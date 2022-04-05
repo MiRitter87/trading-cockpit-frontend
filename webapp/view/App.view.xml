@@ -1,0 +1,17 @@
+<!DOCTYPE xml>
+<mvc:View
+	controllerName="trading-cockpit-frontend.controller.App"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:tnt="sap.tnt"
+	xmlns:f="sap.f"
+	xmlns:core="sap.ui.core">
+	
+	<tnt:ToolPage id="toolPage">
+		<!-- Content area -->
+		<tnt:mainContents>
+			<App id="contentPage"/>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+</mvc:View>
