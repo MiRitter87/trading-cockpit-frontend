@@ -55,11 +55,20 @@
 				"pattern": "",
 				"name": "startPageRoute",
 				"target": "startPageTarget"
+			}, {
+				"pattern": "priceAlertMenu",
+				"name": "priceAlertMenuRoute",
+				"target": "priceAlertMenuTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
 					"viewId": "startPage",
 					"viewName": "navigation.StartPage",
+					"viewLevel" : 1
+            	},
+            	"priceAlertMenuTarget": {
+					"viewId": "priceAlertMenu",
+					"viewName": "priceAlert.PriceAlertMenu",
 					"viewLevel" : 1
             	}
             }

@@ -14,10 +14,12 @@ sap.ui.define([
 		
 		
 		/**
-		 * Handles the click at the price alert entry in the menu.
+		 * Handles the selection of the menu item: price alert.
 		 */
 		onPriceAlertPressed : function() {
-			alert("Price Alert pressed");
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			
+			oRouter.navTo("priceAlertMenuRoute");			
 		}
 	});
 });
