@@ -40,6 +40,29 @@
 		  			"fallbackLocale": "de"
 				}
 	  		}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "trading-cockpit-frontend.view",
+				"controlId": "contentPage",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"async": true
+			},
+			"routes": [{
+				"pattern": "",
+				"name": "startPageRoute",
+				"target": "startPageTarget"
+			}],
+			"targets": {
+				"startPageTarget": {
+					"viewId": "startPage",
+					"viewName": "navigation.StartPage",
+					"viewLevel" : 1
+            	}
+            }
 		}
   	}
 }
