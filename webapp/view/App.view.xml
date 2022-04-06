@@ -12,7 +12,13 @@
 		<!-- Application header -->
 		<tnt:header>
 			<tnt:ToolHeader>
-				<MenuButton text="{i18n>navigation.menu}" />
+				<MenuButton text="{i18n>navigation.menu}">
+					<menu>
+						<Menu>
+							<MenuItem text="{i18n>navigation.menu.priceAlert}" icon="sap-icon://bell" press="onPriceAlertPressed" />
+						</Menu>
+					</menu>
+				</MenuButton>
 				<ToolbarSpacer />
 				<Text text="Trading Cockpit"/>
 				<ToolbarSpacer />
