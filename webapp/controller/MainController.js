@@ -1,6 +1,6 @@
 sap.ui.define([
-	
-], function () {
+	"sap/ui/core/Item"
+], function (Item) {
 	"use strict";
 	
 	return {
@@ -9,6 +9,18 @@ sap.ui.define([
 		 */
 		navigateToStartpage : function(oRouter) {
 			oRouter.navTo("startPageRoute");		
-		}
+		},
+		
+		
+		/**
+		 * Adds an item to a ComboBox.
+		 */
+		addItemToComboBox : function(oComboBox, oResourceBundle, sItemKey, sTextKey) {
+			var oComboBoxItem = new Item();
+			
+			oComboBoxItem.setKey(sItemKey);
+			oComboBoxItem.setText(oResourceBundle.getText(sTextKey));
+			oComboBox.addItem(oComboBoxItem);
+		},
 	};
 });
