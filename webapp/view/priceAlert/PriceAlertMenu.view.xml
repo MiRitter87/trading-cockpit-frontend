@@ -8,9 +8,42 @@
 	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core">
 	
-	<Page title="!Dies ist das Menü für die Preisalarme">
+	<Page>
 		<content>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.priceAlert}"
+						subheader="{i18n>navigation.object.create}" press="onPriceAlertCreatePressed">
+				<TileContent>
+					<ImageContent src="sap-icon://add" />
+				</TileContent>
+			</GenericTile>
 			
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.priceAlert}"
+						subheader="{i18n>navigation.object.edit}" press="onPriceAlertEditPressed">
+				<TileContent>
+					<ImageContent src="sap-icon://edit" />
+				</TileContent>
+			</GenericTile>
+			
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.priceAlert}"
+						subheader="{i18n>navigation.object.display}" press="onPriceAlertDisplayPressed">
+				<TileContent>
+					<ImageContent src="sap-icon://display" />
+				</TileContent>
+			</GenericTile>
+			
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.priceAlert}"
+						subheader="{i18n>navigation.object.overview}" press="onPriceAlertOverviewPressed">
+				<TileContent>
+					<ImageContent src="sap-icon://list" />
+				</TileContent>
+			</GenericTile>
+			
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.priceAlert}"
+						subheader="{i18n>navigation.menu.priceAlert.feed}" press="onPriceAlertFeedPressed">
+				<TileContent>
+					<ImageContent src="sap-icon://feed" />
+				</TileContent>
+			</GenericTile>
 		</content>
 	</Page>
 </mvc:View>
