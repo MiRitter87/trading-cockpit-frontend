@@ -59,6 +59,10 @@
 				"pattern": "priceAlertMenu",
 				"name": "priceAlertMenuRoute",
 				"target": "priceAlertMenuTarget"
+			}, {
+				"pattern": "priceAlertCreate",
+				"name": "priceAlertCreateRoute",
+				"target": "priceAlertCreateTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -69,6 +73,11 @@
             	"priceAlertMenuTarget": {
 					"viewId": "priceAlertMenu",
 					"viewName": "priceAlert.PriceAlertMenu",
+					"viewLevel" : 1
+            	},
+            	"priceAlertCreateTarget": {
+					"viewId": "priceAlertCreate",
+					"viewName": "priceAlert.PriceAlertCreate",
 					"viewLevel" : 1
             	}
             }
