@@ -52,7 +52,7 @@ sap.ui.define([
 			}
 			
 			if(PriceAlertController.isPriceValid(this.getView().byId("priceInput").getValue()) == false)
-				return;				
+				return;
 			
 			/*MaterialController.createMaterialbyWebService(this.getView().getModel("newMaterial"), this.saveMaterialCallback, this);*/
 		},

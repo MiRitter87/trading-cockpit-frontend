@@ -22,5 +22,14 @@ sap.ui.define([
 			oComboBoxItem.setText(oResourceBundle.getText(sTextKey));
 			oComboBox.addItem(oComboBoxItem);
 		},
+		
+		
+		/**
+		 * Gets the server address including the port.
+		 */
+		getServerAddress : function() {
+			var sServerAddress = window.location.origin;
+			return sServerAddress;
+		}
 	};
 });
