@@ -1,8 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"./PriceAlertController",
-	"sap/ui/model/json/JSONModel"
-], function (Controller, PriceAlertController, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/m/MessageBox"
+], function (Controller, PriceAlertController, JSONModel, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertCreate", {
@@ -33,6 +34,31 @@ sap.ui.define([
 
 
 		/**
+		 * Handles a click at the save button.
+		 */
+		onSavePressed : function () {
+			//Validate price first to remove the error indication from the input field as soon as possible if the user fills in correct data.
+			PriceAlertController.validatePriceInput(this.getView().byId("priceInput"), this.getOwnerComponent().getModel("i18n").getResourceBundle(),
+				this.getView().getModel("newPriceAlert"), "/price");
+				
+			if(this.getView().byId("stockExchangeComboBox").getSelectedKey() == "") {
+				this.showMessageOnUndefinedStockExchange();
+				return;
+			}
+			
+			if(this.getView().byId("typeComboBox").getSelectedKey() == "") {
+				this.showMessageOnUndefinedType();
+				return;
+			}
+			
+			if(PriceAlertController.isPriceValid(this.getView().byId("priceInput").getValue()) == false)
+				return;				
+			
+			/*MaterialController.createMaterialbyWebService(this.getView().getModel("newMaterial"), this.saveMaterialCallback, this);*/
+		},
+
+
+		/**
 		 * Initializes the price alert model to which the UI controls are bound.
 		 */
 		initializePriceAlertModel : function () {
@@ -51,6 +77,24 @@ sap.ui.define([
 			this.getView().byId("typeComboBox").setSelectedItem(null);
 			this.getView().byId("priceInput").setValue(0);
 			this.getView().byId("priceInput").setValueState(sap.ui.core.ValueState.None);
+		},
+		
+		
+		/**
+		 * Displays a message in case the stock exchange has not been selected.
+		 */
+		showMessageOnUndefinedStockExchange : function () {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			MessageBox.error(oResourceBundle.getText("priceAlertCreate.noStockExchangeSelected"));
+		},
+		
+		
+		/**
+		 * Displays a message in case the type has not been selected.
+		 */
+		showMessageOnUndefinedType : function () {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			MessageBox.error(oResourceBundle.getText("priceAlertCreate.noTypeSelected"));
 		}
 	});
 });
