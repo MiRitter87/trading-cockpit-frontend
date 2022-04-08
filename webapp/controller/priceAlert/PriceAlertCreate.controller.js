@@ -2,8 +2,9 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"./PriceAlertController",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageBox"
-], function (Controller, PriceAlertController, JSONModel, MessageBox) {
+	"sap/m/MessageBox",
+	"sap/m/MessageToast"
+], function (Controller, PriceAlertController, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertCreate", {
@@ -54,7 +55,30 @@ sap.ui.define([
 			if(PriceAlertController.isPriceValid(this.getView().byId("priceInput").getValue()) == false)
 				return;
 			
-			/*MaterialController.createMaterialbyWebService(this.getView().getModel("newMaterial"), this.saveMaterialCallback, this);*/
+			PriceAlertController.createPriceAlertByWebService(this.getView().getModel("newPriceAlert"), this.savePriceAlertCallback, this);
+		},
+		
+		
+		/**
+		 * Callback function of the savePriceAlert RESTful WebService call in the PriceAlertController.
+		 */
+		savePriceAlertCallback : function (oReturnData, oCallingController) {
+			if(oReturnData.message != null) {
+				if(oReturnData.message[0].type == 'S') {
+					MessageToast.show(oReturnData.message[0].text);
+					//"this" is unknown in the success function of the ajax call. Therefore the calling controller is provided.
+					oCallingController.resetUIElements();
+					oCallingController.initializePriceAlertModel();
+				}
+				
+				if(oReturnData.message[0].type == 'E') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'W') {
+					MessageBox.warning(oReturnData.message[0].text);
+				}
+			} 
 		},
 
 

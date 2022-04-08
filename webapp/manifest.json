@@ -8,6 +8,12 @@
 		"description": "{{appDescription}}",
 		"applicationVersion": {
 	  		"version": "1.0.0"
+		},
+		"dataSources": {
+			"webServiceBaseUrls_dataSource": {
+				"uri": "model/webServiceBaseUrls.json",
+				"type": "JSON"
+			}
 		}
 	},
   	"sap.ui": {
@@ -39,6 +45,10 @@
 		  			"supportedLocales": ["de", "en"],
 		  			"fallbackLocale": "de"
 				}
+	  		},
+	  		"webServiceBaseUrls": {
+	  			"type": "sap.ui.model.json.JSONModel",
+				"dataSource": "webServiceBaseUrls_dataSource"
 	  		}
 		},
 		"routing": {

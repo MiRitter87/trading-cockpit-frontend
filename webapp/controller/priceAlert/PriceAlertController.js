@@ -59,6 +59,28 @@ sap.ui.define([
 				oPriceInput.setValueState(sap.ui.core.ValueState.None);
 				oModel.setProperty(sPricePropertyPath, fPricePerUnit);			
 			}
+		},
+		
+		
+		/**
+		 * Calls a WebService operation to create a price alert.
+		 */
+		createPriceAlertByWebService : function(oPriceAlertModel, callbackFunction, oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/priceAlert");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
+			var sJSONData = oPriceAlertModel.getJSON();
+			
+			//Use "POST" to create a resource.
+			jQuery.ajax({
+				type : "POST", 
+				contentType : "application/json", 
+				url : sQueryUrl,
+				data : sJSONData, 
+				success : function(data) {
+					callbackFunction(data, oCallingController);
+				}
+			});
 		}
 	};
 });
