@@ -45,7 +45,7 @@
 						
 						<f:FormElement label="{i18n>priceAlert.type}">
 							<f:fields>
-								<ComboBox id="typeComboBox" selectedKey="{newPriceAlert>/type}" required="true"/>
+								<ComboBox id="typeComboBox" selectedKey="{newPriceAlert>/alertType}" required="true"/>
 							</f:fields>
 						</f:FormElement>
 						

@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"./PriceAlertController",
-], function (Controller, PriceAlertController) {
+	"sap/ui/model/json/JSONModel"
+], function (Controller, PriceAlertController, JSONModel) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertCreate", {
@@ -26,7 +27,30 @@ sap.ui.define([
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
 		_onRouteMatched: function () {
+			this.resetUIElements();
+			this.initializePriceAlertModel();
+    	},
+
+
+		/**
+		 * Initializes the price alert model to which the UI controls are bound.
+		 */
+		initializePriceAlertModel : function () {
+			var oPriceAlertModel = new JSONModel();
 			
-    	}
+			oPriceAlertModel.loadData("model/priceAlert/priceAlertCreate.json");
+			this.getView().setModel(oPriceAlertModel, "newPriceAlert");
+		},
+
+
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements : function () {
+			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
+			this.getView().byId("typeComboBox").setSelectedItem(null);
+			this.getView().byId("priceInput").setValue(0);
+			this.getView().byId("priceInput").setValueState(sap.ui.core.ValueState.None);
+		}
 	});
 });
