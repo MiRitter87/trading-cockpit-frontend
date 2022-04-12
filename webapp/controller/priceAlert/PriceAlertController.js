@@ -85,6 +85,23 @@ sap.ui.define([
 		
 		
 		/**
+		 * Gets the price alert data of the price alert with the given ID.
+		 */
+		getPriceAlertById : function(iPriceAlertId, oPriceAlerts) {
+			//Get the selected price alert from the array of all price alerts according to the id.
+			for(var i = 0; i < oPriceAlerts.length; i++) {
+    			var oTempPriceAlert = oPriceAlerts[i];
+    			
+				if(oTempPriceAlert.id == iPriceAlertId) {
+					return oTempPriceAlert;
+				}
+			}
+			
+			return null;
+		},
+		
+		
+		/**
 		 * Calls a WebService operation to create a price alert.
 		 */
 		createPriceAlertByWebService : function(oPriceAlertModel, callbackFunction, oCallingController) {
