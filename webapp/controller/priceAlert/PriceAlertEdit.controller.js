@@ -34,7 +34,7 @@ sap.ui.define([
 			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true);
 			
 			this.getView().setModel(null, "selectedPriceAlert");
-			//this.resetUIElements();
+			this.resetUIElements();
     	},
 
 
@@ -48,7 +48,7 @@ sap.ui.define([
 			var oPriceAlertModel = new JSONModel();
 			
 			if(oSelectedItem == null) {
-				//this.resetUIElements();				
+				this.resetUIElements();				
 				return;
 			}
 				
@@ -93,5 +93,23 @@ sap.ui.define([
 			this.getView().byId("priceInput").setValue(fValue);
 			this.getView().byId("priceInput").setValueState(sap.ui.core.ValueState.None);
 		},
+		
+		
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements : function () {
+			this.getView().byId("priceAlertComboBox").setSelectedItem(null);
+			
+			this.getView().byId("idText").setText("");
+			this.getView().byId("symbolInput").setValue("");
+			
+			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
+			this.getView().byId("typeComboBox").setSelectedItem(null);
+			
+			this.setPriceInputValue(0);
+			this.getView().byId("triggerTimeText").setText("");
+			this.getView().byId("confirmationTimeText").setText("");
+		}
 	});
 });
