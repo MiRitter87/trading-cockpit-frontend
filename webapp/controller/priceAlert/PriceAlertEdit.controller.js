@@ -17,6 +17,12 @@ sap.ui.define([
 		onInit : function () {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("priceAlertEditRoute").attachMatched(this._onRouteMatched, this);
+			
+			PriceAlertController.initializeStockExchangeComboBox(this.getView().byId("stockExchangeComboBox"), 
+				this.getOwnerComponent().getModel("i18n").getResourceBundle());
+				
+			PriceAlertController.initializeTypeComboBox(this.getView().byId("typeComboBox"), 
+				this.getOwnerComponent().getModel("i18n").getResourceBundle());
 		},
 		
 		
