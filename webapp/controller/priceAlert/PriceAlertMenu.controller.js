@@ -11,5 +11,14 @@ sap.ui.define([
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("priceAlertCreateRoute");	
 		},
+		
+		
+		/**
+		 * Handles click at the price alert edit tile.
+		 */
+		onPriceAlertEditPressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("priceAlertEditRoute");	
+		}
 	});
 });
