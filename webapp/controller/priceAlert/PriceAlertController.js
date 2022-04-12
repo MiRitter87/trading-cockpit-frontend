@@ -63,6 +63,28 @@ sap.ui.define([
 		
 		
 		/**
+		 * The WebService provides dates as milliseconds since 01.01.1970.
+	     * This function initializes the date properties as Date objects based on the given values.
+		 */
+		initializeDatesAsObject : function(oPriceAlerts) {			
+			for(var i = 0; i < oPriceAlerts.length; i++) {
+    			var oTempPriceAlert = oPriceAlerts[i];
+				var oDate;
+    			
+				if(oTempPriceAlert.triggerTime != null) {
+					oDate = new Date(oTempPriceAlert.triggerTime);
+					oTempPriceAlert.triggerTime = oDate;					
+				}
+				
+				if(oTempPriceAlert.confirmationTime != null) {
+					oDate = new Date(oTempPriceAlert.confirmationTime);
+					oTempPriceAlert.confirmationTime = oDate;					
+				}
+			}
+		},
+		
+		
+		/**
 		 * Calls a WebService operation to create a price alert.
 		 */
 		createPriceAlertByWebService : function(oPriceAlertModel, callbackFunction, oCallingController) {
@@ -81,6 +103,26 @@ sap.ui.define([
 					callbackFunction(data, oCallingController);
 				}
 			});
+		},
+		
+		
+		/**
+		 * Queries the price alert WebService for all price alerts.
+		 */
+		queryPriceAlertsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/priceAlert");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
+			
+			jQuery.ajax({
+				type : "GET", 
+				contentType : "application/json", 
+				url : sQueryUrl, 
+				dataType : "json", 
+				success : function(data) {
+					callbackFunction(data, oCallingController, bShowSuccessMessage);
+				}
+			});                                                                 
 		}
 	};
 });
