@@ -11,7 +11,86 @@
 	
 	<Page title="{i18n>priceAlertEdit.header}">
 		<content>
+			<l:VerticalLayout class="sapUiSmallMarginBegin">
+				<Label text="{i18n>priceAlertEdit.selectionDescription}"/>
+				<ComboBox id="priceAlertComboBox" items="{path: 'priceAlerts>/priceAlert/'}" selectionChange=".onPriceAlertSelectionChange">
+					<core:Item key="{priceAlerts>id}" text="{priceAlerts>symbol} - {priceAlerts>price}"/>
+				</ComboBox>
+			</l:VerticalLayout>
 			
+			<f:Form id="priceAlertForm" editable="true">
+				<f:title>
+					<core:Title text="{i18n>priceAlertEdit.dataHeader}" />
+				</f:title>
+				
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>priceAlert.id}">
+								<f:fields>
+									<Text id="idText" text="{selectedPriceAlert>/id}"/>
+								</f:fields>
+							</f:FormElement>
+	
+							<f:FormElement label="{i18n>priceAlert.symbol}">
+								<f:fields>
+									<Input id="symbolInput" maxLength="6" value="{selectedPriceAlert>/symbol}" required="true"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.stockExchange}">
+								<f:fields>
+									<ComboBox id="stockExchangeComboBox" selectedKey="{selectedPriceAlert>/stockExchange}" required="true"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.type}">
+								<f:fields>
+									<ComboBox id="typeComboBox" selectedKey="{selectedPriceAlert>/alertType}" required="true"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.price}">
+								<f:fields>
+									<Input id="priceInput" type="Number" required="true"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.triggerTime}">
+								<f:fields>
+									<Text id="triggerTimeText" text="{path: 'selectedPriceAlert>/triggerTime', formatter: '.formatter.wsDateFormatter'}" />
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.confirmationTime}">
+								<f:fields>
+									<Text id="confirmationTimeText" text="{path: 'selectedPriceAlert>/confirmationTime', formatter: '.formatter.wsDateFormatter'}" />
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
 		</content>
+		
+		<Button text="{i18n>button.save}" press=".onSavePressed" class="sapUiSmallMargin" />
+		<Button type="Reject" text="{i18n>button.cancel}" press=".onCancelPressed" class="sapUiSmallMargin"/>
 	</Page>
 </mvc:View>
