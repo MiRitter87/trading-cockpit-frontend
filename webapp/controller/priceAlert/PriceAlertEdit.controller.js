@@ -1,11 +1,12 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"../MainController",
 	"./PriceAlertController",
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, PriceAlertController, formatter, JSONModel, MessageToast, MessageBox) {
+], function (Controller, MainController, PriceAlertController, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertEdit", {
@@ -74,6 +75,14 @@ sap.ui.define([
 				return;
 				
 			PriceAlertController.savePriceAlertByWebService(this.getView().getModel("selectedPriceAlert"), this.savePriceAlertCallback, this);
+		},
+		
+		
+		/**
+		 * Handles a click at the cancel button.
+		 */
+		onCancelPressed : function () {
+			MainController.navigateToStartpage(sap.ui.core.UIComponent.getRouterFor(this));	
 		},
 
 
