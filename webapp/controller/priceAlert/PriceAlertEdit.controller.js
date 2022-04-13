@@ -3,8 +3,9 @@ sap.ui.define([
 	"./PriceAlertController",
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
-], function (Controller, PriceAlertController, formatter, JSONModel, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/m/MessageBox"
+], function (Controller, PriceAlertController, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertEdit", {
@@ -61,6 +62,19 @@ sap.ui.define([
 			//Manually set the price of the Input field because the price is not directly bound due to validation reasons.
 			this.setPriceInputValue(oPriceAlert.price);
 		},
+		
+		
+		/**
+		 * Handles a click at the save button.
+		 */
+		onSavePressed : function () {
+			var bInputValid = this.verifyObligatoryFields();
+			
+			if(bInputValid == false)
+				return;
+				
+			/*ProductionOrderController.saveProductionOrderByWebService(this.getView().getModel("selectedProductionOrder"), this.saveProductionOrderCallback, this);*/
+		},
 
 
 		/**
@@ -110,6 +124,43 @@ sap.ui.define([
 			this.setPriceInputValue(0);
 			this.getView().byId("triggerTimeText").setText("");
 			this.getView().byId("confirmationTimeText").setText("");
+		},
+		
+		
+		/**
+		 * Verifies input of obligatory fields.
+		 * Returns true if input is valid. Returns false if input is invalid.
+		 */
+		verifyObligatoryFields : function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			if(this.getView().byId("priceAlertComboBox").getSelectedKey() == "") {
+				var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noPriceAlertSelected"));
+				return;
+			}
+			
+			if(this.getView().byId("symbolInput").getValue() == "") {
+				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noSymbolInput"));
+				return false;
+			}
+			
+			if(this.getView().byId("stockExchangeComboBox").getSelectedKey() == "") {
+				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noStockExchangeSelected"));
+				return false;
+			}
+			
+			if(this.getView().byId("typeComboBox").getSelectedKey() == "") {
+				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noTypeSelected"));
+				return false;
+			}
+			
+			if(this.getView().byId("priceInput").getValue() == "") {
+				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noPriceInput"));
+				return false;
+			}
+			
+			return true;
 		}
 	});
 });
