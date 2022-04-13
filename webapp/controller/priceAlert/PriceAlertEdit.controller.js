@@ -67,13 +67,13 @@ sap.ui.define([
 		/**
 		 * Handles a click at the save button.
 		 */
-		onSavePressed : function () {
+		onSavePressed : function () {				
 			var bInputValid = this.verifyObligatoryFields();
 			
 			if(bInputValid == false)
 				return;
 				
-			/*ProductionOrderController.saveProductionOrderByWebService(this.getView().getModel("selectedProductionOrder"), this.saveProductionOrderCallback, this);*/
+			PriceAlertController.savePriceAlertByWebService(this.getView().getModel("selectedPriceAlert"), this.savePriceAlertCallback, this);
 		},
 
 
@@ -97,6 +97,36 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "priceAlerts");
+		},
+		
+		
+		/**
+		 *  Callback function of the savePriceAlert RESTful WebService call in the PriceAlertController.
+		 */
+		savePriceAlertCallback : function(oReturnData, oCallingController) {
+			if(oReturnData.message != null) {
+				if(oReturnData.message[0].type == 'S') {
+					//Update the data source of the ComboBox with the new priceAlert data.
+					PriceAlertController.queryPriceAlertsByWebService(oCallingController.queryPriceAlertsCallback, oCallingController, false);
+					
+					oCallingController.getView().setModel(null, "selectedPriceAlert");
+					oCallingController.resetUIElements();
+					
+					MessageToast.show(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'I') {
+					MessageToast.show(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'E') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'W') {
+					MessageBox.warning(oReturnData.message[0].text);
+				}
+			}
 		},
 		
 		
@@ -140,6 +170,14 @@ sap.ui.define([
 				return;
 			}
 			
+			//Validate price first to remove the error indication from the input field as soon as possible if the user fills in correct data.
+			PriceAlertController.validatePriceInput(this.getView().byId("priceInput"), this.getOwnerComponent().getModel("i18n").getResourceBundle(),
+				this.getView().getModel("selectedPriceAlert"), "/price");
+			
+			if(PriceAlertController.isPriceValid(this.getView().byId("priceInput").getValue()) == false)
+				return false;
+			
+			
 			if(this.getView().byId("symbolInput").getValue() == "") {
 				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noSymbolInput"));
 				return false;
@@ -152,11 +190,6 @@ sap.ui.define([
 			
 			if(this.getView().byId("typeComboBox").getSelectedKey() == "") {
 				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noTypeSelected"));
-				return false;
-			}
-			
-			if(this.getView().byId("priceInput").getValue() == "") {
-				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noPriceInput"));
 				return false;
 			}
 			

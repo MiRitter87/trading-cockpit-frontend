@@ -140,6 +140,27 @@ sap.ui.define([
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});                                                                 
+		},
+		
+		
+		/**
+		 * Updates changes of the price alert data using the WebService.
+		 */
+		savePriceAlertByWebService : function(oPriceAlertModel, callbackFunction, oCallingController) {
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/priceAlert");
+			var sQueryUrl = sWebServiceBaseUrl + "/";
+			var sJSONData = oPriceAlertModel.getJSON();
+			
+			//Use "PUT" to update an existing resource.
+			jQuery.ajax({
+				type : "PUT", 
+				contentType : "application/json", 
+				url : sQueryUrl,
+				data : sJSONData, 
+				success : function(data) {
+					callbackFunction(data, oCallingController);
+				}
+			}); 
 		}
 	};
 });
