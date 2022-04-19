@@ -11,7 +11,83 @@
 	
 	<Page title="{i18n>priceAlertDisplay.header}">
 		<content>
+			<l:VerticalLayout class="sapUiSmallMarginBegin">
+				<Label text="{i18n>priceAlertDisplay.selectionDescription}"/>
+				<ComboBox id="priceAlertComboBox" items="{path: 'priceAlerts>/priceAlert/'}" selectionChange=".onPriceAlertSelectionChange">
+					<core:Item key="{priceAlerts>id}" text="{priceAlerts>symbol} - {priceAlerts>price}"/>
+				</ComboBox>
+			</l:VerticalLayout>
 			
+			<f:Form id="priceAlertForm" editable="false">
+				<f:title>
+					<core:Title text="{i18n>priceAlertDisplay.dataHeader}" />
+				</f:title>
+				
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>priceAlert.id}">
+								<f:fields>
+									<Text id="idText" text="{selectedPriceAlert>/id}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.symbol}">
+								<f:fields>
+									<Text id="symbolText" text="{selectedPriceAlert>/symbol}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.stockExchange}">
+								<f:fields>
+									<Text id="stockExchangeText"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.type}">
+								<f:fields>
+									<Text id="typeText"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.price}">
+								<f:fields>
+									<Text id="priceText" text="{selectedPriceAlert>/price}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.triggerTime}">
+								<f:fields>
+									<Text id="triggerTimeText" text="{path: 'selectedPriceAlert>/triggerTime', formatter: '.formatter.wsDateFormatter'}" />
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.confirmationTime}">
+								<f:fields>
+									<Text id="confirmationTimeText" text="{path: 'selectedPriceAlert>/confirmationTime', formatter: '.formatter.wsDateFormatter'}" />
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
 		</content>
 	</Page>
 </mvc:View>
