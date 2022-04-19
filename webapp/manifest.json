@@ -77,6 +77,10 @@
 				"pattern": "priceAlertEdit",
 				"name": "priceAlertEditRoute",
 				"target": "priceAlertEditTarget"
+			}, {
+				"pattern": "priceAlertDisplay",
+				"name": "priceAlertDisplayRoute",
+				"target": "priceAlertDisplayTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -97,6 +101,11 @@
             	"priceAlertEditTarget": {
 					"viewId": "priceAlertEdit",
 					"viewName": "priceAlert.PriceAlertEdit",
+					"viewLevel" : 1
+            	},
+            	"priceAlertDisplayTarget": {
+					"viewId": "priceAlertDisplay",
+					"viewName": "priceAlert.PriceAlertDisplay",
 					"viewLevel" : 1
             	}
             }
