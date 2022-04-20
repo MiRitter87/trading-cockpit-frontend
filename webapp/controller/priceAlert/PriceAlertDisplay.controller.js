@@ -28,7 +28,7 @@ sap.ui.define([
 			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true);
 			
 			this.getView().setModel(null, "selectedPriceAlert");
-			//this.resetUIElements();
+			this.resetUIElements();
     	},
 
 
@@ -42,7 +42,7 @@ sap.ui.define([
 			var oPriceAlertModel = new JSONModel();
 			
 			if(oSelectedItem == null) {
-				//this.resetUIElements();				
+				this.resetUIElements();				
 				return;
 			}
 				
@@ -66,7 +66,7 @@ sap.ui.define([
 			
 			if(oReturnData.data != null) {
 				oModel.setData(oReturnData.data);
-				//PriceAlertController.initializeDatesAsObject(oModel.oData.priceAlert);
+				//TODO: Check if needed PriceAlertController.initializeDatesAsObject(oModel.oData.priceAlert);
 				
 				if(bShowSuccessMessage == true)
 					MessageToast.show(oResourceBundle.getText("priceAlertDisplay.dataLoaded"));			
@@ -117,6 +117,22 @@ sap.ui.define([
 			
 			//3. Apply the text to the type label.
 			this.getView().byId("typeText").setText(sTypeText);
+		},
+		
+		
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements : function () {
+			this.getView().byId("priceAlertComboBox").setSelectedItem(null);
+
+			this.getView().byId("idText").setText("");
+			this.getView().byId("symbolText").setText("");
+			this.getView().byId("stockExchangeText").setText("");
+			this.getView().byId("typeText").setText("");
+			this.getView().byId("priceText").setText("");
+			this.getView().byId("triggerTimeText").setText("");
+			this.getView().byId("confirmationTimeText").setText("");
 		}
 	});
 });
