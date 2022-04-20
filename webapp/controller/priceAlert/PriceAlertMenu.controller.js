@@ -28,6 +28,15 @@ sap.ui.define([
 		onPriceAlertDisplayPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("priceAlertDisplayRoute");	
+		},
+		
+		
+		/**
+		 * Handles click at the price alert overview tile.
+		 */
+		onPriceAlertOverviewPressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("priceAlertOverviewRoute");	
 		}
 	});
 });
