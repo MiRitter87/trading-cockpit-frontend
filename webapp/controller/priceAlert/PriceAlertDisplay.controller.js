@@ -33,6 +33,28 @@ sap.ui.define([
 
 
 		/**
+		 * Handles the selection of an item in the price alert ComboBox.
+		 */
+		onPriceAlertSelectionChange : function (oControlEvent) {
+			var oSelectedItem = oControlEvent.getParameters().selectedItem;
+			var oPriceAlertsModel = this.getView().getModel("priceAlerts");
+			var oPriceAlert;
+			var oPriceAlertModel = new JSONModel();
+			
+			if(oSelectedItem == null) {
+				//this.resetUIElements();				
+				return;
+			}
+				
+			oPriceAlert = PriceAlertController.getPriceAlertById(oSelectedItem.getKey(), oPriceAlertsModel.oData.priceAlert);
+			oPriceAlertModel.setData(oPriceAlert);
+			
+			//Set the model of the view according to the selected price alert to allow binding of the UI elements.
+			this.getView().setModel(oPriceAlertModel, "selectedPriceAlert");
+		},
+
+
+		/**
 		 * Callback function of the queryPriceAlerts RESTful WebService call in the PriceAlertController.
 		 */
 		queryPriceAlertsCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
