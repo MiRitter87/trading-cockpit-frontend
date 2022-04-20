@@ -51,6 +51,9 @@ sap.ui.define([
 			
 			//Set the model of the view according to the selected price alert to allow binding of the UI elements.
 			this.getView().setModel(oPriceAlertModel, "selectedPriceAlert");
+			
+			this.setLocalizedStockExchange();
+			this.setLocalizedType();
 		},
 
 
@@ -74,6 +77,46 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "priceAlerts");
+		},
+		
+		
+		/**
+		 * Determines and sets the localized text of the selected price alerts stock exchange.
+		 */
+		setLocalizedStockExchange : function () {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oModel = this.getView().getModel("selectedPriceAlert");
+			var sStockExchangeText = "", sStockExchange = "";
+			
+			//1. Get the stock exchange of the selected price alert.
+			if(oModel != null)
+				sStockExchange = oModel.getProperty("/stockExchange");
+			
+			//2. Determine the localized text of the stock exchange.
+			sStockExchangeText = PriceAlertController.getLocalizedStockExchangeText(sStockExchange, oResourceBundle);
+			
+			//3. Apply the text to the stock exchange label.
+			this.getView().byId("stockExchangeText").setText(sStockExchangeText);
+		},
+		
+		
+		/**
+		 * Determines and sets the localized text of the selected price alerts type.
+		 */
+		setLocalizedType : function () {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oModel = this.getView().getModel("selectedPriceAlert");
+			var sTypeText = "", sType = "";
+			
+			//1. Get the type of the selected price alert.
+			if(oModel != null)
+				sType = oModel.getProperty("/alertType");
+			
+			//2. Determine the localized text of the type.
+			sTypeText = PriceAlertController.getLocalizedTypeText(sType, oResourceBundle);
+			
+			//3. Apply the text to the type label.
+			this.getView().byId("typeText").setText(sTypeText);
 		}
 	});
 });

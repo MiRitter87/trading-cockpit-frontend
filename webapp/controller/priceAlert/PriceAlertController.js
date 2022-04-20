@@ -102,6 +102,34 @@ sap.ui.define([
 		
 		
 		/**
+		 * Returns the localized text of the given stock exchange.
+		 */
+		getLocalizedStockExchangeText : function(sStockExchange, oResourceBundle) {
+			if(sStockExchange == "NYSE")
+				return oResourceBundle.getText("stockExchange.nyse");
+			else if(sStockExchange == "TSX")
+				return oResourceBundle.getText("stockExchange.tsx");
+			else if(sStockExchange == "TSXV")
+				return oResourceBundle.getText("stockExchange.tsxv");
+			else
+				return "";
+		},
+		
+		
+		/**
+		 * Returns the localized text of the given type.
+		 */
+		getLocalizedTypeText : function(sType, oResourceBundle) {
+			if(sType == "LESS_OR_EQUAL")
+				return oResourceBundle.getText("priceAlert.type.lessOrEqual");
+			else if(sType == "GREATER_OR_EQUAL")
+				return oResourceBundle.getText("priceAlert.type.greaterOrEqual");
+			else
+				return "";
+		},
+		
+		
+		/**
 		 * Calls a WebService operation to create a price alert.
 		 */
 		createPriceAlertByWebService : function(oPriceAlertModel, callbackFunction, oCallingController) {
