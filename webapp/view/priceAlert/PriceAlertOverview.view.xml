@@ -48,7 +48,7 @@
 							<ObjectIdentifier text="{priceAlerts>id}"/>
 							<Text text="{priceAlerts>symbol}"/>
 							<Text text="{path: 'priceAlerts>stockExchange', formatter: '.stockExchangeTextFormatter'}"/>
-							<Text text="{path: 'priceAlerts>type', formatter: '.typeTextFormatter'}"/>
+							<Text text="{path: 'priceAlerts>alertType', formatter: '.typeTextFormatter'}"/>
 							<Text text="{priceAlerts>price}"/>
 							<Text text="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateFormatter'}"/>
 							<Text text="{path: 'priceAlerts>confirmationTime', formatter: '.formatter.wsDateFormatter'}"/>
