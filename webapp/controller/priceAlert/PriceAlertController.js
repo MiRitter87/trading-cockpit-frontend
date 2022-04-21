@@ -175,8 +175,9 @@ sap.ui.define([
 		 * Updates changes of the price alert data using the WebService.
 		 */
 		savePriceAlertByWebService : function(oPriceAlertModel, callbackFunction, oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/priceAlert");
-			var sQueryUrl = sWebServiceBaseUrl + "/";
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
 			var sJSONData = oPriceAlertModel.getJSON();
 			
 			//Use "PUT" to update an existing resource.
@@ -189,6 +190,27 @@ sap.ui.define([
 					callbackFunction(data, oCallingController);
 				}
 			}); 
+		},
+		
+		
+		/**
+		 * Deletes the given price alert using the WebService.
+		 */
+		deletePriceAlertByWebService : function(oPriceAlert, callbackFunction, oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/priceAlert");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + oPriceAlert.id;
+			
+			//Use "DELETE" to delete an existing resource.
+			jQuery.ajax({
+				type : "DELETE", 
+				contentType : "application/json", 
+				url : sQueryUrl, 
+				dataType : "json", 
+				success : function(data) {
+					callbackFunction(data, oCallingController);
+				}
+			});
 		}
 	};
 });
