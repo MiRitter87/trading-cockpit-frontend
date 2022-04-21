@@ -11,7 +11,51 @@
 	
 	<Page title="{i18n>priceAlertOverview.header}">
 		<content>
-			
+			<Table id="priceAlertTable" items="{path: 'priceAlerts>/priceAlert/'}" mode="SingleSelectMaster">
+				<headerToolbar>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://delete" tooltip="{i18n>priceAlertOverview.deleteSelected}" press=".onDeletePressed"/>
+					</OverflowToolbar>
+					</headerToolbar>
+				
+				<columns>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>priceAlert.id}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>priceAlert.symbol}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>priceAlert.stockExchange}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>priceAlert.type}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>priceAlert.price}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>priceAlert.triggerTime}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>priceAlert.confirmationTime}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier text="{priceAlerts>id}"/>
+							<Text text="{priceAlerts>symbol}"/>
+							<Text text="{path: 'priceAlerts>stockExchange', formatter: '.stockExchangeTextFormatter'}"/>
+							<Text text="{path: 'priceAlerts>type', formatter: '.typeTextFormatter'}"/>
+							<Text text="{priceAlerts>price}"/>
+							<Text text="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateFormatter'}"/>
+							<Text text="{path: 'priceAlerts>confirmationTime', formatter: '.formatter.wsDateFormatter'}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
 		</content>
 	</Page>
 </mvc:View>
