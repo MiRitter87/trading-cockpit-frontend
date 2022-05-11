@@ -1,0 +1,17 @@
+<!DOCTYPE xml>
+<mvc:View
+	controllerName="trading-cockpit-frontend.controller.priceAlert.PriceAlertFeed"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:u="sap.ui.unified"
+	xmlns:core="sap.ui.core">
+	
+	<Page title="{i18n>priceAlertFeed.header}">
+		<content>
+			
+		</content>
+	</Page>
+</mvc:View>

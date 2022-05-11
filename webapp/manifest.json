@@ -85,6 +85,10 @@
 				"pattern": "priceAlertOverview",
 				"name": "priceAlertOverviewRoute",
 				"target": "priceAlertOverviewTarget"
+			}, {
+				"pattern": "priceAlertFeed",
+				"name": "priceAlertFeedRoute",
+				"target": "priceAlertFeedTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -115,6 +119,11 @@
             	"priceAlertOverviewTarget": {
 					"viewId": "priceAlertOverview",
 					"viewName": "priceAlert.PriceAlertOverview",
+					"viewLevel" : 1
+            	},
+            	"priceAlertFeedTarget": {
+					"viewId": "priceAlertFeed",
+					"viewName": "priceAlert.PriceAlertFeed",
 					"viewLevel" : 1
             	}
             }
