@@ -1,7 +1,10 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/core/IntervalTrigger"
-], function (Controller, IntervalTrigger) {
+	"./PriceAlertController",
+	"sap/ui/core/IntervalTrigger",
+	"sap/m/MessageToast",
+	"sap/ui/model/json/JSONModel"
+], function (Controller, PriceAlertController, IntervalTrigger, MessageToast, JSONModel) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertFeed", {		
@@ -10,7 +13,26 @@ sap.ui.define([
 		 */
 		onInit : function () {
 			var intervalTrigger = new IntervalTrigger(10000);
-			intervalTrigger.addListener(this.getAlerts);
+			//".bind(this)" injects the context of "this" into the getAlerts-function.
+			intervalTrigger.addListener(this.getAlerts.bind(this));
+		},
+		
+		
+		/**
+		 * Callback function of the queryPriceAlerts RESTful WebService call in the PriceAlertController.
+		 */
+		queryPriceAlertsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);		
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+			
+			oCallingController.getView().setModel(oModel, "priceAlerts");
 		},
 		
 		
@@ -18,7 +40,9 @@ sap.ui.define([
 		 * Gets the price alerts.
 		 */
 		getAlerts: function () {
-			alert(Date.now());
+			//TODO Add new status field in view indicating time of last server query
+			
+			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, "TRIGGERED", "NOT_CONFIRMED");
 		}
 	});
 });

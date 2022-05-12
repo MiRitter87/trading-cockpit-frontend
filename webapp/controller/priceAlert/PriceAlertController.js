@@ -154,10 +154,29 @@ sap.ui.define([
 		/**
 		 * Queries the price alert WebService for all price alerts.
 		 */
-		queryPriceAlertsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage) {
+		queryPriceAlertsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sTriggerStatus, sConfirmationStatus) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/priceAlert");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
+			var bTriggerStatusGiven = false;
+			var bConfirmationStatusGiven = false;
+			
+			if(sTriggerStatus != undefined && sTriggerStatus != null)
+				bTriggerStatusGiven = true;
+				
+			if(sConfirmationStatus != undefined && sConfirmationStatus != null)
+				bConfirmationStatusGiven = true;
+				
+			if(bTriggerStatusGiven == true) {
+				sQueryUrl= sQueryUrl + "?triggerStatusQuery=" + sTriggerStatus;
+				
+				if(bConfirmationStatusGiven == true)
+					sQueryUrl = sQueryUrl + "&confirmationStatusQuery=" + sConfirmationStatus;			
+			}
+			else {
+				if(bConfirmationStatusGiven == true)
+					sQueryUrl= sQueryUrl + "?confirmationStatusQuery=" + sConfirmationStatus;
+			}
 			
 			jQuery.ajax({
 				type : "GET", 
