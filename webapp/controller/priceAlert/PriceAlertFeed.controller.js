@@ -43,6 +43,14 @@ sap.ui.define([
 			//TODO Add new status field in view indicating time of last server query
 			
 			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, "TRIGGERED", "NOT_CONFIRMED");
+		},
+		
+		
+		/**
+		 * Formatter of the price alert text.
+		 */
+		priceAlertTextFormatter: function(sSymbol, sStockExchange) {
+			return sSymbol + " (" + sStockExchange + ")";
 		}
 	});
 });

@@ -12,7 +12,7 @@
 	<Page title="{i18n>priceAlertFeed.header}">
 		<content>
 			<List items="{path: 'priceAlerts>/priceAlert/'}" >
-				<FeedListItem text="{priceAlerts>price}">
+				<FeedListItem text="{parts: [{path: 'priceAlerts>symbol'}, {path: 'priceAlerts>stockExchange'}], formatter: '.priceAlertTextFormatter'}">
 				</FeedListItem>
 			</List>
 		</content>
