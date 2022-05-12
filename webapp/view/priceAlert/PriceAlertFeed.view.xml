@@ -11,7 +11,10 @@
 	
 	<Page title="{i18n>priceAlertFeed.header}">
 		<content>
-			
+			<List items="{path: 'priceAlerts>/priceAlert/'}" >
+				<FeedListItem text="{priceAlerts>price}">
+				</FeedListItem>
+			</List>
 		</content>
 	</Page>
 </mvc:View>
