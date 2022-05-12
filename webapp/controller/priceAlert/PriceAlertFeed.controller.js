@@ -51,6 +51,16 @@ sap.ui.define([
 		 */
 		priceAlertTextFormatter: function(sSymbol, sStockExchange) {
 			return sSymbol + " (" + sStockExchange + ")";
+		},
+		
+		
+		/**
+		 * Formatter of the info field of a price alert.
+		 */
+		priceAlertInfoTextFormatter: function(fPrice) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			return oResourceBundle.getText("priceAlertFeed.priceAlert") + fPrice;
 		}
 	});
 });
