@@ -65,6 +65,18 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			return oResourceBundle.getText("priceAlertFeed.priceAlert") + fPrice;
+		},
+		
+		
+		/**
+		 * Formatter of the price alert icon.
+		 */
+		priceAlertIconFormatter: function(sAlertType) {
+			if(sAlertType == "GREATER_OR_EQUAL")
+				return "sap-icon://trend-up";
+				
+			if(sAlertType == "LESS_OR_EQUAL")
+				return "sap-icon://trend-down";
 		}
 	});
 });

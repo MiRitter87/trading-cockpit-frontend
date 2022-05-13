@@ -14,7 +14,8 @@
 			<List items="{path: 'priceAlerts>/priceAlert/'}" >
 				<FeedListItem text="{parts: [{path: 'priceAlerts>symbol'}, {path: 'priceAlerts>stockExchange'}], formatter: '.priceAlertTextFormatter'}"
 					info="{path: 'priceAlerts>price', formatter: '.priceAlertInfoTextFormatter'}"
-					timestamp="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateFormatter'}">
+					timestamp="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateFormatter'}"
+					icon="{path: 'priceAlerts>alertType', formatter: '.priceAlertIconFormatter'}">
 				</FeedListItem>
 			</List>
 		</content>
