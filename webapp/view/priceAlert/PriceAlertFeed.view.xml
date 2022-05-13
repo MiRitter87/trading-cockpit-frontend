@@ -16,6 +16,8 @@
 					info="{path: 'priceAlerts>price', formatter: '.priceAlertInfoTextFormatter'}"
 					timestamp="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateFormatter'}"
 					icon="{path: 'priceAlerts>alertType', formatter: '.priceAlertIconFormatter'}">
+					
+					<FeedListItemAction text="{i18n>priceAlertFeed.confirmAlert}" icon="sap-icon://accept" press=".onActionPressed" />
 				</FeedListItem>
 			</List>
 		</content>

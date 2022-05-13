@@ -23,6 +23,14 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the press on an action of an feed list item.
+		 */
+		onActionPressed: function() {
+			
+		},
+		
+		
+		/**
 		 * Callback function of the queryPriceAlerts RESTful WebService call in the PriceAlertController.
 		 */
 		queryPriceAlertsCallback : function(oReturnData, oCallingController) {
