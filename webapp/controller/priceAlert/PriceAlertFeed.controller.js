@@ -1,13 +1,17 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"./PriceAlertController",
+	"../../model/formatter",
 	"sap/ui/core/IntervalTrigger",
 	"sap/m/MessageToast",
 	"sap/ui/model/json/JSONModel"
-], function (Controller, PriceAlertController, IntervalTrigger, MessageToast, JSONModel) {
+], function (Controller, PriceAlertController, formatter, IntervalTrigger, MessageToast, JSONModel) {
 	"use strict";
 
-	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertFeed", {		
+	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertFeed", {
+		formatter: formatter,
+		
+		
 		/**
 		 * Initializes the controller.
 		 */
