@@ -25,8 +25,15 @@ sap.ui.define([
 		/**
 		 * Handles the press on an action of an feed list item.
 		 */
-		onActionPressed: function() {
+		onActionPressed: function(oEvent) {
+			var oPriceAlert = this.getPriceAlertForAction(oEvent);
 			
+			//Get the price alert.
+			
+			//Set the date of the price alert.
+			
+			//Call WebService to save price alert.
+			alert(oPriceAlert.id);
 		},
 		
 		
@@ -85,6 +92,18 @@ sap.ui.define([
 				
 			if(sAlertType == "LESS_OR_EQUAL")
 				return "sap-icon://trend-down";
+		},
+		
+		
+		/**
+		 * Gets the price alert of the FeedListItem on which the action was performed..
+		 */
+		getPriceAlertForAction : function (oEvent) {
+			var oFeedListItem = oEvent.getSource();
+			var oContext = oFeedListItem.getBindingContext("priceAlerts");
+			var oPriceAlert = oContext.getObject();
+			
+			return oPriceAlert;
 		}
 	});
 });
