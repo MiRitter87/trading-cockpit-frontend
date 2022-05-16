@@ -26,14 +26,10 @@ sap.ui.define([
 		 * Handles the press on an action of an feed list item.
 		 */
 		onActionPressed: function(oEvent) {
-			var oPriceAlert = this.getPriceAlertForAction(oEvent);
-			
-			//Get the price alert.
-			
-			//Set the date of the price alert.
-			
-			//Call WebService to save price alert.
-			alert(oPriceAlert.id);
+			var oPriceAlertModel = this.getPriceAlertForAction(oEvent);
+						
+			oPriceAlertModel.setProperty("/confirmationTime", new Date());			
+			PriceAlertController.savePriceAlertByWebService(oPriceAlertModel, this.savePriceAlertCallback, this);
 		},
 		
 		
@@ -52,6 +48,22 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "priceAlerts");
+		},
+		
+		
+		/**
+		 *  Callback function of the savePriceAlert RESTful WebService call in the PriceAlertController.
+		 */
+		savePriceAlertCallback : function(oReturnData) {
+			if(oReturnData.message != null) {
+				if(oReturnData.message[0].type == 'S' || oReturnData.message[0].type == 'I') {
+					MessageToast.show(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'E' || oReturnData.message[0].type == 'W') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+			}
 		},
 		
 		
@@ -96,14 +108,18 @@ sap.ui.define([
 		
 		
 		/**
-		 * Gets the price alert of the FeedListItem on which the action was performed..
+		 * Gets the price alert of the FeedListItem on which the action was performed.
 		 */
 		getPriceAlertForAction : function (oEvent) {
+			var oPriceAlertModel = new JSONModel();
+			
 			var oFeedListItem = oEvent.getSource();
 			var oContext = oFeedListItem.getBindingContext("priceAlerts");
 			var oPriceAlert = oContext.getObject();
 			
-			return oPriceAlert;
+			oPriceAlertModel.setData(oPriceAlert);
+			
+			return oPriceAlertModel;
 		}
 	});
 });
