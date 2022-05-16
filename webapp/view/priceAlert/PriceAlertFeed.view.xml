@@ -20,6 +20,8 @@
 					<FeedListItemAction text="{i18n>priceAlertFeed.confirmAlert}" icon="sap-icon://accept" press=".onActionPressed" />
 				</FeedListItem>
 			</List>
+			
+			<Text id="lastUpdateText"/>
 		</content>
 	</Page>
 </mvc:View>

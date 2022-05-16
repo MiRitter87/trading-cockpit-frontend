@@ -48,6 +48,7 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "priceAlerts");
+			oCallingController.setLastUpdateText(oCallingController);
 		},
 		
 		
@@ -70,9 +71,7 @@ sap.ui.define([
 		/**
 		 * Gets the price alerts.
 		 */
-		getAlerts: function () {
-			//TODO Add new status field in view indicating time of last server query
-			
+		getAlerts: function () {			
 			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, "TRIGGERED", "NOT_CONFIRMED");
 		},
 		
@@ -120,6 +119,24 @@ sap.ui.define([
 			oPriceAlertModel.setData(oPriceAlert);
 			
 			return oPriceAlertModel;
+		},
+		
+		
+		/**
+		 * Sets the text indicating the time of the last query of feeds.
+		 */
+		setLastUpdateText: function(oCallingController) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var sText = oResourceBundle.getText("priceAlertFeed.lastUpdate");
+			var oDate = new Date();
+			
+			sText = sText + oDate.getHours();
+			sText = sText + ":";
+			sText = sText + oDate.getMinutes();
+			sText = sText + ":";
+			sText = sText + oDate.getSeconds();
+			
+			oCallingController.getView().byId("lastUpdateText").setText(sText);
 		}
 	});
 });
