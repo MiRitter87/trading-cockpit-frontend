@@ -49,6 +49,7 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oModel, "priceAlerts");
 			oCallingController.setLastUpdateText(oCallingController);
+			oCallingController.vibrateIfAlertsTriggered(oCallingController);
 		},
 		
 		
@@ -137,6 +138,18 @@ sap.ui.define([
 			sText = sText + oDate.getSeconds();
 			
 			oCallingController.getView().byId("lastUpdateText").setText(sText);
+		},
+		
+		
+		/**
+		 * Initiates a vibration (on smartphones) if alerts have been triggered and are not confirmed yet.
+		 */
+		vibrateIfAlertsTriggered: function(oCallingController) {
+			var oPriceAlertsModel = oCallingController.getView().getModel("priceAlerts");
+			var iNumberPriceAlerts = oPriceAlertsModel.oData.priceAlert.length;
+			
+			if(iNumberPriceAlerts > 0)
+				window.navigator.vibrate(200);
 		}
 	});
 });
