@@ -44,6 +44,31 @@ sap.ui.define([
 			
 			PriceAlertController.deletePriceAlertByWebService(this.getSelectedPriceAlert(), this.deletePriceAlertCallback, this);
 		},
+		
+		
+		/**
+		 * Handles a selection of an icon in the IconTabBar for price alert filtering.
+		 */
+		onFilterSelect: function (oEvent) {
+			var	sKey = oEvent.getParameter("key");
+			
+			//Values for status query.
+			var sNotTriggered = "NOT_TRIGGERED";
+			var sNotConfirmed = "NOT_CONFIRMED";
+			var sTriggered = "TRIGGERED";
+			var sConfirmed = "CONFIRMED";
+			var sAll = "ALL";
+
+			if (sKey === "All") {
+				PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, sAll, sAll);
+			} else if (sKey === "Not_Triggered") {
+				PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, sNotTriggered, sAll);
+			} else if (sKey === "Not_Confirmed") {
+				PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, sTriggered, sNotConfirmed);
+			} else if (sKey === "Finished") {
+				PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, sTriggered, sConfirmed);
+			}
+		},
 
 
 		/**
