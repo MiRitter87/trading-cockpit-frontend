@@ -144,9 +144,16 @@ sap.ui.define([
 		/**
 		 * Initiates a vibration (on smartphones) if alerts have been triggered and are not confirmed yet.
 		 */
-		vibrateIfAlertsTriggered: function(oCallingController) {
-			var oPriceAlertsModel = oCallingController.getView().getModel("priceAlerts");
-			var iNumberPriceAlerts = oPriceAlertsModel.oData.priceAlert.length;
+		vibrateIfAlertsTriggered: function(oCallingController) {			
+			var oPriceAlertsModel;
+			var iNumberPriceAlerts;
+			var bSupportsVibrate = "vibrate" in navigator;
+			
+			if(bSupportsVibrate == false)		
+				return;
+				
+			oPriceAlertsModel = oCallingController.getView().getModel("priceAlerts");
+			iNumberPriceAlerts = oPriceAlertsModel.oData.priceAlert.length;
 			
 			if(iNumberPriceAlerts > 0)
 				window.navigator.vibrate(200);
