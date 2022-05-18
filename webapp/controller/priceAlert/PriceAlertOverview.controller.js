@@ -27,6 +27,9 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true);
+			
+			//"Show all price alerts" is always selected when the user navigates to the overview.
+			this.getView().byId("filterIconTabBar").setSelectedKey("All");
     	},
 
 
