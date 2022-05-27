@@ -93,6 +93,10 @@
 				"pattern": "instrumentMenu",
 				"name": "instrumentMenuRoute",
 				"target": "instrumentMenuTarget"
+			}, {
+				"pattern": "isntrumentCreate",
+				"name": "instrumentCreateRoute",
+				"target": "instrumentCreateTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -133,6 +137,11 @@
             	"instrumentMenuTarget": {
 					"viewId": "instrumentMenu",
 					"viewName": "instrument.InstrumentMenu",
+					"viewLevel" : 1
+            	},
+            	"instrumentCreateTarget": {
+					"viewId": "instrumentCreate",
+					"viewName": "instrument.InstrumentCreate",
 					"viewLevel" : 1
             	}
             }

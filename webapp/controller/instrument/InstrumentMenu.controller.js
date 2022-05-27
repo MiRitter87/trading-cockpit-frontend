@@ -7,16 +7,16 @@ sap.ui.define([
 		/**
 		 * Handles click at the instrument create tile.
 		 */
-		onPriceAlertCreatePressed : function () {
+		onInstrumentCreatePressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			//oRouter.navTo("instrumentCreateRoute");	
+			oRouter.navTo("instrumentCreateRoute");	
 		},
 		
 		
 		/**
 		 * Handles click at the instrument edit tile.
 		 */
-		onPriceAlertEditPressed : function () {
+		onInstrumentEditPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			//oRouter.navTo("instrumentEditRoute");	
 		},
@@ -25,7 +25,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the instrument display tile.
 		 */
-		onPriceAlertDisplayPressed : function () {
+		onInstrumentDisplayPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			//oRouter.navTo("instrumentDisplayRoute");	
 		},
@@ -34,7 +34,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the instrument overview tile.
 		 */
-		onPriceAlertOverviewPressed : function () {
+		onInstrumentOverviewPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			//oRouter.navTo("instrumentOverviewRoute");	
 		},
