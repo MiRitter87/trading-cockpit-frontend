@@ -94,7 +94,7 @@
 				"name": "instrumentMenuRoute",
 				"target": "instrumentMenuTarget"
 			}, {
-				"pattern": "isntrumentCreate",
+				"pattern": "instrumentCreate",
 				"name": "instrumentCreateRoute",
 				"target": "instrumentCreateTarget"
 			}],
