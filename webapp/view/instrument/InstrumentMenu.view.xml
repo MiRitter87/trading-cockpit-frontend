@@ -10,7 +10,33 @@
 	
 	<Page>
 		<content>
-		
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.instrument}"
+						subheader="{i18n>navigation.object.create}" press="onInstrumentCreatePressed">
+				<TileContent>
+					<ImageContent src="sap-icon://add" />
+				</TileContent>
+			</GenericTile>
+			
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.instrument}"
+						subheader="{i18n>navigation.object.edit}" press="onInstrumentEditPressed">
+				<TileContent>
+					<ImageContent src="sap-icon://edit" />
+				</TileContent>
+			</GenericTile>
+			
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.instrument}"
+						subheader="{i18n>navigation.object.display}" press="onInstrumentDisplayPressed">
+				<TileContent>
+					<ImageContent src="sap-icon://display" />
+				</TileContent>
+			</GenericTile>
+			
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.instrument}"
+						subheader="{i18n>navigation.object.overview}" press="onInstrumentOverviewPressed">
+				<TileContent>
+					<ImageContent src="sap-icon://list" />
+				</TileContent>
+			</GenericTile>
 		</content>
 	</Page>
 </mvc:View>
