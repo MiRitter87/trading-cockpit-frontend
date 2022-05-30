@@ -56,7 +56,7 @@ sap.ui.define([
 			if(PriceAlertController.isPriceValid(this.getView().byId("priceInput").getValue()) == false)
 				return;
 			
-			PriceAlertController.createPriceAlertByWebService(this.getView().getModel("newPriceAlert"), this.savePriceAlertCallback, this);
+			PriceAlertController.createPriceAlertByWebService(this.getView().getModel("newPriceAlert"), this.createPriceAlertCallback, this);
 		},
 		
 		
@@ -69,9 +69,9 @@ sap.ui.define([
 		
 		
 		/**
-		 * Callback function of the savePriceAlert RESTful WebService call in the PriceAlertController.
+		 * Callback function of the createPriceAlert RESTful WebService call in the PriceAlertController.
 		 */
-		savePriceAlertCallback : function (oReturnData, oCallingController) {
+		createPriceAlertCallback : function (oReturnData, oCallingController) {
 			if(oReturnData.message != null) {
 				if(oReturnData.message[0].type == 'S') {
 					MessageToast.show(oReturnData.message[0].text);

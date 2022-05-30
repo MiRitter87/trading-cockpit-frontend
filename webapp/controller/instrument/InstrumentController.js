@@ -18,6 +18,28 @@ sap.ui.define([
 		 */
 		initializeTypeComboBox : function(oComboBox, oResourceBundle) {
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, "STOCK", "instrument.type.stock");
+		},
+		
+		
+		/**
+		 * Calls a WebService operation to create an instrument.
+		 */
+		createInstrumentByWebService : function(oInstrumentModel, callbackFunction, oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
+			var sJSONData = oInstrumentModel.getJSON();
+			
+			//Use "POST" to create a resource.
+			jQuery.ajax({
+				type : "POST", 
+				contentType : "application/json", 
+				url : sQueryUrl,
+				data : sJSONData, 
+				success : function(data) {
+					callbackFunction(data, oCallingController);
+				}
+			});
 		}
 	};
 });

@@ -1,3 +1,4 @@
 {
-	"priceAlert": "/trading-cockpit-backend/services/rest/priceAlerts"
+	"priceAlert": "/trading-cockpit-backend/services/rest/priceAlerts",
+	"instrument": "/trading-cockpit-backend/services/rest/instruments"
 }
