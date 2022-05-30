@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"./InstrumentController"
-], function (Controller, InstrumentController) {
+	"./InstrumentController",
+	"sap/ui/model/json/JSONModel"
+], function (Controller, InstrumentController, JSONModel) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentCreate", {
@@ -26,7 +27,7 @@ sap.ui.define([
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
 		_onRouteMatched: function () {
-			//this.resetUIElements();
+			this.resetUIElements();
 			this.initializeInstrumentModel();
     	},
 
@@ -39,6 +40,15 @@ sap.ui.define([
 			
 			oInstrumentModel.loadData("model/instrument/instrumentCreate.json");
 			this.getView().setModel(oInstrumentModel, "newInstrument");
+		},
+		
+		
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements : function () {
+			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
+			this.getView().byId("typeComboBox").setSelectedItem(null);
 		}
 	});
 });
