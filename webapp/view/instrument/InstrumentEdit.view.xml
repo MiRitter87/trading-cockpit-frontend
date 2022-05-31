@@ -11,7 +11,74 @@
 	
 	<Page title="{i18n>instrumentEdit.header}">
 		<content>
-
+			<l:VerticalLayout class="sapUiSmallMarginBegin">
+				<Label text="{i18n>instrumentEdit.selectionDescription}"/>
+				<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}" selectionChange=".onInstrumentSelectionChange">
+					<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
+				</ComboBox>
+			</l:VerticalLayout>
+			
+			<f:Form id="instrumentForm" editable="true">
+				<f:title>
+					<core:Title text="{i18n>instrumentEdit.dataHeader}" />
+				</f:title>
+				
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>instrument.id}">
+								<f:fields>
+									<Text text="{selectedInstrument>/id}"/>
+								</f:fields>
+							</f:FormElement>
+	
+							<f:FormElement label="{i18n>instrument.symbol}">
+								<f:fields>
+									<Input maxLength="6" value="{selectedInstrument>/symbol}" required="true"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>instrument.name}">
+								<f:fields>
+									<Input maxLength="50" value="{selectedInstrument>/symbol}" required="false"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>instrument.type}">
+							<f:fields>
+								<ComboBox id="typeComboBox" selectedKey="{selectedInstrument>/type}" required="true"/>
+							</f:fields>
+						</f:FormElement>
+						
+						<f:FormElement label="{i18n>instrument.stockExchange}">
+							<f:fields>
+								<ComboBox id="stockExchangeComboBox" selectedKey="{selectedInstrument>/stockExchange}" required="true"/>
+							</f:fields>
+						</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
 		</content>
+		
+		<Button text="{i18n>button.save}" press=".onSavePressed" class="sapUiSmallMargin" />
+		<Button type="Reject" text="{i18n>button.cancel}" press=".onCancelPressed" class="sapUiSmallMargin"/>
 	</Page>
 </mvc:View>
