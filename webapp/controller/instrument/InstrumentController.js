@@ -40,6 +40,26 @@ sap.ui.define([
 					callbackFunction(data, oCallingController);
 				}
 			});
+		},
+		
+		
+		/**
+		 * Queries the instrument WebService for all instruments.
+		 */
+		queryInstrumentsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
+			
+			jQuery.ajax({
+				type : "GET", 
+				contentType : "application/json", 
+				url : sQueryUrl, 
+				dataType : "json", 
+				success : function(data) {
+					callbackFunction(data, oCallingController, bShowSuccessMessage);
+				}
+			});                                                                 
 		}
 	};
 });

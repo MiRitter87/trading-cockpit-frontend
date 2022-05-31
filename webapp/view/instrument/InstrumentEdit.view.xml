@@ -45,19 +45,19 @@
 						<f:formElements>
 							<f:FormElement label="{i18n>instrument.id}">
 								<f:fields>
-									<Text text="{selectedInstrument>/id}"/>
+									<Text id="idText" text="{selectedInstrument>/id}"/>
 								</f:fields>
 							</f:FormElement>
 	
 							<f:FormElement label="{i18n>instrument.symbol}">
 								<f:fields>
-									<Input maxLength="6" value="{selectedInstrument>/symbol}" required="true"/>
+									<Input id="symbolInput" maxLength="6" value="{selectedInstrument>/symbol}" required="true"/>
 								</f:fields>
 							</f:FormElement>
 							
 							<f:FormElement label="{i18n>instrument.name}">
 								<f:fields>
-									<Input maxLength="50" value="{selectedInstrument>/symbol}" required="false"/>
+									<Input id="nameInput" maxLength="50" value="{selectedInstrument>/symbol}" required="false"/>
 								</f:fields>
 							</f:FormElement>
 							
