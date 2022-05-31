@@ -22,6 +22,23 @@ sap.ui.define([
 		
 		
 		/**
+		 * Gets the instrument data of the instrument with the given ID.
+		 */
+		getInstrumentById : function(iInstrumentId, oInstruments) {
+			//Get the selected instrument from the array of all instruments according to the id.
+			for(var i = 0; i < oInstruments.length; i++) {
+    			var oTempInstrument = oInstruments[i];
+    			
+				if(oTempInstrument.id == iInstrumentId) {
+					return oTempInstrument;
+				}
+			}
+			
+			return null;
+		},
+		
+		
+		/**
 		 * Calls a WebService operation to create an instrument.
 		 */
 		createInstrumentByWebService : function(oInstrumentModel, callbackFunction, oCallingController) {

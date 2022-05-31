@@ -57,7 +57,7 @@
 							
 							<f:FormElement label="{i18n>instrument.name}">
 								<f:fields>
-									<Input id="nameInput" maxLength="50" value="{selectedInstrument>/symbol}" required="false"/>
+									<Input id="nameInput" maxLength="50" value="{selectedInstrument>/name}" required="false"/>
 								</f:fields>
 							</f:FormElement>
 							
