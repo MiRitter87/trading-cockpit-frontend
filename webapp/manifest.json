@@ -97,6 +97,10 @@
 				"pattern": "instrumentCreate",
 				"name": "instrumentCreateRoute",
 				"target": "instrumentCreateTarget"
+			}, {
+				"pattern": "instrumentEdit",
+				"name": "instrumentEditRoute",
+				"target": "instrumentEditTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -142,6 +146,11 @@
             	"instrumentCreateTarget": {
 					"viewId": "instrumentCreate",
 					"viewName": "instrument.InstrumentCreate",
+					"viewLevel" : 1
+            	},
+            	"instrumentEditTarget": {
+					"viewId": "instrumentEdit",
+					"viewName": "instrument.InstrumentEdit",
 					"viewLevel" : 1
             	}
             }
