@@ -1,9 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"../MainController",
 	"./InstrumentController",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
-], function (Controller, InstrumentController, JSONModel, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/m/MessageBox"
+], function (Controller, MainController, InstrumentController, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentEdit", {
@@ -54,6 +56,28 @@ sap.ui.define([
 			//Set the model of the view according to the selected instrument to allow binding of the UI elements.
 			this.getView().setModel(oInstrumentModel, "selectedInstrument");
 		},
+		
+		
+		/**
+		 * Handles a click at the save button.
+		 */
+		onSavePressed : function () {				
+			var bInputValid = this.verifyObligatoryFields();
+			
+			if(bInputValid == false)
+				return;
+				
+			InstrumentController.saveInstrumentByWebService(this.getView().getModel("selectedInstrument"), this.saveInstrumentCallback, this);
+		},
+		
+		
+		/**
+		 * Handles a click at the cancel button.
+		 */
+		onCancelPressed : function () {
+			MainController.navigateToStartpage(sap.ui.core.UIComponent.getRouterFor(this));	
+		},
+
 
 
 		/**
@@ -79,6 +103,36 @@ sap.ui.define([
 		
 		
 		/**
+		 *  Callback function of the saveInstrument RESTful WebService call in the InstrumentController.
+		 */
+		saveInstrumentCallback : function(oReturnData, oCallingController) {
+			if(oReturnData.message != null) {
+				if(oReturnData.message[0].type == 'S') {
+					//Update the data source of the ComboBox with the new instrument data.
+					InstrumentController.queryInstrumentsByWebService(oCallingController.queryInstrumentsCallback, oCallingController, false);
+					
+					oCallingController.getView().setModel(null, "selectedInstrument");
+					oCallingController.resetUIElements();
+					
+					MessageToast.show(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'I') {
+					MessageToast.show(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'E') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'W') {
+					MessageBox.warning(oReturnData.message[0].text);
+				}
+			}
+		},
+		
+		
+		/**
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
@@ -91,5 +145,36 @@ sap.ui.define([
 			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
 			this.getView().byId("typeComboBox").setSelectedItem(null);
 		},
+		
+		
+		/**
+		 * Verifies input of obligatory fields.
+		 * Returns true if input is valid. Returns false if input is invalid.
+		 */
+		verifyObligatoryFields : function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			if(this.getView().byId("instrumentComboBox").getSelectedKey() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentEdit.noInstrumentSelected"));
+				return;
+			}
+			
+			if(this.getView().byId("symbolInput").getValue() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentEdit.noSymbolInput"));
+				return false;
+			}
+			
+			if(this.getView().byId("typeComboBox").getSelectedKey() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentEdit.noTypeSelected"));
+				return false;
+			}
+			
+			if(this.getView().byId("stockExchangeComboBox").getSelectedKey() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentEdit.noStockExchangeSelected"));
+				return false;
+			}
+			
+			return true;
+		}
 	});
 });

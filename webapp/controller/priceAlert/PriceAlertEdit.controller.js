@@ -174,7 +174,6 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			if(this.getView().byId("priceAlertComboBox").getSelectedKey() == "") {
-				var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noPriceAlertSelected"));
 				return;
 			}

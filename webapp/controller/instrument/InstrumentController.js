@@ -77,6 +77,28 @@ sap.ui.define([
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});                                                                 
+		},
+		
+		
+		/**
+		 * Updates changes of the instrument data using the WebService.
+		 */
+		saveInstrumentByWebService : function(oInstrumentModel, callbackFunction, oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
+			var sJSONData = oInstrumentModel.getJSON();
+			
+			//Use "PUT" to update an existing resource.
+			jQuery.ajax({
+				type : "PUT", 
+				contentType : "application/json", 
+				url : sQueryUrl,
+				data : sJSONData, 
+				success : function(data) {
+					callbackFunction(data, oCallingController);
+				}
+			}); 
 		}
 	};
 });
