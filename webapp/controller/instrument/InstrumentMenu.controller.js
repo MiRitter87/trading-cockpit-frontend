@@ -27,7 +27,7 @@ sap.ui.define([
 		 */
 		onInstrumentDisplayPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			//oRouter.navTo("instrumentDisplayRoute");	
+			oRouter.navTo("instrumentDisplayRoute");	
 		},
 		
 		

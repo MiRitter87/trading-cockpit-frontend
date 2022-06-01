@@ -101,6 +101,10 @@
 				"pattern": "instrumentEdit",
 				"name": "instrumentEditRoute",
 				"target": "instrumentEditTarget"
+			}, {
+				"pattern": "instrumentDisplay",
+				"name": "instrumentDisplayRoute",
+				"target": "instrumentDisplayTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -151,6 +155,11 @@
             	"instrumentEditTarget": {
 					"viewId": "instrumentEdit",
 					"viewName": "instrument.InstrumentEdit",
+					"viewLevel" : 1
+            	},
+            	"instrumentDisplayTarget": {
+					"viewId": "instrumentDisplay",
+					"viewName": "instrument.InstrumentDisplay",
 					"viewLevel" : 1
             	}
             }
