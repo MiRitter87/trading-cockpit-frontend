@@ -24,8 +24,33 @@ sap.ui.define([
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
 			
 			this.getView().setModel(null, "selectedInstrument");
-			//this.resetUIElements();
+			this.resetUIElements();
     	},
+
+
+		/**
+		 * Handles the selection of an item in the instrument ComboBox.
+		 */
+		onInstrumentSelectionChange : function (oControlEvent) {
+			var oSelectedItem = oControlEvent.getParameters().selectedItem;
+			var oInstrumentsModel = this.getView().getModel("instruments");
+			var oInstrument;
+			var oInstrumentModel = new JSONModel();
+			
+			if(oSelectedItem == null) {
+				this.resetUIElements();				
+				return;
+			}
+				
+			oInstrument = InstrumentController.getInstrumentById(oSelectedItem.getKey(), oInstrumentsModel.oData.instrument);
+			oInstrumentModel.setData(oInstrument);
+			
+			//Set the model of the view according to the selected instrument to allow binding of the UI elements.
+			this.getView().setModel(oInstrumentModel, "selectedInstrument");
+			
+			//this.setLocalizedStockExchange();
+			//this.setLocalizedType();
+		},
 
 
 		/**
@@ -47,6 +72,20 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "instruments");
+		},
+		
+		
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements : function () {
+			this.getView().byId("instrumentComboBox").setSelectedItem(null);
+
+			this.getView().byId("idText").setText("");
+			this.getView().byId("symbolText").setText("");
+			this.getView().byId("nameText").setText("");
+			this.getView().byId("typeText").setText("");
+			this.getView().byId("stockExchangeText").setText("");
 		}
 	});
 });
