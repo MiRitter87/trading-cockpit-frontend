@@ -13,6 +13,16 @@ sap.ui.define([
 		
 		
 		/**
+		 * Initializes the given ComboBox with items for stock exchange selection.
+		 */
+		initializeStockExchangeComboBox : function(oComboBox, oResourceBundle) {
+			this.addItemToComboBox(oComboBox, oResourceBundle, "TSX", "stockExchange.tsx");
+			this.addItemToComboBox(oComboBox, oResourceBundle, "TSXV", "stockExchange.tsxv");
+			this.addItemToComboBox(oComboBox, oResourceBundle, "NYSE", "stockExchange.nyse");
+		},
+		
+		
+		/**
 		 * Adds an item to a ComboBox.
 		 */
 		addItemToComboBox : function(oComboBox, oResourceBundle, sItemKey, sTextKey) {

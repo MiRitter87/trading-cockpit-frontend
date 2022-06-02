@@ -16,7 +16,7 @@ sap.ui.define([
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("instrumentEditRoute").attachMatched(this._onRouteMatched, this);
 			
-			InstrumentController.initializeStockExchangeComboBox(this.getView().byId("stockExchangeComboBox"), 
+			MainController.initializeStockExchangeComboBox(this.getView().byId("stockExchangeComboBox"), 
 				this.getOwnerComponent().getModel("i18n").getResourceBundle());
 				
 			InstrumentController.initializeTypeComboBox(this.getView().byId("typeComboBox"), 

@@ -18,7 +18,7 @@ sap.ui.define([
 			//Register an event handler that gets called every time the router navigates to this view.
 			oRouter.getRoute("priceAlertCreateRoute").attachMatched(this._onRouteMatched, this);
 			
-			PriceAlertController.initializeStockExchangeComboBox(this.getView().byId("stockExchangeComboBox"), 
+			MainController.initializeStockExchangeComboBox(this.getView().byId("stockExchangeComboBox"), 
 				this.getOwnerComponent().getModel("i18n").getResourceBundle());
 				
 			PriceAlertController.initializeTypeComboBox(this.getView().byId("typeComboBox"), 
