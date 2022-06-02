@@ -137,6 +137,7 @@ sap.ui.define([
 		 */
 		resetUIElements : function () {
 			this.getView().byId("instrumentComboBox").setSelectedItem(null);
+			this.getView().setModel(null, "selectedInstrument");
 			
 			this.getView().byId("idText").setText("");
 			this.getView().byId("symbolInput").setValue("");

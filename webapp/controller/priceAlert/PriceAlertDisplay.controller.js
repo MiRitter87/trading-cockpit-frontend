@@ -99,6 +99,7 @@ sap.ui.define([
 		 */
 		resetUIElements : function () {
 			this.getView().byId("priceAlertComboBox").setSelectedItem(null);
+			this.getView().setModel(null, "selectedPriceAlert");
 
 			this.getView().byId("idText").setText("");
 			this.getView().byId("symbolText").setText("");
