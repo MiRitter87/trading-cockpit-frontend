@@ -1,10 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"../MainController",
 	"./PriceAlertController",
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (Controller, PriceAlertController, formatter, JSONModel, MessageToast) {
+], function (Controller, MainController, PriceAlertController, formatter, JSONModel, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertDisplay", {
@@ -93,7 +94,7 @@ sap.ui.define([
 				sStockExchange = oModel.getProperty("/stockExchange");
 			
 			//2. Determine the localized text of the stock exchange.
-			sStockExchangeText = PriceAlertController.getLocalizedStockExchangeText(sStockExchange, oResourceBundle);
+			sStockExchangeText = MainController.getLocalizedStockExchangeText(sStockExchange, oResourceBundle);
 			
 			//3. Apply the text to the stock exchange label.
 			this.getView().byId("stockExchangeText").setText(sStockExchangeText);
