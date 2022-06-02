@@ -63,13 +63,13 @@
 							
 							<f:FormElement label="{i18n>instrument.type}">
 								<f:fields>
-									<Text id="typeText"/>
+									<Text id="typeText" text="{path: 'selectedInstrument>/type', formatter: '.typeTextFormatter'}"/>
 								</f:fields>
 							</f:FormElement>
 							
 							<f:FormElement label="{i18n>instrument.stockExchange}">
 								<f:fields>
-									<Text id="stockExchangeText"/>
+									<Text id="stockExchangeText" text="{path: 'selectedInstrument>/stockExchange', formatter: '.stockExchangeTextFormatter'}"/>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>

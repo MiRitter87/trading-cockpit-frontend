@@ -1,9 +1,10 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"../MainController",
 	"./InstrumentController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (Controller, InstrumentController, JSONModel, MessageToast) {
+], function (Controller, MainController, InstrumentController, JSONModel, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentDisplay", {
@@ -86,6 +87,22 @@ sap.ui.define([
 			this.getView().byId("nameText").setText("");
 			this.getView().byId("typeText").setText("");
 			this.getView().byId("stockExchangeText").setText("");
+		},
+		
+		
+		/**
+		 * Formatter of the stock exchange text.
+		 */
+		stockExchangeTextFormatter: function(sStockExchange) {
+			return MainController.getLocalizedStockExchangeText(sStockExchange, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		},
+		
+		
+		/**
+		 * Formatter of the type text.
+		 */
+		typeTextFormatter: function(sType) {
+			return InstrumentController.getLocalizedTypeText(sType, this.getOwnerComponent().getModel("i18n").getResourceBundle());
 		}
 	});
 });

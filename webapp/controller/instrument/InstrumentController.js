@@ -29,6 +29,17 @@ sap.ui.define([
 		
 		
 		/**
+		 * Returns the localized text of the given type.
+		 */
+		getLocalizedTypeText : function(sType, oResourceBundle) {
+			if(sType == "STOCK")
+				return oResourceBundle.getText("instrument.type.stock");
+			else
+				return "";
+		},
+		
+		
+		/**
 		 * Calls a WebService operation to create an instrument.
 		 */
 		createInstrumentByWebService : function(oInstrumentModel, callbackFunction, oCallingController) {
