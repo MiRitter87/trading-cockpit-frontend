@@ -52,9 +52,6 @@ sap.ui.define([
 			
 			//Set the model of the view according to the selected price alert to allow binding of the UI elements.
 			this.getView().setModel(oPriceAlertModel, "selectedPriceAlert");
-			
-			this.setLocalizedStockExchange();
-			this.setLocalizedType();
 		},
 
 
@@ -82,42 +79,18 @@ sap.ui.define([
 		
 		
 		/**
-		 * Determines and sets the localized text of the selected price alerts stock exchange.
+		 * Formatter of the stock exchange text.
 		 */
-		setLocalizedStockExchange : function () {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var oModel = this.getView().getModel("selectedPriceAlert");
-			var sStockExchangeText = "", sStockExchange = "";
-			
-			//1. Get the stock exchange of the selected price alert.
-			if(oModel != null)
-				sStockExchange = oModel.getProperty("/stockExchange");
-			
-			//2. Determine the localized text of the stock exchange.
-			sStockExchangeText = MainController.getLocalizedStockExchangeText(sStockExchange, oResourceBundle);
-			
-			//3. Apply the text to the stock exchange label.
-			this.getView().byId("stockExchangeText").setText(sStockExchangeText);
+		stockExchangeTextFormatter: function(sStockExchange) {
+			return MainController.getLocalizedStockExchangeText(sStockExchange, this.getOwnerComponent().getModel("i18n").getResourceBundle());
 		},
 		
 		
 		/**
-		 * Determines and sets the localized text of the selected price alerts type.
+		 * Formatter of the type text.
 		 */
-		setLocalizedType : function () {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var oModel = this.getView().getModel("selectedPriceAlert");
-			var sTypeText = "", sType = "";
-			
-			//1. Get the type of the selected price alert.
-			if(oModel != null)
-				sType = oModel.getProperty("/alertType");
-			
-			//2. Determine the localized text of the type.
-			sTypeText = PriceAlertController.getLocalizedTypeText(sType, oResourceBundle);
-			
-			//3. Apply the text to the type label.
-			this.getView().byId("typeText").setText(sTypeText);
+		typeTextFormatter: function(sType) {
+			return PriceAlertController.getLocalizedTypeText(sType, this.getOwnerComponent().getModel("i18n").getResourceBundle());
 		},
 		
 		

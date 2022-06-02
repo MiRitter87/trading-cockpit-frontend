@@ -57,13 +57,13 @@
 							
 							<f:FormElement label="{i18n>priceAlert.stockExchange}">
 								<f:fields>
-									<Text id="stockExchangeText"/>
+									<Text id="stockExchangeText" text="{path: 'selectedPriceAlert>/stockExchange', formatter: '.stockExchangeTextFormatter'}"/>
 								</f:fields>
 							</f:FormElement>
 							
 							<f:FormElement label="{i18n>priceAlert.type}">
 								<f:fields>
-									<Text id="typeText"/>
+									<Text id="typeText" text="{path: 'selectedPriceAlert>/alertType', formatter: '.typeTextFormatter'}"/>
 								</f:fields>
 							</f:FormElement>
 							
