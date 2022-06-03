@@ -105,6 +105,10 @@
 				"pattern": "instrumentDisplay",
 				"name": "instrumentDisplayRoute",
 				"target": "instrumentDisplayTarget"
+			}, {
+				"pattern": "instrumentOverview",
+				"name": "instrumentOverviewRoute",
+				"target": "instrumentOverviewTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -160,6 +164,11 @@
             	"instrumentDisplayTarget": {
 					"viewId": "instrumentDisplay",
 					"viewName": "instrument.InstrumentDisplay",
+					"viewLevel" : 1
+            	},
+            	"instrumentOverviewTarget": {
+					"viewId": "instrumentOverview",
+					"viewName": "instrument.InstrumentOverview",
 					"viewLevel" : 1
             	}
             }

@@ -36,7 +36,7 @@ sap.ui.define([
 		 */
 		onInstrumentOverviewPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			//oRouter.navTo("instrumentOverviewRoute");	
+			oRouter.navTo("instrumentOverviewRoute");	
 		},
 	});
 });
