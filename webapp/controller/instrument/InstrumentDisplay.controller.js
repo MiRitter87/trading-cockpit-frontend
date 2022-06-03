@@ -48,9 +48,6 @@ sap.ui.define([
 			
 			//Set the model of the view according to the selected instrument to allow binding of the UI elements.
 			this.getView().setModel(oInstrumentModel, "selectedInstrument");
-			
-			//this.setLocalizedStockExchange();
-			//this.setLocalizedType();
 		},
 
 
