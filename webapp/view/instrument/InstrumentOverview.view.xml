@@ -10,6 +10,44 @@
 	xmlns:core="sap.ui.core">
 	
 	<Page title="{i18n>instrumentOverview.header}">
-
+		<content>
+			<Table id="instrumentTable" items="{path: 'instruments>/instrument/'}" mode="SingleSelectMaster">
+				<headerToolbar>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://delete" tooltip="{i18n>instrumentOverview.deleteSelected}" press=".onDeletePressed"/>
+					</OverflowToolbar>
+					</headerToolbar>
+				
+				<columns>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>instrument.id}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>instrument.symbol}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>instrument.name}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>instrument.type}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>instrument.stockExchange}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier text="{instruments>id}"/>
+							<Text text="{instruments>symbol}"/>
+							<Text text="{instruments>name}"/>
+							<Text text="{path: 'instruments>type', formatter: '.typeTextFormatter'}"/>
+							<Text text="{path: 'instruments>stockExchange', formatter: '.stockExchangeTextFormatter'}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
 	</Page>
 </mvc:View>
