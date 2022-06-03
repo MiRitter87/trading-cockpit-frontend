@@ -3,8 +3,9 @@ sap.ui.define([
 	"../MainController",
 	"./InstrumentController",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
-], function (Controller, MainController, InstrumentController, JSONModel, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/m/MessageBox"
+], function (Controller, MainController, InstrumentController, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentOverview", {
@@ -24,6 +25,22 @@ sap.ui.define([
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
     	},
+
+
+		/**
+		 * Handles the press-event of the delete button.
+		 */
+		onDeletePressed : function () {
+			var oResourceBundle;
+			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			if(this.isInstrumentSelected() == false) {
+				MessageBox.error(oResourceBundle.getText("instrumentOverview.noInstrumentSelected"));
+				return;
+			}
+			
+			InstrumentController.deleteInstrumentByWebService(this.getSelectedInstrument(), this.deleteInstrumentCallback, this);
+		},
 
 
 		/**
@@ -49,6 +66,27 @@ sap.ui.define([
 		
 		
 		/**
+		 * Callback function of the deleteInstrument RESTful WebService call in the InstrumentController.
+		 */
+		deleteInstrumentCallback : function(oReturnData, oCallingController) {
+			if(oReturnData.message != null) {
+				if(oReturnData.message[0].type == 'S') {
+					MessageToast.show(oReturnData.message[0].text);
+					InstrumentController.queryInstrumentsByWebService(oCallingController.queryInstrumentsCallback, oCallingController, false);
+				}
+				
+				if(oReturnData.message[0].type == 'E') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'W') {
+					MessageBox.warning(oReturnData.message[0].text);
+				}
+			}
+		},
+		
+		
+		/**
 		 * Formatter of the stock exchange text.
 		 */
 		stockExchangeTextFormatter: function(sStockExchange) {
@@ -61,6 +99,29 @@ sap.ui.define([
 		 */
 		typeTextFormatter: function(sType) {
 			return InstrumentController.getLocalizedTypeText(sType, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		},
+		
+		
+		/**
+		 * Checks if an instrument has been selected.
+		 */
+		isInstrumentSelected : function () {
+			if(this.getView().byId("instrumentTable").getSelectedItem() == null)
+				return false;
+			else
+				return true;
+		},
+		
+		
+		/**
+		 * Gets the the selected instrument.
+		 */
+		getSelectedInstrument : function () {
+			var oListItem = this.getView().byId("instrumentTable").getSelectedItem();
+			var oContext = oListItem.getBindingContext("instruments");
+			var oSelectedInstrument = oContext.getProperty(null, oContext);
+			
+			return oSelectedInstrument;
 		}
 	});
 });

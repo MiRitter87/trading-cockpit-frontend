@@ -100,6 +100,27 @@ sap.ui.define([
 					callbackFunction(data, oCallingController);
 				}
 			}); 
+		},
+		
+		
+		/**
+		 * Deletes the given instrument using the WebService.
+		 */
+		deleteInstrumentByWebService : function(oInstrument, callbackFunction, oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + oInstrument.id;
+			
+			//Use "DELETE" to delete an existing resource.
+			jQuery.ajax({
+				type : "DELETE", 
+				contentType : "application/json", 
+				url : sQueryUrl, 
+				dataType : "json", 
+				success : function(data) {
+					callbackFunction(data, oCallingController);
+				}
+			});
 		}
 	};
 });
