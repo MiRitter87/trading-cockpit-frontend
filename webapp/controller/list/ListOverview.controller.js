@@ -2,9 +2,10 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"./ListController",
 	"../MainController",
+	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, ListController, MainController, MessageToast, MessageBox) {
+], function (Controller, ListController, MainController, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.list.ListOverview", {
