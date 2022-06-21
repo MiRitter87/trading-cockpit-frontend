@@ -31,5 +31,15 @@ sap.ui.define([
 			
 			oRouter.navTo("instrumentMenuRoute");			
 		}
+
+		
+		/**
+		 * Handles the selection of the menu item: list.
+		 */
+		onListPressed : function() {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			
+			oRouter.navTo("listMenuRoute");			
+		}
 	});
 });

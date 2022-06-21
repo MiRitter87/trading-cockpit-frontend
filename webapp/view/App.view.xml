@@ -17,6 +17,7 @@
 						<Menu>
 							<MenuItem text="{i18n>navigation.menu.priceAlert}" icon="sap-icon://bell" press="onPriceAlertPressed" />
 							<MenuItem text="{i18n>navigation.menu.instrument}" icon="sap-icon://document-text" press="onInstrumentPressed" />
+							<MenuItem text="{i18n>navigation.menu.list}" icon="sap-icon://documents" press="onListPressed" />
 						</Menu>
 					</menu>
 				</MenuButton>

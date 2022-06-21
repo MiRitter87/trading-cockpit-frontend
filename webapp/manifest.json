@@ -109,6 +109,26 @@
 				"pattern": "instrumentOverview",
 				"name": "instrumentOverviewRoute",
 				"target": "instrumentOverviewTarget"
+			}, {
+				"pattern": "listMenu",
+				"name": "listMenuRoute",
+				"target": "listMenuTarget"
+			}, {
+				"pattern": "listCreate",
+				"name": "listCreateRoute",
+				"target": "listCreateTarget"
+			}, {
+				"pattern": "listEdit",
+				"name": "listEditRoute",
+				"target": "listEditTarget"
+			}, {
+				"pattern": "listDisplay",
+				"name": "listDisplayRoute",
+				"target": "listDisplayTarget"
+			}, {
+				"pattern": "listOverview",
+				"name": "listOverviewRoute",
+				"target": "listOverviewTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -169,6 +189,31 @@
             	"instrumentOverviewTarget": {
 					"viewId": "instrumentOverview",
 					"viewName": "instrument.InstrumentOverview",
+					"viewLevel" : 1
+            	},
+            	"listMenuTarget": {
+					"viewId": "listMenu",
+					"viewName": "list.ListMenu",
+					"viewLevel" : 1
+            	},
+            	"listCreateTarget": {
+					"viewId": "listCreate",
+					"viewName": "list.ListCreate",
+					"viewLevel" : 1
+            	},
+            	"listEditTarget": {
+					"viewId": "listEdit",
+					"viewName": "list.ListEdit",
+					"viewLevel" : 1
+            	},
+            	"listDisplayTarget": {
+					"viewId": "listDisplay",
+					"viewName": "list.ListDisplay",
+					"viewLevel" : 1
+            	},
+            	"listOverviewTarget": {
+					"viewId": "listOverview",
+					"viewName": "list.ListOverview",
 					"viewLevel" : 1
             	}
             }

@@ -1,0 +1,46 @@
+<!DOCTYPE xml>
+<mvc:View
+	controllerName="trading-cockpit-frontend.controller.list.ListOverview"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:u="sap.ui.unified"
+	xmlns:core="sap.ui.core">
+	
+	<Page title="{i18n>listOverview.header}">
+		<content>
+			<Table id="listTable" items="{path: 'lists>/list/'}" mode="SingleSelectMaster">
+				<headerToolbar>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://detail-view" tooltip="{i18n>listOverview.showDetails}" press=".onShowDetailsPressed"/>
+						<Button icon="sap-icon://delete" tooltip="{i18n>listOverview.deleteSelected}" press=".onDeletePressed"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				
+				<columns>
+					<Column>
+						<Text text="{i18n>list.id}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>list.name}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>list.description}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier text="{lists>id}"/>
+							<Text text="{lists>name}"/>
+							<Text text="{lists>description}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>

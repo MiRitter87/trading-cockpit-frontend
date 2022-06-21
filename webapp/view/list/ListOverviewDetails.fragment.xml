@@ -1,0 +1,80 @@
+<!DOCTYPE xml>
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form">
+
+	<Dialog id="listDetailsDialog" title="{i18n>listOverview.detailsHeader}">
+		<content>
+			<f:Form id="listForm" editable="false">
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>list.id}">
+								<f:fields>
+									<Text id="idText" text="{selectedList>/id}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>list.name}">
+								<f:fields>
+									<Text id="nameText" text="{selectedList>/name}"/>
+								</f:fields>
+							</f:FormElement>
+
+							<f:FormElement label="{i18n>list.description}">
+								<f:fields>
+									<Text id="descriptionText" text="{selectedList>/description}"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+			
+			<Table id="instrumentTable" items="{path: 'selectedList>/instruments/', sorter: {path: 'symbol'}}" mode="SingleSelectMaster">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="{i18n>listOverview.titleInstruments}"/>
+					</OverflowToolbar>
+				</headerToolbar>
+			
+				<columns>
+					<Column>
+						<Text text="{i18n>instrument.id}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>instrument.name}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier text="{selectedList>id}"/>
+							<Text text="{selectedList>name}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+      	</content>
+      	
+      	<Button text="{i18n>button.close}" press=".onCloseDialog" class="sapUiSmallMargin"/>
+   	</Dialog>
+</core:FragmentDefinition>

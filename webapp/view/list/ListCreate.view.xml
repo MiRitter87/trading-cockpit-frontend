@@ -1,0 +1,61 @@
+<!DOCTYPE xml>
+<mvc:View
+	controllerName="trading-cockpit-frontend.controller.list.ListCreate"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:u="sap.ui.unified"
+	xmlns:core="sap.ui.core">
+	
+	<Page title="{i18n>listCreate.header}">
+		<content>
+			<f:Form editable="true">
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer>
+						<f:FormElement label="{i18n>list.name}">
+							<f:fields>
+								<Input maxLength="50" value="{newList>/name}" required="true"/>
+							</f:fields>
+						</f:FormElement>
+						
+						<f:FormElement label="{i18n>list.description}">
+								<f:fields>
+									<TextArea maxLength="250" value="{newList>/description}" rows="5"/>
+								</f:fields>
+						</f:FormElement>
+						
+						<f:FormElement label="{i18n>list.instruments}">
+							<f:fields>
+								<Button	text="{i18n>listCreate.openInstrumentSelection}" press=".onSelectInstrumentsPressed"
+									class="sapUiSmallMarginBottom" ariaHasPopup="Dialog">
+								</Button>
+							</f:fields>
+						</f:FormElement>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+			
+			<Button text="{i18n>button.save}" press=".onSavePressed" class="sapUiSmallMargin"/>
+			<Button type="Reject" text="{i18n>button.cancel}" press=".onCancelPressed" class="sapUiSmallMargin"/>
+		</content>
+	</Page>
+</mvc:View>

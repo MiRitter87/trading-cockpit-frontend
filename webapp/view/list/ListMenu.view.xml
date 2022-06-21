@@ -1,0 +1,42 @@
+<!DOCTYPE xml>
+<mvc:View
+	controllerName="trading-cockpit-frontend.controller.list.ListMenu"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	
+	<Page>
+		<content>
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.list}"
+						subheader="{i18n>navigation.object.create}" press="onListCreatePressed">
+				<TileContent>
+					<ImageContent src="sap-icon://add" />
+				</TileContent>
+			</GenericTile>
+			
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.list}"
+						subheader="{i18n>navigation.object.edit}" press="onListEditPressed">
+				<TileContent>
+					<ImageContent src="sap-icon://edit" />
+				</TileContent>
+			</GenericTile>
+			
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.list}"
+						subheader="{i18n>navigation.object.display}" press="onListDisplayPressed">
+				<TileContent>
+					<ImageContent src="sap-icon://display" />
+				</TileContent>
+			</GenericTile>
+			
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.list}"
+						subheader="{i18n>navigation.object.overview}" press="onListOverviewPressed">
+				<TileContent>
+					<ImageContent src="sap-icon://list" />
+				</TileContent>
+			</GenericTile>
+		</content>
+	</Page>
+</mvc:View>

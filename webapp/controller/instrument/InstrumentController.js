@@ -4,7 +4,7 @@ sap.ui.define([
 	"use strict";
 	return {
 		/**
-		 * Initializes the given ComboBox with items for isntrument type selection.
+		 * Initializes the given ComboBox with items for instrument type selection.
 		 */
 		initializeTypeComboBox : function(oComboBox, oResourceBundle) {
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, "STOCK", "instrument.type.stock");

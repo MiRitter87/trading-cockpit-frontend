@@ -1,0 +1,80 @@
+<!DOCTYPE xml>
+<mvc:View
+	controllerName="trading-cockpit-frontend.controller.list.ListEdit"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:u="sap.ui.unified"
+	xmlns:core="sap.ui.core">
+	
+	<Page title="{i18n>listEdit.header}">
+		<content>
+			<l:VerticalLayout class="sapUiSmallMarginBegin">
+				<Label text="{i18n>listEdit.selectionDescription}"/>
+				<ComboBox id="listComboBox" items="{path: 'lists>/list/'}" selectionChange=".onListSelectionChange">
+					<core:Item key="{lists>id}" text="{lists>id} - {lists>name}"/>
+				</ComboBox>
+			</l:VerticalLayout>
+			
+			<f:Form id="listForm" editable="true">
+				<f:title>
+					<core:Title text="{i18n>listEdit.dataHeader}" />
+				</f:title>
+				
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>list.id}">
+								<f:fields>
+									<Text id="idText" text="{selectedList>/id}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>list.name}">
+								<f:fields>
+									<Input id="nameInput" maxLength="50" value="{selectedList>/name}" required="true"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>list.description}">
+								<f:fields>
+									<TextArea maxLength="250" value="{selectedList>/description}" rows="5"/>
+								</f:fields>
+							</f:FormElement>
+						
+							<f:FormElement label="{i18n>list.instruments}">
+								<f:fields>
+									<Button	text="{i18n>listEdit.openInstrumentSelection}" press=".onSelectInstrumentsPressed"
+										class="sapUiSmallMarginBottom" ariaHasPopup="Dialog">
+									</Button>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</content>
+		
+		<Button text="{i18n>button.save}" press=".onSavePressed" class="sapUiSmallMargin" />
+		<Button type="Reject" text="{i18n>button.cancel}" press=".onCancelPressed" class="sapUiSmallMargin"/>
+	</Page>
+</mvc:View>
