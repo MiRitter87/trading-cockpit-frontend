@@ -2,10 +2,11 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"./ListController",
+	"../instrument/InstrumentController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, ListController, JSONModel, MessageBox, MessageToast) {
+], function (Controller, MainController, ListController, InstrumentController, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.list.ListCreate", {
@@ -24,6 +25,9 @@ sap.ui.define([
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
 		_onRouteMatched: function () {
+			//Query instruments for instrument selection dialog.
+			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
+			
 			this.resetUIElements();
 			this.initializeListModel();
     	},
@@ -55,6 +59,24 @@ sap.ui.define([
 		 */
 		onCancelPressed : function () {
 			MainController.navigateToStartpage(sap.ui.core.UIComponent.getRouterFor(this));	
+		},
+		
+		
+		/**
+		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
+		 */
+		queryInstrumentsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}
+			
+			oCallingController.getView().setModel(oModel, "instruments");
 		},
 
 

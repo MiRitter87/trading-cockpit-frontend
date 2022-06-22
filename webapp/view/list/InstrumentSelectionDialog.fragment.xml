@@ -5,20 +5,17 @@
 	<SelectDialog
 		id="instrumentSelectionDialog"
 		multiSelect="true"
-		noDataText="No Products Found"
-		title="Select Product"
+		noDataText="{i18n>instrumentSelectionDialog.noDataText}"
+		title="{i18n>instrumentSelectionDialog.title}"
 		search=".onSearch"
 		confirm=".onDialogClose"
 		cancel=".onDialogClose"
 		items="{
-			path: '/Instruments'
+			path: 'instruments>/instrument'
 		}">
 		<StandardListItem
-			title="{Name}"
-			description="{ProductId}"
-			icon="{ProductPicUrl}"
-			iconDensityAware="false"
-			iconInset="false"
+			title="{instruments>symbol}"
+			description="{instruments>name}"
 			type="Active" />
 	</SelectDialog>
 </core:FragmentDefinition>
