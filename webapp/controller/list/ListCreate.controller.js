@@ -5,8 +5,10 @@ sap.ui.define([
 	"../instrument/InstrumentController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
-	"sap/m/MessageToast"
-], function (Controller, MainController, ListController, InstrumentController, JSONModel, MessageBox, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
+], function (Controller, MainController, ListController, InstrumentController, JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.list.ListCreate", {
@@ -38,6 +40,25 @@ sap.ui.define([
 		 */
 		onSelectInstrumentsPressed : function () {
 			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.list.InstrumentSelectionDialog");
+		},
+		
+		/**
+		 * Handles the search function in the SelectDialog of instruments.
+		 */
+		onSearch: function (oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oBinding = oEvent.getParameter("itemsBinding");
+			
+			var oFilterSymbol = new Filter("symbol", FilterOperator.Contains, sValue);
+			var oFilterName = new Filter("name", FilterOperator.Contains, sValue);
+			
+			//Connect filters via logical "OR".
+			var oFilterTotal = new Filter({
+				filters: [oFilterSymbol, oFilterName],
+    			and: false
+  			});
+			
+			oBinding.filter([oFilterTotal]);
 		},
 
 
