@@ -5,6 +5,7 @@
 	<SelectDialog
 		id="instrumentSelectionDialog"
 		multiSelect="true"
+		rememberSelections="true"
 		noDataText="{i18n>instrumentSelectionDialog.noDataText}"
 		title="{i18n>instrumentSelectionDialog.title}"
 		search=".onSearch"

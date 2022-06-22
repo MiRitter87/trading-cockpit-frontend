@@ -60,6 +60,27 @@ sap.ui.define([
 			
 			oBinding.filter([oFilterTotal]);
 		},
+		
+		
+		/**
+		 * Handles the closing of the SelectDialog of instruments.
+		 */
+		onDialogClose: function (oEvent) {
+			var aContexts = oEvent.getParameter("selectedContexts");
+			var oNewListModel = this.getView().getModel("newList");
+			var oSymbolArray = new Array();
+			
+			if (aContexts && aContexts.length) {
+				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
+					var oContext = aContexts[iIndex];
+					oSymbolArray.push(oContext.getObject().symbol);
+				}				
+				
+				oNewListModel.setProperty("/instruments", oSymbolArray);
+			}
+			
+			oEvent.getSource().getBinding("items").filter([]);
+		},
 
 
 		/**
