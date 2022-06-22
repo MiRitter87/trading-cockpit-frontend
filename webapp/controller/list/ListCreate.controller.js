@@ -26,7 +26,15 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			this.resetUIElements();
 			this.initializeListModel();
-    		},
+    	},
+
+		
+		/**
+		 * Handles a click at the open instrument selection button.
+		 */
+		onSelectInstrumentsPressed : function () {
+			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.list.InstrumentSelectionDialog");
+		},
 
 
 		/**
