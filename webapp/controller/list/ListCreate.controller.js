@@ -73,7 +73,7 @@ sap.ui.define([
 			if (aContexts && aContexts.length) {
 				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
 					var oContext = aContexts[iIndex];
-					oSymbolArray.push(oContext.getObject().symbol);
+					oSymbolArray.push(oContext.getObject());
 				}				
 				
 				oNewListModel.setProperty("/instruments", oSymbolArray);

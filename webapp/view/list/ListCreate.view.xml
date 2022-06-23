@@ -33,7 +33,7 @@
 					<f:FormContainer>
 						<f:FormElement label="{i18n>list.name}">
 							<f:fields>
-								<Input maxLength="50" value="{newList>/name}" required="true"/>
+								<Input id="nameInput" maxLength="50" value="{newList>/name}" required="true"/>
 							</f:fields>
 						</f:FormElement>
 						
