@@ -5,8 +5,10 @@ sap.ui.define([
 	"../instrument/InstrumentController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
-	"sap/m/MessageBox"
-], function (Controller, MainController, ListController, InstrumentController, JSONModel, MessageToast, MessageBox) {
+	"sap/m/MessageBox",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
+], function (Controller, MainController, ListController, InstrumentController, JSONModel, MessageToast, MessageBox, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.list.ListEdit", {
@@ -66,6 +68,47 @@ sap.ui.define([
 			}
 			
 			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.list.InstrumentSelectionDialog");
+		},
+		
+		
+		/**
+		 * Handles the search function in the SelectDialog of instruments.
+		 */
+		onSearch: function (oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oBinding = oEvent.getParameter("itemsBinding");
+			
+			var oFilterSymbol = new Filter("symbol", FilterOperator.Contains, sValue);
+			var oFilterName = new Filter("name", FilterOperator.Contains, sValue);
+			
+			//Connect filters via logical "OR".
+			var oFilterTotal = new Filter({
+				filters: [oFilterSymbol, oFilterName],
+    			and: false
+  			});
+			
+			oBinding.filter([oFilterTotal]);
+		},
+		
+		
+		/**
+		 * Handles the closing of the SelectDialog of instruments.
+		 */
+		onDialogClose: function (oEvent) {
+			var aContexts = oEvent.getParameter("selectedContexts");
+			var oSelectedListModel = this.getView().getModel("selectedList");
+			var aInstrumentArray = new Array();
+			
+			if (aContexts && aContexts.length) {
+				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
+					var oContext = aContexts[iIndex];
+					aInstrumentArray.push(oContext.getObject());
+				}				
+				
+				oSelectedListModel.setProperty("/instruments", aInstrumentArray);
+			}
+			
+			oEvent.getSource().getBinding("items").filter([]);
 		},
 		
 		
@@ -169,6 +212,7 @@ sap.ui.define([
 			
 			this.getView().byId("idText").setText("");
 			this.getView().byId("nameInput").setValue("");
+			this.getView().byId("descriptionTextArea").setValue("");
 		},
 
 

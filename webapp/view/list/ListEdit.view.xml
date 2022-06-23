@@ -57,7 +57,7 @@
 							
 							<f:FormElement label="{i18n>list.description}">
 								<f:fields>
-									<TextArea maxLength="250" value="{selectedList>/description}" rows="5"/>
+									<TextArea id="descriptionTextArea" maxLength="250" value="{selectedList>/description}" rows="5"/>
 								</f:fields>
 							</f:FormElement>
 						
