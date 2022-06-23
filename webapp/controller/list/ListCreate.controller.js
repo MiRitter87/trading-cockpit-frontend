@@ -68,15 +68,15 @@ sap.ui.define([
 		onDialogClose: function (oEvent) {
 			var aContexts = oEvent.getParameter("selectedContexts");
 			var oNewListModel = this.getView().getModel("newList");
-			var oSymbolArray = new Array();
+			var aInstrumentArray = new Array();
 			
 			if (aContexts && aContexts.length) {
 				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
 					var oContext = aContexts[iIndex];
-					oSymbolArray.push(oContext.getObject());
+					aInstrumentArray.push(oContext.getObject());
 				}				
 				
-				oNewListModel.setProperty("/instruments", oSymbolArray);
+				oNewListModel.setProperty("/instruments", aInstrumentArray);
 			}
 			
 			oEvent.getSource().getBinding("items").filter([]);

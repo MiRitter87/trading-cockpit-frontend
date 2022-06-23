@@ -2,10 +2,11 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"./ListController",
+	"../instrument/InstrumentController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, ListController, JSONModel, MessageToast, MessageBox) {
+], function (Controller, MainController, ListController, InstrumentController, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.list.ListEdit", {
@@ -24,6 +25,8 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query list data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ListController.queryListsByWebService(this.queryListsCallback, this, true);
+			//Query instruments for instrument selection dialog.
+			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
 
 			this.getView().setModel(null, "selectedList");
 			this.resetUIElements();
@@ -49,6 +52,20 @@ sap.ui.define([
 			
 			//Set the model of the view according to the selected list to allow binding of the UI elements.
 			this.getView().setModel(oListModel, "selectedList");
+		},
+		
+		
+		/**
+		 * Handles a click at the open instrument selection button.
+		 */
+		onSelectInstrumentsPressed : function () {
+			if(this.getView().byId("listComboBox").getSelectedKey() == "") {
+				var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+				MessageBox.error(oResourceBundle.getText("listEdit.noListSelected"));
+				return;
+			}
+			
+			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.list.InstrumentSelectionDialog");
 		},
 		
 		
@@ -92,6 +109,24 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "lists");
+		},
+		
+		
+		/**
+		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
+		 */
+		queryInstrumentsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}
+			
+			oCallingController.getView().setModel(oModel, "instruments");
 		},
 
 
@@ -161,6 +196,22 @@ sap.ui.define([
 			}
 			
 			return true;
+		},
+		
+		
+		/**
+		 * Formatter that determines the selected instruments of a list for the SelectDialog.
+		 */
+		isInstrumentSelectedFormatter : function(iInstrumentId) {
+			var oSelectedList = this.getView().getModel("selectedList");
+			var aInstruments = oSelectedList.getProperty("/instruments");
+			
+			for(var iIndex = 0; iIndex < aInstruments.length; iIndex++) {
+				if(aInstruments[iIndex].id == iInstrumentId)
+					return true;
+			}
+			
+			return false;
 		}
 	});
 });
