@@ -42,6 +42,23 @@ sap.ui.define([
 			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.list.InstrumentSelectionDialog");
 		},
 		
+		
+		/**
+		 * Formatter that determines the selected instruments of a list for the SelectDialog.
+		 */
+		isInstrumentSelectedFormatter : function(iInstrumentId) {
+			var oNewList = this.getView().getModel("newList");
+			var aInstruments = oNewList.getProperty("/instruments");
+			
+			for(var iIndex = 0; iIndex < aInstruments.length; iIndex++) {
+				if(aInstruments[iIndex].id == iInstrumentId)
+					return true;
+			}
+			
+			return false;
+		},
+		
+		
 		/**
 		 * Handles the search function in the SelectDialog of instruments.
 		 */
