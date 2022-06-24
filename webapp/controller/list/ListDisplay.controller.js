@@ -81,6 +81,9 @@ sap.ui.define([
 
 			this.getView().byId("idText").setText("");
 			this.getView().byId("nameText").setText("");
+			this.getView().byId("descriptionText").setText("");
+			
+			this.getView().byId("instrumentList").destroyItems();
 		}
 	});
 });

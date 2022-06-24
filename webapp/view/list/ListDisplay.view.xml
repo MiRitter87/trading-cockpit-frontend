@@ -65,8 +65,8 @@
 				</f:formContainers>
 			</f:Form>
 
-			<List headerText="{i18n>listDisplay.instrumentListHeader}" items="{path: 'selectedList>/instruments'}" >
-				<StandardListItem title="{Name}"/>
+			<List id="instrumentList" headerText="{i18n>listDisplay.instrumentListHeader}" items="{path: 'selectedList>/instruments'}" >
+				<StandardListItem title="{selectedList>symbol}" description="{selectedList>name}"/>
 			</List>
 		</content>
 	</Page>
