@@ -101,7 +101,7 @@ sap.ui.define([
 			if(oReturnData.message != null) {
 				if(oReturnData.message[0].type == 'S') {
 					MessageToast.show(oReturnData.message[0].text);
-					ListController.queryListsByWebService(oCallingControllerthis.queryListsCallback, oCallingController, false);
+					ListController.queryListsByWebService(oCallingController.queryListsCallback, oCallingController, false);
 				}
 				
 				if(oReturnData.message[0].type == 'E') {
