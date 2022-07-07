@@ -40,6 +40,16 @@ sap.ui.define([
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			
 			oRouter.navTo("listMenuRoute");			
+		},
+		
+		
+		/**
+		 * Handles the selection of the menu item: scan.
+		 */
+		onScanPressed : function() {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			
+			oRouter.navTo("scanMenuRoute");			
 		}
 	});
 });

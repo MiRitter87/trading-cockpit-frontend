@@ -129,6 +129,10 @@
 				"pattern": "listOverview",
 				"name": "listOverviewRoute",
 				"target": "listOverviewTarget"
+			}, {
+				"pattern": "scanMenu",
+				"name": "scanMenuRoute",
+				"target": "scanMenuTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -214,6 +218,11 @@
             	"listOverviewTarget": {
 					"viewId": "listOverview",
 					"viewName": "list.ListOverview",
+					"viewLevel" : 1
+            	},
+            	"scanMenuTarget": {
+					"viewId": "scanMenu",
+					"viewName": "scan.ScanMenu",
 					"viewLevel" : 1
             	}
             }
