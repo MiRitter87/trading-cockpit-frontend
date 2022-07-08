@@ -133,6 +133,10 @@
 				"pattern": "scanMenu",
 				"name": "scanMenuRoute",
 				"target": "scanMenuTarget"
+			}, {
+				"pattern": "scanCreate",
+				"name": "scanCreateRoute",
+				"target": "scanCreateTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -223,6 +227,11 @@
             	"scanMenuTarget": {
 					"viewId": "scanMenu",
 					"viewName": "scan.ScanMenu",
+					"viewLevel" : 1
+            	},
+            	"scanCreateTarget": {
+					"viewId": "scanCreate",
+					"viewName": "scan.ScanCreate",
 					"viewLevel" : 1
             	}
             }
