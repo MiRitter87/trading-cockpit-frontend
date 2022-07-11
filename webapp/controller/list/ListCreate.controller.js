@@ -44,25 +44,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter that determines the selected instruments of a list for the SelectDialog.
-		 */
-		isInstrumentSelectedFormatter : function(iInstrumentId) {
-			var oNewList = this.getView().getModel("newList");
-			var aInstruments = oNewList.getProperty("/instrumentIds");
-			
-			if(aInstruments == undefined)
-				return false;
-			
-			for(var iIndex = 0; iIndex < aInstruments.length; iIndex++) {
-				if(aInstruments[iIndex] == iInstrumentId)
-					return true;
-			}
-			
-			return false;
-		},
-		
-		
-		/**
 		 * Handles the search function in the SelectDialog of instruments.
 		 */
 		onSearch: function (oEvent) {
@@ -94,10 +75,11 @@ sap.ui.define([
 				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
 					var oContext = aContexts[iIndex];
 					aInstrumentArray.push(oContext.getObject().id);
-				}								
+				}
+											
+				oNewListModel.setProperty("/instrumentIds", aInstrumentArray);
 			}
 			
-			oNewListModel.setProperty("/instrumentIds", aInstrumentArray);
 			oEvent.getSource().getBinding("items").filter([]);
 		},
 
@@ -179,7 +161,10 @@ sap.ui.define([
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
+			var oSelectDialog = this.getView().byId("instrumentSelectionDialog");
 			
+			if(oSelectDialog != undefined)
+				oSelectDialog.clearSelection();
 		},
 
 
