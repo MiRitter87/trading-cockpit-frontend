@@ -48,10 +48,13 @@ sap.ui.define([
 		 */
 		isInstrumentSelectedFormatter : function(iInstrumentId) {
 			var oNewList = this.getView().getModel("newList");
-			var aInstruments = oNewList.getProperty("/instruments");
+			var aInstruments = oNewList.getProperty("/instrumentIds");
+			
+			if(aInstruments == undefined)
+				return false;
 			
 			for(var iIndex = 0; iIndex < aInstruments.length; iIndex++) {
-				if(aInstruments[iIndex].id == iInstrumentId)
+				if(aInstruments[iIndex] == iInstrumentId)
 					return true;
 			}
 			
@@ -90,12 +93,11 @@ sap.ui.define([
 			if (aContexts && aContexts.length) {
 				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
 					var oContext = aContexts[iIndex];
-					aInstrumentArray.push(oContext.getObject());
-				}				
-				
-				oNewListModel.setProperty("/instruments", aInstrumentArray);
+					aInstrumentArray.push(oContext.getObject().id);
+				}								
 			}
 			
+			oNewListModel.setProperty("/instrumentIds", aInstrumentArray);
 			oEvent.getSource().getBinding("items").filter([]);
 		},
 
@@ -197,7 +199,7 @@ sap.ui.define([
 			
 			//The list has to have at least one instrument.
 			oListModel = this.getView().getModel("newList");
-			iExistingInstrumentCount = oListModel.oData.instruments.length;
+			iExistingInstrumentCount = oListModel.oData.instrumentIds.length;
 			
 			if(iExistingInstrumentCount < 1) {
 				MessageBox.error(oResourceBundle.getText("listCreate.noInstrumentsExist"));
