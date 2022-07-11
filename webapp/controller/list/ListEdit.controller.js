@@ -41,19 +41,19 @@ sap.ui.define([
 		onListSelectionChange : function (oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oListsModel = this.getView().getModel("lists");
-			var oList;
-			var oListModel = new JSONModel();
+			var oList, wsList;
 			
 			if(oSelectedItem == null) {
-				this.resetUIElements();				
+				this.resetUIElements();
 				return;
 			}
-				
+									
 			oList = ListController.getListById(oSelectedItem.getKey(), oListsModel.oData.list);
-			oListModel.setData(oList);
+			if(oList != null)
+				wsList = this.getListForWebService(oList);
 			
 			//Set the model of the view according to the selected list to allow binding of the UI elements.
-			this.getView().setModel(oListModel, "selectedList");
+			this.getView().setModel(wsList, "selectedList");
 		},
 		
 		
@@ -102,10 +102,10 @@ sap.ui.define([
 			if (aContexts && aContexts.length) {
 				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
 					var oContext = aContexts[iIndex];
-					aInstrumentArray.push(oContext.getObject());
+					aInstrumentArray.push(oContext.getObject().id);
 				}				
 				
-				oSelectedListModel.setProperty("/instruments", aInstrumentArray);
+				oSelectedListModel.setProperty("/instrumentIds", aInstrumentArray);
 			}
 			
 			oEvent.getSource().getBinding("items").filter([]);
@@ -207,6 +207,11 @@ sap.ui.define([
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
+			var oSelectDialog = this.getView().byId("instrumentSelectionDialog");
+			
+			if(oSelectDialog != undefined)
+				oSelectDialog.clearSelection();
+			
 			this.getView().byId("listComboBox").setSelectedItem(null);
 			this.getView().setModel(null, "selectedList");
 			
@@ -232,7 +237,7 @@ sap.ui.define([
 			
 			//The list has to have at least one instrument.
 			oListModel = this.getView().getModel("selectedList");
-			iExistingInstrumentCount = oListModel.oData.instruments.length;
+			iExistingInstrumentCount = oListModel.oData.instrumentIds.length;
 			
 			if(iExistingInstrumentCount < 1) {
 				MessageBox.error(oResourceBundle.getText("listEdit.noInstrumentsExist"));
@@ -244,14 +249,43 @@ sap.ui.define([
 		
 		
 		/**
+		 * Creates a representation of a list that can be processed by the WebService.
+		 */
+		getListForWebService : function(oList) {
+			var wsList = new JSONModel();
+			
+			//Data at head level
+			
+			
+			wsList.setProperty("/id", oList.id);
+			wsList.setProperty("/name", oList.name);
+			wsList.setProperty("/description", oList.description);
+			
+			//Data at item level
+			wsList.setProperty("/instrumentIds", new Array());
+			
+			for(var i = 0; i < oList.instruments.length; i++) {
+				var oInstrument = oList.instruments[i];
+				
+				wsList.oData.instrumentIds.push(oInstrument.id);
+			}
+			
+			return wsList;
+		},
+		
+		
+		/**
 		 * Formatter that determines the selected instruments of a list for the SelectDialog.
 		 */
 		isInstrumentSelectedFormatter : function(iInstrumentId) {
 			var oSelectedList = this.getView().getModel("selectedList");
-			var aInstruments = oSelectedList.getProperty("/instruments");
+			var aInstruments = oSelectedList.getProperty("/instrumentIds");
+			
+			if(aInstruments == undefined)
+				return false;
 			
 			for(var iIndex = 0; iIndex < aInstruments.length; iIndex++) {
-				if(aInstruments[iIndex].id == iInstrumentId)
+				if(aInstruments[iIndex] == iInstrumentId)
 					return true;
 			}
 			

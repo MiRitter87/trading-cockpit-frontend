@@ -192,6 +192,25 @@ sap.ui.define([
 			}
 			
 			return true;
+		},
+		
+		
+		/**
+		 * Formatter that determines the selected instruments of a list for the SelectDialog.
+		 */
+		isInstrumentSelectedFormatter : function(iInstrumentId) {
+			var oNewList = this.getView().getModel("newList");
+			var aInstruments = oNewList.getProperty("/instrumentIds");
+
+			if(aInstruments == undefined)
+				return false;
+
+			for(var iIndex = 0; iIndex < aInstruments.length; iIndex++) {
+				if(aInstruments[iIndex] == iInstrumentId)
+					return true;
+			}
+
+			return false;
 		}
 	});
 });
