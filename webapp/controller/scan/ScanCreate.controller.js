@@ -2,8 +2,10 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"../list/ListController",
-	"sap/ui/model/json/JSONModel"
-], function (Controller, MainController, ListController, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
+], function (Controller, MainController, ListController, JSONModel, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanCreate", {
@@ -36,6 +38,26 @@ sap.ui.define([
 		onSelectListsPressed : function () {
 			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.scan.ListSelectionDialog");
 		},
+		
+		
+		/**
+		 * Handles the search function in the SelectDialog of lists.
+		 */
+		onSearch: function (oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oBinding = oEvent.getParameter("itemsBinding");
+			
+			var oFilterName = new Filter("name", FilterOperator.Contains, sValue);
+			var oFilterDescription = new Filter("description", FilterOperator.Contains, sValue);
+			
+			//Connect filters via logical "OR".
+			var oFilterTotal = new Filter({
+				filters: [oFilterName, oFilterDescription],
+    			and: false
+  			});
+			
+			oBinding.filter([oFilterTotal]);
+		},
 
 
 		/**
@@ -60,10 +82,10 @@ sap.ui.define([
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
-			/*var oSelectDialog = this.getView().byId("listSelectionDialog");
+			var oSelectDialog = this.getView().byId("listSelectionDialog");
 			
 			if(oSelectDialog != undefined)
-				oSelectDialog.clearSelection();*/
+				oSelectDialog.clearSelection();
 		},
 		
 		
