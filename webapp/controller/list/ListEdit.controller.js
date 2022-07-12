@@ -42,11 +42,17 @@ sap.ui.define([
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oListsModel = this.getView().getModel("lists");
 			var oList, wsList;
+			var oSelectDialog = this.getView().byId("instrumentSelectionDialog");
+			var instrumentsModel = this.getView().getModel("instruments");
 			
 			if(oSelectedItem == null) {
 				this.resetUIElements();
 				return;
-			}
+			}			
+			
+			//Reset the selected instruments of the list selected before.
+			if(oSelectDialog != undefined)
+				oSelectDialog.clearSelection();
 									
 			oList = ListController.getListById(oSelectedItem.getKey(), oListsModel.oData.list);
 			if(oList != null)
@@ -54,6 +60,10 @@ sap.ui.define([
 			
 			//Set the model of the view according to the selected list to allow binding of the UI elements.
 			this.getView().setModel(wsList, "selectedList");
+			
+			//Refresh instruments model to trigger formatter in instrumentSelectionDialog.
+			//This assures the instruments of the selected list are correctly selected.
+			instrumentsModel.refresh(true);
 		},
 		
 		
