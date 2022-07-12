@@ -1,0 +1,23 @@
+<!DOCTYPE xml>
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		id="listSelectionDialog"
+		multiSelect="true"
+		rememberSelections="true"
+		noDataText="{i18n>listSelectionDialog.noDataText}"
+		title="{i18n>listSelectionDialog.title}"
+		search=".onSearch"
+		confirm=".onDialogClose"
+		cancel=".onDialogClose"
+		items="{
+			path: 'lists>/list'
+		}">
+		<StandardListItem
+			selected="{path: 'lists>id', formatter: '.isListSelectedFormatter'}"
+			title="{lists>name}"
+			description="{lists>description}"
+			type="Active" />
+	</SelectDialog>
+</core:FragmentDefinition>

@@ -1,8 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"../MainController",
 	"../list/ListController",
 	"sap/ui/model/json/JSONModel"
-], function (Controller, ListController, JSONModel) {
+], function (Controller, MainController, ListController, JSONModel) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanCreate", {
@@ -27,6 +28,14 @@ sap.ui.define([
 			this.resetUIElements();
 			this.initializeScanModel();
     	},
+
+
+		/**
+		 * Handles a click at the open list selection button.
+		 */
+		onSelectListsPressed : function () {
+			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.scan.ListSelectionDialog");
+		},
 
 
 		/**
@@ -66,6 +75,25 @@ sap.ui.define([
 			
 			oScanModel.loadData("model/scan/scanCreate.json");
 			this.getView().setModel(oScanModel, "newScan");
+		},
+		
+		
+		/**
+		 * Formatter that determines the selected lists of a list for the SelectDialog.
+		 */
+		isListSelectedFormatter : function(iListId) {
+			var oNewScan = this.getView().getModel("newScan");
+			var aLists = oNewScan.getProperty("/listIds");
+
+			if(aLists == undefined)
+				return false;
+
+			for(var iIndex = 0; iIndex < aLists.length; iIndex++) {
+				if(aLists[iIndex] == iListId)
+					return true;
+			}
+
+			return false;
 		}
 	});
 });
