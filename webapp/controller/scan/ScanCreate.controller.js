@@ -1,11 +1,14 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
+	"./ScanController",
 	"../list/ListController",
 	"sap/ui/model/json/JSONModel",
+	"sap/m/MessageBox",
+	"sap/m/MessageToast",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Controller, MainController, ListController, JSONModel, Filter, FilterOperator) {
+], function (Controller, MainController, ScanController, ListController, JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanCreate", {
@@ -79,6 +82,27 @@ sap.ui.define([
 			
 			oEvent.getSource().getBinding("items").filter([]);
 		},
+		
+		
+		/**
+		 * Handles a click at the save button.
+		 */
+		onSavePressed : function () {
+			var bInputValid = this.verifyObligatoryFields();
+			
+			if(bInputValid == false)
+				return;
+
+			ScanController.createScanByWebService(this.getView().getModel("newScan"), this.createScanCallback, this);
+		},
+		
+		
+		/**
+		 * Handles a click at the cancel button.
+		 */
+		onCancelPressed : function () {
+			MainController.navigateToStartpage(sap.ui.core.UIComponent.getRouterFor(this));	
+		},
 
 
 		/**
@@ -100,6 +124,29 @@ sap.ui.define([
 		
 		
 		/**
+		 * Callback function of the createScan RESTful WebService call in the ScanController.
+		 */
+		createScanCallback : function (oReturnData, oCallingController) {
+			if(oReturnData.message != null) {
+				if(oReturnData.message[0].type == 'S') {
+					MessageToast.show(oReturnData.message[0].text);
+					//"this" is unknown in the success function of the ajax call. Therefore the calling controller is provided.
+					oCallingController.resetUIElements();
+					oCallingController.initializeScanModel();
+				}
+				
+				if(oReturnData.message[0].type == 'E') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'W') {
+					MessageBox.warning(oReturnData.message[0].text);
+				}
+			} 
+		},
+		
+		
+		/**
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
@@ -107,6 +154,33 @@ sap.ui.define([
 			
 			if(oSelectDialog != undefined)
 				oSelectDialog.clearSelection();
+		},
+		
+		
+		/**
+		 * Verifies input of obligatory fields.
+		 * Returns true if input is valid. Returns false if input is invalid.
+		 */
+		verifyObligatoryFields : function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var iExistingListCount;
+			var oScanModel;
+
+			if(this.getView().byId("nameInput").getValue() == "") {
+				MessageBox.error(oResourceBundle.getText("scanCreate.noNameInput"));
+				return false;
+			}
+			
+			//The scan has to have at least one list.
+			oScanModel = this.getView().getModel("newScan");
+			iExistingListCount = oScanModel.oData.listIds.length;
+			
+			if(iExistingListCount < 1) {
+				MessageBox.error(oResourceBundle.getText("scanCreate.noListsExist"));
+				return false;
+			}
+			
+			return true;
 		},
 		
 		
