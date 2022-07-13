@@ -11,7 +11,88 @@
 	
 	<Page title="{i18n>scanEdit.header}">
 		<content>
+			<l:VerticalLayout class="sapUiSmallMarginBegin">
+				<Label text="{i18n>scanEdit.selectionDescription}"/>
+				<ComboBox id="scanComboBox" items="{path: 'scanss>/scan/'}" selectionChange=".onScanSelectionChange">
+					<core:Item key="{scans>id}" text="{scans>id} - {scans>name}"/>
+				</ComboBox>
+			</l:VerticalLayout>
 			
+			<f:Form id="listForm" editable="true">
+				<f:title>
+					<core:Title text="{i18n>scanEdit.dataHeader}" />
+				</f:title>
+				
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>scan.id}">
+								<f:fields>
+									<Text id="idText" text="{selectedScan>/id}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>scan.name}">
+								<f:fields>
+									<Input id="nameInput" maxLength="50" value="{selectedScan>/name}" required="true"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>scan.description}">
+								<f:fields>
+									<TextArea id="descriptionTextArea" maxLength="250" value="{selectedScan>/description}" rows="5"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>scan.lastScan}">
+								<f:fields>
+									<Text id="lastScanText" text="{path: 'selectedScan>/lastScan', formatter: '.formatter.wsDateFormatter'}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>scan.status}">
+								<f:fields>
+									<Text id="statusText" text="{path: 'selectedScan>/status', formatter: '.statusTextFormatter'}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>scan.percentCompleted}">
+								<f:fields>
+									<Text id="percentCompletedText" text="{selectedScan>/percentCompleted}"/>
+								</f:fields>
+							</f:FormElement>
+						
+							<f:FormElement label="{i18n>scan.lists}">
+								<f:fields>
+									<Button	text="{i18n>scanEdit.openListSelection}" press=".onSelectListsPressed"
+										class="sapUiSmallMarginBottom" ariaHasPopup="Dialog">
+									</Button>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
 		</content>
+		
+		<Button text="{i18n>button.save}" press=".onSavePressed" class="sapUiSmallMargin" />
+		<Button type="Reject" text="{i18n>button.cancel}" press=".onCancelPressed" class="sapUiSmallMargin"/>
 	</Page>
 </mvc:View>
