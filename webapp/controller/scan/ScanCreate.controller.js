@@ -58,6 +58,27 @@ sap.ui.define([
 			
 			oBinding.filter([oFilterTotal]);
 		},
+		
+		
+		/**
+		 * Handles the closing of the SelectDialog of lists.
+		 */
+		onDialogClose: function (oEvent) {
+			var aContexts = oEvent.getParameter("selectedContexts");
+			var oNewScanModel = this.getView().getModel("newScan");
+			var aListArray = new Array();
+			
+			if (aContexts && aContexts.length) {
+				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
+					var oContext = aContexts[iIndex];
+					aListArray.push(oContext.getObject().id);
+				}
+											
+				oNewScanModel.setProperty("/listIds", aListArray);
+			}
+			
+			oEvent.getSource().getBinding("items").filter([]);
+		},
 
 
 		/**
