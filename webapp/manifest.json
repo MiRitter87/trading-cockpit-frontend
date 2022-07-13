@@ -137,6 +137,10 @@
 				"pattern": "scanCreate",
 				"name": "scanCreateRoute",
 				"target": "scanCreateTarget"
+			}, {
+				"pattern": "scanEdit",
+				"name": "scanEditRoute",
+				"target": "scanEditTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -232,6 +236,11 @@
             	"scanCreateTarget": {
 					"viewId": "scanCreate",
 					"viewName": "scan.ScanCreate",
+					"viewLevel" : 1
+            	},
+            	"scanEditTarget": {
+					"viewId": "scanEdit",
+					"viewName": "scan.ScanEdit",
 					"viewLevel" : 1
             	}
             }
