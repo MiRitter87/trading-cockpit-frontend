@@ -1,11 +1,15 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"../MainController",
 	"./ScanController",
 	"../list/ListController",
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
-], function (Controller, ScanController, ListController, formatter, JSONModel, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/m/MessageBox",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
+], function (Controller, MainController, ScanController, ListController, formatter, JSONModel, MessageToast, MessageBox, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanEdit", {
@@ -64,6 +68,61 @@ sap.ui.define([
 			//Refresh lists model to trigger formatter in listSelectionDialog.
 			//This assures the lists of the selected scan are correctly selected.
 			listsModel.refresh(true);
+		},
+		
+		
+		/**
+		 * Handles a click at the open list selection button.
+		 */
+		onSelectListsPressed : function () {
+			if(this.getView().byId("scanComboBox").getSelectedKey() == "") {
+				var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+				MessageBox.error(oResourceBundle.getText("scanEdit.noScanSelected"));
+				return;
+			}
+			
+			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.scan.ListSelectionDialog");
+		},
+		
+		
+		/**
+		 * Handles the search function in the SelectDialog of lists.
+		 */
+		onSearch: function (oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oBinding = oEvent.getParameter("itemsBinding");
+			
+			var oFilterName = new Filter("name", FilterOperator.Contains, sValue);
+			var oFilterDescription = new Filter("description", FilterOperator.Contains, sValue);
+			
+			//Connect filters via logical "OR".
+			var oFilterTotal = new Filter({
+				filters: [oFilterName, oFilterDescription],
+    			and: false
+  			});
+			
+			oBinding.filter([oFilterTotal]);
+		},
+		
+		
+		/**
+		 * Handles the closing of the SelectDialog of lists.
+		 */
+		onDialogClose: function (oEvent) {
+			var aContexts = oEvent.getParameter("selectedContexts");
+			var oSelectedScanModel = this.getView().getModel("selectedScan");
+			var aListArray = new Array();
+			
+			if (aContexts && aContexts.length) {
+				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
+					var oContext = aContexts[iIndex];
+					aListArray.push(oContext.getObject().id);
+				}				
+				
+				oSelectedScanModel.setProperty("/listIds", aListArray);
+			}
+			
+			oEvent.getSource().getBinding("items").filter([]);
 		},
 
 
@@ -160,6 +219,25 @@ sap.ui.define([
 		 */
 		statusTextFormatter: function(sStatus) {
 			return ScanController.getLocalizedStatusText(sStatus, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		},
+		
+		
+		/**
+		 * Formatter that determines the selected lists of a scan for the SelectDialog.
+		 */
+		isListSelectedFormatter : function(iListId) {
+			var oSelectedScan = this.getView().getModel("selectedScan");
+			var aLists = oSelectedScan.getProperty("/listIds");
+			
+			if(aLists == undefined)
+				return false;
+			
+			for(var iIndex = 0; iIndex < aLists.length; iIndex++) {
+				if(aLists[iIndex] == iListId)
+					return true;
+			}
+			
+			return false;
 		}
 	});
 });
