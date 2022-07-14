@@ -124,6 +124,27 @@ sap.ui.define([
 			
 			oEvent.getSource().getBinding("items").filter([]);
 		},
+		
+		
+		/**
+		 * Handles a click at the save button.
+		 */
+		onSavePressed : function () {				
+			var bInputValid = this.verifyObligatoryFields();
+			
+			if(bInputValid == false)
+				return;
+				
+			ScanController.saveScanByWebService(this.getView().getModel("selectedScan"), this.saveScanCallback, this);
+		},
+		
+		
+		/**
+		 * Handles a click at the cancel button.
+		 */
+		onCancelPressed : function () {
+			MainController.navigateToStartpage(sap.ui.core.UIComponent.getRouterFor(this));	
+		},
 
 
 		/**
@@ -167,6 +188,36 @@ sap.ui.define([
 		
 		
 		/**
+		 *  Callback function of the saveScan RESTful WebService call in the ScanController.
+		 */
+		saveScanCallback : function(oReturnData, oCallingController) {
+			if(oReturnData.message != null) {
+				if(oReturnData.message[0].type == 'S') {
+					//Update the data source of the ComboBox with the new scan data.
+					ScanController.queryScansByWebService(oCallingController.queryScansCallback, oCallingController, false);
+					
+					oCallingController.getView().setModel(null, "selectedScan");
+					oCallingController.resetUIElements();
+					
+					MessageToast.show(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'I') {
+					MessageToast.show(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'E') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'W') {
+					MessageBox.warning(oReturnData.message[0].text);
+				}
+			}
+		},
+		
+		
+		/**
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
@@ -184,6 +235,33 @@ sap.ui.define([
 			this.getView().byId("lastScanText").setText("");
 			this.getView().byId("statusText").setText("");
 			this.getView().byId("percentCompletedText").setText("");
+		},
+		
+		
+		/**
+		 * Verifies input of obligatory fields.
+		 * Returns true if input is valid. Returns false if input is invalid.
+		 */
+		verifyObligatoryFields : function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var iExistingListCount;
+			var oScanModel;
+
+			if(this.getView().byId("nameInput").getValue() == "") {
+				MessageBox.error(oResourceBundle.getText("scanEdit.noNameInput"));
+				return false;
+			}
+			
+			//The scan has to have at least one list.
+			oScanModel = this.getView().getModel("selectedScan");
+			iExistingListCount = oScanModel.oData.listIds.length;
+			
+			if(iExistingListCount < 1) {
+				MessageBox.error(oResourceBundle.getText("scanEdit.noListsExist"));
+				return false;
+			}
+			
+			return true;
 		},
 		
 		
