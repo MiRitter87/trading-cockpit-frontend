@@ -32,7 +32,7 @@ sap.ui.define([
 
 			this.getView().setModel(null, "selectedList");
 			this.resetUIElements();
-    		},
+    	},
 
 
 		/**
