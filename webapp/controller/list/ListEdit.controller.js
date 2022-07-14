@@ -265,8 +265,6 @@ sap.ui.define([
 			var wsList = new JSONModel();
 			
 			//Data at head level
-			
-			
 			wsList.setProperty("/id", oList.id);
 			wsList.setProperty("/name", oList.name);
 			wsList.setProperty("/description", oList.description);

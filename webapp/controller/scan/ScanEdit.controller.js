@@ -32,6 +32,38 @@ sap.ui.define([
 
 
 		/**
+		 * Handles the selection of an item in the scan ComboBox.
+		 */
+		onScanSelectionChange : function (oControlEvent) {
+			var oSelectedItem = oControlEvent.getParameters().selectedItem;
+			var oScansModel = this.getView().getModel("scans");
+			var oScan, wsScan;
+			var oSelectDialog = this.getView().byId("listSelectionDialog");
+			var listsModel = this.getView().getModel("lists");
+			
+			if(oSelectedItem == null) {
+				//this.resetUIElements();
+				return;
+			}			
+			
+			//Reset the selected lists of the scan selected before.
+			if(oSelectDialog != undefined)
+				oSelectDialog.clearSelection();
+									
+			oScan = ScanController.getScanById(oSelectedItem.getKey(), oScansModel.oData.scan);
+			if(oScan != null)
+				wsScan = this.getScanForWebService(oScan);
+			
+			//Set the model of the view according to the selected scan to allow binding of the UI elements.
+			this.getView().setModel(wsScan, "selectedScan");
+			
+			//Refresh lists model to trigger formatter in listSelectionDialog.
+			//This assures the lists of the selected scan are correctly selected.
+			listsModel.refresh(true);
+		},
+
+
+		/**
 		 * Callback function of the queryScans RESTful WebService call in the ScanController.
 		 */
 		queryScansCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
@@ -68,6 +100,33 @@ sap.ui.define([
 			}
 			
 			oCallingController.getView().setModel(oModel, "lists");
-		}
+		},
+		
+		
+		/**
+		 * Creates a representation of a scan that can be processed by the WebService.
+		 */
+		getScanForWebService : function(oScan) {
+			var wsScan = new JSONModel();
+			
+			//Data at head level
+			wsScan.setProperty("/id", oScan.id);
+			wsScan.setProperty("/name", oScan.name);
+			wsScan.setProperty("/description", oScan.description);
+			wsScan.setProperty("/lastScan", oScan.lastScan);
+			wsScan.setProperty("/status", oScan.status);
+			wsScan.setProperty("/percentCompleted", oScan.percentCompleted);
+			
+			//Data at item level
+			wsScan.setProperty("/listIds", new Array());
+			
+			for(var i = 0; i < oScan.lists.length; i++) {
+				var oList = oScan.lists[i];
+				
+				wsScan.oData.listIds.push(oList.id);
+			}
+			
+			return wsScan;
+		},
 	});
 });

@@ -13,7 +13,7 @@
 		<content>
 			<l:VerticalLayout class="sapUiSmallMarginBegin">
 				<Label text="{i18n>scanEdit.selectionDescription}"/>
-				<ComboBox id="scanComboBox" items="{path: 'scanss>/scan/'}" selectionChange=".onScanSelectionChange">
+				<ComboBox id="scanComboBox" items="{path: 'scans>/scan/'}" selectionChange=".onScanSelectionChange">
 					<core:Item key="{scans>id}" text="{scans>id} - {scans>name}"/>
 				</ComboBox>
 			</l:VerticalLayout>

@@ -2,7 +2,24 @@ sap.ui.define([
 	"../MainController"
 ], function (MainController) {
 	"use strict";
-	return {		
+	return {
+		/**
+		 * Gets the scan data of the scan with the given ID.
+		 */
+		getScanById : function(iScanId, oScans) {
+			//Get the selected scan from the array of all scans according to the id.
+			for(var i = 0; i < oScans.length; i++) {
+    			var oTempScan = oScans[i];
+    			
+				if(oTempScan.id == iScanId) {
+					return oTempScan;
+				}
+			}
+			
+			return null;
+		},
+		
+				
 		/**
 		 * Calls a WebService operation to create a scan.
 		 */
