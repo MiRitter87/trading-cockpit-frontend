@@ -31,7 +31,7 @@ sap.ui.define([
 			ListController.queryListsByWebService(this.queryListsCallback, this, false);
 
 			this.getView().setModel(null, "selectedScan");
-			//this.resetUIElements();
+			this.resetUIElements();
     	},
 
 
@@ -46,7 +46,7 @@ sap.ui.define([
 			var listsModel = this.getView().getModel("lists");
 			
 			if(oSelectedItem == null) {
-				//this.resetUIElements();
+				this.resetUIElements();
 				return;
 			}			
 			
@@ -104,6 +104,27 @@ sap.ui.define([
 			}
 			
 			oCallingController.getView().setModel(oModel, "lists");
+		},
+		
+		
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements : function () {
+			var oSelectDialog = this.getView().byId("listSelectionDialog");
+			
+			if(oSelectDialog != undefined)
+				oSelectDialog.clearSelection();
+			
+			this.getView().byId("scanComboBox").setSelectedItem(null);
+			this.getView().setModel(null, "selectedScan");
+			
+			this.getView().byId("idText").setText("");
+			this.getView().byId("nameInput").setValue("");
+			this.getView().byId("descriptionTextArea").setValue("");
+			this.getView().byId("lastScanText").setText("");
+			this.getView().byId("statusText").setText("");
+			this.getView().byId("percentCompletedText").setText("");
 		},
 		
 		
