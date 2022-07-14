@@ -2,12 +2,16 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"./ScanController",
 	"../list/ListController",
+	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (Controller, ScanController, ListController, JSONModel, MessageToast) {
+], function (Controller, ScanController, ListController, formatter, JSONModel, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanEdit", {
+		formatter: formatter,
+		
+		
 		/**
 		 * Initializes the controller.
 		 */
@@ -128,5 +132,13 @@ sap.ui.define([
 			
 			return wsScan;
 		},
+		
+		
+		/**
+		 * Formatter of the status text.
+		 */
+		statusTextFormatter: function(sStatus) {
+			return ScanController.getLocalizedStatusText(sStatus, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		}
 	});
 });

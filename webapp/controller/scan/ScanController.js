@@ -19,6 +19,19 @@ sap.ui.define([
 			return null;
 		},
 		
+		
+		/**
+		 * Returns the localized text of the given status.
+		 */
+		getLocalizedStatusText : function(sStatus, oResourceBundle) {
+			if(sStatus == "IN_PROGRESS")
+				return oResourceBundle.getText("scan.status.inProgress");
+			else if(sStatus == "FINISHED")
+				return oResourceBundle.getText("scan.status.finished");
+			else
+				return "";
+		},
+		
 				
 		/**
 		 * Calls a WebService operation to create a scan.

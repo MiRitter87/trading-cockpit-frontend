@@ -75,7 +75,7 @@
 							
 							<f:FormElement label="{i18n>scan.percentCompleted}">
 								<f:fields>
-									<Text id="percentCompletedText" text="{selectedScan>/percentCompleted}"/>
+									<Text id="percentCompletedText" text="{selectedScan>/percentCompleted}%"/>
 								</f:fields>
 							</f:FormElement>
 						
