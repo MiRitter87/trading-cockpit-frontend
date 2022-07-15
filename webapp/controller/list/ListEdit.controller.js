@@ -109,7 +109,7 @@ sap.ui.define([
 			var oSelectedListModel = this.getView().getModel("selectedList");
 			var aInstrumentArray = new Array();
 			
-			if (aContexts && aContexts.length) {
+			if (aContexts) {		//Is defined if user clicks "accept" and is undefined if user clicks "cancel".
 				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
 					var oContext = aContexts[iIndex];
 					aInstrumentArray.push(oContext.getObject().id);

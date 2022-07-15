@@ -113,7 +113,7 @@ sap.ui.define([
 			var oSelectedScanModel = this.getView().getModel("selectedScan");
 			var aListArray = new Array();
 			
-			if (aContexts && aContexts.length) {
+			if (aContexts) {		//Is defined if user clicks "accept" and is undefined if user clicks "cancel".
 				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
 					var oContext = aContexts[iIndex];
 					aListArray.push(oContext.getObject().id);
