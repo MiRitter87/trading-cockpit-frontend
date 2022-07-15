@@ -29,6 +29,28 @@ sap.ui.define([
 
 
 		/**
+		 * Handles the selection of an item in the scan ComboBox.
+		 */
+		onScanSelectionChange : function (oControlEvent) {
+			var oSelectedItem = oControlEvent.getParameters().selectedItem;
+			var oScansModel = this.getView().getModel("scans");
+			var oScan;
+			var oScanModel = new JSONModel();
+			
+			if(oSelectedItem == null) {
+				//this.resetUIElements();				
+				return;
+			}
+				
+			oScan = ScanController.getScanById(oSelectedItem.getKey(), oScansModel.oData.scan);
+			oScanModel.setData(oScan);
+			
+			//Set the model of the view according to the selected scan to allow binding of the UI elements.
+			this.getView().setModel(oScanModel, "selectedScan");
+		},
+
+
+		/**
 		 * Callback function of the queryScans RESTful WebService call in the ScanController.
 		 */
 		queryScansCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
