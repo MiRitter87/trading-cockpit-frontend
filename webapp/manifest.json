@@ -141,6 +141,10 @@
 				"pattern": "scanEdit",
 				"name": "scanEditRoute",
 				"target": "scanEditTarget"
+			}, {
+				"pattern": "scanDisplay",
+				"name": "scanDisplayRoute",
+				"target": "scanDisplayTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -241,6 +245,11 @@
             	"scanEditTarget": {
 					"viewId": "scanEdit",
 					"viewName": "scan.ScanEdit",
+					"viewLevel" : 1
+            	},
+            	"scanDisplayTarget": {
+					"viewId": "scanDisplay",
+					"viewName": "scan.ScanDisplay",
 					"viewLevel" : 1
             	}
             }
