@@ -11,7 +11,49 @@
 	
 	<Page title="{i18n>scanOverview.header}">
 		<content>
-			
+			<Table id="scanTable" items="{path: 'scans>/scan/'}" mode="SingleSelectMaster">
+				<headerToolbar>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://begin" tooltip="{i18n>scanOverview.startScan}" press=".onStartScanPressed"/>
+						<Button icon="sap-icon://detail-view" tooltip="{i18n>scanOverview.showDetails}" press=".onShowDetailsPressed"/>
+						<Button icon="sap-icon://delete" tooltip="{i18n>scanOverview.deleteSelected}" press=".onDeletePressed"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				
+				<columns>
+					<Column>
+						<Text text="{i18n>scan.id}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>scan.name}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>scan.description}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>scan.lastScan}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>scan.status}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>scan.percentCompleted}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier text="{scans>id}"/>
+							<Text text="{scans>name}"/>
+							<Text text="{scans>description}"/>
+							<Text text="{path: 'scans>lastScan', formatter: '.formatter.wsDateFormatter'}"/>
+							<Text text="{path: 'scans>/status', formatter: '.statusTextFormatter'}"/>
+							<Text text="{scans>percentCompleted}%"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
 		</content>
 	</Page>
 </mvc:View>
