@@ -1,0 +1,98 @@
+<!DOCTYPE xml>
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form">
+
+	<Dialog id="scanDetailsDialog" title="{i18n>scanOverview.detailsHeader}">
+		<content>
+			<f:Form id="scanForm" editable="false">
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>scan.id}">
+								<f:fields>
+									<Text id="idText" text="{selectedScan>/id}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>scan.name}">
+								<f:fields>
+									<Text id="nameText" text="{selectedScan>/name}"/>
+								</f:fields>
+							</f:FormElement>
+
+							<f:FormElement label="{i18n>scan.description}">
+								<f:fields>
+									<Text id="descriptionText" text="{selectedScan>/description}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>scan.lastScan}">
+								<f:fields>
+									<Text id="lastScanText" text="{path: 'selectedScan>/lastScan', formatter: '.formatter.wsDateFormatter'}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>scan.status}">
+								<f:fields>
+									<Text id="statusText" text="{path: 'selectedScan>/status', formatter: '.statusTextFormatter'}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>scan.percentCompleted}">
+								<f:fields>
+									<Text id="percentCompletedText" text="{selectedScan>/percentCompleted}%"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+			
+			<Table id="listTable" items="{path: 'selectedScan>/lists/', sorter: {path: 'id'}}" mode="SingleSelectMaster">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="{i18n>scanOverview.titleLists}"/>
+					</OverflowToolbar>
+				</headerToolbar>
+			
+				<columns>
+					<Column>
+						<Text text="{i18n>list.name}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>list.description}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier text="{selectedScan>name}"/>
+							<Text text="{selectedScan>description}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+      	</content>
+      	
+      	<Button text="{i18n>button.close}" press=".onCloseDialog" class="sapUiSmallMargin"/>
+   	</Dialog>
+</core:FragmentDefinition>
