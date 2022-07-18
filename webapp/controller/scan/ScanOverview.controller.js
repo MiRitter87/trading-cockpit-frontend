@@ -58,6 +58,22 @@ sap.ui.define([
 		onCloseDialog : function () {
 			this.byId("scanDetailsDialog").close();
 		},
+		
+		
+		/**
+		 * Handles the press-event of the delete button.
+		 */
+		onDeletePressed : function () {
+			var oResourceBundle;
+			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			if(this.isScanSelected() == false) {
+				MessageBox.error(oResourceBundle.getText("scanOverview.noScanSelected"));
+				return;
+			}
+			
+			ScanController.deleteScanByWebService(this.getSelectedScan(), this.deleteScanCallback, this);
+		},
 
 
 		/**
@@ -79,6 +95,27 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "scans");
+		},
+		
+		
+		/**
+		 * Callback function of the deleteScan RESTful WebService call in the ScanController.
+		 */
+		deleteScanCallback : function(oReturnData, oCallingController) {
+			if(oReturnData.message != null) {
+				if(oReturnData.message[0].type == 'S') {
+					MessageToast.show(oReturnData.message[0].text);
+					ScanController.queryScansByWebService(oCallingController.queryScansCallback, oCallingController, false);
+				}
+				
+				if(oReturnData.message[0].type == 'E') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'W') {
+					MessageBox.warning(oReturnData.message[0].text);
+				}
+			}
 		},
 		
 		

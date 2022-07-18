@@ -94,6 +94,27 @@ sap.ui.define([
 					callbackFunction(data, oCallingController);
 				}
 			}); 
+		},
+		
+		
+		/**
+		 * Deletes the given scan using the WebService.
+		 */
+		deleteScanByWebService : function(oScan, callbackFunction, oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/scan");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + oScan.id;
+			
+			//Use "DELETE" to delete an existing resource.
+			jQuery.ajax({
+				type : "DELETE", 
+				contentType : "application/json", 
+				url : sQueryUrl, 
+				dataType : "json", 
+				success : function(data) {
+					callbackFunction(data, oCallingController);
+				}
+			});
 		}
 	};
 });
