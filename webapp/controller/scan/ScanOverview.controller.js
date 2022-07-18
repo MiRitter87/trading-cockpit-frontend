@@ -1,10 +1,12 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"./ScanController",
+	"../MainController",
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
-], function (Controller, ScanController, formatter, JSONModel, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/m/MessageBox"
+], function (Controller, ScanController, MainController, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanOverview", {
@@ -28,6 +30,35 @@ sap.ui.define([
 			ScanController.queryScansByWebService(this.queryScansCallback, this, true);
     	},
 
+		
+		/**
+		 * Handles the press-event of the show details button.
+		 */
+		onShowDetailsPressed : function () {
+			var oResourceBundle;
+			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oSelectedScanModel;
+			
+			if(this.isScanSelected() == false) {
+				MessageBox.error(oResourceBundle.getText("scanOverview.noScanSelected"));
+				return;
+			}
+			
+			oSelectedScanModel = new JSONModel();
+			oSelectedScanModel.setData(this.getSelectedScan());
+			this.getView().setModel(oSelectedScanModel, "selectedScan");		
+			
+			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.scan.ScanOverviewDetails");
+		},
+		
+		
+		/**
+		 * Handles a click at the close button of the list details fragment.
+		 */
+		onCloseDialog : function () {
+			this.byId("scanDetailsDialog").close();
+		},
+
 
 		/**
 		 * Callback function of the queryScans RESTful WebService call in the ScanController.
@@ -48,6 +79,29 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "scans");
+		},
+		
+		
+		/**
+		 * Checks if a scan has been selected.
+		 */
+		isScanSelected : function () {
+			if(this.getView().byId("scanTable").getSelectedItem() == null)
+				return false;
+			else
+				return true;
+		},
+		
+		
+		/**
+		 * Gets the the selected scan.
+		 */
+		getSelectedScan : function () {
+			var oListItem = this.getView().byId("scanTable").getSelectedItem();
+			var oContext = oListItem.getBindingContext("scans");
+			var oSelectedScan = oContext.getProperty(null, oContext);
+			
+			return oSelectedScan;
 		},
 		
 		
