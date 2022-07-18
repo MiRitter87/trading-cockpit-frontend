@@ -48,7 +48,7 @@
 							<Text text="{scans>name}"/>
 							<Text text="{scans>description}"/>
 							<Text text="{path: 'scans>lastScan', formatter: '.formatter.wsDateFormatter'}"/>
-							<Text text="{path: 'scans>/status', formatter: '.statusTextFormatter'}"/>
+							<Text text="{path: 'scans>status', formatter: '.statusTextFormatter'}"/>
 							<Text text="{scans>percentCompleted}%"/>
 						</cells>
 					</ColumnListItem>

@@ -24,7 +24,7 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ListController.queryListsByWebService(this.queryListsCallback, this, true);
-    		},
+    	},
 
 
 		/**
