@@ -60,7 +60,7 @@ sap.ui.define([
 									
 			oScan = ScanController.getScanById(oSelectedItem.getKey(), oScansModel.oData.scan);
 			if(oScan != null)
-				wsScan = this.getScanForWebService(oScan);
+				wsScan = ScanController.getScanForWebService(oScan);
 			
 			//Set the model of the view according to the selected scan to allow binding of the UI elements.
 			this.getView().setModel(wsScan, "selectedScan");
@@ -262,33 +262,6 @@ sap.ui.define([
 			}
 			
 			return true;
-		},
-		
-		
-		/**
-		 * Creates a representation of a scan that can be processed by the WebService.
-		 */
-		getScanForWebService : function(oScan) {
-			var wsScan = new JSONModel();
-			
-			//Data at head level
-			wsScan.setProperty("/id", oScan.id);
-			wsScan.setProperty("/name", oScan.name);
-			wsScan.setProperty("/description", oScan.description);
-			wsScan.setProperty("/lastScan", oScan.lastScan);
-			wsScan.setProperty("/status", oScan.status);
-			wsScan.setProperty("/percentCompleted", oScan.percentCompleted);
-			
-			//Data at item level
-			wsScan.setProperty("/listIds", new Array());
-			
-			for(var i = 0; i < oScan.lists.length; i++) {
-				var oList = oScan.lists[i];
-				
-				wsScan.oData.listIds.push(oList.id);
-			}
-			
-			return wsScan;
 		},
 		
 		
