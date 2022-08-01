@@ -23,7 +23,7 @@ sap.ui.define([
 		 */
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
-			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
+			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true, "NONE");
     	},
 
 
@@ -72,7 +72,8 @@ sap.ui.define([
 			if(oReturnData.message != null) {
 				if(oReturnData.message[0].type == 'S') {
 					MessageToast.show(oReturnData.message[0].text);
-					InstrumentController.queryInstrumentsByWebService(oCallingController.queryInstrumentsCallback, oCallingController, false);
+					InstrumentController.queryInstrumentsByWebService(
+						oCallingController.queryInstrumentsCallback, oCallingController, false, "NONE");
 				}
 				
 				if(oReturnData.message[0].type == 'E') {

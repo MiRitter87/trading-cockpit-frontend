@@ -29,7 +29,7 @@ sap.ui.define([
 		 */
 		_onRouteMatched: function () {
 			//Query instrument data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
-			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
+			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true, "NONE");
 			
 			this.getView().setModel(null, "selectedInstrument");
 			this.resetUIElements();
@@ -109,7 +109,8 @@ sap.ui.define([
 			if(oReturnData.message != null) {
 				if(oReturnData.message[0].type == 'S') {
 					//Update the data source of the ComboBox with the new instrument data.
-					InstrumentController.queryInstrumentsByWebService(oCallingController.queryInstrumentsCallback, oCallingController, false);
+					InstrumentController.queryInstrumentsByWebService(
+						oCallingController.queryInstrumentsCallback, oCallingController, false, "NONE");
 					
 					oCallingController.getView().setModel(null, "selectedInstrument");
 					oCallingController.resetUIElements();

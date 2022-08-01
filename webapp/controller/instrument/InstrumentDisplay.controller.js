@@ -22,7 +22,7 @@ sap.ui.define([
 		 */
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
-			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
+			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true, "NONE");
 			
 			this.getView().setModel(null, "selectedInstrument");
 			this.resetUIElements();
