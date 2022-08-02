@@ -37,6 +37,15 @@ sap.ui.define([
 		onScanOverviewPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("scanOverviewRoute");	
+		},
+		
+		
+		/**
+		 * Handles click at the scan results tile.
+		 */
+		onScanResultsPressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("scanResultsRoute");	
 		}
 	});
 });

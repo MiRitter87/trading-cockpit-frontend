@@ -149,6 +149,11 @@
 				"pattern": "scanOverview",
 				"name": "scanOverviewRoute",
 				"target": "scanOverviewTarget"
+			}
+			, {
+				"pattern": "scanResults",
+				"name": "scanResultsRoute",
+				"target": "scanResultsTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -259,6 +264,11 @@
             	"scanOverviewTarget": {
 					"viewId": "scanOverview",
 					"viewName": "scan.ScanOverview",
+					"viewLevel" : 1
+            	},
+            	"scanResultsTarget": {
+					"viewId": "scanResults",
+					"viewName": "scan.ScanResults",
 					"viewLevel" : 1
             	}
             }

@@ -37,6 +37,13 @@
 					<ImageContent src="sap-icon://list" />
 				</TileContent>
 			</GenericTile>
+			
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.scan}"
+						subheader="{i18n>navigation.menu.scan.results}" press="onScanResultsPressed">
+				<TileContent>
+					<ImageContent src="sap-icon://target-group" />
+				</TileContent>
+			</GenericTile>
 		</content>
 	</Page>
 </mvc:View>
