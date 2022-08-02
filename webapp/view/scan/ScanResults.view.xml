@@ -11,7 +11,7 @@
 	
 	<Page title="{i18n>scanResults.header}">
 		<content>
-			<Table id="instrumentTable" items="{path: 'instruments>/instrument/'}" mode="SingleSelectMaster">
+			<Table id="instrumentTable" items="{path: 'instruments>/', sorter: {path: 'rsNumber', descending: true }}" mode="SingleSelectMaster">
 				<columns>
 					<Column>
 						<Text text="{i18n>instrument.symbol}"/>
@@ -28,7 +28,7 @@
 						<cells>
 							<Text text="{instruments>symbol}"/>
 							<Text text="{instruments>name}"/>
-							<Text text="{path: 'instruments>quotations', formatter: '.rsNumberFormatter'}"/>
+							<Text text="{instruments>rsNumber}"/>
 						</cells>
 					</ColumnListItem>
 				</items>

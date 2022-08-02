@@ -32,7 +32,7 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			
 			if(oReturnData.data != null) {
-				oModel.setData(oReturnData.data);
+				oModel.setData(oCallingController.getTableModelFromInstrumentData(oReturnData.data));
 			}
 			
 			if(oReturnData.data == null && oReturnData.message != null)  {
@@ -44,21 +44,36 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter of the RS Number.
+		 * Converts the instruments provided by the WebService into a format that can be bound more easily to the table.
+		 * During this process deep structures like instrument->quotations are resolved into a flat structure for each table row.
 		 */
-		rsNumberFormatter: function(aQuotations) {
-			var oQuotation;
+		getTableModelFromInstrumentData : function(instruments) {
+			var oTableRow, oInstrument, oQuotation;
+			var aTableRows = new Array();
 			
-			if(aQuotations == null || aQuotations == undefined || aQuotations.length == 0)
-				return "";
-			else {
-				oQuotation = aQuotations[0];
+			if(instruments == null)
+				return aTableRows;
+			
+			for(var i=0; i < instruments.instrument.length; i++){
+				oInstrument = instruments.instrument[i];
 				
-				if(oQuotation.indicator == null || oQuotation.indicator == undefined)
-					return "";
-				else
-					return oQuotation.indicator.rsPercentSum;
+				if(oInstrument.quotations == null)
+					continue;
+				
+				oQuotation = oInstrument.quotations[0];
+				
+				if(oQuotation == undefined || oQuotation.indicator == null)
+					continue;
+				
+				oTableRow = new Object();
+				oTableRow.symbol = oInstrument.symbol;
+				oTableRow.name = oInstrument.name;
+				oTableRow.rsNumber = oQuotation.indicator.rsPercentSum;
+				
+				aTableRows.push(oTableRow);
 			}
+			
+			return aTableRows;
 		}
 	});
 });
