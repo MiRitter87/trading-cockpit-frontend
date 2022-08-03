@@ -88,6 +88,7 @@ sap.ui.define([
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			if(oReturnData.data != null) {
+				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 				
 				if(bShowSuccessMessage == true)
