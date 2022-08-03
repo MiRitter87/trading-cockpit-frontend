@@ -58,7 +58,7 @@
 			
 				<columns>
 					<Column>
-						<Text text="{i18n>instrument.id}"/>
+						<Text text="{i18n>instrument.symbol}"/>
 					</Column>
 					<Column>
 						<Text text="{i18n>instrument.name}"/>
@@ -67,7 +67,7 @@
 				<items>
 					<ColumnListItem>
 						<cells>
-							<ObjectIdentifier text="{selectedList>id}"/>
+							<Text text="{selectedList>symbol}"/>
 							<Text text="{selectedList>name}"/>
 						</cells>
 					</ColumnListItem>
