@@ -11,7 +11,9 @@
 	
 	<Page title="{i18n>scanResults.header}">
 		<content>
-			<Table id="instrumentTable" items="{path: 'instruments>/', sorter: {path: 'rsNumber', descending: true }}" mode="SingleSelectMaster">
+			<Table id="quotationTable" items="{path: 'quotations>/', sorter: {path: 'indicator/rsPercentSum', descending: true }}" 
+				mode="SingleSelectMaster">
+				
 				<columns>
 					<Column>
 						<Text text="{i18n>instrument.symbol}"/>
@@ -26,9 +28,9 @@
 				<items>
 					<ColumnListItem>
 						<cells>
-							<Text text="{instruments>symbol}"/>
-							<Text text="{instruments>name}"/>
-							<Text text="{instruments>rsNumber}"/>
+							<Text text="{quotations>instrument/symbol}"/>
+							<Text text="{quotations>instrument/name}"/>
+							<Text text="{quotations>indicator/rsPercentSum}"/>
 						</cells>
 					</ColumnListItem>
 				</items>

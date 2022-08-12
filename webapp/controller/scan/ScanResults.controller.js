@@ -1,9 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"../instrument/InstrumentController",
+	"./ScanController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (Controller, InstrumentController, JSONModel, MessageToast) {
+], function (Controller, ScanController, JSONModel, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanResults", {
@@ -21,62 +21,26 @@ sap.ui.define([
 		 */
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
-			
-			//TODO Call QuotationService method to get quotations with instrument and indicator data.
-			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true, "MOST_RECENT");
+			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true);
     	},
     	
     	
     	/**
-		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
+		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
-		queryInstrumentsCallback : function(oReturnData, oCallingController) {
+		queryQuotationsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if(oReturnData.data != null) {
 				oModel.setSizeLimit(300);
-				oModel.setData(oCallingController.getTableModelFromInstrumentData(oReturnData.data));
+				oModel.setData(oReturnData.data);
 			}
 			
 			if(oReturnData.data == null && oReturnData.message != null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}
 			
-			oCallingController.getView().setModel(oModel, "instruments");
-		},
-		
-		
-		/**
-		 * Converts the instruments provided by the WebService into a format that can be bound more easily to the table.
-		 * During this process deep structures like instrument->quotations are resolved into a flat structure for each table row.
-		 */
-		getTableModelFromInstrumentData : function(instruments) {
-			var oTableRow, oInstrument, oQuotation;
-			var aTableRows = new Array();
-			
-			if(instruments == null)
-				return aTableRows;
-			
-			for(var i=0; i < instruments.instrument.length; i++){
-				oInstrument = instruments.instrument[i];
-				
-				if(oInstrument.quotations == null)
-					continue;
-				
-				oQuotation = oInstrument.quotations[0];
-				
-				if(oQuotation == undefined || oQuotation.indicator == null)
-					continue;
-				
-				oTableRow = new Object();
-				oTableRow.symbol = oInstrument.symbol;
-				oTableRow.name = oInstrument.name;
-				oTableRow.rsNumber = oQuotation.indicator.rsPercentSum;
-				
-				aTableRows.push(oTableRow);
-			}
-			
-			return aTableRows;
+			oCallingController.getView().setModel(oModel, "quotations");
 		}
 	});
 });
