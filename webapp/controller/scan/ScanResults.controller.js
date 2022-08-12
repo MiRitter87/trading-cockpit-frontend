@@ -21,6 +21,8 @@ sap.ui.define([
 		 */
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
+			
+			//TODO Call QuotationService method to get quotations with instrument and indicator data.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true, "MOST_RECENT");
     	},
     	

@@ -28,7 +28,7 @@ sap.ui.define([
 			//Query list data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ListController.queryListsByWebService(this.queryListsCallback, this, true);
 			//Query instruments for instrument selection dialog.
-			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false, "NONE");
+			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
 
 			this.getView().setModel(null, "selectedList");
 			this.resetUIElements();

@@ -28,7 +28,7 @@ sap.ui.define([
 		 */
 		_onRouteMatched: function () {
 			//Query instruments for instrument selection dialog.
-			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false, "NONE");
+			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
 			
 			this.resetUIElements();
 			this.initializeListModel();
