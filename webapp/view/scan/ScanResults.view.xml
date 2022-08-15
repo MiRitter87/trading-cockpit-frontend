@@ -30,7 +30,7 @@
 						<cells>
 							<Text text="{quotations>instrument/symbol}"/>
 							<Text text="{quotations>instrument/name}"/>
-							<Text text="{quotations>indicator/rsPercentSum}"/>
+							<Text text="{quotations>indicator/rsNumber}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
