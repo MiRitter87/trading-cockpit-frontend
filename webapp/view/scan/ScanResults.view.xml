@@ -11,6 +11,15 @@
 	
 	<Page title="{i18n>scanResults.header}">
 		<content>
+			<l:VerticalLayout class="sapUiSmallMarginBegin">
+				<l:HorizontalLayout class="sapUiSmallMarginBegin">
+					<Label text="{i18n>scanResults.templateSelection}" class="sapUiSmallMarginTop sapUiSmallMarginEnd"/>
+					<ComboBox id="templateComboBox" selectedKey="ALL" class="sapUiTinyMarginTop"/>
+				</l:HorizontalLayout>
+			
+				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
+			</l:VerticalLayout>			
+		
 			<Table id="quotationTable" items="{path: 'quotations>/quotation/', sorter: {path: 'indicator/rsPercentSum', descending: true }}" 
 				mode="SingleSelectMaster">
 				

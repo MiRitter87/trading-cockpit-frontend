@@ -149,10 +149,13 @@ sap.ui.define([
 		/**
 		 * Queries the quotation WebService for quotations.
 		 */
-		queryQuotationsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage) {
+		queryQuotationsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sTemplate) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/quotation");
-			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
+			
+			if(sTemplate == "MINERVINI_TREND_TEMPLATE")
+				sQueryUrl = sQueryUrl + "?scanTemplate=MINERVINI_TREND_TEMPLATE";
 			
 			jQuery.ajax({
 				type : "GET", 
