@@ -23,6 +23,13 @@
 			<Table id="quotationTable" items="{path: 'quotations>/quotation/', sorter: {path: 'indicator/rsPercentSum', descending: true }}" 
 				mode="SingleSelectMaster">
 				
+				<headerToolbar>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://sort" tooltip="{i18n>scanResults.sort}" press=".onSortPressed"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				
 				<columns>
 					<Column>
 						<Text text="{i18n>instrument.symbol}"/>

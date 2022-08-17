@@ -3,8 +3,9 @@ sap.ui.define([
 	"../MainController",
 	"./ScanController",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
-], function (Controller, MainController, ScanController, JSONModel, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/ui/model/Sorter"
+], function (Controller, MainController, ScanController, JSONModel, MessageToast, Sorter) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanResults", {
@@ -29,7 +30,7 @@ sap.ui.define([
     	
     	
     	/**
-    	 * Handles the button click event of the refresh scan results button.
+    	 * Handles the button press event of the refresh scan results button.
     	 */
     	onRefreshPressed : function() {
 			var sSelectedTemplate = "";
@@ -42,7 +43,7 @@ sap.ui.define([
 		
 		
 		/**
-    	 * Handles the button click event of the chart button in a table row.
+    	 * Handles the button pressed event of the chart button in a table row.
     	 */
     	onChartPressed : function(oControlEvent) {
 			var oButtonParent = oControlEvent.getSource().getParent();
@@ -50,6 +51,32 @@ sap.ui.define([
 			var oQuotationData = oContext.getObject();
 			
 			this.openStockChart(oQuotationData.instrument.symbol, oQuotationData.instrument.stockExchange);
+		},
+		
+		
+		/**
+		 * Handles the button pressed event of the sort button.
+		 */
+		onSortPressed : function() {
+			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.scan.ScanResultsSort");
+		},
+		
+		
+		/**
+		 * Handles the confirmation of the sort dialog.
+		 */
+		handleSortDialogConfirm: function (oEvent) {
+			var oTable = this.byId("quotationTable");
+			var	mParams = oEvent.getParameters();
+			var	oBinding = oTable.getBinding("items");
+			var	sPath, bDescending,	aSorters = [];
+
+			sPath = mParams.sortItem.getKey();
+			bDescending = mParams.sortDescending;
+			aSorters.push(new Sorter(sPath, bDescending));
+
+			// apply the selected sort and group settings
+			oBinding.sort(aSorters);
 		},
     	
     	
