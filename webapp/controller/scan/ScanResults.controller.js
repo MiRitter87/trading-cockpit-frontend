@@ -39,6 +39,18 @@ sap.ui.define([
 			
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, sSelectedTemplate);
 		},
+		
+		
+		/**
+    	 * Handles the button click event of the chart button in a table row.
+    	 */
+    	onChartPressed : function(oControlEvent) {
+			var oButtonParent = oControlEvent.getSource().getParent();
+			var oContext = oButtonParent.getBindingContext("quotations");
+			var oQuotationData = oContext.getObject();
+			
+			this.openStockChart(oQuotationData.instrument.symbol, oQuotationData.instrument.stockExchange);
+		},
     	
     	
     	/**
@@ -69,6 +81,29 @@ sap.ui.define([
 			
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, "ALL", "scanResults.template.all");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, "MINERVINI_TREND_TEMPLATE", "scanResults.template.minervini");
+		},
+		
+		
+		/**
+		 * Opens the stock chart of the given symbol.
+		 */
+		openStockChart : function(sSymbol, sStockExchange) {
+			var sBaseChartLink = "https://stockcharts.com/h-sc/ui?s={symbol}{exchange}&p=D&yr=1&mn=0&dy=0&id=p79905824963";
+			var sChartLink = "";
+			
+			sChartLink = sBaseChartLink.replace("{symbol}", sSymbol);
+			
+			if(sStockExchange == "NYSE") {
+				sChartLink = sChartLink.replace("{exchange}", "");
+			}
+			else if(sStockExchange == "TSX") {
+				sChartLink = sChartLink.replace("{exchange}", ".TO");
+			}
+			else if(sStockExchange == "TSXV") {
+				sChartLink = sChartLink.replace("{exchange}", ".V");
+			}
+					
+			window.open(sChartLink, '_blank');
 		}
 	});
 });
