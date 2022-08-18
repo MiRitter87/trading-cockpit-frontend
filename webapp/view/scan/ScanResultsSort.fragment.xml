@@ -8,6 +8,7 @@
 		confirm="handleSortDialogConfirm">
 		<sortItems>
 			<ViewSettingsItem text="{i18n>indicator.rsNumber}" key="indicator/rsNumber" selected="true" />
+			<ViewSettingsItem text="{i18n>indicator.distanceTo52WeekHigh}" key="indicator/distanceTo52WeekHigh" selected="false" />
 		</sortItems>
 	</ViewSettingsDialog>
 </core:FragmentDefinition>

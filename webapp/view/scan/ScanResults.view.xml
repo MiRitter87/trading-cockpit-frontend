@@ -41,6 +41,9 @@
 						<Text text="{i18n>indicator.rsNumber}"/>
 					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>indicator.distanceTo52WeekHigh}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>scanResults.chart}"/>
 					</Column>
 				</columns>
@@ -50,6 +53,7 @@
 							<Text text="{quotations>instrument/symbol}"/>
 							<Text text="{quotations>instrument/name}"/>
 							<Text text="{quotations>indicator/rsNumber}"/>
+							<Text text="{quotations>indicator/distanceTo52WeekHigh}"/>
 							<Button icon="sap-icon://business-objects-experience" press=".onChartPressed"/>
 						</cells>
 					</ColumnListItem>
