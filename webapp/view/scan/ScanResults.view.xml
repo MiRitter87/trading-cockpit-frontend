@@ -14,7 +14,7 @@
 			<l:VerticalLayout class="sapUiSmallMarginBegin">
 				<l:HorizontalLayout class="sapUiSmallMarginBegin">
 					<Label text="{i18n>scanResults.templateSelection}" class="sapUiSmallMarginTop sapUiSmallMarginEnd"/>
-					<ComboBox id="templateComboBox" selectedKey="ALL" class="sapUiTinyMarginTop"/>
+					<ComboBox id="templateComboBox" class="sapUiTinyMarginTop"/>
 				</l:HorizontalLayout>
 			
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
@@ -25,7 +25,7 @@
 				
 				<headerToolbar>
 					<OverflowToolbar>
-						<Text id="tableHeaderText"/>
+						<Title id="tableHeaderTitle" level="H2"/>
 						<ToolbarSpacer/>
 						<Button icon="sap-icon://sort" tooltip="{i18n>scanResults.sort}" press=".onSortPressed"/>
 					</OverflowToolbar>

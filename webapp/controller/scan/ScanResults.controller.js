@@ -26,6 +26,8 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, "ALL");
+			
+			this.resetUiElements();
     	},
     	
     	
@@ -145,7 +147,17 @@ sap.ui.define([
 			var sText;
 			
 			sText= oResourceBundle.getText("scanResults.tableHeader", rowCount.toString());
-			oCallingController.getView().byId("tableHeaderText").setText(sText);
+			oCallingController.getView().byId("tableHeaderTitle").setText(sText);
+		},
+		
+		
+		/**
+		 * Resets the UI elements into the intial state.
+		 */
+		resetUiElements : function() {
+			var oComboBox = this.getView().byId("templateComboBox");
+						
+			oComboBox.setSelectedKey("ALL");
 		}
 	});
 });
