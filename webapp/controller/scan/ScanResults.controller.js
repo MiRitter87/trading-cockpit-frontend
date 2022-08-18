@@ -89,6 +89,7 @@ sap.ui.define([
 			if(oReturnData.data != null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
+				oCallingController.updateHeaderText(oModel, oCallingController);
 			}
 			
 			if(oReturnData.data == null && oReturnData.message != null)  {
@@ -131,6 +132,20 @@ sap.ui.define([
 			}
 					
 			window.open(sChartLink, '_blank');
+		},
+		
+		
+		/**
+		 * Updates the text of the table header.
+		 */
+		updateHeaderText : function(oModel, oCallingController) {
+			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oModelData = oModel.getData();
+			var	rowCount = oModelData.quotation.length;
+			var sText;
+			
+			sText= oResourceBundle.getText("scanResults.tableHeader", rowCount.toString());
+			oCallingController.getView().byId("tableHeaderText").setText(sText);
 		}
 	});
 });

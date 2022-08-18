@@ -25,6 +25,7 @@
 				
 				<headerToolbar>
 					<OverflowToolbar>
+						<Text id="tableHeaderText"/>
 						<ToolbarSpacer/>
 						<Button icon="sap-icon://sort" tooltip="{i18n>scanResults.sort}" press=".onSortPressed"/>
 					</OverflowToolbar>
