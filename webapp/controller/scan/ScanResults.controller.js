@@ -91,7 +91,6 @@ sap.ui.define([
 			if(oReturnData.data != null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
-				oCallingController.updateHeaderText(oModel, oCallingController);
 			}
 			
 			if(oReturnData.data == null && oReturnData.message != null)  {
@@ -138,16 +137,14 @@ sap.ui.define([
 		
 		
 		/**
-		 * Updates the text of the table header.
+		 * Formatter of the scan result table header text.
 		 */
-		updateHeaderText : function(oModel, oCallingController) {
-			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var oModelData = oModel.getData();
-			var	rowCount = oModelData.quotation.length;
-			var sText;
+		resultHeaderTextFormatter : function(aQuotations) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var numberOfQuotations = aQuotations.length;
+			var sText = oResourceBundle.getText("scanResults.tableHeader", numberOfQuotations.toString());
 			
-			sText= oResourceBundle.getText("scanResults.tableHeader", rowCount.toString());
-			oCallingController.getView().byId("tableHeaderTitle").setText(sText);
+			return sText;
 		},
 		
 		

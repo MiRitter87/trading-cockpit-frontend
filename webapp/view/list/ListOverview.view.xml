@@ -14,7 +14,7 @@
 			<Table id="listTable" items="{path: 'lists>/list/'}" mode="SingleSelectMaster">
 				<headerToolbar>
 					<OverflowToolbar>
-						<Title id="tableHeaderTitle" level="H2"/>
+						<Title text="{path:'lists>/list/', formatter:'.listHeaderTextFormatter' }" level="H2"/>
 						<ToolbarSpacer/>
 						<Button icon="sap-icon://detail-view" tooltip="{i18n>listOverview.showDetails}" press=".onShowDetailsPressed"/>
 						<Button icon="sap-icon://delete" tooltip="{i18n>listOverview.deleteSelected}" press=".onDeletePressed"/>

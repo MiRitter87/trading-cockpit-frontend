@@ -81,7 +81,6 @@ sap.ui.define([
 			
 			if(oReturnData.data != null) {
 				oModel.setData(oReturnData.data);
-				oCallingController.updateListHeaderText(oModel, oCallingController);
 				
 				if(bShowSuccessMessage == true)
 					MessageToast.show(oResourceBundle.getText("listOverview.dataLoaded"));			
@@ -140,16 +139,14 @@ sap.ui.define([
 		
 		
 		/**
-		 * Updates the text of the list table header.
+		 * Formatter of the list table header text.
 		 */
-		updateListHeaderText : function(oModel, oCallingController) {
-			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var oModelData = oModel.getData();
-			var	rowCount = oModelData.list.length;
-			var sText;
+		listHeaderTextFormatter : function(aLists) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var numberOfLists = aLists.length;
+			var sText = oResourceBundle.getText("listOverview.tableHeader", numberOfLists.toString());
 			
-			sText= oResourceBundle.getText("listOverview.tableHeader", rowCount.toString());
-			oCallingController.getView().byId("tableHeaderTitle").setText(sText);
+			return sText;
 		},
 		
 		
