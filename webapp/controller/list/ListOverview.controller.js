@@ -43,7 +43,6 @@ sap.ui.define([
 			oSelectedListModel = new JSONModel();
 			oSelectedListModel.setData(this.getSelectedList());
 			this.getView().setModel(oSelectedListModel, "selectedList");
-			//this.updateInstrumentHeaderText(oSelectedListModel);
 			
 			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.list.ListOverviewDetails");
 		},
@@ -155,16 +154,14 @@ sap.ui.define([
 		
 		
 		/**
-		 * Updates the text of the instrument table header.
+		 * Formatter of the instrument table header text.
 		 */
-		updateInstrumentHeaderText : function(oModel) {
+		instrumentHeaderTextFormatter : function(aInstruments) {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var oModelData = oModel.getData();
-			var	rowCount = oModelData.instruments.length;
-			var sText;
+			var numberOfInstruments = aInstruments.length;
+			var sText = oResourceBundle.getText("listOverview.titleInstruments", numberOfInstruments.toString());;
 			
-			sText= oResourceBundle.getText("listOverview.titleInstruments", rowCount.toString());
-			this.getView().byId("tableInstrumentsHeaderTitle").setText(sText);
+			return sText;
 		}
 	});
 });
