@@ -14,6 +14,7 @@
 			<Table id="instrumentTable" items="{path: 'instruments>/instrument/'}" mode="SingleSelectMaster">
 				<headerToolbar>
 					<OverflowToolbar>
+						<Title id="tableHeaderTitle" level="H2"/>
 						<ToolbarSpacer/>
 						<Button icon="sap-icon://delete" tooltip="{i18n>instrumentOverview.deleteSelected}" press=".onDeletePressed"/>
 					</OverflowToolbar>

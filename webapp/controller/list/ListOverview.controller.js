@@ -42,7 +42,8 @@ sap.ui.define([
 			
 			oSelectedListModel = new JSONModel();
 			oSelectedListModel.setData(this.getSelectedList());
-			this.getView().setModel(oSelectedListModel, "selectedList");		
+			this.getView().setModel(oSelectedListModel, "selectedList");
+			//this.updateInstrumentHeaderText(oSelectedListModel);
 			
 			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.list.ListOverviewDetails");
 		},
@@ -81,6 +82,7 @@ sap.ui.define([
 			
 			if(oReturnData.data != null) {
 				oModel.setData(oReturnData.data);
+				oCallingController.updateListHeaderText(oModel, oCallingController);
 				
 				if(bShowSuccessMessage == true)
 					MessageToast.show(oResourceBundle.getText("listOverview.dataLoaded"));			
@@ -135,6 +137,34 @@ sap.ui.define([
 			var oSelectedList = oContext.getProperty(null, oContext);
 			
 			return oSelectedList;
+		},
+		
+		
+		/**
+		 * Updates the text of the list table header.
+		 */
+		updateListHeaderText : function(oModel, oCallingController) {
+			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oModelData = oModel.getData();
+			var	rowCount = oModelData.list.length;
+			var sText;
+			
+			sText= oResourceBundle.getText("listOverview.tableHeader", rowCount.toString());
+			oCallingController.getView().byId("tableHeaderTitle").setText(sText);
+		},
+		
+		
+		/**
+		 * Updates the text of the instrument table header.
+		 */
+		updateInstrumentHeaderText : function(oModel) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oModelData = oModel.getData();
+			var	rowCount = oModelData.instruments.length;
+			var sText;
+			
+			sText= oResourceBundle.getText("listOverview.titleInstruments", rowCount.toString());
+			this.getView().byId("tableInstrumentsHeaderTitle").setText(sText);
 		}
 	});
 });

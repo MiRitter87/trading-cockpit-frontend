@@ -53,6 +53,7 @@ sap.ui.define([
 			if(oReturnData.data != null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
+				oCallingController.updateHeaderText(oModel, oCallingController);
 				
 				if(bShowSuccessMessage == true)
 					MessageToast.show(oResourceBundle.getText("instrumentOverview.dataLoaded"));			
@@ -123,6 +124,20 @@ sap.ui.define([
 			var oSelectedInstrument = oContext.getProperty(null, oContext);
 			
 			return oSelectedInstrument;
+		},
+		
+		
+		/**
+		 * Updates the text of the table header.
+		 */
+		updateHeaderText : function(oModel, oCallingController) {
+			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oModelData = oModel.getData();
+			var	rowCount = oModelData.instrument.length;
+			var sText;
+			
+			sText= oResourceBundle.getText("instrumentOverview.tableHeader", rowCount.toString());
+			oCallingController.getView().byId("tableHeaderTitle").setText(sText);
 		}
 	});
 });
