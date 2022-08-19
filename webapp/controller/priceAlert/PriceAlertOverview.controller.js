@@ -135,6 +135,18 @@ sap.ui.define([
 		
 		
 		/**
+		 * Formatter of the price alert table header text.
+		 */
+		priceAlertHeaderTextFormatter : function(aPriceAlerts) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var numberOfPriceAlerts = aPriceAlerts.length;
+			var sText = oResourceBundle.getText("priceAlertOverview.tableHeader", numberOfPriceAlerts.toString());
+			
+			return sText;
+		},
+		
+		
+		/**
 		 * Checks if a price alert has been selected.
 		 */
 		isPriceAlertSelected : function () {

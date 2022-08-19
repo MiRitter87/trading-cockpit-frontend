@@ -85,6 +85,18 @@ sap.ui.define([
 		
 		
 		/**
+		 * Formatter of the list list header text.
+		 */
+		listHeaderTextFormatter : function(aLists) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var numberOfLists = aLists.length;
+			var sText = oResourceBundle.getText("scanDisplay.listListHeader", numberOfLists.toString());
+			
+			return sText;
+		},
+		
+		
+		/**
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
