@@ -55,7 +55,7 @@
 							<Text text="{quotations>instrument/name}"/>
 							<Text text="{quotations>indicator/rsNumber}"/>
 							<Text text="{quotations>indicator/distanceTo52WeekHigh}"/>
-							<Button icon="sap-icon://business-objects-experience" press=".onChartPressed"/>
+							<Button icon="sap-icon://business-objects-experience" press=".onChartPressed" tooltip="{i18n>scanResults.chart.tooltip}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
