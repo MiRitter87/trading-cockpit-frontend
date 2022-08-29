@@ -14,7 +14,7 @@
 			<Table id="scanTable" items="{path: 'scans>/scan/'}" mode="SingleSelectMaster">
 				<headerToolbar>
 					<OverflowToolbar>
-						<Title id="tableHeaderTitle" level="H2"/>
+						<Title id="tableHeaderTitle"/>
 						<ToolbarSpacer/>
 						<Button icon="sap-icon://begin" tooltip="{i18n>scanOverview.startScan}" press=".onStartScanPressed"/>
 						<Button icon="sap-icon://detail-view" tooltip="{i18n>scanOverview.showDetails}" press=".onShowDetailsPressed"/>

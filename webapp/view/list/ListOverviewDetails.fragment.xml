@@ -52,7 +52,7 @@
 			<Table id="instrumentTable" items="{path: 'selectedList>/instruments/', sorter: {path: 'symbol'}}" mode="SingleSelectMaster">
 				<headerToolbar>
 					<OverflowToolbar>
-						<Title text="{path:'selectedList>/instruments/', formatter:'.instrumentHeaderTextFormatter' }" level="H2"/>
+						<Title text="{path:'selectedList>/instruments/', formatter:'.instrumentHeaderTextFormatter' }"/>
 					</OverflowToolbar>
 				</headerToolbar>
 			
