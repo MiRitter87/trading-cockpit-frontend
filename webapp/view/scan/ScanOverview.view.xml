@@ -16,6 +16,7 @@
 					<OverflowToolbar>
 						<Title id="tableHeaderTitle"/>
 						<ToolbarSpacer/>
+						<Button icon="sap-icon://refresh" tooltip="{i18n>scanOverview.refresh}" press=".onRefreshPressed"/>
 						<Button icon="sap-icon://begin" tooltip="{i18n>scanOverview.startScan}" press=".onStartScanPressed"/>
 						<Button icon="sap-icon://detail-view" tooltip="{i18n>scanOverview.showDetails}" press=".onShowDetailsPressed"/>
 						<Button icon="sap-icon://delete" tooltip="{i18n>scanOverview.deleteSelected}" press=".onDeletePressed"/>

@@ -75,14 +75,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Handles a click at the close button of the list details fragment.
-		 */
-		onCloseDialog : function () {
-			this.byId("scanDetailsDialog").close();
-		},
-		
-		
-		/**
 		 * Handles the press-event of the delete button.
 		 */
 		onDeletePressed : function () {
@@ -95,6 +87,22 @@ sap.ui.define([
 			}
 			
 			ScanController.deleteScanByWebService(this.getSelectedScan(), this.deleteScanCallback, this);
+		},
+		
+		
+		/**
+		 * Handles the press-event of the refresh button.
+		 */
+		onRefreshPressed : function() {
+			ScanController.queryScansByWebService(this.queryScansCallback, this, true);
+		},
+		
+		
+		/**
+		 * Handles a click at the close button of the list details fragment.
+		 */
+		onCloseDialog : function () {
+			this.byId("scanDetailsDialog").close();
 		},
 
 
