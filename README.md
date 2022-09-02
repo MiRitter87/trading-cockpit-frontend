@@ -34,3 +34,7 @@ The Trading Cockpit is based on the JavaScript Framework [OpenUI5](https://openu
 ## Installation
 
 Just put the files of the projects 'webapp'-folder into the 'webapps'-folder of your WebServer. [Apache Tomcat](https://tomcat.apache.org/) has been used during development of the application.
+
+## License
+
+Copyright © 2022, [MiRitter87](https://github.com/MiRitter87). No License.
