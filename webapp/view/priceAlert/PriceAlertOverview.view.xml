@@ -33,10 +33,7 @@
 							<Text text="{i18n>priceAlert.id}"/>
 						</Column>
 						<Column>
-							<Text text="{i18n>priceAlert.symbol}"/>
-						</Column>
-						<Column minScreenWidth="Desktop" demandPopin="true">
-							<Text text="{i18n>priceAlert.stockExchange}"/>
+							<Text text="{i18n>priceAlert.instrument}"/>
 						</Column>
 						<Column minScreenWidth="Desktop" demandPopin="true">
 							<Text text="{i18n>priceAlert.type}"/>
@@ -55,8 +52,7 @@
 						<ColumnListItem>
 							<cells>
 								<ObjectIdentifier text="{priceAlerts>id}"/>
-								<Text text="{priceAlerts>symbol}"/>
-								<Text text="{path: 'priceAlerts>stockExchange', formatter: '.stockExchangeTextFormatter'}"/>
+								<Text text="{priceAlerts>instrument/name}"/>
 								<Text text="{path: 'priceAlerts>alertType', formatter: '.typeTextFormatter'}"/>
 								<Text text="{priceAlerts>price}"/>
 								<Text text="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateFormatter'}"/>
