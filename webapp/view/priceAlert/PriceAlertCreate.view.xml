@@ -31,15 +31,13 @@
 				
 				<f:formContainers>
 					<f:FormContainer>
-						<f:FormElement label="{i18n>priceAlert.symbol}">
+						<f:FormElement label="{i18n>priceAlert.instrument}">
 							<f:fields>
-								<Input maxLength="6" value="{newPriceAlert>/symbol}" required="true"/>
-							</f:fields>
-						</f:FormElement>
-						
-						<f:FormElement label="{i18n>priceAlert.stockExchange}">
-							<f:fields>
-								<ComboBox id="stockExchangeComboBox" selectedKey="{newPriceAlert>/stockExchange}" required="true"/>
+								<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}" 
+									selectedKey="{newPriceAlert>/instrumentId}" required="true">
+								
+									<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>	
+								</ComboBox>
 							</f:fields>
 						</f:FormElement>
 						

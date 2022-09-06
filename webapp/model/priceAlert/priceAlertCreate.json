@@ -1,6 +1,5 @@
 {
-	"symbol": "",
-	"stockExchange": "",
+	"instrumentId": null,
 	"alertType": "",
 	"price": 0.00
 }

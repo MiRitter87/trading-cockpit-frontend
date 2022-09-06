@@ -2,10 +2,11 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"./PriceAlertController",
+	"../instrument/InstrumentController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, PriceAlertController, JSONModel, MessageBox, MessageToast) {
+], function (Controller, MainController, PriceAlertController, InstrumentController, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertCreate", {
@@ -18,9 +19,6 @@ sap.ui.define([
 			//Register an event handler that gets called every time the router navigates to this view.
 			oRouter.getRoute("priceAlertCreateRoute").attachMatched(this._onRouteMatched, this);
 			
-			MainController.initializeStockExchangeComboBox(this.getView().byId("stockExchangeComboBox"), 
-				this.getOwnerComponent().getModel("i18n").getResourceBundle());
-				
 			PriceAlertController.initializeTypeComboBox(this.getView().byId("typeComboBox"), 
 				this.getOwnerComponent().getModel("i18n").getResourceBundle());
 		},
@@ -30,6 +28,9 @@ sap.ui.define([
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
 		_onRouteMatched: function () {
+			//Query instruments for instrument selection dialog.
+			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
+			
 			this.resetUIElements();
 			this.initializePriceAlertModel();
     	},
@@ -43,8 +44,8 @@ sap.ui.define([
 			PriceAlertController.validatePriceInput(this.getView().byId("priceInput"), this.getOwnerComponent().getModel("i18n").getResourceBundle(),
 				this.getView().getModel("newPriceAlert"), "/price");
 				
-			if(this.getView().byId("stockExchangeComboBox").getSelectedKey() == "") {
-				this.showMessageOnUndefinedStockExchange();
+			if(this.getView().byId("instrumentComboBox").getSelectedKey() == "") {
+				this.showMessageOnUndefinedInstrument();
 				return;
 			}
 			
@@ -65,6 +66,25 @@ sap.ui.define([
 		 */
 		onCancelPressed : function () {
 			MainController.navigateToStartpage(sap.ui.core.UIComponent.getRouterFor(this));	
+		},
+		
+		
+		/**
+		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
+		 */
+		queryInstrumentsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setSizeLimit(300);
+				oModel.setData(oReturnData.data);
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}
+			
+			oCallingController.getView().setModel(oModel, "instruments");
 		},
 		
 		
@@ -106,7 +126,6 @@ sap.ui.define([
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
-			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
 			this.getView().byId("typeComboBox").setSelectedItem(null);
 			this.getView().byId("priceInput").setValue(0);
 			this.getView().byId("priceInput").setValueState(sap.ui.core.ValueState.None);
@@ -114,11 +133,11 @@ sap.ui.define([
 		
 		
 		/**
-		 * Displays a message in case the stock exchange has not been selected.
+		 * Displays a message in case the instrument has not been selected.
 		 */
-		showMessageOnUndefinedStockExchange : function () {
+		showMessageOnUndefinedInstrument : function () {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			MessageBox.error(oResourceBundle.getText("priceAlertCreate.noStockExchangeSelected"));
+			MessageBox.error(oResourceBundle.getText("priceAlertCreate.noInstrumentSelected"));
 		},
 		
 		
