@@ -12,7 +12,7 @@
 	<Page title="{i18n>priceAlertFeed.header}">
 		<content>
 			<List items="{path: 'priceAlerts>/priceAlert/'}" >
-				<FeedListItem text="{parts: [{path: 'priceAlerts>symbol'}, {path: 'priceAlerts>stockExchange'}], formatter: '.priceAlertTextFormatter'}"
+				<FeedListItem sender="{priceAlerts>instrument/name}"
 					info="{path: 'priceAlerts>price', formatter: '.priceAlertInfoTextFormatter'}"
 					timestamp="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateFormatter'}"
 					icon="{path: 'priceAlerts>alertType', formatter: '.priceAlertIconFormatter'}">

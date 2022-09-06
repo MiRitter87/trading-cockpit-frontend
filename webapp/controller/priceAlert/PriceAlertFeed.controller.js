@@ -78,14 +78,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter of the price alert text.
-		 */
-		priceAlertTextFormatter: function(sSymbol, sStockExchange) {
-			return sSymbol + " (" + sStockExchange + ")";
-		},
-		
-		
-		/**
 		 * Formatter of the info field of a price alert.
 		 */
 		priceAlertInfoTextFormatter: function(fPrice) {
