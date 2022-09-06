@@ -2,11 +2,12 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"./PriceAlertController",
+	"../instrument/InstrumentController",
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, PriceAlertController, formatter, JSONModel, MessageToast, MessageBox) {
+], function (Controller, MainController, PriceAlertController, InstrumentController, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertEdit", {
@@ -19,9 +20,6 @@ sap.ui.define([
 		onInit : function () {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("priceAlertEditRoute").attachMatched(this._onRouteMatched, this);
-			
-			MainController.initializeStockExchangeComboBox(this.getView().byId("stockExchangeComboBox"), 
-				this.getOwnerComponent().getModel("i18n").getResourceBundle());
 				
 			PriceAlertController.initializeTypeComboBox(this.getView().byId("typeComboBox"), 
 				this.getOwnerComponent().getModel("i18n").getResourceBundle());
@@ -34,6 +32,8 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query price alert data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true);
+			//Query instruments for instrument selection dialog.
+			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
 			
 			this.getView().setModel(null, "selectedPriceAlert");
 			this.resetUIElements();
@@ -46,8 +46,7 @@ sap.ui.define([
 		onPriceAlertSelectionChange : function (oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oPriceAlertsModel = this.getView().getModel("priceAlerts");
-			var oPriceAlert;
-			var oPriceAlertModel = new JSONModel();
+			var oPriceAlert, wsPriceAlert;
 			
 			if(oSelectedItem == null) {
 				this.resetUIElements();				
@@ -55,10 +54,11 @@ sap.ui.define([
 			}
 				
 			oPriceAlert = PriceAlertController.getPriceAlertById(oSelectedItem.getKey(), oPriceAlertsModel.oData.priceAlert);
-			oPriceAlertModel.setData(oPriceAlert);
+			if(oPriceAlert != null)
+				wsPriceAlert = this.getPriceAlertForWebService(oPriceAlert);
 			
 			//Set the model of the view according to the selected price alert to allow binding of the UI elements.
-			this.getView().setModel(oPriceAlertModel, "selectedPriceAlert");
+			this.getView().setModel(wsPriceAlert, "selectedPriceAlert");
 			
 			//Manually set the price of the Input field because the price is not directly bound due to validation reasons.
 			this.setPriceInputValue(oPriceAlert.price);
@@ -83,6 +83,25 @@ sap.ui.define([
 		 */
 		onCancelPressed : function () {
 			MainController.navigateToStartpage(sap.ui.core.UIComponent.getRouterFor(this));	
+		},
+		
+		
+		/**
+		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
+		 */
+		queryInstrumentsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setSizeLimit(300);
+				oModel.setData(oReturnData.data);
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}
+			
+			oCallingController.getView().setModel(oModel, "instruments");
 		},
 
 
@@ -155,10 +174,8 @@ sap.ui.define([
 			this.getView().byId("priceAlertComboBox").setSelectedItem(null);
 			this.getView().setModel(null, "selectedPriceAlert");
 			
-			this.getView().byId("idText").setText("");
-			this.getView().byId("symbolInput").setValue("");
-			
-			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
+			this.getView().byId("idText").setText("");	
+			this.getView().byId("instrumentComboBox").setSelectedItem(null);	
 			this.getView().byId("typeComboBox").setSelectedItem(null);
 			
 			this.setPriceInputValue(0);
@@ -186,14 +203,8 @@ sap.ui.define([
 			if(PriceAlertController.isPriceValid(this.getView().byId("priceInput").getValue()) == false)
 				return false;
 			
-			
-			if(this.getView().byId("symbolInput").getValue() == "") {
-				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noSymbolInput"));
-				return false;
-			}
-			
-			if(this.getView().byId("stockExchangeComboBox").getSelectedKey() == "") {
-				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noStockExchangeSelected"));
+			if(this.getView().byId("instrumentComboBox").getSelectedKey() == "") {
+				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noInstrumentSelected"));
 				return false;
 			}
 			
@@ -203,6 +214,25 @@ sap.ui.define([
 			}
 			
 			return true;
-		}
+		},
+		
+		
+		/**
+		 * Creates a representation of a price alert that can be processed by the WebService.
+		 */
+		getPriceAlertForWebService : function(oPriceAlert) {
+			var wsPriceAlert = new JSONModel();
+			
+			wsPriceAlert.setProperty("/id", oPriceAlert.id);
+			wsPriceAlert.setProperty("/alertType", oPriceAlert.alertType);
+			wsPriceAlert.setProperty("/price", oPriceAlert.price);
+			wsPriceAlert.setProperty("/triggerTime", oPriceAlert.triggerTime);
+			wsPriceAlert.setProperty("/confirmationTime", oPriceAlert.confirmationTime);
+			wsPriceAlert.setProperty("/lastStockQuoteTime", oPriceAlert.lastStockQuoteTime);
+			
+			wsPriceAlert.setProperty("/instrumentId", oPriceAlert.instrument.id);
+			
+			return wsPriceAlert;
+		},
 	});
 });

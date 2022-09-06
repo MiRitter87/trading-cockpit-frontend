@@ -14,7 +14,7 @@
 			<l:VerticalLayout class="sapUiSmallMarginBegin">
 				<Label text="{i18n>priceAlertEdit.selectionDescription}"/>
 				<ComboBox id="priceAlertComboBox" items="{path: 'priceAlerts>/priceAlert/'}" selectionChange=".onPriceAlertSelectionChange">
-					<core:Item key="{priceAlerts>id}" text="{priceAlerts>symbol} - {priceAlerts>price}"/>
+					<core:Item key="{priceAlerts>id}" text="{priceAlerts>instrument/symbol} - {priceAlerts>price}"/>
 				</ComboBox>
 			</l:VerticalLayout>
 			
@@ -49,15 +49,13 @@
 								</f:fields>
 							</f:FormElement>
 	
-							<f:FormElement label="{i18n>priceAlert.symbol}">
+							<f:FormElement label="{i18n>priceAlert.instrument}">
 								<f:fields>
-									<Input id="symbolInput" maxLength="6" value="{selectedPriceAlert>/symbol}" required="true"/>
-								</f:fields>
-							</f:FormElement>
-							
-							<f:FormElement label="{i18n>priceAlert.stockExchange}">
-								<f:fields>
-									<ComboBox id="stockExchangeComboBox" selectedKey="{selectedPriceAlert>/stockExchange}" required="true"/>
+									<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}" 
+									selectedKey="{selectedPriceAlert>/instrumentId}" required="true">
+								
+									<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>	
+								</ComboBox>
 								</f:fields>
 							</f:FormElement>
 							
