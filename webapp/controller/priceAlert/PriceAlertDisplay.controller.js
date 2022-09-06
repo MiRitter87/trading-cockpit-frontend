@@ -1,11 +1,10 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"../MainController",
 	"./PriceAlertController",
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (Controller, MainController, PriceAlertController, formatter, JSONModel, MessageToast) {
+], function (Controller, PriceAlertController, formatter, JSONModel, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertDisplay", {
@@ -79,14 +78,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter of the stock exchange text.
-		 */
-		stockExchangeTextFormatter: function(sStockExchange) {
-			return MainController.getLocalizedStockExchangeText(sStockExchange, this.getOwnerComponent().getModel("i18n").getResourceBundle());
-		},
-		
-		
-		/**
 		 * Formatter of the type text.
 		 */
 		typeTextFormatter: function(sType) {
@@ -102,8 +93,7 @@ sap.ui.define([
 			this.getView().setModel(null, "selectedPriceAlert");
 
 			this.getView().byId("idText").setText("");
-			this.getView().byId("symbolText").setText("");
-			this.getView().byId("stockExchangeText").setText("");
+			this.getView().byId("instrumentText").setText("");
 			this.getView().byId("typeText").setText("");
 			this.getView().byId("priceText").setText("");
 			this.getView().byId("triggerTimeText").setText("");
