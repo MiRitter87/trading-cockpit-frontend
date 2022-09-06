@@ -53,28 +53,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * The WebService provides dates as milliseconds since 01.01.1970.
-	     * This function initializes the date properties as Date objects based on the given values.
-		 */
-		initializeDatesAsObject : function(oPriceAlerts) {			
-			for(var i = 0; i < oPriceAlerts.length; i++) {
-    			var oTempPriceAlert = oPriceAlerts[i];
-				var oDate;
-    			
-				if(oTempPriceAlert.triggerTime != null) {
-					oDate = new Date(oTempPriceAlert.triggerTime);
-					oTempPriceAlert.triggerTime = oDate;					
-				}
-				
-				if(oTempPriceAlert.confirmationTime != null) {
-					oDate = new Date(oTempPriceAlert.confirmationTime);
-					oTempPriceAlert.confirmationTime = oDate;					
-				}
-			}
-		},
-		
-		
-		/**
 		 * Gets the price alert data of the price alert with the given ID.
 		 */
 		getPriceAlertById : function(iPriceAlertId, oPriceAlerts) {

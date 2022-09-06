@@ -63,7 +63,6 @@ sap.ui.define([
 			
 			if(oReturnData.data != null) {
 				oModel.setData(oReturnData.data);
-				//TODO: Check if needed PriceAlertController.initializeDatesAsObject(oModel.oData.priceAlert);
 				
 				if(bShowSuccessMessage == true)
 					MessageToast.show(oResourceBundle.getText("priceAlertDisplay.dataLoaded"));			
