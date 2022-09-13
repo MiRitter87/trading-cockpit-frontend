@@ -65,7 +65,7 @@
 				</f:formContainers>
 			</f:Form>
 
-			<List id="instrumentList" headerText="{path:'selectedList>/instruments', formatter:'.instrumentHeaderTextFormatter'}" 
+			<List id="instrumentList" headerText="{i18n>listDisplay.instrumentListHeader} ({= ${selectedList>/instruments/}.length})" 
 				items="{path: 'selectedList>/instruments'}">
 				
 				<StandardListItem title="{selectedList>symbol}" description="{selectedList>name}"/>

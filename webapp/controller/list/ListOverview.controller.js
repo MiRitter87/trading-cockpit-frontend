@@ -135,30 +135,6 @@ sap.ui.define([
 			var oSelectedList = oContext.getProperty(null, oContext);
 			
 			return oSelectedList;
-		},
-		
-		
-		/**
-		 * Formatter of the list table header text.
-		 */
-		listHeaderTextFormatter : function(aLists) {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var numberOfLists = aLists.length;
-			var sText = oResourceBundle.getText("listOverview.tableHeader", numberOfLists.toString());
-			
-			return sText;
-		},
-		
-		
-		/**
-		 * Formatter of the instrument table header text.
-		 */
-		instrumentHeaderTextFormatter : function(aInstruments) {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var numberOfInstruments = aInstruments.length;
-			var sText = oResourceBundle.getText("listOverview.titleInstruments", numberOfInstruments.toString());;
-			
-			return sText;
 		}
 	});
 });

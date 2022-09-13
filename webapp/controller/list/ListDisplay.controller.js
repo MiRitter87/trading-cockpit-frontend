@@ -73,18 +73,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter of the instrument list header text.
-		 */
-		instrumentHeaderTextFormatter : function(aInstruments) {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var numberOfInstruments = aInstruments.length;
-			var sText = oResourceBundle.getText("listDisplay.instrumentListHeader", numberOfInstruments.toString());
-			
-			return sText;
-		},
-		
-		
-		/**
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
