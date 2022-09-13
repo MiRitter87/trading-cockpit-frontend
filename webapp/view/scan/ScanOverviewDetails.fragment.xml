@@ -70,7 +70,7 @@
 			<Table id="listTable" items="{path: 'selectedScan>/lists/', sorter: {path: 'id'}}" mode="SingleSelectMaster">
 				<headerToolbar>
 					<OverflowToolbar>
-						<Title text="{i18n>scanOverview.titleLists}"/>
+						<Title text="{i18n>scanOverview.titleLists} ({= ${selectedScan>/lists/}.length})"/>
 					</OverflowToolbar>
 				</headerToolbar>
 			
