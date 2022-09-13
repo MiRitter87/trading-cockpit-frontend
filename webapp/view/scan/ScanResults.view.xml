@@ -25,7 +25,7 @@
 				
 				<headerToolbar>
 					<OverflowToolbar>
-						<Title text="{path:'quotations>/quotation/', formatter:'.resultHeaderTextFormatter' }"/>
+						<Title text="{i18n>scanResults.tableHeader} ({= ${quotations>/quotation/}.length})"/>
 						<ToolbarSpacer/>
 						<Button icon="sap-icon://sort" tooltip="{i18n>scanResults.sort}" press=".onSortPressed"/>
 					</OverflowToolbar>

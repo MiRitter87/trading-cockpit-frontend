@@ -83,7 +83,7 @@
 				</f:formContainers>
 			</f:Form>
 			
-			<List id="listList" headerText="{path:'selectedScan>/lists', formatter:'.listHeaderTextFormatter'}" 
+			<List id="listList" headerText="{i18n>scanDisplay.listListHeader} ({= ${selectedScan>/lists/}.length})" 
 				items="{path: 'selectedScan>/lists'}">
 				
 				<StandardListItem title="{selectedScan>name}" description="{selectedScan>description}"/>

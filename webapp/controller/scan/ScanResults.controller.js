@@ -138,18 +138,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter of the scan result table header text.
-		 */
-		resultHeaderTextFormatter : function(aQuotations) {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var numberOfQuotations = aQuotations.length;
-			var sText = oResourceBundle.getText("scanResults.tableHeader", numberOfQuotations.toString());
-			
-			return sText;
-		},
-		
-		
-		/**
 		 * Resets the UI elements into the intial state.
 		 */
 		resetUiElements : function() {
