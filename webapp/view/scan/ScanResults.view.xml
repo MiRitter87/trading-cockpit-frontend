@@ -48,6 +48,9 @@
 						<Text text="{i18n>indicator.bollingerBandWidth}"/>
 					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>indicator.volumeDifferential10Days}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>scanResults.chart}"/>
 					</Column>
 				</columns>
@@ -59,6 +62,7 @@
 							<Text text="{quotations>indicator/rsNumber}"/>
 							<Text text="{quotations>indicator/distanceTo52WeekHigh}"/>
 							<Text text="{quotations>indicator/bollingerBandWidth}"/>
+							<Text text="{quotations>indicator/volumeDifferential10Days}"/>
 							<Button icon="sap-icon://business-objects-experience" press=".onChartPressed" tooltip="{i18n>scanResults.chart.tooltip}"/>
 						</cells>
 					</ColumnListItem>
