@@ -104,18 +104,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter of the instrument table header text.
-		 */
-		instrumentHeaderTextFormatter : function(aInstruments) {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var numberOfInstruments = aInstruments.length;
-			var sText = oResourceBundle.getText("instrumentOverview.tableHeader", numberOfInstruments.toString());
-			
-			return sText;
-		},
-		
-		
-		/**
 		 * Checks if an instrument has been selected.
 		 */
 		isInstrumentSelected : function () {
