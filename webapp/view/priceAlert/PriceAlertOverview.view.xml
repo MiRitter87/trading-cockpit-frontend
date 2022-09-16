@@ -22,7 +22,7 @@
 				<Table id="priceAlertTable" items="{path: 'priceAlerts>/priceAlert/'}" mode="SingleSelectMaster">
 					<headerToolbar>
 						<OverflowToolbar>
-							<Title text="{path:'priceAlerts>/priceAlert/', formatter:'.priceAlertHeaderTextFormatter'}"/>
+							<Title text="{i18n>priceAlertOverview.tableHeader} ({= ${priceAlerts>/priceAlert/}.length})"/>
 							<ToolbarSpacer/>
 							<Button icon="sap-icon://delete" tooltip="{i18n>priceAlertOverview.deleteSelected}" press=".onDeletePressed"/>
 						</OverflowToolbar>
