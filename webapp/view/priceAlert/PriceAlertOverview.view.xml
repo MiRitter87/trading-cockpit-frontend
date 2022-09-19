@@ -41,6 +41,9 @@
 						<Column>
 							<Text text="{i18n>priceAlert.price}"/>
 						</Column>
+						<Column>
+							<Text text="{i18n>priceAlert.triggerDistancePercent}"/>
+						</Column>
 						<Column minScreenWidth="Desktop" demandPopin="true">
 							<Text text="{i18n>priceAlert.triggerTime}"/>
 						</Column>
@@ -55,6 +58,7 @@
 								<Text text="{priceAlerts>instrument/name}"/>
 								<Text text="{path: 'priceAlerts>alertType', formatter: '.typeTextFormatter'}"/>
 								<Text text="{priceAlerts>price}"/>
+								<Text text="{priceAlerts>triggerDistancePercent}"/>
 								<Text text="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateFormatter'}"/>
 								<Text text="{path: 'priceAlerts>confirmationTime', formatter: '.formatter.wsDateFormatter'}"/>
 							</cells>

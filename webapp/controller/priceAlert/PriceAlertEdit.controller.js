@@ -178,6 +178,7 @@ sap.ui.define([
 			this.getView().byId("typeComboBox").setSelectedItem(null);
 			
 			this.setPriceInputValue(0);
+			this.getView().byId("triggerDistancePercentText").setText("");
 			this.getView().byId("triggerTimeText").setText("");
 			this.getView().byId("confirmationTimeText").setText("");
 		},
@@ -225,6 +226,7 @@ sap.ui.define([
 			wsPriceAlert.setProperty("/id", oPriceAlert.id);
 			wsPriceAlert.setProperty("/alertType", oPriceAlert.alertType);
 			wsPriceAlert.setProperty("/price", oPriceAlert.price);
+			wsPriceAlert.setProperty("/triggerDistancePercent", oPriceAlert.triggerDistancePercent);
 			wsPriceAlert.setProperty("/triggerTime", oPriceAlert.triggerTime);
 			wsPriceAlert.setProperty("/confirmationTime", oPriceAlert.confirmationTime);
 			wsPriceAlert.setProperty("/lastStockQuoteTime", oPriceAlert.lastStockQuoteTime);

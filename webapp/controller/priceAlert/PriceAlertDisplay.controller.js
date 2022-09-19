@@ -95,6 +95,7 @@ sap.ui.define([
 			this.getView().byId("instrumentText").setText("");
 			this.getView().byId("typeText").setText("");
 			this.getView().byId("priceText").setText("");
+			this.getView().byId("triggerDistancePercentText").setText("");
 			this.getView().byId("triggerTimeText").setText("");
 			this.getView().byId("confirmationTimeText").setText("");
 		}

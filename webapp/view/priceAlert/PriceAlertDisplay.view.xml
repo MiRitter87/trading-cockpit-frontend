@@ -67,6 +67,12 @@
 								</f:fields>
 							</f:FormElement>
 							
+							<f:FormElement label="{i18n>priceAlert.triggerDistancePercent}">
+								<f:fields>
+									<Text id="triggerDistancePercentText" text="{selectedPriceAlert>/triggerDistancePercent}"/>
+								</f:fields>
+							</f:FormElement>
+							
 							<f:FormElement label="{i18n>priceAlert.triggerTime}">
 								<f:fields>
 									<Text id="triggerTimeText" text="{path: 'selectedPriceAlert>/triggerTime', formatter: '.formatter.wsDateFormatter'}" />
