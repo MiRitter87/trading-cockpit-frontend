@@ -41,7 +41,7 @@
 						<Column>
 							<Text text="{i18n>priceAlert.price}"/>
 						</Column>
-						<Column>
+						<Column minScreenWidth="Desktop" demandPopin="true">
 							<Text text="{i18n>priceAlert.triggerDistancePercent}"/>
 						</Column>
 						<Column minScreenWidth="Desktop" demandPopin="true">
