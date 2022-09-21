@@ -111,6 +111,7 @@ sap.ui.define([
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, "ALL", "scanResults.template.all");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, "MINERVINI_TREND_TEMPLATE", "scanResults.template.minervini");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, "VOLATILITY_CONTRACTION_10_DAYS", "scanResults.template.volContraction10Days");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, "BREAKOUT_CANDIDATES", "scanResults.template.breakoutCandidates");
 		},
 		
 		

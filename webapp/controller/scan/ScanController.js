@@ -158,6 +158,8 @@ sap.ui.define([
 				sQueryUrl = sQueryUrl + "?scanTemplate=MINERVINI_TREND_TEMPLATE";
 			else if(sTemplate == "VOLATILITY_CONTRACTION_10_DAYS")
 				sQueryUrl = sQueryUrl + "?scanTemplate=VOLATILITY_CONTRACTION_10_DAYS";
+			else if(sTemplate == "BREAKOUT_CANDIDATES")
+				sQueryUrl = sQueryUrl + "?scanTemplate=BREAKOUT_CANDIDATES";
 			
 			jQuery.ajax({
 				type : "GET", 
