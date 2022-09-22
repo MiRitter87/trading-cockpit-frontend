@@ -83,6 +83,21 @@ sap.ui.define([
 		
 		
 		/**
+		 * Returns the currency for the given stock exchange.
+		 */
+		getCurrencyForStockExchange : function(sStockExchange) {
+			if(sStockExchange == "NYSE")
+				return "USD";
+			else if(sStockExchange == "TSX")
+				return "CAD";
+			else if(sStockExchange == "TSXV")
+				return "CAD";
+			else
+				return null;
+		},
+		
+		
+		/**
 		 * Calls a WebService operation to create a price alert.
 		 */
 		createPriceAlertByWebService : function(oPriceAlertModel, callbackFunction, oCallingController) {
