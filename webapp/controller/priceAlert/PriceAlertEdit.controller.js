@@ -66,6 +66,37 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the selection of an item in the instrument ComboBox.
+		 */
+		onInstrumentSelectionChange : function (oControlEvent) {
+			var oSelectedItem = oControlEvent.getParameters().selectedItem;
+			var oInstrumentsModel = this.getView().getModel("instruments");
+			var oInstrument;
+			var sCurrency = "";
+			var oPriceAlertModel;
+			
+			//Check if a price alert has been selected.
+			if(this.getView().byId("priceAlertComboBox").getSelectedKey() == "") {
+				return;
+			}
+			
+			//Get the selected instrument.
+			if(oSelectedItem != null) {			
+				oInstrument = InstrumentController.getInstrumentById(oSelectedItem.getKey(), oInstrumentsModel.oData.instrument);				
+			} else {
+				return;
+			}
+			
+			//Determine the currency based on the stock exchange of the instrument.
+			sCurrency = PriceAlertController.getCurrencyForStockExchange(oInstrument.stockExchange);
+			
+			//Set the currency of the new price alert.
+			oPriceAlertModel = this.getView().getModel("selectedPriceAlert");
+			oPriceAlertModel.setProperty("/currency", sCurrency);
+		},
+		
+		
+		/**
 		 * Handles a click at the save button.
 		 */
 		onSavePressed : function () {				
@@ -226,6 +257,7 @@ sap.ui.define([
 			wsPriceAlert.setProperty("/id", oPriceAlert.id);
 			wsPriceAlert.setProperty("/alertType", oPriceAlert.alertType);
 			wsPriceAlert.setProperty("/price", oPriceAlert.price);
+			wsPriceAlert.setProperty("/currency", oPriceAlert.currency);
 			wsPriceAlert.setProperty("/triggerDistancePercent", oPriceAlert.triggerDistancePercent);
 			wsPriceAlert.setProperty("/triggerTime", oPriceAlert.triggerTime);
 			wsPriceAlert.setProperty("/confirmationTime", oPriceAlert.confirmationTime);

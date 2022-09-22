@@ -52,7 +52,7 @@
 							<f:FormElement label="{i18n>priceAlert.instrument}">
 								<f:fields>
 									<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}" 
-									selectedKey="{selectedPriceAlert>/instrumentId}" required="true">
+									selectedKey="{selectedPriceAlert>/instrumentId}" required="true" selectionChange=".onInstrumentSelectionChange">
 								
 									<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>	
 								</ComboBox>
