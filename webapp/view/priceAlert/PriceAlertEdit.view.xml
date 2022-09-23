@@ -67,7 +67,7 @@
 							
 							<f:FormElement label="{i18n>priceAlert.price}">
 								<f:fields>
-									<Input id="priceInput" type="Number" required="true"/>
+									<Input id="priceInput" type="Number" required="true" description="{selectedPriceAlert>/currency}"/>
 								</f:fields>
 							</f:FormElement>
 							
