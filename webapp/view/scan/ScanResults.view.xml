@@ -11,14 +11,15 @@
 	
 	<Page title="{i18n>scanResults.header}">
 		<content>
-			<l:VerticalLayout class="sapUiSmallMarginBegin">
-				<l:HorizontalLayout class="sapUiSmallMarginBegin">
-					<Label text="{i18n>scanResults.templateSelection}" class="sapUiSmallMarginTop sapUiSmallMarginEnd"/>
-					<ComboBox id="templateComboBox" class="sapUiTinyMarginTop"/>
-				</l:HorizontalLayout>
+			<VBox class="sapUiSmallMarginBegin">
+				<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
+					<Label text="{i18n>scanResults.templateSelection}" class="sapUiSmallMarginEnd"/>
+					<ComboBox id="templateComboBox"/>
+					<Button icon="sap-icon://hint" type="Transparent" tooltip="{i18n>scanResults.templateTooltip}"/>
+				</FlexBox>
 			
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
-			</l:VerticalLayout>			
+			</VBox>			
 		
 			<Table id="quotationTable" items="{path: 'quotations>/quotation/', sorter: {path: 'indicator/rsPercentSum', descending: true }}" 
 				mode="SingleSelectMaster">
