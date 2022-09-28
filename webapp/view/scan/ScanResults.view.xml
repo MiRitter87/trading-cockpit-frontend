@@ -15,7 +15,8 @@
 				<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
 					<Label text="{i18n>scanResults.templateSelection}" class="sapUiSmallMarginEnd"/>
 					<ComboBox id="templateComboBox"/>
-					<Button icon="sap-icon://hint" type="Transparent" tooltip="{i18n>scanResults.templateTooltip}"/>
+					<Button icon="sap-icon://hint" type="Transparent" tooltip="{i18n>scanResults.templateTooltip}" 
+						press=".onTemplateInformationPressed"/>
 				</FlexBox>
 			
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />

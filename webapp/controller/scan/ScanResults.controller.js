@@ -4,8 +4,9 @@ sap.ui.define([
 	"./ScanController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
+	"sap/m/MessageBox",
 	"sap/ui/model/Sorter"
-], function (Controller, MainController, ScanController, JSONModel, MessageToast, Sorter) {
+], function (Controller, MainController, ScanController, JSONModel, MessageToast, MessageBox, Sorter) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanResults", {
@@ -41,6 +42,44 @@ sap.ui.define([
 			sSelectedTemplate = oComboBox.getSelectedKey();
 			
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, sSelectedTemplate);
+		},
+		
+		
+		/**
+    	 * Handles the button press event of the template information button.
+    	 */
+    	onTemplateInformationPressed : function() {
+			var oComboBox = this.getView().byId("templateComboBox");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var mOptions = new Object();
+			var sTitle = "", sDescription = "";
+			var sKey = "";
+			
+			sKey = oComboBox.getSelectedKey();
+			
+			if(sKey == "ALL") {
+				sTitle = oResourceBundle.getText("scanResults.template.all");
+				sDescription = oResourceBundle.getText("scanResults.template.all.description");
+			}
+			else if(sKey == "MINERVINI_TREND_TEMPLATE") {
+				sTitle = oResourceBundle.getText("scanResults.template.minervini");
+				sDescription = oResourceBundle.getText("scanResults.template.minervini.description");
+			}
+			else if(sKey == "VOLATILITY_CONTRACTION_10_DAYS") {
+				sTitle = oResourceBundle.getText("scanResults.template.volContraction10Days");
+				sDescription = oResourceBundle.getText("scanResults.template.volContraction10Days.description");
+			}
+			else if(sKey == "BREAKOUT_CANDIDATES") {
+				sTitle = oResourceBundle.getText("scanResults.template.breakoutCandidates");
+				sDescription = oResourceBundle.getText("scanResults.template.breakoutCandidates.description");
+			}
+			else {
+				MessageBox.information(oResourceBundle.getText("scanResults.noTemplateSelected"));
+				return;
+			}		
+			
+			mOptions.title = sTitle
+			MessageBox.information(sDescription, mOptions);
 		},
 		
 		
