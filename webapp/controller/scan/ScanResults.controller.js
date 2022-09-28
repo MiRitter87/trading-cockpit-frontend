@@ -8,6 +8,16 @@ sap.ui.define([
 	"sap/ui/model/Sorter"
 ], function (Controller, MainController, ScanController, JSONModel, MessageToast, MessageBox, Sorter) {
 	"use strict";
+	
+	/**
+	 * Constants of Scan Template Keys.
+	 */
+	var template_keys = {
+        ALL: 'ALL',
+        MINERVINI: 'MINERVINI_TREND_TEMPLATE',
+        VOLATILITY_CONTRACTION: 'VOLATILITY_CONTRACTION_10_DAYS',
+        BREAKOUT_CANDIDATES: 'BREAKOUT_CANDIDATES'
+    };
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanResults", {
 		/**
@@ -26,7 +36,7 @@ sap.ui.define([
 		 */
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
-			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, "ALL");
+			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, template_keys.ALL);
 			
 			this.resetUiElements();
     	},
@@ -57,19 +67,19 @@ sap.ui.define([
 			
 			sKey = oComboBox.getSelectedKey();
 			
-			if(sKey == "ALL") {
+			if(sKey == template_keys.ALL) {
 				sTitle = oResourceBundle.getText("scanResults.template.all");
 				sDescription = oResourceBundle.getText("scanResults.template.all.description");
 			}
-			else if(sKey == "MINERVINI_TREND_TEMPLATE") {
+			else if(sKey == template_keys.MINERVINI) {
 				sTitle = oResourceBundle.getText("scanResults.template.minervini");
 				sDescription = oResourceBundle.getText("scanResults.template.minervini.description");
 			}
-			else if(sKey == "VOLATILITY_CONTRACTION_10_DAYS") {
+			else if(sKey == template_keys.VOLATILITY_CONTRACTION) {
 				sTitle = oResourceBundle.getText("scanResults.template.volContraction10Days");
 				sDescription = oResourceBundle.getText("scanResults.template.volContraction10Days.description");
 			}
-			else if(sKey == "BREAKOUT_CANDIDATES") {
+			else if(sKey == template_keys.BREAKOUT_CANDIDATES) {
 				sTitle = oResourceBundle.getText("scanResults.template.breakoutCandidates");
 				sDescription = oResourceBundle.getText("scanResults.template.breakoutCandidates.description");
 			}
@@ -147,10 +157,10 @@ sap.ui.define([
 			var oComboBox = this.getView().byId("templateComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, "ALL", "scanResults.template.all");
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, "MINERVINI_TREND_TEMPLATE", "scanResults.template.minervini");
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, "VOLATILITY_CONTRACTION_10_DAYS", "scanResults.template.volContraction10Days");
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, "BREAKOUT_CANDIDATES", "scanResults.template.breakoutCandidates");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, template_keys.ALL, "scanResults.template.all");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, template_keys.MINERVINI, "scanResults.template.minervini");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, template_keys.VOLATILITY_CONTRACTION, "scanResults.template.volContraction10Days");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, template_keys.BREAKOUT_CANDIDATES, "scanResults.template.breakoutCandidates");
 		},
 		
 		
@@ -183,7 +193,7 @@ sap.ui.define([
 		resetUiElements : function() {
 			var oComboBox = this.getView().byId("templateComboBox");
 						
-			oComboBox.setSelectedKey("ALL");
+			oComboBox.setSelectedKey(template_keys.ALL);
 		}
 	});
 });
