@@ -1,11 +1,12 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"./PriceAlertController",
+	"../Constants",
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, PriceAlertController, formatter, JSONModel, MessageToast, MessageBox) {
+], function (Controller, PriceAlertController, Constants, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertOverview", {
@@ -54,22 +55,19 @@ sap.ui.define([
 		 */
 		onFilterSelect: function (oEvent) {
 			var	sKey = oEvent.getParameter("key");
-			
-			//Values for status query.
-			var sNotTriggered = "NOT_TRIGGERED";
-			var sNotConfirmed = "NOT_CONFIRMED";
-			var sTriggered = "TRIGGERED";
-			var sConfirmed = "CONFIRMED";
-			var sAll = "ALL";
 
 			if (sKey === "All") {
-				PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, sAll, sAll);
+				PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, 
+					Constants.ALERT_TRIGGER_STATUS.ALL, Constants.ALERT_CONFIRMATION_STATUS.ALL);
 			} else if (sKey === "Not_Triggered") {
-				PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, sNotTriggered, sAll);
+				PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, 
+					Constants.ALERT_TRIGGER_STATUS.NOT_TRIGGERED, Constants.ALERT_CONFIRMATION_STATUS.ALL);
 			} else if (sKey === "Not_Confirmed") {
-				PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, sTriggered, sNotConfirmed);
+				PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, 
+				Constants.ALERT_TRIGGER_STATUS.TRIGGERED, Constants.ALERT_CONFIRMATION_STATUS.NOT_CONFIRMED);
 			} else if (sKey === "Finished") {
-				PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, sTriggered, sConfirmed);
+				PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, 
+					Constants.ALERT_TRIGGER_STATUS.TRIGGERED, Constants.ALERT_CONFIRMATION_STATUS.CONFIRMED);
 			}
 		},
 

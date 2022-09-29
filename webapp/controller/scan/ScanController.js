@@ -1,7 +1,8 @@
 sap.ui.define([
 	"../MainController",
+	"../Constants",
 	"sap/ui/model/json/JSONModel"
-], function (MainController, JSONModel) {
+], function (MainController, Constants, JSONModel) {
 	"use strict";
 	return {
 		/**
@@ -52,9 +53,9 @@ sap.ui.define([
 		 * Returns the localized text of the given status.
 		 */
 		getLocalizedStatusText : function(sStatus, oResourceBundle) {
-			if(sStatus == "IN_PROGRESS")
+			if(sStatus == Constants.SCAN_STATUS.IN_PROGRESS)
 				return oResourceBundle.getText("scan.status.inProgress");
-			else if(sStatus == "FINISHED")
+			else if(sStatus == Constants.SCAN_STATUS.FINISHED)
 				return oResourceBundle.getText("scan.status.finished");
 			else
 				return "";
@@ -154,12 +155,12 @@ sap.ui.define([
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/quotation");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
 			
-			if(sTemplate == "MINERVINI_TREND_TEMPLATE")
-				sQueryUrl = sQueryUrl + "?scanTemplate=MINERVINI_TREND_TEMPLATE";
-			else if(sTemplate == "VOLATILITY_CONTRACTION_10_DAYS")
-				sQueryUrl = sQueryUrl + "?scanTemplate=VOLATILITY_CONTRACTION_10_DAYS";
-			else if(sTemplate == "BREAKOUT_CANDIDATES")
-				sQueryUrl = sQueryUrl + "?scanTemplate=BREAKOUT_CANDIDATES";
+			if(sTemplate == Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE)
+				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE;
+			else if(sTemplate == Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS)
+				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS;
+			else if(sTemplate == Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES)
+				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES;
 			
 			jQuery.ajax({
 				type : "GET", 

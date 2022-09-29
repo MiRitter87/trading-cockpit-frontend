@@ -1,11 +1,12 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"./PriceAlertController",
+	"../Constants",
 	"../../model/formatter",
 	"sap/ui/core/IntervalTrigger",
 	"sap/m/MessageToast",
 	"sap/ui/model/json/JSONModel"
-], function (Controller, PriceAlertController, formatter, IntervalTrigger, MessageToast, JSONModel) {
+], function (Controller, PriceAlertController, Constants, formatter, IntervalTrigger, MessageToast, JSONModel) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertFeed", {
@@ -73,7 +74,8 @@ sap.ui.define([
 		 * Gets the price alerts.
 		 */
 		getAlerts: function () {			
-			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, "TRIGGERED", "NOT_CONFIRMED");
+			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, 
+				Constants.ALERT_TRIGGER_STATUS.TRIGGERED, Constants.ALERT_CONFIRMATION_STATUS.NOT_CONFIRMED);
 		},
 		
 		
@@ -91,10 +93,10 @@ sap.ui.define([
 		 * Formatter of the price alert icon.
 		 */
 		priceAlertIconFormatter: function(sAlertType) {
-			if(sAlertType == "GREATER_OR_EQUAL")
+			if(sAlertType == Constants.ALERT_TYPE.GREATER_OR_EQUAL)
 				return "sap-icon://trend-up";
 				
-			if(sAlertType == "LESS_OR_EQUAL")
+			if(sAlertType == Constants.ALERT_TYPE.LESS_OR_EQUAL)
 				return "sap-icon://trend-down";
 		},
 		

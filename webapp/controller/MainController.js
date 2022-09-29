@@ -1,8 +1,10 @@
 sap.ui.define([
 	"sap/ui/core/Fragment",
-	"sap/ui/core/Item"
-], function (Fragment, Item) {
+	"sap/ui/core/Item",
+	"./Constants",
+], function (Fragment, Item, Constants) {
 	"use strict";
+	
 	return {
 		/**
 		 * Opens the fragment with the given name as PopUp.
@@ -33,7 +35,7 @@ sap.ui.define([
 		 * Navigates to the startpage.
 		 */
 		navigateToStartpage : function(oRouter) {
-			oRouter.navTo("startPageRoute");		
+			oRouter.navTo("startPageRoute");	
 		},
 		
 		
@@ -41,9 +43,10 @@ sap.ui.define([
 		 * Initializes the given ComboBox with items for stock exchange selection.
 		 */
 		initializeStockExchangeComboBox : function(oComboBox, oResourceBundle) {
-			this.addItemToComboBox(oComboBox, oResourceBundle, "TSX", "stockExchange.tsx");
-			this.addItemToComboBox(oComboBox, oResourceBundle, "TSXV", "stockExchange.tsxv");
-			this.addItemToComboBox(oComboBox, oResourceBundle, "NYSE", "stockExchange.nyse");
+			
+			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.TSX, "stockExchange.tsx");
+			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.TSXV, "stockExchange.tsxv");
+			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.NYSE, "stockExchange.nyse");
 		},
 		
 		
@@ -63,11 +66,11 @@ sap.ui.define([
 		 * Returns the localized text of the given stock exchange.
 		 */
 		getLocalizedStockExchangeText : function(sStockExchange, oResourceBundle) {
-			if(sStockExchange == "NYSE")
+			if(sStockExchange == Constants.STOCK_EXCHANGE.NYSE)
 				return oResourceBundle.getText("stockExchange.nyse");
-			else if(sStockExchange == "TSX")
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX)
 				return oResourceBundle.getText("stockExchange.tsx");
-			else if(sStockExchange == "TSXV")
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSXV)
 				return oResourceBundle.getText("stockExchange.tsxv");
 			else
 				return "";

@@ -1,14 +1,15 @@
 sap.ui.define([
-	"../MainController"
-], function (MainController) {
+	"../MainController",
+	"../Constants"
+], function (MainController, Constants) {
 	"use strict";
 	return {
 		/**
 		 * Initializes the given ComboBox with items for alert type selection.
 		 */
 		initializeTypeComboBox : function(oComboBox, oResourceBundle) {
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, "LESS_OR_EQUAL", "priceAlert.type.lessOrEqual");
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, "GREATER_OR_EQUAL", "priceAlert.type.greaterOrEqual");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.ALERT_TYPE.LESS_OR_EQUAL, "priceAlert.type.lessOrEqual");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.ALERT_TYPE.GREATER_OR_EQUAL, "priceAlert.type.greaterOrEqual");
 		},
 		
 		
@@ -73,9 +74,9 @@ sap.ui.define([
 		 * Returns the localized text of the given type.
 		 */
 		getLocalizedTypeText : function(sType, oResourceBundle) {
-			if(sType == "LESS_OR_EQUAL")
+			if(sType == Constants.ALERT_TYPE.LESS_OR_EQUAL)
 				return oResourceBundle.getText("priceAlert.type.lessOrEqual");
-			else if(sType == "GREATER_OR_EQUAL")
+			else if(sType == Constants.ALERT_TYPE.GREATER_OR_EQUAL)
 				return oResourceBundle.getText("priceAlert.type.greaterOrEqual");
 			else
 				return "";
@@ -86,11 +87,11 @@ sap.ui.define([
 		 * Returns the currency for the given stock exchange.
 		 */
 		getCurrencyForStockExchange : function(sStockExchange) {
-			if(sStockExchange == "NYSE")
+			if(sStockExchange == Constants.STOCK_EXCHANGE.NYSE)
 				return "USD";
-			else if(sStockExchange == "TSX")
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX)
 				return "CAD";
-			else if(sStockExchange == "TSXV")
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSXV)
 				return "CAD";
 			else
 				return null;

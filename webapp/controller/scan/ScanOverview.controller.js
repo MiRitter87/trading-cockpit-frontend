@@ -2,11 +2,12 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"./ScanController",
 	"../MainController",
+	"../Constants",
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, ScanController, MainController, formatter, JSONModel, MessageToast, MessageBox) {
+], function (Controller, ScanController, MainController, Constants, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanOverview", {
@@ -68,7 +69,7 @@ sap.ui.define([
 			oScan = this.getSelectedScan();
 			if(oScan != null){
 				oScanWS = ScanController.getScanForWebService(oScan);
-				oScanWS.setProperty("/status", "IN_PROGRESS");
+				oScanWS.setProperty("/status", Constants.SCAN_STATUS.IN_PROGRESS);
 				ScanController.saveScanByWebService(oScanWS, this.saveScanCallback, this);
 			}			
 		},

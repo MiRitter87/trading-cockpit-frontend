@@ -1,13 +1,15 @@
 sap.ui.define([
-	"../MainController"
-], function (MainController) {
+	"../MainController",
+	"../Constants"
+], function (MainController, Constants) {
 	"use strict";
+	
 	return {
 		/**
 		 * Initializes the given ComboBox with items for instrument type selection.
 		 */
 		initializeTypeComboBox : function(oComboBox, oResourceBundle) {
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, "STOCK", "instrument.type.stock");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.STOCK, "instrument.type.stock");
 		},
 		
 		
@@ -32,7 +34,7 @@ sap.ui.define([
 		 * Returns the localized text of the given type.
 		 */
 		getLocalizedTypeText : function(sType, oResourceBundle) {
-			if(sType == "STOCK")
+			if(sType == Constants.INSTRUMENT_TYPE.STOCK)
 				return oResourceBundle.getText("instrument.type.stock");
 			else
 				return "";

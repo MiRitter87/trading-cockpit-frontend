@@ -1,24 +1,15 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
+	"../Constants",
 	"./ScanController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
 	"sap/ui/model/Sorter"
-], function (Controller, MainController, ScanController, JSONModel, MessageToast, MessageBox, Sorter) {
+], function (Controller, MainController, Constants, ScanController, JSONModel, MessageToast, MessageBox, Sorter) {
 	"use strict";
 	
-	/**
-	 * Constants of Scan Template Keys.
-	 */
-	var template_keys = {
-        ALL: 'ALL',
-        MINERVINI: 'MINERVINI_TREND_TEMPLATE',
-        VOLATILITY_CONTRACTION: 'VOLATILITY_CONTRACTION_10_DAYS',
-        BREAKOUT_CANDIDATES: 'BREAKOUT_CANDIDATES'
-    };
-
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanResults", {
 		/**
 		 * Initializes the controller.
@@ -67,19 +58,19 @@ sap.ui.define([
 			
 			sKey = oComboBox.getSelectedKey();
 			
-			if(sKey == template_keys.ALL) {
+			if(sKey == Constants.SCAN_TEMPLATE.ALL) {
 				sTitle = oResourceBundle.getText("scanResults.template.all");
 				sDescription = oResourceBundle.getText("scanResults.template.all.description");
 			}
-			else if(sKey == template_keys.MINERVINI) {
+			else if(sKey == Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE) {
 				sTitle = oResourceBundle.getText("scanResults.template.minervini");
 				sDescription = oResourceBundle.getText("scanResults.template.minervini.description");
 			}
-			else if(sKey == template_keys.VOLATILITY_CONTRACTION) {
+			else if(sKey == Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS) {
 				sTitle = oResourceBundle.getText("scanResults.template.volContraction10Days");
 				sDescription = oResourceBundle.getText("scanResults.template.volContraction10Days.description");
 			}
-			else if(sKey == template_keys.BREAKOUT_CANDIDATES) {
+			else if(sKey == Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES) {
 				sTitle = oResourceBundle.getText("scanResults.template.breakoutCandidates");
 				sDescription = oResourceBundle.getText("scanResults.template.breakoutCandidates.description");
 			}
@@ -157,10 +148,10 @@ sap.ui.define([
 			var oComboBox = this.getView().byId("templateComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, template_keys.ALL, "scanResults.template.all");
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, template_keys.MINERVINI, "scanResults.template.minervini");
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, template_keys.VOLATILITY_CONTRACTION, "scanResults.template.volContraction10Days");
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, template_keys.BREAKOUT_CANDIDATES, "scanResults.template.breakoutCandidates");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.ALL, "scanResults.template.all");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE, "scanResults.template.minervini");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS, "scanResults.template.volContraction10Days");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES, "scanResults.template.breakoutCandidates");
 		},
 		
 		
@@ -173,13 +164,13 @@ sap.ui.define([
 			
 			sChartLink = sBaseChartLink.replace("{symbol}", sSymbol);
 			
-			if(sStockExchange == "NYSE") {
+			if(sStockExchange == Constants.STOCK_EXCHANGE.NYSE) {
 				sChartLink = sChartLink.replace("{exchange}", "");
 			}
-			else if(sStockExchange == "TSX") {
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX) {
 				sChartLink = sChartLink.replace("{exchange}", ".TO");
 			}
-			else if(sStockExchange == "TSXV") {
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSXV) {
 				sChartLink = sChartLink.replace("{exchange}", ".V");
 			}
 					
@@ -193,7 +184,7 @@ sap.ui.define([
 		resetUiElements : function() {
 			var oComboBox = this.getView().byId("templateComboBox");
 						
-			oComboBox.setSelectedKey(template_keys.ALL);
+			oComboBox.setSelectedKey(Constants.SCAN_TEMPLATE.ALL);
 		}
 	});
 });
