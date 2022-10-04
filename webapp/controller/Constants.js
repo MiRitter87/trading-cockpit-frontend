@@ -10,6 +10,7 @@ sap.ui.define([
 		STOCK_EXCHANGE: {
 			TSX: 'TSX',
 			TSXV: 'TSXV',
+			CSE: 'CSE',
 			NYSE: 'NYSE'			
 		},
 		
