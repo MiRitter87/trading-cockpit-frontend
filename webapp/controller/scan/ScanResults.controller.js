@@ -27,7 +27,7 @@ sap.ui.define([
 		 */
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
-			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, template_keys.ALL);
+			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, Constants.SCAN_TEMPLATE.ALL);
 			
 			this.resetUiElements();
     	},
