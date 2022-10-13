@@ -17,6 +17,7 @@
 						<Title text="{i18n>listOverview.tableHeader} ({= ${lists>/list/}.length})"/>
 						<ToolbarSpacer/>
 						<Button icon="sap-icon://detail-view" tooltip="{i18n>listOverview.showDetails}" press=".onShowDetailsPressed"/>
+						<Button icon="sap-icon://excel-attachment" tooltip="{i18n>listOverview.excelExportPrices}" press=".onExcelExportPressed"/>
 						<Button icon="sap-icon://delete" tooltip="{i18n>listOverview.deleteSelected}" press=".onDeletePressed"/>
 					</OverflowToolbar>
 				</headerToolbar>

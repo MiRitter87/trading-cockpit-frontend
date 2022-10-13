@@ -102,6 +102,30 @@ sap.ui.define([
 					callbackFunction(data, oCallingController);
 				}
 			});
+		},
+		
+		
+		/**
+		 * Downloads the Instrument data of the List with the most recent prices as Excel file.
+		 */
+		downloadListAsExcelFile : function(oList, oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/list");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + oList.id + "/excel";
+			var sFileName = "Recent Prices of List " + oList.id + ".xlsx";
+			
+			fetch(sQueryUrl)
+  				.then(resp => resp.blob())
+  				.then(blob => {
+				    const url = window.URL.createObjectURL(blob);
+				    const a = document.createElement('a');
+				    a.style.display = 'none';
+				    a.href = url;
+				    a.download = sFileName;
+				    document.body.appendChild(a);
+				    a.click();
+				    window.URL.revokeObjectURL(url);
+  				});
 		}
 	};
 });

@@ -46,6 +46,22 @@ sap.ui.define([
 			
 			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.list.ListOverviewDetails");
 		},
+		
+		
+		/**
+		 * Handles the press-event of the Excel export button.
+		 */
+		onExcelExportPressed : function () {
+			var oResourceBundle;
+			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			if(this.isListSelected() == false) {
+				MessageBox.error(oResourceBundle.getText("listOverview.noListSelected"));
+				return;
+			}
+			
+			ListController.downloadListAsExcelFile(this.getSelectedList(), this);
+		},
 
 
 		/**
