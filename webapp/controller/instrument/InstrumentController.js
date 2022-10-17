@@ -10,6 +10,7 @@ sap.ui.define([
 		 */
 		initializeTypeComboBox : function(oComboBox, oResourceBundle) {
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.STOCK, "instrument.type.stock");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.ETF, "instrument.type.etf");
 		},
 		
 		
@@ -36,6 +37,8 @@ sap.ui.define([
 		getLocalizedTypeText : function(sType, oResourceBundle) {
 			if(sType == Constants.INSTRUMENT_TYPE.STOCK)
 				return oResourceBundle.getText("instrument.type.stock");
+			else if(sType == Constants.INSTRUMENT_TYPE.ETF)
+				return oResourceBundle.getText("instrument.type.etf");
 			else
 				return "";
 		},

@@ -15,7 +15,8 @@ sap.ui.define([
 		},
 		
 		INSTRUMENT_TYPE: {
-			STOCK: 'STOCK'
+			STOCK: 'STOCK',
+			ETF: 'ETF'
 		},
 		
 		ALERT_TYPE: {
