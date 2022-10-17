@@ -63,12 +63,16 @@
 					<Column>
 						<Text text="{i18n>instrument.name}"/>
 					</Column>
+					<Column>
+						<Text text="{i18n>instrument.type}"/>
+					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
 						<cells>
 							<Text text="{selectedList>symbol}"/>
 							<Text text="{selectedList>name}"/>
+							<Text text="{path: 'selectedList>type', formatter: '.typeTextFormatter'}"/>
 						</cells>
 					</ColumnListItem>
 				</items>

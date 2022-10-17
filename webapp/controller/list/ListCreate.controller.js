@@ -211,6 +211,14 @@ sap.ui.define([
 			}
 
 			return false;
+		},
+		
+		
+		/**
+		 * Formatter of the type text.
+		 */
+		typeTextFormatter: function(sType) {
+			return InstrumentController.getLocalizedTypeText(sType, this.getOwnerComponent().getModel("i18n").getResourceBundle());
 		}
 	});
 });

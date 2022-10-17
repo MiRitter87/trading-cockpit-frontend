@@ -1,11 +1,12 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"./ListController",
+	"../instrument/InstrumentController",
 	"../MainController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, ListController, MainController, JSONModel, MessageToast, MessageBox) {
+], function (Controller, ListController, InstrumentController, MainController, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.list.ListOverview", {
@@ -151,6 +152,14 @@ sap.ui.define([
 			var oSelectedList = oContext.getProperty(null, oContext);
 			
 			return oSelectedList;
+		},
+		
+		
+		/**
+		 * Formatter of the type text.
+		 */
+		typeTextFormatter: function(sType) {
+			return InstrumentController.getLocalizedTypeText(sType, this.getOwnerComponent().getModel("i18n").getResourceBundle());
 		}
 	});
 });

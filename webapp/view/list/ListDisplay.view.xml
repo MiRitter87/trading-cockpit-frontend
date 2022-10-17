@@ -68,7 +68,8 @@
 			<List id="instrumentList" headerText="{i18n>listDisplay.instrumentListHeader} ({= ${selectedList>/instruments/}.length})" 
 				items="{path: 'selectedList>/instruments'}">
 				
-				<StandardListItem title="{selectedList>symbol}" description="{selectedList>name}"/>
+				<StandardListItem title="{selectedList>symbol}" description="{selectedList>name}" 
+					info="{path: 'selectedList>type', formatter: '.typeTextFormatter'}"/>
 			</List>
 		</content>
 	</Page>

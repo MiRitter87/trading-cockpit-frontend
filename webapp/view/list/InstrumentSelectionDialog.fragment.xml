@@ -18,6 +18,7 @@
 			selected="{path: 'instruments>id', formatter: '.isInstrumentSelectedFormatter'}"
 			title="{instruments>symbol}"
 			description="{instruments>name}"
+			info="{path: 'instruments>type', formatter: '.typeTextFormatter'}"
 			type="Active" />
 	</SelectDialog>
 </core:FragmentDefinition>
