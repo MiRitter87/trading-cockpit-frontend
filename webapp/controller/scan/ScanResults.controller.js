@@ -3,11 +3,12 @@ sap.ui.define([
 	"../MainController",
 	"../Constants",
 	"./ScanController",
+	"../instrument/InstrumentController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
 	"sap/ui/model/Sorter"
-], function (Controller, MainController, Constants, ScanController, JSONModel, MessageToast, MessageBox, Sorter) {
+], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, Sorter) {
 	"use strict";
 	
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanResults", {
@@ -188,6 +189,14 @@ sap.ui.define([
 			var oComboBox = this.getView().byId("templateComboBox");
 						
 			oComboBox.setSelectedKey(Constants.SCAN_TEMPLATE.ALL);
+		},
+		
+		
+		/**
+		 * Formatter of the type text.
+		 */
+		typeTextFormatter: function(sType) {
+			return InstrumentController.getLocalizedTypeText(sType, this.getOwnerComponent().getModel("i18n").getResourceBundle());
 		}
 	});
 });

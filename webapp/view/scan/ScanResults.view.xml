@@ -40,6 +40,9 @@
 					<Column>
 						<Text text="{i18n>instrument.name}"/>
 					</Column>
+					<Column>
+						<Text text="{i18n>instrument.type}"/>
+					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.rsNumber}"/>
 					</Column>
@@ -67,6 +70,7 @@
 						<cells>
 							<Text text="{quotations>instrument/symbol}"/>
 							<Text text="{quotations>instrument/name}"/>
+							<Text text="{path: 'quotations>instrument/type', formatter: '.typeTextFormatter'}"/>
 							<Text text="{quotations>indicator/rsNumber}"/>
 							<Text text="{quotations>indicator/distanceTo52WeekHigh}"/>
 							<Text text="{quotations>indicator/bollingerBandWidth}"/>
