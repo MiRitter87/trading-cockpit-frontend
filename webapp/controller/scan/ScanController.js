@@ -150,10 +150,11 @@ sap.ui.define([
 		/**
 		 * Queries the quotation WebService for quotations.
 		 */
-		queryQuotationsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sTemplate) {
+		queryQuotationsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sTemplate, sType) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/quotation");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
+			var bNoTemplate = false;
 			
 			if(sTemplate == Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE)
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE;
@@ -161,6 +162,18 @@ sap.ui.define([
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS;
 			else if(sTemplate == Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES)
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES;
+			else
+				bNoTemplate = true;
+				
+			if(bNoTemplate == true)
+				sQueryUrl = sQueryUrl + "?";
+			else
+				sQueryUrl = sQueryUrl + "&";
+				
+			if(sType == Constants.INSTRUMENT_TYPE.STOCK)
+				sQueryUrl = sQueryUrl + "instrumentType=" + Constants.INSTRUMENT_TYPE.STOCK;
+			else if(sType == Constants.INSTRUMENT_TYPE.ETF)
+				sQueryUrl = sQueryUrl + "instrumentType=" + Constants.INSTRUMENT_TYPE.ETF;
 			
 			jQuery.ajax({
 				type : "GET", 

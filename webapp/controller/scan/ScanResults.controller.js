@@ -16,10 +16,14 @@ sap.ui.define([
 		 * Initializes the controller.
 		 */
 		onInit : function () {
+			var oTypeComboBox = this.getView().byId("typeComboBox");
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("scanResultsRoute").attachMatched(this._onRouteMatched, this);
 			
 			this.initializeTemplateComboBox();
+			
+			InstrumentController.initializeTypeComboBox(oTypeComboBox, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+			oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
 		},
 		
 		
@@ -28,7 +32,8 @@ sap.ui.define([
 		 */
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
-			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, Constants.SCAN_TEMPLATE.ALL);
+			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, 
+				Constants.SCAN_TEMPLATE.ALL, Constants.INSTRUMENT_TYPE.STOCK);
 			
 			this.resetUiElements();
     	},
@@ -39,11 +44,18 @@ sap.ui.define([
     	 */
     	onRefreshPressed : function() {
 			var sSelectedTemplate = "";
-			var oComboBox = this.getView().byId("templateComboBox");
+			var sSelectedType = "";
+			var oTemplateComboBox = this.getView().byId("templateComboBox");
+			var oTypeComboBox = this.getView().byId("typeComboBox");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			sSelectedTemplate = oComboBox.getSelectedKey();
+			sSelectedTemplate = oTemplateComboBox.getSelectedKey();
+			sSelectedType = oTypeComboBox.getSelectedKey();
 			
-			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, sSelectedTemplate);
+			if(sSelectedType == "")
+				MessageBox.information(oResourceBundle.getText("scanResults.noTypeSelected"));
+			
+			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, sSelectedTemplate, sSelectedType);
 		},
 		
 		
@@ -186,9 +198,11 @@ sap.ui.define([
 		 * Resets the UI elements into the intial state.
 		 */
 		resetUiElements : function() {
-			var oComboBox = this.getView().byId("templateComboBox");
+			var oTemplateComboBox = this.getView().byId("templateComboBox");
+			var oTypeComboBox = this.getView().byId("typeComboBox");
 						
-			oComboBox.setSelectedKey(Constants.SCAN_TEMPLATE.ALL);
+			oTemplateComboBox.setSelectedKey(Constants.SCAN_TEMPLATE.ALL);
+			oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
 		},
 		
 		
