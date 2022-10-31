@@ -2,10 +2,11 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"./InstrumentController",
+	"../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, InstrumentController, JSONModel, MessageBox, MessageToast) {
+], function (Controller, MainController, InstrumentController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentCreate", {
@@ -62,6 +63,23 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the selection of an instrument type.
+		 */
+		onTypeSelectionChange : function () {
+			var oInstrumentModel;
+			var sSelectedType;
+			
+			oInstrumentModel = this.getView().getModel("newInstrument");
+			sSelectedType = oInstrumentModel.getProperty("/type");
+			
+			if(sSelectedType == Constants.INSTRUMENT_TYPE.STOCK)
+				this.setSectorAndIgComboBoxEnabled(true);
+			else
+				this.setSectorAndIgComboBoxEnabled(false);
+		},
+		
+		
+		/**
 		 * Callback function of the createInstrument RESTful WebService call in the InstrumentController.
 		 */
 		createInstrumentCallback : function (oReturnData, oCallingController) {
@@ -101,6 +119,8 @@ sap.ui.define([
 		resetUIElements : function () {
 			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
 			this.getView().byId("typeComboBox").setSelectedItem(null);
+			
+			this.setSectorAndIgComboBoxEnabled(false);
 		},
 		
 		
@@ -119,6 +139,20 @@ sap.ui.define([
 		showMessageOnUndefinedType : function () {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			MessageBox.error(oResourceBundle.getText("instrumentCreate.noTypeSelected"));
+		},
+		
+		
+		/**
+		 * Enables or disables the ComboBoxes for Sector and Industry Group selection.
+		 */
+		setSectorAndIgComboBoxEnabled : function (bEnabled) {
+			var oComboBox;
+			
+			oComboBox = this.getView().byId("sectorComboBox");
+			oComboBox.setEnabled(bEnabled);
+			
+			oComboBox = this.getView().byId("industryGroupComboBox");
+			oComboBox.setEnabled(bEnabled);
 		}
 	});
 });
