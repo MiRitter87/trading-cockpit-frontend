@@ -11,6 +11,8 @@ sap.ui.define([
 		initializeTypeComboBox : function(oComboBox, oResourceBundle) {
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.STOCK, "instrument.type.stock");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.ETF, "instrument.type.etf");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.SECTOR, "instrument.type.sector");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, "instrument.type.industryGroup");
 		},
 		
 		
@@ -39,6 +41,10 @@ sap.ui.define([
 				return oResourceBundle.getText("instrument.type.stock");
 			else if(sType == Constants.INSTRUMENT_TYPE.ETF)
 				return oResourceBundle.getText("instrument.type.etf");
+			else if(sType == Constants.INSTRUMENT_TYPE.SECTOR)
+				return oResourceBundle.getText("instrument.type.sector");
+				else if(sType == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP)
+				return oResourceBundle.getText("instrument.type.industryGroup");
 			else
 				return "";
 		},
