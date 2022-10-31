@@ -2,5 +2,7 @@
 	"symbol": "",
 	"type": "",
 	"stockExchange": "",
-	"name": ""
+	"name": "",
+	"sectorId": null,
+	"industryGroupId": null
 }
