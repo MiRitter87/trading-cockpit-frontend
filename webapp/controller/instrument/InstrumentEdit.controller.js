@@ -42,8 +42,7 @@ sap.ui.define([
 		onInstrumentSelectionChange : function (oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oInstrumentsModel = this.getView().getModel("instruments");
-			var oInstrument;
-			var oInstrumentModel = new JSONModel();
+			var oInstrument, wsInstrument;
 			
 			if(oSelectedItem == null) {
 				this.resetUIElements();				
@@ -51,10 +50,11 @@ sap.ui.define([
 			}
 				
 			oInstrument = InstrumentController.getInstrumentById(oSelectedItem.getKey(), oInstrumentsModel.oData.instrument);
-			oInstrumentModel.setData(oInstrument);
+			if(oInstrument != null)
+				wsInstrument = this.getInstrumentForWebService(oInstrument);
 			
 			//Set the model of the view according to the selected instrument to allow binding of the UI elements.
-			this.getView().setModel(oInstrumentModel, "selectedInstrument");
+			this.getView().setModel(wsInstrument, "selectedInstrument");
 		},
 		
 		
@@ -177,6 +177,30 @@ sap.ui.define([
 			}
 			
 			return true;
+		},
+		
+		
+		/**
+		 * Creates a representation of an Instrument that can be processed by the WebService.
+		 */
+		getInstrumentForWebService : function(oInstrument) {
+			var wsInstrument = new JSONModel();
+			
+			//Simple attributes
+			wsInstrument.setProperty("/id", oInstrument.id);
+			wsInstrument.setProperty("/symbol", oInstrument.symbol);
+			wsInstrument.setProperty("/type", oInstrument.type);
+			wsInstrument.setProperty("/stockExchange", oInstrument.stockExchange);
+			wsInstrument.setProperty("/name", oInstrument.name);
+			
+			//References
+			if(oInstrument.sector != null)
+				wsInstrument.setProperty("/sectorId", oInstrument.sector.id);
+				
+			if(oInstrument.industryGroup != null)
+				wsInstrument.setProperty("/industryGroupId", oInstrument.industryGroup.id);
+			
+			return wsInstrument;
 		}
 	});
 });
