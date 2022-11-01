@@ -75,10 +75,13 @@ sap.ui.define([
 		/**
 		 * Queries the instrument WebService for all instruments.
 		 */
-		queryInstrumentsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage) {
+		queryInstrumentsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentType) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
+			
+			if(sInstrumentType != undefined && sInstrumentType != null)
+				sQueryUrl= sQueryUrl + "?instrumentType=" + sInstrumentType;
 			
 			jQuery.ajax({
 				type : "GET", 

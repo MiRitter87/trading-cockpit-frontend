@@ -60,13 +60,17 @@
 					<f:FormContainer title="{i18n>instrumentCreate.titleSectorAndIg}">
 						<f:FormElement label="{i18n>instrument.type.sector}">
 							<f:fields>
-								<ComboBox id="sectorComboBox"/>
+								<ComboBox id="sectorComboBox" items="{path: 'sectors>/instrument/'}">
+									<core:Item key="{sectors>id}" text="{sectors>symbol} - {sectors>name}"/>
+								</ComboBox>
 							</f:fields>
 						</f:FormElement>
 						
 						<f:FormElement label="{i18n>instrument.type.industryGroup}">
 							<f:fields>
-								<ComboBox id="industryGroupComboBox"/>
+								<ComboBox id="industryGroupComboBox" items="{path: 'industryGroups>/instrument/'}">
+									<core:Item key="{industryGroups>id}" text="{industryGroups>symbol} - {industryGroups>name}"/>
+								</ComboBox>
 							</f:fields>
 						</f:FormElement>
 					</f:FormContainer>

@@ -33,6 +33,10 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			this.resetUIElements();
 			this.initializeInstrumentModel();
+			
+			//Query instruments for potential selection of sector and industry group.
+			InstrumentController.queryInstrumentsByWebService(this.querySectorsCallback, this, false, Constants.INSTRUMENT_TYPE.SECTOR);
+			InstrumentController.queryInstrumentsByWebService(this.queryIndustryGroupsCallback, this, false, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
     	},
 
 
@@ -76,6 +80,42 @@ sap.ui.define([
 				this.setSectorAndIgComboBoxEnabled(true);
 			else
 				this.setSectorAndIgComboBoxEnabled(false);
+		},
+		
+		
+		/**
+		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
+		 */
+		querySectorsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}
+			
+			oCallingController.getView().setModel(oModel, "sectors");
+		},
+		
+		
+		/**
+		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
+		 */
+		queryIndustryGroupsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}
+			
+			oCallingController.getView().setModel(oModel, "industryGroups");
 		},
 		
 		
