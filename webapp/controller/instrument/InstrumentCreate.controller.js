@@ -78,7 +78,7 @@ sap.ui.define([
 			
 			if(sSelectedType == Constants.INSTRUMENT_TYPE.STOCK)
 				this.setSectorAndIgComboBoxEnabled(true);
-			else
+			else	
 				this.setSectorAndIgComboBoxEnabled(false);
 		},
 		
@@ -184,15 +184,19 @@ sap.ui.define([
 		
 		/**
 		 * Enables or disables the ComboBoxes for Sector and Industry Group selection.
+		 * Also resets the previously selected items if the enabled status is set to false.
 		 */
 		setSectorAndIgComboBoxEnabled : function (bEnabled) {
-			var oComboBox;
+			var oSectorComboBox = this.getView().byId("sectorComboBox");
+			var oIndustryGroupComboBox = this.getView().byId("industryGroupComboBox");
 			
-			oComboBox = this.getView().byId("sectorComboBox");
-			oComboBox.setEnabled(bEnabled);
+			oSectorComboBox.setEnabled(bEnabled);
+			oIndustryGroupComboBox.setEnabled(bEnabled);
 			
-			oComboBox = this.getView().byId("industryGroupComboBox");
-			oComboBox.setEnabled(bEnabled);
+			if(bEnabled == false) {
+				oSectorComboBox.setSelectedItem(null);
+				oIndustryGroupComboBox.setSelectedItem(null);
+			}
 		}
 	});
 });
