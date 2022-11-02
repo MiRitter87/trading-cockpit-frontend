@@ -86,6 +86,8 @@ sap.ui.define([
 			this.getView().byId("nameText").setText("");
 			this.getView().byId("typeText").setText("");
 			this.getView().byId("stockExchangeText").setText("");
+			this.getView().byId("sectorText").setText("");
+			this.getView().byId("industryGroupText").setText("");
 		},
 		
 		

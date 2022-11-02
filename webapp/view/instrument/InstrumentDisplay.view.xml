@@ -41,7 +41,7 @@
 				</f:layout>
 				
 				<f:formContainers>
-					<f:FormContainer>
+					<f:FormContainer title="{i18n>instrumentDisplay.titleGeneralData}">
 						<f:formElements>
 							<f:FormElement label="{i18n>instrument.id}">
 								<f:fields>
@@ -70,6 +70,22 @@
 							<f:FormElement label="{i18n>instrument.stockExchange}">
 								<f:fields>
 									<Text id="stockExchangeText" text="{path: 'selectedInstrument>/stockExchange', formatter: '.stockExchangeTextFormatter'}"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>instrumentDisplay.titleSectorAndIg}">
+						<f:formElements>
+							<f:FormElement label="{i18n>instrument.sector}">
+								<f:fields>
+									<Text id="sectorText" text="{selectedInstrument>/sector/name}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>instrument.industryGroup}">
+								<f:fields>
+									<Text id="industryGroupText" text="{selectedInstrument>/industryGroup/name}"/>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>
