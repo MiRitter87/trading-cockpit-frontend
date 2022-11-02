@@ -60,6 +60,29 @@ sap.ui.define([
 			
 			//Set the model of the view according to the selected instrument to allow binding of the UI elements.
 			this.getView().setModel(wsInstrument, "selectedInstrument");
+			
+			this.onTypeSelectionChange();
+		},
+		
+		
+		/**
+		 * Handles the selection of an instrument type.
+		 */
+		onTypeSelectionChange : function () {
+			var oInstrumentModel;
+			var sSelectedType;
+			
+			oInstrumentModel = this.getView().getModel("selectedInstrument");
+			sSelectedType = oInstrumentModel.getProperty("/type");
+			
+			if(sSelectedType == Constants.INSTRUMENT_TYPE.STOCK) {
+				InstrumentController.setSectorAndIgComboBoxEnabled(true, 
+					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));				
+			}
+			else {				
+				InstrumentController.setSectorAndIgComboBoxEnabled(false, 
+					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));	
+			}
 		},
 		
 		
@@ -187,6 +210,9 @@ sap.ui.define([
 			
 			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
 			this.getView().byId("typeComboBox").setSelectedItem(null);
+			
+			InstrumentController.setSectorAndIgComboBoxEnabled(false, 
+					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));	
 		},
 		
 		

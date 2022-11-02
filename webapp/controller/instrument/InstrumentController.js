@@ -51,6 +51,21 @@ sap.ui.define([
 		
 		
 		/**
+		 * Enables or disables the ComboBoxes for Sector and Industry Group selection.
+		 * Also resets the previously selected items if the enabled status is set to false.
+		 */
+		setSectorAndIgComboBoxEnabled : function (bEnabled, oSectorComboBox, oIndustryGroupComboBox) {
+			oSectorComboBox.setEnabled(bEnabled);
+			oIndustryGroupComboBox.setEnabled(bEnabled);
+			
+			if(bEnabled == false) {
+				oSectorComboBox.setSelectedItem(null);
+				oIndustryGroupComboBox.setSelectedItem(null);
+			}
+		},
+		
+		
+		/**
 		 * Calls a WebService operation to create an instrument.
 		 */
 		createInstrumentByWebService : function(oInstrumentModel, callbackFunction, oCallingController) {

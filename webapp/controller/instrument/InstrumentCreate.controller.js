@@ -76,10 +76,14 @@ sap.ui.define([
 			oInstrumentModel = this.getView().getModel("newInstrument");
 			sSelectedType = oInstrumentModel.getProperty("/type");
 			
-			if(sSelectedType == Constants.INSTRUMENT_TYPE.STOCK)
-				this.setSectorAndIgComboBoxEnabled(true);
-			else	
-				this.setSectorAndIgComboBoxEnabled(false);
+			if(sSelectedType == Constants.INSTRUMENT_TYPE.STOCK) {
+				InstrumentController.setSectorAndIgComboBoxEnabled(true, 
+					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));				
+			}
+			else {				
+				InstrumentController.setSectorAndIgComboBoxEnabled(false, 
+					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));	
+			}
 		},
 		
 		
@@ -160,7 +164,8 @@ sap.ui.define([
 			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
 			this.getView().byId("typeComboBox").setSelectedItem(null);
 			
-			this.setSectorAndIgComboBoxEnabled(false);
+			InstrumentController.setSectorAndIgComboBoxEnabled(false, 
+					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));	
 		},
 		
 		
@@ -179,24 +184,6 @@ sap.ui.define([
 		showMessageOnUndefinedType : function () {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			MessageBox.error(oResourceBundle.getText("instrumentCreate.noTypeSelected"));
-		},
-		
-		
-		/**
-		 * Enables or disables the ComboBoxes for Sector and Industry Group selection.
-		 * Also resets the previously selected items if the enabled status is set to false.
-		 */
-		setSectorAndIgComboBoxEnabled : function (bEnabled) {
-			var oSectorComboBox = this.getView().byId("sectorComboBox");
-			var oIndustryGroupComboBox = this.getView().byId("industryGroupComboBox");
-			
-			oSectorComboBox.setEnabled(bEnabled);
-			oIndustryGroupComboBox.setEnabled(bEnabled);
-			
-			if(bEnabled == false) {
-				oSectorComboBox.setSelectedItem(null);
-				oIndustryGroupComboBox.setSelectedItem(null);
-			}
 		}
 	});
 });
