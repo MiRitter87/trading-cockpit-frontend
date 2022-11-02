@@ -2,10 +2,11 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"./InstrumentController",
+	"../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, InstrumentController, JSONModel, MessageToast, MessageBox) {
+], function (Controller, MainController, InstrumentController, Constants, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentEdit", {
@@ -30,6 +31,10 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query instrument data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
+			
+			//Query instruments for potential selection of sector and industry group.
+			InstrumentController.queryInstrumentsByWebService(this.querySectorsCallback, this, false, Constants.INSTRUMENT_TYPE.SECTOR);
+			InstrumentController.queryInstrumentsByWebService(this.queryIndustryGroupsCallback, this, false, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
 			
 			this.getView().setModel(null, "selectedInstrument");
 			this.resetUIElements();
@@ -100,6 +105,42 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "instruments");
+		},
+		
+		
+		/**
+		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
+		 */
+		querySectorsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}
+			
+			oCallingController.getView().setModel(oModel, "sectors");
+		},
+		
+		
+		/**
+		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
+		 */
+		queryIndustryGroupsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}
+			
+			oCallingController.getView().setModel(oModel, "industryGroups");
 		},
 		
 		
