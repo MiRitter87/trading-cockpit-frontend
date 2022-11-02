@@ -41,7 +41,7 @@
 				</f:layout>
 				
 				<f:formContainers>
-					<f:FormContainer>
+					<f:FormContainer title="{i18n>instrumentCreate.titleGeneralData}">
 						<f:formElements>
 							<f:FormElement label="{i18n>instrument.id}">
 								<f:fields>
@@ -63,7 +63,8 @@
 							
 							<f:FormElement label="{i18n>instrument.type}">
 							<f:fields>
-								<ComboBox id="typeComboBox" selectedKey="{selectedInstrument>/type}" required="true"/>
+								<ComboBox id="typeComboBox" selectedKey="{selectedInstrument>/type}" required="true"
+									selectionChange=".onTypeSelectionChange"/>
 							</f:fields>
 						</f:FormElement>
 						
@@ -73,6 +74,26 @@
 							</f:fields>
 						</f:FormElement>
 						</f:formElements>
+					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>instrumentEdit.titleSectorAndIg}">
+						<f:FormElement label="{i18n>instrument.type.sector}">
+							<f:fields>
+								<ComboBox id="sectorComboBox" items="{path: 'sectors>/instrument/'}" selectedKey="{selectedInstrument>/sectorId}">
+									<core:Item key="{sectors>id}" text="{sectors>symbol} - {sectors>name}"/>
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
+						
+						<f:FormElement label="{i18n>instrument.type.industryGroup}">
+							<f:fields>
+								<ComboBox id="industryGroupComboBox" items="{path: 'industryGroups>/instrument/'}" 
+									selectedKey="{selectedInstrument>/industryGroupId}">
+									
+									<core:Item key="{industryGroups>id}" text="{industryGroups>symbol} - {industryGroups>name}"/>
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
 					</f:FormContainer>
 				</f:formContainers>
 			</f:Form>
