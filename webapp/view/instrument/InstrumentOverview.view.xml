@@ -36,6 +36,12 @@
 					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>instrument.stockExchange}"/>
 					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>instrument.sector}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>instrument.industryGroup}"/>
+					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
@@ -45,6 +51,8 @@
 							<Text text="{instruments>name}"/>
 							<Text text="{path: 'instruments>type', formatter: '.typeTextFormatter'}"/>
 							<Text text="{path: 'instruments>stockExchange', formatter: '.stockExchangeTextFormatter'}"/>
+							<Text text="{instruments>sector/name}"/>
+							<Text text="{instruments>industryGroup/name}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
