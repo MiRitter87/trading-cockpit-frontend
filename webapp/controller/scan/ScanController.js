@@ -174,6 +174,10 @@ sap.ui.define([
 				sQueryUrl = sQueryUrl + "instrumentType=" + Constants.INSTRUMENT_TYPE.STOCK;
 			else if(sType == Constants.INSTRUMENT_TYPE.ETF)
 				sQueryUrl = sQueryUrl + "instrumentType=" + Constants.INSTRUMENT_TYPE.ETF;
+			else if(sType == Constants.INSTRUMENT_TYPE.SECTOR)
+				sQueryUrl = sQueryUrl + "instrumentType=" + Constants.INSTRUMENT_TYPE.SECTOR;
+			else if(sType == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP)
+				sQueryUrl = sQueryUrl + "instrumentType=" + Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP;
 			
 			jQuery.ajax({
 				type : "GET", 
