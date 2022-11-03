@@ -4,6 +4,7 @@
 	xmlns:core="sap.ui.core">
 	<SelectDialog
 		id="instrumentSelectionDialog"
+		growing="false"
 		multiSelect="true"
 		rememberSelections="true"
 		noDataText="{i18n>instrumentSelectionDialog.noDataText}"

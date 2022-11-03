@@ -172,6 +172,7 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			
 			if(oReturnData.data != null) {
+				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 			}
 			
