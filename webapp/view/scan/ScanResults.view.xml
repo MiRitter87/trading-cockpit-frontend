@@ -49,6 +49,12 @@
 						<Text text="{i18n>indicator.rsNumber}"/>
 					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>indicator.sectorRsNumber}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>indicator.industryGroupRsNumber}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.distanceTo52WeekHigh}"/>
 					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true">
@@ -74,6 +80,8 @@
 							<Text text="{quotations>instrument/name}"/>
 							<Text text="{path: 'quotations>instrument/type', formatter: '.typeTextFormatter'}"/>
 							<Text text="{quotations>indicator/rsNumber}"/>
+							<Text text="{quotations>indicator/rsNumberSector}"/>
+							<Text text="{quotations>indicator/rsNumberIndustryGroup}"/>
 							<Text text="{quotations>indicator/distanceTo52WeekHigh}"/>
 							<Text text="{quotations>indicator/bollingerBandWidth}"/>
 							<Text text="{quotations>indicator/volumeDifferential10Days}"/>
