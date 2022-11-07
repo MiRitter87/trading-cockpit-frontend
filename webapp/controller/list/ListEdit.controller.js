@@ -288,7 +288,12 @@ sap.ui.define([
 		 */
 		isInstrumentSelectedFormatter : function(iInstrumentId) {
 			var oSelectedList = this.getView().getModel("selectedList");
-			var aInstruments = oSelectedList.getProperty("/instrumentIds");
+			var aInstruments;
+			
+			if(oSelectedList == null)
+				return false;
+				
+			aInstruments = oSelectedList.getProperty("/instrumentIds");
 			
 			if(aInstruments == undefined)
 				return false;
