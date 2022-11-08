@@ -9,9 +9,10 @@ sap.ui.define([
 	"sap/m/MessageBox",
 	"sap/ui/model/Sorter",
 	"sap/m/TablePersoController",
-	"./ScanResultsPersoService"
+	"./ScanResultsPersoService",
+	'sap/m/library'
 ], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, Sorter, 
-	TablePersoController, ScanResultsPersoService) {
+	TablePersoController, ScanResultsPersoService, mlibrary) {
 		
 	"use strict";
 	
@@ -193,10 +194,13 @@ sap.ui.define([
 		 * Initializes the dialog for column settings.
 		 */
 		initializeColumnSettingsDialog : function() {
+			var ResetAllMode =  mlibrary.ResetAllMode;
+			
 			this._oTPC = new TablePersoController({
 				table: this.byId("quotationTable"),
 				//specify the first part of persistence ids e.g. 'demoApp-productsTable-dimensionsCol'
 				componentName: "trading-cockpit-frontend",
+				resetAllMode: ResetAllMode.ServiceReset,
 				persoService: ScanResultsPersoService
 			}).activate();
 		},

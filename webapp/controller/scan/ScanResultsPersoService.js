@@ -3,6 +3,21 @@ sap.ui.define(['sap/ui/thirdparty/jquery'],
 	"use strict";
 
 	var ScanResultsPersoService = {
+		
+		/**
+		 * Colum settings to be set when user clicks reset in Personalization dialog.
+		 */
+		oResetData : {
+			_persoSchemaVersion: "1.0",
+			aColumns : [
+				{
+					id: "trading-cockpit-frontend-quotationTable-sectorRsNumberColumn",
+					visible: false
+				}
+			]
+		},
+		
+		
 		/**
 		 * Retrieves the personalization bundle.
 T		 * This must return a jQuery Promise, which resolves in the desired table state.
