@@ -7,8 +7,12 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
-	"sap/ui/model/Sorter"
-], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, Sorter) {
+	"sap/ui/model/Sorter",
+	"sap/m/TablePersoController",
+	"./ScanResultsPersoService"
+], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, Sorter, 
+	TablePersoController, ScanResultsPersoService) {
+		
 	"use strict";
 	
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanResults", {
@@ -21,9 +25,18 @@ sap.ui.define([
 			oRouter.getRoute("scanResultsRoute").attachMatched(this._onRouteMatched, this);
 			
 			this.initializeTemplateComboBox();
+			this.initializeColumnSettingsDialog();
 			
 			InstrumentController.initializeTypeComboBox(oTypeComboBox, this.getOwnerComponent().getModel("i18n").getResourceBundle());
 			oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
+		},
+		
+		
+		/**
+		 * Handles destroying of the ScanResults view.
+		 */
+		onExit: function () {
+			this._oTPC.destroy();
 		},
 		
 		
@@ -113,7 +126,7 @@ sap.ui.define([
 		 * Handles the button pressed event of the column settings button.
 		 */
 		onColumnSettingsPressed : function() {
-			
+			this._oTPC.openDialog();
 		},
 		
 		
@@ -133,7 +146,7 @@ sap.ui.define([
 			var	mParams = oEvent.getParameters();
 			var	oBinding = oTable.getBinding("items");
 			var	sPath, bDescending,	aSorters = [];
-
+			
 			sPath = mParams.sortItem.getKey();
 			bDescending = mParams.sortDescending;
 			aSorters.push(new Sorter(sPath, bDescending));
@@ -173,6 +186,19 @@ sap.ui.define([
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE, "scanResults.template.minervini");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS, "scanResults.template.volContraction10Days");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES, "scanResults.template.breakoutCandidates");
+		},
+		
+		
+		/**
+		 * Initializes the dialog for column settings.
+		 */
+		initializeColumnSettingsDialog : function() {
+			this._oTPC = new TablePersoController({
+				table: this.byId("quotationTable"),
+				//specify the first part of persistence ids e.g. 'demoApp-productsTable-dimensionsCol'
+				componentName: "trading-cockpit-frontend",
+				persoService: ScanResultsPersoService
+			}).activate();
 		},
 		
 		

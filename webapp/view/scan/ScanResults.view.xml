@@ -37,40 +37,40 @@
 				</headerToolbar>
 				
 				<columns>
-					<Column>
+					<Column id="symbolColumn">
 						<Text text="{i18n>instrument.symbol}"/>
 					</Column>
-					<Column>
+					<Column id="nameColumn">
 						<Text text="{i18n>instrument.name}"/>
 					</Column>
-					<Column>
+					<Column id="typeColumn">
 						<Text text="{i18n>instrument.type}"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true">
+					<Column id="rsNumberColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.rsNumber}"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true">
+					<Column id="sectorRsNumberColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.sectorRsNumber}"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true">
+					<Column id="industryGroupRsNumberColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.industryGroupRsNumber}"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true">
+					<Column id="distanceTo52WeekHighColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.distanceTo52WeekHigh}"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true">
+					<Column id="bollingerBandWidthColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.bollingerBandWidth}"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true">
+					<Column id="volumeDifferential10DaysColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.volumeDifferential10Days}"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true">
+					<Column id="upDownVolumeRatioColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.upDownVolumeRatio}"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true">
+					<Column id="baseLengthWeeksColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.baseLengthWeeks}"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true">
+					<Column id="chartColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>scanResults.chart}"/>
 					</Column>
 				</columns>
