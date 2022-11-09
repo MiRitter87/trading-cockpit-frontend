@@ -5,14 +5,140 @@ sap.ui.define(['sap/ui/thirdparty/jquery'],
 	var ScanResultsPersoService = {
 		
 		/**
+		 * Initial colum settings of the Personalization dialog.
+		 */
+		oData : {
+			_persoSchemaVersion: "1.0",
+			aColumns : [
+				{
+					id: "trading-cockpit-frontend-quotationTable-symbolColumn",
+					order: 0,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-nameColumn",
+					order: 1,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-typeColumn",
+					order: 2,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-rsNumberColumn",
+					order: 3,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-sectorRsNumberColumn",
+					order: 4,
+					visible: false
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-industryGroupRsNumberColumn",
+					order: 5,
+					visible: false
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-distanceTo52WeekHighColumn",
+					order: 6,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-bollingerBandWidthColumn",
+					order: 6,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-volumeDifferential10DaysColumn",
+					order: 8,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-upDownVolumeRatioColumn",
+					order: 9,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-baseLengthWeeksColumn",
+					order: 10,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-chartColumn",
+					order: 11,
+					visible: true
+				}
+			]
+		},
+		
+		
+		/**
 		 * Colum settings to be set when user clicks reset in Personalization dialog.
 		 */
 		oResetData : {
 			_persoSchemaVersion: "1.0",
 			aColumns : [
 				{
+					id: "trading-cockpit-frontend-quotationTable-symbolColumn",
+					order: 0,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-nameColumn",
+					order: 1,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-typeColumn",
+					order: 2,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-rsNumberColumn",
+					order: 3,
+					visible: true
+				},
+				{
 					id: "trading-cockpit-frontend-quotationTable-sectorRsNumberColumn",
-					visible: false
+					order: 4,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-industryGroupRsNumberColumn",
+					order: 5,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-distanceTo52WeekHighColumn",
+					order: 6,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-bollingerBandWidthColumn",
+					order: 6,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-volumeDifferential10DaysColumn",
+					order: 8,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-upDownVolumeRatioColumn",
+					order: 9,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-baseLengthWeeksColumn",
+					order: 10,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-chartColumn",
+					order: 11,
+					visible: true
 				}
 			]
 		},
