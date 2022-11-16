@@ -101,6 +101,10 @@ sap.ui.define([
 				sTitle = oResourceBundle.getText("scanResults.template.breakoutCandidates");
 				sDescription = oResourceBundle.getText("scanResults.template.breakoutCandidates.description");
 			}
+			else if(sKey == Constants.SCAN_TEMPLATE.UP_ON_VOLUME) {
+				sTitle = oResourceBundle.getText("scanResults.template.upOnVolume");
+				sDescription = oResourceBundle.getText("scanResults.template.upOnVolume.description");
+			}
 			else {
 				MessageBox.information(oResourceBundle.getText("scanResults.noTemplateSelected"));
 				return;
@@ -187,6 +191,7 @@ sap.ui.define([
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE, "scanResults.template.minervini");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS, "scanResults.template.volContraction10Days");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES, "scanResults.template.breakoutCandidates");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.UP_ON_VOLUME, "scanResults.template.upOnVolume");
 		},
 		
 		

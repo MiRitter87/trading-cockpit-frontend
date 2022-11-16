@@ -162,6 +162,8 @@ sap.ui.define([
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS;
 			else if(sTemplate == Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES)
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES;
+			else if(sTemplate == Constants.SCAN_TEMPLATE.UP_ON_VOLUME)
+				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.UP_ON_VOLUME;
 			else
 				bNoTemplate = true;
 				
