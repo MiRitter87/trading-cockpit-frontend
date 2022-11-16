@@ -41,33 +41,38 @@ sap.ui.define(['sap/ui/thirdparty/jquery'],
 					visible: false
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-distanceTo52WeekHighColumn",
+					id: "trading-cockpit-frontend-quotationTable-performance5DaysColumn",
 					order: 6,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-distanceTo52WeekHighColumn",
+					order: 7,
 					visible: true
 				},
 				{
 					id: "trading-cockpit-frontend-quotationTable-bollingerBandWidthColumn",
-					order: 6,
-					visible: true
-				},
-				{
-					id: "trading-cockpit-frontend-quotationTable-volumeDifferential10DaysColumn",
 					order: 8,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-upDownVolumeRatioColumn",
+					id: "trading-cockpit-frontend-quotationTable-volumeDifferential10DaysColumn",
 					order: 9,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-baseLengthWeeksColumn",
+					id: "trading-cockpit-frontend-quotationTable-upDownVolumeRatioColumn",
 					order: 10,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-chartColumn",
+					id: "trading-cockpit-frontend-quotationTable-baseLengthWeeksColumn",
 					order: 11,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-chartColumn",
+					order: 12,
 					visible: true
 				}
 			]
@@ -111,33 +116,38 @@ sap.ui.define(['sap/ui/thirdparty/jquery'],
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-distanceTo52WeekHighColumn",
+					id: "trading-cockpit-frontend-quotationTable-performance5DaysColumn",
 					order: 6,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-distanceTo52WeekHighColumn",
+					order: 7,
 					visible: true
 				},
 				{
 					id: "trading-cockpit-frontend-quotationTable-bollingerBandWidthColumn",
-					order: 6,
-					visible: true
-				},
-				{
-					id: "trading-cockpit-frontend-quotationTable-volumeDifferential10DaysColumn",
 					order: 8,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-upDownVolumeRatioColumn",
+					id: "trading-cockpit-frontend-quotationTable-volumeDifferential10DaysColumn",
 					order: 9,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-baseLengthWeeksColumn",
+					id: "trading-cockpit-frontend-quotationTable-upDownVolumeRatioColumn",
 					order: 10,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-chartColumn",
+					id: "trading-cockpit-frontend-quotationTable-baseLengthWeeksColumn",
 					order: 11,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-chartColumn",
+					order: 12,
 					visible: true
 				}
 			]

@@ -55,6 +55,9 @@
 					<Column id="industryGroupRsNumberColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.industryGroupRsNumber}"/>
 					</Column>
+					<Column id="performance5DaysColumn" minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>indicator.performance5Days}"/>
+					</Column>
 					<Column id="distanceTo52WeekHighColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.distanceTo52WeekHigh}"/>
 					</Column>
@@ -83,6 +86,7 @@
 							<Text text="{quotations>indicator/rsNumber}"/>
 							<Text text="{quotations>indicator/rsNumberSector}"/>
 							<Text text="{quotations>indicator/rsNumberIndustryGroup}"/>
+							<Text text="{quotations>indicator/performance5Days}"/>
 							<Text text="{quotations>indicator/distanceTo52WeekHigh}"/>
 							<Text text="{quotations>indicator/bollingerBandWidth}"/>
 							<Text text="{quotations>indicator/volumeDifferential10Days}"/>

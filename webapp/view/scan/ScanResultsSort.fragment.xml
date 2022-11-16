@@ -8,6 +8,7 @@
 		confirm="handleSortDialogConfirm">
 		<sortItems>
 			<ViewSettingsItem text="{i18n>indicator.rsNumber}" key="indicator/rsNumber" selected="true" />
+			<ViewSettingsItem text="{i18n>indicator.performance5Days}" key="indicator/performance5Days" selected="false" />
 			<ViewSettingsItem text="{i18n>indicator.distanceTo52WeekHigh}" key="indicator/distanceTo52WeekHigh" selected="false" />
 			<ViewSettingsItem text="{i18n>indicator.bollingerBandWidth}" key="indicator/bollingerBandWidth" selected="false" />
 			<ViewSettingsItem text="{i18n>indicator.volumeDifferential10Days}" key="indicator/volumeDifferential10Days" selected="false" />
