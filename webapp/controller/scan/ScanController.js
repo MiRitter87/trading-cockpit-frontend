@@ -164,6 +164,8 @@ sap.ui.define([
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES;
 			else if(sTemplate == Constants.SCAN_TEMPLATE.UP_ON_VOLUME)
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.UP_ON_VOLUME;
+			else if(sTemplate == Constants.SCAN_TEMPLATE.DOWN_ON_VOLUME)
+				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.DOWN_ON_VOLUME;
 			else
 				bNoTemplate = true;
 				
