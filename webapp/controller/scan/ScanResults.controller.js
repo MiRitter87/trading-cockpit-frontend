@@ -10,9 +10,11 @@ sap.ui.define([
 	"sap/ui/model/Sorter",
 	"sap/m/TablePersoController",
 	"./ScanResultsPersoService",
-	'sap/m/library'
+	'sap/m/library',
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
 ], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, Sorter, 
-	TablePersoController, ScanResultsPersoService, mlibrary) {
+	TablePersoController, ScanResultsPersoService, mlibrary, Filter, FilterOperator) {
 		
 	"use strict";
 	
@@ -128,6 +130,26 @@ sap.ui.define([
 			var oQuotationData = oContext.getObject();
 			
 			this.openStockChart(oQuotationData.instrument.symbol, oQuotationData.instrument.stockExchange);
+		},
+		
+		
+		/**
+		 * Handles the search function of the table.
+		 */
+		onSearch: function (oEvent) {
+			var sValue = oEvent.getParameter("newValue");
+			var oBinding = this.getView().byId("quotationTable").getBinding("items");
+			
+			var oFilterSymbol = new Filter("instrument/symbol", FilterOperator.Contains, sValue);
+			var oFilterName = new Filter("instrument/name", FilterOperator.Contains, sValue);
+			
+			//Connect filters via logical "OR".
+			var oFilterTotal = new Filter({
+				filters: [oFilterSymbol, oFilterName],
+    			and: false
+  			});
+			
+			oBinding.filter([oFilterTotal]);
 		},
 		
 		
