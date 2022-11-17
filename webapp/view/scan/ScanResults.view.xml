@@ -44,7 +44,7 @@
 					<Column id="nameColumn">
 						<Text text="{i18n>instrument.name}"/>
 					</Column>
-					<Column id="typeColumn">
+					<Column id="typeColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>instrument.type}"/>
 					</Column>
 					<Column id="rsNumberColumn" minScreenWidth="Desktop" demandPopin="true">
