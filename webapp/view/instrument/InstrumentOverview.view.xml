@@ -16,6 +16,7 @@
 					<OverflowToolbar>
 						<Title text="{i18n>instrumentOverview.tableHeader} ({= ${instruments>/instrument/}.length})"/>
 						<ToolbarSpacer/>
+						<SearchField liveChange=".onSearch" width="10%"/>
 						<Button icon="sap-icon://delete" tooltip="{i18n>instrumentOverview.deleteSelected}" press=".onDeletePressed"/>
 					</OverflowToolbar>
 					</headerToolbar>

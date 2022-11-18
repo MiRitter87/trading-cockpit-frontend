@@ -4,8 +4,10 @@ sap.ui.define([
 	"./InstrumentController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
-	"sap/m/MessageBox"
-], function (Controller, MainController, InstrumentController, JSONModel, MessageToast, MessageBox) {
+	"sap/m/MessageBox",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
+], function (Controller, MainController, InstrumentController, JSONModel, MessageToast, MessageBox, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentOverview", {
@@ -25,6 +27,26 @@ sap.ui.define([
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
     	},
+    	
+    	
+    	/**
+		 * Handles the search function of the table.
+		 */
+		onSearch: function (oEvent) {
+			var sValue = oEvent.getParameter("newValue");
+			var oBinding = this.getView().byId("instrumentTable").getBinding("items");
+			
+			var oFilterSymbol = new Filter("symbol", FilterOperator.Contains, sValue);
+			var oFilterName = new Filter("name", FilterOperator.Contains, sValue);
+			
+			//Connect filters via logical "OR".
+			var oFilterTotal = new Filter({
+				filters: [oFilterSymbol, oFilterName],
+    			and: false
+  			});
+			
+			oBinding.filter([oFilterTotal]);
+		},
 
 
 		/**
