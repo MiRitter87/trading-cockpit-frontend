@@ -149,11 +149,14 @@
 				"pattern": "scanOverview",
 				"name": "scanOverviewRoute",
 				"target": "scanOverviewTarget"
-			}
-			, {
+			}, {
 				"pattern": "scanResults",
 				"name": "scanResultsRoute",
 				"target": "scanResultsTarget"
+			}, {
+				"pattern": "dashboardMenu",
+				"name": "dashboardMenuRoute",
+				"target": "dashboardMenuTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -269,6 +272,11 @@
             	"scanResultsTarget": {
 					"viewId": "scanResults",
 					"viewName": "scan.ScanResults",
+					"viewLevel" : 1
+            	},
+            	"dashboardMenuTarget": {
+					"viewId": "dashboardMenu",
+					"viewName": "dashboard.DashboardMenu",
 					"viewLevel" : 1
             	}
             }

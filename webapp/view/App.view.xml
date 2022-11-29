@@ -19,6 +19,7 @@
 							<MenuItem text="{i18n>navigation.menu.instrument}" icon="sap-icon://document-text" press="onInstrumentPressed" />
 							<MenuItem text="{i18n>navigation.menu.list}" icon="sap-icon://documents" press="onListPressed" />
 							<MenuItem text="{i18n>navigation.menu.scan}" icon="sap-icon://search" press="onScanPressed" />
+							<MenuItem text="{i18n>navigation.menu.dashboard}" icon="sap-icon://chart-axis" press="onDashboardPressed" />
 						</Menu>
 					</menu>
 				</MenuButton>

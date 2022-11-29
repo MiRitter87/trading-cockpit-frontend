@@ -50,6 +50,16 @@ sap.ui.define([
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			
 			oRouter.navTo("scanMenuRoute");			
+		},
+		
+		
+		/**
+		 * Handles the selection of the menu item: dashboard.
+		 */
+		onDashboardPressed : function() {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			
+			oRouter.navTo("dashboardMenuRoute");			
 		}
 	});
 });
