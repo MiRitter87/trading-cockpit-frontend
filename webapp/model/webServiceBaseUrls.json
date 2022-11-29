@@ -3,5 +3,6 @@
 	"instrument": "/trading-cockpit-backend/services/rest/instruments",
 	"list": "/trading-cockpit-backend/services/rest/lists",
 	"scan": "/trading-cockpit-backend/services/rest/scans",
-	"quotation": "/trading-cockpit-backend/services/rest/quotations"
+	"quotation": "/trading-cockpit-backend/services/rest/quotations",
+	"statistic": "/trading-cockpit-backend/services/rest/statistics"
 }
