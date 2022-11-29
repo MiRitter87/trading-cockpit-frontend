@@ -157,6 +157,10 @@
 				"pattern": "dashboardMenu",
 				"name": "dashboardMenuRoute",
 				"target": "dashboardMenuTarget"
+			}, {
+				"pattern": "dashboardStatistic",
+				"name": "dashboardStatisticRoute",
+				"target": "dashboardStatisticTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -277,6 +281,11 @@
             	"dashboardMenuTarget": {
 					"viewId": "dashboardMenu",
 					"viewName": "dashboard.DashboardMenu",
+					"viewLevel" : 1
+            	},
+            	"dashboardStatisticTarget": {
+					"viewId": "dashboardStatistic",
+					"viewName": "dashboard.DashboardStatistic",
 					"viewLevel" : 1
             	}
             }

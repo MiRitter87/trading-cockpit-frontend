@@ -10,7 +10,12 @@
 	
 	<Page>
 		<content>
-			
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.dashboard}"
+						subheader="{i18n>navigation.menu.dashboard.statistic}" press="onStatisticPressed">
+				<TileContent>
+					<ImageContent src="sap-icon://table-view" />
+				</TileContent>
+			</GenericTile>
 		</content>
 	</Page>
 </mvc:View>
