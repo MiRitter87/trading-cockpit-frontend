@@ -11,7 +11,32 @@
 	
 	<Page title="{i18n>dashboardStatistic.header}">
 		<content>
-			
+			<Table id="statisticTable" items="{path: 'statistics>/statistic/'}" mode="SingleSelectMaster">
+				<columns>
+					<Column>
+						<Text text="{i18n>statistic.date}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>statistic.advanceDeclineNumber}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>statistic.advance}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>statistic.decline}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{path: 'statistics>date', formatter: '.formatter.wsDateFormatter'}"/>
+							<Text text="{statistics>advanceDeclineNumber}"/>
+							<Text text="{statistics>numberAdvance}"/>
+							<Text text="{statistics>numberDecline}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
 		</content>
 	</Page>
 </mvc:View>
