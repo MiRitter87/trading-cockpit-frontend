@@ -6,10 +6,10 @@ sap.ui.define([
 		/**
 		 * Queries the statistic WebService for all statistics.
 		 */
-		queryStatisticsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage) {
+		queryStatisticsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sType) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/statistic");
-			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "?instrumentType=STOCK";
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "?instrumentType=" + sType;
 			
 			jQuery.ajax({
 				type : "GET", 

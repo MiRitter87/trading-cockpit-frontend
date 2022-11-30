@@ -11,6 +11,15 @@
 	
 	<Page title="{i18n>dashboardStatistic.header}">
 		<content>
+			<VBox class="sapUiSmallMarginBegin">
+				<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
+					<Label text="{i18n>instrument.type}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+					<ComboBox id="typeComboBox" required="true"/>
+				</FlexBox>
+			
+				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
+			</VBox>	
+		
 			<Table id="statisticTable" items="{path: 'statistics>/statistic/'}" mode="SingleSelectMaster">
 				<columns>
 					<Column>
