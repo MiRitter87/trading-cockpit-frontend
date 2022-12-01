@@ -11,7 +11,16 @@
 	
 	<Page title="{i18n>dashboardCharts.header}">
 		<content>
+			<VBox class="sapUiSmallMarginBegin">
+				<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
+					<Label text="{i18n>dashboardCharts.type}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+					<ComboBox id="typeComboBox" required="true"/>
+				</FlexBox>
 			
+				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
+			</VBox>
+			
+			<Image id="chartImage"/>
 		</content>
 	</Page>
 </mvc:View>
