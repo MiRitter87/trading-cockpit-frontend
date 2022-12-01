@@ -161,6 +161,10 @@
 				"pattern": "dashboardStatistic",
 				"name": "dashboardStatisticRoute",
 				"target": "dashboardStatisticTarget"
+			}, {
+				"pattern": "dashboardCharts",
+				"name": "dashboardChartsRoute",
+				"target": "dashboardChartsTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -286,6 +290,11 @@
             	"dashboardStatisticTarget": {
 					"viewId": "dashboardStatistic",
 					"viewName": "dashboard.DashboardStatistic",
+					"viewLevel" : 1
+            	},
+            	"dashboardChartsTarget": {
+					"viewId": "dashboardCharts",
+					"viewName": "dashboard.DashboardCharts",
 					"viewLevel" : 1
             	}
             }
