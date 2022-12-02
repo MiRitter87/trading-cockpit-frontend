@@ -20,7 +20,9 @@
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
 			</VBox>
 			
-			<Image id="chartImage"/>
+			<ScrollContainer>
+				<Image id="chartImage"/>
+			</ScrollContainer>
 		</content>
 	</Page>
 </mvc:View>
