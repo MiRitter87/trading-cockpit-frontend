@@ -23,7 +23,11 @@ sap.ui.define([
 			var sSelectedType = oTypeComboBox.getSelectedKey();
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/statistic");
-			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/chart?chartType=" + sSelectedType;
+			var sQueryUrl;
+			
+			//The randomDate parameter is not evaluated by the backend. 
+			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.
+			sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/chart?chartType=" + sSelectedType + "&randomDate=" + new Date().getTime();
 			
 			if(sSelectedType != "")
 				oImage.setSrc(sQueryUrl);
