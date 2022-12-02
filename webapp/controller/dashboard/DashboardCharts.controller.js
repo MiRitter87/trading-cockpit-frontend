@@ -18,7 +18,17 @@ sap.ui.define([
     	 * Handles the button press event of the refresh chart button.
     	 */
     	onRefreshPressed : function() {
-			//http://127.0.0.1:8080/trading-cockpit-backend/services/rest/statistics/chart?chartType=ADVANCE_DECLINE_NUMBER
+			var oImage = this.getView().byId("chartImage");
+			var oTypeComboBox = this.getView().byId("typeComboBox");
+			var sSelectedType = oTypeComboBox.getSelectedKey();
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/statistic");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/chart?chartType=" + sSelectedType;
+			
+			if(sSelectedType != "")
+				oImage.setSrc(sQueryUrl);
+			else
+				oImage.setSrc(null);
 		},
 		
 		
