@@ -53,32 +53,9 @@ sap.ui.define([
     	 */
     	onRefreshPressed : function() {
 			var oImage = this.getView().byId("chartImage");
-			var oTypeComboBox = this.getView().byId("typeComboBox");
-			var sSelectedType = oTypeComboBox.getSelectedKey();
-			var sServerAddress = MainController.getServerAddress();
-			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/statistic");
-			var sQueryUrl;
+			var sChartUrl = this.getChartUrl();
 			
-			//The randomDate parameter is not evaluated by the backend. 
-			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.
-			sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/chart?chartType=" + sSelectedType + "&randomDate=" + new Date().getTime();
-			
-			if(sSelectedType != "")
-				oImage.setSrc(sQueryUrl);
-			else
-				oImage.setSrc(null);
-		},
-		
-		
-		/**
-		 * Initializes the ComboBox of chart type.
-		 */
-		initializeTypeComboBox : function () {
-			var oComboBox = this.getView().byId("typeComboBox");
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
-				Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER, "dashboardCharts.type.advanceDeclineNumber");
+			oImage.setSrc(sChartUrl);
 		},
 		
 		
@@ -97,6 +74,46 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "lists");
+		},
+		
+		
+		/**
+		 * Initializes the ComboBox of chart type.
+		 */
+		initializeTypeComboBox : function () {
+			var oComboBox = this.getView().byId("typeComboBox");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER, "dashboardCharts.type.advanceDeclineNumber");
+		},
+		
+		
+		/**
+		 * Determines the URL of the statistic chart based on the selected chart type and optional additional parameters.
+		 */
+		getChartUrl : function() {
+			var oTypeComboBox = this.getView().byId("typeComboBox");
+			var oListComboBox = this.getView().byId("listComboBox");
+			var sSelectedType = oTypeComboBox.getSelectedKey();
+			var sSelectedListId = oListComboBox.getSelectedKey();
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/statistic");
+			var sChartUrl;
+			
+			if(sSelectedType == "")
+				return null;
+			
+			sChartUrl = sServerAddress + sWebServiceBaseUrl + "/chart?chartType=" + sSelectedType;
+			
+			if(sSelectedListId != "")
+				sChartUrl = sChartUrl + "&listId=" + sSelectedListId;
+			
+			//The randomDate parameter is not evaluated by the backend. 
+			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.
+			sChartUrl = sChartUrl  + "&randomDate=" + new Date().getTime();
+			
+			return sChartUrl;
 		}
 	});
 });
