@@ -14,7 +14,11 @@
 			<VBox class="sapUiSmallMarginBegin">
 				<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
 					<Label text="{i18n>dashboardCharts.type}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
-					<ComboBox id="typeComboBox" required="true"/>
+					<ComboBox id="typeComboBox" required="true" selectionChange=".onTypeSelectionChange"/>
+					
+					<!-- Additional UI elements that are used depending on the selected chart type. -->
+					<Label id="listLabel" text="{i18n>dashboardCharts.list}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd" visible="false"/>
+					<ComboBox id="listComboBox" required="false" visible="false"/>
 				</FlexBox>
 			
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />

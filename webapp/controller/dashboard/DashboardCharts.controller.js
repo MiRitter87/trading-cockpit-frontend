@@ -15,6 +15,25 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the selection of a chart type.
+		 */
+		onTypeSelectionChange : function (oControlEvent) {
+			var oSelectedItem = oControlEvent.getParameters().selectedItem;
+			var oListLabel = this.getView().byId("listLabel");
+			var oListComboBox = this.getView().byId("listComboBox");
+			
+			if(oSelectedItem == null) {
+				oListLabel.setVisible(false);
+				oListComboBox.setVisible(false);
+			}
+			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER) {
+				oListLabel.setVisible(true);
+				oListComboBox.setVisible(true);
+			}
+		},
+		
+		
+		/**
     	 * Handles the button press event of the refresh chart button.
     	 */
     	onRefreshPressed : function() {
