@@ -18,7 +18,9 @@
 					
 					<!-- Additional UI elements that are used depending on the selected chart type. -->
 					<Label id="listLabel" text="{i18n>dashboardCharts.list}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd" visible="false"/>
-					<ComboBox id="listComboBox" required="false" visible="false"/>
+					<ComboBox id="listComboBox" items="{path: 'lists>/list/'}" required="false" visible="false">
+						<core:Item key="{lists>id}" text="{lists>id} - {lists>name}"/>
+					</ComboBox>
 				</FlexBox>
 			
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
