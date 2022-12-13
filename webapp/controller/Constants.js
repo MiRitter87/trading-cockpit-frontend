@@ -11,7 +11,8 @@ sap.ui.define([
 			TSX: 'TSX',
 			TSXV: 'TSXV',
 			CSE: 'CSE',
-			NYSE: 'NYSE'			
+			NYSE: 'NYSE',
+			LSE: 'LSE'
 		},
 		
 		INSTRUMENT_TYPE: {

@@ -48,6 +48,7 @@ sap.ui.define([
 			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.TSXV, "stockExchange.tsxv");
 			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.CSE, "stockExchange.cse");
 			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.NYSE, "stockExchange.nyse");
+			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.LSE, "stockExchange.lse");
 		},
 		
 		
@@ -75,6 +76,8 @@ sap.ui.define([
 				return oResourceBundle.getText("stockExchange.tsxv");
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.CSE)
 				return oResourceBundle.getText("stockExchange.cse");
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.LSE)
+				return oResourceBundle.getText("stockExchange.lse");
 			else
 				return "";
 		},

@@ -259,6 +259,9 @@ sap.ui.define([
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.CSE) {
 				sChartLink = sChartLink.replace("{exchange}", ".CA");
 			}
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.LSE) {
+				sChartLink = sChartLink.replace("{exchange}", ".L");
+			}
 					
 			window.open(sChartLink, '_blank');
 		},

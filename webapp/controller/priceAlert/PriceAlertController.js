@@ -93,6 +93,10 @@ sap.ui.define([
 				return "CAD";
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSXV)
 				return "CAD";
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.CSE)
+				return "CAD";
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.LSE)
+				return "GBP";
 			else
 				return null;
 		},
