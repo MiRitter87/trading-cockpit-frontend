@@ -95,7 +95,8 @@
 							<Text text="{quotations>indicator/bollingerBandWidth}"/>
 							<Text text="{quotations>indicator/volumeDifferential10Days}"/>
 							<Text text="{quotations>indicator/upDownVolumeRatio}"/>
-							<Text text="{quotations>indicator/liquidity20Days}"/>
+							<Text text="{	parts: ['quotations>indicator/liquidity20Days', 'quotations>currency'],
+											type: 'sap.ui.model.type.Currency'}"/>
 							<Text text="{quotations>indicator/baseLengthWeeks}"/>
 							<Button icon="sap-icon://business-objects-experience" press=".onChartPressed" tooltip="{i18n>scanResults.chart.tooltip}"/>
 						</cells>
