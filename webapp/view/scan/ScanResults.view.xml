@@ -71,6 +71,9 @@
 					<Column id="upDownVolumeRatioColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.upDownVolumeRatio}"/>
 					</Column>
+					<Column id="liquidityColumn" minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>indicator.liquidity}"/>
+					</Column>
 					<Column id="baseLengthWeeksColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.baseLengthWeeks}"/>
 					</Column>
@@ -92,6 +95,7 @@
 							<Text text="{quotations>indicator/bollingerBandWidth}"/>
 							<Text text="{quotations>indicator/volumeDifferential10Days}"/>
 							<Text text="{quotations>indicator/upDownVolumeRatio}"/>
+							<Text text="{quotations>indicator/liquidity20Days}"/>
 							<Text text="{quotations>indicator/baseLengthWeeks}"/>
 							<Button icon="sap-icon://business-objects-experience" press=".onChartPressed" tooltip="{i18n>scanResults.chart.tooltip}"/>
 						</cells>

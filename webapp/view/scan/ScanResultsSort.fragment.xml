@@ -13,6 +13,7 @@
 			<ViewSettingsItem text="{i18n>indicator.bollingerBandWidth}" key="indicator/bollingerBandWidth" selected="false" />
 			<ViewSettingsItem text="{i18n>indicator.volumeDifferential10Days}" key="indicator/volumeDifferential10Days" selected="false" />
 			<ViewSettingsItem text="{i18n>indicator.upDownVolumeRatio}" key="indicator/upDownVolumeRatio" selected="false" />
+			<ViewSettingsItem text="{i18n>indicator.liquidity}" key="indicator/liquidity20Days" selected="false" />
 			<ViewSettingsItem text="{i18n>indicator.baseLengthWeeks}" key="indicator/baseLengthWeeks" selected="false" />
 		</sortItems>
 	</ViewSettingsDialog>

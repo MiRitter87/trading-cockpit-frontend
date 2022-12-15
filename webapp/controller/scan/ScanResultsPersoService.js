@@ -66,13 +66,18 @@ sap.ui.define(['sap/ui/thirdparty/jquery'],
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-baseLengthWeeksColumn",
+					id: "trading-cockpit-frontend-quotationTable-liquidityColumn",
 					order: 11,
+					visible: false
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-baseLengthWeeksColumn",
+					order: 12,
 					visible: true
 				},
 				{
 					id: "trading-cockpit-frontend-quotationTable-chartColumn",
-					order: 12,
+					order: 13,
 					visible: true
 				}
 			]
@@ -141,13 +146,18 @@ sap.ui.define(['sap/ui/thirdparty/jquery'],
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-baseLengthWeeksColumn",
+					id: "trading-cockpit-frontend-quotationTable-liquidityColumn",
 					order: 11,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-chartColumn",
+					id: "trading-cockpit-frontend-quotationTable-baseLengthWeeksColumn",
 					order: 12,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-chartColumn",
+					order: 13,
 					visible: true
 				}
 			]
