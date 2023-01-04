@@ -105,13 +105,13 @@ sap.ui.define([
 		 * Gets the price alert of the FeedListItem on which the action was performed.
 		 */
 		getPriceAlertForAction : function (oEvent) {
-			var oPriceAlertModel = new JSONModel();
+			var oPriceAlertModel;
 			
 			var oFeedListItem = oEvent.getSource();
 			var oContext = oFeedListItem.getBindingContext("priceAlerts");
 			var oPriceAlert = oContext.getObject();
 			
-			oPriceAlertModel.setData(oPriceAlert);
+			oPriceAlertModel = PriceAlertController.getPriceAlertForWebService(oPriceAlert);
 			
 			return oPriceAlertModel;
 		},

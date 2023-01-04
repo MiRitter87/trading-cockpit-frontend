@@ -1,7 +1,8 @@
 sap.ui.define([
 	"../MainController",
-	"../Constants"
-], function (MainController, Constants) {
+	"../Constants",
+	"sap/ui/model/json/JSONModel"
+], function (MainController, Constants, JSONModel) {
 	"use strict";
 	return {
 		/**
@@ -99,6 +100,27 @@ sap.ui.define([
 				return "GBP";
 			else
 				return null;
+		},
+		
+		
+		/**
+		 * Creates a representation of a price alert that can be processed by the WebService.
+		 */
+		getPriceAlertForWebService : function(oPriceAlert) {
+			var wsPriceAlert = new JSONModel();
+			
+			wsPriceAlert.setProperty("/id", oPriceAlert.id);
+			wsPriceAlert.setProperty("/alertType", oPriceAlert.alertType);
+			wsPriceAlert.setProperty("/price", oPriceAlert.price);
+			wsPriceAlert.setProperty("/currency", oPriceAlert.currency);
+			wsPriceAlert.setProperty("/triggerDistancePercent", oPriceAlert.triggerDistancePercent);
+			wsPriceAlert.setProperty("/triggerTime", oPriceAlert.triggerTime);
+			wsPriceAlert.setProperty("/confirmationTime", oPriceAlert.confirmationTime);
+			wsPriceAlert.setProperty("/lastStockQuoteTime", oPriceAlert.lastStockQuoteTime);
+			
+			wsPriceAlert.setProperty("/instrumentId", oPriceAlert.instrument.id);
+			
+			return wsPriceAlert;
 		},
 		
 		

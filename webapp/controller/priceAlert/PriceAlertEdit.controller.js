@@ -55,7 +55,7 @@ sap.ui.define([
 				
 			oPriceAlert = PriceAlertController.getPriceAlertById(oSelectedItem.getKey(), oPriceAlertsModel.oData.priceAlert);
 			if(oPriceAlert != null)
-				wsPriceAlert = this.getPriceAlertForWebService(oPriceAlert);
+				wsPriceAlert = PriceAlertController.getPriceAlertForWebService(oPriceAlert);
 			
 			//Set the model of the view according to the selected price alert to allow binding of the UI elements.
 			this.getView().setModel(wsPriceAlert, "selectedPriceAlert");
@@ -245,27 +245,6 @@ sap.ui.define([
 			}
 			
 			return true;
-		},
-		
-		
-		/**
-		 * Creates a representation of a price alert that can be processed by the WebService.
-		 */
-		getPriceAlertForWebService : function(oPriceAlert) {
-			var wsPriceAlert = new JSONModel();
-			
-			wsPriceAlert.setProperty("/id", oPriceAlert.id);
-			wsPriceAlert.setProperty("/alertType", oPriceAlert.alertType);
-			wsPriceAlert.setProperty("/price", oPriceAlert.price);
-			wsPriceAlert.setProperty("/currency", oPriceAlert.currency);
-			wsPriceAlert.setProperty("/triggerDistancePercent", oPriceAlert.triggerDistancePercent);
-			wsPriceAlert.setProperty("/triggerTime", oPriceAlert.triggerTime);
-			wsPriceAlert.setProperty("/confirmationTime", oPriceAlert.confirmationTime);
-			wsPriceAlert.setProperty("/lastStockQuoteTime", oPriceAlert.lastStockQuoteTime);
-			
-			wsPriceAlert.setProperty("/instrumentId", oPriceAlert.instrument.id);
-			
-			return wsPriceAlert;
-		},
+		}
 	});
 });
