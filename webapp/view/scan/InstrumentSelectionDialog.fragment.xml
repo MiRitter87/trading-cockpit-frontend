@@ -14,7 +14,8 @@
 		confirm=".onDialogClose"
 		cancel=".onDialogClose"
 		items="{
-			path: 'quotations>/quotation'
+			path: 'quotations>/quotation',
+			sorter: {path: 'instrument/name'}
 		}">
 		<StandardListItem
 			title="{quotations>instrument/symbol}"
