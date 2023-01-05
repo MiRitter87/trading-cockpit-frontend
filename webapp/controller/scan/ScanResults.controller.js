@@ -174,6 +174,38 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the closing of the SelectDialog for Instrument comparison.
+		 */
+		onCompareDialogClose: function (oEvent) {
+			var aContexts = oEvent.getParameter("selectedContexts");
+			var oBinding = this.getView().byId("quotationTable").getBinding("items");
+			var aFilterArray = new Array();
+			var oSingleFilter, oTotalFilter;
+			
+			if (aContexts && aContexts.length) {
+				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
+					var oContext = aContexts[iIndex];
+					
+					//Single results are compared by their Quotation ID.
+					oSingleFilter = new Filter("id", FilterOperator.EQ, oContext.getObject().id);
+					aFilterArray.push(oSingleFilter);
+				}
+				
+				//Connect multiple filters of single results via logical "OR".
+				var oTotalFilter = new Filter({
+					filters: aFilterArray,
+	    			and: false
+	  			});
+			}
+			
+			if(aFilterArray.length > 0)
+				oBinding.filter([oTotalFilter]);
+			else		
+				oBinding.filter([]);
+		},
+		
+		
+		/**
 		 * Handles the button pressed event of the compare instruments button.
 		 */
 		onComparePressed: function () {

@@ -11,8 +11,8 @@
 		noDataText="{i18n>instrumentSelectionDialog.noDataText}"
 		title="{i18n>instrumentSelectionDialog.title}"
 		search=".onCompareSearch"
-		confirm=".onDialogClose"
-		cancel=".onDialogClose"
+		confirm=".onCompareDialogClose"
+		cancel=".onCompareDialogClose"
 		items="{
 			path: 'quotations>/quotation',
 			sorter: {path: 'instrument/name'}
