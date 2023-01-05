@@ -1,0 +1,25 @@
+<!DOCTYPE xml>
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		id="instrumentSelectionDialog"
+		growing="false"
+		multiSelect="true"
+		rememberSelections="true"
+		showClearButton="true"
+		noDataText="{i18n>instrumentSelectionDialog.noDataText}"
+		title="{i18n>instrumentSelectionDialog.title}"
+		search=".onSearch"
+		confirm=".onDialogClose"
+		cancel=".onDialogClose"
+		items="{
+			path: 'quotations>/quotation'
+		}">
+		<StandardListItem
+			title="{quotations>instrument/symbol}"
+			description="{quotations>instrument/name}"
+			info="{path: 'quotations>instrument/type', formatter: '.typeTextFormatter'}"
+			type="Active" />
+	</SelectDialog>
+</core:FragmentDefinition>
