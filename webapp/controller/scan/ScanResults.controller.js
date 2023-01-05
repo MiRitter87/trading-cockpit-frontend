@@ -134,11 +134,31 @@ sap.ui.define([
 		
 		
 		/**
-		 * Handles the search function of the table.
+		 * Handles the search function of the scan results table.
 		 */
 		onSearch: function (oEvent) {
 			var sValue = oEvent.getParameter("newValue");
 			var oBinding = this.getView().byId("quotationTable").getBinding("items");
+			
+			var oFilterSymbol = new Filter("instrument/symbol", FilterOperator.Contains, sValue);
+			var oFilterName = new Filter("instrument/name", FilterOperator.Contains, sValue);
+			
+			//Connect filters via logical "OR".
+			var oFilterTotal = new Filter({
+				filters: [oFilterSymbol, oFilterName],
+    			and: false
+  			});
+			
+			oBinding.filter([oFilterTotal]);
+		},
+		
+		
+		/**
+		 * Handles the search function in the SelectDialog for Instrument comparison.
+		 */
+		onCompareSearch: function (oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oBinding = oEvent.getParameter("itemsBinding");
 			
 			var oFilterSymbol = new Filter("instrument/symbol", FilterOperator.Contains, sValue);
 			var oFilterName = new Filter("instrument/name", FilterOperator.Contains, sValue);
