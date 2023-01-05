@@ -154,6 +154,14 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the button pressed event of the compare instruments button.
+		 */
+		onComparePressed: function () {
+			
+		},
+		
+		
+		/**
 		 * Handles the button pressed event of the column settings button.
 		 */
 		onColumnSettingsPressed : function() {
