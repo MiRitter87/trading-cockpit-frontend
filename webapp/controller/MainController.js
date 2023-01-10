@@ -11,10 +11,15 @@ sap.ui.define([
 		 */
 		openFragmentAsPopUp : function (oController, sName) {
 			var oView = oController.getView();
+			var oDialogOfMap;
 			
-			//create dialog lazily
-			if (!oController.pDialog) {
-				oController.pDialog = Fragment.load({
+			if(!oController.oDialogMap)
+				oController.oDialogMap = new Map();
+				
+			oDialogOfMap = oController.oDialogMap.get(sName);
+			
+			if(oDialogOfMap === undefined) {
+				oDialogOfMap = Fragment.load({
 					id: oView.getId(),
 					name: sName,
 					controller: oController
@@ -23,9 +28,11 @@ sap.ui.define([
 					oView.addDependent(oDialog);
 					return oDialog;
 				});
+				
+				oController.oDialogMap.set(sName, oDialogOfMap);				
 			}
-
-			oController.pDialog.then(function(oDialog) {
+			
+			oDialogOfMap.then(function(oDialog) {
 				oDialog.open();
 			});
 		},
