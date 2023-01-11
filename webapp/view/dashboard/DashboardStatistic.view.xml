@@ -34,6 +34,9 @@
 					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>statistic.decline}"/>
 					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>statistic.percentAboveSma50}"/>
+					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
@@ -42,6 +45,7 @@
 							<Text text="{statistics>advanceDeclineNumber}"/>
 							<Text text="{statistics>numberAdvance}"/>
 							<Text text="{statistics>numberDecline}"/>
+							<Text text="{statistics>percentAboveSma50}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
