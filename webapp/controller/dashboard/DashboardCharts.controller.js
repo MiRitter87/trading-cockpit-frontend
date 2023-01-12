@@ -41,7 +41,9 @@ sap.ui.define([
 				oListLabel.setVisible(false);
 				oListComboBox.setVisible(false);
 			}
-			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER) {
+			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER || 
+				oSelectedItem.getKey() == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50) {
+					
 				oListLabel.setVisible(true);
 				oListComboBox.setVisible(true);
 			}
@@ -86,6 +88,9 @@ sap.ui.define([
 			
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER, "dashboardCharts.type.advanceDeclineNumber");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50, "dashboardCharts.type.instrumentsAboveSma50");
 		},
 		
 		
