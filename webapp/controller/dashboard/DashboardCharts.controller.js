@@ -3,9 +3,10 @@ sap.ui.define([
 	"../MainController",
 	"../Constants",
 	"../list/ListController",
+	"../instrument/InstrumentController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (Controller, MainController, Constants, ListController, JSONModel, MessageToast) {
+], function (Controller, MainController, Constants, ListController, InstrumentController, JSONModel, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.dashboard.DashboardCharts", {
@@ -26,6 +27,7 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ListController.queryListsByWebService(this.queryListsCallback, this, false);
+			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
     	},
 		
 		
@@ -88,6 +90,25 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "lists");
+		},
+		
+		
+		/**
+		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
+		 */
+		queryInstrumentsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setSizeLimit(300);
+				oModel.setData(oReturnData.data);
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}
+			
+			oCallingController.getView().setModel(oModel, "instruments");
 		},
 		
 		
