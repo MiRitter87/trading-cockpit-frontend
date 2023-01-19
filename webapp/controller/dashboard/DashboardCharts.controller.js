@@ -5,8 +5,10 @@ sap.ui.define([
 	"../list/ListController",
 	"../instrument/InstrumentController",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
-], function (Controller, MainController, Constants, ListController, InstrumentController, JSONModel, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
+], function (Controller, MainController, Constants, ListController, InstrumentController, JSONModel, MessageToast, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.dashboard.DashboardCharts", {
@@ -58,6 +60,8 @@ sap.ui.define([
 				oInstrumentComboBox.setSelectedKey(null);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.DISTRIBUTION_DAYS) {
+				this.applyFilterToInstrumentsComboBox();
+				
 				oListLabel.setVisible(false);
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(true);
@@ -164,6 +168,28 @@ sap.ui.define([
 			sChartUrl = sChartUrl  + "&randomDate=" + new Date().getTime();
 			
 			return sChartUrl;
+		},
+		
+		
+		/**
+		 * Applies a Filter to the ComboBox for Instrument selection.
+		 * Only Instruments of Type Sector, Industry Group or ETF are being displayed.
+		 */
+		applyFilterToInstrumentsComboBox : function () {
+			var oBinding = this.getView().byId("instrumentComboBox").getBinding("items");
+			var oFilterSector, oFilterIndustryGroup, oFilterEtf, oFilterTotal;
+			
+			var oFilterSector = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.SECTOR);
+			var oFilterIndustryGroup = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
+			var oFilterEtf = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.ETF);
+			
+			//Connect filters via logical "OR".
+			var oFilterTotal = new Filter({
+				filters: [oFilterSector, oFilterIndustryGroup, oFilterEtf],
+    			and: false
+  			});
+			
+			oBinding.filter([oFilterTotal]);
 		}
 	});
 });
