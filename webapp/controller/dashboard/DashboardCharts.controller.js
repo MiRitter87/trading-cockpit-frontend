@@ -36,16 +36,28 @@ sap.ui.define([
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oListLabel = this.getView().byId("listLabel");
 			var oListComboBox = this.getView().byId("listComboBox");
+			var oInstrumentLabel = this.getView().byId("instrumentLabel");
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			
 			if(oSelectedItem == null) {
 				oListLabel.setVisible(false);
 				oListComboBox.setVisible(false);
+				oInstrumentLabel.setVisible(false);
+				oInstrumentComboBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER || 
 				oSelectedItem.getKey() == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50) {
 					
 				oListLabel.setVisible(true);
 				oListComboBox.setVisible(true);
+				oInstrumentLabel.setVisible(false);
+				oInstrumentComboBox.setVisible(false);
+			}
+			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.DISTRIBUTION_DAYS) {
+				oListLabel.setVisible(false);
+				oListComboBox.setVisible(false);
+				oInstrumentLabel.setVisible(true);
+				oInstrumentComboBox.setVisible(true);
 			}
 		},
 		
@@ -91,6 +103,9 @@ sap.ui.define([
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50, "dashboardCharts.type.instrumentsAboveSma50");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_TYPE.DISTRIBUTION_DAYS, "dashboardCharts.type.distributionDays");
 		},
 		
 		

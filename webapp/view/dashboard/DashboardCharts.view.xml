@@ -17,9 +17,17 @@
 					<ComboBox id="typeComboBox" required="true" selectionChange=".onTypeSelectionChange"/>
 					
 					<!-- Additional UI elements that are used depending on the selected chart type. -->
+					<!-- Lists can be selected when determining A/D number and instruments above SMA(50) -->
 					<Label id="listLabel" text="{i18n>dashboardCharts.list}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd" visible="false"/>
 					<ComboBox id="listComboBox" items="{path: 'lists>/list/'}" required="false" visible="false">
 						<core:Item key="{lists>id}" text="{lists>id} - {lists>name}"/>
+					</ComboBox>
+					
+					<!-- Instruments can be selected when determining Distribution Days -->
+					<Label id="instrumentLabel" text="{i18n>dashboardCharts.instrument}" 
+						class="sapUiMediumMarginBegin sapUiSmallMarginEnd" visible="false"/>
+					<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}" required="false" visible="false">
+						<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
 					</ComboBox>
 				</FlexBox>
 			
