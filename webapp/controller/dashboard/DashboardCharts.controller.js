@@ -54,12 +54,16 @@ sap.ui.define([
 				oListComboBox.setVisible(true);
 				oInstrumentLabel.setVisible(false);
 				oInstrumentComboBox.setVisible(false);
+				
+				oInstrumentComboBox.setSelectedKey(null);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.DISTRIBUTION_DAYS) {
 				oListLabel.setVisible(false);
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(true);
 				oInstrumentComboBox.setVisible(true);
+				
+				oListComboBox.setSelectedKey(null);
 			}
 		},
 		
@@ -136,8 +140,10 @@ sap.ui.define([
 		getChartUrl : function() {
 			var oTypeComboBox = this.getView().byId("typeComboBox");
 			var oListComboBox = this.getView().byId("listComboBox");
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var sSelectedType = oTypeComboBox.getSelectedKey();
 			var sSelectedListId = oListComboBox.getSelectedKey();
+			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/statistic");
 			var sChartUrl;
@@ -149,6 +155,9 @@ sap.ui.define([
 			
 			if(sSelectedListId != "")
 				sChartUrl = sChartUrl + "&listId=" + sSelectedListId;
+				
+			if(sSelectedInstrumentId != "")
+				sChartUrl = sChartUrl + "&instrumentId=" + sSelectedInstrumentId;
 			
 			//The randomDate parameter is not evaluated by the backend. 
 			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.
