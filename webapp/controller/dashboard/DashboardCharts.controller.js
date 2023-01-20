@@ -5,10 +5,11 @@ sap.ui.define([
 	"../list/ListController",
 	"../instrument/InstrumentController",
 	"sap/ui/model/json/JSONModel",
+	"sap/m/MessageBox",
 	"sap/m/MessageToast",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Controller, MainController, Constants, ListController, InstrumentController, JSONModel, MessageToast, Filter, FilterOperator) {
+], function (Controller, MainController, Constants, ListController, InstrumentController, JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.dashboard.DashboardCharts", {
@@ -77,9 +78,17 @@ sap.ui.define([
     	 */
     	onRefreshPressed : function() {
 			var oImage = this.getView().byId("chartImage");
-			var sChartUrl = this.getChartUrl();
+			var bIsInputValid = this.isInputValid();
+			var sChartUrl;
 			
-			oImage.setSrc(sChartUrl);
+			if(bIsInputValid) {
+				sChartUrl = this.getChartUrl();
+				oImage.setSrc(sChartUrl);
+			}
+			else {				
+				oImage.setSrc(null);
+			}
+			
 		},
 		
 		
@@ -190,6 +199,25 @@ sap.ui.define([
   			});
 			
 			oBinding.filter([oFilterTotal]);
+		},
+		
+		
+		/**
+		 * Validates the user input. Prompts messages in input is not valid.
+		 */
+		isInputValid : function () {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oTypeComboBox = this.getView().byId("typeComboBox");
+			var sSelectedType = oTypeComboBox.getSelectedKey();
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
+			
+			if(sSelectedType == Constants.CHART_TYPE.DISTRIBUTION_DAYS && sSelectedInstrumentId == "") {
+				MessageBox.error(oResourceBundle.getText("dashboardCharts.noInstrumentSelected"));
+				return false;
+			}
+			
+			return true;
 		}
 	});
 });
