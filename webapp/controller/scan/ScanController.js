@@ -62,6 +62,19 @@ sap.ui.define([
 				return "";
 		},
 		
+		
+		/**
+		 * Returns the localized text of the given completion status.
+		 */
+		getLocalizedCompletionStatusText : function(sStatus, oResourceBundle) {
+			if(sStatus == Constants.SCAN_COMPLETION_STATUS.COMPLETE)
+				return oResourceBundle.getText("scan.completionStatus.complete");
+			else if(sStatus == Constants.SCAN_COMPLETION_STATUS.INCOMPLETE)
+				return oResourceBundle.getText("scan.completionStatus.incomplete");
+			else
+				return "";
+		},
+		
 				
 		/**
 		 * Calls a WebService operation to create a scan.

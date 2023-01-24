@@ -85,6 +85,14 @@ sap.ui.define([
 		
 		
 		/**
+		 * Formatter of the completion status text.
+		 */
+		completionStatusTextFormatter: function(sStatus) {
+			return ScanController.getLocalizedCompletionStatusText(sStatus, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		},
+		
+		
+		/**
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
@@ -96,6 +104,7 @@ sap.ui.define([
 			this.getView().byId("descriptionText").setText("");
 			this.getView().byId("lastScanText").setText("");
 			this.getView().byId("executionStatusText").setText("");
+			this.getView().byId("completionStatusText").setText("");
 			this.getView().byId("progressText").setText("");
 			
 			this.getView().byId("listList").destroyItems();

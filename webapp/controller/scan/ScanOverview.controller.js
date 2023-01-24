@@ -199,6 +199,14 @@ sap.ui.define([
 		 */
 		executionStatusTextFormatter: function(sStatus) {
 			return ScanController.getLocalizedExecutionStatusText(sStatus, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		},
+		
+		
+		/**
+		 * Formatter of the completion status text.
+		 */
+		completionStatusTextFormatter: function(sStatus) {
+			return ScanController.getLocalizedCompletionStatusText(sStatus, this.getOwnerComponent().getModel("i18n").getResourceBundle());
 		}
 	});
 });

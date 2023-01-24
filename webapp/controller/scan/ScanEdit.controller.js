@@ -234,6 +234,7 @@ sap.ui.define([
 			this.getView().byId("descriptionTextArea").setValue("");
 			this.getView().byId("lastScanText").setText("");
 			this.getView().byId("executionStatusText").setText("");
+			this.getView().byId("completionStatusText").setText("");
 			this.getView().byId("progressText").setText("");
 		},
 		
@@ -270,6 +271,14 @@ sap.ui.define([
 		 */
 		executionStatusTextFormatter: function(sStatus) {
 			return ScanController.getLocalizedExecutionStatusText(sStatus, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		},
+		
+		
+		/**
+		 * Formatter of the completion status text.
+		 */
+		completionStatusTextFormatter: function(sStatus) {
+			return ScanController.getLocalizedCompletionStatusText(sStatus, this.getOwnerComponent().getModel("i18n").getResourceBundle());
 		},
 		
 		

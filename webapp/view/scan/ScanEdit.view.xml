@@ -74,6 +74,13 @@
 								</f:fields>
 							</f:FormElement>
 							
+							<f:FormElement label="{i18n>scan.completionStatus}">
+								<f:fields>
+									<Text id="completionStatusText" 
+										text="{path: 'selectedScan>/completionStatus', formatter: '.completionStatusTextFormatter'}"/>
+								</f:fields>
+							</f:FormElement>
+							
 							<f:FormElement label="{i18n>scan.progress}">
 								<f:fields>
 									<Text id="progressText" text="{selectedScan>/progress}%"/>
