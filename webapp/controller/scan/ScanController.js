@@ -33,8 +33,9 @@ sap.ui.define([
 			wsScan.setProperty("/name", oScan.name);
 			wsScan.setProperty("/description", oScan.description);
 			wsScan.setProperty("/lastScan", oScan.lastScan);
-			wsScan.setProperty("/status", oScan.status);
-			wsScan.setProperty("/percentCompleted", oScan.percentCompleted);
+			wsScan.setProperty("/executionStatus", oScan.executionStatus);
+			wsScan.setProperty("/completionStatus", oScan.completionStatus);
+			wsScan.setProperty("/progress", oScan.progress);
 			
 			//Data at item level
 			wsScan.setProperty("/listIds", new Array());

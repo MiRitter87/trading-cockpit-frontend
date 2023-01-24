@@ -1,7 +1,8 @@
 {
 	"name": "",
 	"description": "",
-	"status": "FINISHED",
-	"percentCompleted": 100,
+	"executionStatus": "FINISHED",
+	"completionStatus": "COMPLETE",
+	"progress": 100,
 	"listIds": []
 }
