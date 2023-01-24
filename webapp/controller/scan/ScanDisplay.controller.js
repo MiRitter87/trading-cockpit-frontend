@@ -96,7 +96,7 @@ sap.ui.define([
 			this.getView().byId("descriptionText").setText("");
 			this.getView().byId("lastScanText").setText("");
 			this.getView().byId("executionStatusText").setText("");
-			this.getView().byId("percentCompletedText").setText("");
+			this.getView().byId("progressText").setText("");
 			
 			this.getView().byId("listList").destroyItems();
 		}

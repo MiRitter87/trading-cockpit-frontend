@@ -58,9 +58,9 @@
 								</f:fields>
 							</f:FormElement>
 							
-							<f:FormElement label="{i18n>scan.percentCompleted}">
+							<f:FormElement label="{i18n>scan.progress}">
 								<f:fields>
-									<Text id="percentCompletedText" text="{selectedScan>/percentCompleted}%"/>
+									<Text id="progressText" text="{selectedScan>/progress}%"/>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>

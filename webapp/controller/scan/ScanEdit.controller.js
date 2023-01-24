@@ -234,7 +234,7 @@ sap.ui.define([
 			this.getView().byId("descriptionTextArea").setValue("");
 			this.getView().byId("lastScanText").setText("");
 			this.getView().byId("executionStatusText").setText("");
-			this.getView().byId("percentCompletedText").setText("");
+			this.getView().byId("progressText").setText("");
 		},
 		
 		
