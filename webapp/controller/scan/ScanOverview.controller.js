@@ -69,7 +69,7 @@ sap.ui.define([
 			oScan = this.getSelectedScan();
 			if(oScan != null){
 				oScanWS = ScanController.getScanForWebService(oScan);
-				oScanWS.setProperty("/status", Constants.SCAN_STATUS.IN_PROGRESS);
+				oScanWS.setProperty("/executionStatus", Constants.SCAN_EXECUTION_STATUS.IN_PROGRESS);
 				ScanController.saveScanByWebService(oScanWS, this.saveScanCallback, this);
 			}			
 		},
@@ -195,10 +195,10 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter of the status text.
+		 * Formatter of the execution status text.
 		 */
-		statusTextFormatter: function(sStatus) {
-			return ScanController.getLocalizedStatusText(sStatus, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		executionStatusTextFormatter: function(sStatus) {
+			return ScanController.getLocalizedExecutionStatusText(sStatus, this.getOwnerComponent().getModel("i18n").getResourceBundle());
 		}
 	});
 });

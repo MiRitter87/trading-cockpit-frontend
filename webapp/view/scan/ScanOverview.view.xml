@@ -37,7 +37,7 @@
 						<Text text="{i18n>scan.lastScan}"/>
 					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>scan.status}"/>
+						<Text text="{i18n>scan.executionStatus}"/>
 					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>scan.percentCompleted}"/>
@@ -50,7 +50,7 @@
 							<Text text="{scans>name}"/>
 							<Text text="{scans>description}"/>
 							<Text text="{path: 'scans>lastScan', formatter: '.formatter.wsDateFormatter'}"/>
-							<Text text="{path: 'scans>status', formatter: '.statusTextFormatter'}"/>
+							<Text text="{path: 'scans>executionStatus', formatter: '.executionStatusTextFormatter'}"/>
 							<Text text="{scans>percentCompleted}%"/>
 						</cells>
 					</ColumnListItem>

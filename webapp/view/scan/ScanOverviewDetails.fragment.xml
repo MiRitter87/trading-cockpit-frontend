@@ -51,9 +51,10 @@
 								</f:fields>
 							</f:FormElement>
 							
-							<f:FormElement label="{i18n>scan.status}">
+							<f:FormElement label="{i18n>scan.executionStatus}">
 								<f:fields>
-									<Text id="statusText" text="{path: 'selectedScan>/status', formatter: '.statusTextFormatter'}"/>
+									<Text id="executionStatusText" 
+										text="{path: 'selectedScan>/executionStatus', formatter: '.executionStatusTextFormatter'}"/>
 								</f:fields>
 							</f:FormElement>
 							

@@ -77,10 +77,10 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter of the status text.
+		 * Formatter of the execution status text.
 		 */
-		statusTextFormatter: function(sStatus) {
-			return ScanController.getLocalizedStatusText(sStatus, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		executionStatusTextFormatter: function(sStatus) {
+			return ScanController.getLocalizedExecutionStatusText(sStatus, this.getOwnerComponent().getModel("i18n").getResourceBundle());
 		},
 		
 		
@@ -95,7 +95,7 @@ sap.ui.define([
 			this.getView().byId("nameText").setText("");
 			this.getView().byId("descriptionText").setText("");
 			this.getView().byId("lastScanText").setText("");
-			this.getView().byId("statusText").setText("");
+			this.getView().byId("executionStatusText").setText("");
 			this.getView().byId("percentCompletedText").setText("");
 			
 			this.getView().byId("listList").destroyItems();
