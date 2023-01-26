@@ -59,19 +59,13 @@ sap.ui.define([
 		onStartScanPressed: function () {
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var oScan, oScanWS;
 			
 			if(this.isScanSelected() == false) {
 				MessageBox.error(oResourceBundle.getText("scanOverview.noScanSelected"));
 				return;
 			}
 			
-			oScan = this.getSelectedScan();
-			if(oScan != null){
-				oScanWS = ScanController.getScanForWebService(oScan);
-				oScanWS.setProperty("/executionStatus", Constants.SCAN_EXECUTION_STATUS.IN_PROGRESS);
-				ScanController.saveScanByWebService(oScanWS, this.saveScanCallback, this);
-			}			
+			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.scan.ScanStartDialog");		
 		},
 		
 		
@@ -104,6 +98,31 @@ sap.ui.define([
 		 */
 		onCloseDialog : function () {
 			this.byId("scanDetailsDialog").close();
+		},
+		
+		
+		/**
+		 * Handles a click at the start button of the start scan dialog.
+		 */
+		onStartScanDialog : function () {
+			var oScan, oScanWS;
+					
+			oScan = this.getSelectedScan();
+			if(oScan != null){
+				oScanWS = ScanController.getScanForWebService(oScan);
+				oScanWS.setProperty("/executionStatus", Constants.SCAN_EXECUTION_STATUS.IN_PROGRESS);
+				ScanController.saveScanByWebService(oScanWS, this.saveScanCallback, this);
+			}	
+			
+			this.byId("startScanDialog").close();
+		},
+		
+		
+		/**
+		 * Handles a click at the cancel button of the start scan dialog.
+		 */
+		onCancelScanDialog : function () {
+			this.byId("startScanDialog").close();
 		},
 
 

@@ -1,0 +1,44 @@
+<!DOCTYPE xml>
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form">
+	
+	<Dialog id="startScanDialog" title="{i18n>scanOverview.startScanHeader}">
+		<content>
+			<f:Form id="scanForm" editable="true">
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="4"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="1"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>scanOverview.scanScope}">
+								<f:fields>
+									<ComboBox id="scanScopeComboBox" required="true"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+      	</content>
+	
+		<Button text="{i18n>scanOverview.start}" press=".onStartScanDialog" class="sapUiSmallMargin"/>
+        <Button type="Reject" text="{i18n>button.cancel}" press=".onCancelScanDialog" class="sapUiSmallMargin"/>
+   	</Dialog>
+</core:FragmentDefinition>
