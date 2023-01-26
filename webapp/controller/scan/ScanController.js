@@ -46,6 +46,14 @@ sap.ui.define([
 				wsScan.oData.listIds.push(oList.id);
 			}
 			
+			wsScan.setProperty("/incompleteInstrumentIds", new Array());
+			
+			for(var i = 0; i < oScan.incompleteInstruments.length; i++) {
+				var oInstrument = oScan.incompleteInstruments[i];
+				
+				wsScan.oData.incompleteInstrumentIds.push(oInstrument.id);
+			}
+			
 			return wsScan;
 		},
 		
