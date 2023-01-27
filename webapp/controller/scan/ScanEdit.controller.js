@@ -235,6 +235,7 @@ sap.ui.define([
 			this.getView().byId("lastScanText").setText("");
 			this.getView().byId("executionStatusText").setText("");
 			this.getView().byId("completionStatusText").setText("");
+			this.getView().byId("numberIncompleteInstrumentsText").setText("");
 			this.getView().byId("progressText").setText("");
 		},
 		

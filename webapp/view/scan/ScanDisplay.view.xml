@@ -81,6 +81,12 @@
 								</f:fields>
 							</f:FormElement>
 							
+							<f:FormElement label="{i18n>scan.numberIncompleteInstruments}">
+								<f:fields>
+									<Text id="numberIncompleteInstrumentsText" text="{= ${selectedScan>/incompleteInstruments/}.length}"/>
+								</f:fields>
+							</f:FormElement>
+							
 							<f:FormElement label="{i18n>scan.progress}">
 								<f:fields>
 									<Text id="progressText" text="{selectedScan>/progress}%"/>
