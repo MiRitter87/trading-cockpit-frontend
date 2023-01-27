@@ -4,7 +4,7 @@
 	xmlns:core="sap.ui.core"
 	xmlns:f="sap.ui.layout.form">
 	
-	<Dialog id="startScanDialog" title="{i18n>scanOverview.startScanHeader}">
+	<Dialog id="startScanDialog" title="{i18n>scanOverview.startScanHeader}" afterOpen=".onStartScanDialogOpened">
 		<content>
 			<f:Form id="scanForm" editable="true">
 				<f:layout>

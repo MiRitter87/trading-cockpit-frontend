@@ -101,18 +101,39 @@ sap.ui.define([
 		},
 		
 		
+		/** 
+		 * Handles tasks to be performed after the scan start dialog has been opened.
+		 */
+		onStartScanDialogOpened : function () {
+			this.initializeScopeComboBox();
+		},
+		
+		
 		/**
 		 * Handles a click at the start button of the start scan dialog.
 		 */
 		onStartScanDialog : function () {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oScan, oScanWS;
-					
+			var sSelectedScope = this.getView().byId("scanScopeComboBox").getSelectedKey();
+			
 			oScan = this.getSelectedScan();
-			if(oScan != null){
-				oScanWS = ScanController.getScanForWebService(oScan);
-				oScanWS.setProperty("/executionStatus", Constants.SCAN_EXECUTION_STATUS.IN_PROGRESS);
-				ScanController.saveScanByWebService(oScanWS, this.saveScanCallback, this);
-			}	
+			if(oScan == null) {
+				return;
+			}
+			
+			oScanWS = ScanController.getScanForWebService(oScan);
+			
+			if(sSelectedScope == "") {
+				MessageBox.error(oResourceBundle.getText("scanOverview.noScanScopeSelected"));
+				return;				
+			}
+			else if(sSelectedScope == Constants.SCAN_SCOPE.ALL) {
+				oScanWS.setProperty("/completionStatus", Constants.SCAN_COMPLETION_STATUS.COMPLETE);
+			}
+					
+			oScanWS.setProperty("/executionStatus", Constants.SCAN_EXECUTION_STATUS.IN_PROGRESS);
+			ScanController.saveScanByWebService(oScanWS, this.saveScanCallback, this);
 			
 			this.byId("startScanDialog").close();
 		},
@@ -226,6 +247,24 @@ sap.ui.define([
 		 */
 		completionStatusTextFormatter: function(sStatus) {
 			return ScanController.getLocalizedCompletionStatusText(sStatus, this.getOwnerComponent().getModel("i18n").getResourceBundle());
-		}
+		},
+		
+		
+		/**
+		 * Initializes the ComboBox of scan scope of the start scan dialog.
+		 */
+		initializeScopeComboBox : function () {
+			var oComboBox = this.getView().byId("scanScopeComboBox");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			if(oComboBox.getItems().length == 2)
+				return;		//ComboBox is already initialized.
+			
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.SCAN_SCOPE.ALL, "scanOverview.scanScope.all");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.SCAN_SCOPE.INCOMPLETE, "scanOverview.scanScope.incomplete");
+		},
 	});
 });
