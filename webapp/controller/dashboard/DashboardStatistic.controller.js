@@ -1,13 +1,13 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../Constants",
+	"../MainController",
 	"./DashboardController",
-	"../instrument/InstrumentController",
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, Constants, DashboardController, InstrumentController, formatter, JSONModel, MessageToast, MessageBox) {
+], function (Controller, Constants, MainController, DashboardController, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.dashboard.DashboardStatistic", {
@@ -18,12 +18,10 @@ sap.ui.define([
 		 * Initializes the controller.
 		 */
 		onInit : function () {
-			var oTypeComboBox = this.getView().byId("typeComboBox");
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("dashboardStatisticRoute").attachMatched(this._onRouteMatched, this);
 			
-			InstrumentController.initializeTypeComboBox(oTypeComboBox, this.getOwnerComponent().getModel("i18n").getResourceBundle());
-			oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
+			this.initializeTypeComboBox();
 		},
 		
 		
@@ -31,8 +29,12 @@ sap.ui.define([
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
 		_onRouteMatched: function () {
+			var oTypeComboBox = this.getView().byId("typeComboBox");
+			
 			//Query statistic data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			DashboardController.queryStatisticsByWebService(this.queryStatisticsCallback, this, true, Constants.INSTRUMENT_TYPE.STOCK);
+			
+			oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
     	},
     	
     	
@@ -73,6 +75,18 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "statistics");
+		},
+		
+		
+		/**
+		 * Initializes the given ComboBox with items for instrument type selection.
+		 */
+		initializeTypeComboBox : function() {
+			var oTypeComboBox = this.getView().byId("typeComboBox");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			//The backend currently only computes statistics for instruments of type stock.
+			MainController.addItemToComboBox(oTypeComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.STOCK, "instrument.type.stock");
 		}
 	});
 });
