@@ -4,5 +4,6 @@
 	"stockExchange": "",
 	"name": "",
 	"sectorId": null,
-	"industryGroupId": null
+	"industryGroupId": null,
+	"companyPathInvestingCom": ""
 }

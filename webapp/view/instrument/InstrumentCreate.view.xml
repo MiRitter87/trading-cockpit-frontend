@@ -76,6 +76,14 @@
 							</f:fields>
 						</f:FormElement>
 					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>instrumentCreate.titleInterfaceDataProvider}">
+						<f:FormElement label="{i18n>instrument.companyPathInvestingCom}">
+								<f:fields>
+									<Input maxLength="50" value="{newInstrument>/companyPathInvestingCom}" required="false"/>	
+								</f:fields>
+						</f:FormElement>
+					</f:FormContainer>
 				</f:formContainers>
 			</f:Form>
 			
