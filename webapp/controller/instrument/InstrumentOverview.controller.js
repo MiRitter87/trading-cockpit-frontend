@@ -30,6 +30,35 @@ sap.ui.define([
     	
     	
     	/**
+		 * Handles the press-event of the show details button.
+		 */
+		onShowDetailsPressed : function () {
+			var oResourceBundle;
+			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oSelectedInstrumentModel;
+			
+			if(this.isInstrumentSelected() == false) {
+				MessageBox.error(oResourceBundle.getText("instrumentOverview.noInstrumentSelected"));
+				return;
+			}
+			
+			oSelectedInstrumentModel = new JSONModel();
+			oSelectedInstrumentModel.setData(this.getSelectedInstrument());
+			this.getView().setModel(oSelectedInstrumentModel, "selectedInstrument");
+			
+			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.instrument.InstrumentOverviewDetails");
+		},
+		
+		
+		/**
+		 * Handles a click at the close button of the instrument details fragment.
+		 */
+		onCloseDialog : function () {
+			this.byId("instrumentDetailsDialog").close();
+		},
+    	
+    	
+    	/**
 		 * Handles the search function of the table.
 		 */
 		onSearch: function (oEvent) {

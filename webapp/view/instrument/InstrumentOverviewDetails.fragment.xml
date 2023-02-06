@@ -1,0 +1,14 @@
+<!DOCTYPE xml>
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form">
+
+	<Dialog id="instrumentDetailsDialog" title="{i18n>instrumentOverview.detailsHeader}">
+		<content>
+
+      	</content>
+      	
+      	<Button text="{i18n>button.close}" press=".onCloseDialog" class="sapUiSmallMargin"/>
+   	</Dialog>
+</core:FragmentDefinition>
