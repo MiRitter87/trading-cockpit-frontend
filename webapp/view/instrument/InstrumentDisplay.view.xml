@@ -90,6 +90,14 @@
 							</f:FormElement>
 						</f:formElements>
 					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>instrumentDisplay.titleInterfaceDataProvider}">
+						<f:FormElement label="{i18n>instrument.companyPathInvestingCom}">
+							<f:fields>
+								<Text id="companyPathText" text="{selectedInstrument>/companyPathInvestingCom}"/>
+							</f:fields>
+						</f:FormElement>
+					</f:FormContainer>
 				</f:formContainers>
 			</f:Form>
 		</content>
