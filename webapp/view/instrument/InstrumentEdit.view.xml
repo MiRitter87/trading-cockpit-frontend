@@ -95,6 +95,15 @@
 							</f:fields>
 						</f:FormElement>
 					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>instrumentEdit.titleInterfaceDataProvider}">
+						<f:FormElement label="{i18n>instrument.companyPathInvestingCom}">
+							<f:fields>
+								<Input id ="companyPathInput" maxLength="50" value="{selectedInstrument>/companyPathInvestingCom}" required="false"
+									tooltip="{i18n>instrumentEdit.companyPathTooltip}"/>
+							</f:fields>
+						</f:FormElement>
+					</f:FormContainer>
 				</f:formContainers>
 			</f:Form>
 		</content>

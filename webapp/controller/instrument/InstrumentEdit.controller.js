@@ -207,6 +207,7 @@ sap.ui.define([
 			this.getView().byId("idText").setText("");
 			this.getView().byId("symbolInput").setValue("");
 			this.getView().byId("nameInput").setValue("");
+			this.getView().byId("companyPathInput").setValue("");
 			
 			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
 			this.getView().byId("typeComboBox").setSelectedItem(null);
@@ -259,6 +260,7 @@ sap.ui.define([
 			wsInstrument.setProperty("/type", oInstrument.type);
 			wsInstrument.setProperty("/stockExchange", oInstrument.stockExchange);
 			wsInstrument.setProperty("/name", oInstrument.name);
+			wsInstrument.setProperty("/companyPathInvestingCom", oInstrument.companyPathInvestingCom);
 			
 			//References
 			if(oInstrument.sector != null)
