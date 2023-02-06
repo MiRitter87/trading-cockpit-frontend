@@ -6,7 +6,84 @@
 
 	<Dialog id="instrumentDetailsDialog" title="{i18n>instrumentOverview.detailsHeader}">
 		<content>
-
+			<f:Form id="instrumentForm" editable="false">
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer title="{i18n>instrumentDisplay.titleGeneralData}">
+						<f:formElements>
+							<f:FormElement label="{i18n>instrument.id}">
+								<f:fields>
+									<Text id="idText" text="{selectedInstrument>/id}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>instrument.symbol}">
+								<f:fields>
+									<Text id="symbolText" text="{selectedInstrument>/symbol}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>instrument.name}">
+								<f:fields>
+									<Text id="nameText" text="{selectedInstrument>/name}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>instrument.type}">
+								<f:fields>
+									<Text id="typeText" text="{path: 'selectedInstrument>/type', formatter: '.typeTextFormatter'}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>instrument.stockExchange}">
+								<f:fields>
+									<Text id="stockExchangeText" text="{path: 'selectedInstrument>/stockExchange', formatter: '.stockExchangeTextFormatter'}"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>instrumentOverview.titleSectorAndIg}">
+						<f:formElements>
+							<f:FormElement label="{i18n>instrument.sector}">
+								<f:fields>
+									<Text id="sectorText" text="{selectedInstrument>/sector/name}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>instrument.industryGroup}">
+								<f:fields>
+									<Text id="industryGroupText" text="{selectedInstrument>/industryGroup/name}"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>instrumentOverview.titleInterfaceDataProvider}">
+						<f:FormElement label="{i18n>instrument.companyPathInvestingCom}">
+							<f:fields>
+								<Text id="companyPathText" text="{selectedInstrument>/companyPathInvestingCom}"/>
+							</f:fields>
+						</f:FormElement>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
       	</content>
       	
       	<Button text="{i18n>button.close}" press=".onCloseDialog" class="sapUiSmallMargin"/>
