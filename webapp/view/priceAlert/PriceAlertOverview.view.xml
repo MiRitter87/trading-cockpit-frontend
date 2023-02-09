@@ -60,7 +60,7 @@
 								<Text text="{
 										parts: ['priceAlerts>price', 'priceAlerts>currency'],
 										type: 'sap.ui.model.type.Currency'}"/>
-								<Text text="{priceAlerts>triggerDistancePercent}"/>
+								<Text text="{priceAlerts>triggerDistancePercent} %"/>
 								<Text text="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateFormatter'}"/>
 								<Text text="{path: 'priceAlerts>confirmationTime', formatter: '.formatter.wsDateFormatter'}"/>
 							</cells>
