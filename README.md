@@ -39,7 +39,11 @@ The Dashboard aims to provide a meta overview of the current state of the market
 
 The statistics view provides the number of advancing and decline stocks for each trading day as well as the advance / decline differential.
 
-The charts view displays a chart of the cumulative advance/decline number.
+The charts view provides the following charts.
+
+- The cumulative advance/decline number for the overall database as well as selected lists
+- The percentage of instruments above the SMA(50) for the overall database as well as selected lists
+- A candlestick chart with annotations for Distribution Days for ETFs, sectors and industry groups
 
 ## Technology
 
@@ -51,4 +55,4 @@ Just put the files of the projects 'webapp'-folder into the 'webapps'-folder of 
 
 ## License
 
-Copyright © 2022, [MiRitter87](https://github.com/MiRitter87). No License.
+Copyright © 2023, [MiRitter87](https://github.com/MiRitter87). No License.
