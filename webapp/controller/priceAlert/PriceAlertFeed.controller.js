@@ -82,10 +82,10 @@ sap.ui.define([
 		/**
 		 * Formatter of the info field of a price alert.
 		 */
-		priceAlertInfoTextFormatter: function(fPrice) {
+		priceAlertInfoTextFormatter: function(fPrice, sCurrency) {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			return oResourceBundle.getText("priceAlertFeed.priceAlert") + fPrice;
+			return oResourceBundle.getText("priceAlertFeed.priceAlert") + fPrice + " " + sCurrency;
 		},
 		
 		

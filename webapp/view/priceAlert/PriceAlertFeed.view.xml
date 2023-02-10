@@ -13,7 +13,7 @@
 		<content>
 			<List items="{path: 'priceAlerts>/priceAlert/'}" >
 				<FeedListItem sender="{priceAlerts>instrument/name}"
-					info="{path: 'priceAlerts>price', formatter: '.priceAlertInfoTextFormatter'}"
+					info="{parts: [{path: 'priceAlerts>price'}, {path: 'priceAlerts>currency'}], formatter: '.priceAlertInfoTextFormatter'}"
 					timestamp="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateFormatter'}"
 					icon="{path: 'priceAlerts>alertType', formatter: '.priceAlertIconFormatter'}">
 					
