@@ -25,7 +25,7 @@
 				</f:layout>
 				
 				<f:formContainers>
-					<f:FormContainer>
+					<f:FormContainer title="{i18n>scanOverview.titleGeneralData}">
 						<f:formElements>
 							<f:FormElement label="{i18n>scan.id}">
 								<f:fields>
@@ -44,7 +44,11 @@
 									<Text id="descriptionText" text="{selectedScan>/description}"/>
 								</f:fields>
 							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
 							
+					<f:FormContainer title="{i18n>scanOverview.titleStatus}">
+						<f:formElements>
 							<f:FormElement label="{i18n>scan.lastScan}">
 								<f:fields>
 									<Text id="lastScanText" text="{path: 'selectedScan>/lastScan', formatter: '.formatter.wsDateFormatter'}"/>
@@ -62,6 +66,12 @@
 								<f:fields>
 									<Text id="completionStatusText" 
 										text="{path: 'selectedScan>/completionStatus', formatter: '.completionStatusTextFormatter'}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>scan.numberIncompleteInstruments}">
+								<f:fields>
+									<Text id="numberIncompleteInstrumentsText" text="{= ${selectedScan>/incompleteInstruments/}.length}"/>
 								</f:fields>
 							</f:FormElement>
 							

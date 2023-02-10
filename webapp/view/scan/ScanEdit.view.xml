@@ -41,7 +41,7 @@
 				</f:layout>
 				
 				<f:formContainers>
-					<f:FormContainer>
+					<f:FormContainer title="{i18n>scanEdit.titleGeneralData}">
 						<f:formElements>
 							<f:FormElement label="{i18n>scan.id}">
 								<f:fields>
@@ -61,6 +61,18 @@
 								</f:fields>
 							</f:FormElement>
 							
+							<f:FormElement label="{i18n>scan.lists}">
+								<f:fields>
+									<Button	text="{i18n>scanEdit.openListSelection}" press=".onSelectListsPressed"
+										class="sapUiSmallMarginBottom" ariaHasPopup="Dialog">
+									</Button>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>scanEdit.titleStatus}">
+						<f:formElements>
 							<f:FormElement label="{i18n>scan.lastScan}">
 								<f:fields>
 									<Text id="lastScanText" text="{path: 'selectedScan>/lastScan', formatter: '.formatter.wsDateFormatter'}"/>
@@ -90,14 +102,6 @@
 							<f:FormElement label="{i18n>scan.progress}">
 								<f:fields>
 									<Text id="progressText" text="{selectedScan>/progress}%"/>
-								</f:fields>
-							</f:FormElement>
-						
-							<f:FormElement label="{i18n>scan.lists}">
-								<f:fields>
-									<Button	text="{i18n>scanEdit.openListSelection}" press=".onSelectListsPressed"
-										class="sapUiSmallMarginBottom" ariaHasPopup="Dialog">
-									</Button>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>

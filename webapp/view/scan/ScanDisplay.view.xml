@@ -41,7 +41,7 @@
 				</f:layout>
 				
 				<f:formContainers>
-					<f:FormContainer>
+					<f:FormContainer title="{i18n>scanDisplay.titleGeneralData}">
 						<f:formElements>
 							<f:FormElement label="{i18n>scan.id}">
 								<f:fields>
@@ -60,7 +60,11 @@
 									<Text id="descriptionText" text="{selectedScan>/description}"/>
 								</f:fields>
 							</f:FormElement>
-							
+						</f:formElements>
+					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>scanDisplay.titleStatus}">
+						<f:formElements>
 							<f:FormElement label="{i18n>scan.lastScan}">
 								<f:fields>
 									<Text id="lastScanText" text="{path: 'selectedScan>/lastScan', formatter: '.formatter.wsDateFormatter'}"/>
