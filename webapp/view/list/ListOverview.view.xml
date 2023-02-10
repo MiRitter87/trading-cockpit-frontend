@@ -11,7 +11,7 @@
 	
 	<Page title="{i18n>listOverview.header}">
 		<content>
-			<Table id="listTable" items="{path: 'lists>/list/'}" mode="SingleSelectMaster">
+			<Table id="listTable" items="{path: 'lists>/list/'}" mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders">
 				<headerToolbar>
 					<OverflowToolbar>
 						<Title text="{i18n>listOverview.tableHeader} ({= ${lists>/list/}.length})"/>

@@ -25,7 +25,7 @@
 			</VBox>			
 		
 			<Table id="quotationTable" items="{path: 'quotations>/quotation/', sorter: {path: 'indicator/rsPercentSum', descending: true }}" 
-				mode="SingleSelectMaster">
+				mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders">
 				
 				<headerToolbar>
 					<OverflowToolbar>

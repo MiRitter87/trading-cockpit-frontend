@@ -19,7 +19,7 @@
 				<IconTabFilter icon="sap-icon://message-success" iconColor="Positive" text="{i18n>priceAlertOverview.showFinished}" key="Finished" />
 			</items>
 			<content>
-				<Table id="priceAlertTable" items="{path: 'priceAlerts>/priceAlert/'}" mode="SingleSelectMaster">
+				<Table id="priceAlertTable" items="{path: 'priceAlerts>/priceAlert/'}" mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders">
 					<headerToolbar>
 						<OverflowToolbar>
 							<Title text="{i18n>priceAlertOverview.tableHeader} ({= ${priceAlerts>/priceAlert/}.length})"/>

@@ -49,7 +49,9 @@
 				</f:formContainers>
 			</f:Form>
 			
-			<Table id="instrumentTable" items="{path: 'selectedList>/instruments/', sorter: {path: 'symbol'}}" mode="SingleSelectMaster">
+			<Table id="instrumentTable" items="{path: 'selectedList>/instruments/', sorter: {path: 'symbol'}}" 
+				mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders">
+				
 				<headerToolbar>
 					<OverflowToolbar>
 						<Title text="{i18n>listOverview.titleInstruments} ({= ${selectedList>/instruments/}.length})"/>

@@ -11,7 +11,7 @@
 	
 	<Page title="{i18n>instrumentOverview.header}">
 		<content>
-			<Table id="instrumentTable" items="{path: 'instruments>/instrument/'}" mode="SingleSelectMaster">
+			<Table id="instrumentTable" items="{path: 'instruments>/instrument/'}" mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders">
 				<headerToolbar>
 					<OverflowToolbar>
 						<Title text="{i18n>instrumentOverview.tableHeader} ({= ${instruments>/instrument/}.length})"/>
