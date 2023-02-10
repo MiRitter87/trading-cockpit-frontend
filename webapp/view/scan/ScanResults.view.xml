@@ -91,10 +91,10 @@
 							<Text text="{quotations>indicator/rsNumber}"/>
 							<Text text="{quotations>indicator/rsNumberSector}"/>
 							<Text text="{quotations>indicator/rsNumberIndustryGroup}"/>
-							<Text text="{quotations>indicator/performance5Days}"/>
-							<Text text="{quotations>indicator/distanceTo52WeekHigh}"/>
+							<Text text="{quotations>indicator/performance5Days} %"/>
+							<Text text="{quotations>indicator/distanceTo52WeekHigh} %"/>
 							<Text text="{quotations>indicator/bollingerBandWidth}"/>
-							<Text text="{quotations>indicator/volumeDifferential10Days}"/>
+							<Text text="{quotations>indicator/volumeDifferential10Days} %"/>
 							<Text text="{quotations>indicator/upDownVolumeRatio}"/>
 							<Text text="{	parts: ['quotations>indicator/liquidity20Days', 'quotations>currency'],
 											type: 'sap.ui.model.type.Currency',
