@@ -45,7 +45,7 @@
 							<Text text="{statistics>advanceDeclineNumber}"/>
 							<Text text="{statistics>numberAdvance}"/>
 							<Text text="{statistics>numberDecline}"/>
-							<Text text="{statistics>percentAboveSma50}"/>
+							<Text text="{statistics>percentAboveSma50} %"/>
 						</cells>
 					</ColumnListItem>
 				</items>

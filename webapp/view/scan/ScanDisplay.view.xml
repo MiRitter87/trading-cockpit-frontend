@@ -93,7 +93,7 @@
 							
 							<f:FormElement label="{i18n>scan.progress}">
 								<f:fields>
-									<Text id="progressText" text="{selectedScan>/progress}%"/>
+									<Text id="progressText" text="{selectedScan>/progress} %"/>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>

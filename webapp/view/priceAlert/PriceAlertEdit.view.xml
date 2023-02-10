@@ -73,7 +73,7 @@
 							
 							<f:FormElement label="{i18n>priceAlert.triggerDistancePercent}">
 								<f:fields>
-									<Text id="triggerDistancePercentText" text="{selectedPriceAlert>/triggerDistancePercent}"/>
+									<Text id="triggerDistancePercentText" text="{selectedPriceAlert>/triggerDistancePercent} %"/>
 								</f:fields>
 							</f:FormElement>
 							

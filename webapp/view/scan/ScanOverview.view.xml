@@ -59,7 +59,7 @@
 							<Text text="{path: 'scans>executionStatus', formatter: '.executionStatusTextFormatter'}"/>
 							<Text text="{path: 'scans>completionStatus', formatter: '.completionStatusTextFormatter'}"/>
 							<Text text="{= ${scans>incompleteInstruments}.length}"/>
-							<Text text="{scans>progress}%"/>
+							<Text text="{scans>progress} %"/>
 						</cells>
 					</ColumnListItem>
 				</items>
