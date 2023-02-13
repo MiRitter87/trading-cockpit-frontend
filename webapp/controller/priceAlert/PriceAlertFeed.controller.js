@@ -150,7 +150,7 @@ sap.ui.define([
 			iNumberPriceAlerts = oPriceAlertsModel.oData.priceAlert.length;
 			
 			if(iNumberPriceAlerts > 0)
-				window.navigator.vibrate(200);
+				window.navigator.vibrate(400);
 		}
 	});
 });
