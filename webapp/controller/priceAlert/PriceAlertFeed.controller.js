@@ -50,6 +50,7 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oModel, "priceAlerts");
 			oCallingController.setLastUpdateText(oCallingController);
+			oCallingController.playSilentDummySound();
 			oCallingController.notifyIfAlertsTriggered(oCallingController);
 		},
 		
@@ -173,6 +174,20 @@ sap.ui.define([
 		 */
 		playAlertSound: function() {
 			var audio = new Audio('alert.mp3');
+			audio.play();
+		},
+		
+		
+		/**
+		 * Plays a silent dummy sound.
+		 *
+		 * The Chrome browser on an Android device turns inactive if the display is turned off.
+		 * No queries for triggered price alerts are executed then.
+		 * If a sound is played cyclically, the browser process stays active even if the display is turned off.
+		 * In order to continue querying for price alerts, a silent dummy sound is played periodically to keep the browser active.
+		 */
+		playSilentDummySound: function() {
+			var audio = new Audio('silent1second.mp3');
 			audio.play();
 		}
 	});
