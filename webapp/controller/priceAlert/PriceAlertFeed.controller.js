@@ -50,7 +50,7 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oModel, "priceAlerts");
 			oCallingController.setLastUpdateText(oCallingController);
-			oCallingController.vibrateIfAlertsTriggered(oCallingController);
+			oCallingController.notifyIfAlertsTriggered(oCallingController);
 		},
 		
 		
@@ -136,21 +136,44 @@ sap.ui.define([
 		
 		
 		/**
-		 * Initiates a vibration (on smartphones) if alerts have been triggered and are not confirmed yet.
+		 * Notifies the user if alerts have been triggered and are not yet confirmed.
+		 *
+		 * Initiates a vibration (on smartphones).
+		 * Plays an alert sound.
 		 */
-		vibrateIfAlertsTriggered: function(oCallingController) {			
+		notifyIfAlertsTriggered: function(oCallingController) {			
 			var oPriceAlertsModel;
 			var iNumberPriceAlerts;
+			
+			oPriceAlertsModel = oCallingController.getView().getModel("priceAlerts");
+			iNumberPriceAlerts = oPriceAlertsModel.oData.priceAlert.length;
+			
+			if(iNumberPriceAlerts > 0) {
+				this.vibrate();
+				this.playAlertSound();				
+			}
+		},
+		
+		
+		/**
+		 * Initiate phone vibration.
+		 */
+		vibrate: function() {
 			var bSupportsVibrate = "vibrate" in navigator;
 			
 			if(bSupportsVibrate == false)		
 				return;
 				
-			oPriceAlertsModel = oCallingController.getView().getModel("priceAlerts");
-			iNumberPriceAlerts = oPriceAlertsModel.oData.priceAlert.length;
-			
-			if(iNumberPriceAlerts > 0)
-				window.navigator.vibrate(400);
+			window.navigator.vibrate(400);
+		},
+		
+		
+		/**
+		 * Plays an alert sound.
+		 */
+		playAlertSound: function() {
+			var audio = new Audio('alert.mp3');
+			audio.play();
 		}
 	});
 });
