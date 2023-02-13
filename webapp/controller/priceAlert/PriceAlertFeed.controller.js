@@ -150,8 +150,12 @@ sap.ui.define([
 			iNumberPriceAlerts = oPriceAlertsModel.oData.priceAlert.length;
 			
 			if(iNumberPriceAlerts > 0) {
-				this.vibrate();
+				this.vibrate(400);
 				this.playAlertSound();				
+			}
+			else {
+				this.vibrate(200);
+				this.playSilentDummySound();		
 			}
 		},
 		
@@ -159,13 +163,13 @@ sap.ui.define([
 		/**
 		 * Initiate phone vibration.
 		 */
-		vibrate: function() {
+		vibrate: function(iDuration) {			
 			var bSupportsVibrate = "vibrate" in navigator;
 			
 			if(bSupportsVibrate == false)		
 				return;
 				
-			window.navigator.vibrate(400);
+			window.navigator.vibrate(iDuration);
 		},
 		
 		
@@ -187,7 +191,7 @@ sap.ui.define([
 		 * In order to continue querying for price alerts, a silent dummy sound is played periodically to keep the browser active.
 		 */
 		playSilentDummySound: function() {
-			var audio = new Audio('silent1second.mp3');
+			var audio = new Audio('silent2seconds.mp3');
 			audio.play();
 		}
 	});
