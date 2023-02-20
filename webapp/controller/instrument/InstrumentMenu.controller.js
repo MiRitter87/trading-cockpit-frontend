@@ -38,5 +38,14 @@ sap.ui.define([
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("instrumentOverviewRoute");	
 		},
+		
+		
+		/**
+		 * Handles click at the instrument health check tile.
+		 */
+		onInstrumentHealthCheckPressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("instrumentHealthCheckRoute");	
+		}
 	});
 });

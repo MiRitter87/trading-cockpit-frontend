@@ -37,6 +37,13 @@
 					<ImageContent src="sap-icon://list" />
 				</TileContent>
 			</GenericTile>
+			
+			<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.instrument}"
+						subheader="{i18n>navigation.menu.instrument.healthCheck}" press="onInstrumentHealthCheckPressed">
+				<TileContent>
+					<ImageContent src="sap-icon://survey" />
+				</TileContent>
+			</GenericTile>
 		</content>
 	</Page>
 </mvc:View>

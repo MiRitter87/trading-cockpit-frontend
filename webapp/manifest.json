@@ -110,6 +110,10 @@
 				"name": "instrumentOverviewRoute",
 				"target": "instrumentOverviewTarget"
 			}, {
+				"pattern": "instrumentHealthCheck",
+				"name": "instrumentHealthCheckRoute",
+				"target": "instrumentHealthCheckTarget"
+			},{
 				"pattern": "listMenu",
 				"name": "listMenuRoute",
 				"target": "listMenuTarget"
@@ -225,6 +229,11 @@
             	"instrumentOverviewTarget": {
 					"viewId": "instrumentOverview",
 					"viewName": "instrument.InstrumentOverview",
+					"viewLevel" : 1
+            	},
+            	"instrumentHealthCheckTarget": {
+					"viewId": "instrumentHealthCheck",
+					"viewName": "instrument.InstrumentHealthCheck",
 					"viewLevel" : 1
             	},
             	"listMenuTarget": {
