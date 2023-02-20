@@ -21,19 +21,19 @@
 					<Column>
 						<Text text="{i18n>protocol.date}"/>
 					</Column>
-					<Column>
-						<Text text="{i18n>protocol.text}"/>
-					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>protocol.category}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>protocol.text}"/>
 					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
 						<cells>
 							<Text text="{path: 'protocolEntries>date', formatter: 'formatter.wsDateFormatter'}"/>
-							<Text text="{protocolEntries>text}"/>
 							<Text text="{path: 'protocolEntries>category', formatter: '.categoryTextFormatter'}"/>
+							<Text text="{protocolEntries>text}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
