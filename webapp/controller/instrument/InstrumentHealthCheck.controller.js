@@ -4,8 +4,9 @@ sap.ui.define([
 	"./InstrumentController",
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
-], function (Controller, MainController, InstrumentController, formatter, JSONModel, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/m/MessageBox"
+], function (Controller, MainController, InstrumentController, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentHealthCheck", {
@@ -28,6 +29,17 @@ sap.ui.define([
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
     	},
+    	
+    	
+    	/**
+    	 * Handles the button press event of the refresh health check button.
+    	 */
+    	onRefreshPressed : function() {
+			var bInputValid = this.verifyObligatoryFields();
+			
+			if(bInputValid == false)
+				return;
+		},
 
 
 		/**
@@ -70,25 +82,26 @@ sap.ui.define([
 		
 		
 		/**
-		 * Checks if an instrument has been selected.
+		 * Verifies input of obligatory fields.
+		 * Returns true if input is valid. Returns false if input is invalid.
 		 */
-		isInstrumentSelected : function () {
-			if(this.getView().byId("instrumentTable").getSelectedItem() == null)
-				return false;
-			else
-				return true;
-		},
-		
-		
-		/**
-		 * Gets the the selected instrument.
-		 */
-		getSelectedInstrument : function () {
-			var oListItem = this.getView().byId("instrumentTable").getSelectedItem();
-			var oContext = oListItem.getBindingContext("instruments");
-			var oSelectedInstrument = oContext.getProperty(null, oContext);
+		verifyObligatoryFields : function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oStartDatePicker = this.getView().byId("startDatePicker");
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			
-			return oSelectedInstrument;
+			//Check if Instrument and date have been selected.
+			if(oInstrumentComboBox.getSelectedKey() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentHealthCheck.noInstrumentSelected"));
+				return false;
+			}
+
+			if(oStartDatePicker.getValue() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentHealthCheck.noStartDateSelected"));
+				return false;
+			}
+			
+			return true;
 		}
 	});
 });

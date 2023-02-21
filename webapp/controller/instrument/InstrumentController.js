@@ -150,6 +150,28 @@ sap.ui.define([
 					callbackFunction(data, oCallingController);
 				}
 			});
-		}
+		},
+		
+		
+		/**
+		 * Queries the instrument WebService to perform a health check of the given instrument and get the protocol.
+		 */
+		checkInstrumentHealthByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, iInstrumentId, sDate) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
+			
+			sQueryUrl = sQueryUrl + "/" + iInstrumentId + "/health?startDate=" + sDate;
+			
+			jQuery.ajax({
+				type : "GET", 
+				contentType : "application/json", 
+				url : sQueryUrl, 
+				dataType : "json", 
+				success : function(data) {
+					callbackFunction(data, oCallingController, bShowSuccessMessage);
+				}
+			});                                                                 
+		},
 	};
 });
