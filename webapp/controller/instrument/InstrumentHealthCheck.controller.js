@@ -19,6 +19,8 @@ sap.ui.define([
 		onInit : function () {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("instrumentHealthCheckRoute").attachMatched(this._onRouteMatched, this);
+			
+			this.initializeMinAndMaxDate();
 		},
 		
 		
@@ -102,6 +104,21 @@ sap.ui.define([
 			}
 			
 			return true;
+		},
+		
+		
+		/**
+		 * Initializes the minium and maximum start date of the DatePicker.
+		 */
+		initializeMinAndMaxDate : function() {
+			var oStartDatePicker = this.getView().byId("startDatePicker");
+			var dateNow = new Date();
+			var dateOneYearAgo = new Date();
+			
+			dateOneYearAgo.setFullYear(dateNow.getFullYear() - 1);
+			
+			oStartDatePicker.setMinDate(dateOneYearAgo);
+			oStartDatePicker.setMaxDate(dateNow);
 		}
 	});
 });
