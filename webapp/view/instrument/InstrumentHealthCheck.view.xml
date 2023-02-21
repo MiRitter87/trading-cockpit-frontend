@@ -11,12 +11,54 @@
 	
 	<Page title="{i18n>instrumentHealthCheck.header}">
 		<content>
-			<Label text="{i18n>instrumentHealthCheck.selectionDescription}"/>
-			<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}">
-				<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
-			</ComboBox>
-
+			<f:Form id="queryForm" editable="true">
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>instrumentHealthCheck.selectionDescription}">
+								<f:fields>
+									<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}">
+										<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
+									</ComboBox>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>instrumentHealthCheck.startDate}">
+								<f:fields>
+									<DatePicker id="startDatePicker"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+			
+			<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
+		
 			<Table id="protocolTable" items="{path: 'protocolEntries>/protocolEntry/'}" mode="SingleSelectMaster" sticky="ColumnHeaders">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="{i18n>instrumentHealthCheck.tableHeader}"/>
+					</OverflowToolbar>
+				</headerToolbar>
+			
 				<columns>
 					<Column>
 						<Text text="{i18n>protocol.date}"/>
