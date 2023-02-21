@@ -42,7 +42,7 @@
 							
 							<f:FormElement label="{i18n>instrumentHealthCheck.startDate}">
 								<f:fields>
-									<DatePicker id="startDatePicker"/>
+									<DatePicker id="startDatePicker" valueFormat="yyyy-MM-dd"/>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>

@@ -38,9 +38,16 @@ sap.ui.define([
     	 */
     	onRefreshPressed : function() {
 			var bInputValid = this.verifyObligatoryFields();
+			var sInstrumentId;
+			var sStartDate;
 			
 			if(bInputValid == false)
 				return;
+			
+			sInstrumentId = this.getView().byId("instrumentComboBox").getSelectedKey();
+			sStartDate = this.getView().byId("startDatePicker").getValue();
+			
+			InstrumentController.checkInstrumentHealthByWebService(this.checkInstrumentHealthCallback, this, true, sInstrumentId, sStartDate);
 		},
 
 
@@ -64,6 +71,28 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "instruments");
+		},
+		
+		
+		/**
+		 * Callback function of the checkInstrumentHealth RESTful WebService call in the InstrumentController.
+		 */
+		checkInstrumentHealthCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+			var oModel = new JSONModel();
+			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);
+				
+				if(bShowSuccessMessage == true)
+					MessageToast.show(oResourceBundle.getText("instrumentHealthCheck.checkSuccessful"));			
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+			
+			oCallingController.getView().setModel(oModel, "protocolEntries");
 		},
 		
 		
