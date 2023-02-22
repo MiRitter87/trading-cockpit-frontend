@@ -73,7 +73,7 @@
 				<items>
 					<ColumnListItem>
 						<cells>
-							<Text text="{path: 'protocolEntries>date', formatter: 'formatter.wsDateFormatter'}"/>
+							<Text text="{path: 'protocolEntries>date', formatter: '.formatter.wsDateFormatter'}"/>
 							<Text text="{path: 'protocolEntries>category', formatter: '.categoryTextFormatter'}"/>
 							<Text text="{protocolEntries>text}"/>
 						</cells>

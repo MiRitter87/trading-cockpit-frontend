@@ -3,10 +3,11 @@ sap.ui.define([
 	"../MainController",
 	"./InstrumentController",
 	"../../model/formatter",
+	"../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, InstrumentController, formatter, JSONModel, MessageToast, MessageBox) {
+], function (Controller, MainController, InstrumentController, formatter, Constants, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentHealthCheck", {
@@ -97,18 +98,19 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter of the stock exchange text.
+		 * Formatter of the category text.
 		 */
-		stockExchangeTextFormatter: function(sStockExchange) {
-			return MainController.getLocalizedStockExchangeText(sStockExchange, this.getOwnerComponent().getModel("i18n").getResourceBundle());
-		},
-		
-		
-		/**
-		 * Formatter of the type text.
-		 */
-		typeTextFormatter: function(sType) {
-			return InstrumentController.getLocalizedTypeText(sType, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		categoryTextFormatter: function(sCategory) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.CONFIRMATION)
+				return oResourceBundle.getText("protocol.category.confirmation");
+			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION)
+				return oResourceBundle.getText("protocol.category.violation");
+			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN)
+				return oResourceBundle.getText("protocol.category.uncertain");
+			else
+				return "";
 		},
 		
 		

@@ -68,6 +68,13 @@ sap.ui.define([
 		SCAN_SCOPE: {
 			ALL: 'ALL',
 			INCOMPLETE: 'INCOMPLETE'
+		},
+		
+		
+		PROTOCOL_ENTRY_CATEGORY: {
+			CONFIRMATION: 'CONFIRMATION',
+			VIOLATION: 'VIOLATION',
+			UNCERTAIN: 'UNCERTAIN'
 		}
     };
 	
