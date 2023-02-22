@@ -1,13 +1,12 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"../MainController",
 	"./InstrumentController",
 	"../../model/formatter",
 	"../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, InstrumentController, formatter, Constants, JSONModel, MessageToast, MessageBox) {
+], function (Controller, InstrumentController, formatter, Constants, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentHealthCheck", {
