@@ -31,6 +31,8 @@ sap.ui.define([
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ListController.queryListsByWebService(this.queryListsCallback, this, false);
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
+			
+			this.resetUIElements();
     	},
 		
 		
@@ -218,6 +220,26 @@ sap.ui.define([
 			}
 			
 			return true;
+		},
+		
+		
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements : function () {
+			var oListLabel = this.getView().byId("listLabel");
+			var oListComboBox = this.getView().byId("listComboBox");
+			var oInstrumentLabel = this.getView().byId("instrumentLabel");
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			
+			oListLabel.setVisible(false);
+			oListComboBox.setVisible(false);
+			oInstrumentLabel.setVisible(false);
+			oInstrumentComboBox.setVisible(false);
+			
+			this.getView().byId("typeComboBox").setSelectedKey("");
+			this.getView().byId("listComboBox").setSelectedKey("");
+			this.getView().byId("instrumentComboBox").setSelectedKey("");
 		}
 	});
 });
