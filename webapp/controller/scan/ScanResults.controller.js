@@ -202,6 +202,8 @@ sap.ui.define([
 				oBinding.filter([oTotalFilter]);
 			else		
 				oBinding.filter([]);
+				
+			this.updateResultTableTitle();
 		},
 		
 		
@@ -263,6 +265,8 @@ sap.ui.define([
 			}
 			
 			oCallingController.getView().setModel(oModel, "quotations");
+			
+			oCallingController.updateResultTableTitle();
 		},
 		
 		
@@ -344,6 +348,20 @@ sap.ui.define([
 		 */
 		typeTextFormatter: function(sType) {
 			return InstrumentController.getLocalizedTypeText(sType, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		},
+		
+		
+		/**
+		 * Updates the title of the result table.
+		 */
+		updateResultTableTitle: function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oQuotationTableTitle = this.getView().byId("quotationTableTitle");
+			var sText = oResourceBundle.getText("scanResults.tableHeader");
+			var oBinding = this.getView().byId("quotationTable").getBinding("items");
+			
+			sText = sText + " (" + oBinding.iLength + ")";
+			oQuotationTableTitle.setText(sText);
 		}
 	});
 });
