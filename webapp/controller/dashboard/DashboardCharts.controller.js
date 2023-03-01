@@ -194,6 +194,9 @@ sap.ui.define([
 			var oFilterIndustryGroup = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
 			var oFilterEtf = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.ETF);
 			
+			if(oBinding == undefined)
+				return;
+			
 			//Connect filters via logical "OR".
 			var oFilterTotal = new Filter({
 				filters: [oFilterSector, oFilterIndustryGroup, oFilterEtf],
