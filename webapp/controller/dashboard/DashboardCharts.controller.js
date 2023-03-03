@@ -62,7 +62,9 @@ sap.ui.define([
 				
 				oInstrumentComboBox.setSelectedKey(null);
 			}
-			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.DISTRIBUTION_DAYS) {
+			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.DISTRIBUTION_DAYS ||
+				oSelectedItem.getKey() == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS) {
+					
 				this.applyFilterToInstrumentsComboBox();
 				
 				oListLabel.setVisible(false);
@@ -146,6 +148,9 @@ sap.ui.define([
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.CHART_TYPE.DISTRIBUTION_DAYS, "dashboardCharts.type.distributionDays");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS, "dashboardCharts.type.followThroughDays");
 		},
 		
 		
