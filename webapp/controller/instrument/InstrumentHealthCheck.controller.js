@@ -114,6 +114,36 @@ sap.ui.define([
 		
 		
 		/**
+		 * Formatter of the category icon.
+		 */
+		categoryIconFormatter: function(sCategory) {
+			if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.CONFIRMATION)
+				return "sap-icon://sys-enter-2";
+			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION)
+				return "sap-icon://error";
+			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN)
+				return "sap-icon://alert"
+			else
+				return "";
+		},
+		
+		
+		/**
+		 * Formatter of the category state.
+		 */
+		categoryStateFormatter: function(sCategory) {
+			if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.CONFIRMATION)
+				return "Success";
+			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION)
+				return "Error";
+			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN)
+				return "Warning"
+			else
+				return "None";
+		},
+		
+		
+		/**
 		 * Verifies input of obligatory fields.
 		 * Returns true if input is valid. Returns false if input is invalid.
 		 */

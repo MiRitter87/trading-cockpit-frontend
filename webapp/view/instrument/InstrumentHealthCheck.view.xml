@@ -74,7 +74,9 @@
 					<ColumnListItem>
 						<cells>
 							<Text text="{path: 'protocolEntries>date', formatter: '.formatter.wsDateFormatter'}"/>
-							<Text text="{path: 'protocolEntries>category', formatter: '.categoryTextFormatter'}"/>
+							<ObjectStatus text="{path: 'protocolEntries>category', formatter: '.categoryTextFormatter'}" 
+								icon="{path: 'protocolEntries>category', formatter: '.categoryIconFormatter'}"
+								state="{path: 'protocolEntries>category', formatter: '.categoryStateFormatter'}"/>
 							<Text text="{protocolEntries>text}"/>
 						</cells>
 					</ColumnListItem>
