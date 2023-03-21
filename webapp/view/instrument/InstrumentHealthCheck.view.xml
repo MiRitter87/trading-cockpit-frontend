@@ -55,7 +55,7 @@
 			<Table id="protocolTable" items="{path: 'protocolEntries>/protocolEntry/'}" mode="SingleSelectMaster" sticky="ColumnHeaders">
 				<headerToolbar>
 					<OverflowToolbar>
-						<Title text="{i18n>instrumentHealthCheck.tableHeader}"/>
+						<Title text="{i18n>instrumentHealthCheck.tableHeader} ({= ${protocolEntries>/protocolEntry/}.length})"/>
 					</OverflowToolbar>
 				</headerToolbar>
 			
