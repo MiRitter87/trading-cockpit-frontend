@@ -19,6 +19,8 @@
 						press=".onTemplateInformationPressed"/>
 					<Label text="{i18n>instrument.type}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
 					<ComboBox id="typeComboBox" required="true"/>
+					<Label id="startDateLabel" text="{i18n>scanResults.startDate}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+					<DatePicker id="startDatePicker" valueFormat="yyyy-MM-dd"/>
 				</FlexBox>
 			
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />

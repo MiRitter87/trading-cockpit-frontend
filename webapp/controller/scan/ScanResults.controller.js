@@ -61,17 +61,27 @@ sap.ui.define([
     	onRefreshPressed : function() {
 			var sSelectedTemplate = "";
 			var sSelectedType = "";
+			var sSelectedDate = "";
 			var oTemplateComboBox = this.getView().byId("templateComboBox");
 			var oTypeComboBox = this.getView().byId("typeComboBox");
+			var oStartDatePicker = this.getView().byId("startDatePicker");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			sSelectedTemplate = oTemplateComboBox.getSelectedKey();
 			sSelectedType = oTypeComboBox.getSelectedKey();
+			sSelectedDate = oStartDatePicker.getValue();
 			
-			if(sSelectedType == "")
+			if(sSelectedType == "") {
 				MessageBox.information(oResourceBundle.getText("scanResults.noTypeSelected"));
+				return;				
+			}
+				
+			if(sSelectedTemplate == Constants.SCAN_TEMPLATE.RS_SINCE_DATE && sSelectedDate == "") {
+				MessageBox.information(oResourceBundle.getText("scanResults.noDateSelected"));
+				return;				
+			}
 			
-			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, sSelectedTemplate, sSelectedType);
+			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, sSelectedTemplate, sSelectedType, sSelectedDate);
 		},
 		
 		
@@ -118,6 +128,10 @@ sap.ui.define([
 			else if(sKey == Constants.SCAN_TEMPLATE.NEAR_52_WEEK_LOW) {
 				sTitle = oResourceBundle.getText("scanResults.template.near52WeekLow");
 				sDescription = oResourceBundle.getText("scanResults.template.near52WeekLow.description");
+			}
+			else if(sKey == Constants.SCAN_TEMPLATE.RS_SINCE_DATE) {
+				sTitle = oResourceBundle.getText("scanResults.template.rsSinceDate");
+				sDescription = oResourceBundle.getText("scanResults.template.rsSinceDate.description");
 			}
 			else {
 				MessageBox.information(oResourceBundle.getText("scanResults.noTemplateSelected"));
@@ -293,6 +307,7 @@ sap.ui.define([
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.DOWN_ON_VOLUME, "scanResults.template.downOnVolume");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.NEAR_52_WEEK_HIGH, "scanResults.template.near52WeekHigh");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.NEAR_52_WEEK_LOW, "scanResults.template.near52WeekLow");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.RS_SINCE_DATE, "scanResults.template.rsSinceDate");
 		},
 		
 		

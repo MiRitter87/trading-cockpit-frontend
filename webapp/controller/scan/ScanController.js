@@ -172,7 +172,7 @@ sap.ui.define([
 		/**
 		 * Queries the quotation WebService for quotations.
 		 */
-		queryQuotationsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sTemplate, sType) {
+		queryQuotationsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sTemplate, sType, sStartDate) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/quotation");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
@@ -192,6 +192,8 @@ sap.ui.define([
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.NEAR_52_WEEK_HIGH;
 			else if(sTemplate == Constants.SCAN_TEMPLATE.NEAR_52_WEEK_LOW)
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.NEAR_52_WEEK_LOW;
+			else if(sTemplate == Constants.SCAN_TEMPLATE.RS_SINCE_DATE)
+				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.RS_SINCE_DATE + "&startDate=" + sStartDate;
 			else
 				bNoTemplate = true;
 				
