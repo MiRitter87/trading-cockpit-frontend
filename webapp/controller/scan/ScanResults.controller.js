@@ -56,6 +56,29 @@ sap.ui.define([
     	
     	
     	/**
+		 * Handles the selection of a scan template.
+		 */
+		onTemplateSelectionChange : function (oControlEvent) {
+			var oSelectedItem = oControlEvent.getParameters().selectedItem;
+			var oStartDateLabel = this.getView().byId("startDateLabel");
+			var oStartDatePicker = this.getView().byId("startDatePicker");
+			
+			if(oSelectedItem == null) {
+				oStartDateLabel.setVisible(false);
+				oStartDatePicker.setVisible(false);
+			}
+			else if(oSelectedItem.getKey() == Constants.SCAN_TEMPLATE.RS_SINCE_DATE) {
+				oStartDateLabel.setVisible(true);
+				oStartDatePicker.setVisible(true);
+			}
+			else {
+				oStartDateLabel.setVisible(false);
+				oStartDatePicker.setVisible(false);
+			}
+		},
+    	
+    	
+    	/**
     	 * Handles the button press event of the refresh scan results button.
     	 */
     	onRefreshPressed : function() {
@@ -362,9 +385,14 @@ sap.ui.define([
 		resetUiElements : function() {
 			var oTemplateComboBox = this.getView().byId("templateComboBox");
 			var oTypeComboBox = this.getView().byId("typeComboBox");
+			var oStartDateLabel = this.getView().byId("startDateLabel");
+			var oStartDatePicker = this.getView().byId("startDatePicker");
 						
 			oTemplateComboBox.setSelectedKey(Constants.SCAN_TEMPLATE.ALL);
 			oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
+			
+			oStartDateLabel.setVisible(false);
+			oStartDatePicker.setVisible(false);
 		},
 		
 		

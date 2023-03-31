@@ -14,7 +14,7 @@
 			<VBox class="sapUiSmallMarginBegin">
 				<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
 					<Label text="{i18n>scanResults.templateSelection}" class="sapUiSmallMarginEnd"/>
-					<ComboBox id="templateComboBox"/>
+					<ComboBox id="templateComboBox" selectionChange=".onTemplateSelectionChange"/>
 					<Button icon="sap-icon://hint" type="Transparent" tooltip="{i18n>scanResults.templateTooltip}" 
 						press=".onTemplateInformationPressed"/>
 					<Label text="{i18n>instrument.type}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
