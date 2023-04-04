@@ -94,6 +94,11 @@ sap.ui.define([
 			sSelectedType = oTypeComboBox.getSelectedKey();
 			sSelectedDate = oStartDatePicker.getValue();
 			
+			if(sSelectedTemplate == "") {
+				MessageBox.information(oResourceBundle.getText("scanResults.noTemplateSelected"));
+				return;
+			}
+			
 			if(sSelectedType == "") {
 				MessageBox.information(oResourceBundle.getText("scanResults.noTypeSelected"));
 				return;				
