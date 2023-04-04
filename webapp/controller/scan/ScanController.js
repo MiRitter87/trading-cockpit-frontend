@@ -176,9 +176,10 @@ sap.ui.define([
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/quotation");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
-			var bNoTemplate = false;
 			
-			if(sTemplate == Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE)
+			if(sTemplate == Constants.SCAN_TEMPLATE.ALL)
+				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.ALL;
+			else if(sTemplate == Constants.SCAN_TEMPLATE.ALL)
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE;
 			else if(sTemplate == Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS)
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS;
@@ -194,22 +195,15 @@ sap.ui.define([
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.NEAR_52_WEEK_LOW;
 			else if(sTemplate == Constants.SCAN_TEMPLATE.RS_SINCE_DATE)
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.RS_SINCE_DATE + "&startDate=" + sStartDate;
-			else
-				bNoTemplate = true;
-				
-			if(bNoTemplate == true)
-				sQueryUrl = sQueryUrl + "?";
-			else
-				sQueryUrl = sQueryUrl + "&";
 				
 			if(sType == Constants.INSTRUMENT_TYPE.STOCK)
-				sQueryUrl = sQueryUrl + "instrumentType=" + Constants.INSTRUMENT_TYPE.STOCK;
+				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.STOCK;
 			else if(sType == Constants.INSTRUMENT_TYPE.ETF)
-				sQueryUrl = sQueryUrl + "instrumentType=" + Constants.INSTRUMENT_TYPE.ETF;
+				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.ETF;
 			else if(sType == Constants.INSTRUMENT_TYPE.SECTOR)
-				sQueryUrl = sQueryUrl + "instrumentType=" + Constants.INSTRUMENT_TYPE.SECTOR;
+				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.SECTOR;
 			else if(sType == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP)
-				sQueryUrl = sQueryUrl + "instrumentType=" + Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP;
+				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP;
 			
 			jQuery.ajax({
 				type : "GET", 
