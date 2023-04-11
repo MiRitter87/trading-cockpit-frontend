@@ -226,7 +226,8 @@ sap.ui.define([
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
-			if(sSelectedType == Constants.CHART_TYPE.DISTRIBUTION_DAYS && sSelectedInstrumentId == "") {
+			if(	sSelectedType == Constants.CHART_TYPE.DISTRIBUTION_DAYS && sSelectedInstrumentId == "" || 
+				sSelectedType == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS && sSelectedInstrumentId == "") {
 				MessageBox.error(oResourceBundle.getText("dashboardCharts.noInstrumentSelected"));
 				return false;
 			}
