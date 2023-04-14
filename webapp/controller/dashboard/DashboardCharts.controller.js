@@ -244,6 +244,7 @@ sap.ui.define([
 			var oListComboBox = this.getView().byId("listComboBox");
 			var oInstrumentLabel = this.getView().byId("instrumentLabel");
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oImage = this.getView().byId("chartImage");
 			
 			oListLabel.setVisible(false);
 			oListComboBox.setVisible(false);
@@ -253,6 +254,8 @@ sap.ui.define([
 			this.getView().byId("typeComboBox").setSelectedKey("");
 			this.getView().byId("listComboBox").setSelectedKey("");
 			this.getView().byId("instrumentComboBox").setSelectedKey("");
+			
+			oImage.setSrc(null);
 		}
 	});
 });
