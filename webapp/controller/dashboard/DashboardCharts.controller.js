@@ -54,7 +54,8 @@ sap.ui.define([
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER || 
 				oSelectedItem.getKey() == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50 || 
-				oSelectedItem.getKey() == Constants.CHART_TYPE.RITTER_MARKET_TREND) {
+				oSelectedItem.getKey() == Constants.CHART_TYPE.RITTER_MARKET_TREND || 
+				oSelectedItem.getKey() == Constants.CHART_TYPE.RITTER_PATTERN_INDICATOR) {
 					
 				oListLabel.setVisible(true);
 				oListComboBox.setVisible(true);
@@ -155,6 +156,9 @@ sap.ui.define([
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.CHART_TYPE.RITTER_MARKET_TREND, "dashboardCharts.type.ritterMarketTrend");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_TYPE.RITTER_PATTERN_INDICATOR, "dashboardCharts.type.ritterPatternIndicator");
 		},
 		
 		
