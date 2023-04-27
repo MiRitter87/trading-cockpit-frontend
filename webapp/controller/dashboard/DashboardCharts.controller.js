@@ -61,8 +61,6 @@ sap.ui.define([
 				oListComboBox.setVisible(true);
 				oInstrumentLabel.setVisible(false);
 				oInstrumentComboBox.setVisible(false);
-				
-				oInstrumentComboBox.setSelectedKey(null);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.DISTRIBUTION_DAYS ||
 				oSelectedItem.getKey() == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS) {
@@ -73,9 +71,18 @@ sap.ui.define([
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(true);
 				oInstrumentComboBox.setVisible(true);
-				
-				oListComboBox.setSelectedKey(null);
 			}
+			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.POCKET_PIVOTS) {
+				this.removeFilterFromInstrumentsComboBox();
+				
+				oListLabel.setVisible(false);
+				oListComboBox.setVisible(false);
+				oInstrumentLabel.setVisible(true);
+				oInstrumentComboBox.setVisible(true);
+			}
+			
+			oInstrumentComboBox.setSelectedKey(null);
+			oListComboBox.setSelectedKey(null);
 		},
 		
 		
@@ -159,6 +166,9 @@ sap.ui.define([
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.CHART_TYPE.RITTER_PATTERN_INDICATOR, "dashboardCharts.type.ritterPatternIndicator");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_TYPE.POCKET_PIVOTS, "dashboardCharts.type.pocketPivots");
 		},
 		
 		
@@ -221,6 +231,19 @@ sap.ui.define([
 		
 		
 		/**
+		 * Removes all filters from the ComboBox for Instrument selection.
+		 */
+		removeFilterFromInstrumentsComboBox : function () {
+			var oBinding = this.getView().byId("instrumentComboBox").getBinding("items");
+			
+			if(oBinding == undefined)
+				return;
+				
+			oBinding.filter([]);
+		},
+		
+		
+		/**
 		 * Validates the user input. Prompts messages in input is not valid.
 		 */
 		isInputValid : function () {
@@ -231,7 +254,9 @@ sap.ui.define([
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
 			if(	sSelectedType == Constants.CHART_TYPE.DISTRIBUTION_DAYS && sSelectedInstrumentId == "" || 
-				sSelectedType == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS && sSelectedInstrumentId == "") {
+				sSelectedType == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS && sSelectedInstrumentId == "" ||
+				sSelectedType == Constants.CHART_TYPE.POCKET_PIVOTS && sSelectedInstrumentId == "") {
+					
 				MessageBox.error(oResourceBundle.getText("dashboardCharts.noInstrumentSelected"));
 				return false;
 			}
