@@ -124,6 +124,37 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles error during loading of the chart image using the given URL.
+		 */
+		onChartImageError : function() {
+			var sChartUrl = this.getChartUrl();
+			
+			//Try to query the image again in order to get the error message from the Response.
+			this.queryChart(sChartUrl);
+		},
+		
+		
+		/**
+		 * Queries a chart using an jQuery AJAX call.
+		 * The error message of the HTTP call is being displayed.
+		 */
+		queryChart : function (sChartUrl) {
+			jQuery.ajax({
+				type : "GET", 
+				contentType : "image/png", 
+				url : sChartUrl, 
+				dataType : "text", 
+				success : function() {
+					//Nothing to do here. Only error handling is needed.
+				},
+				error : function(errorData) {
+					MessageToast.show("!Fehler");
+				}
+			});                                                                 
+		},
+		
+		
+		/**
 		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
 		 */
 		queryInstrumentsCallback : function(oReturnData, oCallingController) {

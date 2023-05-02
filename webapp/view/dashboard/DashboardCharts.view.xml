@@ -35,7 +35,7 @@
 			</VBox>
 			
 			<ScrollContainer>
-				<Image id="chartImage"/>
+				<Image id="chartImage" error=".onChartImageError"/>
 			</ScrollContainer>
 		</content>
 	</Page>
