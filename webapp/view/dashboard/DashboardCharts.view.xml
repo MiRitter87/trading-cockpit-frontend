@@ -15,6 +15,8 @@
 				<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
 					<Label text="{i18n>dashboardCharts.type}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
 					<ComboBox id="typeComboBox" required="true" selectionChange=".onTypeSelectionChange"/>
+					<Button icon="sap-icon://hint" type="Transparent" tooltip="{i18n>dashboardCharts.typeTooltip}" 
+						press=".onChartInformationPressed"/>
 					
 					<!-- Additional UI elements that are used depending on the selected chart type. -->
 					<!-- Lists can be selected when determining A/D number and instruments above SMA(50) -->

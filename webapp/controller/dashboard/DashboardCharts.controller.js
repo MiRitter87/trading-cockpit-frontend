@@ -87,12 +87,72 @@ sap.ui.define([
 		
 		
 		/**
+    	 * Handles the button press event of the chart information button.
+    	 */
+    	onChartInformationPressed : function() {
+			var oComboBox = this.getView().byId("typeComboBox");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var mOptions = new Object();
+			var sTitle = "", sDescription = "";
+			var sKey = "";
+			
+			sKey = oComboBox.getSelectedKey();
+			
+			if(sKey == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER) {
+				sTitle = oResourceBundle.getText("dashboardCharts.type.advanceDeclineNumber");
+				sDescription = oResourceBundle.getText("dashboardCharts.type.advanceDeclineNumber.description");
+			}
+			else if(sKey == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50) {
+				sTitle = oResourceBundle.getText("dashboardCharts.type.instrumentsAboveSma50");
+				sDescription = oResourceBundle.getText("dashboardCharts.type.instrumentsAboveSma50.description");
+			}
+			else if(sKey == Constants.CHART_TYPE.DISTRIBUTION_DAYS) {
+				sTitle = oResourceBundle.getText("dashboardCharts.type.distributionDays");
+				sDescription = oResourceBundle.getText("dashboardCharts.type.distributionDays.description");
+			}
+			else if(sKey == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS) {
+				sTitle = oResourceBundle.getText("dashboardCharts.type.followThroughDays");
+				sDescription = oResourceBundle.getText("dashboardCharts.type.followThroughDays.description");
+			}
+			else if(sKey == Constants.CHART_TYPE.RITTER_MARKET_TREND) {
+				sTitle = oResourceBundle.getText("dashboardCharts.type.ritterMarketTrend");
+				sDescription = oResourceBundle.getText("dashboardCharts.type.ritterMarketTrend.description");
+			}
+			else if(sKey == Constants.CHART_TYPE.RITTER_PATTERN_INDICATOR) {
+				sTitle = oResourceBundle.getText("dashboardCharts.type.ritterPatternIndicator");
+				sDescription = oResourceBundle.getText("dashboardCharts.type.ritterPatternIndicator.description");
+			}
+			else if(sKey == Constants.CHART_TYPE.POCKET_PIVOTS) {
+				sTitle = oResourceBundle.getText("dashboardCharts.type.pocketPivots");
+				sDescription = oResourceBundle.getText("dashboardCharts.type.pocketPivots.description");
+			}
+			else {
+				MessageBox.information(oResourceBundle.getText("dashboardCharts.noTypeSelected"));
+				return;
+			}		
+			
+			mOptions.title = sTitle
+			MessageBox.information(sDescription, mOptions);
+		},
+		
+		
+		/**
     	 * Handles the button press event of the refresh chart button.
     	 */
     	onRefreshPressed : function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oImage = this.getView().byId("chartImage");
 			var bIsInputValid = this.isInputValid();
 			var sChartUrl;
+			var sSelectedType = "";
+			var oTypeComboBox = this.getView().byId("typeComboBox");
+			
+			sSelectedType = oTypeComboBox.getSelectedKey();
+			
+			if(sSelectedType == "") {
+				MessageBox.information(oResourceBundle.getText("dashboardCharts.noTypeSelected"));
+				return;				
+			}
 			
 			if(bIsInputValid) {
 				sChartUrl = this.getChartUrl();
