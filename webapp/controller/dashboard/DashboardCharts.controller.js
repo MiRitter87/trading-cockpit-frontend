@@ -127,30 +127,12 @@ sap.ui.define([
 		 * Handles error during loading of the chart image using the given URL.
 		 */
 		onChartImageError : function() {
-			var sChartUrl = this.getChartUrl();
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			//Try to query the image again in order to get the error message from the Response.
-			this.queryChart(sChartUrl);
-		},
-		
-		
-		/**
-		 * Queries a chart using an jQuery AJAX call.
-		 * The error message of the HTTP call is being displayed.
-		 */
-		queryChart : function (sChartUrl) {
-			jQuery.ajax({
-				type : "GET", 
-				contentType : "image/png", 
-				url : sChartUrl, 
-				dataType : "text", 
-				success : function() {
-					//Nothing to do here. Only error handling is needed.
-				},
-				error : function(errorData) {
-					MessageToast.show("!Fehler");
-				}
-			});                                                                 
+			//The backend currently only supports a response with error code 404 and standard error page with response text.
+			//The response site would have to be parsed in order to get the message from the backend.
+			//Therefore only a generic error message is being displayed at the moment.
+			MessageToast.show(oResourceBundle.getText("dashboardCharts.getChartError"));
 		},
 		
 		
