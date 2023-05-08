@@ -19,7 +19,8 @@ sap.ui.define([
 			STOCK: 'STOCK',
 			ETF: 'ETF',
 			SECTOR: 'SECTOR',
-			INDUSTRY_GROUP: 'IND_GROUP'
+			INDUSTRY_GROUP: 'IND_GROUP',
+			RATIO: 'RATIO'
 		},
 		
 		ALERT_TYPE: {

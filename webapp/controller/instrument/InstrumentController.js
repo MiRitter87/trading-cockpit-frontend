@@ -13,6 +13,7 @@ sap.ui.define([
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.ETF, "instrument.type.etf");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.SECTOR, "instrument.type.sector");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, "instrument.type.industryGroup");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.RATIO, "instrument.type.ratio");
 		},
 		
 		
@@ -43,8 +44,10 @@ sap.ui.define([
 				return oResourceBundle.getText("instrument.type.etf");
 			else if(sType == Constants.INSTRUMENT_TYPE.SECTOR)
 				return oResourceBundle.getText("instrument.type.sector");
-				else if(sType == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP)
+			else if(sType == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP)
 				return oResourceBundle.getText("instrument.type.industryGroup");
+			else if(sType == Constants.INSTRUMENT_TYPE.RATIO)
+				return oResourceBundle.getText("instrument.type.ratio");
 			else
 				return "";
 		},
