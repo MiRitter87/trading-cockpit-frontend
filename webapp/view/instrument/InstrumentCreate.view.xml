@@ -33,7 +33,7 @@
 					<f:FormContainer title="{i18n>instrumentCreate.titleGeneralData}">
 						<f:FormElement label="{i18n>instrument.symbol}">
 							<f:fields>
-								<Input maxLength="6" value="{newInstrument>/symbol}" required="true"/>
+								<Input id="symbolInput" maxLength="6" value="{newInstrument>/symbol}" required="true"/>
 							</f:fields>
 						</f:FormElement>
 						
@@ -74,6 +74,20 @@
 									<core:Item key="{industryGroups>id}" text="{industryGroups>symbol} - {industryGroups>name}"/>
 								</ComboBox>
 							</f:fields>
+						</f:FormElement>
+					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>instrumentCreate.titleRatio}">
+						<f:FormElement label="{i18n>instrument.dividend}">
+							<ComboBox id="dividendComboBox">
+							
+							</ComboBox>
+						</f:FormElement>
+						
+						<f:FormElement label="{i18n>instrument.divisor}">
+							<ComboBox id="divisorComboBox">
+							
+							</ComboBox>
 						</f:FormElement>
 					</f:FormContainer>
 					

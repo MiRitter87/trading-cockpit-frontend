@@ -69,6 +69,21 @@ sap.ui.define([
 		
 		
 		/**
+		 * Enables or disables the ComboBoxes for ratio selection.
+		 * Also resets the previously selected items if the enabled status is set to false.
+		 */
+		setRatioComboBoxesEnabled : function (bEnabled, oDividendComboBox, oDivisorComboBox) {
+			oDividendComboBox.setEnabled(bEnabled);
+			oDivisorComboBox.setEnabled(bEnabled);
+			
+			if(bEnabled == false) {
+				oDividendComboBox.setSelectedItem(null);
+				oDivisorComboBox.setSelectedItem(null);
+			}
+		},
+		
+		
+		/**
 		 * Calls a WebService operation to create an instrument.
 		 */
 		createInstrumentByWebService : function(oInstrumentModel, callbackFunction, oCallingController) {
