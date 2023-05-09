@@ -5,8 +5,10 @@ sap.ui.define([
 	"../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
-	"sap/m/MessageToast"
-], function (Controller, MainController, InstrumentController, Constants, JSONModel, MessageBox, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
+], function (Controller, MainController, InstrumentController, Constants, JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentCreate", {
@@ -37,6 +39,8 @@ sap.ui.define([
 			//Query instruments for potential selection of sector and industry group.
 			InstrumentController.queryInstrumentsByWebService(this.querySectorsCallback, this, false, Constants.INSTRUMENT_TYPE.SECTOR);
 			InstrumentController.queryInstrumentsByWebService(this.queryIndustryGroupsCallback, this, false, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
+			
+			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
     	},
 
 
@@ -105,7 +109,7 @@ sap.ui.define([
 					this.getView().byId("dividendComboBox"), this.getView().byId("divisorComboBox"));	
 			}
 		},
-		
+				
 		
 		/**
 		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
@@ -140,6 +144,25 @@ sap.ui.define([
 			}
 			
 			oCallingController.getView().setModel(oModel, "industryGroups");
+		},
+		
+		
+		/**
+		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
+		 */
+		queryInstrumentsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}
+			
+			oCallingController.getView().setModel(oModel, "instruments");
+			oCallingController.setFilterDividendDivisor();
 		},
 		
 		
@@ -207,6 +230,27 @@ sap.ui.define([
 		showMessageOnUndefinedType : function () {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			MessageBox.error(oResourceBundle.getText("instrumentCreate.noTypeSelected"));
+		},
+		
+		
+		/**
+		 * Sets a filter for the items displayed in the dividend and divisor ComboBoxes.
+		 */
+		setFilterDividendDivisor : function () {
+			var oBindingDividend = this.getView().byId("dividendComboBox").getBinding("items");
+			var oBindingDivisor = this.getView().byId("divisorComboBox").getBinding("items");
+			var oFilterTypeEtf = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.ETF);
+			var oFilterTypeSector = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.SECTOR);
+			var oFilterTypeIg = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
+			
+			//Connect filters via logical "OR".
+			var oFilterTotal = new Filter({
+				filters: [oFilterTypeEtf, oFilterTypeSector, oFilterTypeIg],
+    			and: false
+  			});
+			
+			oBindingDividend.filter([oFilterTotal]);
+			oBindingDivisor.filter([oFilterTotal]);
 		}
 	});
 });
