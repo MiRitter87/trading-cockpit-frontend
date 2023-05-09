@@ -36,10 +36,7 @@ sap.ui.define([
 			this.resetUIElements();
 			this.initializeInstrumentModel();
 			
-			//Query instruments for potential selection of sector and industry group.
-			InstrumentController.queryInstrumentsByWebService(this.querySectorsCallback, this, false, Constants.INSTRUMENT_TYPE.SECTOR);
-			InstrumentController.queryInstrumentsByWebService(this.queryIndustryGroupsCallback, this, false, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
-			
+			//Query instruments for potential selection of ratio, sector and industry group.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
     	},
 
@@ -109,42 +106,6 @@ sap.ui.define([
 					this.getView().byId("dividendComboBox"), this.getView().byId("divisorComboBox"));	
 			}
 		},
-				
-		
-		/**
-		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
-		 */
-		querySectorsCallback : function(oReturnData, oCallingController) {
-			var oModel = new JSONModel();
-			
-			if(oReturnData.data != null) {
-				oModel.setData(oReturnData.data);
-			}
-			
-			if(oReturnData.data == null && oReturnData.message != null)  {
-				MessageToast.show(oReturnData.message[0].text);
-			}
-			
-			oCallingController.getView().setModel(oModel, "sectors");
-		},
-		
-		
-		/**
-		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
-		 */
-		queryIndustryGroupsCallback : function(oReturnData, oCallingController) {
-			var oModel = new JSONModel();
-			
-			if(oReturnData.data != null) {
-				oModel.setData(oReturnData.data);
-			}
-			
-			if(oReturnData.data == null && oReturnData.message != null)  {
-				MessageToast.show(oReturnData.message[0].text);
-			}
-			
-			oCallingController.getView().setModel(oModel, "industryGroups");
-		},
 		
 		
 		/**
@@ -163,6 +124,7 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oModel, "instruments");
 			oCallingController.setFilterDividendDivisor();
+			oCallingController.setFilterSectorIg();
 		},
 		
 		
@@ -251,6 +213,20 @@ sap.ui.define([
 			
 			oBindingDividend.filter([oFilterTotal]);
 			oBindingDivisor.filter([oFilterTotal]);
+		},
+		
+		
+		/**
+		 * Sets a filter for the items displayed in the sector and industry group ComboBoxes.
+		 */
+		setFilterSectorIg : function () {
+			var oBindingSector = this.getView().byId("sectorComboBox").getBinding("items");
+			var oBindingIg = this.getView().byId("industryGroupComboBox").getBinding("items");
+			var oFilterTypeSector = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.SECTOR);
+			var oFilterTypeIg = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
+			
+			oBindingSector.filter(oFilterTypeSector);
+			oBindingIg.filter(oFilterTypeIg);
 		}
 	});
 });
