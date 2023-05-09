@@ -96,6 +96,20 @@
 						</f:FormElement>
 					</f:FormContainer>
 					
+					<f:FormContainer title="{i18n>instrumentEdit.titleRatio}">
+						<f:FormElement label="{i18n>instrument.dividend}">
+							<ComboBox id="dividendComboBox" items="{path: 'instruments>/instrument/'}">
+								<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
+							</ComboBox>
+						</f:FormElement>
+						
+						<f:FormElement label="{i18n>instrument.divisor}">
+							<ComboBox id="divisorComboBox" items="{path: 'instruments>/instrument/'}">
+								<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
+							</ComboBox>
+						</f:FormElement>
+					</f:FormContainer>
+					
 					<f:FormContainer title="{i18n>instrumentEdit.titleInterfaceDataProvider}">
 						<f:FormElement label="{i18n>instrument.companyPathInvestingCom}">
 							<f:fields>

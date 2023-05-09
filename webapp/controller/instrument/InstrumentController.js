@@ -1,7 +1,9 @@
 sap.ui.define([
 	"../MainController",
-	"../Constants"
-], function (MainController, Constants) {
+	"../Constants",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
+], function (MainController, Constants, Filter, FilterOperator) {
 	"use strict";
 	
 	return {
@@ -80,6 +82,41 @@ sap.ui.define([
 				oDividendComboBox.setSelectedItem(null);
 				oDivisorComboBox.setSelectedItem(null);
 			}
+		},
+		
+		
+		/**
+		 * Sets a filter for the items displayed in the dividend and divisor ComboBoxes.
+		 */
+		setFilterDividendDivisor : function (oDividendComboBox, oDivisorComboBox) {
+			var oBindingDividend = oDividendComboBox.getBinding("items");
+			var oBindingDivisor = oDivisorComboBox.getBinding("items");
+			var oFilterTypeEtf = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.ETF);
+			var oFilterTypeSector = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.SECTOR);
+			var oFilterTypeIg = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
+			
+			//Connect filters via logical "OR".
+			var oFilterTotal = new Filter({
+				filters: [oFilterTypeEtf, oFilterTypeSector, oFilterTypeIg],
+    			and: false
+  			});
+			
+			oBindingDividend.filter([oFilterTotal]);
+			oBindingDivisor.filter([oFilterTotal]);
+		},
+		
+		
+		/**
+		 * Sets a filter for the items displayed in the sector and industry group ComboBoxes.
+		 */
+		setFilterSectorIg : function (oSectorComboBox, oIndustryGroupComboBox) {
+			var oBindingSector = oSectorComboBox.getBinding("items");
+			var oBindingIg = oIndustryGroupComboBox.getBinding("items");
+			var oFilterTypeSector = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.SECTOR);
+			var oFilterTypeIg = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
+			
+			oBindingSector.filter(oFilterTypeSector);
+			oBindingIg.filter(oFilterTypeIg);
 		},
 		
 		

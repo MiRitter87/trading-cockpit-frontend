@@ -5,10 +5,8 @@ sap.ui.define([
 	"../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
-	"sap/m/MessageBox",
-	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
-], function (Controller, MainController, InstrumentController, Constants, JSONModel, MessageToast, MessageBox, Filter, FilterOperator) {
+	"sap/m/MessageBox"
+], function (Controller, MainController, InstrumentController, Constants, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentEdit", {
@@ -130,7 +128,10 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "instruments");
-			oCallingController.setFilterSectorIg();
+			InstrumentController.setFilterDividendDivisor(
+				oCallingController.getView().byId("dividendComboBox"), oCallingController.getView().byId("divisorComboBox"));
+			InstrumentController.setFilterSectorIg(
+				oCallingController.getView().byId("sectorComboBox"), oCallingController.getView().byId("industryGroupComboBox"));
 		},
 				
 		
@@ -237,20 +238,6 @@ sap.ui.define([
 				wsInstrument.setProperty("/industryGroupId", oInstrument.industryGroup.id);
 			
 			return wsInstrument;
-		},
-		
-		
-		/**
-		 * Sets a filter for the items displayed in the sector and industry group ComboBoxes.
-		 */
-		setFilterSectorIg : function () {
-			var oBindingSector = this.getView().byId("sectorComboBox").getBinding("items");
-			var oBindingIg = this.getView().byId("industryGroupComboBox").getBinding("items");
-			var oFilterTypeSector = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.SECTOR);
-			var oFilterTypeIg = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
-			
-			oBindingSector.filter(oFilterTypeSector);
-			oBindingIg.filter(oFilterTypeIg);
 		}
 	});
 });

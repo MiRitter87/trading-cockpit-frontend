@@ -5,10 +5,8 @@ sap.ui.define([
 	"../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
-	"sap/m/MessageToast",
-	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
-], function (Controller, MainController, InstrumentController, Constants, JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
+	"sap/m/MessageToast"
+], function (Controller, MainController, InstrumentController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentCreate", {
@@ -123,8 +121,10 @@ sap.ui.define([
 			}
 			
 			oCallingController.getView().setModel(oModel, "instruments");
-			oCallingController.setFilterDividendDivisor();
-			oCallingController.setFilterSectorIg();
+			InstrumentController.setFilterDividendDivisor(
+				oCallingController.getView().byId("dividendComboBox"), oCallingController.getView().byId("divisorComboBox"));
+			InstrumentController.setFilterSectorIg(
+				oCallingController.getView().byId("sectorComboBox"), oCallingController.getView().byId("industryGroupComboBox"));
 		},
 		
 		
@@ -192,41 +192,6 @@ sap.ui.define([
 		showMessageOnUndefinedType : function () {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			MessageBox.error(oResourceBundle.getText("instrumentCreate.noTypeSelected"));
-		},
-		
-		
-		/**
-		 * Sets a filter for the items displayed in the dividend and divisor ComboBoxes.
-		 */
-		setFilterDividendDivisor : function () {
-			var oBindingDividend = this.getView().byId("dividendComboBox").getBinding("items");
-			var oBindingDivisor = this.getView().byId("divisorComboBox").getBinding("items");
-			var oFilterTypeEtf = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.ETF);
-			var oFilterTypeSector = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.SECTOR);
-			var oFilterTypeIg = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
-			
-			//Connect filters via logical "OR".
-			var oFilterTotal = new Filter({
-				filters: [oFilterTypeEtf, oFilterTypeSector, oFilterTypeIg],
-    			and: false
-  			});
-			
-			oBindingDividend.filter([oFilterTotal]);
-			oBindingDivisor.filter([oFilterTotal]);
-		},
-		
-		
-		/**
-		 * Sets a filter for the items displayed in the sector and industry group ComboBoxes.
-		 */
-		setFilterSectorIg : function () {
-			var oBindingSector = this.getView().byId("sectorComboBox").getBinding("items");
-			var oBindingIg = this.getView().byId("industryGroupComboBox").getBinding("items");
-			var oFilterTypeSector = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.SECTOR);
-			var oFilterTypeIg = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
-			
-			oBindingSector.filter(oFilterTypeSector);
-			oBindingIg.filter(oFilterTypeIg);
 		}
 	});
 });
