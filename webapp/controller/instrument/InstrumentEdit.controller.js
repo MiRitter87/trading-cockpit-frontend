@@ -83,6 +83,26 @@ sap.ui.define([
 				InstrumentController.setSectorAndIgComboBoxEnabled(false, 
 					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));	
 			}
+			
+			if(sSelectedType == Constants.INSTRUMENT_TYPE.RATIO) {
+				this.getView().byId("symbolInput").setValue("");
+				this.getView().byId("symbolInput").setEnabled(false);
+				this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
+				this.getView().byId("stockExchangeComboBox").setEnabled(false);
+				this.getView().byId("companyPathInput").setValue("");
+				this.getView().byId("companyPathInput").setEnabled(false);
+				
+				InstrumentController.setRatioComboBoxesEnabled(true, 
+					this.getView().byId("dividendComboBox"), this.getView().byId("divisorComboBox"));		
+			}
+			else {
+				this.getView().byId("symbolInput").setEnabled(true);
+				this.getView().byId("stockExchangeComboBox").setEnabled(true);
+				this.getView().byId("companyPathInput").setEnabled(true);
+				
+				InstrumentController.setRatioComboBoxesEnabled(false, 
+					this.getView().byId("dividendComboBox"), this.getView().byId("divisorComboBox"));	
+			}
 		},
 		
 		
