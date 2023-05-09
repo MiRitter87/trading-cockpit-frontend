@@ -91,6 +91,22 @@
 						</f:formElements>
 					</f:FormContainer>
 					
+					<f:FormContainer title="{i18n>instrumentDisplay.titleRatio}">
+						<f:formElements>
+							<f:FormElement label="{i18n>instrument.dividend}">
+								<f:fields>
+									<Text id="dividendText"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>instrument.divisor}">
+								<f:fields>
+									<Text id="divisorText"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+					
 					<f:FormContainer title="{i18n>instrumentDisplay.titleInterfaceDataProvider}">
 						<f:FormElement label="{i18n>instrument.companyPathInvestingCom}">
 							<f:fields>
