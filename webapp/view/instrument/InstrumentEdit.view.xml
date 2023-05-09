@@ -79,18 +79,18 @@
 					<f:FormContainer title="{i18n>instrumentEdit.titleSectorAndIg}">
 						<f:FormElement label="{i18n>instrument.type.sector}">
 							<f:fields>
-								<ComboBox id="sectorComboBox" items="{path: 'sectors>/instrument/'}" selectedKey="{selectedInstrument>/sectorId}">
-									<core:Item key="{sectors>id}" text="{sectors>symbol} - {sectors>name}"/>
+								<ComboBox id="sectorComboBox" items="{path: 'instruments>/instrument/'}" selectedKey="{selectedInstrument>/sectorId}">
+									<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
 								</ComboBox>
 							</f:fields>
 						</f:FormElement>
 						
 						<f:FormElement label="{i18n>instrument.type.industryGroup}">
 							<f:fields>
-								<ComboBox id="industryGroupComboBox" items="{path: 'industryGroups>/instrument/'}" 
+								<ComboBox id="industryGroupComboBox" items="{path: 'instruments>/instrument/'}" 
 									selectedKey="{selectedInstrument>/industryGroupId}">
 									
-									<core:Item key="{industryGroups>id}" text="{industryGroups>symbol} - {industryGroups>name}"/>
+									<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
 								</ComboBox>
 							</f:fields>
 						</f:FormElement>

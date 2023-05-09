@@ -5,8 +5,10 @@ sap.ui.define([
 	"../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
-	"sap/m/MessageBox"
-], function (Controller, MainController, InstrumentController, Constants, JSONModel, MessageToast, MessageBox) {
+	"sap/m/MessageBox",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
+], function (Controller, MainController, InstrumentController, Constants, JSONModel, MessageToast, MessageBox, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentEdit", {
@@ -31,10 +33,6 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query instrument data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
-			
-			//Query instruments for potential selection of sector and industry group.
-			InstrumentController.queryInstrumentsByWebService(this.querySectorsCallback, this, false, Constants.INSTRUMENT_TYPE.SECTOR);
-			InstrumentController.queryInstrumentsByWebService(this.queryIndustryGroupsCallback, this, false, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
 			
 			this.getView().setModel(null, "selectedInstrument");
 			this.resetUIElements();
@@ -73,6 +71,10 @@ sap.ui.define([
 			var sSelectedType;
 			
 			oInstrumentModel = this.getView().getModel("selectedInstrument");
+			
+			if(oInstrumentModel == undefined)
+				return;
+			
 			sSelectedType = oInstrumentModel.getProperty("/type");
 			
 			if(sSelectedType == Constants.INSTRUMENT_TYPE.STOCK) {
@@ -128,44 +130,9 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "instruments");
+			oCallingController.setFilterSectorIg();
 		},
-		
-		
-		/**
-		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
-		 */
-		querySectorsCallback : function(oReturnData, oCallingController) {
-			var oModel = new JSONModel();
-			
-			if(oReturnData.data != null) {
-				oModel.setData(oReturnData.data);
-			}
-			
-			if(oReturnData.data == null && oReturnData.message != null)  {
-				MessageToast.show(oReturnData.message[0].text);
-			}
-			
-			oCallingController.getView().setModel(oModel, "sectors");
-		},
-		
-		
-		/**
-		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
-		 */
-		queryIndustryGroupsCallback : function(oReturnData, oCallingController) {
-			var oModel = new JSONModel();
-			
-			if(oReturnData.data != null) {
-				oModel.setData(oReturnData.data);
-			}
-			
-			if(oReturnData.data == null && oReturnData.message != null)  {
-				MessageToast.show(oReturnData.message[0].text);
-			}
-			
-			oCallingController.getView().setModel(oModel, "industryGroups");
-		},
-		
+				
 		
 		/**
 		 *  Callback function of the saveInstrument RESTful WebService call in the InstrumentController.
@@ -270,6 +237,20 @@ sap.ui.define([
 				wsInstrument.setProperty("/industryGroupId", oInstrument.industryGroup.id);
 			
 			return wsInstrument;
+		},
+		
+		
+		/**
+		 * Sets a filter for the items displayed in the sector and industry group ComboBoxes.
+		 */
+		setFilterSectorIg : function () {
+			var oBindingSector = this.getView().byId("sectorComboBox").getBinding("items");
+			var oBindingIg = this.getView().byId("industryGroupComboBox").getBinding("items");
+			var oFilterTypeSector = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.SECTOR);
+			var oFilterTypeIg = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
+			
+			oBindingSector.filter(oFilterTypeSector);
+			oBindingIg.filter(oFilterTypeIg);
 		}
 	});
 });
