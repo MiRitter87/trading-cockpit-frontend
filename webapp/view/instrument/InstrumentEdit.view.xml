@@ -51,7 +51,7 @@
 	
 							<f:FormElement label="{i18n>instrument.symbol}">
 								<f:fields>
-									<Input id="symbolInput" maxLength="6" value="{selectedInstrument>/symbol}" required="true"/>
+									<Input id="symbolInput" maxLength="6" value="{selectedInstrument>/symbol}"/>
 								</f:fields>
 							</f:FormElement>
 							
@@ -98,13 +98,13 @@
 					
 					<f:FormContainer title="{i18n>instrumentEdit.titleRatio}">
 						<f:FormElement label="{i18n>instrument.dividend}">
-							<ComboBox id="dividendComboBox" items="{path: 'instruments>/instrument/'}">
+							<ComboBox id="dividendComboBox" items="{path: 'instruments>/instrument/'}" selectedKey="{selectedInstrument>/dividendId}">
 								<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
 							</ComboBox>
 						</f:FormElement>
 						
 						<f:FormElement label="{i18n>instrument.divisor}">
-							<ComboBox id="divisorComboBox" items="{path: 'instruments>/instrument/'}">
+							<ComboBox id="divisorComboBox" items="{path: 'instruments>/instrument/'}" selectedKey="{selectedInstrument>/divisorId}">
 								<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
 							</ComboBox>
 						</f:FormElement>

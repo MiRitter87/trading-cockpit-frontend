@@ -192,6 +192,11 @@ sap.ui.define([
 				return false;
 			}
 			
+			if(sType != Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("symbolInput").getValue() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentCreate.noSymbolInput"));
+				return false;
+			}
+			
 			if(sType != Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("stockExchangeComboBox").getSelectedKey() == "") {
 				MessageBox.error(oResourceBundle.getText("instrumentCreate.noStockExchangeSelected"));
 				return false;

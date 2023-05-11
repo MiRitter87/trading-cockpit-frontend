@@ -87,18 +87,26 @@ sap.ui.define([
 			if(sSelectedType == Constants.INSTRUMENT_TYPE.RATIO) {
 				this.getView().byId("symbolInput").setValue("");
 				this.getView().byId("symbolInput").setEnabled(false);
+				this.getView().byId("symbolInput").setRequired(false);
 				this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
 				this.getView().byId("stockExchangeComboBox").setEnabled(false);
+				this.getView().byId("stockExchangeComboBox").setRequired(false);
 				this.getView().byId("companyPathInput").setValue("");
 				this.getView().byId("companyPathInput").setEnabled(false);
+				this.getView().byId("dividendComboBox").setRequired(true);
+				this.getView().byId("divisorComboBox").setRequired(true);
 				
 				InstrumentController.setRatioComboBoxesEnabled(true, 
 					this.getView().byId("dividendComboBox"), this.getView().byId("divisorComboBox"));		
 			}
 			else {
 				this.getView().byId("symbolInput").setEnabled(true);
+				this.getView().byId("symbolInput").setRequired(true);
 				this.getView().byId("stockExchangeComboBox").setEnabled(true);
+				this.getView().byId("stockExchangeComboBox").setRequired(true);
 				this.getView().byId("companyPathInput").setEnabled(true);
+				this.getView().byId("dividendComboBox").setRequired(false);
+				this.getView().byId("divisorComboBox").setRequired(false);
 				
 				InstrumentController.setRatioComboBoxesEnabled(false, 
 					this.getView().byId("dividendComboBox"), this.getView().byId("divisorComboBox"));	
@@ -110,7 +118,7 @@ sap.ui.define([
 		 * Handles a click at the save button.
 		 */
 		onSavePressed : function () {				
-			var bInputValid = this.verifyObligatoryFields();
+			var bInputValid = this.isInputValid();
 			
 			if(bInputValid == false)
 				return;
@@ -201,34 +209,48 @@ sap.ui.define([
 			this.getView().byId("typeComboBox").setSelectedItem(null);
 			
 			InstrumentController.setSectorAndIgComboBoxEnabled(false, 
-					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));	
+					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));
+					
+			InstrumentController.setRatioComboBoxesEnabled(false, 
+					this.getView().byId("dividendComboBox"), this.getView().byId("divisorComboBox"));	
 		},
 		
 		
 		/**
-		 * Verifies input of obligatory fields.
-		 * Returns true if input is valid. Returns false if input is invalid.
+		 * Checks if the input is valid. Additionally prompts messages informing the user about missing data.
 		 */
-		verifyObligatoryFields : function() {
+		isInputValid : function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var sType = this.getView().byId("typeComboBox").getSelectedKey();
+			
 			
 			if(this.getView().byId("instrumentComboBox").getSelectedKey() == "") {
 				MessageBox.error(oResourceBundle.getText("instrumentEdit.noInstrumentSelected"));
 				return;
 			}
 			
-			if(this.getView().byId("symbolInput").getValue() == "") {
-				MessageBox.error(oResourceBundle.getText("instrumentEdit.noSymbolInput"));
-				return false;
-			}
-			
-			if(this.getView().byId("typeComboBox").getSelectedKey() == "") {
+			if(sType == "") {
 				MessageBox.error(oResourceBundle.getText("instrumentEdit.noTypeSelected"));
 				return false;
 			}
 			
-			if(this.getView().byId("stockExchangeComboBox").getSelectedKey() == "") {
+			if(sType != Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("symbolInput").getValue() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentEdit.noSymbolInput"));
+				return false;
+			}
+			
+			if(sType != Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("stockExchangeComboBox").getSelectedKey() == "") {
 				MessageBox.error(oResourceBundle.getText("instrumentEdit.noStockExchangeSelected"));
+				return false;
+			}
+			
+			if(sType == Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("dividendComboBox").getSelectedKey() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentEdit.noDividendSelected"));
+				return false;
+			}
+			
+			if(sType == Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("divisorComboBox").getSelectedKey() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentEdit.noDivisorSelected"));
 				return false;
 			}
 			
@@ -256,6 +278,12 @@ sap.ui.define([
 				
 			if(oInstrument.industryGroup != null)
 				wsInstrument.setProperty("/industryGroupId", oInstrument.industryGroup.id);
+				
+			if(oInstrument.dividend != null)
+				wsInstrument.setProperty("/dividendId", oInstrument.dividend.id);
+				
+			if(oInstrument.divisor != null)
+				wsInstrument.setProperty("/divisorId", oInstrument.divisor.id);
 			
 			return wsInstrument;
 		}
