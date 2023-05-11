@@ -33,7 +33,7 @@
 					<f:FormContainer title="{i18n>instrumentCreate.titleGeneralData}">
 						<f:FormElement label="{i18n>instrument.symbol}">
 							<f:fields>
-								<Input id="symbolInput" maxLength="6" value="{newInstrument>/symbol}" required="true"/>
+								<Input id="symbolInput" maxLength="6" value="{newInstrument>/symbol}"/>
 							</f:fields>
 						</f:FormElement>
 						
@@ -52,7 +52,7 @@
 						
 						<f:FormElement label="{i18n>instrument.stockExchange}">
 							<f:fields>
-								<ComboBox id="stockExchangeComboBox" selectedKey="{newInstrument>/stockExchange}" required="true"/>
+								<ComboBox id="stockExchangeComboBox" selectedKey="{newInstrument>/stockExchange}"/>
 							</f:fields>
 						</f:FormElement>
 					</f:FormContainer>

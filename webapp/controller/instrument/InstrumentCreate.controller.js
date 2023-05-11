@@ -80,10 +80,14 @@ sap.ui.define([
 			if(sSelectedType == Constants.INSTRUMENT_TYPE.RATIO) {
 				this.getView().byId("symbolInput").setValue("");
 				this.getView().byId("symbolInput").setEnabled(false);
+				this.getView().byId("symbolInput").setRequired(false);
 				this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
 				this.getView().byId("stockExchangeComboBox").setEnabled(false);
+				this.getView().byId("stockExchangeComboBox").setRequired(false);
 				this.getView().byId("companyPathInput").setValue("");
 				this.getView().byId("companyPathInput").setEnabled(false);
+				this.getView().byId("dividendComboBox").setRequired(true);
+				this.getView().byId("divisorComboBox").setRequired(true);
 				
 				oInstrumentModel.setProperty("/stockExchange", null);
 				
@@ -92,8 +96,12 @@ sap.ui.define([
 			}
 			else {
 				this.getView().byId("symbolInput").setEnabled(true);
+				this.getView().byId("symbolInput").setRequired(true);
 				this.getView().byId("stockExchangeComboBox").setEnabled(true);
+				this.getView().byId("stockExchangeComboBox").setRequired(true);
 				this.getView().byId("companyPathInput").setEnabled(true);
+				this.getView().byId("dividendComboBox").setRequired(false);
+				this.getView().byId("divisorComboBox").setRequired(false);
 				
 				InstrumentController.setRatioComboBoxesEnabled(false, 
 					this.getView().byId("dividendComboBox"), this.getView().byId("divisorComboBox"));	
