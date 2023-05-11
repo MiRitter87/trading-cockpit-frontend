@@ -43,15 +43,8 @@ sap.ui.define([
 		 * Handles a click at the save button.
 		 */
 		onSavePressed : function () {
-			if(this.getView().byId("stockExchangeComboBox").getSelectedKey() == "") {
-				this.showMessageOnUndefinedStockExchange();
+			if(this.isInputValid() == false)
 				return;
-			}
-			
-			if(this.getView().byId("typeComboBox").getSelectedKey() == "") {
-				this.showMessageOnUndefinedType();
-				return;
-			}
 			
 			InstrumentController.createInstrumentByWebService(this.getView().getModel("newInstrument"), this.createInstrumentCallback, this);
 		},
@@ -91,6 +84,8 @@ sap.ui.define([
 				this.getView().byId("stockExchangeComboBox").setEnabled(false);
 				this.getView().byId("companyPathInput").setValue("");
 				this.getView().byId("companyPathInput").setEnabled(false);
+				
+				oInstrumentModel.setProperty("/stockExchange", null);
 				
 				InstrumentController.setRatioComboBoxesEnabled(true, 
 					this.getView().byId("dividendComboBox"), this.getView().byId("divisorComboBox"));		
@@ -178,20 +173,33 @@ sap.ui.define([
 		
 		
 		/**
-		 * Displays a message in case the stock exchange has not been selected.
+		 * Checks if the input is valid. Additionally prompts messages informing the user about missing data.
 		 */
-		showMessageOnUndefinedStockExchange : function () {
+		isInputValid : function () {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			MessageBox.error(oResourceBundle.getText("instrumentCreate.noStockExchangeSelected"));
-		},
-		
-		
-		/**
-		 * Displays a message in case the type has not been selected.
-		 */
-		showMessageOnUndefinedType : function () {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			MessageBox.error(oResourceBundle.getText("instrumentCreate.noTypeSelected"));
+			var sType = this.getView().byId("typeComboBox").getSelectedKey();
+			
+			if(sType == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentCreate.noTypeSelected"));
+				return false;
+			}
+			
+			if(sType != Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("stockExchangeComboBox").getSelectedKey() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentCreate.noStockExchangeSelected"));
+				return false;
+			}
+			
+			if(sType == Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("dividendComboBox").getSelectedKey() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentCreate.noDividendSelected"));
+				return false;
+			}
+			
+			if(sType == Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("divisorComboBox").getSelectedKey() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentCreate.noDivisorSelected"));
+				return false;
+			}
+			
+			return true;
 		}
 	});
 });

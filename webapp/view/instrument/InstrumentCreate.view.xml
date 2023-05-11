@@ -79,13 +79,13 @@
 					
 					<f:FormContainer title="{i18n>instrumentCreate.titleRatio}">
 						<f:FormElement label="{i18n>instrument.dividend}">
-							<ComboBox id="dividendComboBox" items="{path: 'instruments>/instrument/'}">
+							<ComboBox id="dividendComboBox" items="{path: 'instruments>/instrument/'}" selectedKey="{newInstrument>/dividendId}">
 								<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
 							</ComboBox>
 						</f:FormElement>
 						
 						<f:FormElement label="{i18n>instrument.divisor}">
-							<ComboBox id="divisorComboBox" items="{path: 'instruments>/instrument/'}">
+							<ComboBox id="divisorComboBox" items="{path: 'instruments>/instrument/'}" selectedKey="{newInstrument>/divisorId}">
 								<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
 							</ComboBox>
 						</f:FormElement>

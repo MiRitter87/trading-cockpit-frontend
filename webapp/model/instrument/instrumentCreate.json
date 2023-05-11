@@ -5,5 +5,7 @@
 	"name": "",
 	"sectorId": null,
 	"industryGroupId": null,
-	"companyPathInvestingCom": ""
+	"companyPathInvestingCom": "",
+	"dividendId": null,
+	"divisorId": null
 }
