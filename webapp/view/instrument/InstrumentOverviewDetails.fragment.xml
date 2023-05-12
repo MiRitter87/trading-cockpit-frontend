@@ -79,13 +79,13 @@
 						<f:formElements>
 							<f:FormElement label="{i18n>instrument.dividend}">
 								<f:fields>
-									<Text id="dividendText"/>
+									<Text id="dividendText" text="{selectedInstrument>/dividend/name}"/>
 								</f:fields>
 							</f:FormElement>
 							
 							<f:FormElement label="{i18n>instrument.divisor}">
 								<f:fields>
-									<Text id="divisorText"/>
+									<Text id="divisorText" text="{selectedInstrument>/divisor/name}"/>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>
