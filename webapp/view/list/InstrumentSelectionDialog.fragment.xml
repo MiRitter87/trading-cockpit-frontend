@@ -17,7 +17,7 @@
 		}">
 		<StandardListItem
 			selected="{path: 'instruments>id', formatter: '.isInstrumentSelectedFormatter'}"
-			title="{instruments>symbol}"
+			title="{path: 'instruments>symbol', formatter: '.symbolTextFormatter'}"
 			description="{instruments>name}"
 			info="{path: 'instruments>type', formatter: '.typeTextFormatter'}"
 			type="Active" />

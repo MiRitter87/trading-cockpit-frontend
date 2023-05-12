@@ -93,6 +93,14 @@ sap.ui.define([
 		 */
 		typeTextFormatter: function(sType) {
 			return InstrumentController.getLocalizedTypeText(sType, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		},
+		
+		
+		/**
+		 * Formatter of the symbol text.
+		 */
+		symbolTextFormatter : function(sSymbol) {
+			return ListController.symbolTextFormatter(sSymbol);
 		}
 	});
 });

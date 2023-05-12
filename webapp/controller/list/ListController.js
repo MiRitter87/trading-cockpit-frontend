@@ -21,6 +21,17 @@ sap.ui.define([
 		
 		
 		/**
+		 * Formatter of the symbol text within Instrument lists.
+		 */
+		symbolTextFormatter : function(sSymbol) {
+			if(sSymbol != "")
+				return sSymbol;
+			else
+				return "-";
+		},
+		
+		
+		/**
 		 * Calls a WebService operation to create a list.
 		 */
 		createListByWebService : function(oListModel, callbackFunction, oCallingController) {
