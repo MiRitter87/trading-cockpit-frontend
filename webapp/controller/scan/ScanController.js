@@ -204,6 +204,8 @@ sap.ui.define([
 				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.SECTOR;
 			else if(sType == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP)
 				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP;
+			else if(sType == Constants.INSTRUMENT_TYPE.RATIO)
+				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.RATIO;
 			
 			jQuery.ajax({
 				type : "GET", 
