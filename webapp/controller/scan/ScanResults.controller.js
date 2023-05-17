@@ -179,7 +179,7 @@ sap.ui.define([
 			var oContext = oButtonParent.getBindingContext("quotations");
 			var oQuotationData = oContext.getObject();
 			
-			this.openStockChart(oQuotationData.instrument.symbol, oQuotationData.instrument.stockExchange);
+			this.openStockChart(oQuotationData.instrument);
 		},
 		
 		
@@ -356,31 +356,76 @@ sap.ui.define([
 		
 		
 		/**
-		 * Opens the stock chart of the given symbol.
+		 * Opens the stock chart of the given Instrument.
 		 */
-		openStockChart : function(sSymbol, sStockExchange) {
-			var sBaseChartLink = "https://stockcharts.com/h-sc/ui?s={symbol}{exchange}&p=D&yr=1&mn=0&dy=0&id=p79905824963";
-			var sChartLink = "";
+		openStockChart : function(oInstrument) {
+			var sChartUrl = this.getChartUrl(oInstrument);
+					
+			window.open(sChartUrl, '_blank');
+		},
+		
+		
+		/**
+		 * Gets a chart URL for the given Instrument.
+		 */
+		getChartUrl : function(oInstrument) {
+			var sChartUrl = "";
+
+			if(oInstrument.type == Constants.INSTRUMENT_TYPE.RATIO) {
+				sChartUrl = this.getChartUrlRatio(oInstrument);
+			}
+			else {
+				sChartUrl = this.getChartUrlNonRatio(oInstrument);
+			}
 			
-			sChartLink = sBaseChartLink.replace("{symbol}", sSymbol);
+			return sChartUrl;
+		},
+		
+		
+		/**
+		 * Gets a chart URL for an Instrument of any type other than RATIO.
+		 */
+		getChartUrlNonRatio : function(oInstrument) {
+			var sBaseChartUrl = "https://stockcharts.com/h-sc/ui?s={symbol}{exchange}&p=D&yr=1&mn=0&dy=0&id=p79905824963";
+			var sChartUrl = "";
+			var sStockExchange = oInstrument.stockExchange;
+			var sSymbol = oInstrument.symbol;
+			
+			sChartUrl = sBaseChartUrl.replace("{symbol}", sSymbol);
 			
 			if(sStockExchange == Constants.STOCK_EXCHANGE.NYSE) {
-				sChartLink = sChartLink.replace("{exchange}", "");
+				sChartUrl = sChartUrl.replace("{exchange}", "");
 			}
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX) {
-				sChartLink = sChartLink.replace("{exchange}", ".TO");
+				sChartUrl = sChartUrl.replace("{exchange}", ".TO");
 			}
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSXV) {
-				sChartLink = sChartLink.replace("{exchange}", ".V");
+				sChartUrl = sChartUrl.replace("{exchange}", ".V");
 			}
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.CSE) {
-				sChartLink = sChartLink.replace("{exchange}", ".CA");
+				sChartUrl = sChartUrl.replace("{exchange}", ".CA");
 			}
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.LSE) {
-				sChartLink = sChartLink.replace("{exchange}", ".L");
+				sChartUrl = sChartUrl.replace("{exchange}", ".L");
 			}
-					
-			window.open(sChartLink, '_blank');
+			
+			return sChartUrl;
+		},
+		
+		
+		/**
+		 * Gets a chart URL for an Instrument of type RATIO.
+		 */
+		getChartUrlRatio : function(oInstrument) {
+			var sBaseChartUrl = "https://stockcharts.com/h-sc/ui?s={symbolDividend}:{symbolDivisor}&p=D&yr=1&mn=0&dy=0&id=p79905824963";
+			var sChartUrl = "";
+			var sSymbolDividend = oInstrument.dividend.symbol;
+			var sSymbolDividor = oInstrument.divisor.symbol;
+			
+			sChartUrl = sBaseChartUrl.replace("{symbolDividend}", sSymbolDividend);
+			sChartUrl = sChartUrl.replace("{symbolDivisor}", sSymbolDividor);
+						
+			return sChartUrl;
 		},
 		
 		
