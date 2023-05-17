@@ -64,8 +64,9 @@ sap.ui.define([
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.DISTRIBUTION_DAYS ||
 				oSelectedItem.getKey() == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS) {
-					
-				this.applyFilterToInstrumentsComboBox();
+				
+				this.applyFilterToInstrumentsComboBox(
+					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, Constants.INSTRUMENT_TYPE.ETF]);
 				
 				oListLabel.setVisible(false);
 				oListComboBox.setVisible(false);
@@ -73,7 +74,9 @@ sap.ui.define([
 				oInstrumentComboBox.setVisible(true);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.POCKET_PIVOTS) {
-				this.removeFilterFromInstrumentsComboBox();
+				this.applyFilterToInstrumentsComboBox(
+					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, 
+					 Constants.INSTRUMENT_TYPE.STOCK, Constants.INSTRUMENT_TYPE.ETF]);
 				
 				oListLabel.setVisible(false);
 				oListComboBox.setVisible(false);
@@ -280,39 +283,30 @@ sap.ui.define([
 		
 		/**
 		 * Applies a Filter to the ComboBox for Instrument selection.
-		 * Only Instruments of Type Sector, Industry Group or ETF are being displayed.
 		 */
-		applyFilterToInstrumentsComboBox : function () {
+		applyFilterToInstrumentsComboBox : function (aAllowedInstrumentTypes) {
 			var oBinding = this.getView().byId("instrumentComboBox").getBinding("items");
-			var oFilterSector, oFilterIndustryGroup, oFilterEtf, oFilterTotal;
+			var aFilters = new Array();
+			var oFilterType, oFilterTotal;
 			
-			var oFilterSector = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.SECTOR);
-			var oFilterIndustryGroup = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP);
-			var oFilterEtf = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.ETF);
+			if(aAllowedInstrumentTypes == undefined || aAllowedInstrumentTypes.length == 0)
+				return;
+				
+			for(var i = 0; i < aAllowedInstrumentTypes.length; i++) {
+				oFilterType = new Filter("type", FilterOperator.EQ, aAllowedInstrumentTypes[i]);
+				aFilters.push(oFilterType);
+			}
 			
 			if(oBinding == undefined)
 				return;
 			
 			//Connect filters via logical "OR".
 			var oFilterTotal = new Filter({
-				filters: [oFilterSector, oFilterIndustryGroup, oFilterEtf],
+				filters: aFilters,
     			and: false
   			});
 			
 			oBinding.filter([oFilterTotal]);
-		},
-		
-		
-		/**
-		 * Removes all filters from the ComboBox for Instrument selection.
-		 */
-		removeFilterFromInstrumentsComboBox : function () {
-			var oBinding = this.getView().byId("instrumentComboBox").getBinding("items");
-			
-			if(oBinding == undefined)
-				return;
-				
-			oBinding.filter([]);
 		},
 		
 		
