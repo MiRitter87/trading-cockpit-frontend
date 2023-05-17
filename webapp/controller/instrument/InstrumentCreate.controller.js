@@ -138,9 +138,13 @@ sap.ui.define([
 			if(oReturnData.message != null) {
 				if(oReturnData.message[0].type == 'S') {
 					MessageToast.show(oReturnData.message[0].text);
+					
 					//"this" is unknown in the success function of the ajax call. Therefore the calling controller is provided.
 					oCallingController.resetUIElements();
 					oCallingController.initializeInstrumentModel();
+					
+					//Query instruments for potential selection of ratio, sector and industry group.
+					InstrumentController.queryInstrumentsByWebService(oCallingController.queryInstrumentsCallback, oCallingController, false);
 				}
 				
 				if(oReturnData.message[0].type == 'E') {
@@ -150,7 +154,7 @@ sap.ui.define([
 				if(oReturnData.message[0].type == 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
-			} 
+			}
 		},
 
 
