@@ -259,23 +259,41 @@ sap.ui.define([
 			var sSelectedListId = oListComboBox.getSelectedKey();
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			var sServerAddress = MainController.getServerAddress();
-			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/statistic");
-			var sChartUrl;
+			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
+			var sChartUrl = sServerAddress + sWebServiceBaseUrl;
 			
 			if(sSelectedType == "")
 				return null;
-			
-			sChartUrl = sServerAddress + sWebServiceBaseUrl + "/chart?chartType=" + sSelectedType;
+			else if(sSelectedType == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER) {
+				sChartUrl = sChartUrl + "/cumulativeADNumber";
+			}
+			else if(sSelectedType == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50) {
+				sChartUrl = sChartUrl + "/instrumentsAboveSma50";
+			}
+			else if(sSelectedType == Constants.CHART_TYPE.DISTRIBUTION_DAYS) {
+				sChartUrl = sChartUrl + "/distributionDays/" + sSelectedInstrumentId;
+			}
+			else if(sSelectedType == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS) {
+				sChartUrl = sChartUrl + "/followThroughDays/" + sSelectedInstrumentId;
+			}
+			else if(sSelectedType == Constants.CHART_TYPE.RITTER_MARKET_TREND) {
+				sChartUrl = sChartUrl + "/ritterMarketTrend";
+			}
+			else if(sSelectedType == Constants.CHART_TYPE.RITTER_PATTERN_INDICATOR) {
+				sChartUrl = sChartUrl + "/ritterPatternIndicator";
+			}
+			else if(sSelectedType == Constants.CHART_TYPE.POCKET_PIVOTS) {
+				sChartUrl = sChartUrl + "/pocketPivots/" + sSelectedInstrumentId;
+			}
 			
 			if(sSelectedListId != "")
-				sChartUrl = sChartUrl + "&listId=" + sSelectedListId;
+				sChartUrl = sChartUrl + "?listId=" + sSelectedListId + "&";
+			else
+				sChartUrl = sChartUrl  + "?";
 				
-			if(sSelectedInstrumentId != "")
-				sChartUrl = sChartUrl + "&instrumentId=" + sSelectedInstrumentId;
-			
 			//The randomDate parameter is not evaluated by the backend. 
 			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.
-			sChartUrl = sChartUrl  + "&randomDate=" + new Date().getTime();
+			sChartUrl = sChartUrl  + "randomDate=" + new Date().getTime();
 			
 			return sChartUrl;
 		},
