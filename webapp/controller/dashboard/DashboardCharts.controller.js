@@ -83,6 +83,12 @@ sap.ui.define([
 				oInstrumentLabel.setVisible(true);
 				oInstrumentComboBox.setVisible(true);
 			}
+			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.PRICE_VOLUME) {
+				oListLabel.setVisible(false);
+				oListComboBox.setVisible(false);
+				oInstrumentLabel.setVisible(true);
+				oInstrumentComboBox.setVisible(true);
+			}
 			
 			oInstrumentComboBox.setSelectedKey(null);
 			oListComboBox.setSelectedKey(null);
@@ -128,6 +134,10 @@ sap.ui.define([
 			else if(sKey == Constants.CHART_TYPE.POCKET_PIVOTS) {
 				sTitle = oResourceBundle.getText("dashboardCharts.type.pocketPivots");
 				sDescription = oResourceBundle.getText("dashboardCharts.type.pocketPivots.description");
+			}
+			else if(sKey == Constants.CHART_TYPE.PRICE_VOLUME) {
+				sTitle = oResourceBundle.getText("dashboardCharts.type.priceVolume");
+				sDescription = oResourceBundle.getText("dashboardCharts.type.priceVolume.description");
 			}
 			else {
 				MessageBox.information(oResourceBundle.getText("dashboardCharts.noTypeSelected"));
@@ -245,6 +255,9 @@ sap.ui.define([
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.CHART_TYPE.POCKET_PIVOTS, "dashboardCharts.type.pocketPivots");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_TYPE.PRICE_VOLUME, "dashboardCharts.type.priceVolume");
 		},
 		
 		
@@ -285,15 +298,16 @@ sap.ui.define([
 			else if(sSelectedType == Constants.CHART_TYPE.POCKET_PIVOTS) {
 				sChartUrl = sChartUrl + "/pocketPivots/" + sSelectedInstrumentId;
 			}
+			else if(sSelectedType == Constants.CHART_TYPE.PRICE_VOLUME) {
+				sChartUrl = sChartUrl + "/priceVolume/" + sSelectedInstrumentId;
+			}
 			
-			if(sSelectedListId != "")
-				sChartUrl = sChartUrl + "?listId=" + sSelectedListId + "&";
-			else
-				sChartUrl = sChartUrl  + "?";
-				
 			//The randomDate parameter is not evaluated by the backend. 
 			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.
-			sChartUrl = sChartUrl  + "randomDate=" + new Date().getTime();
+			sChartUrl = sChartUrl  + "?randomDate=" + new Date().getTime();
+			
+			if(sSelectedListId != "")
+				sChartUrl = sChartUrl + "&listId=" + sSelectedListId;
 			
 			return sChartUrl;
 		},
