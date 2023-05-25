@@ -45,12 +45,14 @@ sap.ui.define([
 			var oListComboBox = this.getView().byId("listComboBox");
 			var oInstrumentLabel = this.getView().byId("instrumentLabel");
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oPriceVolumeFlexBox = this.getView().byId("priceVolumeFlexBox");
 			
 			if(oSelectedItem == null) {
 				oListLabel.setVisible(false);
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(false);
 				oInstrumentComboBox.setVisible(false);
+				oPriceVolumeFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER || 
 				oSelectedItem.getKey() == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50 || 
@@ -61,6 +63,7 @@ sap.ui.define([
 				oListComboBox.setVisible(true);
 				oInstrumentLabel.setVisible(false);
 				oInstrumentComboBox.setVisible(false);
+				oPriceVolumeFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.DISTRIBUTION_DAYS ||
 				oSelectedItem.getKey() == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS) {
@@ -72,6 +75,7 @@ sap.ui.define([
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(true);
 				oInstrumentComboBox.setVisible(true);
+				oPriceVolumeFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.POCKET_PIVOTS) {
 				this.applyFilterToInstrumentsComboBox(
@@ -82,12 +86,18 @@ sap.ui.define([
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(true);
 				oInstrumentComboBox.setVisible(true);
+				oPriceVolumeFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.PRICE_VOLUME) {
+				this.applyFilterToInstrumentsComboBox(
+					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, 
+					 Constants.INSTRUMENT_TYPE.STOCK, Constants.INSTRUMENT_TYPE.ETF, Constants.INSTRUMENT_TYPE.RATIO]);
+				
 				oListLabel.setVisible(false);
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(true);
 				oInstrumentComboBox.setVisible(true);
+				oPriceVolumeFlexBox.setVisible(true);
 			}
 			
 			oInstrumentComboBox.setSelectedKey(null);
@@ -278,38 +288,59 @@ sap.ui.define([
 			if(sSelectedType == "")
 				return null;
 			else if(sSelectedType == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER) {
-				sChartUrl = sChartUrl + "/cumulativeADNumber";
+				sChartUrl = sChartUrl + "/cumulativeADNumber" + "?";
 			}
 			else if(sSelectedType == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50) {
-				sChartUrl = sChartUrl + "/instrumentsAboveSma50";
+				sChartUrl = sChartUrl + "/instrumentsAboveSma50" + "?";
 			}
 			else if(sSelectedType == Constants.CHART_TYPE.DISTRIBUTION_DAYS) {
-				sChartUrl = sChartUrl + "/distributionDays/" + sSelectedInstrumentId;
+				sChartUrl = sChartUrl + "/distributionDays/" + sSelectedInstrumentId + "?";
 			}
 			else if(sSelectedType == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS) {
-				sChartUrl = sChartUrl + "/followThroughDays/" + sSelectedInstrumentId;
+				sChartUrl = sChartUrl + "/followThroughDays/" + sSelectedInstrumentId + "?";
 			}
 			else if(sSelectedType == Constants.CHART_TYPE.RITTER_MARKET_TREND) {
-				sChartUrl = sChartUrl + "/ritterMarketTrend";
+				sChartUrl = sChartUrl + "/ritterMarketTrend" + "?";
 			}
 			else if(sSelectedType == Constants.CHART_TYPE.RITTER_PATTERN_INDICATOR) {
-				sChartUrl = sChartUrl + "/ritterPatternIndicator";
+				sChartUrl = sChartUrl + "/ritterPatternIndicator" + "?";
 			}
 			else if(sSelectedType == Constants.CHART_TYPE.POCKET_PIVOTS) {
-				sChartUrl = sChartUrl + "/pocketPivots/" + sSelectedInstrumentId;
+				sChartUrl = sChartUrl + "/pocketPivots/" + sSelectedInstrumentId + "?";
 			}
 			else if(sSelectedType == Constants.CHART_TYPE.PRICE_VOLUME) {
-				sChartUrl = sChartUrl + "/priceVolume/" + sSelectedInstrumentId;
+				sChartUrl = sChartUrl + "/priceVolume/" + sSelectedInstrumentId + this.getUrlParametersPriceVolume() + "&";
 			}
 			
 			//The randomDate parameter is not evaluated by the backend. 
 			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.
-			sChartUrl = sChartUrl  + "?randomDate=" + new Date().getTime();
+			sChartUrl = sChartUrl  + "randomDate=" + new Date().getTime();
 			
 			if(sSelectedListId != "")
 				sChartUrl = sChartUrl + "&listId=" + sSelectedListId;
 			
 			return sChartUrl;
+		},
+		
+		
+		/**
+		 * Gets the URL parameters for configuration of price volume chart.
+		 */
+		getUrlParametersPriceVolume : function() {
+			var sParameters = "";
+			var oEma21CheckBox = this.getView().byId("ema21CheckBox");
+			var oSma50CheckBox = this.getView().byId("sma50CheckBox");
+			var oSma150CheckBox = this.getView().byId("sma150CheckBox");
+			var oSma200CheckBox = this.getView().byId("sma200CheckBox");
+			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
+			
+			sParameters = sParameters + "?withEma21=" + oEma21CheckBox.getSelected();
+			sParameters = sParameters + "&withSma50=" + oSma50CheckBox.getSelected();
+			sParameters = sParameters + "&withSma150=" + oSma150CheckBox.getSelected();
+			sParameters = sParameters + "&withSma200=" + oSma200CheckBox.getSelected();
+			sParameters = sParameters + "&withSma30Volume=" + oSma30VolumeCheckBox.getSelected();
+			
+			return sParameters;
 		},
 		
 		
@@ -354,7 +385,8 @@ sap.ui.define([
 			
 			if(	sSelectedType == Constants.CHART_TYPE.DISTRIBUTION_DAYS && sSelectedInstrumentId == "" || 
 				sSelectedType == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS && sSelectedInstrumentId == "" ||
-				sSelectedType == Constants.CHART_TYPE.POCKET_PIVOTS && sSelectedInstrumentId == "") {
+				sSelectedType == Constants.CHART_TYPE.POCKET_PIVOTS && sSelectedInstrumentId == "" || 
+				sSelectedType == Constants.CHART_TYPE.PRICE_VOLUME && sSelectedInstrumentId == "") {
 					
 				MessageBox.error(oResourceBundle.getText("dashboardCharts.noInstrumentSelected"));
 				return false;

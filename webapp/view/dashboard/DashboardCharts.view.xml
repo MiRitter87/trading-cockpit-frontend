@@ -12,8 +12,9 @@
 	<Page title="{i18n>dashboardCharts.header}">
 		<content>
 			<VBox class="sapUiSmallMarginBegin">
+				<!-- Selection of type and instrument or list. -->
 				<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
-					<Label text="{i18n>dashboardCharts.type}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+					<Label text="{i18n>dashboardCharts.type}" class="sapUiSmallMarginEnd"/>
 					<ComboBox id="typeComboBox" required="true" selectionChange=".onTypeSelectionChange"/>
 					<Button icon="sap-icon://hint" type="Transparent" tooltip="{i18n>dashboardCharts.typeTooltip}" 
 						press=".onChartInformationPressed"/>
@@ -32,8 +33,17 @@
 						<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
 					</ComboBox>
 				</FlexBox>
+				
+				<!-- Additional configuration of the price volume chart. -->
+				<FlexBox id="priceVolumeFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start" visible="false">
+					<CheckBox id="ema21CheckBox" text="{i18n>dashboardCharts.ema21}"/>
+					<CheckBox id="sma50CheckBox" text="{i18n>dashboardCharts.sma50}" selected="true"/>
+					<CheckBox id="sma150CheckBox" text="{i18n>dashboardCharts.sma150}" selected="true"/>
+					<CheckBox id="sma200CheckBox" text="{i18n>dashboardCharts.sma200}" selected="true"/>
+					<CheckBox id="sma30VolumeCheckBox" text="{i18n>dashboardCharts.sma30Volume}" selected="true"/>
+				</FlexBox>
 			
-				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
+				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
 			</VBox>
 			
 			<ScrollContainer>
