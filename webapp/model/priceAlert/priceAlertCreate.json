@@ -2,5 +2,7 @@
 	"instrumentId": null,
 	"alertType": "",
 	"price": 0.00,
-	"currency": ""
+	"currency": "",
+	"sendMail": false,
+	"alertMailAddress": ""
 }

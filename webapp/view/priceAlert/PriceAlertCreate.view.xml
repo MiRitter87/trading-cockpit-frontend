@@ -30,7 +30,7 @@
 				</f:layout>
 				
 				<f:formContainers>
-					<f:FormContainer>
+					<f:FormContainer title="{i18n>priceAlertCreate.titleGeneralData}">
 						<f:FormElement label="{i18n>priceAlert.instrument}">
 							<f:fields>
 								<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}" 
@@ -51,6 +51,20 @@
 							<f:fields>
 								<Input id="priceInput" type="Number" required="true" description="{newPriceAlert>/currency}"/>
 							</f:fields>
+						</f:FormElement>
+					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>priceAlertCreate.titleMailTransmission}">
+						<f:FormElement label="{i18n>priceAlert.sendMail}">
+							<f:fields>
+								<CheckBox id="sendMailCheckBox" selected="{newPriceAlert>/sendMail}"/>
+							</f:fields>
+						</f:FormElement>
+						
+						<f:FormElement label="{i18n>priceAlert.alertMailAddress}">
+								<f:fields>
+									<Input maxLength="254" value="{newPriceAlert>/alertMailAddress}" required="false"/>
+								</f:fields>
 						</f:FormElement>
 					</f:FormContainer>
 				</f:formContainers>
