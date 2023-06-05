@@ -117,6 +117,9 @@ sap.ui.define([
 			wsPriceAlert.setProperty("/triggerTime", oPriceAlert.triggerTime);
 			wsPriceAlert.setProperty("/confirmationTime", oPriceAlert.confirmationTime);
 			wsPriceAlert.setProperty("/lastStockQuoteTime", oPriceAlert.lastStockQuoteTime);
+			wsPriceAlert.setProperty("/sendMail", oPriceAlert.sendMail);
+			wsPriceAlert.setProperty("/alertMailAddress", oPriceAlert.alertMailAddress);
+			wsPriceAlert.setProperty("/mailTransmissionTime", oPriceAlert.mailTransmissionTime);
 			
 			wsPriceAlert.setProperty("/instrumentId", oPriceAlert.instrument.id);
 			

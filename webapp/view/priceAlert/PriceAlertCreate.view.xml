@@ -62,9 +62,9 @@
 						</f:FormElement>
 						
 						<f:FormElement label="{i18n>priceAlert.alertMailAddress}">
-								<f:fields>
-									<Input maxLength="254" value="{newPriceAlert>/alertMailAddress}" required="false"/>
-								</f:fields>
+							<f:fields>
+								<Input maxLength="254" value="{newPriceAlert>/alertMailAddress}" required="false"/>
+							</f:fields>
 						</f:FormElement>
 					</f:FormContainer>
 				</f:formContainers>
