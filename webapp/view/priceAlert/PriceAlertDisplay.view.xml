@@ -41,7 +41,7 @@
 				</f:layout>
 				
 				<f:formContainers>
-					<f:FormContainer>
+					<f:FormContainer title="{i18n>priceAlertDisplay.titleGeneralData}">
 						<f:formElements>
 							<f:FormElement label="{i18n>priceAlert.id}">
 								<f:fields>
@@ -87,6 +87,27 @@
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>
+					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>priceAlertEdit.titleMailTransmission}">
+						<f:FormElement label="{i18n>priceAlert.sendMail}">
+							<f:fields>
+								<CheckBox id="sendMailCheckBox" selected="{selectedPriceAlert>/sendMail}" displayOnly="true"/>
+							</f:fields>
+						</f:FormElement>
+						
+						<f:FormElement label="{i18n>priceAlert.alertMailAddress}">
+							<f:fields>
+								<Text id="alertMailAddressText" text="{selectedPriceAlert>/alertMailAddress}"/>
+							</f:fields>
+						</f:FormElement>
+						
+						<f:FormElement label="{i18n>priceAlert.mailTransmissionTime}">
+							<f:fields>
+								<Text id="mailTransmissionTimeText" 
+									text="{path: 'selectedPriceAlert>/mailTransmissionTime', formatter: '.formatter.wsDateFormatter'}" />
+							</f:fields>
+						</f:FormElement>
 					</f:FormContainer>
 				</f:formContainers>
 			</f:Form>

@@ -98,6 +98,10 @@ sap.ui.define([
 			this.getView().byId("triggerDistancePercentText").setText("");
 			this.getView().byId("triggerTimeText").setText("");
 			this.getView().byId("confirmationTimeText").setText("");
+			
+			this.getView().byId("sendMailCheckBox").setSelected(false);
+			this.getView().byId("alertMailAddressText").setText("");
+			this.getView().byId("mailTransmissionTimeText").setText("");
 		}
 	});
 });
