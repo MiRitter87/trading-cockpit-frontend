@@ -1,12 +1,13 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"../MainController",
 	"./PriceAlertController",
 	"../Constants",
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, PriceAlertController, Constants, formatter, JSONModel, MessageToast, MessageBox) {
+], function (Controller, MainController, PriceAlertController, Constants, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertOverview", {
@@ -32,6 +33,27 @@ sap.ui.define([
 			//"Show all price alerts" is always selected when the user navigates to the overview.
 			this.getView().byId("filterIconTabBar").setSelectedKey("All");
     	},
+    	
+    	
+    	/**
+		 * Handles the press-event of the show details button.
+		 */
+		onShowDetailsPressed : function () {
+			var oResourceBundle;
+			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oSelectedPriceAlertModel;
+			
+			if(this.isPriceAlertSelected() == false) {
+				MessageBox.error(oResourceBundle.getText("priceAlertOverview.noPriceAlertSelected"));
+				return;
+			}
+			
+			oSelectedPriceAlertModel = new JSONModel();
+			oSelectedPriceAlertModel.setData(this.getSelectedPriceAlert());
+			this.getView().setModel(oSelectedPriceAlertModel, "selectedPriceAlert");
+			
+			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.priceAlert.PriceAlertOverviewDetails");
+		},
 
 
 		/**
@@ -47,6 +69,14 @@ sap.ui.define([
 			}
 			
 			PriceAlertController.deletePriceAlertByWebService(this.getSelectedPriceAlert(), this.deletePriceAlertCallback, this);
+		},
+		
+		
+		/**
+		 * Handles a click at the close button of the price alert details fragment.
+		 */
+		onCloseDialog : function () {
+			this.byId("priceAlertDetailsDialog").close();
 		},
 		
 		

@@ -1,0 +1,102 @@
+<!DOCTYPE xml>
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form">
+
+	<Dialog id="priceAlertDetailsDialog" title="{i18n>priceAlertOverview.detailsHeader}">
+		<content>
+			<f:Form id="priceAlertForm" editable="false">
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer title="{i18n>priceAlertDisplay.titleGeneralData}">
+						<f:formElements>
+							<f:FormElement label="{i18n>priceAlert.id}">
+								<f:fields>
+									<Text id="idText" text="{selectedPriceAlert>/id}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.instrument}">
+								<f:fields>
+									<Text id="instrumentText" text="{selectedPriceAlert>/instrument/name}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.type}">
+								<f:fields>
+									<Text id="typeText" text="{path: 'selectedPriceAlert>/alertType', formatter: '.typeTextFormatter'}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.price}">
+								<f:fields>
+									<Text id="priceText" text="{
+										parts: ['selectedPriceAlert>/price', 'selectedPriceAlert>/currency'],
+										type: 'sap.ui.model.type.Currency'}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.triggerDistancePercent}">
+								<f:fields>
+									<Text id="triggerDistancePercentText" text="{selectedPriceAlert>/triggerDistancePercent} %"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.triggerTime}">
+								<f:fields>
+									<Text id="triggerTimeText" text="{path: 'selectedPriceAlert>/triggerTime', formatter: '.formatter.wsDateFormatter'}" />
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>priceAlert.confirmationTime}">
+								<f:fields>
+									<Text id="confirmationTimeText" text="{path: 'selectedPriceAlert>/confirmationTime', formatter: '.formatter.wsDateFormatter'}" />
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>priceAlertEdit.titleMailTransmission}">
+						<f:FormElement label="{i18n>priceAlert.sendMail}">
+							<f:fields>
+								<CheckBox id="sendMailCheckBox" selected="{selectedPriceAlert>/sendMail}" displayOnly="true"/>
+							</f:fields>
+						</f:FormElement>
+						
+						<f:FormElement label="{i18n>priceAlert.alertMailAddress}">
+							<f:fields>
+								<Text id="alertMailAddressText" text="{selectedPriceAlert>/alertMailAddress}"/>
+							</f:fields>
+						</f:FormElement>
+						
+						<f:FormElement label="{i18n>priceAlert.mailTransmissionTime}">
+							<f:fields>
+								<Text id="mailTransmissionTimeText" 
+									text="{path: 'selectedPriceAlert>/mailTransmissionTime', formatter: '.formatter.wsDateFormatter'}" />
+							</f:fields>
+						</f:FormElement>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+      	</content>
+      	
+      	<Button text="{i18n>button.close}" press=".onCloseDialog" class="sapUiSmallMargin"/>
+   	</Dialog>
+</core:FragmentDefinition>

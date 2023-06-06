@@ -24,6 +24,7 @@
 						<OverflowToolbar>
 							<Title text="{i18n>priceAlertOverview.tableHeader} ({= ${priceAlerts>/priceAlert/}.length})"/>
 							<ToolbarSpacer/>
+							<Button icon="sap-icon://detail-view" tooltip="{i18n>priceAlertOverview.showDetails}" press=".onShowDetailsPressed"/>
 							<Button icon="sap-icon://delete" tooltip="{i18n>priceAlertOverview.deleteSelected}" press=".onDeletePressed"/>
 						</OverflowToolbar>
 						</headerToolbar>
@@ -50,6 +51,9 @@
 						<Column minScreenWidth="Desktop" demandPopin="true">
 							<Text text="{i18n>priceAlert.confirmationTime}"/>
 						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true">
+							<Text text="{i18n>priceAlert.sendMail}"/>
+						</Column>
 					</columns>
 					<items>
 						<ColumnListItem>
@@ -63,6 +67,7 @@
 								<Text text="{priceAlerts>triggerDistancePercent} %"/>
 								<Text text="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateFormatter'}"/>
 								<Text text="{path: 'priceAlerts>confirmationTime', formatter: '.formatter.wsDateFormatter'}"/>
+								<CheckBox selected="{priceAlerts>sendMail}" displayOnly="true"/>
 							</cells>
 						</ColumnListItem>
 					</items>
