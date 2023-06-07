@@ -62,6 +62,11 @@ sap.ui.define([
 			
 			//Manually set the price of the Input field because the price is not directly bound due to validation reasons.
 			this.setPriceInputValue(oPriceAlert.price);
+			
+			if(oPriceAlert.triggerTime != null)
+				this.enableInputFields(false);
+			else
+				this.enableInputFields(true);
 		},
 		
 		
@@ -216,6 +221,21 @@ sap.ui.define([
 			this.getView().byId("sendMailCheckBox").setSelected(false);
 			this.getView().byId("alertMailAddressInput").setValue("");
 			this.getView().byId("mailTransmissionTimeText").setText("");
+			
+			this.enableInputFields(false);
+		},
+		
+		
+		/**
+		 * Enables or disables the Input fields of the form
+		 */
+		enableInputFields : function (bEnabled) {
+			this.getView().byId("instrumentComboBox").setEnabled(bEnabled);	
+			this.getView().byId("typeComboBox").setEnabled(bEnabled);
+			this.getView().byId("priceInput").setEnabled(bEnabled);
+			
+			this.getView().byId("sendMailCheckBox").setEnabled(bEnabled);
+			this.getView().byId("alertMailAddressInput").setEnabled(bEnabled);
 		},
 		
 		
