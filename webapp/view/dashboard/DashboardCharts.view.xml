@@ -35,11 +35,15 @@
 				</FlexBox>
 				
 				<!-- Additional configuration of the price volume chart. -->
-				<FlexBox id="priceVolumeFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start" visible="false">
+				<FlexBox id="priceFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start" visible="false">
 					<CheckBox id="ema21CheckBox" text="{i18n>dashboardCharts.ema21}"/>
 					<CheckBox id="sma50CheckBox" text="{i18n>dashboardCharts.sma50}" selected="true"/>
 					<CheckBox id="sma150CheckBox" text="{i18n>dashboardCharts.sma150}" selected="true"/>
 					<CheckBox id="sma200CheckBox" text="{i18n>dashboardCharts.sma200}" selected="true"/>
+				</FlexBox>
+				
+				<FlexBox id="volumeFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start" visible="false">
+					<CheckBox id="volumeCheckBox" text="{i18n>dashboardCharts.withVolume}" selected="true" select=".onVolumeCheckBoxSelect"/>
 					<CheckBox id="sma30VolumeCheckBox" text="{i18n>dashboardCharts.sma30Volume}" selected="true"/>
 				</FlexBox>
 			

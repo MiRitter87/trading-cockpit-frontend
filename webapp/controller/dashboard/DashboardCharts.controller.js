@@ -45,14 +45,17 @@ sap.ui.define([
 			var oListComboBox = this.getView().byId("listComboBox");
 			var oInstrumentLabel = this.getView().byId("instrumentLabel");
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
-			var oPriceVolumeFlexBox = this.getView().byId("priceVolumeFlexBox");
+			var oPriceFlexBox = this.getView().byId("priceFlexBox");
+			var oVolumeFlexBox = this.getView().byId("volumeFlexBox");
+			
 			
 			if(oSelectedItem == null) {
 				oListLabel.setVisible(false);
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(false);
 				oInstrumentComboBox.setVisible(false);
-				oPriceVolumeFlexBox.setVisible(false);
+				oPriceFlexBox.setVisible(false);
+				oVolumeFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER || 
 				oSelectedItem.getKey() == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50 || 
@@ -63,7 +66,8 @@ sap.ui.define([
 				oListComboBox.setVisible(true);
 				oInstrumentLabel.setVisible(false);
 				oInstrumentComboBox.setVisible(false);
-				oPriceVolumeFlexBox.setVisible(false);
+				oPriceFlexBox.setVisible(false);
+				oVolumeFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.DISTRIBUTION_DAYS ||
 				oSelectedItem.getKey() == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS) {
@@ -75,7 +79,8 @@ sap.ui.define([
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(true);
 				oInstrumentComboBox.setVisible(true);
-				oPriceVolumeFlexBox.setVisible(false);
+				oPriceFlexBox.setVisible(false);
+				oVolumeFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.POCKET_PIVOTS) {
 				this.applyFilterToInstrumentsComboBox(
@@ -86,7 +91,8 @@ sap.ui.define([
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(true);
 				oInstrumentComboBox.setVisible(true);
-				oPriceVolumeFlexBox.setVisible(false);
+				oPriceFlexBox.setVisible(false);
+				oVolumeFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.PRICE_VOLUME) {
 				this.applyFilterToInstrumentsComboBox(
@@ -97,7 +103,8 @@ sap.ui.define([
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(true);
 				oInstrumentComboBox.setVisible(true);
-				oPriceVolumeFlexBox.setVisible(true);
+				oPriceFlexBox.setVisible(true);
+				oVolumeFlexBox.setVisible(true);
 			}
 			
 			oInstrumentComboBox.setSelectedKey(null);
@@ -185,6 +192,20 @@ sap.ui.define([
 				oImage.setSrc(null);
 			}
 			
+		},
+		
+		
+		/**
+		 * Handles selection of the volume CheckBox.
+		 */
+		onVolumeCheckBoxSelect : function() {
+			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
+			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
+			 
+			if(oVolumeCheckBox.getSelected() == true)
+				oSma30VolumeCheckBox.setEnabled(true);
+			else
+				oSma30VolumeCheckBox.setEnabled(false);
 		},
 		
 		
@@ -332,12 +353,14 @@ sap.ui.define([
 			var oSma50CheckBox = this.getView().byId("sma50CheckBox");
 			var oSma150CheckBox = this.getView().byId("sma150CheckBox");
 			var oSma200CheckBox = this.getView().byId("sma200CheckBox");
+			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
 			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
 			
 			sParameters = sParameters + "?withEma21=" + oEma21CheckBox.getSelected();
 			sParameters = sParameters + "&withSma50=" + oSma50CheckBox.getSelected();
 			sParameters = sParameters + "&withSma150=" + oSma150CheckBox.getSelected();
 			sParameters = sParameters + "&withSma200=" + oSma200CheckBox.getSelected();
+			sParameters = sParameters + "&withVolume=" + oVolumeCheckBox.getSelected();
 			sParameters = sParameters + "&withSma30Volume=" + oSma30VolumeCheckBox.getSelected();
 			
 			return sParameters;
