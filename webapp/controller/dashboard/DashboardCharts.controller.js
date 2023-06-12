@@ -113,6 +113,33 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the selection of an Instrument.
+		 */
+		onInstrumentSelectionChange : function (oControlEvent) {
+			var oSelectedItem = oControlEvent.getParameters().selectedItem;
+			var oInstrumentsModel = this.getView().getModel("instruments");
+			var oInstrument;
+			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
+			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
+			
+			oInstrument = InstrumentController.getInstrumentById(oSelectedItem.getKey(), oInstrumentsModel.oData.instrument);
+			
+			if(oInstrument.type == Constants.INSTRUMENT_TYPE.RATIO) {
+				oVolumeCheckBox.setSelected(false);
+				oVolumeCheckBox.setEnabled(false);
+				oSma30VolumeCheckBox.setSelected(false);
+				oSma30VolumeCheckBox.setEnabled(false);
+			}
+			else {
+				oVolumeCheckBox.setSelected(true);
+				oVolumeCheckBox.setEnabled(true);
+				oSma30VolumeCheckBox.setSelected(true);
+				oSma30VolumeCheckBox.setEnabled(true);
+			}
+		},
+		
+		
+		/**
     	 * Handles the button press event of the chart information button.
     	 */
     	onChartInformationPressed : function() {

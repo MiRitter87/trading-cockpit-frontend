@@ -29,7 +29,9 @@
 					<!-- Instruments can be selected when determining Distribution Days -->
 					<Label id="instrumentLabel" text="{i18n>dashboardCharts.instrument}" 
 						class="sapUiMediumMarginBegin sapUiSmallMarginEnd" visible="false"/>
-					<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}" required="false" visible="false">
+					<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}" required="false" visible="false"
+						selectionChange=".onInstrumentSelectionChange">
+						
 						<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
 					</ComboBox>
 				</FlexBox>
