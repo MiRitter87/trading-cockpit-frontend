@@ -21,6 +21,7 @@ sap.ui.define([
 			oRouter.getRoute("dashboardChartsRoute").attachMatched(this._onRouteMatched, this);
 			
 			this.initializeTypeComboBox();
+			this.initializeIndicatorComboBox();
 		},
 		
 		
@@ -47,6 +48,7 @@ sap.ui.define([
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oPriceFlexBox = this.getView().byId("priceFlexBox");
 			var oVolumeFlexBox = this.getView().byId("volumeFlexBox");
+			var oIndicatorFlexBox = this.getView().byId("indicatorFlexBox");
 			
 			
 			if(oSelectedItem == null) {
@@ -56,6 +58,7 @@ sap.ui.define([
 				oInstrumentComboBox.setVisible(false);
 				oPriceFlexBox.setVisible(false);
 				oVolumeFlexBox.setVisible(false);
+				oIndicatorFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER || 
 				oSelectedItem.getKey() == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50 || 
@@ -68,6 +71,7 @@ sap.ui.define([
 				oInstrumentComboBox.setVisible(false);
 				oPriceFlexBox.setVisible(false);
 				oVolumeFlexBox.setVisible(false);
+				oIndicatorFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.DISTRIBUTION_DAYS ||
 				oSelectedItem.getKey() == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS) {
@@ -81,6 +85,7 @@ sap.ui.define([
 				oInstrumentComboBox.setVisible(true);
 				oPriceFlexBox.setVisible(false);
 				oVolumeFlexBox.setVisible(false);
+				oIndicatorFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.POCKET_PIVOTS) {
 				this.applyFilterToInstrumentsComboBox(
@@ -93,6 +98,7 @@ sap.ui.define([
 				oInstrumentComboBox.setVisible(true);
 				oPriceFlexBox.setVisible(false);
 				oVolumeFlexBox.setVisible(false);
+				oIndicatorFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.PRICE_VOLUME) {
 				this.applyFilterToInstrumentsComboBox(
@@ -105,6 +111,7 @@ sap.ui.define([
 				oInstrumentComboBox.setVisible(true);
 				oPriceFlexBox.setVisible(true);
 				oVolumeFlexBox.setVisible(true);
+				oIndicatorFlexBox.setVisible(true);
 			}
 			
 			oInstrumentComboBox.setSelectedKey(null);
@@ -320,6 +327,21 @@ sap.ui.define([
 		
 		
 		/**
+		 * Initializes the ComboBox of indicator selection.
+		 */
+		initializeIndicatorComboBox : function() {
+			var oComboBox = this.getView().byId("indicatorComboBox");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_INDICATOR.NONE, "dashboardCharts.indicator.none");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_INDICATOR.RS_LINE, "dashboardCharts.indicator.rsLine");
+		},
+		
+		
+		/**
 		 * Determines the URL of the statistic chart based on the selected chart type and optional additional parameters.
 		 */
 		getChartUrl : function() {
@@ -382,6 +404,8 @@ sap.ui.define([
 			var oSma200CheckBox = this.getView().byId("sma200CheckBox");
 			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
 			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
+			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
+			var sSelectedIndicator = oIndicatorComboBox.getSelectedKey();
 			
 			sParameters = sParameters + "?withEma21=" + oEma21CheckBox.getSelected();
 			sParameters = sParameters + "&withSma50=" + oSma50CheckBox.getSelected();
@@ -389,6 +413,11 @@ sap.ui.define([
 			sParameters = sParameters + "&withSma200=" + oSma200CheckBox.getSelected();
 			sParameters = sParameters + "&withVolume=" + oVolumeCheckBox.getSelected();
 			sParameters = sParameters + "&withSma30Volume=" + oSma30VolumeCheckBox.getSelected();
+			
+			if(sSelectedIndicator == "")
+				sParameters = sParameters + "&indicator=NONE";
+			else
+				sParameters = sParameters + "&indicator=" + sSelectedIndicator;
 			
 			return sParameters;
 		},
