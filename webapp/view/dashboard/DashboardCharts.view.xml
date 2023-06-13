@@ -20,13 +20,13 @@
 						press=".onChartInformationPressed"/>
 					
 					<!-- Additional UI elements that are used depending on the selected chart type. -->
-					<!-- Lists can be selected when determining A/D number and instruments above SMA(50) -->
+					<!-- Lists for example can be selected when determining A/D number and instruments above SMA(50) -->
 					<Label id="listLabel" text="{i18n>dashboardCharts.list}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd" visible="false"/>
 					<ComboBox id="listComboBox" items="{path: 'lists>/list/'}" required="false" visible="false">
 						<core:Item key="{lists>id}" text="{lists>id} - {lists>name}"/>
 					</ComboBox>
 					
-					<!-- Instruments can be selected when determining Distribution Days -->
+					<!-- Instruments for example can be selected when determining Distribution Days or Follow-Through Days -->
 					<Label id="instrumentLabel" text="{i18n>dashboardCharts.instrument}" 
 						class="sapUiMediumMarginBegin sapUiSmallMarginEnd" visible="false"/>
 					<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}" required="false" visible="false"
@@ -49,9 +49,15 @@
 					<CheckBox id="sma30VolumeCheckBox" text="{i18n>dashboardCharts.sma30Volume}" selected="true"/>
 				</FlexBox>
 				
+				<!-- Indicators are available for Price and Volume charts. -->
 				<FlexBox id="indicatorFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start" visible="false">
 					<Label text="{i18n>dashboardCharts.indicator}" class="sapUiSmallMarginEnd"/>
-					<ComboBox id="indicatorComboBox" selectedKey="NONE"/>
+					<ComboBox id="indicatorComboBox" selectedKey="NONE" selectionChange=".onIndicatorSelectionChange"/>
+					<Label id="rsInstrumentLabel" text="{i18n>dashboardCharts.rsInstrument}"
+						class="sapUiMediumMarginBegin sapUiSmallMarginEnd" visible="false"/>
+					<ComboBox id="rsInstrumentComboBox" items="{path: 'instruments>/instrument/'}" required="true" visible="false">
+						<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
+					</ComboBox>
 				</FlexBox>
 			
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>

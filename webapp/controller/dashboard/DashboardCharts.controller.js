@@ -50,7 +50,6 @@ sap.ui.define([
 			var oVolumeFlexBox = this.getView().byId("volumeFlexBox");
 			var oIndicatorFlexBox = this.getView().byId("indicatorFlexBox");
 			
-			
 			if(oSelectedItem == null) {
 				oListLabel.setVisible(false);
 				oListComboBox.setVisible(false);
@@ -76,7 +75,7 @@ sap.ui.define([
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.DISTRIBUTION_DAYS ||
 				oSelectedItem.getKey() == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS) {
 				
-				this.applyFilterToInstrumentsComboBox(
+				this.applyFilterToInstrumentsComboBox(oInstrumentComboBox,
 					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, Constants.INSTRUMENT_TYPE.ETF]);
 				
 				oListLabel.setVisible(false);
@@ -88,7 +87,7 @@ sap.ui.define([
 				oIndicatorFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.POCKET_PIVOTS) {
-				this.applyFilterToInstrumentsComboBox(
+				this.applyFilterToInstrumentsComboBox(oInstrumentComboBox,
 					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, 
 					 Constants.INSTRUMENT_TYPE.STOCK, Constants.INSTRUMENT_TYPE.ETF]);
 				
@@ -101,7 +100,7 @@ sap.ui.define([
 				oIndicatorFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.PRICE_VOLUME) {
-				this.applyFilterToInstrumentsComboBox(
+				this.applyFilterToInstrumentsComboBox(oInstrumentComboBox,
 					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, 
 					 Constants.INSTRUMENT_TYPE.STOCK, Constants.INSTRUMENT_TYPE.ETF, Constants.INSTRUMENT_TYPE.RATIO]);
 				
@@ -240,6 +239,28 @@ sap.ui.define([
 				oSma30VolumeCheckBox.setEnabled(true);
 			else
 				oSma30VolumeCheckBox.setEnabled(false);
+		},
+		
+		
+		/**
+		 * Handles selection of an indicator for the price volume chart.
+		 */
+		onIndicatorSelectionChange : function(oControlEvent) {
+			var oSelectedItem = oControlEvent.getParameters().selectedItem;
+			var oRsInstrumentLabel = this.getView().byId("rsInstrumentLabel");
+			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
+			
+			if(oSelectedItem.getKey() == Constants.CHART_INDICATOR.RS_LINE) {
+				oRsInstrumentLabel.setVisible(true);
+				oRsInstrumentComboBox.setVisible(true);
+				
+				this.applyFilterToInstrumentsComboBox(oRsInstrumentComboBox,
+					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, Constants.INSTRUMENT_TYPE.ETF]);
+			}
+			else {
+				oRsInstrumentLabel.setVisible(false);
+				oRsInstrumentComboBox.setVisible(false);
+			}
 		},
 		
 		
@@ -406,6 +427,7 @@ sap.ui.define([
 			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
 			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
 			var sSelectedIndicator = oIndicatorComboBox.getSelectedKey();
+			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
 			
 			sParameters = sParameters + "?withEma21=" + oEma21CheckBox.getSelected();
 			sParameters = sParameters + "&withSma50=" + oSma50CheckBox.getSelected();
@@ -414,10 +436,13 @@ sap.ui.define([
 			sParameters = sParameters + "&withVolume=" + oVolumeCheckBox.getSelected();
 			sParameters = sParameters + "&withSma30Volume=" + oSma30VolumeCheckBox.getSelected();
 			
-			if(sSelectedIndicator == "")
-				sParameters = sParameters + "&indicator=NONE";
-			else
+			if(sSelectedIndicator == "") {
+				sParameters = sParameters + "&indicator=NONE";				
+			}
+			else {
 				sParameters = sParameters + "&indicator=" + sSelectedIndicator;
+				sParameters = sParameters + "&rsInstrumentId=" + oRsInstrumentComboBox.getSelectedKey();
+			}
 			
 			return sParameters;
 		},
@@ -426,8 +451,8 @@ sap.ui.define([
 		/**
 		 * Applies a Filter to the ComboBox for Instrument selection.
 		 */
-		applyFilterToInstrumentsComboBox : function (aAllowedInstrumentTypes) {
-			var oBinding = this.getView().byId("instrumentComboBox").getBinding("items");
+		applyFilterToInstrumentsComboBox : function (oComboxBox, aAllowedInstrumentTypes) {
+			var oBinding = oComboxBox.getBinding("items");
 			var aFilters = new Array();
 			var oFilterType, oFilterTotal;
 			
@@ -461,6 +486,9 @@ sap.ui.define([
 			var sSelectedType = oTypeComboBox.getSelectedKey();
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
+			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
+			var sSelectedIndicator = oIndicatorComboBox.getSelectedKey();
+			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
 			
 			if(	sSelectedType == Constants.CHART_TYPE.DISTRIBUTION_DAYS && sSelectedInstrumentId == "" || 
 				sSelectedType == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS && sSelectedInstrumentId == "" ||
@@ -468,6 +496,13 @@ sap.ui.define([
 				sSelectedType == Constants.CHART_TYPE.PRICE_VOLUME && sSelectedInstrumentId == "") {
 					
 				MessageBox.error(oResourceBundle.getText("dashboardCharts.noInstrumentSelected"));
+				return false;
+			}
+			
+			if(	sSelectedType == Constants.CHART_TYPE.PRICE_VOLUME && sSelectedIndicator == Constants.CHART_INDICATOR.RS_LINE &&
+				oRsInstrumentComboBox.getSelectedKey() == "") {
+				
+				MessageBox.error(oResourceBundle.getText("dashboardCharts.noRsInstrumentSelected"));
 				return false;
 			}
 			
