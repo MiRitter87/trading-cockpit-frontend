@@ -49,6 +49,8 @@ sap.ui.define([
 			var oPriceFlexBox = this.getView().byId("priceFlexBox");
 			var oVolumeFlexBox = this.getView().byId("volumeFlexBox");
 			var oIndicatorFlexBox = this.getView().byId("indicatorFlexBox");
+			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
+			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
 			
 			if(oSelectedItem == null) {
 				oListLabel.setVisible(false);
@@ -115,6 +117,8 @@ sap.ui.define([
 			
 			oInstrumentComboBox.setSelectedKey(null);
 			oListComboBox.setSelectedKey(null);
+			oIndicatorComboBox.setSelectedKey(null);
+			oRsInstrumentComboBox.setSelectedKey(null);
 		},
 		
 		
@@ -518,12 +522,19 @@ sap.ui.define([
 			var oListComboBox = this.getView().byId("listComboBox");
 			var oInstrumentLabel = this.getView().byId("instrumentLabel");
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oPriceFlexBox = this.getView().byId("priceFlexBox");
+			var oVolumeFlexBox = this.getView().byId("volumeFlexBox");
+			var oIndicatorFlexBox = this.getView().byId("indicatorFlexBox");
 			var oImage = this.getView().byId("chartImage");
 			
 			oListLabel.setVisible(false);
 			oListComboBox.setVisible(false);
 			oInstrumentLabel.setVisible(false);
 			oInstrumentComboBox.setVisible(false);
+			
+			oPriceFlexBox.setVisible(false);
+			oVolumeFlexBox.setVisible(false);
+			oIndicatorFlexBox.setVisible(false);
 			
 			this.getView().byId("typeComboBox").setSelectedKey("");
 			this.getView().byId("listComboBox").setSelectedKey("");
