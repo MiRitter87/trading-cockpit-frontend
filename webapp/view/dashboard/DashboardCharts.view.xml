@@ -37,28 +37,33 @@
 				</FlexBox>
 				
 				<!-- Additional configuration of the price volume chart. -->
-				<FlexBox id="priceFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start" visible="false">
-					<CheckBox id="ema21CheckBox" text="{i18n>dashboardCharts.ema21}"/>
-					<CheckBox id="sma50CheckBox" text="{i18n>dashboardCharts.sma50}" selected="true"/>
-					<CheckBox id="sma150CheckBox" text="{i18n>dashboardCharts.sma150}" selected="true"/>
-					<CheckBox id="sma200CheckBox" text="{i18n>dashboardCharts.sma200}" selected="true"/>
-				</FlexBox>
-				
-				<FlexBox id="volumeFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start" visible="false">
-					<CheckBox id="volumeCheckBox" text="{i18n>dashboardCharts.withVolume}" selected="true" select=".onVolumeCheckBoxSelect"/>
-					<CheckBox id="sma30VolumeCheckBox" text="{i18n>dashboardCharts.sma30Volume}" selected="true"/>
-				</FlexBox>
-				
-				<!-- Indicators are available for Price and Volume charts. -->
-				<FlexBox id="indicatorFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start" visible="false">
-					<Label text="{i18n>dashboardCharts.indicator}" class="sapUiSmallMarginEnd"/>
-					<ComboBox id="indicatorComboBox" selectedKey="NONE" selectionChange=".onIndicatorSelectionChange"/>
-					<Label id="rsInstrumentLabel" text="{i18n>dashboardCharts.rsInstrument}"
-						class="sapUiMediumMarginBegin sapUiSmallMarginEnd" visible="false"/>
-					<ComboBox id="rsInstrumentComboBox" items="{path: 'instruments>/instrument/'}" required="true" visible="false">
-						<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
-					</ComboBox>
-				</FlexBox>
+				<IconTabBar	id="priceVolumeIconTabBar"	class="sapUiResponsiveContentPadding">
+					<items>
+						<IconTabFilter text="{i18n>dashboardCharts.tabPrice}" key="price">
+							<CheckBox id="ema21CheckBox" text="{i18n>dashboardCharts.ema21}"/>
+							<CheckBox id="sma50CheckBox" text="{i18n>dashboardCharts.sma50}" selected="true"/>
+							<CheckBox id="sma150CheckBox" text="{i18n>dashboardCharts.sma150}" selected="true"/>
+							<CheckBox id="sma200CheckBox" text="{i18n>dashboardCharts.sma200}" selected="true"/>
+						</IconTabFilter>
+						
+						<IconTabFilter text="{i18n>dashboardCharts.tabVolume}" key="volume">
+							<CheckBox id="volumeCheckBox" text="{i18n>dashboardCharts.withVolume}" selected="true" select=".onVolumeCheckBoxSelect"/>
+							<CheckBox id="sma30VolumeCheckBox" text="{i18n>dashboardCharts.sma30Volume}" selected="true"/>
+						</IconTabFilter>
+						
+						<IconTabFilter text="{i18n>dashboardCharts.tabIndicators}" key="indicators">
+							<FlexBox alignItems="Center">
+								<Label text="{i18n>dashboardCharts.indicator}" class="sapUiSmallMarginEnd"/>
+								<ComboBox id="indicatorComboBox" selectedKey="NONE" selectionChange=".onIndicatorSelectionChange"/>
+								<Label id="rsInstrumentLabel" text="{i18n>dashboardCharts.rsInstrument}"
+									class="sapUiMediumMarginBegin sapUiSmallMarginEnd" visible="false"/>
+								<ComboBox id="rsInstrumentComboBox" items="{path: 'instruments>/instrument/'}" required="true" visible="false">
+									<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
+								</ComboBox>
+							</FlexBox>
+						</IconTabFilter>
+					</items>
+				</IconTabBar>
 			
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
 			</VBox>

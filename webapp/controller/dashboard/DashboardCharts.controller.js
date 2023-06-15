@@ -46,20 +46,15 @@ sap.ui.define([
 			var oListComboBox = this.getView().byId("listComboBox");
 			var oInstrumentLabel = this.getView().byId("instrumentLabel");
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
-			var oPriceFlexBox = this.getView().byId("priceFlexBox");
-			var oVolumeFlexBox = this.getView().byId("volumeFlexBox");
-			var oIndicatorFlexBox = this.getView().byId("indicatorFlexBox");
 			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
 			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
+			var oPriceVolumeIconTabBar = this.getView().byId("priceVolumeIconTabBar");
 			
 			if(oSelectedItem == null) {
 				oListLabel.setVisible(false);
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(false);
 				oInstrumentComboBox.setVisible(false);
-				oPriceFlexBox.setVisible(false);
-				oVolumeFlexBox.setVisible(false);
-				oIndicatorFlexBox.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER || 
 				oSelectedItem.getKey() == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50 || 
@@ -70,9 +65,7 @@ sap.ui.define([
 				oListComboBox.setVisible(true);
 				oInstrumentLabel.setVisible(false);
 				oInstrumentComboBox.setVisible(false);
-				oPriceFlexBox.setVisible(false);
-				oVolumeFlexBox.setVisible(false);
-				oIndicatorFlexBox.setVisible(false);
+				oPriceVolumeIconTabBar.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.DISTRIBUTION_DAYS ||
 				oSelectedItem.getKey() == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS) {
@@ -84,9 +77,7 @@ sap.ui.define([
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(true);
 				oInstrumentComboBox.setVisible(true);
-				oPriceFlexBox.setVisible(false);
-				oVolumeFlexBox.setVisible(false);
-				oIndicatorFlexBox.setVisible(false);
+				oPriceVolumeIconTabBar.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.POCKET_PIVOTS) {
 				this.applyFilterToInstrumentsComboBox(oInstrumentComboBox,
@@ -97,9 +88,7 @@ sap.ui.define([
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(true);
 				oInstrumentComboBox.setVisible(true);
-				oPriceFlexBox.setVisible(false);
-				oVolumeFlexBox.setVisible(false);
-				oIndicatorFlexBox.setVisible(false);
+				oPriceVolumeIconTabBar.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.PRICE_VOLUME) {
 				this.applyFilterToInstrumentsComboBox(oInstrumentComboBox,
@@ -110,9 +99,7 @@ sap.ui.define([
 				oListComboBox.setVisible(false);
 				oInstrumentLabel.setVisible(true);
 				oInstrumentComboBox.setVisible(true);
-				oPriceFlexBox.setVisible(true);
-				oVolumeFlexBox.setVisible(true);
-				oIndicatorFlexBox.setVisible(true);
+				oPriceVolumeIconTabBar.setVisible(true);
 			}
 			
 			oInstrumentComboBox.setSelectedKey(null);
@@ -522,23 +509,19 @@ sap.ui.define([
 			var oListComboBox = this.getView().byId("listComboBox");
 			var oInstrumentLabel = this.getView().byId("instrumentLabel");
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
-			var oPriceFlexBox = this.getView().byId("priceFlexBox");
-			var oVolumeFlexBox = this.getView().byId("volumeFlexBox");
-			var oIndicatorFlexBox = this.getView().byId("indicatorFlexBox");
 			var oImage = this.getView().byId("chartImage");
+			var oPriceVolumeIconTabBar = this.getView().byId("priceVolumeIconTabBar");
 			
 			oListLabel.setVisible(false);
 			oListComboBox.setVisible(false);
 			oInstrumentLabel.setVisible(false);
 			oInstrumentComboBox.setVisible(false);
 			
-			oPriceFlexBox.setVisible(false);
-			oVolumeFlexBox.setVisible(false);
-			oIndicatorFlexBox.setVisible(false);
-			
 			this.getView().byId("typeComboBox").setSelectedKey("");
 			this.getView().byId("listComboBox").setSelectedKey("");
 			this.getView().byId("instrumentComboBox").setSelectedKey("");
+			
+			oPriceVolumeIconTabBar.setVisible(false);
 			
 			oImage.setSrc(null);
 		}
