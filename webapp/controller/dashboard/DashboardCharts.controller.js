@@ -49,6 +49,7 @@ sap.ui.define([
 			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
 			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
 			var oPriceVolumeIconTabBar = this.getView().byId("priceVolumeIconTabBar");
+			var oImage = this.getView().byId("chartImage");
 			
 			if(oSelectedItem == null) {
 				oListLabel.setVisible(false);
@@ -106,6 +107,7 @@ sap.ui.define([
 			oListComboBox.setSelectedKey(null);
 			oIndicatorComboBox.setSelectedKey(null);
 			oRsInstrumentComboBox.setSelectedKey(null);
+			oImage.setSrc(null);
 		},
 		
 		
@@ -278,6 +280,11 @@ sap.ui.define([
 		 */
 		onChartImageError : function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oImage = this.getView().byId("chartImage");
+			var sImageSrc = oImage.getProperty("src");
+			
+			if(sImageSrc == "")
+				return;		//There was no image to load.
 			
 			//The backend currently only supports a response with error code 404 and standard error page with response text.
 			//The response site would have to be parsed in order to get the message from the backend.
