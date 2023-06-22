@@ -81,7 +81,8 @@ sap.ui.define([
 		
 		CHART_INDICATOR: {
 			NONE: 'NONE',
-			RS_LINE: 'RS_LINE'
+			RS_LINE: 'RS_LINE',
+			BBW: 'BBW'
 		},
 		
 		PROTOCOL_ENTRY_CATEGORY: {

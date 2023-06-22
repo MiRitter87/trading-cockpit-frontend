@@ -357,6 +357,9 @@ sap.ui.define([
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.CHART_INDICATOR.RS_LINE, "dashboardCharts.indicator.rsLine");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_INDICATOR.BBW, "dashboardCharts.indicator.bbw");
 		},
 		
 		
@@ -439,6 +442,9 @@ sap.ui.define([
 			}
 			else {
 				sParameters = sParameters + "&indicator=" + sSelectedIndicator;
+			}
+			
+			if(sSelectedIndicator == Constants.CHART_INDICATOR.RS_LINE) {
 				sParameters = sParameters + "&rsInstrumentId=" + oRsInstrumentComboBox.getSelectedKey();
 			}
 			
