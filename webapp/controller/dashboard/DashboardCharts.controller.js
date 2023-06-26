@@ -360,6 +360,9 @@ sap.ui.define([
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.CHART_INDICATOR.BBW, "dashboardCharts.indicator.bbw");
+			
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_INDICATOR.SLOW_STOCHASTIC, "dashboardCharts.indicator.slowStochastic");	
 		},
 		
 		

@@ -82,7 +82,8 @@ sap.ui.define([
 		CHART_INDICATOR: {
 			NONE: 'NONE',
 			RS_LINE: 'RS_LINE',
-			BBW: 'BBW'
+			BBW: 'BBW',
+			SLOW_STOCHASTIC: 'SLOW_STOCHASTIC'
 		},
 		
 		PROTOCOL_ENTRY_CATEGORY: {
