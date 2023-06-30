@@ -8,7 +8,8 @@ sap.ui.define([
 	"sap/m/MessageBox",
 	"sap/m/MessageToast",
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
+	"sap/ui/model/FilterOperator",
+	"./lightweight-charts.standalone.production"
 ], function (Controller, MainController, Constants, ListController, InstrumentController, JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
 	"use strict";
 
@@ -226,6 +227,31 @@ sap.ui.define([
 		 */
 		onAddObjectPressed : function() {
 			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer");
+			
+			//TODO maybe use this.loadFragmen(...).then(function() { ...} instead of MainController.openFragmentAsPopUp
+			//The loading of the chart only works after subsequent Fragment openings because the fragment is not fully initialized at first
+			//The "chartContainer" is not fully loaded when the code below is being executed.
+			
+			var divId = this.createId("chartContainer")
+			
+			const chart = LightweightCharts.createChart(document.getElementById(divId), {
+  				width: 600,
+  				height: 300,
+			});
+			
+			const lineSeries = chart.addLineSeries();
+				lineSeries.setData([
+				    { time: '2019-04-11', value: 80.01 },
+				    { time: '2019-04-12', value: 96.63 },
+				    { time: '2019-04-13', value: 76.64 },
+				    { time: '2019-04-14', value: 81.89 },
+				    { time: '2019-04-15', value: 74.43 },
+				    { time: '2019-04-16', value: 80.01 },
+				    { time: '2019-04-17', value: 96.63 },
+				    { time: '2019-04-18', value: 76.64 },
+				    { time: '2019-04-19', value: 81.89 },
+				    { time: '2019-04-20', value: 74.43 },
+			]);
 		},
 		
 		
