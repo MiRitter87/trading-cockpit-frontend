@@ -222,6 +222,14 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the button press event of the add object button.
+		 */
+		onAddObjectPressed : function() {
+			MessageBox.information("Test opening the Lightweight-Chart");
+		},
+		
+		
+		/**
 		 * Handles selection of the volume CheckBox.
 		 */
 		onVolumeCheckBoxSelect : function() {

@@ -37,7 +37,7 @@
 				</FlexBox>
 				
 				<!-- Additional configuration of the price volume chart. -->
-				<IconTabBar	id="priceVolumeIconTabBar"	class="sapUiResponsiveContentPadding">
+				<IconTabBar	id="priceVolumeIconTabBar" class="sapUiResponsiveContentPadding">
 					<items>
 						<IconTabFilter text="{i18n>dashboardCharts.tabPrice}" key="price">
 							<CheckBox id="ema21CheckBox" text="{i18n>dashboardCharts.ema21}"/>
@@ -61,6 +61,10 @@
 									<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
 								</ComboBox>
 							</FlexBox>
+						</IconTabFilter>
+						
+						<IconTabFilter text="{i18n>dashboardCharts.tabChartAnalysis}" key="chartAnalysis">
+							<Button id="addButton" text="{i18n>dashboardCharts.buttonAddText}" press=".onAddObjectPressed"/>
 						</IconTabFilter>
 					</items>
 				</IconTabBar>
