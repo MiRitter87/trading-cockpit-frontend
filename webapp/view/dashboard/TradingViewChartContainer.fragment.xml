@@ -1,0 +1,14 @@
+<!DOCTYPE xml>
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form">
+
+	<Dialog id="tradingViewChartContainerDialog" title="!Test">
+		<content>
+		
+		</content>
+		
+		<Button text="{i18n>button.close}" press=".onCloseChartDialog" class="sapUiSmallMargin"/>
+	</Dialog>
+</core:FragmentDefinition>

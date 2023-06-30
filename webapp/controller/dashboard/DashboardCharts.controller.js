@@ -225,7 +225,15 @@ sap.ui.define([
 		 * Handles the button press event of the add object button.
 		 */
 		onAddObjectPressed : function() {
-			MessageBox.information("Test opening the Lightweight-Chart");
+			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer");
+		},
+		
+		
+		/**
+		 * Handles a click at the close button of the TradingView chart container.
+		 */
+		onCloseChartDialog : function () {
+			this.byId("tradingViewChartContainerDialog").close();
 		},
 		
 		
