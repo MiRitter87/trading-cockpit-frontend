@@ -236,6 +236,9 @@ sap.ui.define([
 		onTradingViewPopupOpened : function (oCallingController) {
 			var divId = oCallingController.createId("chartContainer")
 			
+			//Remove previously created chart for subsequent chart creations.
+			document.getElementById(divId).innerHTML = "";
+			
 			const chart = LightweightCharts.createChart(document.getElementById(divId), {
   				width: 600,
   				height: 300,
