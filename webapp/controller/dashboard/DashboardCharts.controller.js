@@ -269,6 +269,26 @@ sap.ui.define([
 			        mode: LightweightCharts.CrosshairMode.Normal
     			},
 			});
+			
+			//Handle clicks in the chart.
+			chart.subscribeClick(oCallingController.onChartClicked);
+			
+			//TODO Remove after test
+			console.log(lineSeries.coordinateToPrice(59));
+		},
+		
+		
+		/**
+		 * Handles clicks in the TradingView chart.
+		 */
+		onChartClicked : function (param) {
+			if (!param.point) {
+		        return;
+		    }
+		    
+		    //TODO Get Series, apply series.coordinateToPrice(param.point.y)
+		
+		    console.log(`Click at ${param.point.x}, ${param.point.y}. The time is ${param.time}.`);
 		},
 		
 		
