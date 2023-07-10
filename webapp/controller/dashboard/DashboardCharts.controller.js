@@ -226,13 +226,15 @@ sap.ui.define([
 		 * Handles the button press event of the add object button.
 		 */
 		onAddObjectPressed : function() {
-			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer");
-			
-			//TODO maybe use this.loadFragmen(...).then(function() { ...} instead of MainController.openFragmentAsPopUp
-			//The loading of the chart only works after subsequent Fragment openings because the fragment is not fully initialized at first
-			//The "chartContainer" is not fully loaded when the code below is being executed.
-			
-			var divId = this.createId("chartContainer")
+			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer", this.onTradingViewPopupOpened);
+		},
+		
+		
+		/**
+		 * Handles initialization of the TradingView lightweight-charts component after the chart PopUp has been initialized and opened.
+		 */
+		onTradingViewPopupOpened : function (oCallingController) {
+			var divId = oCallingController.createId("chartContainer")
 			
 			const chart = LightweightCharts.createChart(document.getElementById(divId), {
   				width: 600,

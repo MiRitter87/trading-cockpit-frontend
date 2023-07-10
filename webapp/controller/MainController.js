@@ -9,7 +9,7 @@ sap.ui.define([
 		/**
 		 * Opens the fragment with the given name as PopUp.
 		 */
-		openFragmentAsPopUp : function (oController, sName) {
+		openFragmentAsPopUp : function (oController, sName, callbackFunction) {
 			var oView = oController.getView();
 			var oDialogOfMap;
 			
@@ -34,6 +34,10 @@ sap.ui.define([
 			
 			oDialogOfMap.then(function(oDialog) {
 				oDialog.open();
+				
+				//This callback function is executed optionally, after the Fragment has been fully initialized and opened.
+				if(callbackFunction != undefined)
+					callbackFunction(oController);
 			});
 		},
 
