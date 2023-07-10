@@ -2,15 +2,16 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"../Constants",
+	"./TradingViewController",
 	"../list/ListController",
 	"../instrument/InstrumentController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast",
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator",
-	"./lightweight-charts.standalone.production"
-], function (Controller, MainController, Constants, ListController, InstrumentController, JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
+	"sap/ui/model/FilterOperator"
+], function (Controller, MainController, Constants, TradingViewController, ListController, InstrumentController, 
+				JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.dashboard.DashboardCharts", {
@@ -226,69 +227,16 @@ sap.ui.define([
 		 * Handles the button press event of the add object button.
 		 */
 		onAddObjectPressed : function() {
-			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer", this.onTradingViewPopupOpened);
+			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer", 
+				this.onTradingViewPopupOpened);
 		},
 		
 		
 		/**
-		 * Handles initialization of the TradingView lightweight-charts component after the chart PopUp has been initialized and opened.
+		 * Executed after PopUp for TradingView chart has been fully initialized and opened.
 		 */
 		onTradingViewPopupOpened : function (oCallingController) {
-			var divId = oCallingController.createId("chartContainer")
-			
-			//Remove previously created chart for subsequent chart creations
-			document.getElementById(divId).innerHTML = "";
-			
-			const chart = LightweightCharts.createChart(document.getElementById(divId), {
-  				width: 600,
-  				height: 300,
-			});
-			
-			const lineSeries = chart.addLineSeries();
-				lineSeries.setData([
-				    { time: '2019-04-11', value: 80.01 },
-				    { time: '2019-04-12', value: 96.63 },
-				    { time: '2019-04-13', value: 76.64 },
-				    { time: '2019-04-14', value: 81.89 },
-				    { time: '2019-04-15', value: 74.43 },
-				    { time: '2019-04-16', value: 80.01 },
-				    { time: '2019-04-17', value: 96.63 },
-				    { time: '2019-04-18', value: 76.64 },
-				    { time: '2019-04-19', value: 81.89 },
-				    { time: '2019-04-20', value: 74.43 },
-			]);
-			
-			//Automatically zoom the time scale to display all datasets over the full width of the chart.
-			chart.timeScale().fitContent();
-			
-			// Customizing the Crosshair
-			chart.applyOptions({
-    			crosshair: {
-			        // Change mode from default 'magnet' to 'normal'.
-			        // Allows the crosshair to move freely without snapping to datapoints
-			        mode: LightweightCharts.CrosshairMode.Normal
-    			},
-			});
-			
-			//Handle clicks in the chart.
-			chart.subscribeClick(oCallingController.onChartClicked);
-			
-			//TODO Remove after test
-			console.log(lineSeries.coordinateToPrice(59));
-		},
-		
-		
-		/**
-		 * Handles clicks in the TradingView chart.
-		 */
-		onChartClicked : function (param) {
-			if (!param.point) {
-		        return;
-		    }
-		    
-		    //TODO Get Series, apply series.coordinateToPrice(param.point.y)
-		
-		    console.log(`Click at ${param.point.x}, ${param.point.y}. The time is ${param.time}.`);
+			TradingViewController.openChart(oCallingController);
 		},
 		
 		
