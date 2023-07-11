@@ -20,6 +20,26 @@ sap.ui.define([
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});                                                                 
+		},
+		
+		
+		/**
+		 * Queries the quotation WebService for quotations of an Instrument with the given ID.
+		 */
+		queryQuotationsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/quotation");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + sInstrumentId;
+			
+			jQuery.ajax({
+				type : "GET", 
+				contentType : "application/json", 
+				url : sQueryUrl, 
+				dataType : "json", 
+				success : function(data) {
+					callbackFunction(data, oCallingController, bShowSuccessMessage);
+				}
+			});  
 		}
 	};
 });

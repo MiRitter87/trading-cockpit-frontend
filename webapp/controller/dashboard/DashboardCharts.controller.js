@@ -2,6 +2,7 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"../Constants",
+	"./DashboardController",
 	"./TradingViewController",
 	"../list/ListController",
 	"../instrument/InstrumentController",
@@ -10,7 +11,7 @@ sap.ui.define([
 	"sap/m/MessageToast",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Controller, MainController, Constants, TradingViewController, ListController, InstrumentController, 
+], function (Controller, MainController, Constants, DashboardController, TradingViewController, ListController, InstrumentController, 
 				JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
 	"use strict";
 
@@ -227,8 +228,16 @@ sap.ui.define([
 		 * Handles the button press event of the add object button.
 		 */
 		onAddObjectPressed : function() {
-			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer", 
-				this.onTradingViewPopupOpened);
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
+			
+			if(sSelectedInstrumentId == "") {
+				MessageBox.information(oResourceBundle.getText("dashboardCharts.noInstrumentSelected"));
+				return;				
+			}
+			
+			DashboardController.queryQuotationsByWebService(this.queryQuotationsCallback, this, false, sSelectedInstrumentId);
 		},
 		
 		
@@ -299,6 +308,27 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "lists");
+		},
+		
+		
+		/**
+		 * Callback function of the queryQuotations RESTful WebService call in the DashboardController.
+		 */
+		queryQuotationsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);		
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+			
+			oCallingController.getView().setModel(oModel, "quotations");
+			
+			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer", 
+				oCallingController.onTradingViewPopupOpened);
 		},
 		
 		
