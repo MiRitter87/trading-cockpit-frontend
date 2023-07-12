@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/format/DateFormat",
 	"./lightweight-charts.standalone.production"
-], function (JSONModel) {
+], function (JSONModel, DateFormat) {
 	"use strict";
 	return {
 		/**
@@ -19,19 +20,8 @@ sap.ui.define([
   				height: 300,
 			});
 			
-			const lineSeries = chart.addLineSeries();
-			lineSeries.setData([
-			    { time: '2019-04-11', value: 80.01 },
-			    { time: '2019-04-12', value: 96.63 },
-			    { time: '2019-04-13', value: 76.64 },
-			    { time: '2019-04-14', value: 81.89 },
-			    { time: '2019-04-15', value: 74.43 },
-			    { time: '2019-04-16', value: 80.01 },
-			    { time: '2019-04-17', value: 96.63 },
-			    { time: '2019-04-18', value: 76.64 },
-			    { time: '2019-04-19', value: 81.89 },
-			    { time: '2019-04-20', value: 74.43 },
-			]);
+			const candlestickSeries = chart.addCandlestickSeries();
+			candlestickSeries.setData(this.getCandlestickSeries(oCallingController));
 			
 			//Automatically zoom the time scale to display all datasets over the full width of the chart.
 			chart.timeScale().fitContent();
@@ -48,8 +38,8 @@ sap.ui.define([
 			//Handle clicks in the chart. The controller needs to be bound to access the data model within the handler.
 			chart.subscribeClick(this.onChartClicked.bind(oCallingController));
 			
-			//The lineSeries needs to be stored in the controller for further access later on.
-			oChartModel.setProperty("/lineSeries", lineSeries);
+			//The candlestickSeries needs to be stored in the controller for further access later on.
+			oChartModel.setProperty("/candlestickSeries", candlestickSeries);
 			oCallingController.getView().setModel(oChartModel, "chartModel");
 		},
 		
@@ -68,6 +58,38 @@ sap.ui.define([
 		    //TODO Remove Test output
 		    console.log(`The price is ${lineSeries.coordinateToPrice(param.point.y)}`);
 			console.log(`The date is ${param.time}.`);
+		},
+		
+		
+		/**
+		 * Creates a candlestick series that contains the data to be displayed.
+		 */
+		getCandlestickSeries : function (oCallingController) {
+			var oQuotationsModel = oCallingController.getView().getModel("quotations");
+			var oQuotations = oQuotationsModel.oData.quotation;
+			var aCandlestickSeries = new Array();
+			var oDateFormat, oDate, sFormattedDate;
+			
+			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
+			
+			//The dataset needs to be constructed beginning at the oldest value.
+			for(var i = oQuotations.length -1; i >= 0; i--) {
+    			var oQuotation = oQuotations[i];
+    			var oCandlestickDataset = new Object();
+    			
+    			oCandlestickDataset.open = oQuotation.open;
+    			oCandlestickDataset.high = oQuotation.high;
+    			oCandlestickDataset.low = oQuotation.low;
+    			oCandlestickDataset.close = oQuotation.close;
+    			
+    			oDate = new Date(parseInt(oQuotation.date));
+    			sFormattedDate = oDateFormat.format(oDate);
+    			oCandlestickDataset.time = sFormattedDate;
+    			
+    			aCandlestickSeries.push(oCandlestickDataset);
+			}
+			
+			return aCandlestickSeries;
 		}
 	};
 });
