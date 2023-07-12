@@ -242,6 +242,22 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the button press event of the edit object button.
+		 */
+		onEditObjectPressed : function() {
+			
+		},
+		
+		
+		/**
+		 * Handles the button press event of the overview object button.
+		 */
+		onOverviewObjectPressed : function() {
+			
+		},
+		
+		
+		/**
 		 * Executed after PopUp for TradingView chart has been fully initialized and opened.
 		 */
 		onTradingViewPopupOpened : function (oCallingController) {
