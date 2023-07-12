@@ -242,6 +242,14 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the button press event of the close button in the "create chart object" dialog.
+		 */
+		onCloseCreateChartObjectDialog : function() {
+			this.byId("createChartObjectDialog").close();
+		},
+		
+		
+		/**
 		 * Handles the button press event of the edit object button.
 		 */
 		onEditObjectPressed : function() {
@@ -254,6 +262,15 @@ sap.ui.define([
 		 */
 		onOverviewObjectPressed : function() {
 			
+		},
+		
+		
+		/**
+		 * Handles the button press event of the open chart button for chart object coordinate selection.
+		 */
+		onOpenChartPressed : function() {
+			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer", 
+				oCallingController.onTradingViewPopupOpened);
 		},
 		
 		
@@ -343,8 +360,7 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oModel, "quotations");
 			
-			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer", 
-				oCallingController.onTradingViewPopupOpened);
+			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.CreateChartObject");
 		},
 		
 		

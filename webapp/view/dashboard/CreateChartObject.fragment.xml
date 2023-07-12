@@ -1,0 +1,19 @@
+<!DOCTYPE xml>
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:html="http://www.w3.org/1999/xhtml">>
+
+	<Dialog id="createChartObjectDialog" title="{i18n>dashboardCharts.createObjectDialog.title}">
+		<l:VerticalLayout class="sapUiSmallMarginBegin">
+			<Label text="{i18n>dashboardCharts.objectType}"/>
+			<ComboBox id="objectTypeComboBox"/>
+		</l:VerticalLayout>
+		
+		<Button text="{i18n>dashboardCharts.buttonOpenChartText}" press=".onOpenChartPressed"/>
+	
+		<Button text="{i18n>button.close}" press=".onCloseCreateChartObjectDialog" class="sapUiSmallMargin"/>
+	</Dialog>
+</core:FragmentDefinition>
