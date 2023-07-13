@@ -60,9 +60,10 @@ sap.ui.define([
 		    var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
 		    var oSelectedDateText = this.getView().byId("selectedDateText");
 		    var oSelectedPriceText = this.getView().byId("selectedPriceText");
+		    var price = candlestickSeries.coordinateToPrice(param.point.y);
 		    
 		    oSelectedDateText.setText(param.time);
-		    oSelectedPriceText.setText(candlestickSeries.coordinateToPrice(param.point.y));
+		    oSelectedPriceText.setText(price.toFixed(2));
 		},
 		
 		
@@ -140,6 +141,14 @@ sap.ui.define([
 		 * Handles a click at the take coordinate button of the TradingView chart container.
 		 */
 		onTakeCoordinate : function (oCallingController) {
+			var oSelectedCoordinateModel = new JSONModel();
+			var oSelectedPriceText = oCallingController.getView().byId("selectedPriceText");
+			var selectedPrice = Number(oSelectedPriceText.getText());
+			
+			//Write selected price to JSONModel and bind model to view.
+			oSelectedCoordinateModel.setProperty("/price", selectedPrice);
+			oCallingController.getView().setModel(oSelectedCoordinateModel, "selectedCoordinates");
+			
 			oCallingController.byId("tradingViewChartContainerDialog").close();
 		},
 		
@@ -148,6 +157,12 @@ sap.ui.define([
 		 * Handles a click at the cancel button of the TradingView chart container.
 		 */
 		onCancelChartDialog : function (oCallingController) {
+			var oSelectedDateText = oCallingController.getView().byId("selectedDateText");
+		    var oSelectedPriceText = oCallingController.getView().byId("selectedPriceText");
+		    
+		    oSelectedDateText.setText("");
+		    oSelectedPriceText.setText("");
+			
 			oCallingController.byId("tradingViewChartContainerDialog").close();
 		},
 		

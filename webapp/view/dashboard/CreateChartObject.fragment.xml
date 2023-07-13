@@ -42,7 +42,7 @@
 						
 						<f:FormElement label="{i18n>dashboardCharts.selectedPrice}">
 							<f:fields>
-								<Text id="newObjectPriceText"/>
+								<Text id="newObjectPriceText" text="{selectedCoordinates>/price}"/>
 							</f:fields>
 						</f:FormElement>
 					</f:formElements>
