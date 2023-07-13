@@ -2,8 +2,7 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"../Constants",
-	"./DashboardController",
-	"./TradingViewController",
+	"./ChartAnalysisController",
 	"../list/ListController",
 	"../instrument/InstrumentController",
 	"sap/ui/model/json/JSONModel",
@@ -11,7 +10,7 @@ sap.ui.define([
 	"sap/m/MessageToast",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Controller, MainController, Constants, DashboardController, TradingViewController, ListController, InstrumentController, 
+], function (Controller, MainController, Constants, ChartAnalysisController, ListController, InstrumentController, 
 				JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
 	"use strict";
 
@@ -228,32 +227,7 @@ sap.ui.define([
 		 * Handles the button press event of the add object button.
 		 */
 		onAddObjectPressed : function() {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
-			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
-			
-			if(sSelectedInstrumentId == "") {
-				MessageBox.information(oResourceBundle.getText("dashboardCharts.noInstrumentSelected"));
-				return;				
-			}
-			
-			DashboardController.queryQuotationsByWebService(this.queryQuotationsCallback, this, false, sSelectedInstrumentId);
-		},
-		
-		
-		/**
-		 * Handles the button press event of the save button in the "create chart object" dialog.
-		 */
-		onSaveNewChartObjectPressed : function () {
-			
-		},
-		
-		
-		/**
-		 * Handles the button press event of the cancel button in the "create chart object" dialog.
-		 */
-		onCancelCreateChartObjectDialog : function() {
-			this.byId("createChartObjectDialog").close();
+			ChartAnalysisController.onAddObjectPressed(this);
 		},
 		
 		
@@ -277,16 +251,23 @@ sap.ui.define([
 		 * Handles the button press event of the open chart button for chart object coordinate selection.
 		 */
 		onOpenChartPressed : function() {
-			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer", 
-				this.onTradingViewPopupOpened);
+			ChartAnalysisController.onOpenChartPressed(this);
 		},
 		
 		
 		/**
-		 * Executed after PopUp for TradingView chart has been fully initialized and opened.
+		 * Handles the button press event of the save button in the "create chart object" dialog.
 		 */
-		onTradingViewPopupOpened : function (oCallingController) {
-			TradingViewController.openChart(oCallingController);
+		onSaveNewChartObjectPressed : function () {
+			ChartAnalysisController.onSaveNewChartObjectPressed(this);
+		},
+		
+		
+		/**
+		 * Handles the button press event of the cancel button in the "create chart object" dialog.
+		 */
+		onCancelCreateChartObjectDialog : function() {
+			ChartAnalysisController.onCancelCreateChartObjectDialog(this);
 		},
 		
 		
@@ -294,7 +275,7 @@ sap.ui.define([
 		 * Handles a click at the take coordinate button of the TradingView chart container.
 		 */
 		onTakeCoordinate : function () {
-			this.byId("tradingViewChartContainerDialog").close();
+			ChartAnalysisController.onTakeCoordinate(this);
 		},
 		
 		
@@ -302,7 +283,7 @@ sap.ui.define([
 		 * Handles a click at the cancel button of the TradingView chart container.
 		 */
 		onCancelChartDialog : function () {
-			this.byId("tradingViewChartContainerDialog").close();
+			ChartAnalysisController.onCancelChartDialog(this);
 		},
 		
 		
@@ -357,26 +338,6 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "lists");
-		},
-		
-		
-		/**
-		 * Callback function of the queryQuotations RESTful WebService call in the DashboardController.
-		 */
-		queryQuotationsCallback : function(oReturnData, oCallingController) {
-			var oModel = new JSONModel();
-			
-			if(oReturnData.data != null) {
-				oModel.setData(oReturnData.data);		
-			}
-			
-			if(oReturnData.data == null && oReturnData.message != null)  {
-				MessageToast.show(oReturnData.message[0].text);
-			}                                                               
-			
-			oCallingController.getView().setModel(oModel, "quotations");
-			
-			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.CreateChartObject");
 		},
 		
 		

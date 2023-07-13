@@ -1,8 +1,12 @@
 sap.ui.define([
+	"../MainController",
+	"./DashboardController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/format/DateFormat",
+	"sap/m/MessageBox",
+	"sap/m/MessageToast",
 	"./lightweight-charts.standalone.production"
-], function (JSONModel, DateFormat) {
+], function (MainController, DashboardController, JSONModel, DateFormat, MessageBox, MessageToast) {
 	"use strict";
 	return {
 		/**
@@ -59,6 +63,92 @@ sap.ui.define([
 		    
 		    oSelectedDateText.setText(param.time);
 		    oSelectedPriceText.setText(candlestickSeries.coordinateToPrice(param.point.y));
+		},
+		
+		
+		/**
+		 * Handles the button press event of the add object button.
+		 */
+		onAddObjectPressed : function(oCallingController) {
+			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
+			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
+			
+			if(sSelectedInstrumentId == "") {
+				MessageBox.information(oResourceBundle.getText("dashboardCharts.noInstrumentSelected"));
+				return;				
+			}
+			
+			DashboardController.queryQuotationsByWebService(this.queryQuotationsCallback, oCallingController, false, sSelectedInstrumentId);
+		},
+				
+		
+		/**
+		 * Callback function of the queryQuotations RESTful WebService call in the DashboardController.
+		 */
+		queryQuotationsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);		
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+			
+			oCallingController.getView().setModel(oModel, "quotations");
+			
+			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.CreateChartObject");
+		},
+		
+		
+		/**
+		 * Handles the button press event of the open chart button for chart object coordinate selection.
+		 */
+		onOpenChartPressed : function(oCallingController) {
+			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer", 
+				this.onTradingViewPopupOpened.bind(this));
+		},
+		
+		
+		/**
+		 * Handles the button press event of the save button in the "create chart object" dialog.
+		 */
+		onSaveNewChartObjectPressed : function () {
+			
+		},
+		
+		
+		/**
+		 * Handles the button press event of the cancel button in the "create chart object" dialog.
+		 */
+		onCancelCreateChartObjectDialog : function(oCallingController) {
+			oCallingController.byId("createChartObjectDialog").close();
+		},
+		
+		
+		/**
+		 * Executed after PopUp for TradingView chart has been fully initialized and opened.
+		 */
+		onTradingViewPopupOpened : function (oCallingController) {
+			this.openChart(oCallingController);
+		},
+		
+		
+		/**
+		 * Handles a click at the take coordinate button of the TradingView chart container.
+		 */
+		onTakeCoordinate : function (oCallingController) {
+			oCallingController.byId("tradingViewChartContainerDialog").close();
+		},
+		
+		
+		/**
+		 * Handles a click at the cancel button of the TradingView chart container.
+		 */
+		onCancelChartDialog : function (oCallingController) {
+			oCallingController.byId("tradingViewChartContainerDialog").close();
 		},
 		
 		

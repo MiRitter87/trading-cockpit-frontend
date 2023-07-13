@@ -52,6 +52,6 @@
 		
 		<Button text="{i18n>dashboardCharts.buttonOpenChartText}" press=".onOpenChartPressed" class="sapUiSmallMargin"/>
 		<Button text="{i18n>button.save}" press=".onSaveNewChartObjectPressed" class="sapUiSmallMargin"/>
-		<Button text="{i18n>button.close}" press=".onCancelCreateChartObjectDialog" class="sapUiSmallMargin"/>
+		<Button text="{i18n>button.cancel}" press=".onCancelCreateChartObjectDialog" class="sapUiSmallMargin"/>
 	</Dialog>
 </core:FragmentDefinition>
