@@ -242,9 +242,17 @@ sap.ui.define([
 		
 		
 		/**
-		 * Handles the button press event of the close button in the "create chart object" dialog.
+		 * Handles the button press event of the save button in the "create chart object" dialog.
 		 */
-		onCloseCreateChartObjectDialog : function() {
+		onSaveNewChartObjectPressed : function () {
+			
+		},
+		
+		
+		/**
+		 * Handles the button press event of the cancel button in the "create chart object" dialog.
+		 */
+		onCancelCreateChartObjectDialog : function() {
 			this.byId("createChartObjectDialog").close();
 		},
 		
@@ -269,8 +277,8 @@ sap.ui.define([
 		 * Handles the button press event of the open chart button for chart object coordinate selection.
 		 */
 		onOpenChartPressed : function() {
-			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer", 
-				oCallingController.onTradingViewPopupOpened);
+			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer", 
+				this.onTradingViewPopupOpened);
 		},
 		
 		

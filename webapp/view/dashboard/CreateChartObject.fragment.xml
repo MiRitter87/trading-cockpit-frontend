@@ -7,13 +7,51 @@
 	xmlns:html="http://www.w3.org/1999/xhtml">>
 
 	<Dialog id="createChartObjectDialog" title="{i18n>dashboardCharts.createObjectDialog.title}">
-		<l:VerticalLayout class="sapUiSmallMarginBegin">
-			<Label text="{i18n>dashboardCharts.objectType}"/>
-			<ComboBox id="objectTypeComboBox"/>
-		</l:VerticalLayout>
+		<f:Form id="createChartObjectForm" editable="false">
+			<f:layout>
+				<f:ResponsiveGridLayout
+					labelSpanXL="3"
+					labelSpanL="3"
+					labelSpanM="3"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="2"
+					emptySpanL="4"
+					emptySpanM="4"
+					emptySpanS="0"
+					columnsXL="2"
+					columnsL="1"
+					columnsM="1"
+					singleContainerFullSize="false" />
+			</f:layout>
+			
+			<f:formContainers>
+				<f:FormContainer>
+					<f:formElements>
+						<f:FormElement label="{i18n>dashboardCharts.objectType}">
+							<f:fields>
+								<ComboBox id="objectTypeComboBox"/>
+							</f:fields>
+						</f:FormElement>
+						
+						<f:FormElement label="{i18n>dashboardCharts.selectedDate}">
+							<f:fields>
+								<Text id="dateText"/>
+							</f:fields>
+						</f:FormElement>
+						
+						<f:FormElement label="{i18n>dashboardCharts.selectedPrice}">
+							<f:fields>
+								<Text id="priceText"/>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
 		
-		<Button text="{i18n>dashboardCharts.buttonOpenChartText}" press=".onOpenChartPressed"/>
-	
-		<Button text="{i18n>button.close}" press=".onCloseCreateChartObjectDialog" class="sapUiSmallMargin"/>
+		<Button text="{i18n>dashboardCharts.buttonOpenChartText}" press=".onOpenChartPressed" class="sapUiSmallMargin"/>
+		<Button text="{i18n>button.save}" press=".onSaveNewChartObjectPressed" class="sapUiSmallMargin"/>
+		<Button text="{i18n>button.close}" press=".onCancelCreateChartObjectDialog" class="sapUiSmallMargin"/>
 	</Dialog>
 </core:FragmentDefinition>
