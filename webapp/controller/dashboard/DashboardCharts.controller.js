@@ -291,9 +291,17 @@ sap.ui.define([
 		
 		
 		/**
-		 * Handles a click at the close button of the TradingView chart container.
+		 * Handles a click at the take coordinate button of the TradingView chart container.
 		 */
-		onCloseChartDialog : function () {
+		onTakeCoordinate : function () {
+			this.byId("tradingViewChartContainerDialog").close();
+		},
+		
+		
+		/**
+		 * Handles a click at the cancel button of the TradingView chart container.
+		 */
+		onCancelChartDialog : function () {
 			this.byId("tradingViewChartContainerDialog").close();
 		},
 		

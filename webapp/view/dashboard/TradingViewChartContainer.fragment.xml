@@ -5,11 +5,49 @@
 	xmlns:f="sap.ui.layout.form"
 	xmlns:html="http://www.w3.org/1999/xhtml">>
 
-	<Dialog id="tradingViewChartContainerDialog" title="!Test">
+	<Dialog id="tradingViewChartContainerDialog" title="{i18n>dashboardCharts.selectObjectCoordinateTitle}">
 		<content>
 			<html:div id='chartContainer'></html:div>
+			
+			<f:Form id="objectCoordinatesForm" editable="false">
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>dashboardCharts.selectedDate}">
+								<f:fields>
+									<Text id="selectedDateText"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>dashboardCharts.selectedPrice}">
+								<f:fields>
+									<Text id="selectedPriceText"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
 		</content>
 		
-		<Button text="{i18n>button.close}" press=".onCloseChartDialog" class="sapUiSmallMargin"/>
+		<Button text="{i18n>dashboardCharts.buttonTakeCoordinate}" press=".onTakeCoordinate" class="sapUiSmallMargin"/>
+		<Button text="{i18n>button.cancel}" press=".onCancelChartDialog" class="sapUiSmallMargin"/>
 	</Dialog>
 </core:FragmentDefinition>

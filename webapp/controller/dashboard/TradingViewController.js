@@ -16,8 +16,8 @@ sap.ui.define([
 			document.getElementById(divId).innerHTML = "";
 			
 			const chart = LightweightCharts.createChart(document.getElementById(divId), {
-  				width: 600,
-  				height: 300,
+  				width: 800,
+  				height: 400,
 			});
 			
 			const candlestickSeries = chart.addCandlestickSeries();
@@ -53,11 +53,12 @@ sap.ui.define([
 		    }
 			
 		    var oChartModel = this.getView().getModel("chartModel");
-		    var lineSeries = oChartModel.getProperty("/lineSeries");
+		    var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
+		    var oSelectedDateText = this.getView().byId("selectedDateText");
+		    var oSelectedPriceText = this.getView().byId("selectedPriceText");
 		    
-		    //TODO Remove Test output
-		    console.log(`The price is ${lineSeries.coordinateToPrice(param.point.y)}`);
-			console.log(`The date is ${param.time}.`);
+		    oSelectedDateText.setText(param.time);
+		    oSelectedPriceText.setText(candlestickSeries.coordinateToPrice(param.point.y));
 		},
 		
 		
