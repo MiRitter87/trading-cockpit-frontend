@@ -49,6 +49,38 @@ sap.ui.define([
 		
 		
 		/**
+		 * Creates a candlestick series that contains the data to be displayed.
+		 */
+		getCandlestickSeries : function (oCallingController) {
+			var oQuotationsModel = oCallingController.getView().getModel("quotations");
+			var oQuotations = oQuotationsModel.oData.quotation;
+			var aCandlestickSeries = new Array();
+			var oDateFormat, oDate, sFormattedDate;
+			
+			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
+			
+			//The dataset needs to be constructed beginning at the oldest value.
+			for(var i = oQuotations.length -1; i >= 0; i--) {
+    			var oQuotation = oQuotations[i];
+    			var oCandlestickDataset = new Object();
+    			
+    			oCandlestickDataset.open = oQuotation.open;
+    			oCandlestickDataset.high = oQuotation.high;
+    			oCandlestickDataset.low = oQuotation.low;
+    			oCandlestickDataset.close = oQuotation.close;
+    			
+    			oDate = new Date(parseInt(oQuotation.date));
+    			sFormattedDate = oDateFormat.format(oDate);
+    			oCandlestickDataset.time = sFormattedDate;
+    			
+    			aCandlestickSeries.push(oCandlestickDataset);
+			}
+			
+			return aCandlestickSeries;
+		},
+		
+		
+		/**
 		 * Handles clicks in the TradingView chart.
 		 */
 		onChartClicked : function (param) {
@@ -83,26 +115,6 @@ sap.ui.define([
 			
 			DashboardController.queryQuotationsByWebService(this.queryQuotationsCallback, oCallingController, false, sSelectedInstrumentId);
 		},
-				
-		
-		/**
-		 * Callback function of the queryQuotations RESTful WebService call in the DashboardController.
-		 */
-		queryQuotationsCallback : function(oReturnData, oCallingController) {
-			var oModel = new JSONModel();
-			
-			if(oReturnData.data != null) {
-				oModel.setData(oReturnData.data);		
-			}
-			
-			if(oReturnData.data == null && oReturnData.message != null)  {
-				MessageToast.show(oReturnData.message[0].text);
-			}                                                               
-			
-			oCallingController.getView().setModel(oModel, "quotations");
-			
-			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.CreateChartObject");
-		},
 		
 		
 		/**
@@ -117,8 +129,16 @@ sap.ui.define([
 		/**
 		 * Handles the button press event of the save button in the "create chart object" dialog.
 		 */
-		onSaveNewChartObjectPressed : function () {
+		onSaveNewChartObjectPressed : function (oCallingController) {
+			var bInputValid = this.isHorizontalLineInputvalid(oCallingController);
+			var oHorizontalLineModel;
 			
+			if(bInputValid == false)
+				return;
+				
+			oHorizontalLineModel = this.getHorizontalLineModel(oCallingController);
+			
+			this.createHorizontalLineByWebService(oHorizontalLineModel, this.createHorizontalLineCallback, oCallingController);
 		},
 		
 		
@@ -163,34 +183,111 @@ sap.ui.define([
 		
 		
 		/**
-		 * Creates a candlestick series that contains the data to be displayed.
+		 * Callback function of the queryQuotations RESTful WebService call in the DashboardController.
 		 */
-		getCandlestickSeries : function (oCallingController) {
-			var oQuotationsModel = oCallingController.getView().getModel("quotations");
-			var oQuotations = oQuotationsModel.oData.quotation;
-			var aCandlestickSeries = new Array();
-			var oDateFormat, oDate, sFormattedDate;
+		queryQuotationsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
 			
-			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
-			
-			//The dataset needs to be constructed beginning at the oldest value.
-			for(var i = oQuotations.length -1; i >= 0; i--) {
-    			var oQuotation = oQuotations[i];
-    			var oCandlestickDataset = new Object();
-    			
-    			oCandlestickDataset.open = oQuotation.open;
-    			oCandlestickDataset.high = oQuotation.high;
-    			oCandlestickDataset.low = oQuotation.low;
-    			oCandlestickDataset.close = oQuotation.close;
-    			
-    			oDate = new Date(parseInt(oQuotation.date));
-    			sFormattedDate = oDateFormat.format(oDate);
-    			oCandlestickDataset.time = sFormattedDate;
-    			
-    			aCandlestickSeries.push(oCandlestickDataset);
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);		
 			}
 			
-			return aCandlestickSeries;
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+			
+			oCallingController.getView().setModel(oModel, "quotations");
+			
+			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.CreateChartObject");
+		},
+		
+		
+		/**
+		 * Callback function of the createHorizontalLine RESTful WebService call.
+		 */
+		createHorizontalLineCallback : function (oReturnData, oCallingController) {
+			if(oReturnData.message != null) {
+				if(oReturnData.message[0].type == 'S') {
+					MessageToast.show(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'E') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'W') {
+					MessageBox.warning(oReturnData.message[0].text);
+				}
+			}
+		},
+		
+		
+		/**
+		 * Calls a WebService operation to create a horizontal line object.
+		 */
+		createHorizontalLineByWebService : function(oHorizontalLineModel, callbackFunction, oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
+			var sJSONData = oHorizontalLineModel.getJSON();
+			
+			//Use "POST" to create a resource.
+			jQuery.ajax({
+				type : "POST", 
+				contentType : "application/json", 
+				url : sQueryUrl,
+				data : sJSONData, 
+				success : function(data) {
+					callbackFunction(data, oCallingController);
+				}
+			});
+		},
+		
+		
+		/**
+		 * Checks if the input for the horizontal line is valid.
+		 */
+		isHorizontalLineInputvalid : function (oCallingController) {
+			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var sSelectedObjectType = oCallingController.getView().byId("objectTypeComboBox").getSelectedKey();
+			var oSelectedCoordinateModel;
+			var price;
+			
+			if(sSelectedObjectType == "") {
+				MessageBox.error(oResourceBundle.getText("dashboardCharts.noObjectTypeSelected"));
+				return false;
+			}
+			
+			oSelectedCoordinateModel = oCallingController.getView().getModel("selectedCoordinates");
+			
+			if(oSelectedCoordinateModel == null || oSelectedCoordinateModel == undefined) {
+				MessageBox.error(oResourceBundle.getText("dashboardCharts.noHorizontalPriceSelected"));
+				return false;
+			} else {
+				price = oSelectedCoordinateModel.getProperty("/price")
+				
+				if(price == undefined || price == "") {
+					MessageBox.error(oResourceBundle.getText("dashboardCharts.noHorizontalPriceSelected"));
+					return false;
+				}
+			}
+			
+			return true;
+		},
+		
+		
+		/**
+		 * Gets the HorizontalLine as JSONModel that can be further processed by the WebService.
+		 */
+		getHorizontalLineModel : function (oCallingController) {
+			var oHorizontalLineWS = new JSONModel();
+			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
+			var oSelectedCoordinateModel = oCallingController.getView().getModel("selectedCoordinates");
+			
+			oHorizontalLineWS.setProperty("/instrumentId", oInstrumentComboBox.getSelectedKey());
+			oHorizontalLineWS.setProperty("/price", oSelectedCoordinateModel.getProperty("/price"));
+			
+			return oHorizontalLineWS;
 		}
 	};
 });
