@@ -125,7 +125,10 @@ sap.ui.define([
 		 * Handles the button press event of the cancel button in the "create chart object" dialog.
 		 */
 		onCancelCreateChartObjectDialog : function(oCallingController) {
+			var oSelectedCoordinateModel = new JSONModel();
+			
 			oCallingController.byId("createChartObjectDialog").close();
+			oCallingController.getView().setModel(oSelectedCoordinateModel, "selectedCoordinates");
 		},
 		
 		
