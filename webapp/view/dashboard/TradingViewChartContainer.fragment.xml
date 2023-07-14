@@ -32,13 +32,13 @@
 						<f:formElements>
 							<f:FormElement label="{i18n>dashboardCharts.selectedDate}">
 								<f:fields>
-									<Text id="selectedDateText"/>
+									<Text id="selectedDateText" text="{selectedCoordinates>/date}"/>
 								</f:fields>
 							</f:FormElement>
 							
 							<f:FormElement label="{i18n>dashboardCharts.selectedPrice}">
 								<f:fields>
-									<Text id="selectedPriceText"/>
+									<Text id="selectedPriceText" text="{selectedCoordinates>/price}"/>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>

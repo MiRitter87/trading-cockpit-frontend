@@ -30,7 +30,7 @@
 					<f:formElements>
 						<f:FormElement label="{i18n>dashboardCharts.objectType}">
 							<f:fields>
-								<ComboBox id="objectTypeComboBox">
+								<ComboBox id="objectTypeComboBox" required="true" >
 									<items>
 										<core:Item key="HORIZONTAL_LINE" text="{i18n>dashboardCharts.objectType.horizontalLine}"/>
 									</items>
