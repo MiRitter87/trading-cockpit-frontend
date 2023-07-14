@@ -138,7 +138,7 @@ sap.ui.define([
 				
 			oHorizontalLineModel = this.getHorizontalLineModel(oCallingController);
 			
-			this.createHorizontalLineByWebService(oHorizontalLineModel, this.createHorizontalLineCallback, oCallingController);
+			this.createHorizontalLineByWebService(oHorizontalLineModel, this.createHorizontalLineCallback.bind(this), oCallingController);
 		},
 		
 		
@@ -146,11 +146,7 @@ sap.ui.define([
 		 * Handles the button press event of the cancel button in the "create chart object" dialog.
 		 */
 		onCancelCreateChartObjectDialog : function(oCallingController) {
-			var oSelectedCoordinateModel = new JSONModel();
-			var oObjectTypeComboBox = oCallingController.getView().byId("objectTypeComboBox");
-			
-			oObjectTypeComboBox.setSelectedKey("");
-			oCallingController.getView().setModel(oSelectedCoordinateModel, "selectedCoordinates");
+			this.resetChartObjectCreation(oCallingController);
 			oCallingController.byId("createChartObjectDialog").close();
 		},
 		
@@ -209,6 +205,8 @@ sap.ui.define([
 			if(oReturnData.message != null) {
 				if(oReturnData.message[0].type == 'S') {
 					MessageToast.show(oReturnData.message[0].text);
+					this.resetChartObjectCreation(oCallingController);
+					oCallingController.byId("createChartObjectDialog").close();
 				}
 				
 				if(oReturnData.message[0].type == 'E') {
@@ -288,6 +286,18 @@ sap.ui.define([
 			oHorizontalLineWS.setProperty("/price", oSelectedCoordinateModel.getProperty("/price"));
 			
 			return oHorizontalLineWS;
+		},
+		
+		
+		/**
+		 * Resets the model and UI elements for chart object creation.
+		 */
+		resetChartObjectCreation : function (oCallingController) {
+			var oSelectedCoordinateModel = new JSONModel();
+			var oObjectTypeComboBox = oCallingController.getView().byId("objectTypeComboBox");
+			
+			oObjectTypeComboBox.setSelectedKey("");
+			oCallingController.getView().setModel(oSelectedCoordinateModel, "selectedCoordinates");
 		}
 	};
 });
