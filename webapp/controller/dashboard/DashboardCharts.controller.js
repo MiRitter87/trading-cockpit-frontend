@@ -123,6 +123,10 @@ sap.ui.define([
 			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
 			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
 			
+			if(oSelectedItem == null) {
+				return;
+			}
+			
 			oInstrument = InstrumentController.getInstrumentById(oSelectedItem.getKey(), oInstrumentsModel.oData.instrument);
 			
 			if(oInstrument.type == Constants.INSTRUMENT_TYPE.RATIO) {
