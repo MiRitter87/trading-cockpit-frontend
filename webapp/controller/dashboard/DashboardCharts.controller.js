@@ -262,7 +262,7 @@ sap.ui.define([
 		/**
 		 * Handles the button press event of the save button in the "create chart object" dialog.
 		 */
-		onSaveNewChartObjectPressed : function () {
+		onSaveNewChartObjectPressed : function() {
 			ChartAnalysisController.onSaveNewChartObjectPressed(this);
 		},
 		
@@ -276,9 +276,17 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the button press event of the delete button in the "chart overview" dialog.
+		 */
+		onDeleteChartObjectPressed : function() {
+			
+		},
+		
+		
+		/**
 		 * Handles a click at the take coordinate button of the TradingView chart container.
 		 */
-		onTakeCoordinate : function () {
+		onTakeCoordinate : function() {
 			ChartAnalysisController.onTakeCoordinate(this);
 		},
 		
@@ -286,7 +294,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the cancel button of the TradingView chart container.
 		 */
-		onCancelChartDialog : function () {
+		onCancelChartDialog : function() {
 			ChartAnalysisController.onCancelChartDialog(this);
 		},
 		

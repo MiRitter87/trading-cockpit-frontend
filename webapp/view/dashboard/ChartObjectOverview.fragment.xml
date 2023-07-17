@@ -1,0 +1,41 @@
+<!DOCTYPE xml>
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:html="http://www.w3.org/1999/xhtml">>
+
+	<Dialog id="chartObjectOverviewDialog" title="{i18n>dashboardCharts.objectOverviewDialog.title}">
+		<Table id="chartObjectTable" items="{path: 'horizontalLines>/horizontalLine/'}" mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders">
+			<headerToolbar>
+				<OverflowToolbar>
+					<Title text="{i18n>dashboardCharts.objectOverviewDialog.tableHeader} ({= ${horizontalLines>/horizontalLine/}.length})"/>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://delete" tooltip="{i18n>dashboardCharts.objectOverviewDialog.deleteSelected}" press=".onDeleteChartObjectPressed"/>
+				</OverflowToolbar>
+				</headerToolbar>
+			
+			<columns>
+				<Column minScreenWidth="Desktop" demandPopin="true">
+					<Text text="{i18n>chartObject.id}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>chartObject.instrumentName}"/>
+				</Column>
+				<Column>
+					<Text text="{i18n>chartObject.horizontalLine.price}"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<ObjectIdentifier text="{horizontalLines>id}"/>
+						<Text text="{horizontalLines>instrument/name)}"/>
+						<Text text="{horizontalLines>price}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</Dialog>
+</core:FragmentDefinition>
