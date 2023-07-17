@@ -279,7 +279,7 @@ sap.ui.define([
 		 * Handles the button press event of the delete button in the "chart overview" dialog.
 		 */
 		onDeleteChartObjectPressed : function() {
-			
+			ChartAnalysisController.onDeleteChartObjectPressed(this);
 		},
 		
 		

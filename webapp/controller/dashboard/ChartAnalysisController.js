@@ -168,6 +168,22 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the button press event of the delete button in the "chart overview" dialog.
+		 */
+		onDeleteChartObjectPressed : function(oCallingController) {
+			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			if(oCallingController.getView().byId("chartObjectTable").getSelectedItem() == null) {
+				MessageBox.information(oResourceBundle.getText("dashboardCharts.objectOverviewDialog.noObjectSelected"));
+				return;				
+			}
+			
+			this.deleteHorizontalLineByWebService(
+				this.getSelectedHorizontalLine(oCallingController), this.deleteHorizontalLineCallback.bind(this), oCallingController);
+		},
+		
+		
+		/**
 		 * Executed after PopUp for TradingView chart has been fully initialized and opened.
 		 */
 		onTradingViewPopupOpened : function (oCallingController) {
@@ -249,6 +265,7 @@ sap.ui.define([
 		 */
 		queryHorizontalLinesCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
+			var oOverviewDialog = oCallingController.byId("chartObjectOverviewDialog");
 			
 			if(oReturnData.data != null) {
 				oModel.setData(oReturnData.data);		
@@ -260,7 +277,39 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oModel, "horizontalLines");
 			
-			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.ChartObjectOverview");
+			if(oOverviewDialog == undefined || oOverviewDialog.isOpen() == false) {
+				MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.ChartObjectOverview");				
+			}
+		},
+		
+		
+		/**
+		 * Callback function of the deleteHorizontalLine RESTful WebService call.
+		 */
+		deleteHorizontalLineCallback : function(oReturnData, oCallingController) {
+			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
+			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
+			
+			if(oReturnData.message != null) {
+				if(oReturnData.message[0].type == 'S') {
+					MessageToast.show(oReturnData.message[0].text);
+					
+					if(sSelectedInstrumentId == "") {
+						this.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, oCallingController, true);				
+					}
+					else {
+						this.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, oCallingController, true, sSelectedInstrumentId);	
+					}
+				}
+				
+				if(oReturnData.message[0].type == 'E') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'W') {
+					MessageBox.warning(oReturnData.message[0].text);
+				}
+			}
 		},
 		
 		
@@ -310,6 +359,27 @@ sap.ui.define([
 		
 		
 		/**
+		 * Deletes the given horizontal line using the WebService.
+		 */
+		deleteHorizontalLineByWebService : function(oHorizontalLine, callbackFunction, oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + oHorizontalLine.id;
+			
+			//Use "DELETE" to delete an existing resource.
+			jQuery.ajax({
+				type : "DELETE", 
+				contentType : "application/json", 
+				url : sQueryUrl, 
+				dataType : "json", 
+				success : function(data) {
+					callbackFunction(data, oCallingController);
+				}
+			});
+		},
+		
+		
+		/**
 		 * Checks if the input for the horizontal line is valid.
 		 */
 		isHorizontalLineInputvalid : function (oCallingController) {
@@ -353,6 +423,18 @@ sap.ui.define([
 			oHorizontalLineWS.setProperty("/price", oSelectedCoordinateModel.getProperty("/price"));
 			
 			return oHorizontalLineWS;
+		},
+		
+		
+		/**
+		 * Gets the the selected horizontal line from the overview table.
+		 */
+		getSelectedHorizontalLine : function (oCallingController) {
+			var oListItem = oCallingController.getView().byId("chartObjectTable").getSelectedItem();
+			var oContext = oListItem.getBindingContext("horizontalLines");
+			var oSelectedHorizontalLine = oContext.getProperty(null, oContext);
+			
+			return oSelectedHorizontalLine;
 		},
 		
 		
