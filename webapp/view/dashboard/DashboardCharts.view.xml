@@ -66,7 +66,7 @@
 						<IconTabFilter text="{i18n>dashboardCharts.tabChartAnalysis}" key="chartAnalysis">
 							<Button id="addButton" text="{i18n>dashboardCharts.buttonAddText}" press=".onAddObjectPressed" class="sapUiSmallMarginEnd"/>
 							<Button id="editButton" text="{i18n>dashboardCharts.buttonEditText}" press=".onEditObjectPressed" class="sapUiSmallMarginEnd"/>
-							<Button id="overviewButton" text="{i18n>dashboardCharts.buttonOverviewText}" press=".onOverviewObjectPressed"/>
+							<Button id="overviewButton" text="{i18n>dashboardCharts.buttonOverviewText}" press=".onObjectOverviewPressed"/>
 						</IconTabFilter>
 					</items>
 				</IconTabBar>

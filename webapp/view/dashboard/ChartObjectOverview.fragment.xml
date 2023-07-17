@@ -31,11 +31,13 @@
 				<ColumnListItem>
 					<cells>
 						<ObjectIdentifier text="{horizontalLines>id}"/>
-						<Text text="{horizontalLines>instrument/name)}"/>
+						<Text text="{horizontalLines>instrument/name}"/>
 						<Text text="{horizontalLines>price}"/>
 					</cells>
 				</ColumnListItem>
 			</items>
 		</Table>
+		
+		<Button text="{i18n>button.close}" press=".onCloseObjectOverviewDialog" class="sapUiSmallMargin"/>
 	</Dialog>
 </core:FragmentDefinition>

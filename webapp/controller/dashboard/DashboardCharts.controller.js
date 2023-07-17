@@ -246,8 +246,8 @@ sap.ui.define([
 		/**
 		 * Handles the button press event of the overview object button.
 		 */
-		onOverviewObjectPressed : function() {
-			
+		onObjectOverviewPressed : function() {
+			ChartAnalysisController.onObjectOverviewPressed(this);
 		},
 		
 		
@@ -296,6 +296,14 @@ sap.ui.define([
 		 */
 		onCancelChartDialog : function() {
 			ChartAnalysisController.onCancelChartDialog(this);
+		},
+		
+		
+		/**
+		 * Handles a click at the close button of the object overview dialog.
+		 */
+		onCloseObjectOverviewDialog : function() {
+			ChartAnalysisController.onCloseObjectOverviewDialog(this);
 		},
 		
 		
