@@ -172,7 +172,7 @@ sap.ui.define([
 		/**
 		 * Queries the quotation WebService for quotations.
 		 */
-		queryQuotationsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sTemplate, sType, sStartDate) {
+		queryQuotationsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sTemplate, sType, sStartDate, sMinLiquidity) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/quotation");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
@@ -208,6 +208,9 @@ sap.ui.define([
 				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP;
 			else if(sType == Constants.INSTRUMENT_TYPE.RATIO)
 				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.RATIO;
+				
+			if(sMinLiquidity != undefined && sMinLiquidity != "")
+				sQueryUrl = sQueryUrl + "&minLiquidity=" + sMinLiquidity;
 			
 			jQuery.ajax({
 				type : "GET", 
