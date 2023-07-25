@@ -90,6 +90,8 @@ sap.ui.define([
 		getCurrencyForStockExchange : function(sStockExchange) {
 			if(sStockExchange == Constants.STOCK_EXCHANGE.NYSE)
 				return "USD";
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.NDQ)
+				return "USD";
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX)
 				return "CAD";
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSXV)

@@ -405,6 +405,9 @@ sap.ui.define([
 			if(sStockExchange == Constants.STOCK_EXCHANGE.NYSE) {
 				sChartUrl = sChartUrl.replace("{exchange}", "");
 			}
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.NDQ) {
+				sChartUrl = sChartUrl.replace("{exchange}", "");
+			}
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX) {
 				sChartUrl = sChartUrl.replace("{exchange}", ".TO");
 			}

@@ -55,10 +55,11 @@ sap.ui.define([
 		 */
 		initializeStockExchangeComboBox : function(oComboBox, oResourceBundle) {
 			
+			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.NYSE, "stockExchange.nyse");
+			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.NDQ, "stockExchange.ndq");
 			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.TSX, "stockExchange.tsx");
 			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.TSXV, "stockExchange.tsxv");
 			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.CSE, "stockExchange.cse");
-			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.NYSE, "stockExchange.nyse");
 			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.LSE, "stockExchange.lse");
 		},
 		
@@ -81,6 +82,8 @@ sap.ui.define([
 		getLocalizedStockExchangeText : function(sStockExchange, oResourceBundle) {
 			if(sStockExchange == Constants.STOCK_EXCHANGE.NYSE)
 				return oResourceBundle.getText("stockExchange.nyse");
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.NDQ)
+				return oResourceBundle.getText("stockExchange.ndq");
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX)
 				return oResourceBundle.getText("stockExchange.tsx");
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSXV)
