@@ -159,6 +159,14 @@ sap.ui.define([
 		
 		
 		/**
+		 * Formatter of the currency display text.
+		 */
+		currencyTextFormatter: function(sCurrencyCode) {
+			return PriceAlertController.getCurrencyDisplayText(sCurrencyCode);
+		},
+		
+		
+		/**
 		 * Displays a message in case the instrument has not been selected.
 		 */
 		showMessageOnUndefinedInstrument : function () {

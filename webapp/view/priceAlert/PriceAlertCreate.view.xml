@@ -49,7 +49,8 @@
 						
 						<f:FormElement label="{i18n>priceAlert.price}">
 							<f:fields>
-								<Input id="priceInput" type="Number" required="true" description="{newPriceAlert>/currency}"/>
+								<Input id="priceInput" type="Number" required="true" 
+									description="{path: 'newPriceAlert>/currency', formatter: '.currencyTextFormatter'}"/>
 							</f:fields>
 						</f:FormElement>
 					</f:FormContainer>

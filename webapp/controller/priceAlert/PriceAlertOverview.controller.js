@@ -154,6 +154,19 @@ sap.ui.define([
 		
 		
 		/**
+		 * Formatter of the price and currency display text.
+		 */
+		priceCurrencyTextFormatter: function(sPrice, sCurrencyCode) {
+			var sPriceCurrencyString = "";
+			var sFormattedCurrency = PriceAlertController.getCurrencyDisplayText(sCurrencyCode);
+			
+			sPriceCurrencyString = sPrice + " " + sFormattedCurrency;
+			
+			return sPriceCurrencyString;
+		},
+		
+		
+		/**
 		 * Checks if a price alert has been selected.
 		 */
 		isPriceAlertSelected : function () {

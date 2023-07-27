@@ -65,7 +65,7 @@
 								<f:fields>
 									<Text id="priceText" text="{
 										parts: ['selectedPriceAlert>/price', 'selectedPriceAlert>/currency'],
-										type: 'sap.ui.model.type.Currency'}"/>
+										formatter: '.priceCurrencyTextFormatter'}"/>
 								</f:fields>
 							</f:FormElement>
 							

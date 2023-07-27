@@ -269,6 +269,14 @@ sap.ui.define([
 			}
 			
 			return true;
+		},
+		
+		
+		/**
+		 * Formatter of the currency display text.
+		 */
+		currencyTextFormatter: function(sCurrencyCode) {
+			return PriceAlertController.getCurrencyDisplayText(sCurrencyCode);
 		}
 	});
 });

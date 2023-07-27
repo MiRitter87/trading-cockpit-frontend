@@ -85,8 +85,9 @@ sap.ui.define([
 		 */
 		priceAlertInfoTextFormatter: function(fPrice, sCurrency) {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var sFormattedCurrency = PriceAlertController.getCurrencyDisplayText(sCurrency);
 			
-			return oResourceBundle.getText("priceAlertFeed.priceAlert") + fPrice + " " + sCurrency;
+			return oResourceBundle.getText("priceAlertFeed.priceAlert") + fPrice + " " + sFormattedCurrency;
 		},
 		
 		

@@ -95,6 +95,12 @@ sap.ui.define([
 			CONFIRMATION: 'CONFIRMATION',
 			VIOLATION: 'VIOLATION',
 			UNCERTAIN: 'UNCERTAIN'
+		},
+		
+		CURRENCY: {
+			USD: 'USD',
+			CAD: 'CAD',
+			GBP: 'GBP'
 		}
     };
 	

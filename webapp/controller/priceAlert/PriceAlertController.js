@@ -89,19 +89,30 @@ sap.ui.define([
 		 */
 		getCurrencyForStockExchange : function(sStockExchange) {
 			if(sStockExchange == Constants.STOCK_EXCHANGE.NYSE)
-				return "USD";
+				return Constants.CURRENCY.USD;
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.NDQ)
-				return "USD";
+				return Constants.CURRENCY.USD;
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX)
-				return "CAD";
+				return Constants.CURRENCY.CAD;
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSXV)
-				return "CAD";
+				return Constants.CURRENCY.CAD;
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.CSE)
-				return "CAD";
+				return Constants.CURRENCY.CAD;
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.LSE)
-				return "GBP";
+				return Constants.CURRENCY.GBP;
 			else
 				return null;
+		},
+		
+		
+		/**
+		 * returns the display text for the given currency code.
+		 */
+		getCurrencyDisplayText: function(sCurrencyCode) {
+			if(sCurrencyCode == Constants.CURRENCY.GBP)
+				return "GBp";
+			else
+				return sCurrencyCode;
 		},
 		
 		
