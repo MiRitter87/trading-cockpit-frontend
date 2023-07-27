@@ -13,6 +13,7 @@ Some business objects have additional views. It's functions are described in the
 
 ### Price Alerts
 A price alert notifies you if the price of a stock reaches a certain threshold. There are two types of alerts. One type informs you if a price is equal or higher than your defined price. The other type informs you if the price is equal of lower than your defined price.
+An E-Mail address can be defined optionally. In case of a triggered alert, an information is send to the defined recipient.
 
 The Feed view cyclically queries all price alerts that have been triggered but not yet confirmed. You can confirm each price alert in the feed. It vanishes from the feed after confirmation.
 
@@ -35,9 +36,9 @@ You can restart a scan and only load those instruments for which the scan proces
 Once a scan has been finished you can view the results in the scan result view. The table shows instruments with their indicator values. You can sort the list by multiple indicators by clicking on the 'sort' button.
 Each table row provides a button that allows you to open a chart for the given instrument. Indicator columns can be set to visible or invisible according to your needs.
 
-There is also a function to compare a list of instruments. You can choose instruments by clicking on the scale button and then selecting instruments from the list popup. This helps you to directly compare only those instruments you are interested in.
+There is also a function to compare a list of instruments. You can choose instruments by clicking on the scale button and then selecting instruments from the list Pop-up. This helps you to directly compare only those instruments you are interested in.
 
-The scan result view offers nine templates.
+The scan result view offers ten templates.
 
 - All (Default template, loads all scanned instruments)
 - Minervini Trend Template (Instruments in a Stage 2 uptrend)
@@ -48,9 +49,10 @@ The scan result view offers nine templates.
 - Near 52-week High (Instruments trading within 5% of their 52-week high)
 - Near 52-week Low (Instruments trading within 5% of their 52-week low)
 - RS since Date (All scanned instruments, calculates RS number since the given date)
+- Three Weeks Tight (Instruments with at least three  weekly closing prices in a +/- 2% range)
 
 ### Dashboard
-The Dashboard aims to provide a meta overview of the current state of the market. Currently there are two views: Statistics and Charts.
+The Dashboard aims to provide a meta overview of the current state of the market. Currently there are two views available: Statistics and Charts.
 
 The statistics view provides the number of advancing and decline stocks for each trading day as well as the advance / decline differential and the percentage of stocks trading above their 50-day moving average.
 
@@ -61,6 +63,9 @@ The charts view provides the following charts.
 - A candlestick chart with annotations for Distribution Days for ETFs, sectors and industry groups
 - A candlestick chart with annotations for Follow-Through Days for ETFs, sectors and industry groups
 - The Ritter Market Trend for the overall database as well as selected lists
+- The Ritter Pattern Indicator for the overall database as well as selected lists
+- A candlestick chart with annotations for Pocket Pivots for all instruments
+- A candlestick chart that can be customized with multiple moving averages, indicators as well as horizontal lines
 
 ## Technology
 
