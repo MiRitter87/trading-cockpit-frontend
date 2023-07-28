@@ -44,7 +44,7 @@
 				
 				<headerToolbar>
 					<OverflowToolbar>
-						<Title id="quotationTableTitle"/>
+						<Title text="{i18n>scanResults.tableHeader} ({= ${quotations>/quotation/}.length})"/>
 						<ToolbarSpacer/>
 						<SearchField id="resultsSearchField" liveChange=".onSearch" width="10%"/>
 						<Button icon="sap-icon://compare" tooltip="{i18n>scanResults.compareInstruments}" press=".onComparePressed"/>
