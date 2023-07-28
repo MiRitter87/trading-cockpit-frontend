@@ -311,6 +311,7 @@ sap.ui.define([
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
 		queryQuotationsCallback : function(oReturnData, oCallingController) {
+			var oSearchField = oCallingController.getView().byId("resultsSearchField");
 			var oModel = new JSONModel();
 			
 			if(oReturnData.data != null) {
@@ -325,6 +326,7 @@ sap.ui.define([
 			oCallingController.getView().setModel(oModel, "quotations");
 			
 			oCallingController.updateResultTableTitle();
+			oSearchField.setValue("");
 		},
 		
 		
@@ -449,12 +451,18 @@ sap.ui.define([
 			var oTypeComboBox = this.getView().byId("typeComboBox");
 			var oStartDateLabel = this.getView().byId("startDateLabel");
 			var oStartDatePicker = this.getView().byId("startDatePicker");
+			var oLiquidityInput = this.getView().byId("liquidityInput");
+			var oSearchField = this.getView().byId("resultsSearchField");
 						
 			oTemplateComboBox.setSelectedKey(Constants.SCAN_TEMPLATE.ALL);
 			oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
 			
 			oStartDateLabel.setVisible(false);
 			oStartDatePicker.setVisible(false);
+			
+			oLiquidityInput.setValue("");
+			
+			oSearchField.setValue("");
 		},
 		
 		

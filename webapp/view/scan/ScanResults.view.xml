@@ -46,7 +46,7 @@
 					<OverflowToolbar>
 						<Title id="quotationTableTitle"/>
 						<ToolbarSpacer/>
-						<SearchField liveChange=".onSearch" width="10%"/>
+						<SearchField id="resultsSearchField" liveChange=".onSearch" width="10%"/>
 						<Button icon="sap-icon://compare" tooltip="{i18n>scanResults.compareInstruments}" press=".onComparePressed"/>
 						<Button icon="sap-icon://action-settings" tooltip="{i18n>scanResults.configureColumns}" press=".onColumnSettingsPressed"/>
 						<Button icon="sap-icon://sort" tooltip="{i18n>scanResults.sort}" press=".onSortPressed"/>
