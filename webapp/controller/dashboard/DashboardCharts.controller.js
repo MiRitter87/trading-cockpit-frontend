@@ -519,19 +519,31 @@ sap.ui.define([
 			var sSelectedIndicator = oIndicatorComboBox.getSelectedKey();
 			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
 			
-			sParameters = sParameters + "?withEma21=" + oEma21CheckBox.getSelected();
-			sParameters = sParameters + "&withSma50=" + oSma50CheckBox.getSelected();
-			sParameters = sParameters + "&withSma150=" + oSma150CheckBox.getSelected();
-			sParameters = sParameters + "&withSma200=" + oSma200CheckBox.getSelected();
-			sParameters = sParameters + "&withVolume=" + oVolumeCheckBox.getSelected();
-			sParameters = sParameters + "&withSma30Volume=" + oSma30VolumeCheckBox.getSelected();
-			
 			if(sSelectedIndicator == "") {
-				sParameters = sParameters + "&indicator=NONE";				
+				sParameters = sParameters + "?indicator=NONE";				
 			}
 			else {
-				sParameters = sParameters + "&indicator=" + sSelectedIndicator;
+				sParameters = sParameters + "?indicator=" + sSelectedIndicator;
 			}
+			
+			if(oEma21CheckBox.getSelected() == true) {
+				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.EMA_21;
+			}
+			
+			if(oSma50CheckBox.getSelected() == true) {
+				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.SMA_50;
+			}
+			
+			if(oSma150CheckBox.getSelected() == true) {
+				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.SMA_150;
+			}
+			
+			if(oSma200CheckBox.getSelected() == true) {
+				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.SMA_200;
+			}
+			
+			sParameters = sParameters + "&withVolume=" + oVolumeCheckBox.getSelected();
+			sParameters = sParameters + "&withSma30Volume=" + oSma30VolumeCheckBox.getSelected();
 			
 			if(sSelectedIndicator == Constants.CHART_INDICATOR.RS_LINE) {
 				sParameters = sParameters + "&rsInstrumentId=" + oRsInstrumentComboBox.getSelectedKey();

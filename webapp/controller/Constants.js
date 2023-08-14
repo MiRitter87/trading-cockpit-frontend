@@ -87,6 +87,13 @@ sap.ui.define([
 			SLOW_STOCHASTIC: 'SLOW_STOCHASTIC'
 		},
 		
+		CHART_OVERLAY: {
+			EMA_21: 'EMA_21',
+			SMA_50: 'SMA_50',
+			SMA_150: 'SMA_150',
+			SMA_200: 'SMA_200'
+		},
+		
 		CHART_OBJECT_TYPE: {
 			HORIZONTAL_LINE: 'HORIZONTAL_LINE'
 		},
