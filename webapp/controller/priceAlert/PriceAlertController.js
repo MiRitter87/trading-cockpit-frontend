@@ -92,6 +92,10 @@ sap.ui.define([
 				return Constants.CURRENCY.USD;
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.NDQ)
 				return Constants.CURRENCY.USD;
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.AMEX)
+				return Constants.CURRENCY.USD;
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.OTC)
+				return Constants.CURRENCY.USD;	
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX)
 				return Constants.CURRENCY.CAD;
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSXV)

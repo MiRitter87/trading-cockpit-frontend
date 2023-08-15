@@ -409,6 +409,12 @@ sap.ui.define([
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.NDQ) {
 				sChartUrl = sChartUrl.replace("{exchange}", "");
 			}
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.AMEX) {
+				sChartUrl = sChartUrl.replace("{exchange}", "");
+			}
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.OTC) {
+				sChartUrl = sChartUrl.replace("{exchange}", "");
+			}
 			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX) {
 				sChartUrl = sChartUrl.replace("{exchange}", ".TO");
 			}

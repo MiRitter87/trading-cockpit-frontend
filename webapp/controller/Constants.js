@@ -13,6 +13,8 @@ sap.ui.define([
 			CSE: 'CSE',
 			NYSE: 'NYSE',
 			NDQ: 'NDQ',
+			AMEX: 'AMEX',
+			OTC: 'OTC',
 			LSE: 'LSE'
 		},
 		
