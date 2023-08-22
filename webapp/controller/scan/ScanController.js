@@ -197,6 +197,8 @@ sap.ui.define([
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.RS_SINCE_DATE + "&startDate=" + sStartDate;
 			else if(sTemplate == Constants.SCAN_TEMPLATE.THREE_WEEKS_TIGHT)
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.THREE_WEEKS_TIGHT;
+			else if(sTemplate == Constants.SCAN_TEMPLATE.HIGH_TIGHT_FLAG)
+				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.HIGH_TIGHT_FLAG;
 				
 			if(sType == Constants.INSTRUMENT_TYPE.STOCK)
 				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.STOCK;

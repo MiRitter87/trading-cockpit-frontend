@@ -169,6 +169,10 @@ sap.ui.define([
 				sTitle = oResourceBundle.getText("scanResults.template.threeWeeksTight");
 				sDescription = oResourceBundle.getText("scanResults.template.threeWeeksTight.description");
 			}
+			else if(sKey == Constants.SCAN_TEMPLATE.HIGH_TIGHT_FLAG) {
+				sTitle = oResourceBundle.getText("scanResults.template.highTightFlag");
+				sDescription = oResourceBundle.getText("scanResults.template.highTightFlag.description");
+			}
 			else {
 				MessageBox.information(oResourceBundle.getText("scanResults.noTemplateSelected"));
 				return;
@@ -346,6 +350,7 @@ sap.ui.define([
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.NEAR_52_WEEK_LOW, "scanResults.template.near52WeekLow");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.RS_SINCE_DATE, "scanResults.template.rsSinceDate");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.THREE_WEEKS_TIGHT, "scanResults.template.threeWeeksTight");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.HIGH_TIGHT_FLAG, "scanResults.template.highTightFlag");
 		},
 		
 		
