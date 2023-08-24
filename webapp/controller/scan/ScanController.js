@@ -199,6 +199,8 @@ sap.ui.define([
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.THREE_WEEKS_TIGHT;
 			else if(sTemplate == Constants.SCAN_TEMPLATE.HIGH_TIGHT_FLAG)
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.HIGH_TIGHT_FLAG;
+			else if(sTemplate == Constants.SCAN_TEMPLATE.SWING_TRADING_ENVIRONMENT)
+				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.SWING_TRADING_ENVIRONMENT;
 				
 			if(sType == Constants.INSTRUMENT_TYPE.STOCK)
 				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.STOCK;

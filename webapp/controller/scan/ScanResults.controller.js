@@ -173,6 +173,10 @@ sap.ui.define([
 				sTitle = oResourceBundle.getText("scanResults.template.highTightFlag");
 				sDescription = oResourceBundle.getText("scanResults.template.highTightFlag.description");
 			}
+			else if(sKey == Constants.SCAN_TEMPLATE.SWING_TRADING_ENVIRONMENT) {
+				sTitle = oResourceBundle.getText("scanResults.template.swingTradingEnvironment");
+				sDescription = oResourceBundle.getText("scanResults.template.swingTradingEnvironment.description");
+			}
 			else {
 				MessageBox.information(oResourceBundle.getText("scanResults.noTemplateSelected"));
 				return;
@@ -351,6 +355,7 @@ sap.ui.define([
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.RS_SINCE_DATE, "scanResults.template.rsSinceDate");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.THREE_WEEKS_TIGHT, "scanResults.template.threeWeeksTight");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.HIGH_TIGHT_FLAG, "scanResults.template.highTightFlag");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.SWING_TRADING_ENVIRONMENT, "scanResults.template.swingTradingEnvironment");
 		},
 		
 		
