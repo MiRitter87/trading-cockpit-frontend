@@ -6,7 +6,7 @@
 
 	<Dialog id="scanDetailsDialog" title="{i18n>scanOverview.detailsHeader}">
 		<content>
-			<f:Form id="scanForm" editable="false">
+			<f:Form id="scanDetailsForm" editable="false">
 				<f:layout>
 					<f:ResponsiveGridLayout
 						labelSpanXL="3"
