@@ -177,41 +177,14 @@ sap.ui.define([
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/quotation");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
 			
-			if(sTemplate == Constants.SCAN_TEMPLATE.ALL)
-				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.ALL;
-			else if(sTemplate == Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE)
-				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE;
-			else if(sTemplate == Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS)
-				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS;
-			else if(sTemplate == Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES)
-				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES;
-			else if(sTemplate == Constants.SCAN_TEMPLATE.UP_ON_VOLUME)
-				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.UP_ON_VOLUME;
-			else if(sTemplate == Constants.SCAN_TEMPLATE.DOWN_ON_VOLUME)
-				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.DOWN_ON_VOLUME;
-			else if(sTemplate == Constants.SCAN_TEMPLATE.NEAR_52_WEEK_HIGH)
-				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.NEAR_52_WEEK_HIGH;
-			else if(sTemplate == Constants.SCAN_TEMPLATE.NEAR_52_WEEK_LOW)
-				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.NEAR_52_WEEK_LOW;
-			else if(sTemplate == Constants.SCAN_TEMPLATE.RS_SINCE_DATE)
+			//Add template to URL.
+			if(sTemplate == Constants.SCAN_TEMPLATE.RS_SINCE_DATE)
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.RS_SINCE_DATE + "&startDate=" + sStartDate;
-			else if(sTemplate == Constants.SCAN_TEMPLATE.THREE_WEEKS_TIGHT)
-				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.THREE_WEEKS_TIGHT;
-			else if(sTemplate == Constants.SCAN_TEMPLATE.HIGH_TIGHT_FLAG)
-				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.HIGH_TIGHT_FLAG;
-			else if(sTemplate == Constants.SCAN_TEMPLATE.SWING_TRADING_ENVIRONMENT)
-				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.SWING_TRADING_ENVIRONMENT;
-				
-			if(sType == Constants.INSTRUMENT_TYPE.STOCK)
-				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.STOCK;
-			else if(sType == Constants.INSTRUMENT_TYPE.ETF)
-				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.ETF;
-			else if(sType == Constants.INSTRUMENT_TYPE.SECTOR)
-				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.SECTOR;
-			else if(sType == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP)
-				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP;
-			else if(sType == Constants.INSTRUMENT_TYPE.RATIO)
-				sQueryUrl = sQueryUrl + "&instrumentType=" + Constants.INSTRUMENT_TYPE.RATIO;
+			else
+				sQueryUrl = sQueryUrl + "?scanTemplate=" + sTemplate;
+			
+			//Add instrument type to URL.
+			sQueryUrl = sQueryUrl + "&instrumentType=" + sType;
 				
 			if(sMinLiquidity != undefined && sMinLiquidity != "")
 				sQueryUrl = sQueryUrl + "&minLiquidity=" + sMinLiquidity;

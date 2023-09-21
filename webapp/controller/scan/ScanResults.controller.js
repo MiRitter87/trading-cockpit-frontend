@@ -177,6 +177,10 @@ sap.ui.define([
 				sTitle = oResourceBundle.getText("scanResults.template.swingTradingEnvironment");
 				sDescription = oResourceBundle.getText("scanResults.template.swingTradingEnvironment.description");
 			}
+			else if(sKey == Constants.SCAN_TEMPLATE.RS_NEAR_HIGH_IG) {
+				sTitle = oResourceBundle.getText("scanResults.template.rsNearHighIg");
+				sDescription = oResourceBundle.getText("scanResults.template.rsNearHighIg.description");
+			}
 			else {
 				MessageBox.information(oResourceBundle.getText("scanResults.noTemplateSelected"));
 				return;
@@ -327,8 +331,18 @@ sap.ui.define([
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
-				MessageToast.show(oReturnData.message[0].text);
+			if(oReturnData.message != null && oReturnData.message.length > 0) {
+				if(oReturnData.message[0].type == 'S') {
+					MessageToast.show(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'E') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+				
+				if(oReturnData.message[0].type == 'W') {
+					MessageBox.warning(oReturnData.message[0].text);
+				}
 			}
 			
 			oCallingController.getView().setModel(oModel, "quotations");
@@ -352,10 +366,11 @@ sap.ui.define([
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.DOWN_ON_VOLUME, "scanResults.template.downOnVolume");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.NEAR_52_WEEK_HIGH, "scanResults.template.near52WeekHigh");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.NEAR_52_WEEK_LOW, "scanResults.template.near52WeekLow");
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.RS_SINCE_DATE, "scanResults.template.rsSinceDate");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.THREE_WEEKS_TIGHT, "scanResults.template.threeWeeksTight");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.HIGH_TIGHT_FLAG, "scanResults.template.highTightFlag");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.SWING_TRADING_ENVIRONMENT, "scanResults.template.swingTradingEnvironment");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.RS_NEAR_HIGH_IG, "scanResults.template.rsNearHighIg");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.RS_SINCE_DATE, "scanResults.template.rsSinceDate");
 		},
 		
 		
