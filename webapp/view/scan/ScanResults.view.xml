@@ -66,6 +66,9 @@
 					<Column id="rsNumberColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.rsNumber}"/>
 					</Column>
+					<Column id="rsNumberCompositeIgColumn" minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>indicator.rsNumberCompositeIg}"/>
+					</Column>
 					<Column id="sectorRsNumberColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.sectorRsNumber}"/>
 					</Column>
@@ -104,6 +107,7 @@
 							<Text text="{quotations>instrument/name}"/>
 							<Text text="{path: 'quotations>instrument/type', formatter: '.typeTextFormatter'}"/>
 							<Text text="{quotations>indicator/rsNumber}"/>
+							<Text text="{quotations>indicator/rsNumberCompositeIg}"/>
 							<Text text="{quotations>indicator/rsNumberSector}"/>
 							<Text text="{quotations>indicator/rsNumberIndustryGroup}"/>
 							<Text text="{quotations>indicator/performance5Days} %"/>

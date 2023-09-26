@@ -31,53 +31,58 @@ sap.ui.define(['sap/ui/thirdparty/jquery'],
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-sectorRsNumberColumn",
+					id: "trading-cockpit-frontend-quotationTable-rsNumberCompositeIgColumn",
 					order: 4,
 					visible: false
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-industryGroupRsNumberColumn",
+					id: "trading-cockpit-frontend-quotationTable-sectorRsNumberColumn",
 					order: 5,
 					visible: false
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-performance5DaysColumn",
+					id: "trading-cockpit-frontend-quotationTable-industryGroupRsNumberColumn",
 					order: 6,
-					visible: true
+					visible: false
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-distanceTo52WeekHighColumn",
+					id: "trading-cockpit-frontend-quotationTable-performance5DaysColumn",
 					order: 7,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-bollingerBandWidthColumn",
+					id: "trading-cockpit-frontend-quotationTable-distanceTo52WeekHighColumn",
 					order: 8,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-volumeDifferential10DaysColumn",
+					id: "trading-cockpit-frontend-quotationTable-bollingerBandWidthColumn",
 					order: 9,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-upDownVolumeRatioColumn",
+					id: "trading-cockpit-frontend-quotationTable-volumeDifferential10DaysColumn",
 					order: 10,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-liquidityColumn",
+					id: "trading-cockpit-frontend-quotationTable-upDownVolumeRatioColumn",
 					order: 11,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-liquidityColumn",
+					order: 12,
 					visible: false
 				},
 				{
 					id: "trading-cockpit-frontend-quotationTable-baseLengthWeeksColumn",
-					order: 12,
+					order: 13,
 					visible: true
 				},
 				{
 					id: "trading-cockpit-frontend-quotationTable-chartColumn",
-					order: 13,
+					order: 14,
 					visible: true
 				}
 			]
@@ -111,53 +116,58 @@ sap.ui.define(['sap/ui/thirdparty/jquery'],
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-sectorRsNumberColumn",
+					id: "trading-cockpit-frontend-quotationTable-rsNumberCompositeIgColumn",
 					order: 4,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-industryGroupRsNumberColumn",
+					id: "trading-cockpit-frontend-quotationTable-sectorRsNumberColumn",
 					order: 5,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-performance5DaysColumn",
+					id: "trading-cockpit-frontend-quotationTable-industryGroupRsNumberColumn",
 					order: 6,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-distanceTo52WeekHighColumn",
+					id: "trading-cockpit-frontend-quotationTable-performance5DaysColumn",
 					order: 7,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-bollingerBandWidthColumn",
+					id: "trading-cockpit-frontend-quotationTable-distanceTo52WeekHighColumn",
 					order: 8,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-volumeDifferential10DaysColumn",
+					id: "trading-cockpit-frontend-quotationTable-bollingerBandWidthColumn",
 					order: 9,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-upDownVolumeRatioColumn",
+					id: "trading-cockpit-frontend-quotationTable-volumeDifferential10DaysColumn",
 					order: 10,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-liquidityColumn",
+					id: "trading-cockpit-frontend-quotationTable-upDownVolumeRatioColumn",
 					order: 11,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-baseLengthWeeksColumn",
+					id: "trading-cockpit-frontend-quotationTable-liquidityColumn",
 					order: 12,
 					visible: true
 				},
 				{
-					id: "trading-cockpit-frontend-quotationTable-chartColumn",
+					id: "trading-cockpit-frontend-quotationTable-baseLengthWeeksColumn",
 					order: 13,
+					visible: true
+				},
+				{
+					id: "trading-cockpit-frontend-quotationTable-chartColumn",
+					order: 14,
 					visible: true
 				}
 			]
