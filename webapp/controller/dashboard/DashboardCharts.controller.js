@@ -61,6 +61,7 @@ sap.ui.define([
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER || 
 				oSelectedItem.getKey() == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50 || 
+				oSelectedItem.getKey() == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA200 || 
 				oSelectedItem.getKey() == Constants.CHART_TYPE.RITTER_MARKET_TREND || 
 				oSelectedItem.getKey() == Constants.CHART_TYPE.RITTER_PATTERN_INDICATOR) {
 					
@@ -163,6 +164,10 @@ sap.ui.define([
 			else if(sKey == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50) {
 				sTitle = oResourceBundle.getText("dashboardCharts.type.instrumentsAboveSma50");
 				sDescription = oResourceBundle.getText("dashboardCharts.type.instrumentsAboveSma50.description");
+			}
+			else if(sKey == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA200) {
+				sTitle = oResourceBundle.getText("dashboardCharts.type.instrumentsAboveSma200");
+				sDescription = oResourceBundle.getText("dashboardCharts.type.instrumentsAboveSma200.description");
 			}
 			else if(sKey == Constants.CHART_TYPE.DISTRIBUTION_DAYS) {
 				sTitle = oResourceBundle.getText("dashboardCharts.type.distributionDays");
@@ -412,6 +417,9 @@ sap.ui.define([
 				Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50, "dashboardCharts.type.instrumentsAboveSma50");
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA200, "dashboardCharts.type.instrumentsAboveSma200");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.CHART_TYPE.DISTRIBUTION_DAYS, "dashboardCharts.type.distributionDays");
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
@@ -473,6 +481,9 @@ sap.ui.define([
 			}
 			else if(sSelectedType == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50) {
 				sChartUrl = sChartUrl + "/instrumentsAboveSma50" + "?";
+			}
+			else if(sSelectedType == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA200) {
+				sChartUrl = sChartUrl + "/instrumentsAboveSma200" + "?";
 			}
 			else if(sSelectedType == Constants.CHART_TYPE.DISTRIBUTION_DAYS) {
 				sChartUrl = sChartUrl + "/distributionDays/" + sSelectedInstrumentId + "?";
