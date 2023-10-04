@@ -65,8 +65,8 @@
 										parts: ['priceAlerts>price', 'priceAlerts>currency'],
 										formatter: '.priceCurrencyTextFormatter'}"/>
 								<Text text="{priceAlerts>triggerDistancePercent} %"/>
-								<Text text="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateFormatter'}"/>
-								<Text text="{path: 'priceAlerts>confirmationTime', formatter: '.formatter.wsDateFormatter'}"/>
+								<Text text="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateTimeFormatter'}"/>
+								<Text text="{path: 'priceAlerts>confirmationTime', formatter: '.formatter.wsDateTimeFormatter'}"/>
 								<CheckBox selected="{priceAlerts>sendMail}" displayOnly="true"/>
 							</cells>
 						</ColumnListItem>

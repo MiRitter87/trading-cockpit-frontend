@@ -55,7 +55,7 @@
 							<ObjectIdentifier text="{scans>id}"/>
 							<Text text="{scans>name}"/>
 							<Text text="{scans>description}"/>
-							<Text text="{path: 'scans>lastScan', formatter: '.formatter.wsDateFormatter'}"/>
+							<Text text="{path: 'scans>lastScan', formatter: '.formatter.wsDateTimeFormatter'}"/>
 							<Text text="{path: 'scans>executionStatus', formatter: '.executionStatusTextFormatter'}"/>
 							<Text text="{path: 'scans>completionStatus', formatter: '.completionStatusTextFormatter'}"/>
 							<Text text="{= ${scans>incompleteInstruments}.length}"/>

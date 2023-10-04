@@ -14,7 +14,7 @@
 			<List items="{path: 'priceAlerts>/priceAlert/'}" >
 				<FeedListItem sender="{priceAlerts>instrument/name}"
 					info="{parts: [{path: 'priceAlerts>price'}, {path: 'priceAlerts>currency'}], formatter: '.priceAlertInfoTextFormatter'}"
-					timestamp="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateFormatter'}"
+					timestamp="{path: 'priceAlerts>triggerTime', formatter: '.formatter.wsDateTimeFormatter'}"
 					icon="{path: 'priceAlerts>alertType', formatter: '.priceAlertIconFormatter'}">
 					
 					<FeedListItemAction text="{i18n>priceAlertFeed.confirmAlert}" icon="sap-icon://accept" press=".onActionPressed" />

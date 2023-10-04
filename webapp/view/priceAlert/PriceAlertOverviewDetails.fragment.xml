@@ -61,13 +61,13 @@
 							
 							<f:FormElement label="{i18n>priceAlert.triggerTime}">
 								<f:fields>
-									<Text id="triggerTimeText" text="{path: 'selectedPriceAlert>/triggerTime', formatter: '.formatter.wsDateFormatter'}" />
+									<Text id="triggerTimeText" text="{path: 'selectedPriceAlert>/triggerTime', formatter: '.formatter.wsDateTimeFormatter'}" />
 								</f:fields>
 							</f:FormElement>
 							
 							<f:FormElement label="{i18n>priceAlert.confirmationTime}">
 								<f:fields>
-									<Text id="confirmationTimeText" text="{path: 'selectedPriceAlert>/confirmationTime', formatter: '.formatter.wsDateFormatter'}" />
+									<Text id="confirmationTimeText" text="{path: 'selectedPriceAlert>/confirmationTime', formatter: '.formatter.wsDateTimeFormatter'}" />
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>
@@ -89,7 +89,7 @@
 						<f:FormElement label="{i18n>priceAlert.mailTransmissionTime}">
 							<f:fields>
 								<Text id="mailTransmissionTimeText" 
-									text="{path: 'selectedPriceAlert>/mailTransmissionTime', formatter: '.formatter.wsDateFormatter'}" />
+									text="{path: 'selectedPriceAlert>/mailTransmissionTime', formatter: '.formatter.wsDateTimeFormatter'}" />
 							</f:fields>
 						</f:FormElement>
 					</f:FormContainer>

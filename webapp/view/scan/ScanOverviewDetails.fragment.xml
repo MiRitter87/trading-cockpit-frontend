@@ -51,7 +51,7 @@
 						<f:formElements>
 							<f:FormElement label="{i18n>scan.lastScan}">
 								<f:fields>
-									<Text id="lastScanText" text="{path: 'selectedScan>/lastScan', formatter: '.formatter.wsDateFormatter'}"/>
+									<Text id="lastScanText" text="{path: 'selectedScan>/lastScan', formatter: '.formatter.wsDateTimeFormatter'}"/>
 								</f:fields>
 							</f:FormElement>
 							
