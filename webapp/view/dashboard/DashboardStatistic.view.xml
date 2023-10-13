@@ -40,6 +40,9 @@
 					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>statistic.percentAboveSma200}"/>
 					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>statistic.upOnVolume}"/>
+					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
@@ -50,6 +53,7 @@
 							<Text text="{statistics>numberDecline}"/>
 							<Text text="{statistics>percentAboveSma50} %"/>
 							<Text text="{statistics>percentAboveSma200} %"/>
+							<Text text="{statistics>numberUpOnVolume}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
