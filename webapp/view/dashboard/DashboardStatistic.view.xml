@@ -26,6 +26,9 @@
 						<Text text="{i18n>statistic.date}"/>
 					</Column>
 					<Column>
+						<Text text="{i18n>statistic.numberOfInstruments}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>statistic.advanceDeclineNumber}"/>
 					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true">
@@ -43,17 +46,22 @@
 					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>statistic.upOnVolume}"/>
 					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>statistic.downOnVolume}"/>
+					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
 						<cells>
 							<Text text="{path: 'statistics>date', formatter: '.formatter.wsDateFormatter'}"/>
+							<Text text="{statistics>numberOfInstruments}"/>
 							<Text text="{statistics>advanceDeclineNumber}"/>
 							<Text text="{statistics>numberAdvance}"/>
 							<Text text="{statistics>numberDecline}"/>
 							<Text text="{statistics>percentAboveSma50} %"/>
 							<Text text="{statistics>percentAboveSma200} %"/>
 							<Text text="{statistics>numberUpOnVolume}"/>
+							<Text text="{statistics>numberDownOnVolume}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
