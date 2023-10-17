@@ -49,6 +49,9 @@
 					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>statistic.downOnVolume}"/>
 					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>statistic.bearishReversal}"/>
+					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
@@ -62,6 +65,7 @@
 							<Text text="{statistics>percentAboveSma200} %"/>
 							<Text text="{statistics>numberUpOnVolume}"/>
 							<Text text="{statistics>numberDownOnVolume}"/>
+							<Text text="{statistics>numberBearishReversal}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
