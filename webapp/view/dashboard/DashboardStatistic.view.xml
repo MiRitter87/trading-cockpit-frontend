@@ -55,6 +55,9 @@
 					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>statistic.bearishReversal}"/>
 					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>statistic.churning}"/>
+					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
@@ -70,6 +73,7 @@
 							<Text text="{statistics>numberDownOnVolume}"/>
 							<Text text="{statistics>numberBullishReversal}"/>
 							<Text text="{statistics>numberBearishReversal}"/>
+							<Text text="{statistics>numberChurning}"/>
 						</cells>
 					</ColumnListItem>
 				</items>
