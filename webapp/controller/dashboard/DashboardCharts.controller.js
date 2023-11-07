@@ -193,6 +193,10 @@ sap.ui.define([
 				sTitle = oResourceBundle.getText("dashboardCharts.type.priceVolume");
 				sDescription = oResourceBundle.getText("dashboardCharts.type.priceVolume.description");
 			}
+			else if(sKey == Constants.CHART_TYPE.HEALTH_CHECK) {
+				sTitle = oResourceBundle.getText("dashboardCharts.type.healthCheck");
+				sDescription = oResourceBundle.getText("dashboardCharts.type.healthCheck.description");
+			}
 			else {
 				MessageBox.information(oResourceBundle.getText("dashboardCharts.noTypeSelected"));
 				return;
@@ -436,6 +440,9 @@ sap.ui.define([
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.CHART_TYPE.PRICE_VOLUME, "dashboardCharts.type.priceVolume");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_TYPE.HEALTH_CHECK, "dashboardCharts.type.healthCheck");
 		},
 		
 		
