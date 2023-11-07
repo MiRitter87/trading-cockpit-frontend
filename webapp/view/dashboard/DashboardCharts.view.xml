@@ -12,29 +12,34 @@
 	<Page title="{i18n>dashboardCharts.header}">
 		<content>
 			<VBox class="sapUiSmallMarginBegin">
-				<!-- Selection of type and instrument or list. -->
-				<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
-					<Label text="{i18n>dashboardCharts.type}" class="sapUiSmallMarginEnd"/>
-					<ComboBox id="typeComboBox" required="true" selectionChange=".onTypeSelectionChange"/>
-					<Button icon="sap-icon://hint" type="Transparent" tooltip="{i18n>dashboardCharts.typeTooltip}" 
-						press=".onChartInformationPressed"/>
-					
+				<HBox>
+					<!-- Selection of type and instrument or list. -->
+					<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
+						<Label text="{i18n>dashboardCharts.type}" class="sapUiSmallMarginEnd"/>
+						<ComboBox id="typeComboBox" required="true" selectionChange=".onTypeSelectionChange"/>
+						<Button icon="sap-icon://hint" type="Transparent" tooltip="{i18n>dashboardCharts.typeTooltip}" 
+							press=".onChartInformationPressed"/>
+					</FlexBox>
+						
 					<!-- Additional UI elements that are used depending on the selected chart type. -->
 					<!-- Lists for example can be selected when determining A/D number and instruments above SMA(50) -->
-					<Label id="listLabel" text="{i18n>dashboardCharts.list}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd" visible="false"/>
-					<ComboBox id="listComboBox" items="{path: 'lists>/list/'}" required="false" visible="false">
-						<core:Item key="{lists>id}" text="{lists>id} - {lists>name}"/>
-					</ComboBox>
-					
-					<!-- Instruments for example can be selected when determining Distribution Days or Follow-Through Days -->
-					<Label id="instrumentLabel" text="{i18n>dashboardCharts.instrument}" 
-						class="sapUiMediumMarginBegin sapUiSmallMarginEnd" visible="false"/>
-					<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}" required="false" visible="false"
-						selectionChange=".onInstrumentSelectionChange">
+					<FlexBox id="listFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
+						<Label id="listLabel" text="{i18n>dashboardCharts.list}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+						<ComboBox id="listComboBox" items="{path: 'lists>/list/'}" required="false">
+							<core:Item key="{lists>id}" text="{lists>id} - {lists>name}"/>
+						</ComboBox>
+					</FlexBox>
 						
-						<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
-					</ComboBox>
-				</FlexBox>
+					<!-- Instruments for example can be selected when determining Distribution Days or Follow-Through Days -->
+					<FlexBox id="instrumentFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
+						<Label id="instrumentLabel" text="{i18n>dashboardCharts.instrument}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+						<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}" required="false" 
+							selectionChange=".onInstrumentSelectionChange">
+							
+							<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
+						</ComboBox>
+					</FlexBox>
+				</HBox>
 				
 				<!-- Additional configuration of the price volume chart. -->
 				<IconTabBar	id="priceVolumeIconTabBar" class="sapUiResponsiveContentPadding">

@@ -44,9 +44,9 @@ sap.ui.define([
 		 */
 		onTypeSelectionChange : function (oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
-			var oListLabel = this.getView().byId("listLabel");
+			var oListFlexBox = this.getView().byId("listFlexBox");
+			var oInstrumentFlexBox = this.getView().byId("instrumentFlexBox");
 			var oListComboBox = this.getView().byId("listComboBox");
-			var oInstrumentLabel = this.getView().byId("instrumentLabel");
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
 			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
@@ -54,10 +54,9 @@ sap.ui.define([
 			var oImage = this.getView().byId("chartImage");
 			
 			if(oSelectedItem == null) {
-				oListLabel.setVisible(false);
-				oListComboBox.setVisible(false);
-				oInstrumentLabel.setVisible(false);
-				oInstrumentComboBox.setVisible(false);
+				oListFlexBox.setVisible(false);
+				oInstrumentFlexBox.setVisible(false);
+				oPriceVolumeIconTabBar.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.ADVANCE_DECLINE_NUMBER || 
 				oSelectedItem.getKey() == Constants.CHART_TYPE.INSTRUMENTS_ABOVE_SMA50 || 
@@ -65,10 +64,8 @@ sap.ui.define([
 				oSelectedItem.getKey() == Constants.CHART_TYPE.RITTER_MARKET_TREND || 
 				oSelectedItem.getKey() == Constants.CHART_TYPE.RITTER_PATTERN_INDICATOR) {
 					
-				oListLabel.setVisible(true);
-				oListComboBox.setVisible(true);
-				oInstrumentLabel.setVisible(false);
-				oInstrumentComboBox.setVisible(false);
+				oListFlexBox.setVisible(true);
+				oInstrumentFlexBox.setVisible(false);
 				oPriceVolumeIconTabBar.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.DISTRIBUTION_DAYS ||
@@ -77,10 +74,8 @@ sap.ui.define([
 				this.applyFilterToInstrumentsComboBox(oInstrumentComboBox,
 					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, Constants.INSTRUMENT_TYPE.ETF]);
 				
-				oListLabel.setVisible(false);
-				oListComboBox.setVisible(false);
-				oInstrumentLabel.setVisible(true);
-				oInstrumentComboBox.setVisible(true);
+				oListFlexBox.setVisible(false);
+				oInstrumentFlexBox.setVisible(true);
 				oPriceVolumeIconTabBar.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.POCKET_PIVOTS) {
@@ -88,10 +83,8 @@ sap.ui.define([
 					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, 
 					 Constants.INSTRUMENT_TYPE.STOCK, Constants.INSTRUMENT_TYPE.ETF]);
 				
-				oListLabel.setVisible(false);
-				oListComboBox.setVisible(false);
-				oInstrumentLabel.setVisible(true);
-				oInstrumentComboBox.setVisible(true);
+				oListFlexBox.setVisible(false);
+				oInstrumentFlexBox.setVisible(true);
 				oPriceVolumeIconTabBar.setVisible(false);
 			}
 			else if(oSelectedItem.getKey() == Constants.CHART_TYPE.PRICE_VOLUME) {
@@ -99,10 +92,8 @@ sap.ui.define([
 					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, 
 					 Constants.INSTRUMENT_TYPE.STOCK, Constants.INSTRUMENT_TYPE.ETF, Constants.INSTRUMENT_TYPE.RATIO]);
 				
-				oListLabel.setVisible(false);
-				oListComboBox.setVisible(false);
-				oInstrumentLabel.setVisible(true);
-				oInstrumentComboBox.setVisible(true);
+				oListFlexBox.setVisible(false);
+				oInstrumentFlexBox.setVisible(true);
 				oPriceVolumeIconTabBar.setVisible(true);
 			}
 			
@@ -637,17 +628,13 @@ sap.ui.define([
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
-			var oListLabel = this.getView().byId("listLabel");
-			var oListComboBox = this.getView().byId("listComboBox");
-			var oInstrumentLabel = this.getView().byId("instrumentLabel");
-			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oListFlexBox = this.getView().byId("listFlexBox");
+			var oInstrumentFlexBox = this.getView().byId("instrumentFlexBox");
 			var oImage = this.getView().byId("chartImage");
 			var oPriceVolumeIconTabBar = this.getView().byId("priceVolumeIconTabBar");
 			
-			oListLabel.setVisible(false);
-			oListComboBox.setVisible(false);
-			oInstrumentLabel.setVisible(false);
-			oInstrumentComboBox.setVisible(false);
+			oListFlexBox.setVisible(false);
+			oInstrumentFlexBox.setVisible(false);
 			
 			this.getView().byId("typeComboBox").setSelectedKey("");
 			this.getView().byId("listComboBox").setSelectedKey("");
