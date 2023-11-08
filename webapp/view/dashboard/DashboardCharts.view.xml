@@ -39,6 +39,11 @@
 							<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
 						</ComboBox>
 					</FlexBox>
+					
+					<!-- Health check related UI elements -->
+					<FlexBox id="healthCheckFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
+						<Label text="{i18n>dashboardCharts.healthCheckProfile}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+					</FlexBox>
 				</HBox>
 				
 				<!-- Additional configuration of the price volume chart. -->
