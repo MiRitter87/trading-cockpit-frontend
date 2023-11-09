@@ -540,6 +540,9 @@ sap.ui.define([
 			else if(sSelectedType == Constants.CHART_TYPE.PRICE_VOLUME) {
 				sChartUrl = sChartUrl + "/priceVolume/" + sSelectedInstrumentId + this.getUrlParametersPriceVolume() + "&";
 			}
+			else if(sSelectedType == Constants.CHART_TYPE.HEALTH_CHECK) {
+				sChartUrl = sChartUrl + "/healthCheck/" + sSelectedInstrumentId + this.getUrlParametersHealthCheck() + "&";
+			}
 			
 			//The randomDate parameter is not evaluated by the backend. 
 			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.
@@ -596,6 +599,20 @@ sap.ui.define([
 			if(sSelectedIndicator == Constants.CHART_INDICATOR.RS_LINE) {
 				sParameters = sParameters + "&rsInstrumentId=" + oRsInstrumentComboBox.getSelectedKey();
 			}
+			
+			return sParameters;
+		},
+		
+		/**
+		 * Gets the URL parameters for the health check chart.
+		 */
+		getUrlParametersHealthCheck : function() {
+			var sParameters = "";
+			var oHealthCheckProfileComboBox = this.getView().byId("healthCheckProfileComboBox");
+			var oLookbackPeriodInput = this.getView().byId("lookbackPeriodInput");
+			
+			sParameters = sParameters + "?profile=" + oHealthCheckProfileComboBox.getSelectedKey();
+			sParameters = sParameters + "&lookbackPeriod=" + oLookbackPeriodInput.getValue();
 			
 			return sParameters;
 		},
