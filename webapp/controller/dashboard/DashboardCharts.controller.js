@@ -638,11 +638,16 @@ sap.ui.define([
 			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
 			var sSelectedIndicator = oIndicatorComboBox.getSelectedKey();
 			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
+			var oHealthCheckProfileComboBox = this.getView().byId("healthCheckProfileComboBox");
+			var oLookbackPeriodInput = this.getView().byId("lookbackPeriodInput");
+			var sLookbackPeriod = "";
+			var iLookbackPeriod = 0;
 			
 			if(	sSelectedType == Constants.CHART_TYPE.DISTRIBUTION_DAYS && sSelectedInstrumentId == "" || 
 				sSelectedType == Constants.CHART_TYPE.FOLLOW_THROUGH_DAYS && sSelectedInstrumentId == "" ||
 				sSelectedType == Constants.CHART_TYPE.POCKET_PIVOTS && sSelectedInstrumentId == "" || 
-				sSelectedType == Constants.CHART_TYPE.PRICE_VOLUME && sSelectedInstrumentId == "") {
+				sSelectedType == Constants.CHART_TYPE.PRICE_VOLUME && sSelectedInstrumentId == "" || 
+				sSelectedType == Constants.CHART_TYPE.HEALTH_CHECK && sSelectedInstrumentId == "") {
 					
 				MessageBox.error(oResourceBundle.getText("dashboardCharts.noInstrumentSelected"));
 				return false;
@@ -653,6 +658,32 @@ sap.ui.define([
 				
 				MessageBox.error(oResourceBundle.getText("dashboardCharts.noRsInstrumentSelected"));
 				return false;
+			}
+			
+			if(sSelectedType == Constants.CHART_TYPE.HEALTH_CHECK) {
+				if(oHealthCheckProfileComboBox.getSelectedKey() == "") {
+					MessageBox.error(oResourceBundle.getText("dashboardCharts.noHealthCheckProfileSelected"));
+					return false;
+				}
+				
+				sLookbackPeriod = oLookbackPeriodInput.getValue();
+				
+				if(sLookbackPeriod == "") {
+					MessageBox.error(oResourceBundle.getText("dashboardCharts.lookbackPeriodInvalid"));
+					return false;
+				}
+				
+				iLookbackPeriod = parseInt(sLookbackPeriod);
+				
+				if(isNaN(iLookbackPeriod)) {
+					MessageBox.error(oResourceBundle.getText("dashboardCharts.lookbackPeriodInvalid"));
+					return false;
+				}
+				
+				if(iLookbackPeriod < 1 || iLookbackPeriod > 50) {
+					MessageBox.error(oResourceBundle.getText("dashboardCharts.lookbackPeriodInvalid"));
+					return false;
+				}
 			}
 			
 			return true;
