@@ -39,12 +39,15 @@
 							<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
 						</ComboBox>
 					</FlexBox>
-					
-					<!-- Health check related UI elements -->
-					<FlexBox id="healthCheckFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
-						<Label text="{i18n>dashboardCharts.healthCheckProfile}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
-					</FlexBox>
 				</HBox>
+				
+				<!-- Health check related UI elements -->
+				<FlexBox id="healthCheckFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
+					<Label text="{i18n>dashboardCharts.healthCheckProfile}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+					<ComboBox id="healthCheckProfileComboBox" required="true"/>
+					<Label text="{i18n>dashboardCharts.lookbackPeriod}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+					<Input id="lookbackPeriodInput" type="Number" placeholder="{i18n>dashboardCharts.lookbackPeriod.placeholder}"/>
+				</FlexBox>
 				
 				<!-- Additional configuration of the price volume chart. -->
 				<IconTabBar	id="priceVolumeIconTabBar" class="sapUiResponsiveContentPadding">

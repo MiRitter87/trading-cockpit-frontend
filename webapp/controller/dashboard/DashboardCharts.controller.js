@@ -23,6 +23,7 @@ sap.ui.define([
 			oRouter.getRoute("dashboardChartsRoute").attachMatched(this._onRouteMatched, this);
 			
 			this.initializeTypeComboBox();
+			this.initializeHealthCheckProfileComboBox();
 			this.initializeIndicatorComboBox();
 		},
 		
@@ -450,6 +451,24 @@ sap.ui.define([
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.CHART_TYPE.HEALTH_CHECK, "dashboardCharts.type.healthCheck");
+		},
+		
+		
+		/**
+		 * Initializes the ComboBox of the health check profile.
+		 */
+		initializeHealthCheckProfileComboBox: function () {
+			var oComboBox = this.getView().byId("healthCheckProfileComboBox");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS, "dashboardCharts.healthCheckProfile.confirmations");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH, "dashboardCharts.healthCheckProfile.strength");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS, "dashboardCharts.healthCheckProfile.weakness");
 		},
 		
 		
