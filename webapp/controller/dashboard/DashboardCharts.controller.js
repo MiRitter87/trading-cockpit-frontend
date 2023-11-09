@@ -54,6 +54,8 @@ sap.ui.define([
 			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
 			var oPriceVolumeIconTabBar = this.getView().byId("priceVolumeIconTabBar");
 			var oImage = this.getView().byId("chartImage");
+			var oHealthCheckProfileComboBox = this.getView().byId("healthCheckProfileComboBox");
+			var oLookbackPeriodInput = this.getView().byId("lookbackPeriodInput");
 			
 			if(oSelectedItem == null) {
 				oListFlexBox.setVisible(false);
@@ -118,6 +120,8 @@ sap.ui.define([
 			oListComboBox.setSelectedKey(null);
 			oIndicatorComboBox.setSelectedKey(null);
 			oRsInstrumentComboBox.setSelectedKey(null);
+			oHealthCheckProfileComboBox.setSelectedKey(null);
+			oLookbackPeriodInput.setValue("");
 			oImage.setSrc(null);
 		},
 		
@@ -707,7 +711,9 @@ sap.ui.define([
 			
 			this.getView().byId("typeComboBox").setSelectedKey("");
 			this.getView().byId("listComboBox").setSelectedKey("");
-			this.getView().byId("instrumentComboBox").setSelectedKey("");			
+			this.getView().byId("instrumentComboBox").setSelectedKey("");	
+			this.getView().byId("healthCheckProfileComboBox").setSelectedKey("");
+			this.getView().byId("lookbackPeriodInput").setValue("");
 			
 			oImage.setSrc(null);
 		}
