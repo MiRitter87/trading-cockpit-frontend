@@ -121,7 +121,7 @@ sap.ui.define([
 			oIndicatorComboBox.setSelectedKey(null);
 			oRsInstrumentComboBox.setSelectedKey(null);
 			oHealthCheckProfileComboBox.setSelectedKey(null);
-			oLookbackPeriodInput.setValue("");
+			oLookbackPeriodInput.setValue("15");
 			oImage.setSrc(null);
 		},
 		
@@ -727,11 +727,6 @@ sap.ui.define([
 			oPriceVolumeIconTabBar.setVisible(false);
 			
 			this.getView().byId("typeComboBox").setSelectedKey("");
-			this.getView().byId("listComboBox").setSelectedKey("");
-			this.getView().byId("instrumentComboBox").setSelectedKey("");	
-			this.getView().byId("healthCheckProfileComboBox").setSelectedKey("");
-			this.getView().byId("lookbackPeriodInput").setValue("");
-			
 			oImage.setSrc(null);
 		}
 	});

@@ -46,7 +46,7 @@
 					<Label text="{i18n>dashboardCharts.healthCheckProfile}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
 					<ComboBox id="healthCheckProfileComboBox" required="true"/>
 					<Label text="{i18n>dashboardCharts.lookbackPeriod}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
-					<Input id="lookbackPeriodInput" type="Number" placeholder="{i18n>dashboardCharts.lookbackPeriod.placeholder}"/>
+					<Input id="lookbackPeriodInput" type="Number" description="{i18n>dashboardCharts.lookbackPeriod.description}"/>
 				</FlexBox>
 				
 				<!-- Additional configuration of the price volume chart. -->
