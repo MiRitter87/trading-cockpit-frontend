@@ -4,15 +4,14 @@ sap.ui.define([
 	"../Constants",
 	"./ChartAnalysisController",
 	"../list/ListController",
-	"../instrument/InstrumentController",
 	"../scan/ScanController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Controller, MainController, Constants, ChartAnalysisController, ListController, InstrumentController, 
-				ScanController, JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
+], function (Controller, MainController, Constants, ChartAnalysisController, ListController, ScanController, 
+	JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.dashboard.DashboardCharts", {
@@ -35,6 +34,7 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ListController.queryListsByWebService(this.queryListsCallback, this, false);
+			//Query only instruments that have quotations referenced. Otherwise no chart could be created.
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, false, Constants.SCAN_TEMPLATE.ALL);
 			
 			this.resetUIElements();
@@ -132,7 +132,7 @@ sap.ui.define([
 		 */
 		onInstrumentSelectionChange : function (oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
-			var oInstrumentsModel = this.getView().getModel("instruments");
+			var oQuotationsModel = this.getView().getModel("quotations");
 			var oInstrument;
 			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
 			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
@@ -141,7 +141,7 @@ sap.ui.define([
 				return;
 			}
 			
-			oInstrument = InstrumentController.getInstrumentById(oSelectedItem.getKey(), oInstrumentsModel.oData.instrument);
+			oInstrument = ScanController.getInstrumentById(oSelectedItem.getKey(), oQuotationsModel.oData.quotation);
 			
 			if(oInstrument.type == Constants.INSTRUMENT_TYPE.RATIO) {
 				oVolumeCheckBox.setSelected(false);

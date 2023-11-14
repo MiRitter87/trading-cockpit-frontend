@@ -23,6 +23,23 @@ sap.ui.define([
 		
 		
 		/**
+		 * Gets the instrument data of the instrument with the given ID.
+		 */
+		getInstrumentById : function(iInstrumentId, oQuotations) {
+			//Get the selected instrument from the array of all quotations according to the id.
+			for(var i = 0; i < oQuotations.length; i++) {
+    			var oTempQuotation = oQuotations[i];
+    			
+				if(oTempQuotation.instrument.id == iInstrumentId) {
+					return oTempQuotation.instrument;
+				}
+			}
+			
+			return null;
+		},
+		
+		
+		/**
 		 * Creates a representation of a scan that can be processed by the WebService.
 		 */
 		getScanForWebService : function(oScan) {
