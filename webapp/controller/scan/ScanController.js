@@ -184,7 +184,8 @@ sap.ui.define([
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + sTemplate;
 			
 			//Add instrument type to URL.
-			sQueryUrl = sQueryUrl + "&instrumentType=" + sType;
+			if(sType != undefined && sType != "")
+				sQueryUrl = sQueryUrl + "&instrumentType=" + sType;
 				
 			if(sMinLiquidity != undefined && sMinLiquidity != "")
 				sQueryUrl = sQueryUrl + "&minLiquidity=" + sMinLiquidity;

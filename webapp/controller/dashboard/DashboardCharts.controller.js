@@ -5,13 +5,14 @@ sap.ui.define([
 	"./ChartAnalysisController",
 	"../list/ListController",
 	"../instrument/InstrumentController",
+	"../scan/ScanController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
 ], function (Controller, MainController, Constants, ChartAnalysisController, ListController, InstrumentController, 
-				JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
+				ScanController, JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.dashboard.DashboardCharts", {
@@ -34,7 +35,7 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ListController.queryListsByWebService(this.queryListsCallback, this, false);
-			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
+			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, false, Constants.SCAN_TEMPLATE.ALL);
 			
 			this.resetUIElements();
     	},
@@ -383,6 +384,25 @@ sap.ui.define([
 		
 		
 		/**
+		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
+		 */
+		queryQuotationsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setSizeLimit(300);
+				oModel.setData(oReturnData.data);
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}
+			
+			oCallingController.getView().setModel(oModel, "quotations");
+		},
+		
+		
+		/**
 		 * Handles error during loading of the chart image using the given URL.
 		 */
 		onChartImageError : function() {
@@ -397,25 +417,6 @@ sap.ui.define([
 			//The response site would have to be parsed in order to get the message from the backend.
 			//Therefore only a generic error message is being displayed at the moment.
 			MessageToast.show(oResourceBundle.getText("dashboardCharts.getChartError"));
-		},
-		
-		
-		/**
-		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
-		 */
-		queryInstrumentsCallback : function(oReturnData, oCallingController) {
-			var oModel = new JSONModel();
-			
-			if(oReturnData.data != null) {
-				oModel.setSizeLimit(300);
-				oModel.setData(oReturnData.data);
-			}
-			
-			if(oReturnData.data == null && oReturnData.message != null)  {
-				MessageToast.show(oReturnData.message[0].text);
-			}
-			
-			oCallingController.getView().setModel(oModel, "instruments");
 		},
 		
 		
@@ -630,7 +631,7 @@ sap.ui.define([
 				return;
 				
 			for(var i = 0; i < aAllowedInstrumentTypes.length; i++) {
-				oFilterType = new Filter("type", FilterOperator.EQ, aAllowedInstrumentTypes[i]);
+				oFilterType = new Filter("instrument/type", FilterOperator.EQ, aAllowedInstrumentTypes[i]);
 				aFilters.push(oFilterType);
 			}
 			
