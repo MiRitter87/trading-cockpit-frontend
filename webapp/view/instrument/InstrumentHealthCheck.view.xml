@@ -73,6 +73,9 @@
 					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>protocol.category}"/>
 					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>protocol.profile}"/>
+					</Column>
 					<Column>
 						<Text text="{i18n>protocol.text}"/>
 					</Column>
@@ -84,6 +87,7 @@
 							<ObjectStatus text="{path: 'protocolEntries>category', formatter: '.categoryTextFormatter'}" 
 								icon="{path: 'protocolEntries>category', formatter: '.categoryIconFormatter'}"
 								state="{path: 'protocolEntries>category', formatter: '.categoryStateFormatter'}"/>
+							<Text text="{path: 'protocolEntries>profile', formatter: '.profileTextFormatter'}"/>
 							<Text text="{protocolEntries>text}"/>
 						</cells>
 					</ColumnListItem>
