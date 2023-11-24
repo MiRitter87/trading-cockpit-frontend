@@ -45,6 +45,12 @@
 									<DatePicker id="startDatePicker" valueFormat="yyyy-MM-dd"/>
 								</f:fields>
 							</f:FormElement>
+							
+							<f:FormElement label="{i18n>instrumentHealthCheck.profileDescription}">
+								<f:fields>
+									<ComboBox id="healthCheckProfileComboBox"/>
+								</f:fields>
+							</f:FormElement>
 						</f:formElements>
 					</f:FormContainer>
 				</f:formContainers>

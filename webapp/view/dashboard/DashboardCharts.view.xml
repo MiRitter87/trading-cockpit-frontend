@@ -43,7 +43,7 @@
 				
 				<!-- Health check related UI elements -->
 				<FlexBox id="healthCheckFlexBox" class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
-					<Label text="{i18n>dashboardCharts.healthCheckProfile}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+					<Label text="{i18n>healthCheckProfile}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
 					<ComboBox id="healthCheckProfileComboBox" required="true"/>
 					<Label text="{i18n>dashboardCharts.lookbackPeriod}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
 					<Input id="lookbackPeriodInput" type="Number" description="{i18n>dashboardCharts.lookbackPeriod.description}"/>

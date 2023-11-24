@@ -1,12 +1,13 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"../MainController",
 	"./InstrumentController",
 	"../../model/formatter",
 	"../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, InstrumentController, formatter, Constants, JSONModel, MessageToast, MessageBox) {
+], function (Controller, MainController, InstrumentController, formatter, Constants, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentHealthCheck", {
@@ -21,6 +22,7 @@ sap.ui.define([
 			oRouter.getRoute("instrumentHealthCheckRoute").attachMatched(this._onRouteMatched, this);
 			
 			this.initializeMinAndMaxDate();
+			this.initializeHealthCheckProfileComboBox();
 		},
 		
 		
@@ -196,6 +198,27 @@ sap.ui.define([
 			
 			oStartDatePicker.setMinDate(dateOneYearAgo);
 			oStartDatePicker.setMaxDate(dateNow);
+		},
+		
+		
+		/**
+		 * Initializes the ComboBox of the health check profile.
+		 */
+		initializeHealthCheckProfileComboBox: function () {
+			var oComboBox = this.getView().byId("healthCheckProfileComboBox");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.ALL, "healthCheckProfile.all");
+			
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS, "healthCheckProfile.confirmations");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH, "healthCheckProfile.strength");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS, "healthCheckProfile.weakness");
 		}
 	});
 });

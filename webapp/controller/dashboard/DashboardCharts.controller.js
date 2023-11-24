@@ -467,13 +467,13 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
-				Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS, "dashboardCharts.healthCheckProfile.confirmations");
+				Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS, "healthCheckProfile.confirmations");
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
-				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH, "dashboardCharts.healthCheckProfile.strength");
+				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH, "healthCheckProfile.strength");
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
-				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS, "dashboardCharts.healthCheckProfile.weakness");
+				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS, "healthCheckProfile.weakness");
 		},
 		
 		
