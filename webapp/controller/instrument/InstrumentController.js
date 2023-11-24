@@ -211,12 +211,12 @@ sap.ui.define([
 		/**
 		 * Queries the instrument WebService to perform a health check of the given instrument and get the protocol.
 		 */
-		checkInstrumentHealthByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, iInstrumentId, sDate) {
+		checkInstrumentHealthByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, iInstrumentId, sDate, sProfile) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
 			
-			sQueryUrl = sQueryUrl + "/" + iInstrumentId + "/health?startDate=" + sDate;
+			sQueryUrl = sQueryUrl + "/" + iInstrumentId + "/health?startDate=" + sDate +"&profile=" + sProfile;
 			
 			jQuery.ajax({
 				type : "GET", 

@@ -42,14 +42,17 @@ sap.ui.define([
 			var bInputValid = this.verifyObligatoryFields();
 			var sInstrumentId;
 			var sStartDate;
+			var sProfile;
 			
 			if(bInputValid == false)
 				return;
 			
 			sInstrumentId = this.getView().byId("instrumentComboBox").getSelectedKey();
 			sStartDate = this.getView().byId("startDatePicker").getValue();
+			sProfile = this.getView().byId("healthCheckProfileComboBox").getSelectedKey();
 			
-			InstrumentController.checkInstrumentHealthByWebService(this.checkInstrumentHealthCallback, this, true, sInstrumentId, sStartDate);
+			InstrumentController.checkInstrumentHealthByWebService(this.checkInstrumentHealthCallback, this, true, 
+				sInstrumentId, sStartDate, sProfile);
 		},
 
 
@@ -170,8 +173,9 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oStartDatePicker = this.getView().byId("startDatePicker");
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oProfileComboBox = this.getView().byId("healthCheckProfileComboBox");
 			
-			//Check if Instrument and date have been selected.
+			//Check if Instrument, profile and date have been selected.
 			if(oInstrumentComboBox.getSelectedKey() == "") {
 				MessageBox.error(oResourceBundle.getText("instrumentHealthCheck.noInstrumentSelected"));
 				return false;
@@ -179,6 +183,11 @@ sap.ui.define([
 
 			if(oStartDatePicker.getValue() == "") {
 				MessageBox.error(oResourceBundle.getText("instrumentHealthCheck.noStartDateSelected"));
+				return false;
+			}
+			
+			if(oProfileComboBox.getSelectedKey() == "") {
+				MessageBox.error(oResourceBundle.getText("instrumentHealthCheck.noProfileSelected"));
 				return false;
 			}
 			
