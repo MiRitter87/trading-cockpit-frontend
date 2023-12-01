@@ -106,10 +106,10 @@
 							<Text text="{quotations>instrument/symbol}"/>
 							<Text text="{quotations>instrument/name}"/>
 							<Text text="{path: 'quotations>instrument/type', formatter: '.typeTextFormatter'}"/>
-							<Text text="{quotations>indicator/rsNumber}"/>
-							<Text text="{quotations>indicator/rsNumberCompositeIg}"/>
-							<Text text="{quotations>indicator/rsNumberSector}"/>
-							<Text text="{quotations>indicator/rsNumberIndustryGroup}"/>
+							<Text text="{quotations>indicator/relativeStrengthData/rsNumber}"/>
+							<Text text="{quotations>indicator/relativeStrengthData/rsNumberCompositeIg}"/>
+							<Text text="{quotations>indicator/relativeStrengthData/rsNumberSector}"/>
+							<Text text="{quotations>indicator/relativeStrengthData/rsNumberIndustryGroup}"/>
 							<Text text="{quotations>indicator/performance5Days} %"/>
 							<Text text="{quotations>indicator/distanceTo52WeekHigh} %"/>
 							<Text text="{quotations>indicator/bollingerBandWidth}"/>
