@@ -39,8 +39,8 @@
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
 			</VBox>			
 		
-			<Table id="quotationTable" items="{path: 'quotations>/quotation/', sorter: {path: 'indicator/rsPercentSum', descending: true }}" 
-				mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders">
+			<Table id="quotationTable" mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders"
+				items="{path: 'quotations>/quotation/', sorter: {path: 'indicator/relativeStrengthData/rsNumber', descending: true }}">
 				
 				<headerToolbar>
 					<OverflowToolbar>
