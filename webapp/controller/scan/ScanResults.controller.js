@@ -7,13 +7,13 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
-	"sap/m/TablePersoController",
-	"./ScanResultsPersoService",
-	'sap/m/library',
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
+	"sap/ui/model/FilterOperator",
+	"sap/m/p13n/MetadataHelper",
+	"sap/m/p13n/Engine",
+	"sap/m/p13n/SelectionController",
 ], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, 
-	TablePersoController, ScanResultsPersoService, mlibrary, Filter, FilterOperator) {
+	Filter, FilterOperator, MetadataHelper, Engine, SelectionController) {
 		
 	"use strict";
 	
@@ -291,6 +291,14 @@ sap.ui.define([
 			this._oTPC.openDialog();
 		},
 		
+		
+		/**
+		 * Handles state changes of the personalization dialog.
+		 */
+		handleStateChange: function(oEvent) {
+			
+		},
+		
     	
     	/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
@@ -348,18 +356,29 @@ sap.ui.define([
 		
 		
 		/**
-		 * Initializes the dialog for settings.
+		 * Initializes the dialog for settings (Personalization).
 		 */
 		initializeSettingsDialog : function() {
-			var ResetAllMode =  mlibrary.ResetAllMode;
+			var oTable = this.byId("quotationTable");
 			
-			this._oTPC = new TablePersoController({
-				table: this.byId("quotationTable"),
-				//specify the first part of persistence ids e.g. 'demoApp-productsTable-dimensionsCol'
-				componentName: "trading-cockpit-frontend",
-				resetAllMode: ResetAllMode.ServiceReset,
-				persoService: ScanResultsPersoService
-			}).activate();
+			this.oMetadataHelper = new MetadataHelper([
+				{key: "symbolColumn", label: "!Symbol", path: "quotations>instrument/symbol"},
+				{key: "nameColumn", label: "!Name", path: "quotations>instrument/name"},
+				{key: "typeColumn", label: "!Typ", path: "quotations>instrument/type"},
+				{key: "rsNumberColumn", label: "!RS Nummer", path: "quotations>indicator/relativeStrengthData/rsNumber"}
+			]);
+			
+			Engine.getInstance().register(oTable, {
+				helper: this.oMetadataHelper,
+				controller: {
+					Columns: new SelectionController({
+						targetAggregation: "columns",
+						control: oTable
+					})
+				}
+			});
+			
+			Engine.getInstance().attachStateChange(this.handleStateChange.bind(this));
 		},
 		
 		
