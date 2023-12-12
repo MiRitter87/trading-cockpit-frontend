@@ -7,13 +7,12 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
-	"sap/ui/model/Sorter",
 	"sap/m/TablePersoController",
 	"./ScanResultsPersoService",
 	'sap/m/library',
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, Sorter, 
+], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, 
 	TablePersoController, ScanResultsPersoService, mlibrary, Filter, FilterOperator) {
 		
 	"use strict";
@@ -28,7 +27,7 @@ sap.ui.define([
 			oRouter.getRoute("scanResultsRoute").attachMatched(this._onRouteMatched, this);
 			
 			this.initializeTemplateComboBox();
-			this.initializeColumnSettingsDialog();
+			this.initializeSettingsDialog();
 			
 			InstrumentController.initializeTypeComboBox(oTypeComboBox, this.getOwnerComponent().getModel("i18n").getResourceBundle());
 			oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
@@ -286,38 +285,12 @@ sap.ui.define([
 		
 		
 		/**
-		 * Handles the button pressed event of the column settings button.
+		 * Handles the button pressed event of the settings button.
 		 */
-		onColumnSettingsPressed : function() {
+		onSettingsPressed : function() {
 			this._oTPC.openDialog();
 		},
 		
-		
-		/**
-		 * Handles the button pressed event of the sort button.
-		 */
-		onSortPressed : function() {
-			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.scan.ScanResultsSort");
-		},
-		
-		
-		/**
-		 * Handles the confirmation of the sort dialog.
-		 */
-		handleSortDialogConfirm: function (oEvent) {
-			var oTable = this.byId("quotationTable");
-			var	mParams = oEvent.getParameters();
-			var	oBinding = oTable.getBinding("items");
-			var	sPath, bDescending,	aSorters = [];
-			
-			sPath = mParams.sortItem.getKey();
-			bDescending = mParams.sortDescending;
-			aSorters.push(new Sorter(sPath, bDescending));
-
-			// apply the selected sort and group settings
-			oBinding.sort(aSorters);
-		},
-    	
     	
     	/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
@@ -375,9 +348,9 @@ sap.ui.define([
 		
 		
 		/**
-		 * Initializes the dialog for column settings.
+		 * Initializes the dialog for settings.
 		 */
-		initializeColumnSettingsDialog : function() {
+		initializeSettingsDialog : function() {
 			var ResetAllMode =  mlibrary.ResetAllMode;
 			
 			this._oTPC = new TablePersoController({
