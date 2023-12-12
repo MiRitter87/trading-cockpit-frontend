@@ -287,8 +287,14 @@ sap.ui.define([
 		/**
 		 * Handles the button pressed event of the settings button.
 		 */
-		onSettingsPressed : function() {
-			this._oTPC.openDialog();
+		onSettingsPressed : function(oEvent) {
+			var oTable = this.byId("quotationTable");
+
+			Engine.getInstance().show(oTable, ["Columns"], {
+				contentHeight: "35rem",
+				contentWidth: "32rem",
+				source: oEvent.getSource()
+			});
 		},
 		
 		
