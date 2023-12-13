@@ -12,8 +12,9 @@ sap.ui.define([
 	"sap/m/p13n/MetadataHelper",
 	"sap/m/p13n/Engine",
 	"sap/m/p13n/SelectionController",
+	"sap/m/ColumnListItem"
 ], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, 
-	Filter, FilterOperator, MetadataHelper, Engine, SelectionController) {
+	Filter, FilterOperator, MetadataHelper, Engine, SelectionController, ColumnListItem) {
 		
 	"use strict";
 	
@@ -302,7 +303,38 @@ sap.ui.define([
 		 * Handles state changes of the personalization dialog.
 		 */
 		handleStateChange: function(oEvent) {
+			var oTable = this.byId("quotationTable");
+			var oState = oEvent.getParameter("state");
+			var aSorter = [];
 			
+			if (!oState) {
+				return;
+			}
+			
+			oTable.getColumns().forEach(function(oColumn){
+       			oColumn.setVisible(false);
+    		});
+    		
+    		oState.Columns.forEach(function(oProp, iIndex){
+        		var oCol = this.byId(oProp.key);
+        		oCol.setVisible(true);
+
+        		oTable.removeColumn(oCol);
+        		oTable.insertColumn(oCol, iIndex);
+    		}.bind(this));
+    		
+    		var aCells = oState.Columns.map(function(oColumnState) {
+				return new Text({
+					text: "{" + this.oMetadataHelper.getProperty(oColumnState.key).path + "}"
+				});
+			}.bind(this));
+    		
+    		oTable.bindItems({
+        		templateShareable: false,
+        		path: 'quotations>/quotation/',
+        		sorter: aSorter,
+        		template: new ColumnListItem({cells: aCells})
+    		});
 		},
 		
     	
@@ -368,10 +400,10 @@ sap.ui.define([
 			var oTable = this.byId("quotationTable");
 			
 			this.oMetadataHelper = new MetadataHelper([
-				{key: "symbolColumn", label: "!Symbol", path: "quotations>instrument/symbol"},
-				{key: "nameColumn", label: "!Name", path: "quotations>instrument/name"},
-				{key: "typeColumn", label: "!Typ", path: "quotations>instrument/type"},
-				{key: "rsNumberColumn", label: "!RS Nummer", path: "quotations>indicator/relativeStrengthData/rsNumber"}
+				{key: "symbolColumn", label: "!Symbol", path: "/instrument/symbol"},
+				{key: "nameColumn", label: "!Name", path: "/instrument/name"},
+				{key: "typeColumn", label: "!Typ", path: "/instrument/type"},
+				{key: "rsNumberColumn", label: "!RS Nummer", path: "/indicator/relativeStrengthData/rsNumber"}
 			]);
 			
 			Engine.getInstance().register(oTable, {
