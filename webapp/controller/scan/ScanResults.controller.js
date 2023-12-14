@@ -326,10 +326,21 @@ sap.ui.define([
     		
     		var aCells = oState.Columns.map(function(oColumnState) {
 				var sPath = this.oMetadataHelper.getProperty(oColumnState.key).path;
+				var oText;
+				
+				if(oColumnState.key == "typeColumn") {
+					oText = new Text();
+					oText.bindProperty("text", {
+          				path: sPath,
+           				formatter: this.typeTextFormatter.bind(this)
+       				});
+				} else {
+					oText = new Text({
+						text: "{" + sPath + "}"
+					});					
+				}
 	
-				return new Text({
-					text: "{" + sPath + "}"
-				});
+				return oText;
 			}.bind(this));
     		
     		oTable.bindItems({
@@ -405,6 +416,7 @@ sap.ui.define([
 			this.oMetadataHelper = new MetadataHelper([
 				{key: "symbolColumn", label: "!Symbol", path: "quotations>instrument/symbol"},
 				{key: "nameColumn", label: "!Name", path: "quotations>instrument/name"},
+				{key: "typeColumn", label: "!Typ", path: "quotations>instrument/type"}
 			]);
 			
 			Engine.getInstance().register(oTable, {

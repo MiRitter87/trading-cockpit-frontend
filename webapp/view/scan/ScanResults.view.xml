@@ -58,10 +58,10 @@
 					</Column>
 					<Column id="nameColumn">
 						<Text text="{i18n>instrument.name}"/>
-					</Column><!--
+					</Column>
 					<Column id="typeColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>instrument.type}"/>
-					</Column>
+					</Column><!--
 					<Column id="rsNumberColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.rsNumber}"/>
 					</Column>
@@ -103,8 +103,8 @@
 					<ColumnListItem>
 						<cells>
 							<Text text="{quotations>instrument/symbol}"/>
-							<Text text="{quotations>instrument/name}"/><!-- 
-							<Text text="{path: 'quotations>instrument/type', formatter: '.typeTextFormatter'}"/>
+							<Text text="{quotations>instrument/name}"/>
+							<Text text="{path: 'quotations>instrument/type', formatter: '.typeTextFormatter'}"/><!-- 
 							<Text text="{quotations>indicator/relativeStrengthData/rsNumber}"/>
 							<Text text="{quotations>indicator/relativeStrengthData/rsNumberCompositeIg}"/>
 							<Text text="{quotations>indicator/relativeStrengthData/rsNumberSector}"/>
