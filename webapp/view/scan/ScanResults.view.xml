@@ -58,7 +58,7 @@
 					</Column>
 					<Column id="nameColumn">
 						<Text text="{i18n>instrument.name}"/>
-					</Column>
+					</Column><!--
 					<Column id="typeColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>instrument.type}"/>
 					</Column>
@@ -97,13 +97,13 @@
 					</Column>
 					<Column id="chartColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>scanResults.chart}"/>
-					</Column>
+					</Column>-->
 				</columns>
 				<items>
 					<ColumnListItem>
 						<cells>
 							<Text text="{quotations>instrument/symbol}"/>
-							<Text text="{quotations>instrument/name}"/>
+							<Text text="{quotations>instrument/name}"/><!-- 
 							<Text text="{path: 'quotations>instrument/type', formatter: '.typeTextFormatter'}"/>
 							<Text text="{quotations>indicator/relativeStrengthData/rsNumber}"/>
 							<Text text="{quotations>indicator/relativeStrengthData/rsNumberCompositeIg}"/>
@@ -120,6 +120,7 @@
 										}"/>
 							<Text text="{quotations>indicator/baseLengthWeeks}"/>
 							<Button icon="sap-icon://business-objects-experience" press=".onChartPressed" tooltip="{i18n>scanResults.chart.tooltip}"/>
+							-->
 						</cells>
 					</ColumnListItem>
 				</items>

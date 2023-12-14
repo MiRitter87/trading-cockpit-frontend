@@ -12,9 +12,10 @@ sap.ui.define([
 	"sap/m/p13n/MetadataHelper",
 	"sap/m/p13n/Engine",
 	"sap/m/p13n/SelectionController",
-	"sap/m/ColumnListItem"
+	"sap/m/ColumnListItem",
+	"sap/m/Text"
 ], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, 
-	Filter, FilterOperator, MetadataHelper, Engine, SelectionController, ColumnListItem) {
+	Filter, FilterOperator, MetadataHelper, Engine, SelectionController, ColumnListItem, Text) {
 		
 	"use strict";
 	
@@ -324,8 +325,10 @@ sap.ui.define([
     		}.bind(this));
     		
     		var aCells = oState.Columns.map(function(oColumnState) {
+				var sPath = this.oMetadataHelper.getProperty(oColumnState.key).path;
+	
 				return new Text({
-					text: "{" + this.oMetadataHelper.getProperty(oColumnState.key).path + "}"
+					text: "{" + sPath + "}"
 				});
 			}.bind(this));
     		
@@ -400,10 +403,8 @@ sap.ui.define([
 			var oTable = this.byId("quotationTable");
 			
 			this.oMetadataHelper = new MetadataHelper([
-				{key: "symbolColumn", label: "!Symbol", path: "/instrument/symbol"},
-				{key: "nameColumn", label: "!Name", path: "/instrument/name"},
-				{key: "typeColumn", label: "!Typ", path: "/instrument/type"},
-				{key: "rsNumberColumn", label: "!RS Nummer", path: "/indicator/relativeStrengthData/rsNumber"}
+				{key: "symbolColumn", label: "!Symbol", path: "quotations>instrument/symbol"},
+				{key: "nameColumn", label: "!Name", path: "quotations>instrument/name"},
 			]);
 			
 			Engine.getInstance().register(oTable, {
