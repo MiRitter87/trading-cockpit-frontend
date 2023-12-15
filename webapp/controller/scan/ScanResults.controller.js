@@ -308,6 +308,7 @@ sap.ui.define([
 			var oTable = this.byId("quotationTable");
 			var oState = oEvent.getParameter("state");
 			var aSorter = [];
+			var aCells;
 			
 			if (!oState) {
 				return;
@@ -325,43 +326,7 @@ sap.ui.define([
         		oTable.insertColumn(oCol, iIndex);
     		}.bind(this));
     		
-    		var aCells = oState.Columns.map(function(oColumnState) {
-				var sPath = this.oMetadataHelper.getProperty(oColumnState.key).path;
-				var oText;
-				var oButton;
-				
-				if(oColumnState.key == "typeColumn") {
-					oText = new Text();
-					oText.bindProperty("text", {
-          				path: sPath,
-           				formatter: this.typeTextFormatter.bind(this)
-       				});
-				} else if(oColumnState.key == "performance5DaysColumn" || oColumnState.key == "distanceTo52WeekHighColumn"
-					|| oColumnState.key == "volumeDifferential10DaysColumn") {
-					oText = new Text({
-						text: "{" + sPath + "} %"
-					});	
-				} else if(oColumnState.key == "liquidityColumn") {
-					oText = new Text({
-						text: "{parts: ['" + sPath +"', 'quotations>currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
-					});	
-				} else if(oColumnState.key == "chartColumn") {
-					oButton = new Button({
-						icon: "sap-icon://business-objects-experience",
-						press: this.onChartPressed.bind(this),
-						tooltip: "{i18n>scanResults.chart.tooltip}"
-					});
-					
-					return oButton;
-				}
-				else {
-					oText = new Text({
-						text: "{" + sPath + "}"
-					});					
-				}
-	
-				return oText;
-			}.bind(this));
+    		aCells = this.getTableCells(oState);
     		
     		oTable.bindItems({
         		templateShareable: false,
@@ -553,6 +518,52 @@ sap.ui.define([
 			sChartUrl = sChartUrl.replace("{symbolDivisor}", sSymbolDividor);
 						
 			return sChartUrl;
+		},
+		
+		
+		/**
+		 * Gets an array of table cells based on the state of the personalization dialog.
+		 */
+		getTableCells : function(oState) {
+			var aCells = oState.Columns.map(function(oColumnState) {
+				var sPath = this.oMetadataHelper.getProperty(oColumnState.key).path;
+				var oText;
+				var oButton;
+				
+				if(oColumnState.key == "typeColumn") {
+					oText = new Text();
+					oText.bindProperty("text", {
+          				path: sPath,
+           				formatter: this.typeTextFormatter.bind(this)
+       				});
+				} else if(oColumnState.key == "performance5DaysColumn" || oColumnState.key == "distanceTo52WeekHighColumn"
+					|| oColumnState.key == "volumeDifferential10DaysColumn") {
+					oText = new Text({
+						text: "{" + sPath + "} %"
+					});	
+				} else if(oColumnState.key == "liquidityColumn") {
+					oText = new Text({
+						text: "{parts: ['" + sPath +"', 'quotations>currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
+					});	
+				} else if(oColumnState.key == "chartColumn") {
+					oButton = new Button({
+						icon: "sap-icon://business-objects-experience",
+						press: this.onChartPressed.bind(this),
+						tooltip: "{i18n>scanResults.chart.tooltip}"
+					});
+					
+					return oButton;
+				}
+				else {
+					oText = new Text({
+						text: "{" + sPath + "}"
+					});					
+				}
+	
+				return oText;
+			}.bind(this));
+			
+			return aCells;
 		},
 		
 		
