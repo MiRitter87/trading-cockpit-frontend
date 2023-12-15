@@ -412,11 +412,12 @@ sap.ui.define([
 		 */
 		initializeSettingsDialog : function() {
 			var oTable = this.byId("quotationTable");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			this.oMetadataHelper = new MetadataHelper([
-				{key: "symbolColumn", label: "!Symbol", path: "quotations>instrument/symbol"},
-				{key: "nameColumn", label: "!Name", path: "quotations>instrument/name"},
-				{key: "typeColumn", label: "!Typ", path: "quotations>instrument/type"}
+				{key: "symbolColumn", label: oResourceBundle.getText("instrument.symbol"), path: "quotations>instrument/symbol"},
+				{key: "nameColumn", label: oResourceBundle.getText("instrument.name"), path: "quotations>instrument/name"},
+				{key: "typeColumn", label: oResourceBundle.getText("instrument.type"), path: "quotations>instrument/type"}
 			]);
 			
 			Engine.getInstance().register(oTable, {
