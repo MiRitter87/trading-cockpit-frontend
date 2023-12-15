@@ -61,7 +61,7 @@
 					</Column>
 					<Column id="typeColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>instrument.type}"/>
-					</Column><!--
+					</Column>
 					<Column id="rsNumberColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.rsNumber}"/>
 					</Column>
@@ -88,7 +88,7 @@
 					</Column>
 					<Column id="upDownVolumeRatioColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.upDownVolumeRatio}"/>
-					</Column>
+					</Column><!--
 					<Column id="liquidityColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.liquidity}"/>
 					</Column>
@@ -104,7 +104,7 @@
 						<cells>
 							<Text text="{quotations>instrument/symbol}"/>
 							<Text text="{quotations>instrument/name}"/>
-							<Text text="{path: 'quotations>instrument/type', formatter: '.typeTextFormatter'}"/><!-- 
+							<Text text="{path: 'quotations>instrument/type', formatter: '.typeTextFormatter'}"/>
 							<Text text="{quotations>indicator/relativeStrengthData/rsNumber}"/>
 							<Text text="{quotations>indicator/relativeStrengthData/rsNumberCompositeIg}"/>
 							<Text text="{quotations>indicator/relativeStrengthData/rsNumberSector}"/>
@@ -113,7 +113,7 @@
 							<Text text="{quotations>indicator/distanceTo52WeekHigh} %"/>
 							<Text text="{quotations>indicator/bollingerBandWidth}"/>
 							<Text text="{quotations>indicator/volumeDifferential10Days} %"/>
-							<Text text="{quotations>indicator/upDownVolumeRatio}"/>
+							<Text text="{quotations>indicator/upDownVolumeRatio}"/><!-- 
 							<Text text="{	parts: ['quotations>indicator/liquidity20Days', 'quotations>currency'],
 											type: 'sap.ui.model.type.Currency',
 											formatOptions: {style : 'short'}

@@ -334,6 +334,11 @@ sap.ui.define([
           				path: sPath,
            				formatter: this.typeTextFormatter.bind(this)
        				});
+				} else if(oColumnState.key == "performance5DaysColumn" || oColumnState.key == "distanceTo52WeekHighColumn"
+					|| oColumnState.key == "volumeDifferential10DaysColumn") {
+					oText = new Text({
+						text: "{" + sPath + "} %"
+					});	
 				} else {
 					oText = new Text({
 						text: "{" + sPath + "}"
@@ -417,7 +422,23 @@ sap.ui.define([
 			this.oMetadataHelper = new MetadataHelper([
 				{key: "symbolColumn", label: oResourceBundle.getText("instrument.symbol"), path: "quotations>instrument/symbol"},
 				{key: "nameColumn", label: oResourceBundle.getText("instrument.name"), path: "quotations>instrument/name"},
-				{key: "typeColumn", label: oResourceBundle.getText("instrument.type"), path: "quotations>instrument/type"}
+				{key: "typeColumn", label: oResourceBundle.getText("instrument.type"), path: "quotations>instrument/type"},
+				{key: "rsNumberColumn", label: oResourceBundle.getText("indicator.rsNumber"), path: "quotations>indicator/relativeStrengthData/rsNumber"},
+				{key: "rsNumberCompositeIgColumn", label: oResourceBundle.getText("indicator.rsNumberCompositeIg"), 
+					path: "quotations>indicator/relativeStrengthData/rsNumberCompositeIg"},
+				{key: "sectorRsNumberColumn", label: oResourceBundle.getText("indicator.sectorRsNumber"), 
+					path: "quotations>indicator/relativeStrengthData/rsNumberSector"},
+				{key: "industryGroupRsNumberColumn", label: oResourceBundle.getText("indicator.industryGroupRsNumber"), 
+					path: "quotations>indicator/relativeStrengthData/rsNumberIndustryGroup"},
+				{key: "performance5DaysColumn", label: oResourceBundle.getText("indicator.performance5Days"), path: "quotations>indicator/performance5Days"},
+				{key: "distanceTo52WeekHighColumn", label: oResourceBundle.getText("indicator.distanceTo52WeekHigh"), 
+					path: "quotations>indicator/distanceTo52WeekHigh"},
+				{key: "bollingerBandWidthColumn", label: oResourceBundle.getText("indicator.bollingerBandWidth"), 
+					path: "quotations>indicator/bollingerBandWidth"},
+				{key: "volumeDifferential10DaysColumn", label: oResourceBundle.getText("indicator.volumeDifferential10Days"), 
+					path: "quotations>indicator/volumeDifferential10Days"},
+				{key: "upDownVolumeRatioColumn", label: oResourceBundle.getText("indicator.upDownVolumeRatio"), 
+					path: "quotations>indicator/upDownVolumeRatio"}
 			]);
 			
 			Engine.getInstance().register(oTable, {
