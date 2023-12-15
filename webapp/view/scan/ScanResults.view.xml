@@ -68,10 +68,10 @@
 					<Column id="rsNumberCompositeIgColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.rsNumberCompositeIg}"/>
 					</Column>
-					<Column id="sectorRsNumberColumn" minScreenWidth="Desktop" demandPopin="true">
+					<Column id="sectorRsNumberColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
 						<Text text="{i18n>indicator.sectorRsNumber}"/>
 					</Column>
-					<Column id="industryGroupRsNumberColumn" minScreenWidth="Desktop" demandPopin="true">
+					<Column id="industryGroupRsNumberColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
 						<Text text="{i18n>indicator.industryGroupRsNumber}"/>
 					</Column>
 					<Column id="performance5DaysColumn" minScreenWidth="Desktop" demandPopin="true">
@@ -89,7 +89,7 @@
 					<Column id="upDownVolumeRatioColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.upDownVolumeRatio}"/>
 					</Column>
-					<Column id="liquidityColumn" minScreenWidth="Desktop" demandPopin="true">
+					<Column id="liquidityColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
 						<Text text="{i18n>indicator.liquidity}"/>
 					</Column>
 					<Column id="baseLengthWeeksColumn" minScreenWidth="Desktop" demandPopin="true">
