@@ -13,9 +13,10 @@ sap.ui.define([
 	"sap/m/p13n/Engine",
 	"sap/m/p13n/SelectionController",
 	"sap/m/ColumnListItem",
-	"sap/m/Text"
+	"sap/m/Text",
+	"sap/m/Button"
 ], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, 
-	Filter, FilterOperator, MetadataHelper, Engine, SelectionController, ColumnListItem, Text) {
+	Filter, FilterOperator, MetadataHelper, Engine, SelectionController, ColumnListItem, Text, Button) {
 		
 	"use strict";
 	
@@ -327,6 +328,7 @@ sap.ui.define([
     		var aCells = oState.Columns.map(function(oColumnState) {
 				var sPath = this.oMetadataHelper.getProperty(oColumnState.key).path;
 				var oText;
+				var oButton;
 				
 				if(oColumnState.key == "typeColumn") {
 					oText = new Text();
@@ -339,7 +341,20 @@ sap.ui.define([
 					oText = new Text({
 						text: "{" + sPath + "} %"
 					});	
-				} else {
+				} else if(oColumnState.key == "liquidityColumn") {
+					oText = new Text({
+						text: "{parts: ['" + sPath +"', 'quotations>currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
+					});	
+				} else if(oColumnState.key == "chartColumn") {
+					oButton = new Button({
+						icon: "sap-icon://business-objects-experience",
+						press: this.onChartPressed.bind(this),
+						tooltip: "{i18n>scanResults.chart.tooltip}"
+					});
+					
+					return oButton;
+				}
+				else {
 					oText = new Text({
 						text: "{" + sPath + "}"
 					});					
@@ -438,7 +453,10 @@ sap.ui.define([
 				{key: "volumeDifferential10DaysColumn", label: oResourceBundle.getText("indicator.volumeDifferential10Days"), 
 					path: "quotations>indicator/volumeDifferential10Days"},
 				{key: "upDownVolumeRatioColumn", label: oResourceBundle.getText("indicator.upDownVolumeRatio"), 
-					path: "quotations>indicator/upDownVolumeRatio"}
+					path: "quotations>indicator/upDownVolumeRatio"},
+				{key: "liquidityColumn", label: oResourceBundle.getText("indicator.liquidity"), path: "quotations>indicator/liquidity20Days"},
+				{key: "baseLengthWeeksColumn", label: oResourceBundle.getText("indicator.baseLengthWeeks"), path: "quotations>indicator/baseLengthWeeks"},
+				{key: "chartColumn", label: oResourceBundle.getText("scanResults.chart"), path: ""}
 			]);
 			
 			Engine.getInstance().register(oTable, {
