@@ -13,11 +13,14 @@ sap.ui.define([
 	"sap/m/p13n/Engine",
 	"sap/m/p13n/SelectionController",
 	"sap/m/p13n/SortController",
+	"sap/ui/model/Sorter",
 	"sap/m/ColumnListItem",
 	"sap/m/Text",
-	"sap/m/Button"
+	"sap/m/Button",
+	"sap/ui/core/library"
 ], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, 
-	Filter, FilterOperator, MetadataHelper, Engine, SelectionController, SortController, ColumnListItem, Text, Button) {
+	Filter, FilterOperator, MetadataHelper, Engine, SelectionController, SortController, Sorter, ColumnListItem, Text, 
+	Button, coreLibrary) {
 		
 	"use strict";
 	
@@ -315,10 +318,30 @@ sap.ui.define([
 				return;
 			}
 			
+			oState.Sorter.forEach(function(oSorter) {
+				var oExistingSorter = aSorter.find(function(oSort){
+					return oSort.sPath === this.oMetadataHelper.getProperty(oSorter.key).path;
+				}.bind(this));
+
+				if (oExistingSorter) {
+					oExistingSorter.bDescending = !!oSorter.descending;
+				} else {
+					aSorter.push(new Sorter(this.oMetadataHelper.getProperty(oSorter.key).path, oSorter.descending));
+				}
+			}.bind(this));
+			
 			oTable.getColumns().forEach(function(oColumn){
        			oColumn.setVisible(false);
+       			oColumn.setSortIndicator(coreLibrary.SortOrder.None);
     		});
     		
+    		oState.Sorter.forEach(function(oSorter) {
+				var oCol = this.byId(oSorter.key);
+				if (oSorter.sorted !== false) {
+					oCol.setSortIndicator(oSorter.descending ? coreLibrary.SortOrder.Descending : coreLibrary.SortOrder.Ascending);
+				}
+			}.bind(this));
+    		    		
     		oState.Columns.forEach(function(oProp, iIndex){
         		var oCol = this.byId(oProp.key);
         		oCol.setVisible(true);
