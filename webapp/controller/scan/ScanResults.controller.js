@@ -12,11 +12,12 @@ sap.ui.define([
 	"sap/m/p13n/MetadataHelper",
 	"sap/m/p13n/Engine",
 	"sap/m/p13n/SelectionController",
+	"sap/m/p13n/SortController",
 	"sap/m/ColumnListItem",
 	"sap/m/Text",
 	"sap/m/Button"
 ], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, 
-	Filter, FilterOperator, MetadataHelper, Engine, SelectionController, ColumnListItem, Text, Button) {
+	Filter, FilterOperator, MetadataHelper, Engine, SelectionController, SortController, ColumnListItem, Text, Button) {
 		
 	"use strict";
 	
@@ -293,7 +294,7 @@ sap.ui.define([
 		onSettingsPressed : function(oEvent) {
 			var oTable = this.byId("quotationTable");
 
-			Engine.getInstance().show(oTable, ["Columns"], {
+			Engine.getInstance().show(oTable, ["Columns", "Sorter"], {
 				contentHeight: "35rem",
 				contentWidth: "32rem",
 				source: oEvent.getSource()
@@ -430,7 +431,10 @@ sap.ui.define([
 					Columns: new SelectionController({
 						targetAggregation: "columns",
 						control: oTable
-					})
+					}),
+        			Sorter: new SortController({
+            			control: oTable
+        			})
 				}
 			});
 			
