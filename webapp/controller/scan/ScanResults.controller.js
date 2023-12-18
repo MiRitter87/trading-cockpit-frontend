@@ -278,8 +278,6 @@ sap.ui.define([
 				oBinding.filter([oTotalFilter]);
 			else		
 				oBinding.filter([]);
-				
-			this.updateResultTableTitle();
 		},
 		
 		

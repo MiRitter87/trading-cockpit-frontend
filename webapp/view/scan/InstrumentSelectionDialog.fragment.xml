@@ -14,13 +14,13 @@
 		confirm=".onCompareDialogClose"
 		cancel=".onCompareDialogClose"
 		items="{
-			path: 'quotations>/quotation',
+			path: '/quotation',
 			sorter: {path: 'instrument/name'}
 		}">
 		<StandardListItem
-			title="{quotations>instrument/symbol}"
-			description="{quotations>instrument/name}"
-			info="{path: 'quotations>instrument/type', formatter: '.typeTextFormatter'}"
+			title="{instrument/symbol}"
+			description="{instrument/name}"
+			info="{path: 'instrument/type', formatter: '.typeTextFormatter'}"
 			type="Active" />
 	</SelectDialog>
 </core:FragmentDefinition>
