@@ -40,11 +40,11 @@
 			</VBox>			
 		
 			<Table id="quotationTable" mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders"
-				items="{path: 'quotations>/quotation/', sorter: {path: 'indicator/relativeStrengthData/rsNumber', descending: true }}">
+				items="{path: '/quotation/', sorter: {path: 'indicator/relativeStrengthData/rsNumber', descending: true }}">
 				
 				<headerToolbar>
 					<OverflowToolbar>
-						<Title text="{i18n>scanResults.tableHeader} ({= ${quotations>/quotation/}.length})"/>
+						<Title text="{i18n>scanResults.tableHeader} ({= ${/quotation/}.length})"/>
 						<ToolbarSpacer/>
 						<SearchField id="resultsSearchField" liveChange=".onSearch" width="10%"/>
 						<Button icon="sap-icon://compare" tooltip="{i18n>scanResults.compareInstruments}" press=".onComparePressed"/>
@@ -102,23 +102,23 @@
 				<items>
 					<ColumnListItem>
 						<cells>
-							<Text text="{quotations>instrument/symbol}"/>
-							<Text text="{quotations>instrument/name}"/>
-							<Text text="{path: 'quotations>instrument/type', formatter: '.typeTextFormatter'}"/>
-							<Text text="{quotations>indicator/relativeStrengthData/rsNumber}"/>
-							<Text text="{quotations>indicator/relativeStrengthData/rsNumberCompositeIg}"/>
-							<Text text="{quotations>indicator/relativeStrengthData/rsNumberSector}"/>
-							<Text text="{quotations>indicator/relativeStrengthData/rsNumberIndustryGroup}"/>
-							<Text text="{quotations>indicator/performance5Days} %"/>
-							<Text text="{quotations>indicator/distanceTo52WeekHigh} %"/>
-							<Text text="{quotations>indicator/bollingerBandWidth}"/>
-							<Text text="{quotations>indicator/volumeDifferential10Days} %"/>
-							<Text text="{quotations>indicator/upDownVolumeRatio}"/>
-							<Text text="{	parts: ['quotations>indicator/liquidity20Days', 'quotations>currency'],
+							<Text text="{instrument/symbol}"/>
+							<Text text="{instrument/name}"/>
+							<Text text="{path: 'instrument/type', formatter: '.typeTextFormatter'}"/>
+							<Text text="{indicator/relativeStrengthData/rsNumber}"/>
+							<Text text="{indicator/relativeStrengthData/rsNumberCompositeIg}"/>
+							<Text text="{indicator/relativeStrengthData/rsNumberSector}"/>
+							<Text text="{indicator/relativeStrengthData/rsNumberIndustryGroup}"/>
+							<Text text="{indicator/performance5Days} %"/>
+							<Text text="{indicator/distanceTo52WeekHigh} %"/>
+							<Text text="{indicator/bollingerBandWidth}"/>
+							<Text text="{indicator/volumeDifferential10Days} %"/>
+							<Text text="{indicator/upDownVolumeRatio}"/>
+							<Text text="{	parts: ['indicator/liquidity20Days', 'currency'],
 											type: 'sap.ui.model.type.Currency',
 											formatOptions: {style : 'short'}
 										}"/>
-							<Text text="{quotations>indicator/baseLengthWeeks}"/>
+							<Text text="{indicator/baseLengthWeeks}"/>
 							<Button icon="sap-icon://business-objects-experience" press=".onChartPressed" tooltip="{i18n>scanResults.chart.tooltip}"/>
 						</cells>
 					</ColumnListItem>

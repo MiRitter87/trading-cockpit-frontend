@@ -202,7 +202,7 @@ sap.ui.define([
     	 */
     	onChartPressed : function(oControlEvent) {
 			var oButtonParent = oControlEvent.getSource().getParent();
-			var oContext = oButtonParent.getBindingContext("quotations");
+			var oContext = oButtonParent.getBindingContext();
 			var oQuotationData = oContext.getObject();
 			
 			this.openStockChart(oQuotationData.instrument);
@@ -354,7 +354,7 @@ sap.ui.define([
     		
     		oTable.bindItems({
         		templateShareable: false,
-        		path: 'quotations>/quotation/',
+        		path: '/quotation/',
         		sorter: aSorter,
         		template: new ColumnListItem({cells: aCells})
     		});
@@ -387,7 +387,7 @@ sap.ui.define([
 				}
 			}
 			
-			oCallingController.getView().setModel(oModel, "quotations");
+			oCallingController.getView().setModel(oModel);
 			
 			oSearchField.setValue("");
 		},
@@ -424,27 +424,27 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			this.oMetadataHelper = new MetadataHelper([
-				{key: "symbolColumn", label: oResourceBundle.getText("instrument.symbol"), path: "quotations>instrument/symbol"},
-				{key: "nameColumn", label: oResourceBundle.getText("instrument.name"), path: "quotations>instrument/name"},
-				{key: "typeColumn", label: oResourceBundle.getText("instrument.type"), path: "quotations>instrument/type"},
-				{key: "rsNumberColumn", label: oResourceBundle.getText("indicator.rsNumber"), path: "quotations>indicator/relativeStrengthData/rsNumber"},
+				{key: "symbolColumn", label: oResourceBundle.getText("instrument.symbol"), path: "instrument/symbol"},
+				{key: "nameColumn", label: oResourceBundle.getText("instrument.name"), path: "instrument/name"},
+				{key: "typeColumn", label: oResourceBundle.getText("instrument.type"), path: "instrument/type"},
+				{key: "rsNumberColumn", label: oResourceBundle.getText("indicator.rsNumber"), path: "indicator/relativeStrengthData/rsNumber"},
 				{key: "rsNumberCompositeIgColumn", label: oResourceBundle.getText("indicator.rsNumberCompositeIg"), 
-					path: "quotations>indicator/relativeStrengthData/rsNumberCompositeIg"},
+					path: "indicator/relativeStrengthData/rsNumberCompositeIg"},
 				{key: "sectorRsNumberColumn", label: oResourceBundle.getText("indicator.sectorRsNumber"), 
-					path: "quotations>indicator/relativeStrengthData/rsNumberSector"},
+					path: "indicator/relativeStrengthData/rsNumberSector"},
 				{key: "industryGroupRsNumberColumn", label: oResourceBundle.getText("indicator.industryGroupRsNumber"), 
-					path: "quotations>indicator/relativeStrengthData/rsNumberIndustryGroup"},
-				{key: "performance5DaysColumn", label: oResourceBundle.getText("indicator.performance5Days"), path: "quotations>indicator/performance5Days"},
+					path: "indicator/relativeStrengthData/rsNumberIndustryGroup"},
+				{key: "performance5DaysColumn", label: oResourceBundle.getText("indicator.performance5Days"), path: "indicator/performance5Days"},
 				{key: "distanceTo52WeekHighColumn", label: oResourceBundle.getText("indicator.distanceTo52WeekHigh"), 
-					path: "quotations>indicator/distanceTo52WeekHigh"},
+					path: "indicator/distanceTo52WeekHigh"},
 				{key: "bollingerBandWidthColumn", label: oResourceBundle.getText("indicator.bollingerBandWidth"), 
-					path: "quotations>indicator/bollingerBandWidth"},
+					path: "indicator/bollingerBandWidth"},
 				{key: "volumeDifferential10DaysColumn", label: oResourceBundle.getText("indicator.volumeDifferential10Days"), 
-					path: "quotations>indicator/volumeDifferential10Days"},
+					path: "indicator/volumeDifferential10Days"},
 				{key: "upDownVolumeRatioColumn", label: oResourceBundle.getText("indicator.upDownVolumeRatio"), 
-					path: "quotations>indicator/upDownVolumeRatio"},
-				{key: "liquidityColumn", label: oResourceBundle.getText("indicator.liquidity"), path: "quotations>indicator/liquidity20Days"},
-				{key: "baseLengthWeeksColumn", label: oResourceBundle.getText("indicator.baseLengthWeeks"), path: "quotations>indicator/baseLengthWeeks"},
+					path: "indicator/upDownVolumeRatio"},
+				{key: "liquidityColumn", label: oResourceBundle.getText("indicator.liquidity"), path: "indicator/liquidity20Days"},
+				{key: "baseLengthWeeksColumn", label: oResourceBundle.getText("indicator.baseLengthWeeks"), path: "indicator/baseLengthWeeks"},
 				{key: "chartColumn", label: oResourceBundle.getText("scanResults.chart"), path: ""}
 			]);
 			
@@ -570,7 +570,7 @@ sap.ui.define([
 					});	
 				} else if(oColumnState.key == "liquidityColumn") {
 					oText = new Text({
-						text: "{parts: ['" + sPath +"', 'quotations>currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
+						text: "{parts: ['" + sPath +"', 'currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
 					});	
 				} else if(oColumnState.key == "chartColumn") {
 					oButton = new Button({
