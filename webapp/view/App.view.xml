@@ -20,6 +20,7 @@
 							<MenuItem text="{i18n>navigation.menu.list}" icon="sap-icon://documents" press="onListPressed" />
 							<MenuItem text="{i18n>navigation.menu.scan}" icon="sap-icon://search" press="onScanPressed" />
 							<MenuItem text="{i18n>navigation.menu.dashboard}" icon="sap-icon://chart-axis" press="onDashboardPressed" />
+							<MenuItem text="{i18n>navigation.menu.chart}" icon="sap-icon://business-objects-experience" press="onChartPressed" />
 						</Menu>
 					</menu>
 				</MenuButton>

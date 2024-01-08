@@ -60,6 +60,16 @@ sap.ui.define([
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			
 			oRouter.navTo("dashboardMenuRoute");			
+		},
+		
+		
+		/**
+		 * Handles the selection of the menu item: chart.
+		 */
+		onChartPressed : function() {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			
+			//oRouter.navTo("dashboardMenuRoute");			
 		}
 	});
 });
