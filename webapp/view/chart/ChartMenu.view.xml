@@ -10,7 +10,17 @@
 	
 	<Page title="{i18n>navigation.menu.chart.header}">
 		<content>
-		
+			<Panel headerText="{i18n>navigation.menu.chart.header.statistic}">
+				<content>
+				
+				</content>
+			</Panel>
+			
+			<Panel headerText="{i18n>navigation.menu.chart.header.priceVolume}">
+				<content>
+				
+				</content>
+			</Panel>
 		</content>
 	</Page>
 </mvc:View>
