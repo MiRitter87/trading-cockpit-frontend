@@ -169,6 +169,10 @@
 				"pattern": "dashboardCharts",
 				"name": "dashboardChartsRoute",
 				"target": "dashboardChartsTarget"
+			}, {
+				"pattern": "chartMenu",
+				"name": "chartMenuRoute",
+				"target": "chartMenuTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -304,6 +308,11 @@
             	"dashboardChartsTarget": {
 					"viewId": "dashboardCharts",
 					"viewName": "dashboard.DashboardCharts",
+					"viewLevel" : 1
+            	},
+            	"chartMenuTarget": {
+					"viewId": "chartMenu",
+					"viewName": "chart.ChartMenu",
 					"viewLevel" : 1
             	}
             }

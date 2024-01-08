@@ -69,7 +69,7 @@ sap.ui.define([
 		onChartPressed : function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			
-			//oRouter.navTo("dashboardMenuRoute");			
+			oRouter.navTo("chartMenuRoute");			
 		}
 	});
 });
