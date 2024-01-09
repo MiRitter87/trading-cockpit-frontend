@@ -1,7 +1,10 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/m/MessageBox"
-], function (Controller, MessageBox) {
+	"../list/ListController",
+	"sap/ui/model/json/JSONModel",
+	"sap/m/MessageBox",
+	"sap/m/MessageToast"
+], function (Controller, ListController, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.ChartAdvanceDeclineNumber", {
@@ -18,7 +21,8 @@ sap.ui.define([
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
 		_onRouteMatched: function () {
-
+			ListController.queryListsByWebService(this.queryListsCallback, this, false);
+			this.resetUIElements();
     	},
     	
     	
@@ -49,6 +53,36 @@ sap.ui.define([
 		 */
 		onChartImageError : function() {
 			
+		},
+		
+		
+		/**
+		 * Callback function of the queryLists RESTful WebService call in the ListController.
+		 */
+		queryListsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);		
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+			
+			oCallingController.getView().setModel(oModel, "lists");
+		},
+		
+		
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements : function () {
+			var oListComboBox = this.getView().byId("listComboBox");
+			var oImage = this.getView().byId("chartImage");
+			
+			oListComboBox.setSelectedKey("");
+			oImage.setSrc(null);
 		}
 	});
 });
