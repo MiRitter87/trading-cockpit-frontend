@@ -12,7 +12,12 @@
 		<content>
 			<Panel headerText="{i18n>navigation.menu.chart.header.statistic}">
 				<content>
-				
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.chart}"
+						subheader="{i18n>navigation.menu.chart.advanceDeclineNumber}" press="onAdvanceDeclineNumberPressed">
+						<TileContent>
+							<ImageContent src="sap-icon://business-objects-experience" />
+						</TileContent>
+					</GenericTile>
 				</content>
 			</Panel>
 			
