@@ -9,7 +9,7 @@ sap.ui.define([
 		 */
 		onAdvanceDeclineNumberPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			//oRouter.navTo("dashboardStatisticRoute");	
+			oRouter.navTo("chartAdvanceDeclineNumberRoute");	
 		},
 	});
 });

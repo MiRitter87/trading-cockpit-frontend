@@ -173,6 +173,10 @@
 				"pattern": "chartMenu",
 				"name": "chartMenuRoute",
 				"target": "chartMenuTarget"
+			}, {
+				"pattern": "chartAdvanceDeclineNumber",
+				"name": "chartAdvanceDeclineNumberRoute",
+				"target": "chartAdvanceDeclineNumberTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -313,6 +317,11 @@
             	"chartMenuTarget": {
 					"viewId": "chartMenu",
 					"viewName": "chart.ChartMenu",
+					"viewLevel" : 1
+            	},
+            	"chartAdvanceDeclineNumberTarget": {
+					"viewId": "ChartAdvanceDeclineNumber",
+					"viewName": "chart.ChartAdvanceDeclineNumber",
 					"viewLevel" : 1
             	}
             }
