@@ -1,10 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"../MainController",
 	"../list/ListController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, ListController, JSONModel, MessageBox, MessageToast) {
+], function (Controller, MainController, ListController, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.ChartAdvanceDeclineNumber", {
@@ -44,7 +45,10 @@ sap.ui.define([
     	 * Handles the button press event of the refresh chart button.
     	 */
     	onRefreshPressed : function() {
-	
+			var sChartUrl = this.getChartUrl();
+			var oImage = this.getView().byId("chartImage");
+			
+			oImage.setSrc(sChartUrl);
 		},
 		
 		
@@ -52,7 +56,17 @@ sap.ui.define([
 		 * Handles error during loading of the chart image using the given URL.
 		 */
 		onChartImageError : function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oImage = this.getView().byId("chartImage");
+			var sImageSrc = oImage.getProperty("src");
 			
+			if(sImageSrc == "")
+				return;		//There was no image to load.
+			
+			//The backend currently only supports a response with error code 404 and standard error page with response text.
+			//The response site would have to be parsed in order to get the message from the backend.
+			//Therefore only a generic error message is being displayed at the moment.
+			MessageToast.show(oResourceBundle.getText("chartAdNumber.getChartError"));
 		},
 		
 		
@@ -71,6 +85,29 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "lists");
+		},
+		
+		
+		/**
+		 * Determines the URL of the chart.
+		 */
+		getChartUrl : function() {
+			var oListComboBox = this.getView().byId("listComboBox");
+			var sSelectedListId = oListComboBox.getSelectedKey();
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
+			var sChartUrl = sServerAddress + sWebServiceBaseUrl;
+			
+			sChartUrl = sChartUrl + "/cumulativeADNumber";
+			
+			//The randomDate parameter is not evaluated by the backend. 
+			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.
+			sChartUrl = sChartUrl  + "?randomDate=" + new Date().getTime();
+			
+			if(sSelectedListId != "")
+				sChartUrl = sChartUrl + "&listId=" + sSelectedListId;
+			
+			return sChartUrl;
 		},
 		
 		
