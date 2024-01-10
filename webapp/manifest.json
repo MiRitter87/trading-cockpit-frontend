@@ -177,6 +177,10 @@
 				"pattern": "chartAdvanceDeclineNumber",
 				"name": "chartAdvanceDeclineNumberRoute",
 				"target": "chartAdvanceDeclineNumberTarget"
+			}, {
+				"pattern": "chartAboveSma50",
+				"name": "chartAboveSma50Route",
+				"target": "chartAboveSma50Target"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -322,6 +326,11 @@
             	"chartAdvanceDeclineNumberTarget": {
 					"viewId": "ChartAdvanceDeclineNumber",
 					"viewName": "chart.ChartAdvanceDeclineNumber",
+					"viewLevel" : 1
+            	},
+            	"chartAboveSma50Target": {
+					"viewId": "ChartAboveSma50",
+					"viewName": "chart.ChartAboveSma50",
 					"viewLevel" : 1
             	}
             }

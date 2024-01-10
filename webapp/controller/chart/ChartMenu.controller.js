@@ -18,7 +18,7 @@ sap.ui.define([
 		 */
 		onAboveSma50Pressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			//oRouter.navTo("chartAdvanceDeclineNumberRoute");	
+			oRouter.navTo("chartAboveSma50Route");	
 		}
 	});
 });
