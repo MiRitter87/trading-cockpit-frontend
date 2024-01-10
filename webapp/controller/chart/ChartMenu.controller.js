@@ -11,5 +11,14 @@ sap.ui.define([
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartAdvanceDeclineNumberRoute");	
 		},
+		
+		
+		/**
+		 * Handles click at the Quota above SMA(50) tile.
+		 */
+		onAboveSma50Pressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			//oRouter.navTo("chartAdvanceDeclineNumberRoute");	
+		}
 	});
 });
