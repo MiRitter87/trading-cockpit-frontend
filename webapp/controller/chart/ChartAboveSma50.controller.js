@@ -32,6 +32,22 @@ sap.ui.define([
 			
 			mOptions.title = sTitle;
 			MessageBox.information(sDescription, mOptions);
+		},
+		
+		
+		/**
+    	 * Handles the button press event of the refresh chart button.
+    	 */
+    	onRefreshPressed : function() {
+			
+		},
+		
+		
+		/**
+		 * Handles error during loading of the chart image using the given URL.
+		 */
+		onChartImageError : function() {
+			
 		}
 	});
 });

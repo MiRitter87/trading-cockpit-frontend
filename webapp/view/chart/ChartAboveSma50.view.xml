@@ -12,7 +12,17 @@
 		</headerContent>
 		
 		<content>
-
+			<FlexBox alignItems="Center" justifyContent="Start">
+				<Label text="{i18n>chartAboveSma50.list}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
+				<ComboBox id="listComboBox" items="{path: 'lists>/list/'}" required="false">
+					<core:Item key="{lists>id}" text="{lists>id} - {lists>name}"/>
+				</ComboBox>
+				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
+			</FlexBox>
+							
+			<ScrollContainer>
+				<Image id="chartImage" error=".onChartImageError"/>
+			</ScrollContainer>
 		</content>
 	</Page>
 </mvc:View>
