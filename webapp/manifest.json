@@ -181,6 +181,10 @@
 				"pattern": "chartAboveSma50",
 				"name": "chartAboveSma50Route",
 				"target": "chartAboveSma50Target"
+			}, {
+				"pattern": "chartAboveSma200",
+				"name": "chartAboveSma200Route",
+				"target": "chartAboveSma200Target"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -331,6 +335,11 @@
             	"chartAboveSma50Target": {
 					"viewId": "ChartAboveSma50",
 					"viewName": "chart.ChartAboveSma50",
+					"viewLevel" : 1
+            	},
+            	"chartAboveSma200Target": {
+					"viewId": "ChartAboveSma200",
+					"viewName": "chart.ChartAboveSma200",
 					"viewLevel" : 1
             	}
             }

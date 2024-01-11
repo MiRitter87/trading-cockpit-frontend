@@ -25,6 +25,13 @@
 							<ImageContent src="sap-icon://business-objects-experience" />
 						</TileContent>
 					</GenericTile>
+					
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.chart}"
+						subheader="{i18n>navigation.menu.chart.aboveSma200}" press="onAboveSma200Pressed">
+						<TileContent>
+							<ImageContent src="sap-icon://business-objects-experience" />
+						</TileContent>
+					</GenericTile>
 				</content>
 			</Panel>
 			

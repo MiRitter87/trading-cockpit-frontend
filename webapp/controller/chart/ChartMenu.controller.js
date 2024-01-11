@@ -19,6 +19,15 @@ sap.ui.define([
 		onAboveSma50Pressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartAboveSma50Route");	
+		},
+		
+		
+		/**
+		 * Handles click at the Quota above SMA(200) tile.
+		 */
+		onAboveSma200Pressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("chartAboveSma200Route");	
 		}
 	});
 });
