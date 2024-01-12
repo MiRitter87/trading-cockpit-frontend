@@ -15,21 +15,28 @@
 					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.chart}"
 						subheader="{i18n>navigation.menu.chart.advanceDeclineNumber}" press="onAdvanceDeclineNumberPressed">
 						<TileContent>
-							<ImageContent src="sap-icon://business-objects-experience" />
+							<ImageContent src="sap-icon://line-charts" />
 						</TileContent>
 					</GenericTile>
 					
 					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.chart}"
 						subheader="{i18n>navigation.menu.chart.aboveSma50}" press="onAboveSma50Pressed">
 						<TileContent>
-							<ImageContent src="sap-icon://business-objects-experience" />
+							<ImageContent src="sap-icon://line-charts" />
 						</TileContent>
 					</GenericTile>
 					
 					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.chart}"
 						subheader="{i18n>navigation.menu.chart.aboveSma200}" press="onAboveSma200Pressed">
 						<TileContent>
-							<ImageContent src="sap-icon://business-objects-experience" />
+							<ImageContent src="sap-icon://line-charts" />
+						</TileContent>
+					</GenericTile>
+					
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.chart}"
+						subheader="{i18n>navigation.menu.chart.rmt}" press="onRmtPressed">
+						<TileContent>
+							<ImageContent src="sap-icon://line-charts" />
 						</TileContent>
 					</GenericTile>
 				</content>

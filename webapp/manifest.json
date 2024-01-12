@@ -185,6 +185,10 @@
 				"pattern": "chartAboveSma200",
 				"name": "chartAboveSma200Route",
 				"target": "chartAboveSma200Target"
+			}, {
+				"pattern": "chartRitterMarketTrend",
+				"name": "chartRitterMarketTrendRoute",
+				"target": "chartRitterMarketTrendTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -340,6 +344,12 @@
             	"chartAboveSma200Target": {
 					"viewId": "ChartAboveSma200",
 					"viewName": "chart.ChartAboveSma200",
+					"viewLevel" : 1
+            	}
+            	,
+            	"chartRitterMarketTrendTarget": {
+					"viewId": "ChartRitterMarketTrend",
+					"viewName": "chart.ChartRitterMarketTrend",
 					"viewLevel" : 1
             	}
             }

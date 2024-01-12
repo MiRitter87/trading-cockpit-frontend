@@ -28,6 +28,15 @@ sap.ui.define([
 		onAboveSma200Pressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartAboveSma200Route");	
+		},
+		
+		
+		/**
+		 * Handles click at the Ritter Market Trend tile.
+		 */
+		onRmtPressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("chartRitterMarketTrendRoute");	
 		}
 	});
 });
