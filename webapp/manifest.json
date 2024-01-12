@@ -189,6 +189,10 @@
 				"pattern": "chartRitterMarketTrend",
 				"name": "chartRitterMarketTrendRoute",
 				"target": "chartRitterMarketTrendTarget"
+			}, {
+				"pattern": "chartRitterPatternIndicator",
+				"name": "chartRitterPatternIndicatorRoute",
+				"target": "chartRitterPatternIndicatorTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -345,11 +349,15 @@
 					"viewId": "ChartAboveSma200",
 					"viewName": "chart.ChartAboveSma200",
 					"viewLevel" : 1
-            	}
-            	,
+            	},
             	"chartRitterMarketTrendTarget": {
 					"viewId": "ChartRitterMarketTrend",
 					"viewName": "chart.ChartRitterMarketTrend",
+					"viewLevel" : 1
+            	},
+            	"chartRitterPatternIndicatorTarget": {
+					"viewId": "ChartRitterPatternIndicator",
+					"viewName": "chart.ChartRitterPatternIndicator",
 					"viewLevel" : 1
             	}
             }

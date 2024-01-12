@@ -39,6 +39,13 @@
 							<ImageContent src="sap-icon://line-charts" />
 						</TileContent>
 					</GenericTile>
+					
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.chart}"
+						subheader="{i18n>navigation.menu.chart.rpi}" press="onRpiPressed">
+						<TileContent>
+							<ImageContent src="sap-icon://line-charts" />
+						</TileContent>
+					</GenericTile>
 				</content>
 			</Panel>
 			

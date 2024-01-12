@@ -37,6 +37,15 @@ sap.ui.define([
 		onRmtPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartRitterMarketTrendRoute");	
+		},
+		
+		
+		/**
+		 * Handles click at the Ritter Pattern Indicator tile.
+		 */
+		onRpiPressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("chartRitterPatternIndicatorRoute");	
 		}
 	});
 });
