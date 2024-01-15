@@ -23,7 +23,7 @@
 					<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
 				</FlexBox>
 				
-				<IconTabBar	class="sapUiResponsiveContentPadding">
+				<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 					<items>
 						<IconTabFilter text="{i18n>chartPriceVolume.tabPrice}" key="price">
 							<CheckBox id="ema21CheckBox" text="{i18n>chartPriceVolume.ema21}"/>
