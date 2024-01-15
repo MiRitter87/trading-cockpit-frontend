@@ -46,6 +46,15 @@ sap.ui.define([
 		onRpiPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartRitterPatternIndicatorRoute");	
+		},
+		
+		
+		/**
+		 * Handles click at the Price/Volume tile.
+		 */
+		onPriceVolumePressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("chartPriceVolumeRoute");	
 		}
 	});
 });

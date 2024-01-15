@@ -193,6 +193,10 @@
 				"pattern": "chartRitterPatternIndicator",
 				"name": "chartRitterPatternIndicatorRoute",
 				"target": "chartRitterPatternIndicatorTarget"
+			}, {
+				"pattern": "chartPriceVolume",
+				"name": "chartPriceVolumeRoute",
+				"target": "chartPriceVolumeTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -358,6 +362,11 @@
             	"chartRitterPatternIndicatorTarget": {
 					"viewId": "ChartRitterPatternIndicator",
 					"viewName": "chart.ChartRitterPatternIndicator",
+					"viewLevel" : 1
+            	},
+            	"chartPriceVolumeTarget": {
+					"viewId": "ChartPriceVolume",
+					"viewName": "chart.ChartPriceVolume",
 					"viewLevel" : 1
             	}
             }

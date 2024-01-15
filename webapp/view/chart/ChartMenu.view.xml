@@ -51,7 +51,12 @@
 			
 			<Panel headerText="{i18n>navigation.menu.chart.header.priceVolume}">
 				<content>
-				
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.chart}"
+						subheader="{i18n>navigation.menu.chart.pv}" press="onPriceVolumePressed">
+						<TileContent>
+							<ImageContent src="sap-icon://business-objects-experience" />
+						</TileContent>
+					</GenericTile>
 				</content>
 			</Panel>
 		</content>
