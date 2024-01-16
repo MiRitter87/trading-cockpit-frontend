@@ -51,7 +51,30 @@ sap.ui.define([
 		 * Handles the selection of an Instrument.
 		 */
 		onInstrumentSelectionChange : function (oControlEvent) {
+			var oSelectedItem = oControlEvent.getParameters().selectedItem;
+			var oQuotationsModel = this.getView().getModel("quotations");
+			var oInstrument;
+			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
+			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
 			
+			if(oSelectedItem == null) {
+				return;
+			}
+			
+			oInstrument = ScanController.getInstrumentById(oSelectedItem.getKey(), oQuotationsModel.oData.quotation);
+			
+			if(oInstrument.type == Constants.INSTRUMENT_TYPE.RATIO) {
+				oVolumeCheckBox.setSelected(false);
+				oVolumeCheckBox.setEnabled(false);
+				oSma30VolumeCheckBox.setSelected(false);
+				oSma30VolumeCheckBox.setEnabled(false);
+			}
+			else {
+				oVolumeCheckBox.setSelected(true);
+				oVolumeCheckBox.setEnabled(true);
+				oSma30VolumeCheckBox.setSelected(true);
+				oSma30VolumeCheckBox.setEnabled(true);
+			}
 		},
 		
 		
@@ -67,7 +90,17 @@ sap.ui.define([
 		 * Handles selection of the volume CheckBox.
 		 */
 		onVolumeCheckBoxSelect : function() {
-			
+			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
+			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
+			 
+			if(oVolumeCheckBox.getSelected() == true) {				
+				oSma30VolumeCheckBox.setEnabled(true);
+				oSma30VolumeCheckBox.setSelected(true);
+			}
+			else {				
+				oSma30VolumeCheckBox.setEnabled(false);
+				oSma30VolumeCheckBox.setSelected(false);
+			}
 		},
 		
 		
