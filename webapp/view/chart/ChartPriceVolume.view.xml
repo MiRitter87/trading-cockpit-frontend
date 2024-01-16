@@ -43,8 +43,10 @@
 								<ComboBox id="indicatorComboBox" selectedKey="NONE" selectionChange=".onIndicatorSelectionChange"/>
 								<Label id="rsInstrumentLabel" text="{i18n>chartPriceVolume.rsInstrument}"
 									class="sapUiMediumMarginBegin sapUiSmallMarginEnd" visible="false"/>
-								<ComboBox id="rsInstrumentComboBox" items="{path: 'instruments>/instrument/'}" required="true" visible="false">
-									<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
+								<ComboBox id="rsInstrumentComboBox" items="{path: 'quotations>/quotation/', sorter: {path: 'instrument/id'}}" 
+									required="true" visible="false">
+									
+									<core:Item key="{quotations>instrument/id}" text="{quotations>instrument/symbol} - {quotations>instrument/name}"/>
 								</ComboBox>
 							</FlexBox>
 						</IconTabFilter>

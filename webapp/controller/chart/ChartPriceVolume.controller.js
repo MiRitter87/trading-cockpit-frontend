@@ -4,8 +4,10 @@ sap.ui.define([
 	"../scan/ScanController",
 	"../Constants",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageBox"
-], function (Controller, MainController, ScanController, Constants, JSONModel, MessageBox) {
+	"sap/m/MessageBox",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
+], function (Controller, MainController, ScanController, Constants, JSONModel, MessageBox, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.ChartPriceVolume", {
@@ -73,7 +75,21 @@ sap.ui.define([
 		 * Handles selection of an indicator for the price volume chart.
 		 */
 		onIndicatorSelectionChange : function(oControlEvent) {
+			var oSelectedItem = oControlEvent.getParameters().selectedItem;
+			var oRsInstrumentLabel = this.getView().byId("rsInstrumentLabel");
+			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
 			
+			if(oSelectedItem.getKey() == Constants.CHART_INDICATOR.RS_LINE) {
+				oRsInstrumentLabel.setVisible(true);
+				oRsInstrumentComboBox.setVisible(true);
+				
+				this.applyFilterToInstrumentsComboBox(oRsInstrumentComboBox,
+					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, Constants.INSTRUMENT_TYPE.ETF]);
+			}
+			else {
+				oRsInstrumentLabel.setVisible(false);
+				oRsInstrumentComboBox.setVisible(false);
+			}
 		},
 		
 		
@@ -142,12 +158,42 @@ sap.ui.define([
 		
 		
 		/**
+		 * Applies a Filter to the ComboBox for Instrument selection.
+		 */
+		applyFilterToInstrumentsComboBox : function (oComboxBox, aAllowedInstrumentTypes) {
+			var oBinding = oComboxBox.getBinding("items");
+			var aFilters = new Array();
+			var oFilterType, oFilterTotal;
+			
+			if(aAllowedInstrumentTypes == undefined || aAllowedInstrumentTypes.length == 0)
+				return;
+				
+			for(var i = 0; i < aAllowedInstrumentTypes.length; i++) {
+				oFilterType = new Filter("instrument/type", FilterOperator.EQ, aAllowedInstrumentTypes[i]);
+				aFilters.push(oFilterType);
+			}
+			
+			if(oBinding == undefined)
+				return;
+			
+			//Connect filters via logical "OR".
+			var oFilterTotal = new Filter({
+				filters: aFilters,
+    			and: false
+  			});
+			
+			oBinding.filter([oFilterTotal]);
+		},
+		
+		
+		/**
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
 			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
+			var oRsInstrumentLabel = this.getView().byId("rsInstrumentLabel");
 			var oIconTabBar = this.getView().byId("iconTabBar");
 			
 			var oImage = this.getView().byId("chartImage");
@@ -155,6 +201,8 @@ sap.ui.define([
 			oInstrumentComboBox.setSelectedKey("");
 			oIndicatorComboBox.setSelectedKey("");
 			oRsInstrumentComboBox.setSelectedKey("");
+			oRsInstrumentComboBox.setVisible(false);
+			oRsInstrumentLabel.setVisible(false);
 			oIconTabBar.setSelectedKey("price");
 			oImage.setSrc(null);
 		}
