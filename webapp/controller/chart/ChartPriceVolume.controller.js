@@ -82,7 +82,17 @@ sap.ui.define([
     	 * Handles the button press event of the refresh chart button.
     	 */
     	onRefreshPressed : function() {
-	
+			var oImage = this.getView().byId("chartImage");
+			var bIsInputValid = this.isInputValid();
+			var sChartUrl;
+			
+			if(bIsInputValid) {
+				sChartUrl = this.getChartUrl();
+				oImage.setSrc(sChartUrl);
+			}
+			else {				
+				oImage.setSrc(null);
+			}
 		},
 		
 		
@@ -216,6 +226,100 @@ sap.ui.define([
   			});
 			
 			oBinding.filter([oFilterTotal]);
+		},
+		
+		
+		/**
+		 * Validates the user input. Prompts messages in input is not valid.
+		 */
+		isInputValid : function () {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
+			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
+			var sSelectedIndicator = oIndicatorComboBox.getSelectedKey();
+			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
+			
+			if(sSelectedInstrumentId == "") {
+				MessageBox.error(oResourceBundle.getText("chartPriceVolume.noInstrumentSelected"));
+				return false;
+			}
+			
+			if(sSelectedIndicator == Constants.CHART_INDICATOR.RS_LINE && oRsInstrumentComboBox.getSelectedKey() == "") {	
+				MessageBox.error(oResourceBundle.getText("chartPriceVolume.noRsInstrumentSelected"));
+				return false;
+			}
+			
+			return true;
+		},
+		
+		
+		/**
+		 * Determines the URL of the statistic chart based on the selected chart type and optional additional parameters.
+		 */
+		getChartUrl : function() {
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
+			var sChartUrl = sServerAddress + sWebServiceBaseUrl;
+			
+			sChartUrl = sChartUrl + "/priceVolume/" + sSelectedInstrumentId + this.getUrlParametersPriceVolume();
+			
+			//The randomDate parameter is not evaluated by the backend. 
+			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.
+			sChartUrl = sChartUrl  + "&randomDate=" + new Date().getTime();
+			
+			return sChartUrl;
+		},
+		
+		
+		/**
+		 * Gets the URL parameters for configuration of price volume chart.
+		 */
+		getUrlParametersPriceVolume : function() {
+			var sParameters = "";
+			var oEma21CheckBox = this.getView().byId("ema21CheckBox");
+			var oSma50CheckBox = this.getView().byId("sma50CheckBox");
+			var oSma150CheckBox = this.getView().byId("sma150CheckBox");
+			var oSma200CheckBox = this.getView().byId("sma200CheckBox");
+			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
+			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
+			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
+			var sSelectedIndicator = oIndicatorComboBox.getSelectedKey();
+			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
+			
+			if(sSelectedIndicator == "") {
+				sParameters = sParameters + "?indicator=NONE";				
+			}
+			else {
+				sParameters = sParameters + "?indicator=" + sSelectedIndicator;
+			}
+			
+			if(oEma21CheckBox.getSelected() == true) {
+				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.EMA_21;
+			}
+			
+			if(oSma50CheckBox.getSelected() == true) {
+				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.SMA_50;
+			}
+			
+			if(oSma150CheckBox.getSelected() == true) {
+				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.SMA_150;
+			}
+			
+			if(oSma200CheckBox.getSelected() == true) {
+				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.SMA_200;
+			}
+			
+			sParameters = sParameters + "&withVolume=" + oVolumeCheckBox.getSelected();
+			sParameters = sParameters + "&withSma30Volume=" + oSma30VolumeCheckBox.getSelected();
+			
+			if(sSelectedIndicator == Constants.CHART_INDICATOR.RS_LINE) {
+				sParameters = sParameters + "&rsInstrumentId=" + oRsInstrumentComboBox.getSelectedKey();
+			}
+			
+			return sParameters;
 		},
 		
 		
