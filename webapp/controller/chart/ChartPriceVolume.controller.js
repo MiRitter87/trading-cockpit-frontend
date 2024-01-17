@@ -170,6 +170,14 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the button press event of the save button in the "create chart object" dialog.
+		 */
+		onSaveNewChartObjectPressed : function() {
+			ChartAnalysisController.onSaveNewChartObjectPressed(this);
+		},
+		
+		
+		/**
 		 * Handles the button press event of the cancel button in the "create chart object" dialog.
 		 */
 		onCancelCreateChartObjectDialog : function() {
