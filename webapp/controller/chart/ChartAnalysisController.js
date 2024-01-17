@@ -277,7 +277,7 @@ sap.ui.define([
 			oCallingController.getView().setModel(oModel, "horizontalLines");
 			
 			if(oOverviewDialog == undefined || oOverviewDialog.isOpen() == false) {
-				MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.ChartObjectOverview");				
+				MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.chart.ChartObjectOverview");				
 			}
 		},
 		

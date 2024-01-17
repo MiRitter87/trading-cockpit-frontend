@@ -157,7 +157,23 @@ sap.ui.define([
 		 * Handles the button press event of the overview object button.
 		 */
 		onObjectOverviewPressed : function() {
-			
+			ChartAnalysisController.onObjectOverviewPressed(this);
+		},
+		
+		
+		/**
+		 * Handles the button press event of the cancel button in the "create chart object" dialog.
+		 */
+		onCancelCreateChartObjectDialog : function() {
+			ChartAnalysisController.onCancelCreateChartObjectDialog(this);
+		},
+		
+		
+		/**
+		 * Handles a click at the close button of the object overview dialog.
+		 */
+		onCloseObjectOverviewDialog : function() {
+			ChartAnalysisController.onCloseObjectOverviewDialog(this);
 		},
 		
 		
