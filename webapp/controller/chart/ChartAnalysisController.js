@@ -136,7 +136,7 @@ sap.ui.define([
 		 * Handles the button press event of the open chart button for chart object coordinate selection.
 		 */
 		onOpenChartPressed : function(oCallingController) {
-			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.dashboard.TradingViewChartContainer", 
+			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.chart.TradingViewChartContainer", 
 				this.onTradingViewPopupOpened.bind(this));
 		},
 		

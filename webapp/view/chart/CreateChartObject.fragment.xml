@@ -40,7 +40,7 @@
 						
 						<f:FormElement label="{i18n>chartPriceVolume.selectedDate}">
 							<f:fields>
-								<Text id="newObjectDateText"/>
+								<Text id="newObjectDateText" text="{selectedCoordinates>/date}"/>
 							</f:fields>
 						</f:FormElement>
 						

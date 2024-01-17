@@ -162,10 +162,34 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the button press event of the open chart button for chart object coordinate selection.
+		 */
+		onOpenChartPressed : function() {
+			ChartAnalysisController.onOpenChartPressed(this);
+		},
+		
+		
+		/**
 		 * Handles the button press event of the cancel button in the "create chart object" dialog.
 		 */
 		onCancelCreateChartObjectDialog : function() {
 			ChartAnalysisController.onCancelCreateChartObjectDialog(this);
+		},
+		
+		
+		/**
+		 * Handles a click at the take coordinate button of the TradingView chart container.
+		 */
+		onTakeCoordinate : function() {
+			ChartAnalysisController.onTakeCoordinate(this);
+		},
+		
+		
+		/**
+		 * Handles a click at the cancel button of the TradingView chart container.
+		 */
+		onCancelChartDialog : function() {
+			ChartAnalysisController.onCancelChartDialog(this);
 		},
 		
 		
