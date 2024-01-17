@@ -25,6 +25,7 @@ sap.ui.define([
 		
 		/**
 		 * Queries the quotation WebService for quotations of an Instrument with the given ID.
+		 * TODO Remove when DashboardCharts view is obsolete.
 		 */
 		queryQuotationsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
 			var sServerAddress = MainController.getServerAddress();

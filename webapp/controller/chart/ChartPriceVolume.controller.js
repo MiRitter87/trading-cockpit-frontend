@@ -3,11 +3,12 @@ sap.ui.define([
 	"../MainController",
 	"../scan/ScanController",
 	"../Constants",
+	"./ChartAnalysisController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Controller, MainController, ScanController, Constants, JSONModel, MessageBox, Filter, FilterOperator) {
+], function (Controller, MainController, ScanController, Constants, ChartAnalysisController, JSONModel, MessageBox, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.ChartPriceVolume", {
@@ -140,7 +141,7 @@ sap.ui.define([
 		 * Handles the button press event of the add object button.
 		 */
 		onAddObjectPressed : function() {
-		
+			ChartAnalysisController.onAddObjectPressed(this);
 		},
 		
 		
