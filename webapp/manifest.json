@@ -197,6 +197,10 @@
 				"pattern": "chartPriceVolume",
 				"name": "chartPriceVolumeRoute",
 				"target": "chartPriceVolumeTarget"
+			}, {
+				"pattern": "chartDistributionDays",
+				"name": "chartDistributionDaysRoute",
+				"target": "chartDistributionDaysTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -367,6 +371,11 @@
             	"chartPriceVolumeTarget": {
 					"viewId": "ChartPriceVolume",
 					"viewName": "chart.ChartPriceVolume",
+					"viewLevel" : 1
+            	},
+            	"chartDistributionDaysTarget": {
+					"viewId": "ChartDistributionDays",
+					"viewName": "chart.ChartDistributionDays",
 					"viewLevel" : 1
             	}
             }

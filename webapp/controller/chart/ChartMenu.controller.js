@@ -55,6 +55,15 @@ sap.ui.define([
 		onPriceVolumePressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartPriceVolumeRoute");	
+		},
+		
+		
+		/**
+		 * Handles click at the Distribution Days tile.
+		 */
+		onDistributionDaysPressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("chartDistributionDaysRoute");
 		}
 	});
 });
