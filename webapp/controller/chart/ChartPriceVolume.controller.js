@@ -98,6 +98,24 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles error during loading of the chart image using the given URL.
+		 */
+		onChartImageError : function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oImage = this.getView().byId("chartImage");
+			var sImageSrc = oImage.getProperty("src");
+			
+			if(sImageSrc == "")
+				return;		//There was no image to load.
+			
+			//The backend currently only supports a response with error code 404 and standard error page with response text.
+			//The response site would have to be parsed in order to get the message from the backend.
+			//Therefore only a generic error message is being displayed at the moment.
+			MessageToast.show(oResourceBundle.getText("chartPriceVolume.getChartError"));
+		},
+		
+		
+		/**
 		 * Handles selection of the volume CheckBox.
 		 */
 		onVolumeCheckBoxSelect : function() {

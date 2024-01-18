@@ -8,11 +8,23 @@
 	
 	<Page title="{i18n>chartDistributionDays.header}">
 		<headerContent>
-
+			<Button icon="sap-icon://hint" tooltip="{i18n>chartDistributionDays.typeTooltip}" press=".onChartInformationPressed"/>
 		</headerContent>
 		
 		<content>
-
+			<FlexBox alignItems="Center" justifyContent="Start">
+				<Label text="{i18n>chartDistributionDays.instrument}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
+				<ComboBox id="instrumentComboBox" items="{path: 'quotations>/quotation/', sorter: {path: 'instrument/id'}}" required="false" 
+					selectionChange=".onInstrumentSelectionChange">
+					
+					<core:Item key="{quotations>instrument/id}" text="{quotations>instrument/symbol} - {quotations>instrument/name}"/>
+				</ComboBox>
+				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
+			</FlexBox>
+			
+			<ScrollContainer>
+				<Image id="chartImage" error=".onChartImageError"/>
+			</ScrollContainer>
 		</content>
 	</Page>
 </mvc:View>
