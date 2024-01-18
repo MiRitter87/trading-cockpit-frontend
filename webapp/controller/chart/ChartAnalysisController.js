@@ -51,7 +51,7 @@ sap.ui.define([
 		 * Creates a candlestick series that contains the data to be displayed.
 		 */
 		getCandlestickSeries : function (oCallingController) {
-			var oQuotationsModel = oCallingController.getView().getModel("quotations");
+			var oQuotationsModel = oCallingController.getView().getModel("quotationsForChart");
 			var oQuotations = oQuotationsModel.oData.quotation;
 			var aCandlestickSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
@@ -231,7 +231,7 @@ sap.ui.define([
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
-			oCallingController.getView().setModel(oModel, "quotations");
+			oCallingController.getView().setModel(oModel, "quotationsForChart");
 			
 			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.chart.CreateChartObject");
 		},
@@ -408,20 +408,20 @@ sap.ui.define([
 			var price;
 			
 			if(sSelectedObjectType == "") {
-				MessageBox.error(oResourceBundle.getText("dashboardCharts.noObjectTypeSelected"));
+				MessageBox.error(oResourceBundle.getText("chartPriceVolume.noObjectTypeSelected"));
 				return false;
 			}
 			
 			oSelectedCoordinateModel = oCallingController.getView().getModel("selectedCoordinates");
 			
 			if(oSelectedCoordinateModel == null || oSelectedCoordinateModel == undefined) {
-				MessageBox.error(oResourceBundle.getText("dashboardCharts.noHorizontalPriceSelected"));
+				MessageBox.error(oResourceBundle.getText("chartPriceVolume.noHorizontalPriceSelected"));
 				return false;
 			} else {
 				price = oSelectedCoordinateModel.getProperty("/price")
 				
 				if(price == undefined || price == "") {
-					MessageBox.error(oResourceBundle.getText("dashboardCharts.noHorizontalPriceSelected"));
+					MessageBox.error(oResourceBundle.getText("chartPriceVolume.noHorizontalPriceSelected"));
 					return false;
 				}
 			}
