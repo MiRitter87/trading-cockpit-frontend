@@ -173,7 +173,7 @@ sap.ui.define([
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			if(oCallingController.getView().byId("chartObjectTable").getSelectedItem() == null) {
-				MessageBox.information(oResourceBundle.getText("dashboardCharts.objectOverviewDialog.noObjectSelected"));
+				MessageBox.information(oResourceBundle.getText("chartPriceVolume.objectOverviewDialog.noObjectSelected"));
 				return;				
 			}
 			
