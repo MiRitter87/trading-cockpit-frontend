@@ -1,14 +1,13 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
+	"./ChartController",
 	"../scan/ScanController",
 	"../Constants",
 	"./ChartAnalysisController",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageBox",
-	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
-], function (Controller, MainController, ScanController, Constants, ChartAnalysisController, JSONModel, MessageBox, Filter, FilterOperator) {
+	"sap/m/MessageBox"
+], function (Controller, MainController, ChartController, ScanController, Constants, ChartAnalysisController, JSONModel, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.ChartPriceVolume", {
@@ -145,7 +144,7 @@ sap.ui.define([
 				oRsInstrumentLabel.setVisible(true);
 				oRsInstrumentComboBox.setVisible(true);
 				
-				this.applyFilterToInstrumentsComboBox(oRsInstrumentComboBox,
+				ChartController.applyFilterToInstrumentsComboBox(oRsInstrumentComboBox,
 					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, Constants.INSTRUMENT_TYPE.ETF]);
 			}
 			else {
@@ -272,35 +271,6 @@ sap.ui.define([
 			
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.CHART_INDICATOR.SLOW_STOCHASTIC, "chartPriceVolume.indicator.slowStochastic");	
-		},
-		
-		
-		/**
-		 * Applies a Filter to the ComboBox for Instrument selection.
-		 */
-		applyFilterToInstrumentsComboBox : function (oComboxBox, aAllowedInstrumentTypes) {
-			var oBinding = oComboxBox.getBinding("items");
-			var aFilters = new Array();
-			var oFilterType, oFilterTotal;
-			
-			if(aAllowedInstrumentTypes == undefined || aAllowedInstrumentTypes.length == 0)
-				return;
-				
-			for(var i = 0; i < aAllowedInstrumentTypes.length; i++) {
-				oFilterType = new Filter("instrument/type", FilterOperator.EQ, aAllowedInstrumentTypes[i]);
-				aFilters.push(oFilterType);
-			}
-			
-			if(oBinding == undefined)
-				return;
-			
-			//Connect filters via logical "OR".
-			var oFilterTotal = new Filter({
-				filters: aFilters,
-    			and: false
-  			});
-			
-			oBinding.filter([oFilterTotal]);
 		},
 		
 		
