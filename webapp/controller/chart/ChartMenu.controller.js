@@ -73,6 +73,15 @@ sap.ui.define([
 		onFollowThroughDaysPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartFollowThroughDaysRoute");
+		},
+		
+		
+		/**
+		 * Handles click at the Pocket Pivots tile.
+		 */
+		onPocketPivotsPressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("chartPocketPivotsRoute");
 		}
 	});
 });

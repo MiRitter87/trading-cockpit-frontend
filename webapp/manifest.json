@@ -205,6 +205,10 @@
 				"pattern": "chartFollowThroughDays",
 				"name": "chartFollowThroughDaysRoute",
 				"target": "chartFollowThroughDaysTarget"
+			}, {
+				"pattern": "chartPocketPivots",
+				"name": "chartPocketPivotsRoute",
+				"target": "chartPocketPivotsTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -385,6 +389,11 @@
             	"chartFollowThroughDaysTarget": {
 					"viewId": "ChartFollowThroughDays",
 					"viewName": "chart.ChartFollowThroughDays",
+					"viewLevel" : 1
+            	},
+            	"chartPocketPivotsTarget": {
+					"viewId": "ChartPocketPivots",
+					"viewName": "chart.ChartPocketPivots",
 					"viewLevel" : 1
             	}
             }
