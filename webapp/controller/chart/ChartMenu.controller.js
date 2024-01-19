@@ -64,6 +64,15 @@ sap.ui.define([
 		onDistributionDaysPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartDistributionDaysRoute");
+		},
+		
+		
+		/**
+		 * Handles click at the Follow-Through Days tile.
+		 */
+		onFollowThroughDaysPressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("chartFollowThroughDaysRoute");
 		}
 	});
 });

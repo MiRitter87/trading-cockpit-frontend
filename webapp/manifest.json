@@ -201,6 +201,10 @@
 				"pattern": "chartDistributionDays",
 				"name": "chartDistributionDaysRoute",
 				"target": "chartDistributionDaysTarget"
+			}, {
+				"pattern": "chartFollowThroughDays",
+				"name": "chartFollowThroughDaysRoute",
+				"target": "chartFollowThroughDaysTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -376,6 +380,11 @@
             	"chartDistributionDaysTarget": {
 					"viewId": "ChartDistributionDays",
 					"viewName": "chart.ChartDistributionDays",
+					"viewLevel" : 1
+            	},
+            	"chartFollowThroughDaysTarget": {
+					"viewId": "ChartFollowThroughDays",
+					"viewName": "chart.ChartFollowThroughDays",
 					"viewLevel" : 1
             	}
             }
