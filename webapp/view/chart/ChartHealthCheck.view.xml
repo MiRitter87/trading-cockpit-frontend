@@ -27,7 +27,7 @@
 					<ComboBox id="healthCheckProfileComboBox" required="true"/>
 					
 					<Label text="{i18n>chartHealthCheck.lookbackPeriod}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
-					<Input id="lookbackPeriodInput" type="Number" description="{i18n>chartHealthCheck.lookbackPeriod.description}"/>
+					<Input id="lookbackPeriodInput" value="15" type="Number" description="{i18n>chartHealthCheck.lookbackPeriod.description}"/>
 				</FlexBox>
 			</VBox>
 			
