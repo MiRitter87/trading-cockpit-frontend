@@ -78,6 +78,13 @@
 							<ImageContent src="sap-icon://business-objects-experience" />
 						</TileContent>
 					</GenericTile>
+					
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.chart}"
+						subheader="{i18n>navigation.menu.chart.healthCheck}" press="onHealthCheckPressed">
+						<TileContent>
+							<ImageContent src="sap-icon://business-objects-experience" />
+						</TileContent>
+					</GenericTile>
 				</content>
 			</Panel>
 		</content>

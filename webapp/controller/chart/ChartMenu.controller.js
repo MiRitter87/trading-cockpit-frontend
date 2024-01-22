@@ -82,6 +82,15 @@ sap.ui.define([
 		onPocketPivotsPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartPocketPivotsRoute");
+		},
+		
+		
+		/**
+		 * Handles click at the Health Check tile.
+		 */
+		onHealthCheckPressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("chartHealthCheckRoute");
 		}
 	});
 });

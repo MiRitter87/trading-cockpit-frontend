@@ -209,6 +209,10 @@
 				"pattern": "chartPocketPivots",
 				"name": "chartPocketPivotsRoute",
 				"target": "chartPocketPivotsTarget"
+			}, {
+				"pattern": "chartHealthCheck",
+				"name": "chartHealthCheckRoute",
+				"target": "chartHealthCheckTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -394,6 +398,11 @@
             	"chartPocketPivotsTarget": {
 					"viewId": "ChartPocketPivots",
 					"viewName": "chart.ChartPocketPivots",
+					"viewLevel" : 1
+            	},
+            	"chartHealthCheckTarget": {
+					"viewId": "ChartHealthCheck",
+					"viewName": "chart.ChartHealthCheck",
 					"viewLevel" : 1
             	}
             }
