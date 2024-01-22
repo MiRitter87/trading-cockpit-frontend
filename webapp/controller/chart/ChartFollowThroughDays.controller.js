@@ -49,10 +49,17 @@ sap.ui.define([
     	 * Handles the button press event of the refresh chart button.
     	 */
     	onRefreshPressed : function() {
-			var sChartUrl = this.getChartUrl();
 			var oImage = this.getView().byId("chartImage");
+			var bIsInputValid = this.isInputValid();
+			var sChartUrl;
 			
-			oImage.setSrc(sChartUrl);
+			if(bIsInputValid) {
+				sChartUrl = this.getChartUrl();
+				oImage.setSrc(sChartUrl);
+			}
+			else {				
+				oImage.setSrc(null);
+			}
 		},
 		
 		
@@ -93,6 +100,23 @@ sap.ui.define([
 			oCallingController.getView().setModel(oModel, "quotations");
 			ChartController.applyFilterToInstrumentsComboBox(oInstrumentComboBox,
 					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, Constants.INSTRUMENT_TYPE.ETF]);
+		},
+		
+		
+		/**
+		 * Validates the user input. Prompts messages in input is not valid.
+		 */
+		isInputValid : function () {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
+			
+			if(sSelectedInstrumentId == "") {
+				MessageBox.error(oResourceBundle.getText("chartFollowThroughDays.noInstrumentSelected"));
+				return false;
+			}
+			
+			return true;
 		},
 		
 		
