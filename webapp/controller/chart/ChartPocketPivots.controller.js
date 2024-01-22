@@ -92,7 +92,8 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oModel, "quotations");
 			ChartController.applyFilterToInstrumentsComboBox(oInstrumentComboBox,
-					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, Constants.INSTRUMENT_TYPE.ETF]);
+					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, 
+					 Constants.INSTRUMENT_TYPE.STOCK, Constants.INSTRUMENT_TYPE.ETF]);
 		},
 		
 		
