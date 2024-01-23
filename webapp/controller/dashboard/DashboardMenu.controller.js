@@ -10,15 +10,6 @@ sap.ui.define([
 		onStatisticPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("dashboardStatisticRoute");	
-		},
-		
-		
-		/**
-		 * Handles click at the charts tile.
-		 */
-		onChartsPressed : function () {
-			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter.navTo("dashboardChartsRoute");	
 		}
 	});
 });
