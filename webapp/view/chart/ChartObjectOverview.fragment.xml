@@ -2,8 +2,6 @@
 <core:FragmentDefinition
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
-	xmlns:l="sap.ui.layout"
-	xmlns:f="sap.ui.layout.form"
 	xmlns:html="http://www.w3.org/1999/xhtml">>
 
 	<Dialog id="chartObjectOverviewDialog" title="{i18n>chartPriceVolume.objectOverviewDialog.title}">

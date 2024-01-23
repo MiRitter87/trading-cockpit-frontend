@@ -3,11 +3,7 @@
 	controllerName="trading-cockpit-frontend.controller.instrument.InstrumentOverview"
 	displayBlock="true"
 	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:l="sap.ui.layout"
-	xmlns:f="sap.ui.layout.form"
-	xmlns:u="sap.ui.unified"
-	xmlns:core="sap.ui.core">
+	xmlns:mvc="sap.ui.core.mvc">
 	
 	<Page title="{i18n>instrumentOverview.header}">
 		<content>

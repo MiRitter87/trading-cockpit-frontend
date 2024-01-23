@@ -4,9 +4,7 @@
 	displayBlock="true"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:tnt="sap.tnt"
-	xmlns:f="sap.f"
-	xmlns:core="sap.ui.core">
+	xmlns:tnt="sap.tnt">
 	
 	<tnt:ToolPage id="toolPage">
 		<!-- Application header -->
