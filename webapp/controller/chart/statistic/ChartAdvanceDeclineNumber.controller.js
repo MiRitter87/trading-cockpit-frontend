@@ -1,20 +1,20 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"../MainController",
-	"../list/ListController",
+	"../../MainController",
+	"../../list/ListController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
 ], function (Controller, MainController, ListController, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
-	return Controller.extend("trading-cockpit-frontend.controller.chart.ChartRitterMarketTrend", {
+	return Controller.extend("trading-cockpit-frontend.controller.chart.statistic.ChartAdvanceDeclineNumber", {
 		/**
 		 * Initializes the controller.
 		 */
 		onInit : function () {
 			var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute("chartRitterMarketTrendRoute").attachMatched(this._onRouteMatched, this);
+			oRouter.getRoute("chartAdvanceDeclineNumberRoute").attachMatched(this._onRouteMatched, this);
 		},
 		
 		
@@ -33,8 +33,8 @@ sap.ui.define([
     	onChartInformationPressed : function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var mOptions = new Object();
-			var sTitle = oResourceBundle.getText("chartRmt.info.title");
-			var sDescription = oResourceBundle.getText("chartRmt.info.description");
+			var sTitle = oResourceBundle.getText("chartAdNumber.info.title");
+			var sDescription = oResourceBundle.getText("chartAdNumber.info.description");
 			
 			mOptions.title = sTitle;
 			MessageBox.information(sDescription, mOptions);
@@ -66,7 +66,7 @@ sap.ui.define([
 			//The backend currently only supports a response with error code 404 and standard error page with response text.
 			//The response site would have to be parsed in order to get the message from the backend.
 			//Therefore only a generic error message is being displayed at the moment.
-			MessageToast.show(oResourceBundle.getText("chartRmt.getChartError"));
+			MessageToast.show(oResourceBundle.getText("chartAdNumber.getChartError"));
 		},
 		
 		
@@ -98,7 +98,7 @@ sap.ui.define([
 			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
 			var sChartUrl = sServerAddress + sWebServiceBaseUrl;
 			
-			sChartUrl = sChartUrl + "/ritterMarketTrend";
+			sChartUrl = sChartUrl + "/cumulativeADNumber";
 			
 			//The randomDate parameter is not evaluated by the backend. 
 			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.

@@ -348,27 +348,27 @@
             	},
             	"chartAdvanceDeclineNumberTarget": {
 					"viewId": "ChartAdvanceDeclineNumber",
-					"viewName": "chart.ChartAdvanceDeclineNumber",
+					"viewName": "chart.statistic.ChartAdvanceDeclineNumber",
 					"viewLevel" : 1
             	},
             	"chartAboveSma50Target": {
 					"viewId": "ChartAboveSma50",
-					"viewName": "chart.ChartAboveSma50",
+					"viewName": "chart.statistic.ChartAboveSma50",
 					"viewLevel" : 1
             	},
             	"chartAboveSma200Target": {
 					"viewId": "ChartAboveSma200",
-					"viewName": "chart.ChartAboveSma200",
+					"viewName": "chart.statistic.ChartAboveSma200",
 					"viewLevel" : 1
             	},
             	"chartRitterMarketTrendTarget": {
 					"viewId": "ChartRitterMarketTrend",
-					"viewName": "chart.ChartRitterMarketTrend",
+					"viewName": "chart.statistic.ChartRitterMarketTrend",
 					"viewLevel" : 1
             	},
             	"chartRitterPatternIndicatorTarget": {
 					"viewId": "ChartRitterPatternIndicator",
-					"viewName": "chart.ChartRitterPatternIndicator",
+					"viewName": "chart.statistic.ChartRitterPatternIndicator",
 					"viewLevel" : 1
             	},
             	"chartPriceVolumeTarget": {

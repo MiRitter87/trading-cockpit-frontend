@@ -1,6 +1,6 @@
 <!DOCTYPE xml>
 <mvc:View
-	controllerName="trading-cockpit-frontend.controller.chart.ChartRitterMarketTrend"
+	controllerName="trading-cockpit-frontend.controller.chart.statistic.ChartRitterMarketTrend"
 	displayBlock="true"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"

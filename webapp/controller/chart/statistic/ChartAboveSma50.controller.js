@@ -1,14 +1,14 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"../MainController",
-	"../list/ListController",
+	"../../MainController",
+	"../../list/ListController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
 ], function (Controller, MainController, ListController, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
-	return Controller.extend("trading-cockpit-frontend.controller.chart.ChartAboveSma50", {
+	return Controller.extend("trading-cockpit-frontend.controller.chart.statistic.ChartAboveSma50", {
 		/**
 		 * Initializes the controller.
 		 */
