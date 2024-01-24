@@ -1,5 +1,5 @@
 sap.ui.define([
-	"../MainController",
+	"../../MainController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/format/DateFormat",
 	"sap/m/MessageBox",
@@ -136,7 +136,7 @@ sap.ui.define([
 		 * Handles the button press event of the open chart button for chart object coordinate selection.
 		 */
 		onOpenChartPressed : function(oCallingController) {
-			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.chart.TradingViewChartContainer", 
+			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.chart.priceVolume.TradingViewChartContainer", 
 				this.onTradingViewPopupOpened.bind(this));
 		},
 		
@@ -233,7 +233,7 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oModel, "quotationsForChart");
 			
-			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.chart.CreateChartObject");
+			MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.chart.priceVolume.CreateChartObject");
 		},
 		
 		
@@ -277,7 +277,7 @@ sap.ui.define([
 			oCallingController.getView().setModel(oModel, "horizontalLines");
 			
 			if(oOverviewDialog == undefined || oOverviewDialog.isOpen() == false) {
-				MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.chart.ChartObjectOverview");				
+				MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.chart.priceVolume.ChartObjectOverview");				
 			}
 		},
 		

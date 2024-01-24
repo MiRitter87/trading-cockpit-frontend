@@ -373,27 +373,27 @@
             	},
             	"chartPriceVolumeTarget": {
 					"viewId": "ChartPriceVolume",
-					"viewName": "chart.ChartPriceVolume",
+					"viewName": "chart.priceVolume.ChartPriceVolume",
 					"viewLevel" : 1
             	},
             	"chartDistributionDaysTarget": {
 					"viewId": "ChartDistributionDays",
-					"viewName": "chart.ChartDistributionDays",
+					"viewName": "chart.priceVolume.ChartDistributionDays",
 					"viewLevel" : 1
             	},
             	"chartFollowThroughDaysTarget": {
 					"viewId": "ChartFollowThroughDays",
-					"viewName": "chart.ChartFollowThroughDays",
+					"viewName": "chart.priceVolume.ChartFollowThroughDays",
 					"viewLevel" : 1
             	},
             	"chartPocketPivotsTarget": {
 					"viewId": "ChartPocketPivots",
-					"viewName": "chart.ChartPocketPivots",
+					"viewName": "chart.priceVolume.ChartPocketPivots",
 					"viewLevel" : 1
             	},
             	"chartHealthCheckTarget": {
 					"viewId": "ChartHealthCheck",
-					"viewName": "chart.ChartHealthCheck",
+					"viewName": "chart.priceVolume.ChartHealthCheck",
 					"viewLevel" : 1
             	}
             }

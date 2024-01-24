@@ -1,22 +1,22 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"../MainController",
-	"./ChartController",
-	"../scan/ScanController",
-	"../Constants",
+	"../../MainController",
+	"../ChartController",
+	"../../scan/ScanController",
+	"../../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
 ], function (Controller, MainController, ChartController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
-	return Controller.extend("trading-cockpit-frontend.controller.chart.ChartFollowThroughDays", {
+	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartDistributionDays", {
 		/**
 		 * Initializes the controller.
 		 */
 		onInit : function () {
 			var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute("chartFollowThroughDaysRoute").attachMatched(this._onRouteMatched, this);
+			oRouter.getRoute("chartDistributionDaysRoute").attachMatched(this._onRouteMatched, this);
 		},
 		
 		
@@ -37,8 +37,8 @@ sap.ui.define([
     	onChartInformationPressed : function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var mOptions = new Object();
-			var sTitle = oResourceBundle.getText("chartFollowThroughDays.info.title");
-			var sDescription = oResourceBundle.getText("chartFollowThroughDays.info.description");
+			var sTitle = oResourceBundle.getText("chartDistributionDays.info.title");
+			var sDescription = oResourceBundle.getText("chartDistributionDays.info.description");
 			
 			mOptions.title = sTitle;
 			MessageBox.information(sDescription, mOptions);
@@ -77,7 +77,7 @@ sap.ui.define([
 			//The backend currently only supports a response with error code 404 and standard error page with response text.
 			//The response site would have to be parsed in order to get the message from the backend.
 			//Therefore only a generic error message is being displayed at the moment.
-			MessageToast.show(oResourceBundle.getText("chartFollowThroughDays.getChartError"));
+			MessageToast.show(oResourceBundle.getText("chartDistributionDays.getChartError"));
 		},
 		
 		
@@ -112,7 +112,7 @@ sap.ui.define([
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
 			if(sSelectedInstrumentId == "") {
-				MessageBox.error(oResourceBundle.getText("chartFollowThroughDays.noInstrumentSelected"));
+				MessageBox.error(oResourceBundle.getText("chartDistributionDays.noInstrumentSelected"));
 				return false;
 			}
 			
@@ -130,7 +130,7 @@ sap.ui.define([
 			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
 			var sChartUrl = sServerAddress + sWebServiceBaseUrl;
 			
-			sChartUrl = sChartUrl + "/followThroughDays/" + sSelectedInstrumentId;
+			sChartUrl = sChartUrl + "/distributionDays/" + sSelectedInstrumentId;
 			
 			//The randomDate parameter is not evaluated by the backend. 
 			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.

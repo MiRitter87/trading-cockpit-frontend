@@ -1,19 +1,19 @@
 <!DOCTYPE xml>
 <mvc:View
-	controllerName="trading-cockpit-frontend.controller.chart.ChartDistributionDays"
+	controllerName="trading-cockpit-frontend.controller.chart.priceVolume.ChartPocketPivots"
 	displayBlock="true"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core">
 	
-	<Page title="{i18n>chartDistributionDays.header}">
+	<Page title="{i18n>chartPocketPivots.header}">
 		<headerContent>
-			<Button icon="sap-icon://hint" tooltip="{i18n>chartDistributionDays.typeTooltip}" press=".onChartInformationPressed"/>
+			<Button icon="sap-icon://hint" tooltip="{i18n>chartPocketPivots.typeTooltip}" press=".onChartInformationPressed"/>
 		</headerContent>
 		
 		<content>
 			<FlexBox alignItems="Center" justifyContent="Start">
-				<Label text="{i18n>chartDistributionDays.instrument}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
+				<Label text="{i18n>chartPocketPivots.instrument}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
 				<ComboBox id="instrumentComboBox" items="{path: 'quotations>/quotation/', sorter: {path: 'instrument/id'}}" required="false">
 					<core:Item key="{quotations>instrument/id}" text="{quotations>instrument/symbol} - {quotations>instrument/name}"/>
 				</ComboBox>

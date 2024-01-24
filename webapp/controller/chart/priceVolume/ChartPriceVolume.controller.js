@@ -1,16 +1,16 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"../MainController",
-	"./ChartController",
-	"../scan/ScanController",
-	"../Constants",
+	"../../MainController",
+	"../ChartController",
+	"../../scan/ScanController",
+	"../../Constants",
 	"./ChartAnalysisController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox"
 ], function (Controller, MainController, ChartController, ScanController, Constants, ChartAnalysisController, JSONModel, MessageBox) {
 	"use strict";
 
-	return Controller.extend("trading-cockpit-frontend.controller.chart.ChartPriceVolume", {
+	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartPriceVolume", {
 		/**
 		 * Initializes the controller.
 		 */

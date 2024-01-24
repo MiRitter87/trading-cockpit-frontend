@@ -1,22 +1,22 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"../MainController",
-	"./ChartController",
-	"../scan/ScanController",
-	"../Constants",
+	"../../MainController",
+	"../ChartController",
+	"../../scan/ScanController",
+	"../../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
 ], function (Controller, MainController, ChartController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
-	return Controller.extend("trading-cockpit-frontend.controller.chart.ChartPocketPivots", {
+	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartFollowThroughDays", {
 		/**
 		 * Initializes the controller.
 		 */
 		onInit : function () {
 			var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute("chartPocketPivotsRoute").attachMatched(this._onRouteMatched, this);
+			oRouter.getRoute("chartFollowThroughDaysRoute").attachMatched(this._onRouteMatched, this);
 		},
 		
 		
@@ -37,8 +37,8 @@ sap.ui.define([
     	onChartInformationPressed : function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var mOptions = new Object();
-			var sTitle = oResourceBundle.getText("chartPocketPivots.info.title");
-			var sDescription = oResourceBundle.getText("chartPocketPivots.info.description");
+			var sTitle = oResourceBundle.getText("chartFollowThroughDays.info.title");
+			var sDescription = oResourceBundle.getText("chartFollowThroughDays.info.description");
 			
 			mOptions.title = sTitle;
 			MessageBox.information(sDescription, mOptions);
@@ -77,7 +77,7 @@ sap.ui.define([
 			//The backend currently only supports a response with error code 404 and standard error page with response text.
 			//The response site would have to be parsed in order to get the message from the backend.
 			//Therefore only a generic error message is being displayed at the moment.
-			MessageToast.show(oResourceBundle.getText("chartPocketPivots.getChartError"));
+			MessageToast.show(oResourceBundle.getText("chartFollowThroughDays.getChartError"));
 		},
 		
 		
@@ -99,8 +99,7 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oModel, "quotations");
 			ChartController.applyFilterToInstrumentsComboBox(oInstrumentComboBox,
-					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, 
-					 Constants.INSTRUMENT_TYPE.STOCK, Constants.INSTRUMENT_TYPE.ETF]);
+					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, Constants.INSTRUMENT_TYPE.ETF]);
 		},
 		
 		
@@ -113,7 +112,7 @@ sap.ui.define([
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
 			if(sSelectedInstrumentId == "") {
-				MessageBox.error(oResourceBundle.getText("chartPocketPivots.noInstrumentSelected"));
+				MessageBox.error(oResourceBundle.getText("chartFollowThroughDays.noInstrumentSelected"));
 				return false;
 			}
 			
@@ -131,7 +130,7 @@ sap.ui.define([
 			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
 			var sChartUrl = sServerAddress + sWebServiceBaseUrl;
 			
-			sChartUrl = sChartUrl + "/pocketPivots/" + sSelectedInstrumentId;
+			sChartUrl = sChartUrl + "/followThroughDays/" + sSelectedInstrumentId;
 			
 			//The randomDate parameter is not evaluated by the backend. 
 			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.
