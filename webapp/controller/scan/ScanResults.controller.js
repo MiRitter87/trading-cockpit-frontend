@@ -68,7 +68,9 @@ sap.ui.define([
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oStartDateLabel = this.getView().byId("startDateLabel");
 			var oStartDatePicker = this.getView().byId("startDatePicker");
+			var oTypeComboBox = this.getView().byId("typeComboBox");
 			
+			//Handle visibility of date label and picker.
 			if(oSelectedItem == null) {
 				oStartDateLabel.setVisible(false);
 				oStartDatePicker.setVisible(false);
@@ -80,6 +82,20 @@ sap.ui.define([
 			else {
 				oStartDateLabel.setVisible(false);
 				oStartDatePicker.setVisible(false);
+			}
+			
+			//Handle visibility of instrument types.
+			if(oSelectedItem.getKey() == Constants.SCAN_TEMPLATE.RS_NEAR_HIGH_IG) {
+				this.enableInstrumentTypesInComboBox(oTypeComboBox, [Constants.INSTRUMENT_TYPE.STOCK]);
+				
+				if(oTypeComboBox.getSelectedKey() != Constants.INSTRUMENT_TYPE.STOCK) {				
+					oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
+				}
+			}
+			else {
+				this.enableInstrumentTypesInComboBox(oTypeComboBox, [Constants.INSTRUMENT_TYPE.STOCK,
+					Constants.INSTRUMENT_TYPE.ETF, Constants.INSTRUMENT_TYPE.SECTOR,
+					Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, Constants.INSTRUMENT_TYPE.RATIO]);
 			}
 		},
     	
@@ -620,6 +636,27 @@ sap.ui.define([
 		 */
 		typeTextFormatter: function(sType) {
 			return InstrumentController.getLocalizedTypeText(sType, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		},
+		
+		
+		/**
+		 * Controls which instrument types are available for selection in the type ComboBox.
+		 */
+		enableInstrumentTypesInComboBox : function (oComboxBox, aAllowedInstrumentTypes) {
+			//Set all types to invisible by default.
+			oComboxBox.getItemByKey(Constants.INSTRUMENT_TYPE.STOCK).setEnabled(false);
+			oComboxBox.getItemByKey(Constants.INSTRUMENT_TYPE.ETF).setEnabled(false);
+			oComboxBox.getItemByKey(Constants.INSTRUMENT_TYPE.SECTOR).setEnabled(false);
+			oComboxBox.getItemByKey(Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP).setEnabled(false);
+			oComboxBox.getItemByKey(Constants.INSTRUMENT_TYPE.RATIO).setEnabled(false);
+			
+			if(aAllowedInstrumentTypes == undefined || aAllowedInstrumentTypes.length == 0)
+				return;
+				
+			//Only set those types to visible, that are explicitly allowed.			
+			for(var i = 0; i < aAllowedInstrumentTypes.length; i++) {
+				oComboxBox.getItemByKey(aAllowedInstrumentTypes[i]).setEnabled(true);
+			}
 		}
 	});
 });
