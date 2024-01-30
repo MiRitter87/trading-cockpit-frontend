@@ -210,13 +210,14 @@ sap.ui.define([
 		
 		/**
 		 * Queries the instrument WebService to perform a health check of the given instrument and get the protocol.
+		 * The health check begins at the given start date up until the most recent date.
 		 */
-		checkInstrumentHealthByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, iInstrumentId, sDate, sProfile) {
+		checkHealthWithStartDateByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, iInstrumentId, sDate, sProfile) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
 			
-			sQueryUrl = sQueryUrl + "/" + iInstrumentId + "/health?startDate=" + sDate +"&profile=" + sProfile;
+			sQueryUrl = sQueryUrl + "/" + iInstrumentId + "/health/startDate?startDate=" + sDate +"&profile=" + sProfile;
 			
 			jQuery.ajax({
 				type : "GET", 

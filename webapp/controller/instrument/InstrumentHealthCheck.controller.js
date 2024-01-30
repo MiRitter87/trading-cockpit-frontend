@@ -51,7 +51,7 @@ sap.ui.define([
 			sStartDate = this.getView().byId("startDatePicker").getValue();
 			sProfile = this.getView().byId("healthCheckProfileComboBox").getSelectedKey();
 			
-			InstrumentController.checkInstrumentHealthByWebService(this.checkInstrumentHealthCallback, this, true, 
+			InstrumentController.checkHealthWithStartDateByWebService(this.checkInstrumentHealthCallback, this, true, 
 				sInstrumentId, sStartDate, sProfile);
 		},
 
