@@ -289,5 +289,30 @@ sap.ui.define([
 				}
 			});                                                                 
 		},
+		
+		
+		/**
+		 * Queries the instrument WebService to perform a health check of the given instrument and get the protocol.
+		 * The lookback period defines the number of recent days for which the health check is performed.
+		 */
+		checkHealthWithLookbackPeriodByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, 
+			sInstrumentId, sLookbackPeriod, sProfile) {
+				
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
+			
+			sQueryUrl = sQueryUrl + "/" + sInstrumentId + "/health/lookbackPeriod?lookbackPeriod=" + sLookbackPeriod +"&profile=" + sProfile;
+			
+			jQuery.ajax({
+				type : "GET", 
+				contentType : "application/json", 
+				url : sQueryUrl, 
+				dataType : "json", 
+				success : function(data) {
+					callbackFunction(data, oCallingController, bShowSuccessMessage);
+				}
+			});                                                                 
+		}
 	};
 });

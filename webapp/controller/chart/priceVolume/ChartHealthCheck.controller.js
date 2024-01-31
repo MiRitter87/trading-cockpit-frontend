@@ -2,12 +2,13 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../../MainController",
 	"../../scan/ScanController",
+	"../../instrument/InstrumentController",
 	"../../Constants",
 	"../../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, ScanController, Constants, formatter, JSONModel, MessageBox, MessageToast) {
+], function (Controller, MainController, ScanController, InstrumentController, Constants, formatter, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartHealthCheck", {
@@ -56,11 +57,20 @@ sap.ui.define([
     	onRefreshPressed : function() {
 			var oImage = this.getView().byId("chartImage");
 			var bIsInputValid = this.isInputValid();
+			var sInstrumentId;
+			var sLookbackPeriod;
+			var sProfile;
 			var sChartUrl;
 			
 			if(bIsInputValid) {
 				sChartUrl = this.getChartUrl();
 				oImage.setSrc(sChartUrl);
+				
+				sInstrumentId = this.getView().byId("instrumentComboBox").getSelectedKey();
+				sLookbackPeriod = this.getView().byId("lookbackPeriodInput").getValue();
+				sProfile = this.getView().byId("healthCheckProfileComboBox").getSelectedKey();
+				InstrumentController.checkHealthWithLookbackPeriodByWebService(this.checkInstrumentHealthCallback, 
+					this, true, sInstrumentId, sLookbackPeriod, sProfile);
 			}
 			else {				
 				oImage.setSrc(null);
@@ -102,6 +112,28 @@ sap.ui.define([
 			}
 			
 			oCallingController.getView().setModel(oModel, "quotations");
+		},
+		
+		
+		/**
+		 * Callback function of the checkInstrumentHealth RESTful WebService call in the InstrumentController.
+		 */
+		checkInstrumentHealthCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+			var oModel = new JSONModel();
+			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);
+				
+				if(bShowSuccessMessage == true)
+					MessageToast.show(oResourceBundle.getText("chartHealthCheck.checkSuccessful"));			
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+			
+			oCallingController.getView().setModel(oModel, "protocolEntries");
 		},
 		
 		
@@ -219,34 +251,36 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter of the category text.
+		 * Formatter of the protocol category text.
 		 */
 		categoryTextFormatter: function(sCategory) {
-			
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			return InstrumentController.categoryTextFormatter(sCategory, oResourceBundle);
 		},
 		
 		
 		/**
-		 * Formatter of the category icon.
+		 * Formatter of the protocol category icon.
 		 */
 		categoryIconFormatter: function(sCategory) {
-			
+			return InstrumentController.categoryIconFormatter(sCategory);
 		},
 		
 		
 		/**
-		 * Formatter of the category state.
+		 * Formatter of the protocol category state.
 		 */
 		categoryStateFormatter: function(sCategory) {
-			
+			return InstrumentController.categoryStateFormatter(sCategory);
 		},
 		
 		
 		/**
-		 * Formatter of the profile text.
+		 * Formatter of the health check profile text.
 		 */
 		profileTextFormatter: function(sProfile) {
-			
-		}
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			return InstrumentController.profileTextFormatter(sProfile, oResourceBundle);
+		},
 	});
 });
