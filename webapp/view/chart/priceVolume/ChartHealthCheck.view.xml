@@ -34,6 +34,42 @@
 			<ScrollContainer>
 				<Image id="chartImage" error=".onChartImageError"/>
 			</ScrollContainer>
+			
+			<Table id="protocolTable" items="{path: 'protocolEntries>/protocolEntry/'}" mode="SingleSelectMaster" sticky="ColumnHeaders">
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title text="{i18n>chartHealthCheck.tableHeader} ({= ${protocolEntries>/protocolEntry/}.length})"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				
+				<columns>
+					<Column>
+						<Text text="{i18n>protocol.date}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>protocol.category}"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>protocol.profile}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>protocol.text}"/>
+					</Column>
+				</columns>
+				
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{path: 'protocolEntries>date', formatter: '.formatter.wsDateFormatter'}"/>
+							<ObjectStatus text="{path: 'protocolEntries>category', formatter: '.categoryTextFormatter'}" 
+								icon="{path: 'protocolEntries>category', formatter: '.categoryIconFormatter'}"
+								state="{path: 'protocolEntries>category', formatter: '.categoryStateFormatter'}"/>
+							<Text text="{path: 'protocolEntries>profile', formatter: '.profileTextFormatter'}"/>
+							<Text text="{protocolEntries>text}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
 		</content>
 	</Page>
 </mvc:View>

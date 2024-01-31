@@ -3,13 +3,17 @@ sap.ui.define([
 	"../../MainController",
 	"../../scan/ScanController",
 	"../../Constants",
+	"../../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
+], function (Controller, MainController, ScanController, Constants, formatter, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartHealthCheck", {
+		formatter: formatter,
+		
+		
 		/**
 		 * Initializes the controller.
 		 */
@@ -211,6 +215,38 @@ sap.ui.define([
 			oHealthCheckComboBox.setSelectedKey("");
 			oLookbackPeriodInput.setValue("15");
 			oImage.setSrc(null);
+		},
+		
+		
+		/**
+		 * Formatter of the category text.
+		 */
+		categoryTextFormatter: function(sCategory) {
+			
+		},
+		
+		
+		/**
+		 * Formatter of the category icon.
+		 */
+		categoryIconFormatter: function(sCategory) {
+			
+		},
+		
+		
+		/**
+		 * Formatter of the category state.
+		 */
+		categoryStateFormatter: function(sCategory) {
+			
+		},
+		
+		
+		/**
+		 * Formatter of the profile text.
+		 */
+		profileTextFormatter: function(sProfile) {
+			
 		}
 	});
 });
