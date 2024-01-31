@@ -121,6 +121,66 @@ sap.ui.define([
 		
 		
 		/**
+		 * Formatter of the protocol category text.
+		 */
+		categoryTextFormatter: function(sCategory, oResourceBundle) {
+			if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.CONFIRMATION)
+				return oResourceBundle.getText("protocol.category.confirmation");
+			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION)
+				return oResourceBundle.getText("protocol.category.violation");
+			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN)
+				return oResourceBundle.getText("protocol.category.uncertain");
+			else
+				return "";
+		},
+		
+		
+		/**
+		 * Formatter of the protocol category icon.
+		 */
+		categoryIconFormatter: function(sCategory) {
+			if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.CONFIRMATION)
+				return "sap-icon://sys-enter-2";
+			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION)
+				return "sap-icon://error";
+			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN)
+				return "sap-icon://alert"
+			else
+				return "";
+		},
+		
+		
+		/**
+		 * Formatter of the protocol category state.
+		 */
+		categoryStateFormatter: function(sCategory) {
+			if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.CONFIRMATION)
+				return "Success";
+			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION)
+				return "Error";
+			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN)
+				return "Warning"
+			else
+				return "None";
+		},
+		
+		
+		/**
+		 * Formatter of the health check profile text.
+		 */
+		profileTextFormatter: function(sProfile, oResourceBundle) {
+			if(sProfile == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS)
+				return oResourceBundle.getText("protocol.profile.confirmations");
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH)
+				return oResourceBundle.getText("protocol.profile.strength");
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS)
+				return oResourceBundle.getText("protocol.profile.weakness");
+			else
+				return "";
+		},
+		
+		
+		/**
 		 * Calls a WebService operation to create an instrument.
 		 */
 		createInstrumentByWebService : function(oInstrumentModel, callbackFunction, oCallingController) {
