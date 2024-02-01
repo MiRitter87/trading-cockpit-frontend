@@ -32,6 +32,8 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
+			
+			this.resetUIElements();
     	},
     	
     	
@@ -198,6 +200,22 @@ sap.ui.define([
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS, "healthCheckProfile.weakness");
+		},
+		
+		
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements : function () {
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oStartDatePicker = this.getView().byId("startDatePicker");
+			var oHealthCheckComboBox = this.getView().byId("healthCheckProfileComboBox");
+			var oProtocolEntries = new JSONModel();
+
+			oInstrumentComboBox.setSelectedKey("");
+			oStartDatePicker.setValue("");
+			oHealthCheckComboBox.setSelectedKey("");
+			this.getView().setModel(oProtocolEntries, "protocolEntries");
 		}
 	});
 });
