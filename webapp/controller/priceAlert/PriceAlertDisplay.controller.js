@@ -27,7 +27,6 @@ sap.ui.define([
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true);
 			
-			this.getView().setModel(null, "selectedPriceAlert");
 			this.resetUIElements();
     	},
 
@@ -101,20 +100,12 @@ sap.ui.define([
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
-			this.getView().byId("priceAlertComboBox").setSelectedItem(null);
-			this.getView().setModel(null, "selectedPriceAlert");
-
-			this.getView().byId("idText").setText("");
-			this.getView().byId("instrumentText").setText("");
-			this.getView().byId("typeText").setText("");
-			this.getView().byId("priceText").setText("");
-			this.getView().byId("triggerDistancePercentText").setText("");
-			this.getView().byId("triggerTimeText").setText("");
-			this.getView().byId("confirmationTimeText").setText("");
+			var oPriceAlertModel = new JSONModel();
 			
-			this.getView().byId("sendMailCheckBox").setSelected(false);
-			this.getView().byId("alertMailAddressText").setText("");
-			this.getView().byId("mailTransmissionTimeText").setText("");
+			this.getView().setModel(oPriceAlertModel, "selectedPriceAlert");
+			
+			this.getView().byId("priceAlertComboBox").setSelectedItem(null);
+			this.getView().byId("priceText").setText("");
 		}
 	});
 });

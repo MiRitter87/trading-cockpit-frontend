@@ -35,7 +35,6 @@ sap.ui.define([
 			//Query instruments for instrument selection dialog.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
 			
-			this.getView().setModel(null, "selectedPriceAlert");
 			this.resetUIElements();
     	},
 
@@ -206,22 +205,16 @@ sap.ui.define([
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
-			this.getView().byId("priceAlertComboBox").setSelectedItem(null);
-			this.getView().setModel(null, "selectedPriceAlert");
+			var oPriceAlertModel = new JSONModel();
 			
-			this.getView().byId("idText").setText("");	
+			this.getView().setModel(oPriceAlertModel, "selectedPriceAlert");
+			
+			this.getView().byId("priceAlertComboBox").setSelectedItem(null);			
 			this.getView().byId("instrumentComboBox").setSelectedItem(null);	
 			this.getView().byId("typeComboBox").setSelectedItem(null);
 			
 			this.setPriceInputValue(0);
-			this.getView().byId("triggerDistancePercentText").setText("");
-			this.getView().byId("triggerTimeText").setText("");
-			this.getView().byId("confirmationTimeText").setText("");
-			
-			this.getView().byId("sendMailCheckBox").setSelected(false);
-			this.getView().byId("alertMailAddressInput").setValue("");
-			this.getView().byId("mailTransmissionTimeText").setText("");
-			
+
 			this.enableInputFields(false);
 		},
 		
