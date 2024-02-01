@@ -96,19 +96,10 @@ sap.ui.define([
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
-			this.getView().byId("scanComboBox").setSelectedItem(null);
-			this.getView().setModel(null, "selectedScan");
-
-			this.getView().byId("idText").setText("");
-			this.getView().byId("nameText").setText("");
-			this.getView().byId("descriptionText").setText("");
-			this.getView().byId("lastScanText").setText("");
-			this.getView().byId("executionStatusText").setText("");
-			this.getView().byId("completionStatusText").setText("");
-			this.getView().byId("numberIncompleteInstrumentsText").setText("");
-			this.getView().byId("progressText").setText("");
+			var oScanModel = new JSONModel();
 			
-			this.getView().byId("listList").destroyItems();
+			this.getView().byId("scanComboBox").setSelectedItem(null);			
+			this.getView().setModel(oScanModel, "selectedScan");
 		}
 	});
 });
