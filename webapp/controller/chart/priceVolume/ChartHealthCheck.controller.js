@@ -235,22 +235,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Resets the UI elements.
-		 */
-		resetUIElements : function () {
-			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
-			var oHealthCheckComboBox = this.getView().byId("healthCheckProfileComboBox");
-			var oLookbackPeriodInput = this.getView().byId("lookbackPeriodInput");
-			var oImage = this.getView().byId("chartImage");
-
-			oInstrumentComboBox.setSelectedKey("");
-			oHealthCheckComboBox.setSelectedKey("");
-			oLookbackPeriodInput.setValue("15");
-			oImage.setSrc(null);
-		},
-		
-		
-		/**
 		 * Formatter of the protocol category text.
 		 */
 		categoryTextFormatter: function(sCategory) {
@@ -282,5 +266,23 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			return InstrumentController.profileTextFormatter(sProfile, oResourceBundle);
 		},
+				
+		
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements : function () {
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oHealthCheckComboBox = this.getView().byId("healthCheckProfileComboBox");
+			var oLookbackPeriodInput = this.getView().byId("lookbackPeriodInput");
+			var oImage = this.getView().byId("chartImage");
+			var oProtocolEntries = new JSONModel();
+
+			oInstrumentComboBox.setSelectedKey("");
+			oHealthCheckComboBox.setSelectedKey("");
+			oLookbackPeriodInput.setValue("15");
+			oImage.setSrc(null);
+			this.getView().setModel(oProtocolEntries, "protocolEntries");
+		}
 	});
 });
