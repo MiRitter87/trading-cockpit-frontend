@@ -221,22 +221,14 @@ sap.ui.define([
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
+			var oSelectedScan = new JSONModel();
 			var oSelectDialog = this.getView().byId("listSelectionDialog");
 			
 			if(oSelectDialog != undefined)
 				oSelectDialog.clearSelection();
 			
 			this.getView().byId("scanComboBox").setSelectedItem(null);
-			this.getView().setModel(null, "selectedScan");
-			
-			this.getView().byId("idText").setText("");
-			this.getView().byId("nameInput").setValue("");
-			this.getView().byId("descriptionTextArea").setValue("");
-			this.getView().byId("lastScanText").setText("");
-			this.getView().byId("executionStatusText").setText("");
-			this.getView().byId("completionStatusText").setText("");
-			this.getView().byId("numberIncompleteInstrumentsText").setText("");
-			this.getView().byId("progressText").setText("");
+			this.getView().setModel(oSelectedScan, "selectedScan");
 		},
 		
 		
