@@ -218,17 +218,14 @@ sap.ui.define([
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
+			var oSelectedList = new JSONModel();
 			var oSelectDialog = this.getView().byId("instrumentSelectionDialog");
 			
 			if(oSelectDialog != undefined)
 				oSelectDialog.clearSelection();
 			
 			this.getView().byId("listComboBox").setSelectedItem(null);
-			this.getView().setModel(null, "selectedList");
-			
-			this.getView().byId("idText").setText("");
-			this.getView().byId("nameInput").setValue("");
-			this.getView().byId("descriptionTextArea").setValue("");
+			this.getView().setModel(oSelectedList, "selectedList");
 		},
 
 
