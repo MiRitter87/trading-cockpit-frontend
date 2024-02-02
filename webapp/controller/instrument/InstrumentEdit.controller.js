@@ -197,16 +197,13 @@ sap.ui.define([
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
+			var oSelectedInstrument = new JSONModel();
+			
 			this.getView().byId("instrumentComboBox").setSelectedItem(null);
-			this.getView().setModel(null, "selectedInstrument");
+			this.getView().setModel(oSelectedInstrument, "selectedInstrument");
 			
-			this.getView().byId("idText").setText("");
-			this.getView().byId("symbolInput").setValue("");
-			this.getView().byId("nameInput").setValue("");
-			this.getView().byId("companyPathInput").setValue("");
-			
-			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
 			this.getView().byId("typeComboBox").setSelectedItem(null);
+			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
 			
 			InstrumentController.setSectorAndIgComboBoxEnabled(false, 
 					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));

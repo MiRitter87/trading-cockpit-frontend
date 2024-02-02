@@ -78,17 +78,10 @@ sap.ui.define([
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
+			var oSelectedInstrument = new JSONModel();
+			
 			this.getView().byId("instrumentComboBox").setSelectedItem(null);
-			this.getView().setModel(null, "selectedInstrument");
-
-			this.getView().byId("idText").setText("");
-			this.getView().byId("symbolText").setText("");
-			this.getView().byId("nameText").setText("");
-			this.getView().byId("typeText").setText("");
-			this.getView().byId("stockExchangeText").setText("");
-			this.getView().byId("sectorText").setText("");
-			this.getView().byId("industryGroupText").setText("");
-			this.getView().byId("companyPathText").setText("");
+			this.getView().setModel(oSelectedInstrument, "selectedInstrument");
 		},
 		
 		
