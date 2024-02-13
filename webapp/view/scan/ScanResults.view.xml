@@ -101,10 +101,10 @@
 							<Text text="{instrument/symbol}"/>
 							<Text text="{instrument/name}"/>
 							<Text text="{path: 'instrument/type', formatter: '.typeTextFormatter'}"/>
-							<Text text="{indicator/relativeStrengthData/rsNumber}"/>
-							<Text text="{indicator/relativeStrengthData/rsNumberCompositeIg}"/>
-							<Text text="{indicator/relativeStrengthData/rsNumberSector}"/>
-							<Text text="{indicator/relativeStrengthData/rsNumberIndustryGroup}"/>
+							<Text text="{relativeStrengthData/rsNumber}"/>
+							<Text text="{relativeStrengthData/rsNumberCompositeIg}"/>
+							<Text text="{relativeStrengthData/rsNumberSector}"/>
+							<Text text="{relativeStrengthData/rsNumberIndustryGroup}"/>
 							<Text text="{indicator/performance5Days} %"/>
 							<Text text="{indicator/distanceTo52WeekHigh} %"/>
 							<Text text="{indicator/bollingerBandWidth}"/>
