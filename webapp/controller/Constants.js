@@ -44,6 +44,7 @@ sap.ui.define([
 		},
 		
 		SCAN_EXECUTION_STATUS: {
+			NOT_EXECUTED: 'NOT_EXECUTED',
 			IN_PROGRESS: 'IN_PROGRESS',
 			FINISHED: 'FINISHED'
 		},

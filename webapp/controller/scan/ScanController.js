@@ -79,7 +79,9 @@ sap.ui.define([
 		 * Returns the localized text of the given execution status.
 		 */
 		getLocalizedExecutionStatusText : function(sStatus, oResourceBundle) {
-			if(sStatus == Constants.SCAN_EXECUTION_STATUS.IN_PROGRESS)
+			if(sStatus == Constants.SCAN_EXECUTION_STATUS.NOT_EXECUTED)
+				return oResourceBundle.getText("scan.executionStatus.notExecuted");
+			else if(sStatus == Constants.SCAN_EXECUTION_STATUS.IN_PROGRESS)
 				return oResourceBundle.getText("scan.executionStatus.inProgress");
 			else if(sStatus == Constants.SCAN_EXECUTION_STATUS.FINISHED)
 				return oResourceBundle.getText("scan.executionStatus.finished");
