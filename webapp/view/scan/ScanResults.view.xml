@@ -36,7 +36,7 @@
 			</VBox>			
 		
 			<Table id="quotationTable" mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders"
-				items="{path: '/quotation/', sorter: {path: 'indicator/relativeStrengthData/rsNumber', descending: true }}">
+				items="{path: '/quotation/', sorter: {path: 'relativeStrengthData/rsNumber', descending: true }}">
 				
 				<headerToolbar>
 					<OverflowToolbar>
