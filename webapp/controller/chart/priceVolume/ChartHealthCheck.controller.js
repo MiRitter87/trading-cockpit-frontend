@@ -145,6 +145,9 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.ALL, "healthCheckProfile.all");
+			
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS, "healthCheckProfile.confirmations");
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
