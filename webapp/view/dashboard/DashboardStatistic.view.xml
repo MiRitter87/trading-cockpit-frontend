@@ -22,10 +22,10 @@
 					<Column>
 						<Text text="{i18n>statistic.date}"/>
 					</Column>
-					<Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>statistic.numberOfInstruments}"/>
 					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true">
+					<Column>
 						<Text text="{i18n>statistic.advanceDeclineNumber}"/>
 					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true">
