@@ -459,6 +459,7 @@ sap.ui.define([
 					path: "indicator/upDownVolumeRatio"},
 				{key: "liquidityColumn", label: oResourceBundle.getText("indicator.liquidity"), path: "indicator/liquidity20Days"},
 				{key: "baseLengthWeeksColumn", label: oResourceBundle.getText("indicator.baseLengthWeeks"), path: "indicator/baseLengthWeeks"},
+				{key: "atrpColumn", label: oResourceBundle.getText("indicator.averageTrueRangePercent"), path: "indicator/averageTrueRangePercent20"},
 				{key: "chartColumn", label: oResourceBundle.getText("scanResults.chart"), path: ""}
 			]);
 			
@@ -578,7 +579,7 @@ sap.ui.define([
            				formatter: this.typeTextFormatter.bind(this)
        				});
 				} else if(oColumnState.key == "performance5DaysColumn" || oColumnState.key == "distanceTo52WeekHighColumn"
-					|| oColumnState.key == "volumeDifferential10DaysColumn") {
+					|| oColumnState.key == "volumeDifferential10DaysColumn" || oColumnState.key == "atrpColumn") {
 					oText = new Text({
 						text: "{" + sPath + "} %"
 					});	

@@ -91,6 +91,9 @@
 					<Column id="baseLengthWeeksColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.baseLengthWeeks}"/>
 					</Column>
+					<Column id="atrpColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
+						<Text text="{i18n>indicator.averageTrueRangePercent}"/>
+					</Column>
 					<Column id="chartColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>scanResults.chart}"/>
 					</Column>
@@ -115,6 +118,7 @@
 											formatOptions: {style : 'short'}
 										}"/>
 							<Text text="{indicator/baseLengthWeeks}"/>
+							<Text text="{indicator/averageTrueRangePercent20}"/>
 							<Button icon="sap-icon://business-objects-experience" press=".onChartPressed" tooltip="{i18n>scanResults.chart.tooltip}"/>
 						</cells>
 					</ColumnListItem>
