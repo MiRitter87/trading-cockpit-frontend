@@ -511,7 +511,7 @@ sap.ui.define([
 		 * Gets a chart URL for an Instrument of any type other than RATIO.
 		 */
 		getChartUrlNonRatio : function(oInstrument) {
-			var sBaseChartUrl = "https://stockcharts.com/h-sc/ui?s={symbol}{exchange}&p=D&yr=1&mn=0&dy=0&id=p79905824963";
+			var sBaseChartUrl = "https://stockcharts.com/h-sc/ui?s={symbol}{exchange}&p=D&yr=1&mn=0&dy=0&id=p45419491770";
 			var sChartUrl = "";
 			var sStockExchange = oInstrument.stockExchange;
 			var sSymbol = oInstrument.symbol;
@@ -551,7 +551,7 @@ sap.ui.define([
 		 * Gets a chart URL for an Instrument of type RATIO.
 		 */
 		getChartUrlRatio : function(oInstrument) {
-			var sBaseChartUrl = "https://stockcharts.com/h-sc/ui?s={symbolDividend}:{symbolDivisor}&p=D&yr=1&mn=0&dy=0&id=p79905824963";
+			var sBaseChartUrl = "https://stockcharts.com/h-sc/ui?s={symbolDividend}:{symbolDivisor}&p=D&yr=1&mn=0&dy=0&id=p45419491770";
 			var sChartUrl = "";
 			var sSymbolDividend = oInstrument.dividend.symbol;
 			var sSymbolDividor = oInstrument.divisor.symbol;
