@@ -27,6 +27,8 @@
 							<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
 								<Label text="{i18n>scanResults.minLiquidity}" class="sapUiSmallMarginEnd"/>
 								<Input id="liquidityInput" type="Number"/>
+								<Label text="{i18n>scanResults.minAtrp}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+								<Input id="atrpInput" type="Number" description="%"/>
 							</FlexBox>
 						</IconTabFilter>
 					</items>

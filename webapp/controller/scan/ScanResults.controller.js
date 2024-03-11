@@ -108,16 +108,20 @@ sap.ui.define([
 			var sSelectedType = "";
 			var sSelectedDate = "";
 			var sMinLiquidity = "";
+			var sMinAtrp = "";
 			var oTemplateComboBox = this.getView().byId("templateComboBox");
 			var oTypeComboBox = this.getView().byId("typeComboBox");
 			var oStartDatePicker = this.getView().byId("startDatePicker");
 			var oLiquidityInput = this.getView().byId("liquidityInput");
+			var oAtrpInput = this.getView().byId("atrpInput");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			sSelectedTemplate = oTemplateComboBox.getSelectedKey();
 			sSelectedType = oTypeComboBox.getSelectedKey();
 			sSelectedDate = oStartDatePicker.getValue();
 			sMinLiquidity = oLiquidityInput.getValue();
+			sMinAtrp = oAtrpInput.getValue();
+			
 			
 			if(sSelectedTemplate == "") {
 				MessageBox.information(oResourceBundle.getText("scanResults.noTemplateSelected"));
@@ -135,7 +139,7 @@ sap.ui.define([
 			}
 			
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, 
-				sSelectedTemplate, sSelectedType, sSelectedDate, sMinLiquidity);
+				sSelectedTemplate, sSelectedType, sSelectedDate, sMinLiquidity, sMinAtrp);
 		},
 		
 		
