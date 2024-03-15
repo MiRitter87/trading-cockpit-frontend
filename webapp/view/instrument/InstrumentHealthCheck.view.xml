@@ -56,7 +56,7 @@
 			
 			<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
 		
-			<Table id="protocolTable" items="{path: 'protocolEntries>/protocolEntry/'}" mode="SingleSelectMaster" sticky="ColumnHeaders">
+			<Table id="protocolTable" items="{path: 'protocolEntries>/protocolEntry/'}" mode="None" sticky="ColumnHeaders">
 				<headerToolbar>
 					<OverflowToolbar>
 						<Title text="{i18n>instrumentHealthCheck.tableHeader} ({= ${protocolEntries>/protocolEntry/}.length})"/>

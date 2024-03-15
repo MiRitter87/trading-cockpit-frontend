@@ -37,7 +37,7 @@
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
 			</VBox>			
 		
-			<Table id="quotationTable" mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders"
+			<Table id="quotationTable" mode="None" sticky="HeaderToolbar,ColumnHeaders"
 				items="{path: '/quotation/', sorter: {path: 'relativeStrengthData/rsNumber', descending: true }}">
 				
 				<headerToolbar>

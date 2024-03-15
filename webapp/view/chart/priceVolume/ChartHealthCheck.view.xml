@@ -35,7 +35,7 @@
 				<Image id="chartImage" error=".onChartImageError"/>
 			</ScrollContainer>
 			
-			<Table id="protocolTable" items="{path: 'protocolEntries>/protocolEntry/'}" mode="SingleSelectMaster" sticky="ColumnHeaders">
+			<Table id="protocolTable" items="{path: 'protocolEntries>/protocolEntry/'}" mode="None" sticky="ColumnHeaders">
 				<headerToolbar>
 					<OverflowToolbar>
 						<Title text="{i18n>chartHealthCheck.tableHeader} ({= ${protocolEntries>/protocolEntry/}.length})"/>

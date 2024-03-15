@@ -17,7 +17,7 @@
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
 			</VBox>	
 		
-			<Table id="statisticTable" items="{path: 'statistics>/statistic/'}" mode="SingleSelectMaster" sticky="ColumnHeaders">
+			<Table id="statisticTable" items="{path: 'statistics>/statistic/'}" mode="None" sticky="ColumnHeaders">
 				<columns>
 					<Column>
 						<Text text="{i18n>statistic.date}"/>
