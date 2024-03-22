@@ -1,13 +1,12 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../../MainController",
-	"../ChartController",
 	"../../scan/ScanController",
 	"../../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, ChartController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
+], function (Controller, MainController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartDistributionDays", {
@@ -98,7 +97,7 @@ sap.ui.define([
 			}
 			
 			oCallingController.getView().setModel(oModel, "quotations");
-			ChartController.applyFilterToInstrumentsComboBox(oInstrumentComboBox,
+			MainController.applyFilterToInstrumentsComboBox(oInstrumentComboBox,
 					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, Constants.INSTRUMENT_TYPE.ETF]);
 		},
 		
