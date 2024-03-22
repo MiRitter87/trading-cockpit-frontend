@@ -1,0 +1,14 @@
+<!DOCTYPE xml>
+<mvc:View
+	controllerName="trading-cockpit-frontend.controller.dashboard.DashboardHealthStatus"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core">
+	
+	<Page title="{i18n>dashboardHealthStatus.header}">
+		<content>
+		
+		</content>
+	</Page>
+</mvc:View>

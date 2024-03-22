@@ -166,6 +166,10 @@
 				"name": "dashboardStatisticRoute",
 				"target": "dashboardStatisticTarget"
 			}, {
+				"pattern": "dashboardHealthStatus",
+				"name": "dashboardHealthStatusRoute",
+				"target": "dashboardHealthStatusTarget"
+			}, {
 				"pattern": "chartMenu",
 				"name": "chartMenuRoute",
 				"target": "chartMenuTarget"
@@ -339,6 +343,11 @@
             	"dashboardStatisticTarget": {
 					"viewId": "dashboardStatistic",
 					"viewName": "dashboard.DashboardStatistic",
+					"viewLevel" : 1
+            	},
+            	"dashboardHealthStatusTarget": {
+					"viewId": "dashboardHealthStatus",
+					"viewName": "dashboard.DashboardHealthStatus",
 					"viewLevel" : 1
             	},
             	"chartMenuTarget": {
