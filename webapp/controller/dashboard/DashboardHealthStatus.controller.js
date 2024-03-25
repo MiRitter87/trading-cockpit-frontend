@@ -3,14 +3,18 @@ sap.ui.define([
 	"../MainController",
 	"../scan/ScanController",
 	"../Constants",
+	"../../model/formatter",
 	"./DashboardController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, ScanController, Constants, DashboardController, JSONModel, MessageToast, MessageBox) {
+], function (Controller, MainController, ScanController, Constants, formatter, DashboardController, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.dashboard.DashboardHealthStatus", {
+		formatter: formatter,
+		
+		
 		/**
 		 * Initializes the controller.
 		 */

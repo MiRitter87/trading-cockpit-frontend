@@ -52,13 +52,13 @@
 							
 							<f:FormElement label="{i18n>dashboardHealthStatus.date}">
 								<f:fields>
-									<Text id="dateText" text="{marketHealthStatus/date}"/>
+									<Text id="dateText" text="{path: 'marketHealthStatus>/date', formatter: '.formatter.wsDateTimeFormatter'}"/>
 								</f:fields>
 							</f:FormElement>
 							
 							<f:FormElement label="{i18n>dashboardHealthStatus.statusSwingtradingEnvironment}">
 								<f:fields>
-									<Text id="statusSwingTradingEnvironmentText" text="{marketHealthStatus/swingTradingEnvironmentStatus}"/>
+									<Text id="statusSwingTradingEnvironmentText" text="{marketHealthStatus>/swingTradingEnvironmentStatus}"/>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>
