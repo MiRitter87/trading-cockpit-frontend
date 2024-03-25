@@ -4,6 +4,7 @@
 	displayBlock="true"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core">
 	
 	<Page title="{i18n>dashboardHealthStatus.header}">
@@ -15,6 +16,55 @@
 				</ComboBox>
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
 			</FlexBox>
+			
+			<f:Form id="resultForm" editable="false">
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer title="{i18n>dashboardHealthStatus.titleGeneralData}">
+						<f:formElements>
+							<f:FormElement label="{i18n>instrument.symbol}">
+								<f:fields>
+									<Text id="symbolText" text="{marketHealthStatus>/symbol}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>instrument.name}">
+								<f:fields>
+									<Text id="nameText" text="{marketHealthStatus>/name}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>dashboardHealthStatus.date}">
+								<f:fields>
+									<Text id="dateText" text="{marketHealthStatus/date}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>dashboardHealthStatus.statusSwingtradingEnvironment}">
+								<f:fields>
+									<Text id="statusSwingTradingEnvironmentText" text="{marketHealthStatus/swingTradingEnvironmentStatus}"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
 		</content>
 	</Page>
 </mvc:View>
