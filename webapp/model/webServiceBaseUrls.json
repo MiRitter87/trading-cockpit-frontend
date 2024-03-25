@@ -6,5 +6,6 @@
 	"quotation": "/trading-cockpit-backend/services/rest/quotations",
 	"statistic": "/trading-cockpit-backend/services/rest/statistics",
 	"chart": "/trading-cockpit-backend/services/rest/charts",
-	"horizontalLine": "/trading-cockpit-backend/services/rest/chartObjects/horizontalLine"
+	"horizontalLine": "/trading-cockpit-backend/services/rest/chartObjects/horizontalLine",
+	"dashboard": "/trading-cockpit-backend/services/rest/dashboard"
 }

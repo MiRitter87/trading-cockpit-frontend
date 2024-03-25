@@ -20,6 +20,26 @@ sap.ui.define([
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});                                                                 
+		},
+		
+		
+		/**
+		 * Queries the Dashboard WebService for the health status of the given market.
+		 */
+		queryMarketHealthStatusByWebService: function(callbackFunction, oCallingController, bShowSuccessMessage, iInstrumentId) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/dashboard");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/marketHealthStatus/" + iInstrumentId;
+			
+			jQuery.ajax({
+				type : "GET", 
+				contentType : "application/json", 
+				url : sQueryUrl, 
+				dataType : "json", 
+				success : function(data) {
+					callbackFunction(data, oCallingController, bShowSuccessMessage);
+				}
+			}); 
 		}
 	};
 });
