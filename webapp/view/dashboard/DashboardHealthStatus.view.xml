@@ -62,7 +62,7 @@
 										<items>
 											<core:Icon src="{path: 'marketHealthStatus>/swingTradingEnvironmentStatus', 
 												formatter: '.iconSrcFormatter'}" color ="{path: 'marketHealthStatus>/swingTradingEnvironmentStatus', 
-												ormatter: '.iconColorFormatter'}"/>
+												formatter: '.iconColorFormatter'}"/>
 										</items>
 									</FlexBox>
 								</f:fields>
