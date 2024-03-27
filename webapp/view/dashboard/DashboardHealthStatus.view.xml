@@ -59,7 +59,8 @@
 							<f:FormElement label="{i18n>dashboardHealthStatus.statusSwingtradingEnvironment}">
 								<f:fields>
 									<core:Icon src="{path: 'marketHealthStatus>/swingTradingEnvironmentStatus', 
-										formatter: '.iconSrcFormatter'}"/>
+										formatter: '.iconSrcFormatter'}" color ="{path: 'marketHealthStatus>/swingTradingEnvironmentStatus', 
+										formatter: '.iconColorFormatter'}"/>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>
