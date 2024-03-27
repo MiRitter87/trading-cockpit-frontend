@@ -58,7 +58,8 @@
 							
 							<f:FormElement label="{i18n>dashboardHealthStatus.statusSwingtradingEnvironment}">
 								<f:fields>
-									<Text id="statusSwingTradingEnvironmentText" text="{marketHealthStatus>/swingTradingEnvironmentStatus}"/>
+									<core:Icon src="{path: 'marketHealthStatus>/swingTradingEnvironmentStatus', 
+										formatter: '.iconSrcFormatter'}"/>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>

@@ -109,6 +109,22 @@ sap.ui.define([
 				return false;
 			}
 		},
+		
+		
+		/**
+		 * Formatter of the Swingtrading Environment status icon.
+		 */
+		iconSrcFormatter : function(sSwingTradingEnvironmentStatus) {
+			if(sSwingTradingEnvironmentStatus == 'GREEN') {
+				return "sap-icon://status-positive";
+			}
+			else if(sSwingTradingEnvironmentStatus == 'YELLOW') {
+				return "sap-icon://status-critical";
+			}
+			else if(sSwingTradingEnvironmentStatus == 'RED') {
+				return "sap-icon://status-negative";
+			}
+		},
     	
     	
     	/**
