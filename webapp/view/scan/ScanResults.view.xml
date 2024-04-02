@@ -8,7 +8,7 @@
 	<Page title="{i18n>scanResults.header}">
 		<content>			
 			<VBox>
-				<IconTabBar	id="scanResultsIconTabBar" class="sapUiResponsiveContentPadding">
+				<IconTabBar	id="scanSelectionIconTabBar" class="sapUiResponsiveContentPadding">
 					<items>
 						<IconTabFilter text="{i18n>scanResults.tabTemplate}" key="template">
 							<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
@@ -37,95 +37,106 @@
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
 			</VBox>			
 		
-			<Table id="quotationTable" mode="None" sticky="HeaderToolbar,ColumnHeaders"
-				items="{path: '/quotation/', sorter: {path: 'relativeStrengthData/rsNumber', descending: true }}">
-				
-				<headerToolbar>
-					<OverflowToolbar>
-						<Title text="{i18n>scanResults.tableHeader} ({= ${/quotation/}.length})"/>
-						<ToolbarSpacer/>
-						<SearchField id="resultsSearchField" liveChange=".onSearch" width="10%"/>
-						<Button icon="sap-icon://compare" tooltip="{i18n>scanResults.compareInstruments}" press=".onComparePressed"/>
-						<Button icon="sap-icon://action-settings" tooltip="{i18n>scanResults.settings}" press=".onSettingsPressed"/>
-					</OverflowToolbar>
-				</headerToolbar>
-				
-				<columns>
-					<Column id="symbolColumn">
-						<Text text="{i18n>instrument.symbol}"/>
-					</Column>
-					<Column id="nameColumn">
-						<Text text="{i18n>instrument.name}"/>
-					</Column>
-					<Column id="typeColumn" minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>instrument.type}"/>
-					</Column>
-					<Column id="rsNumberColumn" minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>indicator.rsNumber}"/>
-					</Column>
-					<Column id="rsNumberCompositeIgColumn" minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>indicator.rsNumberCompositeIg}"/>
-					</Column>
-					<Column id="sectorRsNumberColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
-						<Text text="{i18n>indicator.sectorRsNumber}"/>
-					</Column>
-					<Column id="industryGroupRsNumberColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
-						<Text text="{i18n>indicator.industryGroupRsNumber}"/>
-					</Column>
-					<Column id="performance5DaysColumn" minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>indicator.performance5Days}"/>
-					</Column>
-					<Column id="distanceTo52WeekHighColumn" minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>indicator.distanceTo52WeekHigh}"/>
-					</Column>
-					<Column id="bollingerBandWidthColumn" minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>indicator.bollingerBandWidth}"/>
-					</Column>
-					<Column id="volumeDifferential10DaysColumn" minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>indicator.volumeDifferential10Days}"/>
-					</Column>
-					<Column id="upDownVolumeRatioColumn" minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>indicator.upDownVolumeRatio}"/>
-					</Column>
-					<Column id="liquidityColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
-						<Text text="{i18n>indicator.liquidity}"/>
-					</Column>
-					<Column id="baseLengthWeeksColumn" minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>indicator.baseLengthWeeks}"/>
-					</Column>
-					<Column id="atrpColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
-						<Text text="{i18n>indicator.averageTrueRangePercent}"/>
-					</Column>
-					<Column id="chartColumn" minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>scanResults.chart}"/>
-					</Column>
-				</columns>
+			<IconTabBar	id="scanResultsIconTabBar" class="sapUiResponsiveContentPadding">
 				<items>
-					<ColumnListItem>
-						<cells>
-							<Text text="{instrument/symbol}"/>
-							<Text text="{instrument/name}"/>
-							<Text text="{path: 'instrument/type', formatter: '.typeTextFormatter'}"/>
-							<Text text="{relativeStrengthData/rsNumber}"/>
-							<Text text="{relativeStrengthData/rsNumberCompositeIg}"/>
-							<Text text="{relativeStrengthData/rsNumberSector}"/>
-							<Text text="{relativeStrengthData/rsNumberIndustryGroup}"/>
-							<Text text="{indicator/performance5Days} %"/>
-							<Text text="{indicator/distanceTo52WeekHigh} %"/>
-							<Text text="{indicator/bollingerBandWidth}"/>
-							<Text text="{indicator/volumeDifferential10Days} %"/>
-							<Text text="{indicator/upDownVolumeRatio}"/>
-							<Text text="{	parts: ['indicator/liquidity20Days', 'currency'],
-											type: 'sap.ui.model.type.Currency',
-											formatOptions: {style : 'short'}
-										}"/>
-							<Text text="{indicator/baseLengthWeeks}"/>
-							<Text text="{indicator/averageTrueRangePercent20}"/>
-							<Button icon="sap-icon://business-objects-experience" press=".onChartPressed" tooltip="{i18n>scanResults.chart.tooltip}"/>
-						</cells>
-					</ColumnListItem>
+					<IconTabFilter text="{i18n>scanResults.tabTable}" key="table">
+						<Table id="quotationTable" mode="None" sticky="HeaderToolbar,ColumnHeaders"
+							items="{path: '/quotation/', sorter: {path: 'relativeStrengthData/rsNumber', descending: true }}">
+							
+							<headerToolbar>
+								<OverflowToolbar>
+									<Title text="{i18n>scanResults.tableHeader} ({= ${/quotation/}.length})"/>
+									<ToolbarSpacer/>
+									<SearchField id="resultsSearchField" liveChange=".onSearch" width="10%"/>
+									<Button icon="sap-icon://compare" tooltip="{i18n>scanResults.compareInstruments}" press=".onComparePressed"/>
+									<Button icon="sap-icon://action-settings" tooltip="{i18n>scanResults.settings}" press=".onSettingsPressed"/>
+								</OverflowToolbar>
+							</headerToolbar>
+							
+							<columns>
+								<Column id="symbolColumn">
+									<Text text="{i18n>instrument.symbol}"/>
+								</Column>
+								<Column id="nameColumn">
+									<Text text="{i18n>instrument.name}"/>
+								</Column>
+								<Column id="typeColumn" minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>instrument.type}"/>
+								</Column>
+								<Column id="rsNumberColumn" minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>indicator.rsNumber}"/>
+								</Column>
+								<Column id="rsNumberCompositeIgColumn" minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>indicator.rsNumberCompositeIg}"/>
+								</Column>
+								<Column id="sectorRsNumberColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
+									<Text text="{i18n>indicator.sectorRsNumber}"/>
+								</Column>
+								<Column id="industryGroupRsNumberColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
+									<Text text="{i18n>indicator.industryGroupRsNumber}"/>
+								</Column>
+								<Column id="performance5DaysColumn" minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>indicator.performance5Days}"/>
+								</Column>
+								<Column id="distanceTo52WeekHighColumn" minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>indicator.distanceTo52WeekHigh}"/>
+								</Column>
+								<Column id="bollingerBandWidthColumn" minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>indicator.bollingerBandWidth}"/>
+								</Column>
+								<Column id="volumeDifferential10DaysColumn" minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>indicator.volumeDifferential10Days}"/>
+								</Column>
+								<Column id="upDownVolumeRatioColumn" minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>indicator.upDownVolumeRatio}"/>
+								</Column>
+								<Column id="liquidityColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
+									<Text text="{i18n>indicator.liquidity}"/>
+								</Column>
+								<Column id="baseLengthWeeksColumn" minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>indicator.baseLengthWeeks}"/>
+								</Column>
+								<Column id="atrpColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
+									<Text text="{i18n>indicator.averageTrueRangePercent}"/>
+								</Column>
+								<Column id="chartColumn" minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>scanResults.chart}"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{instrument/symbol}"/>
+										<Text text="{instrument/name}"/>
+										<Text text="{path: 'instrument/type', formatter: '.typeTextFormatter'}"/>
+										<Text text="{relativeStrengthData/rsNumber}"/>
+										<Text text="{relativeStrengthData/rsNumberCompositeIg}"/>
+										<Text text="{relativeStrengthData/rsNumberSector}"/>
+										<Text text="{relativeStrengthData/rsNumberIndustryGroup}"/>
+										<Text text="{indicator/performance5Days} %"/>
+										<Text text="{indicator/distanceTo52WeekHigh} %"/>
+										<Text text="{indicator/bollingerBandWidth}"/>
+										<Text text="{indicator/volumeDifferential10Days} %"/>
+										<Text text="{indicator/upDownVolumeRatio}"/>
+										<Text text="{	parts: ['indicator/liquidity20Days', 'currency'],
+														type: 'sap.ui.model.type.Currency',
+														formatOptions: {style : 'short'}
+													}"/>
+										<Text text="{indicator/baseLengthWeeks}"/>
+										<Text text="{indicator/averageTrueRangePercent20}"/>
+										<Button icon="sap-icon://business-objects-experience" press=".onChartPressed" 
+											tooltip="{i18n>scanResults.chart.tooltip}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+					
+					<IconTabFilter text="{i18n>scanResults.tabCharts}" key="charts">
+					
+					</IconTabFilter>
 				</items>
-			</Table>
+			</IconTabBar>
 		</content>
 	</Page>
 </mvc:View>
