@@ -3,7 +3,8 @@
 	controllerName="trading-cockpit-frontend.controller.scan.ScanResults"
 	displayBlock="true"
 	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc">
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form">
 	
 	<Page title="{i18n>scanResults.header}">
 		<content>			
@@ -133,7 +134,48 @@
 					</IconTabFilter>
 					
 					<IconTabFilter text="{i18n>scanResults.tabCharts}" key="charts">
-					
+						<f:Form id="resultForm" editable="false">
+							<f:layout>
+								<f:ResponsiveGridLayout
+									labelSpanXL="3"
+									labelSpanL="3"
+									labelSpanM="3"
+									labelSpanS="12"
+									adjustLabelSpan="false"
+									emptySpanXL="2"
+									emptySpanL="4"
+									emptySpanM="4"
+									emptySpanS="0"
+									columnsXL="2"
+									columnsL="1"
+									columnsM="1"
+									singleContainerFullSize="false" />
+							</f:layout>
+							
+							<f:formContainers>
+								<f:FormContainer title="{i18n>scanResults.titleGeneralData}">
+									<f:formElements>
+										<f:FormElement label="{i18n>instrument.symbol}">
+											<f:fields>
+												<Text id="symbolText" text="{selectedQuotation>instrument/symbol}"/>
+											</f:fields>
+										</f:FormElement>
+										
+										<f:FormElement label="{i18n>instrument.name}">
+											<f:fields>
+												<Text id="nameText" text="{selectedQuotation>instrument/name}"/>
+											</f:fields>
+										</f:FormElement>
+										
+										<f:FormElement label="{i18n>indicator.rsNumber}">
+											<f:fields>
+												<Text id="rsNumberText" text="{selectedQuotation>relativeStrengthData/rsNumber}"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
 					</IconTabFilter>
 				</items>
 			</IconTabBar>
