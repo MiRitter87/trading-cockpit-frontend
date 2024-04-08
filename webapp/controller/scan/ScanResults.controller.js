@@ -17,10 +17,11 @@ sap.ui.define([
 	"sap/m/ColumnListItem",
 	"sap/m/Text",
 	"sap/m/Button",
-	"sap/ui/core/library"
+	"sap/ui/core/library",
+	"sap/ui/core/Fragment"
 ], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, 
 	Filter, FilterOperator, MetadataHelper, Engine, SelectionController, SortController, Sorter, ColumnListItem, Text, 
-	Button, coreLibrary) {
+	Button, coreLibrary, Fragment) {
 		
 	"use strict";
 	
@@ -220,10 +221,28 @@ sap.ui.define([
 		/**
 		 * Handles the link pressed event of the symbol link.
 		 */
-		onSymbolLinkPressed : function() {
-			// Determine and set miniChartUrl
-			
+		onSymbolLinkPressed : function(oEvent) {
+			var oContext = oEvent.getSource().getBindingContext();
+			var	oControl = oEvent.getSource();
+			var	oView = this.getView();
+
 			//Open Popover
+			if (!this._pPopover) {
+				this._pPopover = Fragment.load({
+					id: oView.getId(),
+					name: "trading-cockpit-frontend.view.scan.MiniChartPopover",
+					controller: this
+				}).then(function (oPopover) {
+					oView.addDependent(oPopover);
+					return oPopover;
+				}.bind(this));
+			}
+			this._pPopover.then(function(oPopover) {
+				oPopover.bindElement(oContext.getPath());
+				oPopover.openBy(oControl);
+			});
+			
+			// Determine and set miniChartUrl
 		},
 		
 		
