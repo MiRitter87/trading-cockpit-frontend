@@ -221,7 +221,9 @@ sap.ui.define([
 		 * Handles the link pressed event of the symbol link.
 		 */
 		onSymbolLinkPressed : function() {
+			// Determine and set miniChartUrl
 			
+			//Open Popover
 		},
 		
 		
