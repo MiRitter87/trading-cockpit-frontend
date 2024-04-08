@@ -5,8 +5,9 @@
 	<Popover
 		id="miniChartPopover"
 		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
-		placement="Horizontal">
+		placement="Horizontal"
+		afterOpen=".afterMiniChartPopoverOpened">
 
-		<Image src="{miniChartUrl}" />
+		<Image id="miniChartImage"/>
 	</Popover>
 </core:FragmentDefinition>

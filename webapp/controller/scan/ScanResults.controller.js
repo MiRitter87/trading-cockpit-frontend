@@ -241,8 +241,24 @@ sap.ui.define([
 				oPopover.bindElement(oContext.getPath());
 				oPopover.openBy(oControl);
 			});
+		},
+		
+		
+		/**
+		 * Handles loading of image after the mini chart Popover has been opened.
+		 */
+		afterMiniChartPopoverOpened : function(oControlEvent) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
+			var sChartUrl = sServerAddress + sWebServiceBaseUrl;
+			var oPopover = oControlEvent.getSource();
+			var oContext = oPopover.getBindingContext();
+			var oQuotationData = oContext.getObject();
+			var oMiniChartImage = this.getView().byId("miniChartImage");
 			
-			// Determine and set miniChartUrl
+			sChartUrl = sChartUrl + "/priceVolume/mini/" + oQuotationData.instrument.id;
+			
+			oMiniChartImage.setSrc(sChartUrl);
 		},
 		
 		
