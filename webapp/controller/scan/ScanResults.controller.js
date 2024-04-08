@@ -218,6 +218,14 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the link pressed event of the symbol link.
+		 */
+		onSymbolLinkPressed : function() {
+			
+		},
+		
+		
+		/**
     	 * Handles the button pressed event of the chart button in a table row.
     	 */
     	onChartPressed : function(oControlEvent) {

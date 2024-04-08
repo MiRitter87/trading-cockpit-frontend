@@ -107,7 +107,7 @@
 							<items>
 								<ColumnListItem>
 									<cells>
-										<Text text="{instrument/symbol}"/>
+										<Link text="{instrument/symbol}" press=".onSymbolLinkPressed"/>
 										<Text text="{instrument/name}"/>
 										<Text text="{path: 'instrument/type', formatter: '.typeTextFormatter'}"/>
 										<Text text="{relativeStrengthData/rsNumber}"/>
