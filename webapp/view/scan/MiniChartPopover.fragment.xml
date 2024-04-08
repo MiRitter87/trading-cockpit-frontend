@@ -5,6 +5,7 @@
 	<Popover
 		id="miniChartPopover"
 		class="sapUiResponsivePadding--header sapUiResponsivePadding--footer"
+		showHeader="false"
 		placement="Horizontal"
 		afterOpen=".afterMiniChartPopoverOpened">
 
