@@ -17,11 +17,12 @@ sap.ui.define([
 	"sap/m/ColumnListItem",
 	"sap/m/Text",
 	"sap/m/Button",
+	"sap/m/Link",
 	"sap/ui/core/library",
 	"sap/ui/core/Fragment"
 ], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, 
 	Filter, FilterOperator, MetadataHelper, Engine, SelectionController, SortController, Sorter, ColumnListItem, Text, 
-	Button, coreLibrary, Fragment) {
+	Button, Link, coreLibrary, Fragment) {
 		
 	"use strict";
 	
@@ -620,6 +621,7 @@ sap.ui.define([
 				var sPath = this.oMetadataHelper.getProperty(oColumnState.key).path;
 				var oText;
 				var oButton;
+				var oLink;
 				
 				if(oColumnState.key == "typeColumn") {
 					oText = new Text();
@@ -644,8 +646,14 @@ sap.ui.define([
 					});
 					
 					return oButton;
-				}
-				else {
+				} else if(oColumnState.key == "symbolColumn") {
+					oLink = new Link({
+						text: "{" + sPath + "}",
+						press: this.onSymbolLinkPressed.bind(this)
+					});
+					
+					return oLink;
+				} else {
 					oText = new Text({
 						text: "{" + sPath + "}"
 					});					
