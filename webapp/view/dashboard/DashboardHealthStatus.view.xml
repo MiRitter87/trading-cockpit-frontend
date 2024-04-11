@@ -67,6 +67,12 @@
 									</FlexBox>
 								</f:fields>
 							</f:FormElement>
+							
+							<f:FormElement label="{i18n>dashboardHealthStatus.distributionDays}">
+								<f:fields>
+									<Text id="distributionDaysText" text="{marketHealthStatus>/distributionDaysSum}"/>
+								</f:fields>
+							</f:FormElement>
 						</f:formElements>
 					</f:FormContainer>
 				</f:formContainers>
