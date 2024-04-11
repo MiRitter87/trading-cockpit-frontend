@@ -141,6 +141,19 @@ sap.ui.define([
 				return "red";
 			}
 		},
+		
+		
+		/**
+		 * Formatter of the visibility of the Distribution Days icon.
+		 */
+		ddIconVisibleFormatter : function(iDistributionDaysSum) {			
+			if(iDistributionDaysSum >= 5) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		},
     	
     	
     	/**

@@ -70,7 +70,14 @@
 							
 							<f:FormElement label="{i18n>dashboardHealthStatus.distributionDays}">
 								<f:fields>
-									<Text id="distributionDaysText" text="{marketHealthStatus>/distributionDaysSum}"/>
+									<FlexBox alignItems="Start">
+										<items>
+											<Text id="distributionDaysText" text="{marketHealthStatus>/distributionDaysSum}"/>
+											<core:Icon id="distributionDaysIcon" class="sapUiSmallMarginBegin" src="sap-icon://status-negative" 
+												 color="red" visible="{path: 'marketHealthStatus>/distributionDaysSum', 
+												formatter: '.ddIconVisibleFormatter'}"/>
+										</items>
+									</FlexBox>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>
