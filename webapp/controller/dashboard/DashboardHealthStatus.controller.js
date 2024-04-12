@@ -161,8 +161,13 @@ sap.ui.define([
 		 */
 		resetUIElements : function () {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oDistributionDaysIcon = this.getView().byId("distributionDaysIcon");
+			var oHealthStatus = new JSONModel();
+			
+			this.getView().setModel(oHealthStatus, "marketHealthStatus");
 
 			oInstrumentComboBox.setSelectedKey("");
+			oDistributionDaysIcon.setSrc(null);
 		}
 	});
 });
