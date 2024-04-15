@@ -80,6 +80,12 @@
 									</FlexBox>
 								</f:fields>
 							</f:FormElement>
+							
+							<f:FormElement label="{i18n>dashboardHealthStatus.upDownVolumeRatio}">
+								<f:fields>
+									<Text id="udVolRatioText" text="{marketHealthStatus>/upDownVolumeRatio}"/>
+								</f:fields>
+							</f:FormElement>
 						</f:formElements>
 					</f:FormContainer>
 				</f:formContainers>
