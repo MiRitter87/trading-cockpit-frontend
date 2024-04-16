@@ -86,6 +86,12 @@
 									<Text id="udVolRatioText" text="{marketHealthStatus>/upDownVolumeRatio}"/>
 								</f:fields>
 							</f:FormElement>
+							
+							<f:FormElement label="{i18n>dashboardHealthStatus.rsNumber}">
+								<f:fields>
+									<Text id="rsNumberText" text="{marketHealthStatus>/rsNumber}"/>
+								</f:fields>
+							</f:FormElement>
 						</f:formElements>
 					</f:FormContainer>
 				</f:formContainers>
