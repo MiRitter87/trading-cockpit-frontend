@@ -29,8 +29,8 @@
 						emptySpanL="4"
 						emptySpanM="4"
 						emptySpanS="0"
-						columnsXL="2"
-						columnsL="1"
+						columnsXL="3"
+						columnsL="2"
 						columnsM="1"
 						singleContainerFullSize="false" />
 				</f:layout>
@@ -55,16 +55,20 @@
 									<Text id="dateText" text="{path: 'marketHealthStatus>/date', formatter: '.formatter.wsDateTimeFormatter'}"/>
 								</f:fields>
 							</f:FormElement>
-							
-							<f:FormElement label="{i18n>dashboardHealthStatus.statusSwingtradingEnvironment}">
+						</f:formElements>
+					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>dashboardHealthStatus.titleIndicators}">
+						<f:formElements>
+							<f:FormElement label="{i18n>dashboardHealthStatus.rsNumber}">
 								<f:fields>
-									<FlexBox alignItems="Start">
-										<items>
-											<core:Icon src="{path: 'marketHealthStatus>/swingTradingEnvironmentStatus', 
-												formatter: '.iconSrcFormatter'}" color ="{path: 'marketHealthStatus>/swingTradingEnvironmentStatus', 
-												formatter: '.iconColorFormatter'}"/>
-										</items>
-									</FlexBox>
+									<Text id="rsNumberText" text="{marketHealthStatus>/rsNumber}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>dashboardHealthStatus.upDownVolumeRatio}">
+								<f:fields>
+									<Text id="udVolRatioText" text="{marketHealthStatus>/upDownVolumeRatio}"/>
 								</f:fields>
 							</f:FormElement>
 							
@@ -81,15 +85,15 @@
 								</f:fields>
 							</f:FormElement>
 							
-							<f:FormElement label="{i18n>dashboardHealthStatus.upDownVolumeRatio}">
+							<f:FormElement label="{i18n>dashboardHealthStatus.statusSwingtradingEnvironment}">
 								<f:fields>
-									<Text id="udVolRatioText" text="{marketHealthStatus>/upDownVolumeRatio}"/>
-								</f:fields>
-							</f:FormElement>
-							
-							<f:FormElement label="{i18n>dashboardHealthStatus.rsNumber}">
-								<f:fields>
-									<Text id="rsNumberText" text="{marketHealthStatus>/rsNumber}"/>
+									<FlexBox alignItems="Start">
+										<items>
+											<core:Icon src="{path: 'marketHealthStatus>/swingTradingEnvironmentStatus', 
+												formatter: '.iconSrcFormatter'}" color ="{path: 'marketHealthStatus>/swingTradingEnvironmentStatus', 
+												formatter: '.iconColorFormatter'}"/>
+										</items>
+									</FlexBox>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>
