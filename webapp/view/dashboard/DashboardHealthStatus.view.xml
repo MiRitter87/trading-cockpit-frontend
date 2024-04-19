@@ -5,7 +5,8 @@
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:f="sap.ui.layout.form"
-	xmlns:core="sap.ui.core">
+	xmlns:core="sap.ui.core"
+	xmlns:mc="sap.suite.ui.microchart">
 	
 	<Page title="{i18n>dashboardHealthStatus.header}">
 		<content>
@@ -94,6 +95,21 @@
 												formatter: '.iconColorFormatter'}"/>
 										</items>
 									</FlexBox>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+					
+					<f:FormContainer title="{i18n>dashboardHealthStatus.titleBreadth}">
+						<f:formElements>
+							<f:FormElement label="{i18n>dashboardHealthStatus.nearHighLow}">
+								<f:fields>
+									<mc:StackedBarMicroChart size="L" height="20px">
+										<mc:bars>
+											<mc:StackedBarMicroChartBar valueColor="Good" value="{marketHealthStatus>/numberNear52wHigh}"/>
+											<mc:StackedBarMicroChartBar valueColor="Error" value="{marketHealthStatus>/numberNear52wLow}"/>
+										</mc:bars>
+									</mc:StackedBarMicroChart>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>
