@@ -106,8 +106,10 @@
 								<f:fields>
 									<mc:StackedBarMicroChart size="L" height="20px">
 										<mc:bars>
-											<mc:StackedBarMicroChartBar valueColor="Good" value="{marketHealthStatus>/numberNear52wHigh}"/>
-											<mc:StackedBarMicroChartBar valueColor="Error" value="{marketHealthStatus>/numberNear52wLow}"/>
+											<mc:StackedBarMicroChartBar valueColor="Good" value="{marketHealthStatus>/numberNear52wHigh}"
+												displayValue="{marketHealthStatus>/numberNear52wHigh}"/>
+											<mc:StackedBarMicroChartBar valueColor="Error" value="{marketHealthStatus>/numberNear52wLow}"
+												displayValue="{marketHealthStatus>/numberNear52wLow}"/>
 										</mc:bars>
 									</mc:StackedBarMicroChart>
 								</f:fields>
