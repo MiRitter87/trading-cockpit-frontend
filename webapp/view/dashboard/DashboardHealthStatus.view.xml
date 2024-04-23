@@ -114,6 +114,19 @@
 									</mc:StackedBarMicroChart>
 								</f:fields>
 							</f:FormElement>
+							
+							<f:FormElement label="{i18n>dashboardHealthStatus.upDownOnVolume}">
+								<f:fields>
+									<mc:StackedBarMicroChart size="L" height="20px">
+										<mc:bars>
+											<mc:StackedBarMicroChartBar valueColor="Good" value="{marketHealthStatus>/numberUpOnVolume}"
+												displayValue="{marketHealthStatus>/numberUpOnVolume}"/>
+											<mc:StackedBarMicroChartBar valueColor="Error" value="{marketHealthStatus>/numberDownOnVolume}"
+												displayValue="{marketHealthStatus>/numberDownOnVolume}"/>
+										</mc:bars>
+									</mc:StackedBarMicroChart>
+								</f:fields>
+							</f:FormElement>
 						</f:formElements>
 					</f:FormContainer>
 				</f:formContainers>
