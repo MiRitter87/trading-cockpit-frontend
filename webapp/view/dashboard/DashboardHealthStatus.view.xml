@@ -117,7 +117,8 @@
 							
 							<f:FormElement label="{i18n>dashboardHealthStatus.upDownOnVolume}">
 								<f:fields>
-									<mc:StackedBarMicroChart size="L" height="20px">
+									<mc:StackedBarMicroChart size="L" height="20px" tooltip="{parts:[{path : 'marketHealthStatus>/numberUpOnVolume'}, 
+										{path :'marketHealthStatus>/numberDownOnVolume'}], formatter : '.upDownOnVolumeTooltipFormatter'}">
 										<mc:bars>
 											<mc:StackedBarMicroChartBar valueColor="Good" value="{marketHealthStatus>/numberUpOnVolume}"
 												displayValue="{marketHealthStatus>/numberUpOnVolume}"/>

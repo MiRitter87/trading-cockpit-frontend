@@ -154,6 +154,17 @@ sap.ui.define([
 				return false;
 			}
 		},
+		
+		
+		/**
+		 * Formatter of the Tooltip for the Up/Down on Volume StackedBarMicroChart.
+		 */
+		upDownOnVolumeTooltipFormatter: function(iNumberUp, iNumberDown) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var sTooltip = oResourceBundle.getText("dashboardHealthStatus.upDownOnVolume.tooltip", [iNumberUp, iNumberDown]);
+			
+			return sTooltip;
+		},
     	
     	
     	/**
