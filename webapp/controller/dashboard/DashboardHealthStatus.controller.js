@@ -165,6 +165,17 @@ sap.ui.define([
 			
 			return sTooltip;
 		},
+		
+		
+		/**
+		 * Formatter of the Tooltip for the Near 52 week high/low StackedBarMicroChart.
+		 */
+		near52wHighLowTooltipFormatter: function(iNumberHigh, iNumberLow) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var sTooltip = oResourceBundle.getText("dashboardHealthStatus.nearHighLow.tooltip", [iNumberHigh, iNumberLow]);
+			
+			return sTooltip;
+		},
     	
     	
     	/**

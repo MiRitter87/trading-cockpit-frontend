@@ -104,7 +104,8 @@
 						<f:formElements>
 							<f:FormElement label="{i18n>dashboardHealthStatus.nearHighLow}">
 								<f:fields>
-									<mc:StackedBarMicroChart size="L" height="20px">
+									<mc:StackedBarMicroChart size="L" height="20px" tooltip="{parts:[{path : 'marketHealthStatus>/numberNear52wHigh'}, 
+										{path :'marketHealthStatus>/numberNear52wLow'}], formatter : '.near52wHighLowTooltipFormatter'}">
 										<mc:bars>
 											<mc:StackedBarMicroChartBar valueColor="Good" value="{marketHealthStatus>/numberNear52wHigh}"
 												displayValue="{marketHealthStatus>/numberNear52wHigh}"/>
