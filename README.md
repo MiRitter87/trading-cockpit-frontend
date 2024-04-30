@@ -15,7 +15,8 @@ It's functions as well as additional views are described in the according sectio
 A price alert notifies you if the price of a stock reaches a certain threshold. There are two types of alerts. One type informs you if a price is equal or higher than your defined price. The other type informs you if the price is equal of lower than your defined price.
 An E-Mail address can be defined optionally. In case of a triggered alert, an information is send to the defined recipient.
 
-The Feed view cyclically queries all price alerts that have been triggered but not yet confirmed. You can confirm each price alert in the feed. It vanishes from the feed after confirmation.
+The Feed view cyclically queries all price alerts that have been triggered but not yet confirmed. You can confirm each price alert in the feed. It vanishes from the feed after confirmation. 
+A sound is played cyclically if any price alert has been triggered and not yet confirmed.
 
 ### Instruments
 Here you can manage all instruments that you later want to use for the stock screener or price alert functionality.
@@ -25,16 +26,23 @@ The application then checks the price and volume behavior of the instrument and 
 
 ### Lists
 Lists allow you to organize sets of instruments. The list feature allows you for example to reproduce ETFs or stock indexes. Lists are used by the scan functionality to scan and screen all instruments of multiple lists.
+Lists are also used for the generation of statistical charts. Those charts are generated for all instruments of a list.
 
-The list overview provides a functionality to generate Excel files. The file contains the instrument symbol as well as the most recent price of all instruments of the selected list.
+The list overview provides a functionality to generate Excel files with the most recent instrument information. The file contains the following data of all instruments of the selected list:
+- Symbol
+- Date
+- Price
+- RS Number
+- Average True Range Percent
 
 ### Scans
 Scans consist of multiple lists that contain instruments. Scans are executed from the scan overview. The scan 'status' and 'percent completed' attributes inform you about the progress of the scan. 
 The scanner detects instruments for which the data retrieval failed. The number of instruments for which the scan failed is being displayed in the overview.
-You can restart a scan and only load those instruments for which the scan process failed the last time.
+You can restart a scan and only query those instruments for which the scan process failed the last time.
 
 Once a scan has been finished you can view the results in the scan result view. The table shows instruments with their indicator values. You can sort the list by multiple indicators by clicking on the 'settings' button.
-Each table row provides a button that allows you to open a chart for the given instrument. Additionally indicator columns can be set to visible or invisible according to your needs.
+Additionally indicator columns can be set to visible or invisible according to your needs. 
+Each table row provides a button that allows you to open a chart for the given instrument. You can also click on a symbol to open a short-term chart.
 
 There is also a function to compare a list of instruments. You can choose instruments by clicking on the scale button and then selecting instruments from the list Pop-up. This helps you to directly compare only those instruments you are interested in.
 
@@ -69,6 +77,15 @@ The following statistical values are provided:
 - Number of instruments showing a bullish reversal
 - Number of instruments showing a bearish reversal
 - Number of instruments that are churning
+
+The dashboard also provides a view to determine the status of the current market health. In this view you can select a sector or industry group. The following metrics are calculated then:
+
+- RS Number
+- Up/Down Volume Ratio
+- Number of Distribution Days
+- Status of the Swingtrading Environment
+- Number of stocks near 52-week high and low
+- Number of stocks that traded up or down on volume (5 day period)
 
 ### Charts
 The application provides a multitude of charts that are grouped in statistical and price/volume charts.
