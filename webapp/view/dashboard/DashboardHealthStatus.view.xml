@@ -9,6 +9,10 @@
 	xmlns:mc="sap.suite.ui.microchart">
 	
 	<Page title="{i18n>dashboardHealthStatus.header}">
+		<headerContent>
+			<Button icon="sap-icon://hint" tooltip="{i18n>dashboardHealthStatus.infoTooltip}" press=".onInfoButtonPressed"/>
+		</headerContent>
+	
 		<content>
 			<FlexBox alignItems="Center" justifyContent="Start">
 				<Label text="{i18n>dashboardHealthStatus.instrument}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>

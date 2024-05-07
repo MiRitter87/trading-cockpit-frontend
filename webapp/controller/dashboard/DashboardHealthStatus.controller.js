@@ -36,6 +36,20 @@ sap.ui.define([
     	
     	
     	/**
+    	 * Handles the button press event of the information button.
+    	 */
+    	onInfoButtonPressed : function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var mOptions = new Object();
+			var sTitle = oResourceBundle.getText("dashboardHealthStatus.info.title");
+			var sDescription = oResourceBundle.getText("dashboardHealthStatus.info.description");
+			
+			mOptions.title = sTitle;
+			MessageBox.information(sDescription, mOptions);
+		},
+    	
+    	
+    	/**
     	 * Handles the button press event of the refresh health check button.
     	 */
     	onRefreshPressed : function() {
