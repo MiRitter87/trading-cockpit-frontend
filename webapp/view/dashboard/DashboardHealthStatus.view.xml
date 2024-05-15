@@ -90,6 +90,18 @@
 								</f:fields>
 							</f:FormElement>
 							
+							<f:FormElement label="{i18n>dashboardHealthStatus.aggregateIndicator}">
+								<f:fields>
+									<FlexBox alignItems="Start">
+										<items>
+											<Text id="aggregateIndicatorText" text="{marketHealthStatus>/aggregateIndicator}"/>
+											<core:Icon id="aggregateIndicatorIcon" class="sapUiSmallMarginBegin"
+											visible="{path: 'marketHealthStatus>/aggregateIndicator', formatter: '.aiIconVisibleFormatter'}"/>
+										</items>
+									</FlexBox>
+								</f:fields>
+							</f:FormElement>
+							
 							<f:FormElement label="{i18n>dashboardHealthStatus.statusSwingtradingEnvironment}">
 								<f:fields>
 									<FlexBox alignItems="Start">

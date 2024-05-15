@@ -171,6 +171,14 @@ sap.ui.define([
 		
 		
 		/**
+		 * Formatter of the visibility of the Aggregate Indicator icon.
+		 */
+		aiIconVisibleFormatter : function(iAggregateIndicator) {			
+			
+		},
+			
+		
+		/**
 		 * Formatter of the Tooltip for the Up/Down on Volume StackedBarMicroChart.
 		 */
 		upDownOnVolumeTooltipFormatter: function(iNumberUp, iNumberDown) {
