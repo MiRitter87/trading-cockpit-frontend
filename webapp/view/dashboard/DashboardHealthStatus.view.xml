@@ -94,7 +94,7 @@
 								<f:fields>
 									<FlexBox alignItems="Start">
 										<items>
-											<Text id="aggregateIndicatorText" text="{marketHealthStatus>/aggregateIndicator}"/>
+											<Text text="{path: 'marketHealthStatus>/aggregateIndicator', formatter: '.aiTextFormatter'}"/>
 											<core:Icon id="aggregateIndicatorIcon" class="sapUiSmallMarginBegin"
 												src="{path: 'marketHealthStatus>/aggregateIndicator', formatter: '.aiIconSrcFormatter'}"
 												color ="{path: 'marketHealthStatus>/aggregateIndicator', formatter: '.aiIconColorFormatter'}"/>

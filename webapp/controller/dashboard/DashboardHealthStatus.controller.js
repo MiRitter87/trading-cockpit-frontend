@@ -171,10 +171,25 @@ sap.ui.define([
 		
 		
 		/**
+		 * Formatter of the Aggregate Indicator text.
+		 */
+		aiTextFormatter : function(iAggregateIndicator) {
+			//The backend returns -1 if the aggregate indicator could not be determined.
+			//In this case don't show any value.
+			if(iAggregateIndicator == -1) {
+				return "";
+			}
+			else {
+				return iAggregateIndicator;
+			}
+		},
+		
+		
+		/**
 		 * Formatter of the Aggregate Indicator status icon.
 		 */
 		aiIconSrcFormatter : function(iAggregateIndicator) {
-			if(iAggregateIndicator <= 15) {
+			if(iAggregateIndicator >= 0 && iAggregateIndicator <= 15) {
 				return "sap-icon://status-positive";
 			}
 			else if(iAggregateIndicator >= 85) {
