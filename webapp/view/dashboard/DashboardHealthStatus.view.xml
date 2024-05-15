@@ -96,7 +96,8 @@
 										<items>
 											<Text id="aggregateIndicatorText" text="{marketHealthStatus>/aggregateIndicator}"/>
 											<core:Icon id="aggregateIndicatorIcon" class="sapUiSmallMarginBegin"
-											visible="{path: 'marketHealthStatus>/aggregateIndicator', formatter: '.aiIconVisibleFormatter'}"/>
+												src="{path: 'marketHealthStatus>/aggregateIndicator', formatter: '.aiIconSrcFormatter'}"
+												color ="{path: 'marketHealthStatus>/aggregateIndicator', formatter: '.aiIconColorFormatter'}"/>
 										</items>
 									</FlexBox>
 								</f:fields>
@@ -107,8 +108,8 @@
 									<FlexBox alignItems="Start">
 										<items>
 											<core:Icon src="{path: 'marketHealthStatus>/swingTradingEnvironmentStatus', 
-												formatter: '.iconSrcFormatter'}" color ="{path: 'marketHealthStatus>/swingTradingEnvironmentStatus', 
-												formatter: '.iconColorFormatter'}"/>
+												formatter: '.steIconSrcFormatter'}" color ="{path: 'marketHealthStatus>/swingTradingEnvironmentStatus', 
+												formatter: '.steIconColorFormatter'}"/>
 										</items>
 									</FlexBox>
 								</f:fields>

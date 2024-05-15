@@ -128,7 +128,7 @@ sap.ui.define([
 		/**
 		 * Formatter of the Swingtrading Environment status icon.
 		 */
-		iconSrcFormatter : function(sSwingTradingEnvironmentStatus) {
+		steIconSrcFormatter : function(sSwingTradingEnvironmentStatus) {
 			if(sSwingTradingEnvironmentStatus == 'GREEN') {
 				return "sap-icon://status-positive";
 			}
@@ -144,7 +144,7 @@ sap.ui.define([
 		/**
 		 * Formatter of the Swingtrading Environment status icon color.
 		 */
-		iconColorFormatter : function(sSwingTradingEnvironmentStatus) {
+		steIconColorFormatter : function(sSwingTradingEnvironmentStatus) {
 			if(sSwingTradingEnvironmentStatus == 'GREEN') {
 				return "green";
 			}
@@ -171,10 +171,31 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter of the visibility of the Aggregate Indicator icon.
+		 * Formatter of the Aggregate Indicator status icon.
 		 */
-		aiIconVisibleFormatter : function(iAggregateIndicator) {			
-			
+		aiIconSrcFormatter : function(iAggregateIndicator) {
+			if(iAggregateIndicator <= 15) {
+				return "sap-icon://status-positive";
+			}
+			else if(iAggregateIndicator >= 85) {
+				return "sap-icon://status-negative";
+			}
+			else {
+				return null;
+			}
+		},
+
+		
+		/**
+		 * Formatter of the Aggregate Indicator status icon color.
+		 */
+		aiIconColorFormatter : function(iAggregateIndicator) {
+			if(iAggregateIndicator <= 15) {
+				return "green";
+			}
+			else if(iAggregateIndicator >= 85) {
+				return "red";
+			}
 		},
 			
 		
