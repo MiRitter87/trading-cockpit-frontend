@@ -13,7 +13,9 @@
 					<Label text="{i18n>instrument.type}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
 					<ComboBox id="typeComboBox" required="true"/>
 					<Label text="{i18n>dashboardStatistic.sectorIgLabel}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
-					<ComboBox id="sectorIgComboBox" required="false"/>
+					<ComboBox id="sectorIgComboBox" required="false" items="{path: 'instruments>/instrument/'}">
+						<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
+					</ComboBox>
 				</FlexBox>
 			
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />

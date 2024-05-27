@@ -3,11 +3,12 @@ sap.ui.define([
 	"../Constants",
 	"../MainController",
 	"./DashboardController",
+	"../instrument/InstrumentController",
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, Constants, MainController, DashboardController, formatter, JSONModel, MessageToast, MessageBox) {
+], function (Controller, Constants, MainController, DashboardController, InstrumentController, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.dashboard.DashboardStatistic", {
@@ -33,6 +34,9 @@ sap.ui.define([
 			
 			//Query statistic data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			DashboardController.queryStatisticsByWebService(this.queryStatisticsCallback, this, true, Constants.INSTRUMENT_TYPE.STOCK);
+			
+			//Query instruments for selection of sector or industry group.
+			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
 			
 			oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
     	},
@@ -75,6 +79,29 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "statistics");
+		},
+		
+		
+		/**
+		 * Callback function of the queryInstruments RESTful WebService call in the InstrumentController.
+		 */
+		queryInstrumentsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			var oSectorIgComboBox = oCallingController.getView().byId("sectorIgComboBox");
+			
+			if(oReturnData.data != null) {
+				oModel.setSizeLimit(300);
+				oModel.setData(oReturnData.data);		
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+			
+			oCallingController.getView().setModel(oModel, "instruments");
+			
+			MainController.applyFilterToInstrumentsComboBox(oSectorIgComboBox, "type", 
+					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP]);
 		},
 		
 		

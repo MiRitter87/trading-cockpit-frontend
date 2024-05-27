@@ -143,7 +143,7 @@ sap.ui.define([
 				oRsInstrumentLabel.setVisible(true);
 				oRsInstrumentComboBox.setVisible(true);
 				
-				MainController.applyFilterToInstrumentsComboBox(oRsInstrumentComboBox,
+				MainController.applyFilterToInstrumentsComboBox(oRsInstrumentComboBox, "instrument/type", 
 					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, Constants.INSTRUMENT_TYPE.ETF]);
 			}
 			else {

@@ -117,7 +117,7 @@ sap.ui.define([
 		/**
 		 * Applies a Filter to the ComboBox for Instrument selection.
 		 */
-		applyFilterToInstrumentsComboBox : function (oComboxBox, aAllowedInstrumentTypes) {
+		applyFilterToInstrumentsComboBox : function (oComboxBox, sTypePath, aAllowedInstrumentTypes) {
 			var oBinding = oComboxBox.getBinding("items");
 			var aFilters = new Array();
 			var oFilterType, oFilterTotal;
@@ -126,7 +126,7 @@ sap.ui.define([
 				return;
 				
 			for(var i = 0; i < aAllowedInstrumentTypes.length; i++) {
-				oFilterType = new Filter("instrument/type", FilterOperator.EQ, aAllowedInstrumentTypes[i]);
+				oFilterType = new Filter(sTypePath, FilterOperator.EQ, aAllowedInstrumentTypes[i]);
 				aFilters.push(oFilterType);
 			}
 			
