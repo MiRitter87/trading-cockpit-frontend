@@ -47,15 +47,39 @@ sap.ui.define([
     	 */
     	onRefreshPressed : function() {
 			var sSelectedType = "";
+			var sSectorId;
+			var sIndustryGroupId;
+			var oInstrument;
+			var oInstrumentsModel = this.getView().getModel("instruments");
 			var oTypeComboBox = this.getView().byId("typeComboBox");
+			var oSectorIgComboBox = this.getView().byId("sectorIgComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			sSelectedType = oTypeComboBox.getSelectedKey();
 			
-			if(sSelectedType == "")
+			if(sSelectedType == "") {				
 				MessageBox.information(oResourceBundle.getText("dashboardStatistic.noTypeSelected"));
+			}
 			
-			DashboardController.queryStatisticsByWebService(this.queryStatisticsCallback, this, true, sSelectedType);
+			oInstrument = InstrumentController.getInstrumentById(oSectorIgComboBox.getSelectedKey(), oInstrumentsModel.oData.instrument);
+			
+			if(oInstrument == null) {				
+				DashboardController.queryStatisticsByWebService(this.queryStatisticsCallback, this, true, sSelectedType);
+				return;
+			}
+			
+			if(oInstrument.type == Constants.INSTRUMENT_TYPE.SECTOR) {
+				sSectorId = oInstrument.id;
+			}
+			
+			if(oInstrument.type == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP) {
+				sIndustryGroupId = oInstrument.id;
+			}
+			
+			if(sSectorId != undefined || sIndustryGroupId != undefined) {				
+				DashboardController.queryStatisticsByWebService(
+					this.queryStatisticsCallback, this, true, sSelectedType, sSectorId, sIndustryGroupId);
+			}
 		},
     	
     	

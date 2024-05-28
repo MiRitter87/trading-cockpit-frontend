@@ -6,10 +6,18 @@ sap.ui.define([
 		/**
 		 * Queries the statistic WebService for all statistics.
 		 */
-		queryStatisticsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sType) {
+		queryStatisticsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sType, sSectorId, sIndustryGroupId) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/statistic");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "?instrumentType=" + sType;
+			
+			if(sSectorId != undefined) {
+				sQueryUrl = sQueryUrl + "&sectorId=" + sSectorId;
+			}
+			
+			if(sIndustryGroupId != undefined) {
+				sQueryUrl = sQueryUrl + "&industryGroupId=" + sIndustryGroupId;
+			}
 			
 			jQuery.ajax({
 				type : "GET", 
