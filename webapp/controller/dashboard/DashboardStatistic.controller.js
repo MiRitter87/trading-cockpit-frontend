@@ -30,15 +30,13 @@ sap.ui.define([
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
 		_onRouteMatched: function () {
-			var oTypeComboBox = this.getView().byId("typeComboBox");
-			
 			//Query statistic data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			DashboardController.queryStatisticsByWebService(this.queryStatisticsCallback, this, true, Constants.INSTRUMENT_TYPE.STOCK);
 			
 			//Query instruments for selection of sector or industry group.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
 			
-			oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
+			this.resetUIElements();
     	},
     	
     	
@@ -138,6 +136,18 @@ sap.ui.define([
 			
 			//The backend currently only computes statistics for instruments of type stock.
 			MainController.addItemToComboBox(oTypeComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.STOCK, "instrument.type.stock");
+		},
+		
+		
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements : function () {
+			var oTypeComboBox = this.getView().byId("typeComboBox");
+			var oSectorIgComboBox = this.getView().byId("sectorIgComboBox");
+
+			oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
+			oSectorIgComboBox.setSelectedKey("");
 		}
 	});
 });
