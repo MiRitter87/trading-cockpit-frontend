@@ -79,8 +79,8 @@
 					<Column id="distanceTo52WeekHighColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.distanceTo52WeekHigh}"/>
 					</Column>
-					<Column id="bollingerBandWidthColumn" minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>indicator.bollingerBandWidth}"/>
+					<Column id="bbw10DaysColumn" minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>indicator.bbw10Days}"/>
 					</Column>
 					<Column id="volumeDifferential10DaysColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.volumeDifferential10Days}"/>
@@ -113,7 +113,7 @@
 							<Text text="{relativeStrengthData/rsNumberIndustryGroup}"/>
 							<Text text="{indicator/performance5Days} %"/>
 							<Text text="{indicator/distanceTo52WeekHigh} %"/>
-							<Text text="{indicator/bollingerBandWidth}"/>
+							<Text text="{indicator/bollingerBandWidth10Days}"/>
 							<Text text="{indicator/volumeDifferential10Days} %"/>
 							<Text text="{indicator/upDownVolumeRatio}"/>
 							<Text text="{	parts: ['indicator/liquidity20Days', 'currency'],
