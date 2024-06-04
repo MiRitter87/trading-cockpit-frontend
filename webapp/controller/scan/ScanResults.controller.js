@@ -169,9 +169,9 @@ sap.ui.define([
 				sTitle = oResourceBundle.getText("scanResults.template.consolidation10Weeks");
 				sDescription = oResourceBundle.getText("scanResults.template.consolidation10Weeks.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS) {
-				sTitle = oResourceBundle.getText("scanResults.template.volContraction10Days");
-				sDescription = oResourceBundle.getText("scanResults.template.volContraction10Days.description");
+			else if(sKey == Constants.SCAN_TEMPLATE.CONSOLIDATION_10_DAYS) {
+				sTitle = oResourceBundle.getText("scanResults.template.consolidation10Days");
+				sDescription = oResourceBundle.getText("scanResults.template.consolidation10Days.description");
 			}
 			else if(sKey == Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES) {
 				sTitle = oResourceBundle.getText("scanResults.template.breakoutCandidates");
@@ -471,7 +471,7 @@ sap.ui.define([
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.ALL, "scanResults.template.all");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE, "scanResults.template.minervini");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.CONSOLIDATION_10_WEEKS, "scanResults.template.consolidation10Weeks");
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.VOLATILITY_CONTRACTION_10_DAYS, "scanResults.template.volContraction10Days");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.CONSOLIDATION_10_DAYS, "scanResults.template.consolidation10Days");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES, "scanResults.template.breakoutCandidates");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.UP_ON_VOLUME, "scanResults.template.upOnVolume");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.DOWN_ON_VOLUME, "scanResults.template.downOnVolume");
