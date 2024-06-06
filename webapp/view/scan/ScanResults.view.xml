@@ -82,8 +82,8 @@
 					<Column id="bbw10DaysColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.bbw10Days}"/>
 					</Column>
-					<Column id="volumeDifferential10DaysColumn" minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>indicator.volumeDifferential10Days}"/>
+					<Column id="volumeDifferential5DaysColumn" minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>indicator.volumeDifferential5Days}"/>
 					</Column>
 					<Column id="upDownVolumeRatioColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.upDownVolumeRatio}"/>
@@ -114,7 +114,7 @@
 							<Text text="{indicator/performance5Days} %"/>
 							<Text text="{indicator/distanceTo52WeekHigh} %"/>
 							<Text text="{indicator/bollingerBandWidth10Days}"/>
-							<Text text="{indicator/volumeDifferential10Days} %"/>
+							<Text text="{indicator/volumeDifferential5Days} %"/>
 							<Text text="{indicator/upDownVolumeRatio}"/>
 							<Text text="{	parts: ['indicator/liquidity20Days', 'currency'],
 											type: 'sap.ui.model.type.Currency',
