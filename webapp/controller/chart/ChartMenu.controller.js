@@ -99,7 +99,7 @@ sap.ui.define([
 		 */
 		onAggregateIndicatorPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			//oRouter.navTo("chartAggregateIndicatorRoute");
+			oRouter.navTo("chartAggregateIndicatorRoute");
 		}
 	});
 });

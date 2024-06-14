@@ -213,6 +213,10 @@
 				"pattern": "chartHealthCheck",
 				"name": "chartHealthCheckRoute",
 				"target": "chartHealthCheckTarget"
+			}, {
+				"pattern": "chartAggregateIndicator",
+				"name": "chartAggregateIndicatorRoute",
+				"target": "chartAggregateIndicatorTarget"
 			}],
 			"targets": {
 				"startPageTarget": {
@@ -403,6 +407,11 @@
             	"chartHealthCheckTarget": {
 					"viewId": "ChartHealthCheck",
 					"viewName": "chart.priceVolume.ChartHealthCheck",
+					"viewLevel" : 1
+            	},
+            	"chartAggregateIndicatorTarget": {
+					"viewId": "ChartAggregateIndicator",
+					"viewName": "chart.diverse.ChartAggregateIndicator",
 					"viewLevel" : 1
             	}
             }
