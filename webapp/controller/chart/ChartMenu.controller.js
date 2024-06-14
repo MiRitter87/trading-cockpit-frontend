@@ -91,6 +91,15 @@ sap.ui.define([
 		onHealthCheckPressed : function () {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartHealthCheckRoute");
+		},
+		
+		
+		/**
+		 * Handles click at the Aggregate Indicator tile.
+		 */
+		onAggregateIndicatorPressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			//oRouter.navTo("chartAggregateIndicatorRoute");
 		}
 	});
 });

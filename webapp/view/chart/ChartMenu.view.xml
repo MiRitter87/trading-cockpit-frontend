@@ -84,6 +84,17 @@
 					</GenericTile>
 				</content>
 			</Panel>
+			
+			<Panel headerText="{i18n>navigation.menu.chart.header.diverse}">
+				<content>
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.chart}"
+						subheader="{i18n>navigation.menu.chart.aggregateIndicator}" press="onAggregateIndicatorPressed">
+						<TileContent>
+							<ImageContent src="sap-icon://line-charts" />
+						</TileContent>
+					</GenericTile>
+				</content>
+			</Panel>
 		</content>
 	</Page>
 </mvc:View>
