@@ -31,6 +31,20 @@ sap.ui.define([
     	
     	
     	/**
+    	 * Handles the button press event of the chart information button.
+    	 */
+    	onChartInformationPressed : function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var mOptions = new Object();
+			var sTitle = oResourceBundle.getText("chartAggregateIndicator.info.title");
+			var sDescription = oResourceBundle.getText("chartAggregateIndicator.info.description");
+			
+			mOptions.title = sTitle;
+			MessageBox.information(sDescription, mOptions);
+		},
+    	
+    	
+    	/**
     	 * Handles the button press event of the refresh chart button.
     	 */
     	onRefreshPressed : function() {

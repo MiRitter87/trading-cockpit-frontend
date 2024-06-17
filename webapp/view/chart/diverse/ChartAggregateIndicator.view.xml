@@ -8,7 +8,7 @@
 	
 	<Page title="{i18n>chartAggregateIndicator.header}">
 		<headerContent>
-		
+			<Button icon="sap-icon://hint" tooltip="{i18n>chartAggregateIndicator.typeTooltip}" press=".onChartInformationPressed"/>
 		</headerContent>
 		
 		<content>
