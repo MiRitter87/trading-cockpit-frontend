@@ -47,6 +47,13 @@
 									<Text id="idText" text="{selectedInstrument>/id}"/>
 								</f:fields>
 							</f:FormElement>
+							
+							<f:FormElement label="{i18n>instrument.type}">
+								<f:fields>
+									<ComboBox id="typeComboBox" selectedKey="{selectedInstrument>/type}" required="true"
+										selectionChange=".onTypeSelectionChange"/>
+								</f:fields>
+							</f:FormElement>
 	
 							<f:FormElement label="{i18n>instrument.symbol}">
 								<f:fields>
@@ -59,19 +66,12 @@
 									<Input id="nameInput" maxLength="50" value="{selectedInstrument>/name}" required="false"/>
 								</f:fields>
 							</f:FormElement>
-							
-							<f:FormElement label="{i18n>instrument.type}">
-							<f:fields>
-								<ComboBox id="typeComboBox" selectedKey="{selectedInstrument>/type}" required="true"
-									selectionChange=".onTypeSelectionChange"/>
-							</f:fields>
-						</f:FormElement>
 						
-						<f:FormElement label="{i18n>instrument.stockExchange}">
-							<f:fields>
-								<ComboBox id="stockExchangeComboBox" selectedKey="{selectedInstrument>/stockExchange}" required="true"/>
-							</f:fields>
-						</f:FormElement>
+							<f:FormElement label="{i18n>instrument.stockExchange}">
+								<f:fields>
+									<ComboBox id="stockExchangeComboBox" selectedKey="{selectedInstrument>/stockExchange}" required="true"/>
+								</f:fields>
+							</f:FormElement>
 						</f:formElements>
 					</f:FormContainer>
 					

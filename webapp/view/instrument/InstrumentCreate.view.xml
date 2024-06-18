@@ -29,6 +29,13 @@
 				
 				<f:formContainers>
 					<f:FormContainer title="{i18n>instrumentCreate.titleGeneralData}">
+						<f:FormElement label="{i18n>instrument.type}">
+							<f:fields>
+								<ComboBox id="typeComboBox" selectedKey="{newInstrument>/type}" required="true" 
+									selectionChange=".onTypeSelectionChange"/>
+							</f:fields>
+						</f:FormElement>
+					
 						<f:FormElement label="{i18n>instrument.symbol}">
 							<f:fields>
 								<Input id="symbolInput" maxLength="6" value="{newInstrument>/symbol}"/>
@@ -40,14 +47,7 @@
 									<Input maxLength="50" value="{newInstrument>/name}" required="false"/>
 								</f:fields>
 						</f:FormElement>
-						
-						<f:FormElement label="{i18n>instrument.type}">
-							<f:fields>
-								<ComboBox id="typeComboBox" selectedKey="{newInstrument>/type}" required="true" 
-									selectionChange=".onTypeSelectionChange"/>
-							</f:fields>
-						</f:FormElement>
-						
+
 						<f:FormElement label="{i18n>instrument.stockExchange}">
 							<f:fields>
 								<ComboBox id="stockExchangeComboBox" selectedKey="{newInstrument>/stockExchange}"/>

@@ -22,14 +22,14 @@
 					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>instrument.id}"/>
 					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>instrument.type}"/>
+					</Column>
 					<Column>
 						<Text text="{i18n>instrument.symbol}"/>
 					</Column>
 					<Column>
 						<Text text="{i18n>instrument.name}"/>
-					</Column>
-					<Column minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>instrument.type}"/>
 					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>instrument.stockExchange}"/>
@@ -45,9 +45,9 @@
 					<ColumnListItem>
 						<cells>
 							<ObjectIdentifier text="{instruments>id}"/>
+							<Text text="{path: 'instruments>type', formatter: '.typeTextFormatter'}"/>
 							<Text text="{instruments>symbol}"/>
 							<Text text="{instruments>name}"/>
-							<Text text="{path: 'instruments>type', formatter: '.typeTextFormatter'}"/>
 							<Text text="{path: 'instruments>stockExchange', formatter: '.stockExchangeTextFormatter'}"/>
 							<Text text="{instruments>sector/name}"/>
 							<Text text="{instruments>industryGroup/name}"/>

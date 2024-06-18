@@ -33,6 +33,12 @@
 								</f:fields>
 							</f:FormElement>
 							
+							<f:FormElement label="{i18n>instrument.type}">
+								<f:fields>
+									<Text id="typeText" text="{path: 'selectedInstrument>/type', formatter: '.typeTextFormatter'}"/>
+								</f:fields>
+							</f:FormElement>
+							
 							<f:FormElement label="{i18n>instrument.symbol}">
 								<f:fields>
 									<Text id="symbolText" text="{selectedInstrument>/symbol}"/>
@@ -42,12 +48,6 @@
 							<f:FormElement label="{i18n>instrument.name}">
 								<f:fields>
 									<Text id="nameText" text="{selectedInstrument>/name}"/>
-								</f:fields>
-							</f:FormElement>
-							
-							<f:FormElement label="{i18n>instrument.type}">
-								<f:fields>
-									<Text id="typeText" text="{path: 'selectedInstrument>/type', formatter: '.typeTextFormatter'}"/>
 								</f:fields>
 							</f:FormElement>
 							
