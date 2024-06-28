@@ -7,5 +7,6 @@
 	"industryGroupId": null,
 	"companyPathInvestingCom": "",
 	"dividendId": null,
-	"divisorId": null
+	"divisorId": null,
+	"dataSourceListId": null
 }

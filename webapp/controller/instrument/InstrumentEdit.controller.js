@@ -281,6 +281,9 @@ sap.ui.define([
 				
 			if(oInstrument.divisor != null)
 				wsInstrument.setProperty("/divisorId", oInstrument.divisor.id);
+				
+			if(oInstrument.dataSourceList != null)
+				wsInstrument.setProperty("/dataSourceListId", oInstrument.dataSourceList.id);
 			
 			return wsInstrument;
 		}
