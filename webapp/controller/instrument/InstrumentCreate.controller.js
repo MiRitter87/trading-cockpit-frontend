@@ -2,11 +2,12 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"./InstrumentController",
+	"../list/ListController",
 	"../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, InstrumentController, Constants, JSONModel, MessageBox, MessageToast) {
+], function (Controller, MainController, InstrumentController, ListController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentCreate", {
@@ -36,6 +37,9 @@ sap.ui.define([
 			
 			//Query instruments for potential selection of ratio, sector and industry group.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
+			
+			//Query lists for potential selection of data source list.
+			ListController.queryListsByWebService(this.queryListsCallback, this, false);
     	},
 
 
@@ -128,6 +132,24 @@ sap.ui.define([
 				oCallingController.getView().byId("dividendComboBox"), oCallingController.getView().byId("divisorComboBox"));
 			InstrumentController.setFilterSectorIg(
 				oCallingController.getView().byId("sectorComboBox"), oCallingController.getView().byId("industryGroupComboBox"));
+		},
+		
+		
+		/**
+		 * Callback function of the queryLists RESTful WebService call in the ListController.
+		 */
+		queryListsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);		
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+			
+			oCallingController.getView().setModel(oModel, "lists");
 		},
 		
 		
