@@ -107,6 +107,12 @@
 					</f:FormContainer>
 					
 					<f:FormContainer title="{i18n>instrumentDisplay.titleInterfaceDataProvider}">
+						<f:FormElement label="{i18n>instrument.dataSourceList}">
+							<f:fields>
+								<Text id="dataSourceListText" text="{selectedInstrument>/dataSourceList/name}"/>
+							</f:fields>
+						</f:FormElement>
+					
 						<f:FormElement label="{i18n>instrument.companyPathInvestingCom}">
 							<f:fields>
 								<Text id="companyPathText" text="{selectedInstrument>/companyPathInvestingCom}"/>
