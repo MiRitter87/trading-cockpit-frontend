@@ -2,11 +2,12 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"./InstrumentController",
+	"../list/ListController",
 	"../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, InstrumentController, Constants, JSONModel, MessageToast, MessageBox) {
+], function (Controller, MainController, InstrumentController, ListController, Constants, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentEdit", {
@@ -31,6 +32,9 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query instrument data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
+			
+			//Query lists for potential selection of data source list.
+			ListController.queryListsByWebService(this.queryListsCallback, this, false);
 			
 			this.getView().setModel(null, "selectedInstrument");
 			this.resetUIElements();
@@ -160,6 +164,24 @@ sap.ui.define([
 				oCallingController.getView().byId("dividendComboBox"), oCallingController.getView().byId("divisorComboBox"));
 			InstrumentController.setFilterSectorIg(
 				oCallingController.getView().byId("sectorComboBox"), oCallingController.getView().byId("industryGroupComboBox"));
+		},
+		
+		
+		/**
+		 * Callback function of the queryLists RESTful WebService call in the ListController.
+		 */
+		queryListsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);		
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+			
+			oCallingController.getView().setModel(oModel, "lists");
 		},
 				
 		

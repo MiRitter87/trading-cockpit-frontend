@@ -110,6 +110,15 @@
 					</f:FormContainer>
 					
 					<f:FormContainer title="{i18n>instrumentEdit.titleInterfaceDataProvider}">
+						<f:FormElement label="{i18n>instrument.dataSourceList}">
+							<f:fields>
+								<ComboBox id="listComboBox" items="{path: 'lists>/list/'}" required="false"
+									selectedKey="{selectedInstrument>/dataSourceListId}">
+									<core:Item key="{lists>id}" text="{lists>id} - {lists>name}"/>
+								</ComboBox>
+							</f:fields>
+						</f:FormElement>
+					
 						<f:FormElement label="{i18n>instrument.companyPathInvestingCom}">
 							<f:fields>
 								<Input id ="companyPathInput" maxLength="50" value="{selectedInstrument>/companyPathInvestingCom}" required="false"
