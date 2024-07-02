@@ -88,6 +88,14 @@ sap.ui.define([
 					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));	
 			}
 			
+			if(sSelectedType == Constants.INSTRUMENT_TYPE.ETF || sSelectedType == Constants.INSTRUMENT_TYPE.SECTOR ||
+				sSelectedType == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP) {
+				
+				this.getView().byId("listComboBox").setEnabled(true);
+			} else {
+				this.getView().byId("listComboBox").setEnabled(false);
+			}
+			
 			if(sSelectedType == Constants.INSTRUMENT_TYPE.RATIO) {
 				this.getView().byId("symbolInput").setValue("");
 				this.getView().byId("symbolInput").setEnabled(false);
