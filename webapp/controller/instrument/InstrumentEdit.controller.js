@@ -234,6 +234,7 @@ sap.ui.define([
 			
 			this.getView().byId("typeComboBox").setSelectedItem(null);
 			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
+			this.getView().byId("listComboBox").setSelectedItem(null);
 			
 			InstrumentController.setSectorAndIgComboBoxEnabled(false, 
 					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));
