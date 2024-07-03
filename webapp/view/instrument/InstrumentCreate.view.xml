@@ -93,7 +93,7 @@
 						<f:FormElement label="{i18n>instrument.dataSourceList}">
 							<f:fields>
 								<ComboBox id="listComboBox" items="{path: 'lists>/list/'}" required="false"
-									selectedKey="{newInstrument>/dataSourceListId}">
+									selectedKey="{newInstrument>/dataSourceListId}" selectionChange=".onListSelectionChange">
 									<core:Item key="{lists>id}" text="{lists>id} - {lists>name}"/>
 								</ComboBox>
 							</f:fields>
