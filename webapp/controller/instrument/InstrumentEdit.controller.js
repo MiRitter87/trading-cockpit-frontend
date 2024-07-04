@@ -228,12 +228,16 @@ sap.ui.define([
 				return false;
 			}
 			
-			if(sType != Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("symbolInput").getValue() == "") {
+			if(sType != Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("symbolInput").getValue() == "" &&
+				this.getView().byId("listComboBox").getSelectedKey() == "") {
+					
 				MessageBox.error(oResourceBundle.getText("instrumentEdit.noSymbolInput"));
 				return false;
 			}
 			
-			if(sType != Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("stockExchangeComboBox").getSelectedKey() == "") {
+			if(sType != Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("stockExchangeComboBox").getSelectedKey() == "" &&
+				this.getView().byId("listComboBox").getSelectedKey() == "") {
+					
 				MessageBox.error(oResourceBundle.getText("instrumentEdit.noStockExchangeSelected"));
 				return false;
 			}
