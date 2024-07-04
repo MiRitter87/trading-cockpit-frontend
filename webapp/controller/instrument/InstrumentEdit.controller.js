@@ -69,60 +69,16 @@ sap.ui.define([
 		 * Handles the selection of an instrument type.
 		 */
 		onTypeSelectionChange : function () {
-			var oInstrumentModel;
-			var sSelectedType;
-			
-			oInstrumentModel = this.getView().getModel("selectedInstrument");
-			
-			if(oInstrumentModel == undefined)
-				return;
-			
-			sSelectedType = oInstrumentModel.getProperty("/type");
-			
-			if(sSelectedType == Constants.INSTRUMENT_TYPE.STOCK) {
-				InstrumentController.setSectorAndIgComboBoxEnabled(true, 
-					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));				
-			}
-			else {				
-				InstrumentController.setSectorAndIgComboBoxEnabled(false, 
-					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));	
-			}
-			
-			if(sSelectedType == Constants.INSTRUMENT_TYPE.ETF || sSelectedType == Constants.INSTRUMENT_TYPE.SECTOR ||
-				sSelectedType == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP) {
-				
-				this.getView().byId("listComboBox").setEnabled(true);
-			} else {
-				this.getView().byId("listComboBox").setEnabled(false);
-			}
-			
-			if(sSelectedType == Constants.INSTRUMENT_TYPE.RATIO) {
-				this.getView().byId("symbolInput").setValue("");
-				this.getView().byId("symbolInput").setEnabled(false);
-				this.getView().byId("symbolInput").setRequired(false);
-				this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
-				this.getView().byId("stockExchangeComboBox").setEnabled(false);
-				this.getView().byId("stockExchangeComboBox").setRequired(false);
-				this.getView().byId("companyPathInput").setValue("");
-				this.getView().byId("companyPathInput").setEnabled(false);
-				this.getView().byId("dividendComboBox").setRequired(true);
-				this.getView().byId("divisorComboBox").setRequired(true);
-				
-				InstrumentController.setRatioComboBoxesEnabled(true, 
-					this.getView().byId("dividendComboBox"), this.getView().byId("divisorComboBox"));		
-			}
-			else {
-				this.getView().byId("symbolInput").setEnabled(true);
-				this.getView().byId("symbolInput").setRequired(true);
-				this.getView().byId("stockExchangeComboBox").setEnabled(true);
-				this.getView().byId("stockExchangeComboBox").setRequired(true);
-				this.getView().byId("companyPathInput").setEnabled(true);
-				this.getView().byId("dividendComboBox").setRequired(false);
-				this.getView().byId("divisorComboBox").setRequired(false);
-				
-				InstrumentController.setRatioComboBoxesEnabled(false, 
-					this.getView().byId("dividendComboBox"), this.getView().byId("divisorComboBox"));	
-			}
+			this.applyTypeRelatedUiSettings();
+			this.applyListRelatedUiSettings();
+		},
+		
+		
+		/**
+		 * Handles the selection of an item in the data source list ComboBox.
+		 */
+		onListSelectionChange : function () {
+			this.applyListRelatedUiSettings();
 		},
 		
 		
@@ -232,9 +188,19 @@ sap.ui.define([
 			this.getView().byId("instrumentComboBox").setSelectedItem(null);
 			this.getView().setModel(oSelectedInstrument, "selectedInstrument");
 			
-			this.getView().byId("typeComboBox").setSelectedItem(null);
+			this.getView().byId("typeComboBox").setSelectedItem(null);			
+			
+			this.getView().byId("symbolInput").setEnabled(true);
+			this.getView().byId("symbolInput").setRequired(true);
+			
+			this.getView().byId("stockExchangeComboBox").setEnabled(true);
+			this.getView().byId("stockExchangeComboBox").setRequired(true);
 			this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
+			
+			this.getView().byId("listComboBox").setEnabled(true);
 			this.getView().byId("listComboBox").setSelectedItem(null);
+			
+			this.getView().byId("companyPathInput").setEnabled(true);
 			
 			InstrumentController.setSectorAndIgComboBoxEnabled(false, 
 					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));
@@ -283,6 +249,103 @@ sap.ui.define([
 			}
 			
 			return true;
+		},
+		
+		
+		/**
+		 * Applies settings of UI elements based on the selected instrument type.
+		 */
+		applyTypeRelatedUiSettings : function () {
+			var oInstrumentModel;
+			var sSelectedType;
+			
+			oInstrumentModel = this.getView().getModel("selectedInstrument");
+			
+			if(oInstrumentModel == undefined)
+				return;
+			
+			sSelectedType = oInstrumentModel.getProperty("/type");
+			
+			if(sSelectedType == Constants.INSTRUMENT_TYPE.STOCK) {
+				InstrumentController.setSectorAndIgComboBoxEnabled(true, 
+					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));				
+			}
+			else {				
+				InstrumentController.setSectorAndIgComboBoxEnabled(false, 
+					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));	
+			}
+			
+			if(sSelectedType == Constants.INSTRUMENT_TYPE.ETF || sSelectedType == Constants.INSTRUMENT_TYPE.SECTOR ||
+				sSelectedType == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP) {
+				
+				this.getView().byId("listComboBox").setEnabled(true);
+			} else {
+				this.getView().byId("listComboBox").setEnabled(false);
+				this.getView().byId("listComboBox").setSelectedItem(null);
+			}
+			
+			if(sSelectedType == Constants.INSTRUMENT_TYPE.RATIO) {
+				this.getView().byId("symbolInput").setValue("");
+				this.getView().byId("symbolInput").setEnabled(false);
+				this.getView().byId("symbolInput").setRequired(false);
+				this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
+				this.getView().byId("stockExchangeComboBox").setEnabled(false);
+				this.getView().byId("stockExchangeComboBox").setRequired(false);
+				this.getView().byId("companyPathInput").setValue("");
+				this.getView().byId("companyPathInput").setEnabled(false);
+				this.getView().byId("dividendComboBox").setRequired(true);
+				this.getView().byId("divisorComboBox").setRequired(true);
+				
+				InstrumentController.setRatioComboBoxesEnabled(true, 
+					this.getView().byId("dividendComboBox"), this.getView().byId("divisorComboBox"));		
+			}
+			else {
+				this.getView().byId("symbolInput").setEnabled(true);
+				this.getView().byId("symbolInput").setRequired(true);
+				this.getView().byId("stockExchangeComboBox").setEnabled(true);
+				this.getView().byId("stockExchangeComboBox").setRequired(true);
+				this.getView().byId("companyPathInput").setEnabled(true);
+				this.getView().byId("dividendComboBox").setRequired(false);
+				this.getView().byId("divisorComboBox").setRequired(false);
+				
+				InstrumentController.setRatioComboBoxesEnabled(false, 
+					this.getView().byId("dividendComboBox"), this.getView().byId("divisorComboBox"));	
+			}
+		},
+		
+		
+		/**
+		 * Applies settings of UI elements based on the selected data source list.
+		 */
+		applyListRelatedUiSettings : function () {
+			var sSelectedType;
+			var oSelectedList = this.getView().byId("listComboBox").getSelectedItem();
+			var oInstrumentModel = this.getView().getModel("selectedInstrument");
+			
+			sSelectedType = oInstrumentModel.getProperty("/type");
+			
+			if(sSelectedType == Constants.INSTRUMENT_TYPE.STOCK || 
+				sSelectedType == Constants.INSTRUMENT_TYPE.RATIO) {
+					
+				return;	//There can be no list defined if type is STOCK or RATIO.
+			}
+			
+			if(oSelectedList == null) {
+				this.getView().byId("symbolInput").setEnabled(true);
+				this.getView().byId("symbolInput").setRequired(true);
+				this.getView().byId("stockExchangeComboBox").setEnabled(true);
+				this.getView().byId("stockExchangeComboBox").setRequired(true);
+				this.getView().byId("companyPathInput").setEnabled(true);
+			} else {
+				this.getView().byId("symbolInput").setValue("");
+				this.getView().byId("symbolInput").setEnabled(false);
+				this.getView().byId("symbolInput").setRequired(false);
+				this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
+				this.getView().byId("stockExchangeComboBox").setEnabled(false);
+				this.getView().byId("stockExchangeComboBox").setRequired(false);
+				this.getView().byId("companyPathInput").setValue("");
+				this.getView().byId("companyPathInput").setEnabled(false);
+			}
 		},
 		
 		
