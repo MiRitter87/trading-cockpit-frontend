@@ -2,9 +2,10 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"./InstrumentController",
+	"../list/ListController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (Controller, MainController, InstrumentController, JSONModel, MessageToast) {
+], function (Controller, MainController, InstrumentController, ListController, JSONModel, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentDisplay", {
@@ -23,6 +24,9 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
+			
+			//Query lists to display potential name of data source list.
+			ListController.queryListsByWebService(this.queryListsCallback, this, false);
 			
 			this.getView().setModel(null, "selectedInstrument");
 			this.resetUIElements();
@@ -72,7 +76,25 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oModel, "instruments");
 		},
-				
+		
+		
+		/**
+		 * Callback function of the queryLists RESTful WebService call in the ListController.
+		 */
+		queryListsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);		
+			}
+
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+
+			oCallingController.getView().setModel(oModel, "lists");
+		},
+		
 		
 		/**
 		 * Resets the UI elements.
@@ -98,6 +120,27 @@ sap.ui.define([
 		 */
 		typeTextFormatter: function(sType) {
 			return InstrumentController.getLocalizedTypeText(sType, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		},
+		
+		
+		/**
+		 * Formatter of the list name.
+		 */
+		listNameFormatter: function(oInstrument) {
+			var oListsModel = this.getView().getModel("lists");
+			var iListId;
+			var oList = null;
+			
+			if(oInstrument.dataSourceList != null) {
+				iListId = oInstrument.dataSourceList;
+				oList = ListController.getListById(iListId, oListsModel.oData.list);
+			}
+			
+			if(oList != null) {
+				return oList.name;
+			}
+			
+			return "";
 		}
 	});
 });
