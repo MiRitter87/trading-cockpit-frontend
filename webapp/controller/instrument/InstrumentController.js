@@ -1,9 +1,10 @@
 sap.ui.define([
 	"../MainController",
+	"../list/ListController",
 	"../Constants",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (MainController, Constants, Filter, FilterOperator) {
+], function (MainController, ListController, Constants, Filter, FilterOperator) {
 	"use strict";
 	
 	return {
@@ -177,6 +178,26 @@ sap.ui.define([
 				return oResourceBundle.getText("protocol.profile.weakness");
 			else
 				return "";
+		},
+		
+		
+		/**
+		 * Formatter of the list name.
+		 */
+		listNameFormatter: function(oInstrument, oListsModel) {
+			var iListId;
+			var oList = null;
+			
+			if(oInstrument.dataSourceList != null) {
+				iListId = oInstrument.dataSourceList;
+				oList = ListController.getListById(iListId, oListsModel.oData.list);
+			}
+			
+			if(oList != null) {
+				return oList.name;
+			}
+			
+			return "";
 		},
 		
 		

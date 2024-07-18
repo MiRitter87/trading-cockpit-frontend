@@ -94,7 +94,8 @@
 					<f:FormContainer title="{i18n>instrumentOverview.titleInterfaceDataProvider}">
 						<f:FormElement label="{i18n>instrument.dataSourceList}">
 							<f:fields>
-								<Text id="dataSourceListText" text="{selectedInstrument>/dataSourceList/name}"/>
+								<Text id="dataSourceListText"
+										text="{path: 'selectedInstrument>/', formatter: '.listNameFormatter'}"/>
 							</f:fields>
 						</f:FormElement>
 					

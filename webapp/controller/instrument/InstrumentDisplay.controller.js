@@ -127,20 +127,7 @@ sap.ui.define([
 		 * Formatter of the list name.
 		 */
 		listNameFormatter: function(oInstrument) {
-			var oListsModel = this.getView().getModel("lists");
-			var iListId;
-			var oList = null;
-			
-			if(oInstrument.dataSourceList != null) {
-				iListId = oInstrument.dataSourceList;
-				oList = ListController.getListById(iListId, oListsModel.oData.list);
-			}
-			
-			if(oList != null) {
-				return oList.name;
-			}
-			
-			return "";
+			return InstrumentController.listNameFormatter(oInstrument, this.getView().getModel("lists"));
 		}
 	});
 });
