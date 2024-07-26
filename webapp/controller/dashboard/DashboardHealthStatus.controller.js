@@ -224,17 +224,30 @@ sap.ui.define([
 			return sTooltip;
 		},
 		
+
+		/**
+		 * Formatter calculating the percentage of instruments near the 52-week high.
+		 */
+		percentNear52wHighFormatter : function(iNumberNear52wHigh, iNumberNear52wLow) {
+			var iPercentNearHigh;
+			
+			iPercentNearHigh = iNumberNear52wHigh /	(iNumberNear52wHigh + iNumberNear52wLow) * 100;
+				
+			return iPercentNearHigh;
+		},
+		
 		
 		/**
-		 * Formatter of the Tooltip for the Near 52 week high/low StackedBarMicroChart.
+		 * Formatter calculating the percentage of instruments near the 52-week low.
 		 */
-		near52wHighLowTooltipFormatter: function(iNumberHigh, iNumberLow) {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var sTooltip = oResourceBundle.getText("dashboardHealthStatus.nearHighLow.tooltip", [iNumberHigh, iNumberLow]);
+		percentNear52wLowFormatter : function(iNumberNear52wHigh, iNumberNear52wLow) {
+			var iPercentNearLow;
 			
-			return sTooltip;
+			iPercentNearLow = iNumberNear52wLow / (iNumberNear52wHigh + iNumberNear52wLow) * 100;
+				
+			return iPercentNearLow;
 		},
-    	
+		 	
     	
     	/**
 		 * Resets the UI elements.

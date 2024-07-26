@@ -119,17 +119,21 @@
 					
 					<f:FormContainer title="{i18n>dashboardHealthStatus.titleBreadth}">
 						<f:formElements>
-							<f:FormElement label="{i18n>dashboardHealthStatus.nearHighLow}">
+							<f:FormElement label="{i18n>dashboardHealthStatus.nearHigh}">
 								<f:fields>
-									<mc:StackedBarMicroChart size="L" height="20px" tooltip="{parts:[{path : 'marketHealthStatus>/numberNear52wHigh'}, 
-										{path :'marketHealthStatus>/numberNear52wLow'}], formatter : '.near52wHighLowTooltipFormatter'}">
-										<mc:bars>
-											<mc:StackedBarMicroChartBar valueColor="Good" value="{marketHealthStatus>/numberNear52wHigh}"
-												displayValue="{marketHealthStatus>/numberNear52wHigh}"/>
-											<mc:StackedBarMicroChartBar valueColor="Error" value="{marketHealthStatus>/numberNear52wLow}"
-												displayValue="{marketHealthStatus>/numberNear52wLow}"/>
-										</mc:bars>
-									</mc:StackedBarMicroChart>
+									<ProgressIndicator showValue="true" state="Success" displayOnly="true"
+										percentValue="{parts:[{path : 'marketHealthStatus>/numberNear52wHigh'}, 
+										{path :'marketHealthStatus>/numberNear52wLow'}], formatter : '.percentNear52wHighFormatter'}"
+										displayValue="{marketHealthStatus>/numberNear52wHigh}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>dashboardHealthStatus.nearLow}">
+								<f:fields>
+									<ProgressIndicator showValue="true" state="Error" displayOnly="true"
+										percentValue="{parts:[{path : 'marketHealthStatus>/numberNear52wHigh'}, 
+										{path :'marketHealthStatus>/numberNear52wLow'}], formatter : '.percentNear52wLowFormatter'}"
+										displayValue="{marketHealthStatus>/numberNear52wLow}"/>
 								</f:fields>
 							</f:FormElement>
 							
