@@ -212,17 +212,6 @@ sap.ui.define([
 				return "red";
 			}
 		},
-			
-		
-		/**
-		 * Formatter of the Tooltip for the Up/Down on Volume StackedBarMicroChart.
-		 */
-		upDownOnVolumeTooltipFormatter: function(iNumberUp, iNumberDown) {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var sTooltip = oResourceBundle.getText("dashboardHealthStatus.upDownOnVolume.tooltip", [iNumberUp, iNumberDown]);
-			
-			return sTooltip;
-		},
 		
 
 		/**
@@ -244,6 +233,30 @@ sap.ui.define([
 			var iPercentNearLow;
 			
 			iPercentNearLow = iNumberNear52wLow / (iNumberNear52wHigh + iNumberNear52wLow) * 100;
+				
+			return iPercentNearLow;
+		},
+		
+		
+		/**
+		 * Formatter calculating the percentage of instruments trading up on volume.
+		 */
+		percentUpOnVolumeFormatter : function(iNumberUpOnVolume, iNumberDownOnVolume) {
+			var iPercentUpOnVolume;
+			
+			iPercentUpOnVolume = iNumberUpOnVolume / (iNumberUpOnVolume + iNumberDownOnVolume) * 100;
+				
+			return iPercentUpOnVolume;
+		},
+		
+		
+		/**
+		 * Formatter calculating the percentage of instruments trading down on volume.
+		 */
+		percentDownOnVolumeFormatter : function(iNumberUpOnVolume, iNumberDownOnVolume) {
+			var iPercentNearLow;
+			
+			iPercentNearLow = iNumberDownOnVolume / (iNumberUpOnVolume + iNumberDownOnVolume) * 100;
 				
 			return iPercentNearLow;
 		},

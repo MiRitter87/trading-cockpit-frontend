@@ -5,8 +5,7 @@
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:f="sap.ui.layout.form"
-	xmlns:core="sap.ui.core"
-	xmlns:mc="sap.suite.ui.microchart">
+	xmlns:core="sap.ui.core">
 	
 	<Page title="{i18n>dashboardHealthStatus.header}">
 		<headerContent>
@@ -137,17 +136,23 @@
 								</f:fields>
 							</f:FormElement>
 							
-							<f:FormElement label="{i18n>dashboardHealthStatus.upDownOnVolume}">
+							<f:FormElement label="{i18n>dashboardHealthStatus.upOnVolume}">
 								<f:fields>
-									<mc:StackedBarMicroChart size="L" height="20px" tooltip="{parts:[{path : 'marketHealthStatus>/numberUpOnVolume'}, 
-										{path :'marketHealthStatus>/numberDownOnVolume'}], formatter : '.upDownOnVolumeTooltipFormatter'}">
-										<mc:bars>
-											<mc:StackedBarMicroChartBar valueColor="Good" value="{marketHealthStatus>/numberUpOnVolume}"
-												displayValue="{marketHealthStatus>/numberUpOnVolume}"/>
-											<mc:StackedBarMicroChartBar valueColor="Error" value="{marketHealthStatus>/numberDownOnVolume}"
-												displayValue="{marketHealthStatus>/numberDownOnVolume}"/>
-										</mc:bars>
-									</mc:StackedBarMicroChart>
+									<ProgressIndicator showValue="true" state="Success" displayOnly="true"
+										percentValue="{parts:[{path : 'marketHealthStatus>/numberUpOnVolume'}, 
+										{path :'marketHealthStatus>/numberDownOnVolume'}], formatter : '.percentUpOnVolumeFormatter'}"
+										displayValue="{marketHealthStatus>/numberUpOnVolume}"
+										tooltip="{i18n>dashboardHealthStatus.upOnVolume.tooltip}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>dashboardHealthStatus.downOnVolume}">
+								<f:fields>
+									<ProgressIndicator showValue="true" state="Error" displayOnly="true"
+										percentValue="{parts:[{path : 'marketHealthStatus>/numberUpOnVolume'}, 
+										{path :'marketHealthStatus>/numberDownOnVolume'}], formatter : '.percentDownOnVolumeFormatter'}"
+										displayValue="{marketHealthStatus>/numberDownOnVolume}"
+										tooltip="{i18n>dashboardHealthStatus.downOnVolume.tooltip}"/>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>
