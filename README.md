@@ -23,6 +23,15 @@ Here you can manage all instruments that you later want to use for the stock scr
 
 There is an additional function called instrument health check. In this view you can choose an Instrument, a profile and a starting date for the health check. 
 The application then checks the price and volume behavior of the instrument and displays a protocol allowing you to gauge the health of the instrument.
+This function is only available if you have previously gathered quotation data using the scanner.
+
+An instrument can be linked to a sector or industry group.
+You can choose a list as data source for instruments of type sector, industry group or ETF. In this case, the quotations of the instrument are
+calculated locally using all instruments and their quotations of the referenced list. This happens during the scan process.
+
+The backend my be configured to use investing.com as data source for current quotations. In this case, the text input "company path investing" has to be defined. 
+If you are for example configuring the instrument of Amazon, the URL of investing.com may be "https://www.investing.com/equities/amazon-com-inc".
+The text input "company path investing" then has to be filled with "amazon-com-inc". 
 
 ### Lists
 Lists allow you to organize sets of instruments. The list feature allows you for example to reproduce ETFs or stock indexes. Lists are used by the scan functionality to scan and screen all instruments of multiple lists.
@@ -46,21 +55,23 @@ Each table row provides a button that allows you to open a chart for the given i
 
 There is also a function to compare a list of instruments. You can choose instruments by clicking on the scale button and then selecting instruments from the list Pop-up. This helps you to directly compare only those instruments you are interested in.
 
-The scan result view offers 13 templates.
+The scan result view currently offers 15 templates.
 
 - All (Default template, loads all scanned instruments)
-- Minervini Trend Template (Instruments in a Stage 2 uptrend)
-- Volatility Contraction - 10 Days (Instruments that show narrow price action and below average volume during the last 10 trading days)
+- Buyable Base (Instruments in a short-term uptrend consolidating on low volatility and below average volume)
 - Breakout Candidates (Instruments consolidating near their 52 week highs on low volatility and below average volume)
+- Volatility Contraction - 10 Weeks (Instruments that show narrow price action and below average volume during the last 10 weeks)
+- Volatility Contraction - 10 Days (Instruments that show narrow price action and below average volume during the last 10 trading days)
+- High Tight Flag (Instruments consolidating at max 25% off it's high after a 100% gain within 8 weeks)
+- Three Weeks Tight (Instruments with at least three  weekly closing prices in a +/- 1.5% range)
+- Minervini Trend Template (Instruments in a Stage 2 uptrend)
+- Swingtrading Environment (Instruments, which SMA(10) is above SMA(20), both rising. Additionally price is above SMA(20))
+- RS-Line near 52-week High (Instruments for which the RS-Line using an instruments industry group is within 5% of its 52-week high)
+- RS since Date (All scanned instruments, calculates RS number since the given date)
 - Up on Volume (Instruments gaining more than 10% on at least 25% increased volume during the last 5 trading days)
 - Down on Volume (Instruments losing more that 10% on at least 25% increased volume during the last 5 trading days)
 - Near 52-week High (Instruments trading within 5% of their 52-week high)
 - Near 52-week Low (Instruments trading within 5% of their 52-week low)
-- Three Weeks Tight (Instruments with at least three  weekly closing prices in a +/- 1.5% range)
-- High Tight Flag (Instruments consolidating at max 25% off it's high after a 100% gain within 8 weeks)
-- Swingtrading Environment (Instruments, which SMA(10) is above SMA(20), both rising. Additionally price is above SMA(20))
-- RS-Line near 52-week High (Instruments for which the RS-Line using an instruments industry group is within 5% of its 52-week high)
-- RS since Date (All scanned instruments, calculates RS number since the given date)
 
 ### Dashboard
 The Dashboard aims to provide a meta overview of the current state of the market. Statistical values for each trading day are provided in a tabular form.
@@ -83,9 +94,10 @@ The dashboard also provides a view to determine the status of the current market
 - RS Number
 - Up/Down Volume Ratio
 - Number of Distribution Days
+- Aggregate Indicator
 - Status of the Swingtrading Environment
 - Number of stocks near 52-week high and low
-- Number of stocks that traded up or down on volume (5 day period)
+- Number of stocks that traded up or down on volume (5 day sum)
 
 ### Charts
 The application provides a multitude of charts that are grouped in statistical and price/volume charts.
