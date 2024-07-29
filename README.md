@@ -110,7 +110,16 @@ The Trading Cockpit is based on the JavaScript Framework [OpenUI5](https://openu
 
 ## Installation
 
-Just put the files of the projects 'webapp'-folder into the 'webapps'-folder of your WebServer. [Apache Tomcat](https://tomcat.apache.org/) has been used during development of the application.
+Create a new folder *trading-cockpit-frontend* in the *webapps* folder of your WebServer. 
+Then copy all files from the projects *webapp* folder into the newly created folder of the WebServer.
+[Apache Tomcat](https://tomcat.apache.org/) has been used during development of the application.
+
+The *index.html* file is set up in a way that requires a local [UI5 runtime environment](https://openui5.org/releases/) in the folder *resources* of the base directory of your WebServer.
+The advantage of that configuration is that it reduces the loading time of the application because no runtime information has to be loaded from the web.
+Additionally it allows you to work offline. The current version of the application uses the OpenUI5 runtime version 1.120.18.
+
+If you instead prefer to load the runtime information directly from the web, then change the `src` Attribute of the `Script` Statement in the *index.html* file as follows:
+`src="https://ui5.sap.com/resources/sap-ui-core.js"`
 
 ## License
 
