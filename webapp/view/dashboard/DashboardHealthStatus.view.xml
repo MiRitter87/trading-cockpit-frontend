@@ -116,7 +116,8 @@
 						<f:formElements>
 							<f:FormElement label="{i18n>dashboardHealthStatus.nearHigh}">
 								<f:fields>
-									<ProgressIndicator showValue="true" state="Success" displayOnly="true"
+									<ProgressIndicator id="pi52wHigh" showValue="true" state="Success" displayOnly="true"
+										displayAnimation="false"
 										percentValue="{parts:[{path : 'marketHealthStatus>/numberNear52wHigh'}, 
 										{path :'marketHealthStatus>/numberNear52wLow'}], formatter : '.percentNear52wHighFormatter'}"
 										displayValue="{marketHealthStatus>/numberNear52wHigh}"/>
@@ -125,7 +126,8 @@
 							
 							<f:FormElement label="{i18n>dashboardHealthStatus.nearLow}">
 								<f:fields>
-									<ProgressIndicator showValue="true" state="Error" displayOnly="true"
+									<ProgressIndicator id="pi52wLow" showValue="true" state="Error" displayOnly="true"
+										displayAnimation="false"
 										percentValue="{parts:[{path : 'marketHealthStatus>/numberNear52wHigh'}, 
 										{path :'marketHealthStatus>/numberNear52wLow'}], formatter : '.percentNear52wLowFormatter'}"
 										displayValue="{marketHealthStatus>/numberNear52wLow}"/>
@@ -134,7 +136,8 @@
 							
 							<f:FormElement label="{i18n>dashboardHealthStatus.upOnVolume}">
 								<f:fields>
-									<ProgressIndicator showValue="true" state="Success" displayOnly="true"
+									<ProgressIndicator id="piUpOnVolume" showValue="true" state="Success" displayOnly="true"
+										displayAnimation="false"
 										percentValue="{parts:[{path : 'marketHealthStatus>/numberUpOnVolume'}, 
 										{path :'marketHealthStatus>/numberDownOnVolume'}], formatter : '.percentUpOnVolumeFormatter'}"
 										displayValue="{marketHealthStatus>/numberUpOnVolume}"
@@ -144,7 +147,8 @@
 							
 							<f:FormElement label="{i18n>dashboardHealthStatus.downOnVolume}">
 								<f:fields>
-									<ProgressIndicator showValue="true" state="Error" displayOnly="true"
+									<ProgressIndicator id="piDownOnVolume" showValue="true" state="Error" displayOnly="true"
+										displayAnimation="false"
 										percentValue="{parts:[{path : 'marketHealthStatus>/numberUpOnVolume'}, 
 										{path :'marketHealthStatus>/numberDownOnVolume'}], formatter : '.percentDownOnVolumeFormatter'}"
 										displayValue="{marketHealthStatus>/numberDownOnVolume}"

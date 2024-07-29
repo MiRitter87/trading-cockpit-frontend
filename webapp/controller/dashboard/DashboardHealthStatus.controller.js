@@ -254,12 +254,22 @@ sap.ui.define([
 		resetUIElements : function () {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oDistributionDaysIcon = this.getView().byId("distributionDaysIcon");
+			var oPi52wHigh = this.getView().byId("pi52wHigh");
+			var oPi52wLow = this.getView().byId("pi52wLow");
+			var oPiUpOnVolume = this.getView().byId("piUpOnVolume");
+			var oPiDownOnVolume = this.getView().byId("piDownOnVolume");
 			var oHealthStatus = new JSONModel();
 			
 			this.getView().setModel(oHealthStatus, "marketHealthStatus");
 
 			oInstrumentComboBox.setSelectedKey("");
 			oDistributionDaysIcon.setSrc(null);
+			
+			// Reset ProgressIndicator
+			oPi52wHigh.setPercentValue(0);
+			oPi52wLow.setPercentValue(0);
+			oPiUpOnVolume.setPercentValue(0);
+			oPiDownOnVolume.setPercentValue(0);
 		}
 	});
 });
