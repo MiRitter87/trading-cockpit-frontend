@@ -1,15 +1,17 @@
 # trading-cockpit-frontend
-Frontend of the Trading Cockpit application.
+Frontend of the Trading Cockpit application. The application provides the user interface for the [Trading Cockpit Backend](https://github.com/MiRitter87/trading-cockpit-backend).
 
 ## Features
-The frontend provides you with views for creation, editing, display and overview of the following business objects.
+The frontend consists of several feature packages. First, it enables a master data management of the following business objects.
 
 - Price Alerts
 - Instruments
 - Lists
 - Scans
 
-It's functions as well as additional views are described in the according sections below.
+Additionally, there is a view to filter instruments using a multitude of criteria. There are also nearly a dozen charts to be explored.
+Statistical market information are provided via the dashboard. There is also a knowledge-based system accessible that gauges the health of instruments.
+You can learn more details about the features in the following paragraphs.
 
 ### Price Alerts
 A price alert notifies you if the price of a stock reaches a certain threshold. There are two types of alerts. One type informs you if a price is equal or higher than your defined price. The other type informs you if the price is equal of lower than your defined price.
@@ -100,7 +102,7 @@ The dashboard also provides a view to determine the status of the current market
 - Number of stocks that traded up or down on volume (5 day sum)
 
 ### Charts
-The application provides a multitude of charts that are grouped in statistical and price/volume charts.
+The application provides a multitude of charts that are grouped in statistical, price/volume and other charts.
 
 #### Statistical
 - The cumulative advance/decline number for the overall database as well as selected lists
@@ -116,14 +118,17 @@ The application provides a multitude of charts that are grouped in statistical a
 - A candlestick chart with annotations for Pocket Pivots for all instruments
 - A candlestick chart with annotations for events related to the health check
 
+### Other
+- A chart displaying the Aggregate Indicator of a sector or industry group
+
 ## Technology
 
 The Trading Cockpit is based on the JavaScript Framework [OpenUI5](https://openui5.org/).
 
-## Installation
+## Deployment
 
 Create a new folder *trading-cockpit-frontend* in the *webapps* folder of your WebServer. 
-Then copy all files from the projects *webapp* folder into the newly created folder of the WebServer.
+Then copy all files and folders from the projects *webapp* folder into the newly created folder of the WebServer.
 [Apache Tomcat](https://tomcat.apache.org/) has been used during development of the application.
 
 The *index.html* file is set up in a way that requires a local [UI5 runtime environment](https://openui5.org/releases/) in the folder *resources* of the base directory of your WebServer.
@@ -131,7 +136,8 @@ The advantage of that configuration is that it reduces the loading time of the a
 Additionally it allows you to work offline. The current version of the application uses the OpenUI5 runtime version 1.120.18.
 
 If you instead prefer to load the runtime information directly from the web, then change the `src` Attribute of the `Script` Statement in the *index.html* file as follows:
-`src="https://ui5.sap.com/resources/sap-ui-core.js"`
+`src="https://ui5.sap.com/resources/sap-ui-core.js"`. 
+In that case you don't need to set up the *resources* folder of the WebServer with the OpenUI5 runtime environment.
 
 ## License
 
