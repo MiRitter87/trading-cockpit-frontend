@@ -560,7 +560,11 @@ sap.ui.define([
 				sChartUrl = this.getChartUrlRatio(oInstrument);
 			}
 			else {
-				sChartUrl = this.getChartUrlNonRatio(oInstrument);
+				if(oInstrument.symbol == "") {
+					sChartUrl = this.getChartUrlBackend(oInstrument);
+				} else {
+					sChartUrl = this.getChartUrlNonRatio(oInstrument);
+				}
 			}
 			
 			return sChartUrl;
@@ -568,7 +572,7 @@ sap.ui.define([
 		
 		
 		/**
-		 * Gets a chart URL for an Instrument of any type other than RATIO.
+		 * Gets a chart URL for an Instrument of any type other than RATIO where symbol and stock exchange are given.
 		 */
 		getChartUrlNonRatio : function(oInstrument) {
 			var sBaseChartUrl = "https://stockcharts.com/h-sc/ui?s={symbol}{exchange}&p=D&yr=1&mn=0&dy=0&id=p87853059193";
@@ -619,6 +623,21 @@ sap.ui.define([
 			sChartUrl = sBaseChartUrl.replace("{symbolDividend}", sSymbolDividend);
 			sChartUrl = sChartUrl.replace("{symbolDivisor}", sSymbolDividor);
 						
+			return sChartUrl;
+		},
+		
+		
+		/**
+		 * Gets the chart URL of a backend chart for the given instrument.
+		 */
+		getChartUrlBackend : function(oInstrument) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
+			var sChartUrl = sServerAddress + sWebServiceBaseUrl + "/priceVolume/" + oInstrument.id;
+			
+			//Append chart configuration to request URL.
+			sChartUrl = sChartUrl + "?indicator=BBW&overlays=EMA_21&overlays=SMA_50&overlays=SMA_200&withVolume=true&withSma30Volume=true";
+			
 			return sChartUrl;
 		},
 		
