@@ -206,6 +206,10 @@ sap.ui.define([
 		percentNear52wHighFormatter : function(iNumberNear52wHigh, iNumberNear52wLow) {
 			var iPercentNearHigh;
 			
+			if(iNumberNear52wHigh == 0 && iNumberNear52wLow == 0) {
+				return 0;
+			}
+			
 			iPercentNearHigh = iNumberNear52wHigh /	(iNumberNear52wHigh + iNumberNear52wLow) * 100;
 				
 			return iPercentNearHigh;
@@ -217,6 +221,10 @@ sap.ui.define([
 		 */
 		percentNear52wLowFormatter : function(iNumberNear52wHigh, iNumberNear52wLow) {
 			var iPercentNearLow;
+			
+			if(iNumberNear52wHigh == 0 && iNumberNear52wLow == 0) {
+				return 0;
+			}
 			
 			iPercentNearLow = iNumberNear52wLow / (iNumberNear52wHigh + iNumberNear52wLow) * 100;
 				
@@ -230,6 +238,10 @@ sap.ui.define([
 		percentUpOnVolumeFormatter : function(iNumberUpOnVolume, iNumberDownOnVolume) {
 			var iPercentUpOnVolume;
 			
+			if(iNumberUpOnVolume == 0 && iNumberDownOnVolume == 0) {
+				return 0;
+			}
+			
 			iPercentUpOnVolume = iNumberUpOnVolume / (iNumberUpOnVolume + iNumberDownOnVolume) * 100;
 				
 			return iPercentUpOnVolume;
@@ -241,6 +253,10 @@ sap.ui.define([
 		 */
 		percentDownOnVolumeFormatter : function(iNumberUpOnVolume, iNumberDownOnVolume) {
 			var iPercentNearLow;
+			
+			if(iNumberUpOnVolume == 0 && iNumberDownOnVolume == 0) {
+				return 0;
+			}
 			
 			iPercentNearLow = iNumberDownOnVolume / (iNumberUpOnVolume + iNumberDownOnVolume) * 100;
 				
