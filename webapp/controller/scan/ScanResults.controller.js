@@ -705,6 +705,10 @@ sap.ui.define([
 			var oStartDatePicker = this.getView().byId("startDatePicker");
 			var oLiquidityInput = this.getView().byId("liquidityInput");
 			var oSearchField = this.getView().byId("resultsSearchField");
+			
+			this.enableInstrumentTypesInComboBox(oTypeComboBox, [Constants.INSTRUMENT_TYPE.STOCK,
+					Constants.INSTRUMENT_TYPE.ETF, Constants.INSTRUMENT_TYPE.SECTOR,
+					Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP, Constants.INSTRUMENT_TYPE.RATIO]);
 						
 			oTemplateComboBox.setSelectedKey(Constants.SCAN_TEMPLATE.ALL);
 			oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
