@@ -704,6 +704,7 @@ sap.ui.define([
 			var oStartDateLabel = this.getView().byId("startDateLabel");
 			var oStartDatePicker = this.getView().byId("startDatePicker");
 			var oLiquidityInput = this.getView().byId("liquidityInput");
+			var oAtrpInput = this.getView().byId("atrpInput");
 			var oSearchField = this.getView().byId("resultsSearchField");
 			
 			this.enableInstrumentTypesInComboBox(oTypeComboBox, [Constants.INSTRUMENT_TYPE.STOCK,
@@ -717,6 +718,7 @@ sap.ui.define([
 			oStartDatePicker.setVisible(false);
 			
 			oLiquidityInput.setValue("");
+			oAtrpInput.setValue("");
 			
 			oSearchField.setValue("");
 		},
