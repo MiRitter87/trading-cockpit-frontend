@@ -520,7 +520,7 @@ sap.ui.define([
 				{key: "liquidityColumn", label: oResourceBundle.getText("indicator.liquidity"), path: "indicator/liquidity20Days"},
 				{key: "baseLengthWeeksColumn", label: oResourceBundle.getText("indicator.baseLengthWeeks"), path: "indicator/baseLengthWeeks"},
 				{key: "atrpColumn", label: oResourceBundle.getText("indicator.averageTrueRangePercent"), path: "indicator/averageTrueRangePercent20"},
-				{key: "chartColumn", label: oResourceBundle.getText("scanResults.chart"), path: ""}
+				{key: "functionsColumn", label: oResourceBundle.getText("scanResults.functions"), path: ""}
 			]);
 			
 			Engine.getInstance().register(oTable, {
@@ -667,11 +667,10 @@ sap.ui.define([
 					oText = new Text({
 						text: "{parts: ['" + sPath +"', 'currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
 					});	
-				} else if(oColumnState.key == "chartColumn") {
+				} else if(oColumnState.key == "functionsColumn") {
 					oButton = new Button({
 						icon: "sap-icon://business-objects-experience",
-						press: this.onChartPressed.bind(this),
-						tooltip: "{i18n>scanResults.chart.tooltip}"
+						press: this.onChartPressed.bind(this)
 					});
 					
 					return oButton;
