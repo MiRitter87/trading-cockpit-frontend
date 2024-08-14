@@ -38,7 +38,7 @@
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin" />
 			</VBox>			
 		
-			<Table id="quotationTable" mode="None" sticky="HeaderToolbar,ColumnHeaders"
+			<Table id="quotationTable" mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders"
 				items="{path: '/quotation/', sorter: {path: 'relativeStrengthData/rsNumber', descending: true }}">
 				
 				<headerToolbar>
@@ -46,6 +46,8 @@
 						<Title text="{i18n>scanResults.tableHeader} ({= ${/quotation/}.length})"/>
 						<ToolbarSpacer/>
 						<SearchField id="resultsSearchField" liveChange=".onSearch" width="10%"/>
+						<Button icon="sap-icon://business-objects-experience" press=".onStockchartsPressed"
+							tooltip="{i18n>scanResults.stockChartsButtonTooltip}"/>
 						<Button icon="sap-icon://compare" tooltip="{i18n>scanResults.compareInstruments}" press=".onComparePressed"/>
 						<Button icon="sap-icon://action-settings" tooltip="{i18n>scanResults.settings}" press=".onSettingsPressed"/>
 					</OverflowToolbar>
@@ -97,9 +99,6 @@
 					<Column id="atrpColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
 						<Text text="{i18n>indicator.averageTrueRangePercent}"/>
 					</Column>
-					<Column id="functionsColumn" minScreenWidth="Desktop" demandPopin="true">
-						<Text text="{i18n>scanResults.functions}"/>
-					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
@@ -122,7 +121,6 @@
 										}"/>
 							<Text text="{indicator/baseLengthWeeks}"/>
 							<Text text="{indicator/averageTrueRangePercent20}"/>
-							<Button icon="sap-icon://business-objects-experience" press=".onChartPressed"/>
 						</cells>
 					</ColumnListItem>
 				</items>

@@ -16,13 +16,12 @@ sap.ui.define([
 	"sap/ui/model/Sorter",
 	"sap/m/ColumnListItem",
 	"sap/m/Text",
-	"sap/m/Button",
 	"sap/m/Link",
 	"sap/ui/core/library",
 	"sap/ui/core/Fragment"
 ], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, 
 	Filter, FilterOperator, MetadataHelper, Engine, SelectionController, SortController, Sorter, ColumnListItem, Text, 
-	Button, Link, coreLibrary, Fragment) {
+	Link, coreLibrary, Fragment) {
 		
 	"use strict";
 	
@@ -274,7 +273,7 @@ sap.ui.define([
 		/**
     	 * Handles the button pressed event of the chart button in a table row.
     	 */
-    	onChartPressed : function(oControlEvent) {
+    	onStockchartsPressed : function(oControlEvent) {
 			var oButtonParent = oControlEvent.getSource().getParent();
 			var oContext = oButtonParent.getBindingContext();
 			var oQuotationData = oContext.getObject();
@@ -519,8 +518,7 @@ sap.ui.define([
 					path: "indicator/upDownVolumeRatio"},
 				{key: "liquidityColumn", label: oResourceBundle.getText("indicator.liquidity"), path: "indicator/liquidity20Days"},
 				{key: "baseLengthWeeksColumn", label: oResourceBundle.getText("indicator.baseLengthWeeks"), path: "indicator/baseLengthWeeks"},
-				{key: "atrpColumn", label: oResourceBundle.getText("indicator.averageTrueRangePercent"), path: "indicator/averageTrueRangePercent20"},
-				{key: "functionsColumn", label: oResourceBundle.getText("scanResults.functions"), path: ""}
+				{key: "atrpColumn", label: oResourceBundle.getText("indicator.averageTrueRangePercent"), path: "indicator/averageTrueRangePercent20"}
 			]);
 			
 			Engine.getInstance().register(oTable, {
@@ -649,7 +647,6 @@ sap.ui.define([
 			var aCells = oState.Columns.map(function(oColumnState) {
 				var sPath = this.oMetadataHelper.getProperty(oColumnState.key).path;
 				var oText;
-				var oButton;
 				var oLink;
 				
 				if(oColumnState.key == "typeColumn") {
@@ -667,13 +664,6 @@ sap.ui.define([
 					oText = new Text({
 						text: "{parts: ['" + sPath +"', 'currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
 					});	
-				} else if(oColumnState.key == "functionsColumn") {
-					oButton = new Button({
-						icon: "sap-icon://business-objects-experience",
-						press: this.onChartPressed.bind(this)
-					});
-					
-					return oButton;
 				} else if(oColumnState.key == "symbolColumn") {
 					oLink = new Link({
 						text: "{" + sPath + "}",
