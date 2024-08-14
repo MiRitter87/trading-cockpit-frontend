@@ -77,8 +77,7 @@ sap.ui.define([
 		 * Handles the press-event of the delete button.
 		 */
 		onDeletePressed : function () {
-			var oResourceBundle;
-			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			if(this.isListSelected() == false) {
 				MessageBox.error(oResourceBundle.getText("listOverview.noListSelected"));

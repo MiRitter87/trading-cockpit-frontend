@@ -39,7 +39,7 @@
 			</VBox>			
 		
 			<Table id="quotationTable" mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders"
-				items="{path: '/quotation/', sorter: {path: 'relativeStrengthData/rsNumber', descending: true }}">
+				items="{path: 'quotations>/quotation/', sorter: {path: 'relativeStrengthData/rsNumber', descending: true }}">
 				
 				<headerToolbar>
 					<OverflowToolbar>
@@ -103,24 +103,24 @@
 				<items>
 					<ColumnListItem>
 						<cells>
-							<Link text="{instrument/symbol}" press=".onSymbolLinkPressed"/>
-							<Text text="{instrument/name}"/>
-							<Text text="{path: 'instrument/type', formatter: '.typeTextFormatter'}"/>
-							<Text text="{relativeStrengthData/rsNumber}"/>
-							<Text text="{relativeStrengthData/rsNumberCompositeIg}"/>
-							<Text text="{relativeStrengthData/rsNumberSector}"/>
-							<Text text="{relativeStrengthData/rsNumberIndustryGroup}"/>
-							<Text text="{indicator/distanceTo52WeekHigh} %"/>
-							<Text text="{indicator/performance5Days} %"/>
-							<Text text="{indicator/volumeDifferential5Days} %"/>
-							<Text text="{indicator/bollingerBandWidth10Days}"/>
-							<Text text="{indicator/upDownVolumeRatio}"/>
-							<Text text="{	parts: ['indicator/liquidity20Days', 'currency'],
+							<Link text="{quotations>instrument/symbol}" press=".onSymbolLinkPressed"/>
+							<Text text="{quotations>instrument/name}"/>
+							<Text text="{path: 'quotations>instrument/type', formatter: '.typeTextFormatter'}"/>
+							<Text text="{quotations>relativeStrengthData/rsNumber}"/>
+							<Text text="{quotations>relativeStrengthData/rsNumberCompositeIg}"/>
+							<Text text="{quotations>relativeStrengthData/rsNumberSector}"/>
+							<Text text="{quotations>relativeStrengthData/rsNumberIndustryGroup}"/>
+							<Text text="{quotations>indicator/distanceTo52WeekHigh} %"/>
+							<Text text="{quotations>indicator/performance5Days} %"/>
+							<Text text="{quotations>indicator/volumeDifferential5Days} %"/>
+							<Text text="{quotations>indicator/bollingerBandWidth10Days}"/>
+							<Text text="{quotations>indicator/upDownVolumeRatio}"/>
+							<Text text="{	parts: ['quotations>indicator/liquidity20Days', 'quotations>currency'],
 											type: 'sap.ui.model.type.Currency',
 											formatOptions: {style : 'short'}
 										}"/>
-							<Text text="{indicator/baseLengthWeeks}"/>
-							<Text text="{indicator/averageTrueRangePercent20}"/>
+							<Text text="{quotations>indicator/baseLengthWeeks}"/>
+							<Text text="{quotations>indicator/averageTrueRangePercent20}"/>
 						</cells>
 					</ColumnListItem>
 				</items>

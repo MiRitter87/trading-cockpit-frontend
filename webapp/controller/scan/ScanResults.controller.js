@@ -271,14 +271,17 @@ sap.ui.define([
 		
 		
 		/**
-    	 * Handles the button pressed event of the chart button in a table row.
+    	 * Handles the button pressed event of the "StockCharts" button in the table header.
     	 */
-    	onStockchartsPressed : function(oControlEvent) {
-			var oButtonParent = oControlEvent.getSource().getParent();
-			var oContext = oButtonParent.getBindingContext();
-			var oQuotationData = oContext.getObject();
+    	onStockchartsPressed : function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			this.openStockChart(oQuotationData.instrument);
+			if(this.isInstrumentSelected() == false) {
+				MessageBox.error(oResourceBundle.getText("scanResults.noInstrumentSelected"));
+				return;
+			}
+			
+			this.openStockChart(this.getSelectedInstrument());
 		},
 		
 		
@@ -425,7 +428,7 @@ sap.ui.define([
     		
     		oTable.bindItems({
         		templateShareable: false,
-        		path: '/quotation/',
+        		path: 'quotations>/quotation/',
         		sorter: aSorter,
         		template: new ColumnListItem({cells: aCells})
     		});
@@ -458,7 +461,7 @@ sap.ui.define([
 				}
 			}
 			
-			oCallingController.getView().setModel(oModel);
+			oCallingController.getView().setModel(oModel, "quotations");
 			
 			oSearchField.setValue("");
 		},
@@ -497,28 +500,36 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			this.oMetadataHelper = new MetadataHelper([
-				{key: "symbolColumn", label: oResourceBundle.getText("instrument.symbol"), path: "instrument/symbol"},
-				{key: "nameColumn", label: oResourceBundle.getText("instrument.name"), path: "instrument/name"},
-				{key: "typeColumn", label: oResourceBundle.getText("instrument.type"), path: "instrument/type"},
-				{key: "rsNumberColumn", label: oResourceBundle.getText("indicator.rsNumber"), path: "relativeStrengthData/rsNumber"},
+				{key: "symbolColumn", label: oResourceBundle.getText("instrument.symbol"), 
+					path: "quotations>instrument/symbol"},
+				{key: "nameColumn", label: oResourceBundle.getText("instrument.name"), 
+					path: "quotations>instrument/name"},
+				{key: "typeColumn", label: oResourceBundle.getText("instrument.type"), 
+					path: "quotations>instrument/type"},
+				{key: "rsNumberColumn", label: oResourceBundle.getText("indicator.rsNumber"), 
+					path: "quotations>relativeStrengthData/rsNumber"},
 				{key: "rsNumberCompositeIgColumn", label: oResourceBundle.getText("indicator.rsNumberCompositeIg"), 
-					path: "relativeStrengthData/rsNumberCompositeIg"},
+					path: "quotations>relativeStrengthData/rsNumberCompositeIg"},
 				{key: "sectorRsNumberColumn", label: oResourceBundle.getText("indicator.sectorRsNumber"), 
-					path: "relativeStrengthData/rsNumberSector"},
+					path: "quotations>relativeStrengthData/rsNumberSector"},
 				{key: "industryGroupRsNumberColumn", label: oResourceBundle.getText("indicator.industryGroupRsNumber"), 
-					path: "relativeStrengthData/rsNumberIndustryGroup"},
+					path: "quotations>relativeStrengthData/rsNumberIndustryGroup"},
 				{key: "distanceTo52WeekHighColumn", label: oResourceBundle.getText("indicator.distanceTo52WeekHigh"), 
-					path: "indicator/distanceTo52WeekHigh"},
-				{key: "performance5DaysColumn", label: oResourceBundle.getText("indicator.performance5Days"), path: "indicator/performance5Days"},
+					path: "quotations>indicator/distanceTo52WeekHigh"},
+				{key: "performance5DaysColumn", label: oResourceBundle.getText("indicator.performance5Days"), 
+					path: "quotations>indicator/performance5Days"},
 				{key: "volumeDifferential5DaysColumn", label: oResourceBundle.getText("indicator.volumeDifferential5Days"), 
-					path: "indicator/volumeDifferential5Days"},
+					path: "quotations>indicator/volumeDifferential5Days"},
 				{key: "bbw10DaysColumn", label: oResourceBundle.getText("indicator.bbw10Days"), 
-					path: "indicator/bollingerBandWidth10Days"},
+					path: "quotations>indicator/bollingerBandWidth10Days"},
 				{key: "upDownVolumeRatioColumn", label: oResourceBundle.getText("indicator.upDownVolumeRatio"), 
-					path: "indicator/upDownVolumeRatio"},
-				{key: "liquidityColumn", label: oResourceBundle.getText("indicator.liquidity"), path: "indicator/liquidity20Days"},
-				{key: "baseLengthWeeksColumn", label: oResourceBundle.getText("indicator.baseLengthWeeks"), path: "indicator/baseLengthWeeks"},
-				{key: "atrpColumn", label: oResourceBundle.getText("indicator.averageTrueRangePercent"), path: "indicator/averageTrueRangePercent20"}
+					path: "quotations>indicator/upDownVolumeRatio"},
+				{key: "liquidityColumn", label: oResourceBundle.getText("indicator.liquidity"), 
+					path: "quotations>indicator/liquidity20Days"},
+				{key: "baseLengthWeeksColumn", label: oResourceBundle.getText("indicator.baseLengthWeeks"), 
+					path: "quotations>indicator/baseLengthWeeks"},
+				{key: "atrpColumn", label: oResourceBundle.getText("indicator.averageTrueRangePercent"), 
+					path: "quotations>indicator/averageTrueRangePercent20"}
 			]);
 			
 			Engine.getInstance().register(oTable, {
@@ -662,7 +673,7 @@ sap.ui.define([
 					});	
 				} else if(oColumnState.key == "liquidityColumn") {
 					oText = new Text({
-						text: "{parts: ['" + sPath +"', 'currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
+						text: "{parts: ['" + sPath +"', 'quotations>currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
 					});	
 				} else if(oColumnState.key == "symbolColumn") {
 					oLink = new Link({
@@ -739,6 +750,29 @@ sap.ui.define([
 			for(var i = 0; i < aAllowedInstrumentTypes.length; i++) {
 				oComboxBox.getItemByKey(aAllowedInstrumentTypes[i]).setEnabled(true);
 			}
-		}
+		},
+		
+		
+		/**
+		 * Checks if an instrument has been selected.
+		 */
+		isInstrumentSelected : function () {
+			if(this.getView().byId("quotationTable").getSelectedItem() == null)
+				return false;
+			else
+				return true;
+		},
+		
+		
+		/**
+		 * Gets the the selected instrument.
+		 */
+		getSelectedInstrument : function () {
+			var oListItem = this.getView().byId("quotationTable").getSelectedItem();
+			var oContext = oListItem.getBindingContext("quotations");
+			var oSelectedQuotation = oContext.getProperty(null, oContext);
+			
+			return oSelectedQuotation.instrument;
+		},
 	});
 });
