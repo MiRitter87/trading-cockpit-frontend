@@ -286,6 +286,21 @@ sap.ui.define([
 		
 		
 		/**
+    	 * Handles the button pressed event of the "Earnings" button in the table header.
+    	 */
+    	onEarningsPressed : function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			if(this.isInstrumentSelected() == false) {
+				MessageBox.error(oResourceBundle.getText("scanResults.noInstrumentSelected"));
+				return;
+			}
+			
+			this.openEarnings(this.getSelectedInstrument());
+		},
+		
+		
+		/**
 		 * Handles the search function of the scan results table.
 		 */
 		onSearch: function (oEvent) {
@@ -561,6 +576,16 @@ sap.ui.define([
 		
 		
 		/**
+		 * Opens a website with earnings data of the given Instrument.
+		 */
+		openEarnings : function(oInstrument) {
+			var sEarningsUrl = this.getEarningsUrl(oInstrument);
+					
+			window.open(sEarningsUrl, '_blank');
+		},
+		
+		
+		/**
 		 * Gets a chart URL for the given Instrument.
 		 */
 		getChartUrl : function(oInstrument) {
@@ -649,6 +674,36 @@ sap.ui.define([
 			sChartUrl = sChartUrl + "?indicator=BBW&overlays=EMA_21&overlays=SMA_50&overlays=SMA_200&withVolume=true&withSma30Volume=true";
 			
 			return sChartUrl;
+		},
+		
+		
+		/**
+		 * Gets a URL for the earnings website of an Instrument.
+		 */
+		getEarningsUrl : function(oInstrument) {
+			var sBaseEarningsUrl = "https://www.tipranks.com/stocks/{placeholder}/earnings";
+			var sEarningsUrl = "";
+			var sStockExchange = oInstrument.stockExchange;
+			var sSymbol = oInstrument.symbol;
+			
+			if(	sStockExchange == Constants.STOCK_EXCHANGE.NYSE ||
+				sStockExchange == Constants.STOCK_EXCHANGE.NDQ ||
+				sStockExchange == Constants.STOCK_EXCHANGE.AMEX ||
+				sStockExchange == Constants.STOCK_EXCHANGE.OTC) {
+					
+				sEarningsUrl = sBaseEarningsUrl.replace("{placeholder}", sSymbol);
+			}
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX ||
+				sStockExchange == Constants.STOCK_EXCHANGE.TSXV ||
+				sStockExchange == Constants.STOCK_EXCHANGE.CSE) {
+					
+				sEarningsUrl = sBaseEarningsUrl.replace("{placeholder}", "tse:" + sSymbol);
+			}
+			else if(sStockExchange == Constants.STOCK_EXCHANGE.LSE) {
+				sEarningsUrl = sBaseEarningsUrl.replace("{placeholder}", "gb:" + sSymbol);
+			}
+			
+			return sEarningsUrl;
 		},
 		
 		

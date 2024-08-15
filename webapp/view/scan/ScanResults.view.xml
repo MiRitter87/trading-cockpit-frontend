@@ -46,6 +46,8 @@
 						<Title text="{i18n>scanResults.tableHeader} ({= ${/quotation/}.length})"/>
 						<ToolbarSpacer/>
 						<SearchField id="resultsSearchField" liveChange=".onSearch" width="10%"/>
+						<Button icon="sap-icon://lead" press=".onEarningsPressed"
+							tooltip="{i18n>scanResults.earningsButtonTooltip}"/>
 						<Button icon="sap-icon://business-objects-experience" press=".onStockchartsPressed"
 							tooltip="{i18n>scanResults.stockChartsButtonTooltip}"/>
 						<Button icon="sap-icon://compare" tooltip="{i18n>scanResults.compareInstruments}" press=".onComparePressed"/>
