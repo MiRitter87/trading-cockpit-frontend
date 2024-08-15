@@ -428,7 +428,7 @@ sap.ui.define([
     		
     		oTable.bindItems({
         		templateShareable: false,
-        		path: 'quotations>/quotation/',
+        		path: '/quotation/',
         		sorter: aSorter,
         		template: new ColumnListItem({cells: aCells})
     		});
@@ -461,7 +461,8 @@ sap.ui.define([
 				}
 			}
 			
-			oCallingController.getView().setModel(oModel, "quotations");
+			//Do not use a named model because the sorting dialog is not compatible with named models.
+			oCallingController.getView().setModel(oModel);
 			
 			oSearchField.setValue("");
 		},
@@ -501,35 +502,35 @@ sap.ui.define([
 			
 			this.oMetadataHelper = new MetadataHelper([
 				{key: "symbolColumn", label: oResourceBundle.getText("instrument.symbol"), 
-					path: "quotations>instrument/symbol"},
+					path: "instrument/symbol"},
 				{key: "nameColumn", label: oResourceBundle.getText("instrument.name"), 
-					path: "quotations>instrument/name"},
+					path: "instrument/name"},
 				{key: "typeColumn", label: oResourceBundle.getText("instrument.type"), 
-					path: "quotations>instrument/type"},
+					path: "instrument/type"},
 				{key: "rsNumberColumn", label: oResourceBundle.getText("indicator.rsNumber"), 
-					path: "quotations>relativeStrengthData/rsNumber"},
+					path: "relativeStrengthData/rsNumber"},
 				{key: "rsNumberCompositeIgColumn", label: oResourceBundle.getText("indicator.rsNumberCompositeIg"), 
-					path: "quotations>relativeStrengthData/rsNumberCompositeIg"},
+					path: "relativeStrengthData/rsNumberCompositeIg"},
 				{key: "sectorRsNumberColumn", label: oResourceBundle.getText("indicator.sectorRsNumber"), 
-					path: "quotations>relativeStrengthData/rsNumberSector"},
+					path: "relativeStrengthData/rsNumberSector"},
 				{key: "industryGroupRsNumberColumn", label: oResourceBundle.getText("indicator.industryGroupRsNumber"), 
-					path: "quotations>relativeStrengthData/rsNumberIndustryGroup"},
+					path: "relativeStrengthData/rsNumberIndustryGroup"},
 				{key: "distanceTo52WeekHighColumn", label: oResourceBundle.getText("indicator.distanceTo52WeekHigh"), 
-					path: "quotations>indicator/distanceTo52WeekHigh"},
+					path: "indicator/distanceTo52WeekHigh"},
 				{key: "performance5DaysColumn", label: oResourceBundle.getText("indicator.performance5Days"), 
-					path: "quotations>indicator/performance5Days"},
+					path: "indicator/performance5Days"},
 				{key: "volumeDifferential5DaysColumn", label: oResourceBundle.getText("indicator.volumeDifferential5Days"), 
-					path: "quotations>indicator/volumeDifferential5Days"},
+					path: "indicator/volumeDifferential5Days"},
 				{key: "bbw10DaysColumn", label: oResourceBundle.getText("indicator.bbw10Days"), 
-					path: "quotations>indicator/bollingerBandWidth10Days"},
+					path: "indicator/bollingerBandWidth10Days"},
 				{key: "upDownVolumeRatioColumn", label: oResourceBundle.getText("indicator.upDownVolumeRatio"), 
-					path: "quotations>indicator/upDownVolumeRatio"},
+					path: "indicator/upDownVolumeRatio"},
 				{key: "liquidityColumn", label: oResourceBundle.getText("indicator.liquidity"), 
-					path: "quotations>indicator/liquidity20Days"},
+					path: "indicator/liquidity20Days"},
 				{key: "baseLengthWeeksColumn", label: oResourceBundle.getText("indicator.baseLengthWeeks"), 
-					path: "quotations>indicator/baseLengthWeeks"},
+					path: "indicator/baseLengthWeeks"},
 				{key: "atrpColumn", label: oResourceBundle.getText("indicator.averageTrueRangePercent"), 
-					path: "quotations>indicator/averageTrueRangePercent20"}
+					path: "indicator/averageTrueRangePercent20"}
 			]);
 			
 			Engine.getInstance().register(oTable, {
@@ -673,7 +674,7 @@ sap.ui.define([
 					});	
 				} else if(oColumnState.key == "liquidityColumn") {
 					oText = new Text({
-						text: "{parts: ['" + sPath +"', 'quotations>currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
+						text: "{parts: ['" + sPath +"', 'currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
 					});	
 				} else if(oColumnState.key == "symbolColumn") {
 					oLink = new Link({
@@ -769,7 +770,7 @@ sap.ui.define([
 		 */
 		getSelectedInstrument : function () {
 			var oListItem = this.getView().byId("quotationTable").getSelectedItem();
-			var oContext = oListItem.getBindingContext("quotations");
+			var oContext = oListItem.getBindingContext();
 			var oSelectedQuotation = oContext.getProperty(null, oContext);
 			
 			return oSelectedQuotation.instrument;
