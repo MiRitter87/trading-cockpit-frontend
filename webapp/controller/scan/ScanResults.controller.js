@@ -290,13 +290,21 @@ sap.ui.define([
     	 */
     	onEarningsPressed : function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oInstrument;
 			
 			if(this.isInstrumentSelected() == false) {
 				MessageBox.error(oResourceBundle.getText("scanResults.noInstrumentSelected"));
 				return;
 			}
 			
-			this.openEarnings(this.getSelectedInstrument());
+			oInstrument = this.getSelectedInstrument();
+			
+			if(oInstrument.type != Constants.INSTRUMENT_TYPE.STOCK) {
+				MessageBox.error(oResourceBundle.getText("scanResults.wrongTypeForEarnings"));
+				return;
+			}
+			
+			this.openEarnings(oInstrument);
 		},
 		
 		
@@ -580,6 +588,7 @@ sap.ui.define([
 		 */
 		openEarnings : function(oInstrument) {
 			var sEarningsUrl = this.getEarningsUrl(oInstrument);
+			
 					
 			window.open(sEarningsUrl, '_blank');
 		},
