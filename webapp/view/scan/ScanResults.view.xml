@@ -108,7 +108,8 @@
 							<Link text="{instrument/symbol}" press=".onSymbolLinkPressed"/>
 							<Text text="{instrument/name}"/>
 							<Text text="{path: 'instrument/type', formatter: '.typeTextFormatter'}"/>
-							<Text text="{relativeStrengthData/rsNumber}"/>
+							<ObjectStatus text="{relativeStrengthData/rsNumber}"
+								state="{path: 'relativeStrengthData/rsNumber', formatter: '.rsNumberStateFormatter'}"/>
 							<Text text="{relativeStrengthData/rsNumberCompositeIg}"/>
 							<Text text="{relativeStrengthData/rsNumberSector}"/>
 							<Text text="{relativeStrengthData/rsNumberIndustryGroup}"/>

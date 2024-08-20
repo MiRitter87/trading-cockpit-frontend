@@ -17,11 +17,12 @@ sap.ui.define([
 	"sap/m/ColumnListItem",
 	"sap/m/Text",
 	"sap/m/Link",
+	"sap/m/ObjectStatus",
 	"sap/ui/core/library",
 	"sap/ui/core/Fragment"
 ], function (Controller, MainController, Constants, ScanController, InstrumentController, JSONModel, MessageToast, MessageBox, 
 	Filter, FilterOperator, MetadataHelper, Engine, SelectionController, SortController, Sorter, ColumnListItem, Text, 
-	Link, coreLibrary, Fragment) {
+	Link, ObjectStatus, coreLibrary, Fragment) {
 		
 	"use strict";
 	
@@ -724,6 +725,7 @@ sap.ui.define([
 				var sPath = this.oMetadataHelper.getProperty(oColumnState.key).path;
 				var oText;
 				var oLink;
+				var oObjectStatus;
 				
 				if(oColumnState.key == "typeColumn") {
 					oText = new Text();
@@ -747,6 +749,16 @@ sap.ui.define([
 					});
 					
 					return oLink;
+				} else if(oColumnState.key == "rsNumberColumn") {
+					oObjectStatus = new ObjectStatus({
+						text: "{" + sPath + "}"
+					});
+					oObjectStatus.bindProperty("state", {
+						path: sPath,
+						formatter: this.rsNumberStateFormatter.bind(this)
+					});
+					
+					return oObjectStatus;
 				} else {
 					oText = new Text({
 						text: "{" + sPath + "}"
@@ -794,6 +806,20 @@ sap.ui.define([
 		 */
 		typeTextFormatter: function(sType) {
 			return InstrumentController.getLocalizedTypeText(sType, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		},
+		
+		
+		/**
+		 * State formatter of the (Composite) RS-Number ObjectStatus.
+		 */
+		rsNumberStateFormatter: function(iRsNumber) {
+			if(iRsNumber >= 80) {
+				return "Success";
+			} else if(iRsNumber <=20) {
+				return "Error";
+			} else  {
+				return "None";
+			}
 		},
 		
 		
