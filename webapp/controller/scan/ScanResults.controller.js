@@ -760,6 +760,16 @@ sap.ui.define([
 					});
 					
 					return oObjectStatus;
+				} else if(oColumnState.key == "upDownVolumeRatioColumn") {
+					oObjectStatus = new ObjectStatus({
+						text: "{" + sPath + "}"
+					});
+					oObjectStatus.bindProperty("state", {
+						path: sPath,
+						formatter: this.udVolRatioStateFormatter.bind(this)
+					});
+					
+					return oObjectStatus;
 				} else {
 					oText = new Text({
 						text: "{" + sPath + "}"
@@ -816,7 +826,21 @@ sap.ui.define([
 		rsNumberStateFormatter: function(iRsNumber) {
 			if(iRsNumber >= 80) {
 				return "Success";
-			} else if(iRsNumber <=20) {
+			} else if(iRsNumber <= 20) {
+				return "Error";
+			} else  {
+				return "None";
+			}
+		},
+		
+		
+		/**
+		 * State formatter of the Up/Down volume ratio ObjectStatus.
+		 */
+		udVolRatioStateFormatter: function(iUdVolRatio) {
+			if(iUdVolRatio >= 1.2) {
+				return "Success";
+			} else if(iUdVolRatio <= 0.8) {
 				return "Error";
 			} else  {
 				return "None";

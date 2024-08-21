@@ -118,7 +118,8 @@
 							<Text text="{indicator/performance5Days} %"/>
 							<Text text="{indicator/volumeDifferential5Days} %"/>
 							<Text text="{indicator/bollingerBandWidth10Days}"/>
-							<Text text="{indicator/upDownVolumeRatio}"/>
+							<ObjectStatus text="{indicator/upDownVolumeRatio}"
+								state="{path: 'indicator/upDownVolumeRatio', formatter: '.udVolRatioStateFormatter'}"/>
 							<Text text="{	parts: ['indicator/liquidity20Days', 'currency'],
 											type: 'sap.ui.model.type.Currency',
 											formatOptions: {style : 'short'}
