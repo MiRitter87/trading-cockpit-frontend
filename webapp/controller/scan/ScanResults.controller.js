@@ -749,9 +749,10 @@ sap.ui.define([
 					});
 					
 					return oLink;
-				} else if(oColumnState.key == "rsNumberColumn") {
+				} else if(oColumnState.key == "rsNumberColumn" || oColumnState.key == "rsNumberCompositeIgColumn") {
 					oObjectStatus = new ObjectStatus({
-						text: "{" + sPath + "}"
+						text: "{" + sPath + "}",
+						inverted: true
 					});
 					oObjectStatus.bindProperty("state", {
 						path: sPath,
