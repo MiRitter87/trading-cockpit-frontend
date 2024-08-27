@@ -92,6 +92,9 @@
 					<Column id="upDownVolumeRatioColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>indicator.upDownVolumeRatio}"/>
 					</Column>
+					<Column id="upDownPerformanceVolumeRatioColumn" minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>indicator.upDownPerformanceVolumeRatio}"/>
+					</Column>
 					<Column id="liquidityColumn" minScreenWidth="Desktop" demandPopin="true" visible="false">
 						<Text text="{i18n>indicator.liquidity}"/>
 					</Column>
@@ -120,6 +123,7 @@
 							<Text text="{indicator/bollingerBandWidth10Days}"/>
 							<ObjectStatus text="{indicator/upDownVolumeRatio}"
 								state="{path: 'indicator/upDownVolumeRatio', formatter: '.udVolRatioStateFormatter'}"/>
+							<Text text="{indicator/upDownPerformanceVolumeRatio}"/>
 							<Text text="{	parts: ['indicator/liquidity20Days', 'currency'],
 											type: 'sap.ui.model.type.Currency',
 											formatOptions: {style : 'short'}
