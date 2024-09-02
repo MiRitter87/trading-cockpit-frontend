@@ -293,6 +293,7 @@ sap.ui.define([
 		 */
 		resetUIElements : function () {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oListComboBox = this.getView().byId("listComboBox");
 			var oDistributionDaysIcon = this.getView().byId("distributionDaysIcon");
 			var oPi52wHigh = this.getView().byId("pi52wHigh");
 			var oPi52wLow = this.getView().byId("pi52wLow");
@@ -303,6 +304,7 @@ sap.ui.define([
 			this.getView().setModel(oHealthStatus, "marketHealthStatus");
 
 			oInstrumentComboBox.setSelectedKey("");
+			oListComboBox.setSelectedKey("");
 			oDistributionDaysIcon.setSrc(null);
 			
 			// Reset ProgressIndicator
