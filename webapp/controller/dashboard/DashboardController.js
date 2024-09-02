@@ -34,10 +34,14 @@ sap.ui.define([
 		/**
 		 * Queries the Dashboard WebService for the health status of the given market.
 		 */
-		queryMarketHealthStatusByWebService: function(callbackFunction, oCallingController, bShowSuccessMessage, iInstrumentId) {
+		queryMarketHealthStatusByWebService: function(callbackFunction, oCallingController, bShowSuccessMessage, iInstrumentId, sListId) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/dashboard");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/marketHealthStatus/" + iInstrumentId;
+			
+			if(sListId != "") {
+				sQueryUrl = sQueryUrl + "?listId=" + sListId;
+			}
 			
 			jQuery.ajax({
 				type : "GET", 

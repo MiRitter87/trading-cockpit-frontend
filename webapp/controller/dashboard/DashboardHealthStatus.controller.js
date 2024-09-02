@@ -2,13 +2,15 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
 	"../scan/ScanController",
+	"../list/ListController",
 	"../Constants",
 	"../../model/formatter",
 	"./DashboardController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, ScanController, Constants, formatter, DashboardController, JSONModel, MessageToast, MessageBox) {
+], function (Controller, MainController, ScanController, ListController, Constants, formatter, DashboardController, 
+	JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.dashboard.DashboardHealthStatus", {
@@ -31,6 +33,8 @@ sap.ui.define([
 			//Query only instruments that have quotations referenced. Otherwise no health status can be determined.
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, false, Constants.SCAN_TEMPLATE.ALL);
 			
+			ListController.queryListsByWebService(this.queryListsCallback, this, false);
+			
 			this.resetUIElements();
     	},
     	   	
@@ -41,13 +45,15 @@ sap.ui.define([
     	onRefreshPressed : function() {
 			var bInputValid = this.verifyObligatoryFields();
 			var sInstrumentId;
+			var sListId;
 			
 			if(bInputValid == false)
 				return;
 			
 			sInstrumentId = this.getView().byId("instrumentComboBox").getSelectedKey();
+			sListId = this.getView().byId("listComboBox").getSelectedKey();
 			
-			DashboardController.queryMarketHealthStatusByWebService(this.queryHealthStatusCallback, this, true, sInstrumentId);
+			DashboardController.queryMarketHealthStatusByWebService(this.queryHealthStatusCallback, this, true, sInstrumentId, sListId);
 		},
     	
     	
@@ -70,6 +76,24 @@ sap.ui.define([
 			oCallingController.getView().setModel(oModel, "quotations");
 			MainController.applyFilterToInstrumentsComboBox(oInstrumentComboBox, "instrument/type",
 					[Constants.INSTRUMENT_TYPE.SECTOR, Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP]);
+		},
+		
+		
+		/**
+		 * Callback function of the queryLists RESTful WebService call in the ListController.
+		 */
+		queryListsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+			
+			oCallingController.getView().setModel(oModel, "lists");
 		},
 		
 		
