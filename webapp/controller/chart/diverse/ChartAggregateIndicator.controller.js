@@ -2,11 +2,12 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../../MainController",
 	"../../scan/ScanController",
+	"../../list/ListController",
 	"../../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
+], function (Controller, MainController, ScanController, ListController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.diverse.ChartAggregateIndicator", {
@@ -25,6 +26,8 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query only instruments that have quotations referenced. Otherwise no Aggregate Indicator can be determined.
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, false, Constants.SCAN_TEMPLATE.ALL);
+			
+			ListController.queryListsByWebService(this.queryListsCallback, this, false);
 			
 			this.resetUIElements();
     	},
@@ -103,6 +106,24 @@ sap.ui.define([
 		
 		
 		/**
+		 * Callback function of the queryLists RESTful WebService call in the ListController.
+		 */
+		queryListsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if(oReturnData.data != null) {
+				oModel.setData(oReturnData.data);
+			}
+			
+			if(oReturnData.data == null && oReturnData.message != null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+			
+			oCallingController.getView().setModel(oModel, "lists");
+		},
+		
+		
+		/**
 		 * Validates the user input. Prompts messages in input is not valid.
 		 */
 		isInputValid : function () {
@@ -128,12 +149,17 @@ sap.ui.define([
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
 			var sChartUrl = sServerAddress + sWebServiceBaseUrl;
+			var sListId = this.getView().byId("listComboBox").getSelectedKey();
 			
 			sChartUrl = sChartUrl + "/aggregateIndicator/" + sSelectedInstrumentId;
 			
 			//The randomDate parameter is not evaluated by the backend. 
 			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.
 			sChartUrl = sChartUrl  + "?randomDate=" + new Date().getTime();
+			
+			if(sListId != "") {
+				sChartUrl = sChartUrl + "&listId=" + sListId;
+			}
 			
 			return sChartUrl;
 		},
@@ -144,9 +170,11 @@ sap.ui.define([
 		 */
 		resetUIElements : function () {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oListComboBox = this.getView().byId("listComboBox");
 			var oImage = this.getView().byId("chartImage");
 
 			oInstrumentComboBox.setSelectedKey("");
+			oListComboBox.setSelectedKey("");
 			oImage.setSrc(null);
 		}
 	});
