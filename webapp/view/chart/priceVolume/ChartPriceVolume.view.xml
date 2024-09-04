@@ -14,8 +14,8 @@
 		<content>
 			<VBox>
 				<FlexBox alignItems="Center" justifyContent="Start">
-					<Label text="{i18n>chartPriceVolume.instrument}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd"/>
-					<ComboBox id="instrumentComboBox" items="{path: 'quotations>/quotation/', sorter: {path: 'instrument/id'}}" required="false" 
+					<Label text="{i18n>chartPriceVolume.instrument}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" required="true"/>
+					<ComboBox id="instrumentComboBox" items="{path: 'quotations>/quotation/', sorter: {path: 'instrument/id'}}" 
 						selectionChange=".onInstrumentSelectionChange">
 						
 						<core:Item key="{quotations>instrument/id}" text="{quotations>instrument/symbol} - {quotations>instrument/name}"/>
