@@ -56,7 +56,8 @@ sap.ui.define([
 			sSelectedType = oTypeComboBox.getSelectedKey();
 			
 			if(sSelectedType == "") {				
-				MessageBox.information(oResourceBundle.getText("dashboardStatistic.noTypeSelected"));
+				MessageBox.error(oResourceBundle.getText("dashboardStatistic.noTypeSelected"));
+				return;
 			}
 			
 			oInstrument = InstrumentController.getInstrumentById(oSectorIgComboBox.getSelectedKey(), oInstrumentsModel.oData.instrument);
