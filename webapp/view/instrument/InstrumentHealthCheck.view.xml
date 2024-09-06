@@ -32,7 +32,7 @@
 						<f:formElements>
 							<f:FormElement label="{i18n>instrumentHealthCheck.selectionDescription}">
 								<f:fields>
-									<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}">
+									<ComboBox id="instrumentComboBox" items="{path: 'instruments>/instrument/'}" required="true">
 										<core:Item key="{instruments>id}" text="{instruments>symbol} - {instruments>name}"/>
 									</ComboBox>
 								</f:fields>
@@ -40,13 +40,13 @@
 							
 							<f:FormElement label="{i18n>instrumentHealthCheck.startDate}">
 								<f:fields>
-									<DatePicker id="startDatePicker" valueFormat="yyyy-MM-dd"/>
+									<DatePicker id="startDatePicker" valueFormat="yyyy-MM-dd" required="true"/>
 								</f:fields>
 							</f:FormElement>
 							
 							<f:FormElement label="{i18n>instrumentHealthCheck.profileDescription}">
 								<f:fields>
-									<ComboBox id="healthCheckProfileComboBox"/>
+									<ComboBox id="healthCheckProfileComboBox" required="true"/>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>
