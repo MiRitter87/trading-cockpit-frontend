@@ -76,6 +76,7 @@ sap.ui.define([
 			if(oSelectedItem == null) {
 				oStartDateLabel.setVisible(false);
 				oStartDatePicker.setVisible(false);
+				return;
 			}
 			else if(oSelectedItem.getKey() == Constants.SCAN_TEMPLATE.RS_SINCE_DATE) {
 				oStartDateLabel.setVisible(true);

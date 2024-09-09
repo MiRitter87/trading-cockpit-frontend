@@ -13,13 +13,14 @@
 					<items>
 						<IconTabFilter text="{i18n>scanResults.tabTemplate}" key="template">
 							<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
-								<Label text="{i18n>scanResults.templateSelection}" class="sapUiSmallMarginEnd"/>
+								<Label text="{i18n>scanResults.templateSelection}" class="sapUiSmallMarginEnd" required="true"/>
 								<ComboBox id="templateComboBox" selectionChange=".onTemplateSelectionChange"/>
 								<Button icon="sap-icon://hint" type="Transparent" tooltip="{i18n>scanResults.templateTooltip}" 
 									press=".onTemplateInformationPressed"/>
-								<Label text="{i18n>instrument.type}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
-								<ComboBox id="typeComboBox" required="true"/>
-								<Label id="startDateLabel" text="{i18n>scanResults.startDate}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
+								<Label text="{i18n>instrument.type}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd" required="true"/>
+								<ComboBox id="typeComboBox"/>
+								<Label id="startDateLabel" text="{i18n>scanResults.startDate}" required="true"
+									class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
 								<DatePicker id="startDatePicker" valueFormat="yyyy-MM-dd"/>
 							</FlexBox>
 						</IconTabFilter>
