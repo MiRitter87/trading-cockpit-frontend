@@ -196,13 +196,16 @@ sap.ui.define([
 				Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS, "healthCheckProfile.confirmations");
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
-				Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING, "healthCheckProfile.confirmationsWithoutCounting");
-				
-			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH, "healthCheckProfile.strength");
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS, "healthCheckProfile.weakness");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING, "healthCheckProfile.confirmationsWithoutCounting");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING, "healthCheckProfile.weaknessWithoutCounting");
 		},
 		
 		
