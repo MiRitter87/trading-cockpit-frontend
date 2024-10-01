@@ -157,6 +157,9 @@ sap.ui.define([
 				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH, "healthCheckProfile.strength");
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.ALL_WITHOUT_COUNTING, "healthCheckProfile.allWithoutCounting")
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING, "healthCheckProfile.confirmationsWithoutCounting");
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
