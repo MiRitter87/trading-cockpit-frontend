@@ -172,10 +172,14 @@ sap.ui.define([
 		profileTextFormatter: function(sProfile, oResourceBundle) {
 			if(sProfile == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS)
 				return oResourceBundle.getText("protocol.profile.confirmations");
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH)
-				return oResourceBundle.getText("protocol.profile.strength");
 			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS)
 				return oResourceBundle.getText("protocol.profile.weakness");
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH)
+				return oResourceBundle.getText("protocol.profile.strength");
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING)
+				return oResourceBundle.getText("protocol.profile.confirmationsWithoutCounting");
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING)
+				return oResourceBundle.getText("protocol.profile.weaknessWithoutCounting");
 			else
 				return "";
 		},
