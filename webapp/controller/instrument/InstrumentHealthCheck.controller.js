@@ -41,7 +41,25 @@ sap.ui.define([
     	 * Handles the button press event of the template information button.
     	 */
     	onProfileInformationPressed : function() {
-	
+			var oComboBox = this.getView().byId("healthCheckProfileComboBox");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var mOptions = new Object();
+			var sTitle = "", sDescription = "";
+			var sKey = "";
+			
+			sKey = oComboBox.getSelectedKey();
+			
+			if(sKey == Constants.HEALTH_CHECK_PROFILE.ALL) {
+				sTitle = oResourceBundle.getText("healthCheckProfile.all");
+				sDescription = oResourceBundle.getText("healthCheckProfile.all.description");
+			}
+			else {
+				MessageBox.information(oResourceBundle.getText("instrumentHealthCheck.noProfileSelected"));
+				return;
+			}
+			
+			mOptions.title = sTitle
+			MessageBox.information(sDescription, mOptions);
 		},
     	
     	
