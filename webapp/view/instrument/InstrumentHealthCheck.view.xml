@@ -46,7 +46,15 @@
 							
 							<f:FormElement label="{i18n>instrumentHealthCheck.profileDescription}">
 								<f:fields>
-									<ComboBox id="healthCheckProfileComboBox" required="true"/>
+									<FlexBox>
+										<ComboBox id="healthCheckProfileComboBox" required="true" width="100%">
+											<layoutData>
+												<FlexItemData growFactor="2" />
+											</layoutData>
+										</ComboBox>
+										<Button icon="sap-icon://hint" type="Transparent" width="40px"
+											tooltip="{i18n>healthCheckProfile.tooltip}" press=".onProfileInformationPressed"/>									
+									</FlexBox>
 								</f:fields>
 							</f:FormElement>
 						</f:formElements>

@@ -38,6 +38,14 @@ sap.ui.define([
     	
     	
     	/**
+    	 * Handles the button press event of the template information button.
+    	 */
+    	onProfileInformationPressed : function() {
+	
+		},
+    	
+    	
+    	/**
     	 * Handles the button press event of the refresh health check button.
     	 */
     	onRefreshPressed : function() {
