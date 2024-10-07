@@ -20,7 +20,8 @@
 					</ComboBox>
 					<Label text="{i18n>healthCheckProfile}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" required="true"/>
 					<ComboBox id="healthCheckProfileComboBox"/>
-					
+					<Button icon="sap-icon://hint" type="Transparent" tooltip="{i18n>i18n>healthCheckProfile.tooltip}" 
+									press=".onProfileInformationPressed"/>
 					<Label text="{i18n>chartHealthCheck.lookbackPeriod}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" required="true"/>
 					<Input id="lookbackPeriodInput" value="15" type="Number" description="{i18n>chartHealthCheck.lookbackPeriod.description}"/>
 				</FlexBox>
