@@ -18,17 +18,14 @@
 					<ComboBox id="instrumentComboBox" items="{path: 'quotations>/quotation/', sorter: {path: 'instrument/id'}}">
 						<core:Item key="{quotations>instrument/id}" text="{quotations>instrument/symbol} - {quotations>instrument/name}"/>
 					</ComboBox>
-					
-					<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
-				</FlexBox>
-				
-				<FlexBox alignItems="Center" justifyContent="Start">
 					<Label text="{i18n>healthCheckProfile}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" required="true"/>
 					<ComboBox id="healthCheckProfileComboBox"/>
 					
 					<Label text="{i18n>chartHealthCheck.lookbackPeriod}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" required="true"/>
 					<Input id="lookbackPeriodInput" value="15" type="Number" description="{i18n>chartHealthCheck.lookbackPeriod.description}"/>
 				</FlexBox>
+
+				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
 			</VBox>
 			
 			<ScrollContainer>
