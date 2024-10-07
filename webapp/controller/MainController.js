@@ -106,6 +106,69 @@ sap.ui.define([
 		
 		
 		/**
+		 * Returns the localized title of the given health check profile.
+		 */
+		getTitleOfHealthCheckProfile : function (sProfile, oResourceBundle) {
+			var sTitle = "";
+			
+			if(sProfile == Constants.HEALTH_CHECK_PROFILE.ALL) {
+				sTitle = oResourceBundle.getText("healthCheckProfile.all");
+			}
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS) {
+				sTitle = oResourceBundle.getText("healthCheckProfile.confirmations");
+			}
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS) {
+				sTitle = oResourceBundle.getText("healthCheckProfile.weakness");
+			}
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH) {
+				sTitle = oResourceBundle.getText("healthCheckProfile.strength");
+			}
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.ALL_WITHOUT_COUNTING) {
+				sTitle = oResourceBundle.getText("healthCheckProfile.allWithoutCounting");
+			}
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING) {
+				sTitle = oResourceBundle.getText("healthCheckProfile.confirmationsWithoutCounting");
+			}
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING) {
+				sTitle = oResourceBundle.getText("healthCheckProfile.weaknessWithoutCounting");
+			}
+			
+			return sTitle;
+		},
+		
+		/**
+		 * Returns the localized description of the given health check profile.
+		 */
+		getDescriptionOfHealthCheckProfile : function (sProfile, oResourceBundle) {
+			var sDescription = "";
+			
+			if(sProfile == Constants.HEALTH_CHECK_PROFILE.ALL) {
+				sDescription = oResourceBundle.getText("healthCheckProfile.all.description");
+			}
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS) {
+				sDescription = oResourceBundle.getText("healthCheckProfile.confirmations.description");
+			}
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS) {
+				sDescription = oResourceBundle.getText("healthCheckProfile.weakness.description");
+			}
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH) {
+				sDescription = oResourceBundle.getText("healthCheckProfile.strength.description");
+			}
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.ALL_WITHOUT_COUNTING) {
+				sDescription = oResourceBundle.getText("healthCheckProfile.allWithoutCounting.description");
+			}
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING) {
+				sDescription = oResourceBundle.getText("healthCheckProfile.confirmationsWithoutCounting.description");
+			}
+			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING) {
+				sDescription = oResourceBundle.getText("healthCheckProfile.weaknessWithoutCounting.description");
+			}
+			
+			return sDescription;
+		},
+		
+		
+		/**
 		 * Gets the server address including the port.
 		 */
 		getServerAddress : function() {

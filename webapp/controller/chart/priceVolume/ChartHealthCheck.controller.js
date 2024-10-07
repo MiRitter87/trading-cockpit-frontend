@@ -59,43 +59,16 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var mOptions = new Object();
 			var sTitle = "", sDescription = "";
-			var sKey = "";
+			var sKey = oComboBox.getSelectedKey();
 			
-			sKey = oComboBox.getSelectedKey();
+			sTitle = MainController.getTitleOfHealthCheckProfile(sKey, oResourceBundle);
+			sDescription = MainController.getDescriptionOfHealthCheckProfile(sKey, oResourceBundle);
 			
-			if(sKey == Constants.HEALTH_CHECK_PROFILE.ALL) {
-				sTitle = oResourceBundle.getText("healthCheckProfile.all");
-				sDescription = oResourceBundle.getText("healthCheckProfile.all.description");
-			}
-			else if(sKey == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS) {
-				sTitle = oResourceBundle.getText("healthCheckProfile.confirmations");
-				sDescription = oResourceBundle.getText("healthCheckProfile.confirmations.description");
-			}
-			else if(sKey == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS) {
-				sTitle = oResourceBundle.getText("healthCheckProfile.weakness");
-				sDescription = oResourceBundle.getText("healthCheckProfile.weakness.description");
-			}
-			else if(sKey == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH) {
-				sTitle = oResourceBundle.getText("healthCheckProfile.strength");
-				sDescription = oResourceBundle.getText("healthCheckProfile.strength.description");
-			}
-			else if(sKey == Constants.HEALTH_CHECK_PROFILE.ALL_WITHOUT_COUNTING) {
-				sTitle = oResourceBundle.getText("healthCheckProfile.allWithoutCounting");
-				sDescription = oResourceBundle.getText("healthCheckProfile.allWithoutCounting.description");
-			}
-			else if(sKey == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING) {
-				sTitle = oResourceBundle.getText("healthCheckProfile.confirmationsWithoutCounting");
-				sDescription = oResourceBundle.getText("healthCheckProfile.confirmationsWithoutCounting.description");
-			}
-			else if(sKey == Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING) {
-				sTitle = oResourceBundle.getText("healthCheckProfile.weaknessWithoutCounting");
-				sDescription = oResourceBundle.getText("healthCheckProfile.weaknessWithoutCounting.description");
-			}
-			else {
-				MessageBox.information(oResourceBundle.getText("instrumentHealthCheck.noProfileSelected"));
+			if(sTitle == "" || sDescription == "") {
+				MessageBox.information(oResourceBundle.getText("chartHealthCheck.noProfileSelected"));
 				return;
 			}
-			
+				
 			mOptions.title = sTitle
 			MessageBox.information(sDescription, mOptions);
 		},
