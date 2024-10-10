@@ -90,6 +90,12 @@ sap.ui.define([
 			HEALTH_CHECK: 'HEALTH_CHECK'
 		},
 		
+		CHART_TEMPLATE: {
+			TREND: 'TREND',
+			BUYABLE_BASE: 'BUYABLE_BASE',
+			RS: 'RS'
+		},
+		
 		CHART_INDICATOR: {
 			NONE: 'NONE',
 			RS_LINE: 'RS_LINE',

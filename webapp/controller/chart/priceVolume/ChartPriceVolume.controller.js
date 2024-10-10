@@ -17,6 +17,7 @@ sap.ui.define([
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("chartPriceVolumeRoute").attachMatched(this._onRouteMatched, this);
 			
+			this.initializeTemplateComboBox();
 			this.initializeIndicatorComboBox();
 		},
 		
@@ -92,6 +93,14 @@ sap.ui.define([
 			else {				
 				oImage.setSrc(null);
 			}
+		},
+		
+		
+		/**
+		 * Handles the selection of a chart template.
+		 */
+		onTemplateSelectionChange : function() {
+			
 		},
 		
 		
@@ -274,6 +283,24 @@ sap.ui.define([
 		
 		
 		/**
+		 * Initializes the ComboBox of chart template selection.
+		 */
+		initializeTemplateComboBox : function() {
+			var oComboBox = this.getView().byId("templateComboBox");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_TEMPLATE.TREND, "chartPriceVolume.template.trend");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_TEMPLATE.BUYABLE_BASE, "chartPriceVolume.template.buyableBase");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_TEMPLATE.RS, "chartPriceVolume.template.relativeStrength");
+		},
+		
+		
+		/**
 		 * Validates the user input. Prompts messages in input is not valid.
 		 */
 		isInputValid : function () {
@@ -384,7 +411,7 @@ sap.ui.define([
 			oRsInstrumentComboBox.setSelectedKey("");
 			oRsInstrumentComboBox.setVisible(false);
 			oRsInstrumentLabel.setVisible(false);
-			oIconTabBar.setSelectedKey("price");
+			oIconTabBar.setSelectedKey("template");
 			oImage.setSrc(null);
 		}
 	});

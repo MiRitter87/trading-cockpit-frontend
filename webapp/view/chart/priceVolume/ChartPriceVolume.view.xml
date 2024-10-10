@@ -25,6 +25,13 @@
 				
 				<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
 					<items>
+						<IconTabFilter text="{i18n>chartPriceVolume.tabTemplate}" key="template">
+							<FlexBox alignItems="Center">
+								<Label text="{i18n>chartPriceVolume.template}" class="sapUiSmallMarginEnd"/>
+								<ComboBox id="templateComboBox" selectedKey="TREND" selectionChange=".onTemplateSelectionChange"/>							
+							</FlexBox>
+						</IconTabFilter>
+					
 						<IconTabFilter text="{i18n>chartPriceVolume.tabPrice}" key="price">
 							<CheckBox id="ema21CheckBox" text="{i18n>chartPriceVolume.ema21}"/>
 							<CheckBox id="sma50CheckBox" text="{i18n>chartPriceVolume.sma50}" selected="true"/>
