@@ -100,7 +100,49 @@ sap.ui.define([
 		 * Handles the selection of a chart template.
 		 */
 		onTemplateSelectionChange : function() {
+			var oTemplateComboBox = this.getView().byId("templateComboBox");
+			var oEma21CheckBox = this.getView().byId("ema21CheckBox");
+			var oSma50CheckBox = this.getView().byId("sma50CheckBox");
+			var oSma150CheckBox = this.getView().byId("sma150CheckBox");
+			var oSma200CheckBox = this.getView().byId("sma200CheckBox");
+			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
+			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
+			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
 			
+			if(oTemplateComboBox.getSelectedKey() == Constants.CHART_TEMPLATE.TREND) {
+				oEma21CheckBox.setSelected(false);
+				oSma50CheckBox.setSelected(true);
+				oSma150CheckBox.setSelected(true);
+				oSma200CheckBox.setSelected(true);
+				
+				oVolumeCheckBox.setSelected(true);
+				oSma30VolumeCheckBox.setSelected(true);
+				
+				oIndicatorComboBox.setSelectedKey(Constants.CHART_INDICATOR.SLOW_STOCHASTIC);
+				this.onIndicatorSelectionChange();
+			} else if(oTemplateComboBox.getSelectedKey() == Constants.CHART_TEMPLATE.BUYABLE_BASE) {
+				oEma21CheckBox.setSelected(true);
+				oSma50CheckBox.setSelected(true);
+				oSma150CheckBox.setSelected(false);
+				oSma200CheckBox.setSelected(true);
+				
+				oVolumeCheckBox.setSelected(true);
+				oSma30VolumeCheckBox.setSelected(true);
+				
+				oIndicatorComboBox.setSelectedKey(Constants.CHART_INDICATOR.BBW);
+				this.onIndicatorSelectionChange();
+			} else if(oTemplateComboBox.getSelectedKey() == Constants.CHART_TEMPLATE.RS) {
+				oEma21CheckBox.setSelected(false);
+				oSma50CheckBox.setSelected(true);
+				oSma150CheckBox.setSelected(true);
+				oSma200CheckBox.setSelected(true);
+				
+				oVolumeCheckBox.setSelected(true);
+				oSma30VolumeCheckBox.setSelected(true);
+				
+				oIndicatorComboBox.setSelectedKey(Constants.CHART_INDICATOR.RS_LINE);
+				this.onIndicatorSelectionChange();
+			}
 		},
 		
 		
@@ -143,8 +185,9 @@ sap.ui.define([
 		/**
 		 * Handles selection of an indicator for the price volume chart.
 		 */
-		onIndicatorSelectionChange : function(oControlEvent) {
-			var oSelectedItem = oControlEvent.getParameters().selectedItem;
+		onIndicatorSelectionChange : function() {
+			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
+			var oSelectedItem = oIndicatorComboBox.getSelectedItem();
 			var oRsInstrumentLabel = this.getView().byId("rsInstrumentLabel");
 			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
 			
