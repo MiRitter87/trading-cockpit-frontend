@@ -736,8 +736,8 @@ sap.ui.define([
           				path: sPath,
            				formatter: this.typeTextFormatter.bind(this)
        				});
-				} else if(oColumnState.key == "performance5DaysColumn" || oColumnState.key == "distanceTo52WeekHighColumn"
-					|| oColumnState.key == "volumeDifferential5DaysColumn" || oColumnState.key == "atrpColumn") {
+				} else if(oColumnState.key == "performance5DaysColumn" || 
+					oColumnState.key == "volumeDifferential5DaysColumn" || oColumnState.key == "atrpColumn") {
 					oText = new Text({
 						text: "{" + sPath + "} %"
 					});	
@@ -770,6 +770,16 @@ sap.ui.define([
 					oObjectStatus.bindProperty("state", {
 						path: sPath,
 						formatter: this.udVolRatioStateFormatter.bind(this)
+					});
+					
+					return oObjectStatus;
+				} else if(oColumnState.key == "distanceTo52WeekHighColumn") {
+					oObjectStatus = new ObjectStatus({
+						text: "{" + sPath + "}"
+					});
+					oObjectStatus.bindProperty("state", {
+						path: sPath,
+						formatter: this.distance52wHighStateFormatter.bind(this)
 					});
 					
 					return oObjectStatus;
@@ -847,6 +857,16 @@ sap.ui.define([
 				return "Error";
 			} else  {
 				return "None";
+			}
+		},
+		
+		
+		/**
+		 * State formatter of the distance to the 52w high.
+		 */
+		distance52wHighStateFormatter: function(fDistanceTo52wHigh) {
+			if(fDistanceTo52wHigh >= -5) {
+				return "Success";
 			}
 		},
 		

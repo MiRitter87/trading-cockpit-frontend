@@ -118,7 +118,8 @@
 								state="{path: 'relativeStrengthData/rsNumberCompositeIg', formatter: '.rsNumberStateFormatter'}"/>
 							<Text text="{relativeStrengthData/rsNumberSector}"/>
 							<Text text="{relativeStrengthData/rsNumberIndustryGroup}"/>
-							<Text text="{indicator/distanceTo52WeekHigh} %"/>
+							<ObjectStatus text="{indicator/distanceTo52WeekHigh} %"
+								state="{path: 'indicator/distanceTo52WeekHigh', formatter: '.distance52wHighStateFormatter'}"/>
 							<Text text="{indicator/performance5Days} %"/>
 							<Text text="{indicator/volumeDifferential5Days} %"/>
 							<Text text="{indicator/bollingerBandWidth10Days}"/>
