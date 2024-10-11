@@ -28,7 +28,7 @@
 						<IconTabFilter text="{i18n>chartPriceVolume.tabTemplate}" key="template">
 							<FlexBox alignItems="Center">
 								<Label text="{i18n>chartPriceVolume.template}" class="sapUiSmallMarginEnd"/>
-								<ComboBox id="templateComboBox" selectedKey="TREND" selectionChange=".onTemplateSelectionChange"/>							
+								<ComboBox id="templateComboBox" selectionChange=".onTemplateSelectionChange"/>							
 							</FlexBox>
 						</IconTabFilter>
 					

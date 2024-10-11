@@ -30,6 +30,7 @@ sap.ui.define([
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, false, Constants.SCAN_TEMPLATE.ALL);
 			
 			this.resetUIElements();
+			this.onTemplateSelectionChange();
     	},
     	
     	
@@ -117,6 +118,7 @@ sap.ui.define([
 				
 				oVolumeCheckBox.setSelected(true);
 				oSma30VolumeCheckBox.setSelected(true);
+				oSma30VolumeCheckBox.setEnabled(true);
 				
 				oIndicatorComboBox.setSelectedKey(Constants.CHART_INDICATOR.SLOW_STOCHASTIC);
 				this.onIndicatorSelectionChange();
@@ -128,6 +130,7 @@ sap.ui.define([
 				
 				oVolumeCheckBox.setSelected(true);
 				oSma30VolumeCheckBox.setSelected(true);
+				oSma30VolumeCheckBox.setEnabled(true);
 				
 				oIndicatorComboBox.setSelectedKey(Constants.CHART_INDICATOR.BBW);
 				this.onIndicatorSelectionChange();
@@ -139,6 +142,7 @@ sap.ui.define([
 				
 				oVolumeCheckBox.setSelected(true);
 				oSma30VolumeCheckBox.setSelected(true);
+				oSma30VolumeCheckBox.setEnabled(true);
 				
 				oIndicatorComboBox.setSelectedKey(Constants.CHART_INDICATOR.RS_LINE);
 				this.onIndicatorSelectionChange();
@@ -442,19 +446,15 @@ sap.ui.define([
 		 */
 		resetUIElements : function () {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
-			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
 			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
-			var oRsInstrumentLabel = this.getView().byId("rsInstrumentLabel");
+			var oTemplateComboBox = this.getView().byId("templateComboBox");
 			var oIconTabBar = this.getView().byId("iconTabBar");
-			
 			var oImage = this.getView().byId("chartImage");
 
 			oInstrumentComboBox.setSelectedKey("");
-			oIndicatorComboBox.setSelectedKey("");
 			oRsInstrumentComboBox.setSelectedKey("");
-			oRsInstrumentComboBox.setVisible(false);
-			oRsInstrumentLabel.setVisible(false);
 			oIconTabBar.setSelectedKey("template");
+			oTemplateComboBox.setSelectedKey(Constants.CHART_TEMPLATE.TREND);
 			oImage.setSrc(null);
 		}
 	});
