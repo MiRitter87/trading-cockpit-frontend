@@ -775,7 +775,7 @@ sap.ui.define([
 					return oObjectStatus;
 				} else if(oColumnState.key == "distanceTo52WeekHighColumn") {
 					oObjectStatus = new ObjectStatus({
-						text: "{" + sPath + "}"
+						text: "{" + sPath + "} %"
 					});
 					oObjectStatus.bindProperty("state", {
 						path: sPath,
