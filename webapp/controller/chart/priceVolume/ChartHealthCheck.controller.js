@@ -64,7 +64,7 @@ sap.ui.define([
 			sTitle = MainController.getTitleOfHealthCheckProfile(sKey, oResourceBundle);
 			sDescription = MainController.getDescriptionOfHealthCheckProfile(sKey, oResourceBundle);
 			
-			if(sTitle == "" || sDescription == "") {
+			if (sTitle === "" || sDescription === "") {
 				MessageBox.information(oResourceBundle.getText("chartHealthCheck.noProfileSelected"));
 				return;
 			}
@@ -85,7 +85,7 @@ sap.ui.define([
 			var sProfile;
 			var sChartUrl;
 			
-			if(bIsInputValid) {
+			if (bIsInputValid) {
 				sChartUrl = this.getChartUrl();
 				oImage.setSrc(sChartUrl);
 				
@@ -109,8 +109,9 @@ sap.ui.define([
 			var oImage = this.getView().byId("chartImage");
 			var sImageSrc = oImage.getProperty("src");
 			
-			if(sImageSrc == "")
+			if (sImageSrc === "") {				
 				return;		//There was no image to load.
+			}
 			
 			//The backend currently only supports a response with error code 404 and standard error page with response text.
 			//The response site would have to be parsed in order to get the message from the backend.
@@ -125,12 +126,12 @@ sap.ui.define([
 		queryQuotationsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}
 			
@@ -145,14 +146,15 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if (bShowSuccessMessage === true) {					
 					MessageToast.show(oResourceBundle.getText("chartHealthCheck.checkSuccessful"));			
+				}
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -203,29 +205,29 @@ sap.ui.define([
 			var sLookbackPeriod = oLookbackPeriodInput.getValue();
 			var iLookbackPeriod = 0;
 			
-			if(sSelectedInstrumentId == "") {
+			if (sSelectedInstrumentId === "") {
 				MessageBox.error(oResourceBundle.getText("chartHealthCheck.noInstrumentSelected"));
 				return false;
 			}
 			
-			if(sSelectedProfile == "") {	
+			if (sSelectedProfile === "") {	
 				MessageBox.error(oResourceBundle.getText("chartHealthCheck.noProfileSelected"));
 				return false;
 			}
 			
-			if(sLookbackPeriod == "") {
+			if (sLookbackPeriod === "") {
 				MessageBox.error(oResourceBundle.getText("chartHealthCheck.lookbackPeriodInvalid"));
 				return false;
 			}
 			
 			iLookbackPeriod = parseInt(sLookbackPeriod);
 			
-			if(isNaN(iLookbackPeriod)) {
+			if (isNaN(iLookbackPeriod)) {
 				MessageBox.error(oResourceBundle.getText("chartHealthCheck.lookbackPeriodInvalid"));
 				return false;
 			}
 			
-			if(iLookbackPeriod < 1 || iLookbackPeriod > 50) {
+			if (iLookbackPeriod < 1 || iLookbackPeriod > 50) {
 				MessageBox.error(oResourceBundle.getText("chartHealthCheck.lookbackPeriodInvalid"));
 				return false;
 			}

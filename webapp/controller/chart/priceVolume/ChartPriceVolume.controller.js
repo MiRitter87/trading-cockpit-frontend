@@ -58,13 +58,13 @@ sap.ui.define([
 			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
 			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
 			
-			if(oSelectedItem == null) {
+			if (oSelectedItem === null) {
 				return;
 			}
 			
 			oInstrument = ScanController.getInstrumentById(oSelectedItem.getKey(), oQuotationsModel.oData.quotation);
 			
-			if(oInstrument.type == Constants.INSTRUMENT_TYPE.RATIO) {
+			if (oInstrument.type === Constants.INSTRUMENT_TYPE.RATIO) {
 				oVolumeCheckBox.setSelected(false);
 				oVolumeCheckBox.setEnabled(false);
 				oSma30VolumeCheckBox.setSelected(false);
@@ -87,7 +87,7 @@ sap.ui.define([
 			var bIsInputValid = this.isInputValid();
 			var sChartUrl;
 			
-			if(bIsInputValid) {
+			if (bIsInputValid) {
 				sChartUrl = this.getChartUrl();
 				oImage.setSrc(sChartUrl);
 			}
@@ -110,7 +110,7 @@ sap.ui.define([
 			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
 			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
 			
-			if(oTemplateComboBox.getSelectedKey() == Constants.CHART_TEMPLATE.TREND) {
+			if (oTemplateComboBox.getSelectedKey() === Constants.CHART_TEMPLATE.TREND) {
 				oEma21CheckBox.setSelected(false);
 				oSma50CheckBox.setSelected(true);
 				oSma150CheckBox.setSelected(true);
@@ -122,7 +122,7 @@ sap.ui.define([
 				
 				oIndicatorComboBox.setSelectedKey(Constants.CHART_INDICATOR.SLOW_STOCHASTIC);
 				this.onIndicatorSelectionChange();
-			} else if(oTemplateComboBox.getSelectedKey() == Constants.CHART_TEMPLATE.BUYABLE_BASE) {
+			} else if (oTemplateComboBox.getSelectedKey() === Constants.CHART_TEMPLATE.BUYABLE_BASE) {
 				oEma21CheckBox.setSelected(true);
 				oSma50CheckBox.setSelected(true);
 				oSma150CheckBox.setSelected(false);
@@ -134,7 +134,7 @@ sap.ui.define([
 				
 				oIndicatorComboBox.setSelectedKey(Constants.CHART_INDICATOR.BBW);
 				this.onIndicatorSelectionChange();
-			} else if(oTemplateComboBox.getSelectedKey() == Constants.CHART_TEMPLATE.RS) {
+			} else if (oTemplateComboBox.getSelectedKey() === Constants.CHART_TEMPLATE.RS) {
 				oEma21CheckBox.setSelected(false);
 				oSma50CheckBox.setSelected(true);
 				oSma150CheckBox.setSelected(true);
@@ -158,8 +158,9 @@ sap.ui.define([
 			var oImage = this.getView().byId("chartImage");
 			var sImageSrc = oImage.getProperty("src");
 			
-			if(sImageSrc == "")
+			if (sImageSrc === "") {				
 				return;		//There was no image to load.
+			}
 			
 			//The backend currently only supports a response with error code 404 and standard error page with response text.
 			//The response site would have to be parsed in order to get the message from the backend.
@@ -175,7 +176,7 @@ sap.ui.define([
 			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
 			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
 			 
-			if(oVolumeCheckBox.getSelected() == true) {				
+			if (oVolumeCheckBox.getSelected() === true) {				
 				oSma30VolumeCheckBox.setEnabled(true);
 				oSma30VolumeCheckBox.setSelected(true);
 			}
@@ -195,7 +196,7 @@ sap.ui.define([
 			var oRsInstrumentLabel = this.getView().byId("rsInstrumentLabel");
 			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
 			
-			if(oSelectedItem.getKey() == Constants.CHART_INDICATOR.RS_LINE) {
+			if (oSelectedItem.getKey() === Constants.CHART_INDICATOR.RS_LINE) {
 				oRsInstrumentLabel.setVisible(true);
 				oRsInstrumentComboBox.setVisible(true);
 				
@@ -295,12 +296,12 @@ sap.ui.define([
 		queryQuotationsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}
 			
@@ -358,12 +359,12 @@ sap.ui.define([
 			var sSelectedIndicator = oIndicatorComboBox.getSelectedKey();
 			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
 			
-			if(sSelectedInstrumentId == "") {
+			if (sSelectedInstrumentId === "") {
 				MessageBox.error(oResourceBundle.getText("chartPriceVolume.noInstrumentSelected"));
 				return false;
 			}
 			
-			if(sSelectedIndicator == Constants.CHART_INDICATOR.RS_LINE && oRsInstrumentComboBox.getSelectedKey() == "") {	
+			if (sSelectedIndicator === Constants.CHART_INDICATOR.RS_LINE && oRsInstrumentComboBox.getSelectedKey() === "") {	
 				MessageBox.error(oResourceBundle.getText("chartPriceVolume.noRsInstrumentSelected"));
 				return false;
 			}
@@ -407,33 +408,33 @@ sap.ui.define([
 			var sSelectedIndicator = oIndicatorComboBox.getSelectedKey();
 			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
 			
-			if(sSelectedIndicator == "") {
+			if (sSelectedIndicator === "") {
 				sParameters = sParameters + "?indicator=NONE";				
 			}
 			else {
 				sParameters = sParameters + "?indicator=" + sSelectedIndicator;
 			}
 			
-			if(oEma21CheckBox.getSelected() == true) {
+			if (oEma21CheckBox.getSelected() === true) {
 				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.EMA_21;
 			}
 			
-			if(oSma50CheckBox.getSelected() == true) {
+			if (oSma50CheckBox.getSelected() === true) {
 				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.SMA_50;
 			}
 			
-			if(oSma150CheckBox.getSelected() == true) {
+			if (oSma150CheckBox.getSelected() === true) {
 				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.SMA_150;
 			}
 			
-			if(oSma200CheckBox.getSelected() == true) {
+			if (oSma200CheckBox.getSelected() === true) {
 				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.SMA_200;
 			}
 			
 			sParameters = sParameters + "&withVolume=" + oVolumeCheckBox.getSelected();
 			sParameters = sParameters + "&withSma30Volume=" + oSma30VolumeCheckBox.getSelected();
 			
-			if(sSelectedIndicator == Constants.CHART_INDICATOR.RS_LINE) {
+			if (sSelectedIndicator === Constants.CHART_INDICATOR.RS_LINE) {
 				sParameters = sParameters + "&rsInstrumentId=" + oRsInstrumentComboBox.getSelectedKey();
 			}
 			

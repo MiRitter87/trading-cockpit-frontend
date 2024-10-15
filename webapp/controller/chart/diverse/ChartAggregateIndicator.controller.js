@@ -55,7 +55,7 @@ sap.ui.define([
 			var bIsInputValid = this.isInputValid();
 			var sChartUrl;
 			
-			if(bIsInputValid) {
+			if (bIsInputValid) {
 				sChartUrl = this.getChartUrl();
 				oImage.setSrc(sChartUrl);
 			}
@@ -73,8 +73,9 @@ sap.ui.define([
 			var oImage = this.getView().byId("chartImage");
 			var sImageSrc = oImage.getProperty("src");
 			
-			if(sImageSrc == "")
+			if (sImageSrc === "") {				
 				return;		//There was no image to load.
+			}
 			
 			//The backend currently only supports a response with error code 404 and standard error page with response text.
 			//The response site would have to be parsed in order to get the message from the backend.
@@ -90,12 +91,12 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}
 			
@@ -111,11 +112,11 @@ sap.ui.define([
 		queryListsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -131,7 +132,7 @@ sap.ui.define([
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
-			if(sSelectedInstrumentId == "") {
+			if (sSelectedInstrumentId === "") {
 				MessageBox.error(oResourceBundle.getText("chartAggregateIndicator.noInstrumentSelected"));
 				return false;
 			}
@@ -157,7 +158,7 @@ sap.ui.define([
 			//It assures that the image is not loaded from the browser cache by generating a new query URL each time.
 			sChartUrl = sChartUrl  + "?randomDate=" + new Date().getTime();
 			
-			if(sListId != "") {
+			if (sListId !== "") {
 				sChartUrl = sChartUrl + "&listId=" + sListId;
 			}
 			

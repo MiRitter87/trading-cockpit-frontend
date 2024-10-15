@@ -107,7 +107,7 @@ sap.ui.define([
 			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
-			if(sSelectedInstrumentId == "") {
+			if (sSelectedInstrumentId === "") {
 				MessageBox.information(oResourceBundle.getText("chartPriceVolume.noInstrumentSelected"));
 				return;				
 			}
@@ -123,7 +123,7 @@ sap.ui.define([
 			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
-			if(sSelectedInstrumentId == "") {
+			if (sSelectedInstrumentId === "") {
 				this.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, oCallingController, true);				
 			}
 			else {
@@ -148,8 +148,9 @@ sap.ui.define([
 			var bInputValid = this.isHorizontalLineInputvalid(oCallingController);
 			var oHorizontalLineModel;
 			
-			if(bInputValid == false)
+			if (bInputValid === false) {				
 				return;
+			}
 				
 			oHorizontalLineModel = this.getHorizontalLineModel(oCallingController);
 			
@@ -172,7 +173,7 @@ sap.ui.define([
 		onDeleteChartObjectPressed : function(oCallingController) {
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oCallingController.getView().byId("chartObjectTable").getSelectedItem() == null) {
+			if (oCallingController.getView().byId("chartObjectTable").getSelectedItem() === null) {
 				MessageBox.information(oResourceBundle.getText("chartPriceVolume.objectOverviewDialog.noObjectSelected"));
 				return;				
 			}
@@ -223,11 +224,11 @@ sap.ui.define([
 		queryQuotationsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);		
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -241,18 +242,18 @@ sap.ui.define([
 		 * Callback function of the createHorizontalLine RESTful WebService call.
 		 */
 		createHorizontalLineCallback : function (oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
 					this.resetChartObjectCreation(oCallingController);
 					oCallingController.byId("createChartObjectDialog").close();
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
@@ -266,17 +267,17 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oOverviewDialog = oCallingController.byId("chartObjectOverviewDialog");
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);		
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "horizontalLines");
 			
-			if(oOverviewDialog == undefined || oOverviewDialog.isOpen() == false) {
+			if (oOverviewDialog === undefined || oOverviewDialog.isOpen() === false) {
 				MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.chart.priceVolume.ChartObjectOverview");				
 			}
 		},
@@ -289,11 +290,11 @@ sap.ui.define([
 			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
 					
-					if(sSelectedInstrumentId == "") {
+					if (sSelectedInstrumentId === "") {
 						this.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, oCallingController, true);				
 					}
 					else {
@@ -301,11 +302,11 @@ sap.ui.define([
 					}
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
@@ -342,8 +343,9 @@ sap.ui.define([
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
 			
-			if(sInstrumentId != undefined && sInstrumentId != null)
+			if (sInstrumentId !== undefined && sInstrumentId !== null) {				
 				sQueryUrl= sQueryUrl + "?instrumentId=" + sInstrumentId;
+			}
 			
 			jQuery.ajax({
 				type : "GET", 
@@ -407,20 +409,20 @@ sap.ui.define([
 			var oSelectedCoordinateModel;
 			var price;
 			
-			if(sSelectedObjectType == "") {
+			if (sSelectedObjectType === "") {
 				MessageBox.error(oResourceBundle.getText("chartPriceVolume.noObjectTypeSelected"));
 				return false;
 			}
 			
 			oSelectedCoordinateModel = oCallingController.getView().getModel("selectedCoordinates");
 			
-			if(oSelectedCoordinateModel == null || oSelectedCoordinateModel == undefined) {
+			if (oSelectedCoordinateModel === null || oSelectedCoordinateModel === undefined) {
 				MessageBox.error(oResourceBundle.getText("chartPriceVolume.noHorizontalPriceSelected"));
 				return false;
 			} else {
 				price = oSelectedCoordinateModel.getProperty("/price")
 				
-				if(price == undefined || price == "") {
+				if (price === undefined || price === "") {
 					MessageBox.error(oResourceBundle.getText("chartPriceVolume.noHorizontalPriceSelected"));
 					return false;
 				}
