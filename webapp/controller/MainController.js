@@ -15,12 +15,13 @@ sap.ui.define([
 			var oView = oController.getView();
 			var oDialogOfMap;
 			
-			if(!oController.oDialogMap)
+			if (!oController.oDialogMap) {				
 				oController.oDialogMap = new Map();
+			}
 				
 			oDialogOfMap = oController.oDialogMap.get(sName);
 			
-			if(oDialogOfMap === undefined) {
+			if (oDialogOfMap === undefined) {
 				oDialogOfMap = Fragment.load({
 					id: oView.getId(),
 					name: sName,
@@ -38,8 +39,9 @@ sap.ui.define([
 				oDialog.open();
 				
 				//This callback function is executed optionally, after the Fragment has been fully initialized and opened.
-				if(callbackFunction != undefined)
+				if (callbackFunction !== undefined) {					
 					callbackFunction(oController);
+				}
 			});
 		},
 
@@ -56,7 +58,6 @@ sap.ui.define([
 		 * Initializes the given ComboBox with items for stock exchange selection.
 		 */
 		initializeStockExchangeComboBox : function(oComboBox, oResourceBundle) {
-			
 			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.NYSE, "stockExchange.nyse");
 			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.NDQ, "stockExchange.ndq");
 			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.AMEX, "stockExchange.amex");
@@ -84,24 +85,25 @@ sap.ui.define([
 		 * Returns the localized text of the given stock exchange.
 		 */
 		getLocalizedStockExchangeText : function(sStockExchange, oResourceBundle) {
-			if(sStockExchange == Constants.STOCK_EXCHANGE.NYSE)
+			if (sStockExchange === Constants.STOCK_EXCHANGE.NYSE) {				
 				return oResourceBundle.getText("stockExchange.nyse");
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.NDQ)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.NDQ) {				
 				return oResourceBundle.getText("stockExchange.ndq");
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.AMEX)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.AMEX) {				
 				return oResourceBundle.getText("stockExchange.amex");
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.OTC)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.OTC) {				
 				return oResourceBundle.getText("stockExchange.otc");
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.TSX) {				
 				return oResourceBundle.getText("stockExchange.tsx");
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSXV)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.TSXV) {				
 				return oResourceBundle.getText("stockExchange.tsxv");
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.CSE)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.CSE) {				
 				return oResourceBundle.getText("stockExchange.cse");
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.LSE)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.LSE) {				
 				return oResourceBundle.getText("stockExchange.lse");
-			else
+			} else {				
 				return "";
+			}
 		},
 		
 		
@@ -111,25 +113,25 @@ sap.ui.define([
 		getTitleOfHealthCheckProfile : function (sProfile, oResourceBundle) {
 			var sTitle = "";
 			
-			if(sProfile == Constants.HEALTH_CHECK_PROFILE.ALL) {
+			if (sProfile === Constants.HEALTH_CHECK_PROFILE.ALL) {
 				sTitle = oResourceBundle.getText("healthCheckProfile.all");
 			}
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS) {
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS) {
 				sTitle = oResourceBundle.getText("healthCheckProfile.confirmations");
 			}
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS) {
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS) {
 				sTitle = oResourceBundle.getText("healthCheckProfile.weakness");
 			}
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH) {
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH) {
 				sTitle = oResourceBundle.getText("healthCheckProfile.strength");
 			}
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.ALL_WITHOUT_COUNTING) {
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.ALL_WITHOUT_COUNTING) {
 				sTitle = oResourceBundle.getText("healthCheckProfile.allWithoutCounting");
 			}
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING) {
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING) {
 				sTitle = oResourceBundle.getText("healthCheckProfile.confirmationsWithoutCounting");
 			}
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING) {
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING) {
 				sTitle = oResourceBundle.getText("healthCheckProfile.weaknessWithoutCounting");
 			}
 			
@@ -142,25 +144,25 @@ sap.ui.define([
 		getDescriptionOfHealthCheckProfile : function (sProfile, oResourceBundle) {
 			var sDescription = "";
 			
-			if(sProfile == Constants.HEALTH_CHECK_PROFILE.ALL) {
+			if (sProfile === Constants.HEALTH_CHECK_PROFILE.ALL) {
 				sDescription = oResourceBundle.getText("healthCheckProfile.all.description");
 			}
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS) {
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS) {
 				sDescription = oResourceBundle.getText("healthCheckProfile.confirmations.description");
 			}
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS) {
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS) {
 				sDescription = oResourceBundle.getText("healthCheckProfile.weakness.description");
 			}
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH) {
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH) {
 				sDescription = oResourceBundle.getText("healthCheckProfile.strength.description");
 			}
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.ALL_WITHOUT_COUNTING) {
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.ALL_WITHOUT_COUNTING) {
 				sDescription = oResourceBundle.getText("healthCheckProfile.allWithoutCounting.description");
 			}
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING) {
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING) {
 				sDescription = oResourceBundle.getText("healthCheckProfile.confirmationsWithoutCounting.description");
 			}
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING) {
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING) {
 				sDescription = oResourceBundle.getText("healthCheckProfile.weaknessWithoutCounting.description");
 			}
 			
@@ -185,15 +187,16 @@ sap.ui.define([
 			var aFilters = new Array();
 			var oFilterType, oFilterTotal;
 			
-			if(aAllowedInstrumentTypes == undefined || aAllowedInstrumentTypes.length == 0)
+			if (aAllowedInstrumentTypes === undefined || aAllowedInstrumentTypes.length === 0) {				
 				return;
+			}
 				
-			for(var i = 0; i < aAllowedInstrumentTypes.length; i++) {
+			for (var i = 0; i < aAllowedInstrumentTypes.length; i++) {
 				oFilterType = new Filter(sTypePath, FilterOperator.EQ, aAllowedInstrumentTypes[i]);
 				aFilters.push(oFilterType);
 			}
 			
-			if(oBinding == undefined)
+			if (oBinding === undefined)
 				return;
 			
 			//Connect filters via logical "OR".

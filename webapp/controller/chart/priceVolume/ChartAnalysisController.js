@@ -59,7 +59,7 @@ sap.ui.define([
 			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
 			
 			//The dataset needs to be constructed beginning at the oldest value.
-			for(var i = oQuotations.length -1; i >= 0; i--) {
+			for (var i = oQuotations.length -1; i >= 0; i--) {
     			var oQuotation = oQuotations[i];
     			var oCandlestickDataset = new Object();
     			
