@@ -47,8 +47,9 @@ sap.ui.define([
 			var sInstrumentId;
 			var sListId;
 			
-			if(bInputValid == false)
+			if (bInputValid === false) {				
 				return;
+			}
 			
 			sInstrumentId = this.getView().byId("instrumentComboBox").getSelectedKey();
 			sListId = this.getView().byId("listComboBox").getSelectedKey();
@@ -64,12 +65,12 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}
 			
@@ -85,11 +86,11 @@ sap.ui.define([
 		queryListsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -104,14 +105,14 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if (bShowSuccessMessage === true)
 					MessageToast.show(oResourceBundle.getText("dashboardHealthStatus.checkSuccessful"));			
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -128,7 +129,7 @@ sap.ui.define([
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			
 			//Check if Instrument has been selected.
-			if(oInstrumentComboBox.getSelectedKey() == "") {
+			if (oInstrumentComboBox.getSelectedKey() === "") {
 				MessageBox.error(oResourceBundle.getText("dashboardHealthStatus.noInstrumentSelected"));
 				return false;
 			}
@@ -139,13 +140,13 @@ sap.ui.define([
 		 * Formatter of the Swingtrading Environment status icon.
 		 */
 		steIconSrcFormatter : function(sSwingTradingEnvironmentStatus) {
-			if(sSwingTradingEnvironmentStatus == 'GREEN') {
+			if (sSwingTradingEnvironmentStatus === 'GREEN') {
 				return "sap-icon://status-positive";
 			}
-			else if(sSwingTradingEnvironmentStatus == 'YELLOW') {
+			else if (sSwingTradingEnvironmentStatus === 'YELLOW') {
 				return "sap-icon://status-critical";
 			}
-			else if(sSwingTradingEnvironmentStatus == 'RED') {
+			else if (sSwingTradingEnvironmentStatus === 'RED') {
 				return "sap-icon://status-negative";
 			}
 		},
@@ -155,13 +156,13 @@ sap.ui.define([
 		 * Formatter of the Swingtrading Environment status icon color.
 		 */
 		steIconColorFormatter : function(sSwingTradingEnvironmentStatus) {
-			if(sSwingTradingEnvironmentStatus == 'GREEN') {
+			if (sSwingTradingEnvironmentStatus === 'GREEN') {
 				return "green";
 			}
-			else if(sSwingTradingEnvironmentStatus == 'YELLOW') {
+			else if (sSwingTradingEnvironmentStatus === 'YELLOW') {
 				return "yellow";
 			}
-			else if(sSwingTradingEnvironmentStatus == 'RED') {
+			else if (sSwingTradingEnvironmentStatus === 'RED') {
 				return "red";
 			}
 		},
@@ -171,7 +172,7 @@ sap.ui.define([
 		 * Formatter of the visibility of the Distribution Days icon.
 		 */
 		ddIconVisibleFormatter : function(iDistributionDaysSum) {			
-			if(iDistributionDaysSum >= 5) {
+			if (iDistributionDaysSum >= 5) {
 				return true;
 			}
 			else {
@@ -186,7 +187,7 @@ sap.ui.define([
 		aiTextFormatter : function(iAggregateIndicator) {
 			//The backend returns -1 if the aggregate indicator could not be determined.
 			//In this case don't show any value.
-			if(iAggregateIndicator == -1) {
+			if (iAggregateIndicator === -1) {
 				return "";
 			}
 			else {
@@ -199,10 +200,10 @@ sap.ui.define([
 		 * Formatter of the Aggregate Indicator status icon.
 		 */
 		aiIconSrcFormatter : function(iAggregateIndicator) {
-			if(iAggregateIndicator >= 0 && iAggregateIndicator <= 15) {
+			if (iAggregateIndicator >= 0 && iAggregateIndicator <= 15) {
 				return "sap-icon://status-positive";
 			}
-			else if(iAggregateIndicator >= 85) {
+			else if (iAggregateIndicator >= 85) {
 				return "sap-icon://status-negative";
 			}
 			else {
@@ -215,10 +216,10 @@ sap.ui.define([
 		 * Formatter of the Aggregate Indicator status icon color.
 		 */
 		aiIconColorFormatter : function(iAggregateIndicator) {
-			if(iAggregateIndicator <= 15) {
+			if (iAggregateIndicator <= 15) {
 				return "green";
 			}
-			else if(iAggregateIndicator >= 85) {
+			else if (iAggregateIndicator >= 85) {
 				return "red";
 			}
 		},
@@ -230,7 +231,7 @@ sap.ui.define([
 		percentNear52wHighFormatter : function(iNumberNear52wHigh, iNumberNear52wLow) {
 			var iPercentNearHigh;
 			
-			if(iNumberNear52wHigh == 0 && iNumberNear52wLow == 0) {
+			if (iNumberNear52wHigh === 0 && iNumberNear52wLow === 0) {
 				return 0;
 			}
 			
@@ -246,7 +247,7 @@ sap.ui.define([
 		percentNear52wLowFormatter : function(iNumberNear52wHigh, iNumberNear52wLow) {
 			var iPercentNearLow;
 			
-			if(iNumberNear52wHigh == 0 && iNumberNear52wLow == 0) {
+			if (iNumberNear52wHigh === 0 && iNumberNear52wLow === 0) {
 				return 0;
 			}
 			
@@ -262,7 +263,7 @@ sap.ui.define([
 		percentUpOnVolumeFormatter : function(iNumberUpOnVolume, iNumberDownOnVolume) {
 			var iPercentUpOnVolume;
 			
-			if(iNumberUpOnVolume == 0 && iNumberDownOnVolume == 0) {
+			if (iNumberUpOnVolume === 0 && iNumberDownOnVolume === 0) {
 				return 0;
 			}
 			
@@ -278,7 +279,7 @@ sap.ui.define([
 		percentDownOnVolumeFormatter : function(iNumberUpOnVolume, iNumberDownOnVolume) {
 			var iPercentNearLow;
 			
-			if(iNumberUpOnVolume == 0 && iNumberDownOnVolume == 0) {
+			if (iNumberUpOnVolume === 0 && iNumberDownOnVolume === 0) {
 				return 0;
 			}
 			

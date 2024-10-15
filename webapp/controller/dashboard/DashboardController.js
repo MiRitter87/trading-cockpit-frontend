@@ -11,11 +11,11 @@ sap.ui.define([
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/statistic");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "?instrumentType=" + sType;
 			
-			if(sSectorId != undefined) {
+			if (sSectorId !== undefined) {
 				sQueryUrl = sQueryUrl + "&sectorId=" + sSectorId;
 			}
 			
-			if(sIndustryGroupId != undefined) {
+			if (sIndustryGroupId !== undefined) {
 				sQueryUrl = sQueryUrl + "&industryGroupId=" + sIndustryGroupId;
 			}
 			
@@ -39,7 +39,7 @@ sap.ui.define([
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/dashboard");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/marketHealthStatus/" + iInstrumentId;
 			
-			if(sListId != "") {
+			if (sListId !== "") {
 				sQueryUrl = sQueryUrl + "?listId=" + sListId;
 			}
 			
