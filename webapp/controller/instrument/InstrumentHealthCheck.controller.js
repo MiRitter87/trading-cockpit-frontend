@@ -50,7 +50,7 @@ sap.ui.define([
 			sTitle = MainController.getTitleOfHealthCheckProfile(sKey, oResourceBundle);
 			sDescription = MainController.getDescriptionOfHealthCheckProfile(sKey, oResourceBundle);
 			
-			if(sTitle == "" || sDescription == "") {
+			if (sTitle === "" || sDescription === "") {
 				MessageBox.information(oResourceBundle.getText("instrumentHealthCheck.noProfileSelected"));
 				return;
 			}
@@ -69,8 +69,9 @@ sap.ui.define([
 			var sStartDate;
 			var sProfile;
 			
-			if(bInputValid == false)
+			if (bInputValid === false) {				
 				return;
+			}
 			
 			sInstrumentId = this.getView().byId("instrumentComboBox").getSelectedKey();
 			sStartDate = this.getView().byId("startDatePicker").getValue();
@@ -88,15 +89,16 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 						
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if (bShowSuccessMessage === true) {					
 					MessageToast.show(oResourceBundle.getText("instrumentOverview.dataLoaded"));			
+				}
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -111,14 +113,15 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if (bShowSuccessMessage === true) {					
 					MessageToast.show(oResourceBundle.getText("instrumentHealthCheck.checkSuccessful"));			
+				}
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -171,17 +174,17 @@ sap.ui.define([
 			var oProfileComboBox = this.getView().byId("healthCheckProfileComboBox");
 			
 			//Check if Instrument, profile and date have been selected.
-			if(oInstrumentComboBox.getSelectedKey() == "") {
+			if (oInstrumentComboBox.getSelectedKey() === "") {
 				MessageBox.error(oResourceBundle.getText("instrumentHealthCheck.noInstrumentSelected"));
 				return false;
 			}
 
-			if(oStartDatePicker.getValue() == "") {
+			if (oStartDatePicker.getValue() === "") {
 				MessageBox.error(oResourceBundle.getText("instrumentHealthCheck.noStartDateSelected"));
 				return false;
 			}
 			
-			if(oProfileComboBox.getSelectedKey() == "") {
+			if (oProfileComboBox.getSelectedKey() === "") {
 				MessageBox.error(oResourceBundle.getText("instrumentHealthCheck.noProfileSelected"));
 				return false;
 			}

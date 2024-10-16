@@ -25,10 +25,10 @@ sap.ui.define([
 		 */
 		getInstrumentById : function(iInstrumentId, oInstruments) {
 			//Get the selected instrument from the array of all instruments according to the id.
-			for(var i = 0; i < oInstruments.length; i++) {
+			for (var i = 0; i < oInstruments.length; i++) {
     			var oTempInstrument = oInstruments[i];
     			
-				if(oTempInstrument.id == iInstrumentId) {
+				if (oTempInstrument.id === iInstrumentId) {
 					return oTempInstrument;
 				}
 			}
@@ -41,18 +41,19 @@ sap.ui.define([
 		 * Returns the localized text of the given type.
 		 */
 		getLocalizedTypeText : function(sType, oResourceBundle) {
-			if(sType == Constants.INSTRUMENT_TYPE.STOCK)
+			if (sType === Constants.INSTRUMENT_TYPE.STOCK) {				
 				return oResourceBundle.getText("instrument.type.stock");
-			else if(sType == Constants.INSTRUMENT_TYPE.ETF)
+			} else if (sType === Constants.INSTRUMENT_TYPE.ETF) {				
 				return oResourceBundle.getText("instrument.type.etf");
-			else if(sType == Constants.INSTRUMENT_TYPE.SECTOR)
+			} else if (sType === Constants.INSTRUMENT_TYPE.SECTOR) {				
 				return oResourceBundle.getText("instrument.type.sector");
-			else if(sType == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP)
+			} else if (sType === Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP) {				
 				return oResourceBundle.getText("instrument.type.industryGroup");
-			else if(sType == Constants.INSTRUMENT_TYPE.RATIO)
+			} else if (sType === Constants.INSTRUMENT_TYPE.RATIO) {				
 				return oResourceBundle.getText("instrument.type.ratio");
-			else
+			} else {				
 				return "";
+			}
 		},
 		
 		
@@ -64,7 +65,7 @@ sap.ui.define([
 			oSectorComboBox.setEnabled(bEnabled);
 			oIndustryGroupComboBox.setEnabled(bEnabled);
 			
-			if(bEnabled == false) {
+			if (bEnabled === false) {
 				oSectorComboBox.setSelectedItem(null);
 				oIndustryGroupComboBox.setSelectedItem(null);
 			}
@@ -79,7 +80,7 @@ sap.ui.define([
 			oDividendComboBox.setEnabled(bEnabled);
 			oDivisorComboBox.setEnabled(bEnabled);
 			
-			if(bEnabled == false) {
+			if (bEnabled === false) {
 				oDividendComboBox.setSelectedItem(null);
 				oDivisorComboBox.setSelectedItem(null);
 			}
@@ -125,14 +126,15 @@ sap.ui.define([
 		 * Formatter of the protocol category text.
 		 */
 		categoryTextFormatter: function(sCategory, oResourceBundle) {
-			if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.CONFIRMATION)
+			if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.CONFIRMATION) {				
 				return oResourceBundle.getText("protocol.category.confirmation");
-			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION)
+			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION) {				
 				return oResourceBundle.getText("protocol.category.violation");
-			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN)
+			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN) {				
 				return oResourceBundle.getText("protocol.category.uncertain");
-			else
+			} else {				
 				return "";
+			}
 		},
 		
 		
@@ -140,14 +142,15 @@ sap.ui.define([
 		 * Formatter of the protocol category icon.
 		 */
 		categoryIconFormatter: function(sCategory) {
-			if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.CONFIRMATION)
+			if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.CONFIRMATION) {				
 				return "sap-icon://sys-enter-2";
-			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION)
+			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION) {				
 				return "sap-icon://error";
-			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN)
+			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN) {				
 				return "sap-icon://alert"
-			else
+			} else {				
 				return "";
+			}
 		},
 		
 		
@@ -155,14 +158,15 @@ sap.ui.define([
 		 * Formatter of the protocol category state.
 		 */
 		categoryStateFormatter: function(sCategory) {
-			if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.CONFIRMATION)
+			if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.CONFIRMATION) {				
 				return "Success";
-			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION)
+			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION) {				
 				return "Error";
-			else if(sCategory == Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN)
+			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN) {				
 				return "Warning"
-			else
+			} else {				
 				return "None";
+			}
 		},
 		
 		
@@ -170,18 +174,19 @@ sap.ui.define([
 		 * Formatter of the health check profile text.
 		 */
 		profileTextFormatter: function(sProfile, oResourceBundle) {
-			if(sProfile == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS)
+			if (sProfile === Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS) {				
 				return oResourceBundle.getText("protocol.profile.confirmations");
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS)
+			} else if (sProfile === Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS) {				
 				return oResourceBundle.getText("protocol.profile.weakness");
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH)
+			} else if (sProfile === Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH) {				
 				return oResourceBundle.getText("protocol.profile.strength");
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING)
+			} else if (sProfile === Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING) {				
 				return oResourceBundle.getText("protocol.profile.confirmationsWithoutCounting");
-			else if(sProfile == Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING)
+			} else if (sProfile === Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING) {				
 				return oResourceBundle.getText("protocol.profile.weaknessWithoutCounting");
-			else
+			} else {				
 				return "";
+			}
 		},
 		
 		
@@ -189,16 +194,12 @@ sap.ui.define([
 		 * Formatter of the list name.
 		 */
 		listNameFormatter: function(oInstrument, oListsModel) {
-			var iListId;
-			var oList = null;
-			
-			if(oInstrument.dataSourceList != null) {
-				iListId = oInstrument.dataSourceList;
-				oList = ListController.getListById(iListId, oListsModel.oData.list);
+			if(oListsModel === undefined || oInstrument === null) {
+				return "";
 			}
 			
-			if(oList != null) {
-				return oList.name;
+			if (oInstrument.dataSourceList !== null) {
+				return oInstrument.dataSourceList.name;
 			}
 			
 			return "";
@@ -235,8 +236,9 @@ sap.ui.define([
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
 			
-			if(sInstrumentType != undefined && sInstrumentType != null)
+			if (sInstrumentType !== undefined && sInstrumentType !== null) {				
 				sQueryUrl= sQueryUrl + "?instrumentType=" + sInstrumentType;
+			}
 			
 			jQuery.ajax({
 				type : "GET", 

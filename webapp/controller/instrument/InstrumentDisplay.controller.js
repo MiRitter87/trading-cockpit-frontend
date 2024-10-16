@@ -41,13 +41,15 @@ sap.ui.define([
 			var oInstrumentsModel = this.getView().getModel("instruments");
 			var oInstrument;
 			var oInstrumentModel = new JSONModel();
+			var iSelectedInstrumentId;
 			
 			if(oSelectedItem == null) {
 				this.resetUIElements();				
 				return;
 			}
-				
-			oInstrument = InstrumentController.getInstrumentById(oSelectedItem.getKey(), oInstrumentsModel.oData.instrument);
+			
+			iSelectedInstrumentId = Number(oSelectedItem.getKey());
+			oInstrument = InstrumentController.getInstrumentById(iSelectedInstrumentId, oInstrumentsModel.oData.instrument);
 			oInstrumentModel.setData(oInstrument);
 			
 			//Set the model of the view according to the selected instrument to allow binding of the UI elements.
@@ -66,8 +68,9 @@ sap.ui.define([
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if(bShowSuccessMessage == true) {					
 					MessageToast.show(oResourceBundle.getText("instrumentDisplay.dataLoaded"));			
+				}
 			}
 			
 			if(oReturnData.data == null && oReturnData.message != null)  {

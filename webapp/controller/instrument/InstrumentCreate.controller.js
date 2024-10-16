@@ -47,8 +47,9 @@ sap.ui.define([
 		 * Handles a click at the save button.
 		 */
 		onSavePressed : function () {
-			if(this.isInputValid() == false)
+			if (this.isInputValid() === false) {				
 				return;
+			}
 			
 			InstrumentController.createInstrumentByWebService(this.getView().getModel("newInstrument"), this.createInstrumentCallback, this);
 		},
@@ -85,11 +86,11 @@ sap.ui.define([
 		queryInstrumentsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}
 			
@@ -107,11 +108,11 @@ sap.ui.define([
 		queryListsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);		
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -123,8 +124,8 @@ sap.ui.define([
 		 * Callback function of the createInstrument RESTful WebService call in the InstrumentController.
 		 */
 		createInstrumentCallback : function (oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
 					
 					//"this" is unknown in the success function of the ajax call. Therefore the calling controller is provided.
@@ -135,11 +136,11 @@ sap.ui.define([
 					InstrumentController.queryInstrumentsByWebService(oCallingController.queryInstrumentsCallback, oCallingController, false);
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
@@ -190,31 +191,37 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var sType = this.getView().byId("typeComboBox").getSelectedKey();
 			
-			if(sType == "") {
+			if (sType === "") {
 				MessageBox.error(oResourceBundle.getText("instrumentCreate.noTypeSelected"));
 				return false;
 			}
 			
-			if(sType != Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("symbolInput").getValue() == "" &&
-				this.getView().byId("listComboBox").getSelectedKey() == "") {
+			if (sType !== Constants.INSTRUMENT_TYPE.RATIO && 
+				this.getView().byId("symbolInput").getValue() === "" &&
+				this.getView().byId("listComboBox").getSelectedKey() === "") {
 					
 				MessageBox.error(oResourceBundle.getText("instrumentCreate.noSymbolInput"));
 				return false;
 			}
 			
-			if(sType != Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("stockExchangeComboBox").getSelectedKey() == "" &&
-				this.getView().byId("listComboBox").getSelectedKey() == "") {
+			if (sType !== Constants.INSTRUMENT_TYPE.RATIO && 
+				this.getView().byId("stockExchangeComboBox").getSelectedKey() === "" &&
+				this.getView().byId("listComboBox").getSelectedKey() === "") {
 					
 				MessageBox.error(oResourceBundle.getText("instrumentCreate.noStockExchangeSelected"));
 				return false;
 			}
 			
-			if(sType == Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("dividendComboBox").getSelectedKey() == "") {
+			if (sType === Constants.INSTRUMENT_TYPE.RATIO && 
+				this.getView().byId("dividendComboBox").getSelectedKey() === "") {
+					
 				MessageBox.error(oResourceBundle.getText("instrumentCreate.noDividendSelected"));
 				return false;
 			}
 			
-			if(sType == Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("divisorComboBox").getSelectedKey() == "") {
+			if (sType === Constants.INSTRUMENT_TYPE.RATIO && 
+				this.getView().byId("divisorComboBox").getSelectedKey() === "") {
+					
 				MessageBox.error(oResourceBundle.getText("instrumentCreate.noDivisorSelected"));
 				return false;
 			}
@@ -233,7 +240,7 @@ sap.ui.define([
 			oInstrumentModel = this.getView().getModel("newInstrument");
 			sSelectedType = oInstrumentModel.getProperty("/type");
 			
-			if(sSelectedType == Constants.INSTRUMENT_TYPE.STOCK) {
+			if (sSelectedType === Constants.INSTRUMENT_TYPE.STOCK) {
 				InstrumentController.setSectorAndIgComboBoxEnabled(true, 
 					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));				
 			}
@@ -242,8 +249,8 @@ sap.ui.define([
 					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));	
 			}
 			
-			if(sSelectedType == Constants.INSTRUMENT_TYPE.ETF || sSelectedType == Constants.INSTRUMENT_TYPE.SECTOR ||
-				sSelectedType == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP) {
+			if (sSelectedType === Constants.INSTRUMENT_TYPE.ETF || sSelectedType === Constants.INSTRUMENT_TYPE.SECTOR ||
+				sSelectedType === Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP) {
 				
 				this.getView().byId("listComboBox").setEnabled(true);
 			} else {
@@ -251,7 +258,7 @@ sap.ui.define([
 				this.getView().byId("listComboBox").setSelectedItem(null);
 			}
 			
-			if(sSelectedType == Constants.INSTRUMENT_TYPE.RATIO) {
+			if (sSelectedType === Constants.INSTRUMENT_TYPE.RATIO) {
 				this.getView().byId("symbolInput").setValue("");
 				this.getView().byId("symbolInput").setEnabled(false);
 				this.getView().byId("symbolInput").setRequired(false);
@@ -293,13 +300,13 @@ sap.ui.define([
 			
 			sSelectedType = oInstrumentModel.getProperty("/type");
 			
-			if(sSelectedType == Constants.INSTRUMENT_TYPE.STOCK || 
-				sSelectedType == Constants.INSTRUMENT_TYPE.RATIO) {
+			if (sSelectedType === Constants.INSTRUMENT_TYPE.STOCK || 
+				sSelectedType === Constants.INSTRUMENT_TYPE.RATIO) {
 					
 				return;	//There can be no list defined if type is STOCK or RATIO.
 			}
 			
-			if(oSelectedList == null) {
+			if (oSelectedList === null) {
 				this.getView().byId("symbolInput").setEnabled(true);
 				this.getView().byId("symbolInput").setRequired(true);
 				this.getView().byId("stockExchangeComboBox").setEnabled(true);

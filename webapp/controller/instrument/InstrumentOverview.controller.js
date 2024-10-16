@@ -42,7 +42,7 @@ sap.ui.define([
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oSelectedInstrumentModel;
 			
-			if(this.isInstrumentSelected() == false) {
+			if (this.isInstrumentSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("instrumentOverview.noInstrumentSelected"));
 				return;
 			}
@@ -90,7 +90,7 @@ sap.ui.define([
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(this.isInstrumentSelected() == false) {
+			if (this.isInstrumentSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("instrumentOverview.noInstrumentSelected"));
 				return;
 			}
@@ -106,15 +106,16 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 						
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if (bShowSuccessMessage === true) {					
 					MessageToast.show(oResourceBundle.getText("instrumentOverview.dataLoaded"));			
+				}
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -128,11 +129,11 @@ sap.ui.define([
 		queryListsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);		
 			}
 
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 
@@ -144,17 +145,17 @@ sap.ui.define([
 		 * Callback function of the deleteInstrument RESTful WebService call in the InstrumentController.
 		 */
 		deleteInstrumentCallback : function(oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
 					InstrumentController.queryInstrumentsByWebService(oCallingController.queryInstrumentsCallback, oCallingController, false);
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
@@ -189,10 +190,11 @@ sap.ui.define([
 		 * Checks if an instrument has been selected.
 		 */
 		isInstrumentSelected : function () {
-			if(this.getView().byId("instrumentTable").getSelectedItem() == null)
+			if (this.getView().byId("instrumentTable").getSelectedItem() === null) {				
 				return false;
-			else
+			} else {				
 				return true;
+			}
 		},
 		
 		

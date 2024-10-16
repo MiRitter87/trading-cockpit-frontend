@@ -48,15 +48,18 @@ sap.ui.define([
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oInstrumentsModel = this.getView().getModel("instruments");
 			var oInstrument, wsInstrument;
+			var iSelectedInstrumentId;
 			
-			if(oSelectedItem == null) {
+			if (oSelectedItem === null) {
 				this.resetUIElements();				
 				return;
 			}
-				
-			oInstrument = InstrumentController.getInstrumentById(oSelectedItem.getKey(), oInstrumentsModel.oData.instrument);
-			if(oInstrument != null)
+			
+			iSelectedInstrumentId = Number(oSelectedItem.getKey());
+			oInstrument = InstrumentController.getInstrumentById(iSelectedInstrumentId, oInstrumentsModel.oData.instrument);
+			if (oInstrument !== null) {				
 				wsInstrument = this.getInstrumentForWebService(oInstrument);
+			}
 			
 			//Set the model of the view according to the selected instrument to allow binding of the UI elements.
 			this.getView().setModel(wsInstrument, "selectedInstrument");
@@ -88,8 +91,9 @@ sap.ui.define([
 		onSavePressed : function () {				
 			var bInputValid = this.isInputValid();
 			
-			if(bInputValid == false)
+			if (bInputValid === false) {				
 				return;
+			}
 				
 			InstrumentController.saveInstrumentByWebService(this.getView().getModel("selectedInstrument"), this.saveInstrumentCallback, this);
 		},
@@ -111,15 +115,16 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if (bShowSuccessMessage === true) {					
 					MessageToast.show(oResourceBundle.getText("instrumentEdit.dataLoaded"));			
+				}
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -137,11 +142,11 @@ sap.ui.define([
 		queryListsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);		
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -153,8 +158,8 @@ sap.ui.define([
 		 *  Callback function of the saveInstrument RESTful WebService call in the InstrumentController.
 		 */
 		saveInstrumentCallback : function(oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					//Update the data source of the ComboBox with the new instrument data.
 					InstrumentController.queryInstrumentsByWebService(oCallingController.queryInstrumentsCallback, oCallingController, false);
 					
@@ -164,15 +169,15 @@ sap.ui.define([
 					MessageToast.show(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'I') {
+				if (oReturnData.message[0].type === 'I') {
 					MessageToast.show(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
@@ -218,36 +223,36 @@ sap.ui.define([
 			var sType = this.getView().byId("typeComboBox").getSelectedKey();
 			
 			
-			if(this.getView().byId("instrumentComboBox").getSelectedKey() == "") {
+			if (this.getView().byId("instrumentComboBox").getSelectedKey() === "") {
 				MessageBox.error(oResourceBundle.getText("instrumentEdit.noInstrumentSelected"));
 				return;
 			}
 			
-			if(sType == "") {
+			if (sType === "") {
 				MessageBox.error(oResourceBundle.getText("instrumentEdit.noTypeSelected"));
 				return false;
 			}
 			
-			if(sType != Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("symbolInput").getValue() == "" &&
-				this.getView().byId("listComboBox").getSelectedKey() == "") {
+			if (sType !== Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("symbolInput").getValue() === "" &&
+				this.getView().byId("listComboBox").getSelectedKey() === "") {
 					
 				MessageBox.error(oResourceBundle.getText("instrumentEdit.noSymbolInput"));
 				return false;
 			}
 			
-			if(sType != Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("stockExchangeComboBox").getSelectedKey() == "" &&
-				this.getView().byId("listComboBox").getSelectedKey() == "") {
+			if (sType !== Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("stockExchangeComboBox").getSelectedKey() === "" &&
+				this.getView().byId("listComboBox").getSelectedKey() === "") {
 					
 				MessageBox.error(oResourceBundle.getText("instrumentEdit.noStockExchangeSelected"));
 				return false;
 			}
 			
-			if(sType == Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("dividendComboBox").getSelectedKey() == "") {
+			if (sType === Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("dividendComboBox").getSelectedKey() === "") {
 				MessageBox.error(oResourceBundle.getText("instrumentEdit.noDividendSelected"));
 				return false;
 			}
 			
-			if(sType == Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("divisorComboBox").getSelectedKey() == "") {
+			if (sType === Constants.INSTRUMENT_TYPE.RATIO && this.getView().byId("divisorComboBox").getSelectedKey() === "") {
 				MessageBox.error(oResourceBundle.getText("instrumentEdit.noDivisorSelected"));
 				return false;
 			}
@@ -265,12 +270,13 @@ sap.ui.define([
 			
 			oInstrumentModel = this.getView().getModel("selectedInstrument");
 			
-			if(oInstrumentModel == undefined)
+			if (oInstrumentModel === undefined) {				
 				return;
+			}
 			
 			sSelectedType = oInstrumentModel.getProperty("/type");
 			
-			if(sSelectedType == Constants.INSTRUMENT_TYPE.STOCK) {
+			if (sSelectedType === Constants.INSTRUMENT_TYPE.STOCK) {
 				InstrumentController.setSectorAndIgComboBoxEnabled(true, 
 					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));				
 			}
@@ -279,8 +285,8 @@ sap.ui.define([
 					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));	
 			}
 			
-			if(sSelectedType == Constants.INSTRUMENT_TYPE.ETF || sSelectedType == Constants.INSTRUMENT_TYPE.SECTOR ||
-				sSelectedType == Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP) {
+			if (sSelectedType === Constants.INSTRUMENT_TYPE.ETF || sSelectedType === Constants.INSTRUMENT_TYPE.SECTOR ||
+				sSelectedType === Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP) {
 				
 				this.getView().byId("listComboBox").setEnabled(true);
 			} else {
@@ -288,7 +294,7 @@ sap.ui.define([
 				this.getView().byId("listComboBox").setSelectedItem(null);
 			}
 			
-			if(sSelectedType == Constants.INSTRUMENT_TYPE.RATIO) {
+			if (sSelectedType === Constants.INSTRUMENT_TYPE.RATIO) {
 				this.getView().byId("symbolInput").setValue("");
 				this.getView().byId("symbolInput").setEnabled(false);
 				this.getView().byId("symbolInput").setRequired(false);
@@ -328,13 +334,13 @@ sap.ui.define([
 			
 			sSelectedType = oInstrumentModel.getProperty("/type");
 			
-			if(sSelectedType == Constants.INSTRUMENT_TYPE.STOCK || 
-				sSelectedType == Constants.INSTRUMENT_TYPE.RATIO) {
+			if (sSelectedType === Constants.INSTRUMENT_TYPE.STOCK || 
+				sSelectedType === Constants.INSTRUMENT_TYPE.RATIO) {
 					
 				return;	//There can be no list defined if type is STOCK or RATIO.
 			}
 			
-			if(oSelectedList == null) {
+			if (oSelectedList === null) {
 				this.getView().byId("symbolInput").setEnabled(true);
 				this.getView().byId("symbolInput").setRequired(true);
 				this.getView().byId("stockExchangeComboBox").setEnabled(true);
@@ -368,20 +374,25 @@ sap.ui.define([
 			wsInstrument.setProperty("/companyPathInvestingCom", oInstrument.companyPathInvestingCom);
 			
 			//References
-			if(oInstrument.sector != null)
+			if (oInstrument.sector !== null) {				
 				wsInstrument.setProperty("/sectorId", oInstrument.sector.id);
+			}
 				
-			if(oInstrument.industryGroup != null)
+			if (oInstrument.industryGroup !== null) {				
 				wsInstrument.setProperty("/industryGroupId", oInstrument.industryGroup.id);
+			}
 				
-			if(oInstrument.dividend != null)
+			if (oInstrument.dividend !== null) {				
 				wsInstrument.setProperty("/dividendId", oInstrument.dividend.id);
+			}
 				
-			if(oInstrument.divisor != null)
+			if (oInstrument.divisor !== null) {				
 				wsInstrument.setProperty("/divisorId", oInstrument.divisor.id);
+			}
 				
-			if(oInstrument.dataSourceList != null)
+			if (oInstrument.dataSourceList !== null) {				
 				wsInstrument.setProperty("/dataSourceListId", oInstrument.dataSourceList.id);
+			}
 			
 			return wsInstrument;
 		}
