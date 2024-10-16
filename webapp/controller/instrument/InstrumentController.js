@@ -191,22 +191,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter of the list name.
-		 */
-		listNameFormatter: function(oInstrument, oListsModel) {
-			if(oListsModel === undefined || oInstrument === null) {
-				return "";
-			}
-			
-			if (oInstrument.dataSourceList !== null) {
-				return oInstrument.dataSourceList.name;
-			}
-			
-			return "";
-		},
-		
-		
-		/**
 		 * Calls a WebService operation to create an instrument.
 		 */
 		createInstrumentByWebService : function(oInstrumentModel, callbackFunction, oCallingController) {
