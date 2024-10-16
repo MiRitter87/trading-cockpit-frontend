@@ -72,7 +72,7 @@ sap.ui.define([
 			var aInstrumentArray = new Array();
 			
 			if (aContexts && aContexts.length) {
-				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
+				for (var iIndex = 0; iIndex < aContexts.length; iIndex++) {
 					var oContext = aContexts[iIndex];
 					aInstrumentArray.push(oContext.getObject().id);
 				}
@@ -90,8 +90,9 @@ sap.ui.define([
 		onSavePressed : function () {
 			var bInputValid = this.verifyObligatoryFields();
 			
-			if(bInputValid == false)
+			if (bInputValid === false) {				
 				return;
+			}
 
 			ListController.createListByWebService(this.getView().getModel("newList"), this.createListCallback, this);
 		},
@@ -111,12 +112,12 @@ sap.ui.define([
 		queryInstrumentsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}
 			
@@ -128,19 +129,19 @@ sap.ui.define([
 		 * Callback function of the createList RESTful WebService call in the ListController.
 		 */
 		createListCallback : function (oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
 					//"this" is unknown in the success function of the ajax call. Therefore the calling controller is provided.
 					oCallingController.resetUIElements();
 					oCallingController.initializeListModel();
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			} 
@@ -164,8 +165,9 @@ sap.ui.define([
 		resetUIElements : function () {
 			var oSelectDialog = this.getView().byId("instrumentSelectionDialog");
 			
-			if(oSelectDialog != undefined)
+			if (oSelectDialog !== undefined) {				
 				oSelectDialog.clearSelection();
+			}
 		},
 
 
@@ -178,7 +180,7 @@ sap.ui.define([
 			var iExistingInstrumentCount;
 			var oListModel;
 
-			if(this.getView().byId("nameInput").getValue() == "") {
+			if (this.getView().byId("nameInput").getValue() === "") {
 				MessageBox.error(oResourceBundle.getText("listCreate.noNameInput"));
 				return false;
 			}
@@ -187,7 +189,7 @@ sap.ui.define([
 			oListModel = this.getView().getModel("newList");
 			iExistingInstrumentCount = oListModel.oData.instrumentIds.length;
 			
-			if(iExistingInstrumentCount < 1) {
+			if (iExistingInstrumentCount < 1) {
 				MessageBox.error(oResourceBundle.getText("listCreate.noInstrumentsExist"));
 				return false;
 			}
@@ -203,12 +205,14 @@ sap.ui.define([
 			var oNewList = this.getView().getModel("newList");
 			var aInstruments = oNewList.getProperty("/instrumentIds");
 
-			if(aInstruments == undefined)
+			if (aInstruments === undefined) {				
 				return false;
+			}
 
-			for(var iIndex = 0; iIndex < aInstruments.length; iIndex++) {
-				if(aInstruments[iIndex] == iInstrumentId)
+			for (var iIndex = 0; iIndex < aInstruments.length; iIndex++) {
+				if (aInstruments[iIndex] === iInstrumentId) {					
 					return true;
+				}
 			}
 
 			return false;

@@ -37,15 +37,13 @@ sap.ui.define([
 			var oInstrumentsModel = this.getView().getModel("instruments");
 			var oInstrument;
 			var oInstrumentModel = new JSONModel();
-			var iSelectedInstrumentId;
 			
 			if(oSelectedItem == null) {
 				this.resetUIElements();				
 				return;
 			}
 			
-			iSelectedInstrumentId = Number(oSelectedItem.getKey());
-			oInstrument = InstrumentController.getInstrumentById(iSelectedInstrumentId, oInstrumentsModel.oData.instrument);
+			oInstrument = InstrumentController.getInstrumentById(Number(oSelectedItem.getKey()), oInstrumentsModel.oData.instrument);
 			oInstrumentModel.setData(oInstrument);
 			
 			//Set the model of the view according to the selected instrument to allow binding of the UI elements.

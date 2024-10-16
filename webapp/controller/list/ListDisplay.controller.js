@@ -38,12 +38,12 @@ sap.ui.define([
 			var oList;
 			var oListModel = new JSONModel();
 			
-			if(oSelectedItem == null) {
+			if (oSelectedItem === null) {
 				this.resetUIElements();				
 				return;
 			}
-				
-			oList = ListController.getListById(oSelectedItem.getKey(), oListsModel.oData.list);
+			
+			oList = ListController.getListById(Number(oSelectedItem.getKey()), oListsModel.oData.list);
 			oListModel.setData(oList);
 			
 			//Set the model of the view according to the selected list to allow binding of the UI elements.
@@ -58,14 +58,15 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if (bShowSuccessMessage === true) {					
 					MessageToast.show(oResourceBundle.getText("listDisplay.dataLoaded"));			
+				}
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			

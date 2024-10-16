@@ -36,7 +36,7 @@ sap.ui.define([
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oSelectedListModel;
 			
-			if(this.isListSelected() == false) {
+			if (this.isListSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("listOverview.noListSelected"));
 				return;
 			}
@@ -56,7 +56,7 @@ sap.ui.define([
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(this.isListSelected() == false) {
+			if (this.isListSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("listOverview.noListSelected"));
 				return;
 			}
@@ -79,7 +79,7 @@ sap.ui.define([
 		onDeletePressed : function () {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(this.isListSelected() == false) {
+			if (this.isListSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("listOverview.noListSelected"));
 				return;
 			}
@@ -95,14 +95,15 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if (bShowSuccessMessage === true) {					
 					MessageToast.show(oResourceBundle.getText("listOverview.dataLoaded"));			
+				}
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -114,17 +115,17 @@ sap.ui.define([
 		 * Callback function of the deleteList RESTful WebService call in the ListController.
 		 */
 		deleteListCallback : function(oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
 					ListController.queryListsByWebService(oCallingController.queryListsCallback, oCallingController, false);
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
@@ -135,10 +136,11 @@ sap.ui.define([
 		 * Checks if a list has been selected.
 		 */
 		isListSelected : function () {
-			if(this.getView().byId("listTable").getSelectedItem() == null)
+			if (this.getView().byId("listTable").getSelectedItem() === null) {				
 				return false;
-			else
+			} else {				
 				return true;
+			}
 		},
 		
 		

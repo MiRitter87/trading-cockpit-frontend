@@ -45,18 +45,20 @@ sap.ui.define([
 			var oSelectDialog = this.getView().byId("instrumentSelectionDialog");
 			var instrumentsModel = this.getView().getModel("instruments");
 			
-			if(oSelectedItem == null) {
+			if (oSelectedItem === null) {
 				this.resetUIElements();
 				return;
 			}			
 			
 			//Reset the selected instruments of the list selected before.
-			if(oSelectDialog != undefined)
+			if (oSelectDialog !== undefined) {				
 				oSelectDialog.clearSelection();
-									
-			oList = ListController.getListById(oSelectedItem.getKey(), oListsModel.oData.list);
-			if(oList != null)
+			}
+						
+			oList = ListController.getListById(Number(oSelectedItem.getKey()), oListsModel.oData.list);
+			if (oList !== null) {				
 				wsList = this.getListForWebService(oList);
+			}
 			
 			//Set the model of the view according to the selected list to allow binding of the UI elements.
 			this.getView().setModel(wsList, "selectedList");
@@ -71,7 +73,7 @@ sap.ui.define([
 		 * Handles a click at the open instrument selection button.
 		 */
 		onSelectInstrumentsPressed : function () {
-			if(this.getView().byId("listComboBox").getSelectedKey() == "") {
+			if (this.getView().byId("listComboBox").getSelectedKey() === "") {
 				var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 				MessageBox.error(oResourceBundle.getText("listEdit.noListSelected"));
 				return;
@@ -110,7 +112,7 @@ sap.ui.define([
 			var aInstrumentArray = new Array();
 			
 			if (aContexts) {		//Is defined if user clicks "accept" and is undefined if user clicks "cancel".
-				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
+				for (var iIndex = 0; iIndex < aContexts.length; iIndex++) {
 					var oContext = aContexts[iIndex];
 					aInstrumentArray.push(oContext.getObject().id);
 				}				
@@ -128,8 +130,9 @@ sap.ui.define([
 		onSavePressed : function () {				
 			var bInputValid = this.verifyObligatoryFields();
 			
-			if(bInputValid == false)
+			if (bInputValid === false) {				
 				return;
+			}
 				
 			ListController.saveListByWebService(this.getView().getModel("selectedList"), this.saveListCallback, this);
 		},
@@ -150,14 +153,15 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if (bShowSuccessMessage === true) {					
 					MessageToast.show(oResourceBundle.getText("listEdit.dataLoaded"));			
+				}
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -171,12 +175,12 @@ sap.ui.define([
 		queryInstrumentsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}
 			
@@ -188,8 +192,8 @@ sap.ui.define([
 		 *  Callback function of the saveList RESTful WebService call in the ListController.
 		 */
 		saveListCallback : function(oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					//Update the data source of the ComboBox with the new list data.
 					ListController.queryListsByWebService(oCallingController.queryListsCallback, oCallingController, false);
 					
@@ -199,15 +203,15 @@ sap.ui.define([
 					MessageToast.show(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'I') {
+				if (oReturnData.message[0].type === 'I') {
 					MessageToast.show(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
@@ -221,8 +225,9 @@ sap.ui.define([
 			var oSelectedList = new JSONModel();
 			var oSelectDialog = this.getView().byId("instrumentSelectionDialog");
 			
-			if(oSelectDialog != undefined)
+			if (oSelectDialog !== undefined) {				
 				oSelectDialog.clearSelection();
+			}
 			
 			this.getView().byId("listComboBox").setSelectedItem(null);
 			this.getView().setModel(oSelectedList, "selectedList");
@@ -238,7 +243,7 @@ sap.ui.define([
 			var iExistingInstrumentCount;
 			var oListModel;
 
-			if(this.getView().byId("nameInput").getValue() == "") {
+			if (this.getView().byId("nameInput").getValue() === "") {
 				MessageBox.error(oResourceBundle.getText("listEdit.noNameInput"));
 				return false;
 			}
@@ -247,7 +252,7 @@ sap.ui.define([
 			oListModel = this.getView().getModel("selectedList");
 			iExistingInstrumentCount = oListModel.oData.instrumentIds.length;
 			
-			if(iExistingInstrumentCount < 1) {
+			if (iExistingInstrumentCount < 1) {
 				MessageBox.error(oResourceBundle.getText("listEdit.noInstrumentsExist"));
 				return false;
 			}
@@ -270,7 +275,7 @@ sap.ui.define([
 			//Data at item level
 			wsList.setProperty("/instrumentIds", new Array());
 			
-			for(var i = 0; i < oList.instruments.length; i++) {
+			for (var i = 0; i < oList.instruments.length; i++) {
 				var oInstrument = oList.instruments[i];
 				
 				wsList.oData.instrumentIds.push(oInstrument.id);
@@ -287,17 +292,20 @@ sap.ui.define([
 			var oSelectedList = this.getView().getModel("selectedList");
 			var aInstruments;
 			
-			if(oSelectedList == null)
+			if (oSelectedList === null) {				
 				return false;
+			}
 				
 			aInstruments = oSelectedList.getProperty("/instrumentIds");
 			
-			if(aInstruments == undefined)
+			if (aInstruments === undefined) {				
 				return false;
+			}
 			
-			for(var iIndex = 0; iIndex < aInstruments.length; iIndex++) {
-				if(aInstruments[iIndex] == iInstrumentId)
+			for (var iIndex = 0; iIndex < aInstruments.length; iIndex++) {
+				if (aInstruments[iIndex] === iInstrumentId) {					
 					return true;
+				}
 			}
 			
 			return false;

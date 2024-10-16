@@ -8,10 +8,10 @@ sap.ui.define([
 		 */
 		getListById : function(iListId, oLists) {
 			//Get the selected list from the array of all lists according to the id.
-			for(var i = 0; i < oLists.length; i++) {
+			for (var i = 0; i < oLists.length; i++) {
     			var oTempList = oLists[i];
     			
-				if(oTempList.id == iListId) {
+				if (oTempList.id === iListId) {
 					return oTempList;
 				}
 			}
@@ -24,10 +24,11 @@ sap.ui.define([
 		 * Formatter of the symbol text within Instrument lists.
 		 */
 		symbolTextFormatter : function(sSymbol) {
-			if(sSymbol != "")
+			if (sSymbol !== "") {				
 				return sSymbol;
-			else
+			} else {				
 				return "-";
+			}
 		},
 		
 		
