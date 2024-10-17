@@ -52,9 +52,10 @@ sap.ui.define([
 				return;
 			}
 				
-			oPriceAlert = PriceAlertController.getPriceAlertById(oSelectedItem.getKey(), oPriceAlertsModel.oData.priceAlert);
-			if (oPriceAlert !== null)
+			oPriceAlert = PriceAlertController.getPriceAlertById(Number(oSelectedItem.getKey()), oPriceAlertsModel.oData.priceAlert);
+			if (oPriceAlert !== null) {				
 				wsPriceAlert = PriceAlertController.getPriceAlertForWebService(oPriceAlert);
+			}
 			
 			//Set the model of the view according to the selected price alert to allow binding of the UI elements.
 			this.getView().setModel(wsPriceAlert, "selectedPriceAlert");
