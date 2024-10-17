@@ -73,12 +73,12 @@ sap.ui.define([
 			var oTypeComboBox = this.getView().byId("typeComboBox");
 			
 			//Handle visibility of date label and picker.
-			if(oSelectedItem == null) {
+			if (oSelectedItem === null) {
 				oStartDateLabel.setVisible(false);
 				oStartDatePicker.setVisible(false);
 				return;
 			}
-			else if(oSelectedItem.getKey() == Constants.SCAN_TEMPLATE.RS_SINCE_DATE) {
+			else if (oSelectedItem.getKey() === Constants.SCAN_TEMPLATE.RS_SINCE_DATE) {
 				oStartDateLabel.setVisible(true);
 				oStartDatePicker.setVisible(true);
 			}
@@ -88,10 +88,10 @@ sap.ui.define([
 			}
 			
 			//Handle visibility of instrument types.
-			if(oSelectedItem.getKey() == Constants.SCAN_TEMPLATE.RS_NEAR_HIGH_IG) {
+			if (oSelectedItem.getKey() === Constants.SCAN_TEMPLATE.RS_NEAR_HIGH_IG) {
 				ScanResultsHelper.enableInstrumentTypesInComboBox(oTypeComboBox, [Constants.INSTRUMENT_TYPE.STOCK]);
 				
-				if(oTypeComboBox.getSelectedKey() != Constants.INSTRUMENT_TYPE.STOCK) {				
+				if (oTypeComboBox.getSelectedKey() !== Constants.INSTRUMENT_TYPE.STOCK) {				
 					oTypeComboBox.setSelectedKey(Constants.INSTRUMENT_TYPE.STOCK);
 				}
 			}
@@ -126,17 +126,17 @@ sap.ui.define([
 			sMinAtrp = oAtrpInput.getValue();
 			
 			
-			if(sSelectedTemplate == "") {
+			if (sSelectedTemplate === "") {
 				MessageBox.information(oResourceBundle.getText("scanResults.noTemplateSelected"));
 				return;
 			}
 			
-			if(sSelectedType == "") {
+			if (sSelectedType === "") {
 				MessageBox.information(oResourceBundle.getText("scanResults.noTypeSelected"));
 				return;				
 			}
 				
-			if(sSelectedTemplate == Constants.SCAN_TEMPLATE.RS_SINCE_DATE && sSelectedDate == "") {
+			if (sSelectedTemplate === Constants.SCAN_TEMPLATE.RS_SINCE_DATE && sSelectedDate === "") {
 				MessageBox.information(oResourceBundle.getText("scanResults.noDateSelected"));
 				return;				
 			}
@@ -208,7 +208,7 @@ sap.ui.define([
     	onStockchartsPressed : function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(this.isInstrumentSelected() == false) {
+			if (this.isInstrumentSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("scanResults.noInstrumentSelected"));
 				return;
 			}
@@ -224,14 +224,14 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oInstrument;
 			
-			if(this.isInstrumentSelected() == false) {
+			if (this.isInstrumentSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("scanResults.noInstrumentSelected"));
 				return;
 			}
 			
 			oInstrument = this.getSelectedInstrument();
 			
-			if(oInstrument.type != Constants.INSTRUMENT_TYPE.STOCK) {
+			if (oInstrument.type !== Constants.INSTRUMENT_TYPE.STOCK) {
 				MessageBox.error(oResourceBundle.getText("scanResults.wrongTypeForEarnings"));
 				return;
 			}
@@ -290,7 +290,7 @@ sap.ui.define([
 			var oSingleFilter, oTotalFilter;
 			
 			if (aContexts && aContexts.length) {
-				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
+				for (var iIndex = 0; iIndex < aContexts.length; iIndex++) {
 					var oContext = aContexts[iIndex];
 					
 					//Single results are compared by their Quotation ID.
@@ -305,10 +305,11 @@ sap.ui.define([
 	  			});
 			}
 			
-			if(aFilterArray.length > 0)
+			if (aFilterArray.length > 0) {				
 				oBinding.filter([oTotalFilter]);
-			else		
+			} else {				
 				oBinding.filter([]);
+			}	
 		},
 		
 		
@@ -397,21 +398,21 @@ sap.ui.define([
 			var oSearchField = oCallingController.getView().byId("resultsSearchField");
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.message != null && oReturnData.message.length > 0) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null && oReturnData.message.length > 0) {
+				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
@@ -491,29 +492,29 @@ sap.ui.define([
 				var oLink;
 				var oObjectStatus;
 				
-				if(oColumnState.key == "typeColumn") {
+				if (oColumnState.key === "typeColumn") {
 					oText = new Text();
 					oText.bindProperty("text", {
           				path: sPath,
            				formatter: this.typeTextFormatter.bind(this)
        				});
-				} else if(oColumnState.key == "performance5DaysColumn" || 
-					oColumnState.key == "volumeDifferential5DaysColumn" || oColumnState.key == "atrpColumn") {
+				} else if (oColumnState.key === "performance5DaysColumn" || 
+					oColumnState.key === "volumeDifferential5DaysColumn" || oColumnState.key === "atrpColumn") {
 					oText = new Text({
 						text: "{" + sPath + "} %"
 					});	
-				} else if(oColumnState.key == "liquidityColumn") {
+				} else if (oColumnState.key === "liquidityColumn") {
 					oText = new Text({
 						text: "{parts: ['" + sPath +"', 'currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
 					});	
-				} else if(oColumnState.key == "symbolColumn") {
+				} else if (oColumnState.key === "symbolColumn") {
 					oLink = new Link({
 						text: "{" + sPath + "}",
 						press: this.onSymbolLinkPressed.bind(this)
 					});
 					
 					return oLink;
-				} else if(oColumnState.key == "rsNumberColumn" || oColumnState.key == "rsNumberCompositeIgColumn") {
+				} else if (oColumnState.key === "rsNumberColumn" || oColumnState.key === "rsNumberCompositeIgColumn") {
 					oObjectStatus = new ObjectStatus({
 						text: "{" + sPath + "}",
 						inverted: true
@@ -524,7 +525,7 @@ sap.ui.define([
 					});
 					
 					return oObjectStatus;
-				} else if(oColumnState.key == "upDownVolumeRatioColumn") {
+				} else if (oColumnState.key === "upDownVolumeRatioColumn") {
 					oObjectStatus = new ObjectStatus({
 						text: "{" + sPath + "}"
 					});
@@ -534,7 +535,7 @@ sap.ui.define([
 					});
 					
 					return oObjectStatus;
-				} else if(oColumnState.key == "distanceTo52WeekHighColumn") {
+				} else if (oColumnState.key === "distanceTo52WeekHighColumn") {
 					oObjectStatus = new ObjectStatus({
 						text: "{" + sPath + "} %"
 					});
@@ -598,9 +599,9 @@ sap.ui.define([
 		 * State formatter of the (Composite) RS-Number ObjectStatus.
 		 */
 		rsNumberStateFormatter: function(iRsNumber) {
-			if(iRsNumber >= 80) {
+			if (iRsNumber >= 80) {
 				return "Success";
-			} else if(iRsNumber <= 20) {
+			} else if (iRsNumber <= 20) {
 				return "Error";
 			} else  {
 				return "None";
@@ -612,9 +613,9 @@ sap.ui.define([
 		 * State formatter of the Up/Down volume ratio ObjectStatus.
 		 */
 		udVolRatioStateFormatter: function(iUdVolRatio) {
-			if(iUdVolRatio >= 1.2) {
+			if (iUdVolRatio >= 1.2) {
 				return "Success";
-			} else if(iUdVolRatio <= 0.8) {
+			} else if (iUdVolRatio <= 0.8) {
 				return "Error";
 			} else  {
 				return "None";
@@ -626,7 +627,7 @@ sap.ui.define([
 		 * State formatter of the distance to the 52w high.
 		 */
 		distance52wHighStateFormatter: function(fDistanceTo52wHigh) {
-			if(fDistanceTo52wHigh >= -5) {
+			if (fDistanceTo52wHigh >= -5) {
 				return "Success";
 			}
 		},
@@ -636,10 +637,11 @@ sap.ui.define([
 		 * Checks if an instrument has been selected.
 		 */
 		isInstrumentSelected : function () {
-			if(this.getView().byId("quotationTable").getSelectedItem() == null)
+			if (this.getView().byId("quotationTable").getSelectedItem() === null) {				
 				return false;
-			else
+			} else {				
 				return true;
+			}
 		},
 		
 		

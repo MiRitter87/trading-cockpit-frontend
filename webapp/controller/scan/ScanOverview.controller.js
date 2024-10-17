@@ -40,7 +40,7 @@ sap.ui.define([
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oSelectedScanModel;
 			
-			if(this.isScanSelected() == false) {
+			if (this.isScanSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("scanOverview.noScanSelected"));
 				return;
 			}
@@ -60,7 +60,7 @@ sap.ui.define([
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(this.isScanSelected() == false) {
+			if (this.isScanSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("scanOverview.noScanSelected"));
 				return;
 			}
@@ -76,7 +76,7 @@ sap.ui.define([
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(this.isScanSelected() == false) {
+			if (this.isScanSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("scanOverview.noScanSelected"));
 				return;
 			}
@@ -118,17 +118,17 @@ sap.ui.define([
 			var sSelectedScope = this.getView().byId("scanScopeComboBox").getSelectedKey();
 			
 			oScan = this.getSelectedScan();
-			if(oScan == null) {
+			if (oScan === null) {
 				return;
 			}
 			
 			oScanWS = ScanController.getScanForWebService(oScan);
 			
-			if(sSelectedScope == "") {
+			if (sSelectedScope === "") {
 				MessageBox.error(oResourceBundle.getText("scanOverview.noScanScopeSelected"));
 				return;				
 			}
-			else if(sSelectedScope == Constants.SCAN_SCOPE.ALL) {
+			else if (sSelectedScope === Constants.SCAN_SCOPE.ALL) {
 				oScanWS.setProperty("/completionStatus", Constants.SCAN_COMPLETION_STATUS.COMPLETE);
 			}
 					
@@ -154,14 +154,15 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if (bShowSuccessMessage === true) {					
 					MessageToast.show(oResourceBundle.getText("scanOverview.dataLoaded"));			
+				}
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -173,17 +174,17 @@ sap.ui.define([
 		 * Callback function of the deleteScan RESTful WebService call in the ScanController.
 		 */
 		deleteScanCallback : function(oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
 					ScanController.queryScansByWebService(oCallingController.queryScansCallback, oCallingController, false);
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
@@ -194,17 +195,17 @@ sap.ui.define([
 		 *  Callback function of the saveScan RESTful WebService call in the ScanController.
 		 */
 		saveScanCallback : function(oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
 					ScanController.queryScansByWebService(oCallingController.queryScansCallback, oCallingController, false);
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
@@ -215,10 +216,11 @@ sap.ui.define([
 		 * Checks if a scan has been selected.
 		 */
 		isScanSelected : function () {
-			if(this.getView().byId("scanTable").getSelectedItem() == null)
+			if (this.getView().byId("scanTable").getSelectedItem() === null) {				
 				return false;
-			else
+			} else {				
 				return true;
+			}
 		},
 		
 		
@@ -257,8 +259,9 @@ sap.ui.define([
 			var oComboBox = this.getView().byId("scanScopeComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oComboBox.getItems().length == 2)
+			if (oComboBox.getItems().length === 2) {				
 				return;		//ComboBox is already initialized.
+			}
 			
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.SCAN_SCOPE.ALL, "scanOverview.scanScope.all");

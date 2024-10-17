@@ -49,18 +49,20 @@ sap.ui.define([
 			var oSelectDialog = this.getView().byId("listSelectionDialog");
 			var listsModel = this.getView().getModel("lists");
 			
-			if(oSelectedItem == null) {
+			if (oSelectedItem === null) {
 				this.resetUIElements();
 				return;
 			}			
 			
 			//Reset the selected lists of the scan selected before.
-			if(oSelectDialog != undefined)
+			if (oSelectDialog !== undefined) {				
 				oSelectDialog.clearSelection();
+			}
 									
 			oScan = ScanController.getScanById(oSelectedItem.getKey(), oScansModel.oData.scan);
-			if(oScan != null)
+			if (oScan !== null) {				
 				wsScan = ScanController.getScanForWebService(oScan);
+			}
 			
 			//Set the model of the view according to the selected scan to allow binding of the UI elements.
 			this.getView().setModel(wsScan, "selectedScan");
@@ -75,7 +77,7 @@ sap.ui.define([
 		 * Handles a click at the open list selection button.
 		 */
 		onSelectListsPressed : function () {
-			if(this.getView().byId("scanComboBox").getSelectedKey() == "") {
+			if (this.getView().byId("scanComboBox").getSelectedKey() === "") {
 				var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 				MessageBox.error(oResourceBundle.getText("scanEdit.noScanSelected"));
 				return;
@@ -114,7 +116,7 @@ sap.ui.define([
 			var aListArray = new Array();
 			
 			if (aContexts) {		//Is defined if user clicks "accept" and is undefined if user clicks "cancel".
-				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
+				for (var iIndex = 0; iIndex < aContexts.length; iIndex++) {
 					var oContext = aContexts[iIndex];
 					aListArray.push(oContext.getObject().id);
 				}				
@@ -132,8 +134,9 @@ sap.ui.define([
 		onSavePressed : function () {				
 			var bInputValid = this.verifyObligatoryFields();
 			
-			if(bInputValid == false)
+			if (bInputValid === false) {				
 				return;
+			}
 				
 			ScanController.saveScanByWebService(this.getView().getModel("selectedScan"), this.saveScanCallback, this);
 		},
@@ -154,14 +157,15 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if (bShowSuccessMessage === true) {					
 					MessageToast.show(oResourceBundle.getText("scanEdit.dataLoaded"));			
+				}
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -175,11 +179,11 @@ sap.ui.define([
 		queryListsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}
 			
@@ -191,8 +195,8 @@ sap.ui.define([
 		 *  Callback function of the saveScan RESTful WebService call in the ScanController.
 		 */
 		saveScanCallback : function(oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					//Update the data source of the ComboBox with the new scan data.
 					ScanController.queryScansByWebService(oCallingController.queryScansCallback, oCallingController, false);
 					
@@ -202,15 +206,15 @@ sap.ui.define([
 					MessageToast.show(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'I') {
+				if (oReturnData.message[0].type === 'I') {
 					MessageToast.show(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
@@ -224,8 +228,9 @@ sap.ui.define([
 			var oSelectedScan = new JSONModel();
 			var oSelectDialog = this.getView().byId("listSelectionDialog");
 			
-			if(oSelectDialog != undefined)
+			if (oSelectDialog !== undefined) {				
 				oSelectDialog.clearSelection();
+			}
 			
 			this.getView().byId("scanComboBox").setSelectedItem(null);
 			this.getView().setModel(oSelectedScan, "selectedScan");
@@ -241,7 +246,7 @@ sap.ui.define([
 			var iExistingListCount;
 			var oScanModel;
 
-			if(this.getView().byId("nameInput").getValue() == "") {
+			if (this.getView().byId("nameInput").getValue() === "") {
 				MessageBox.error(oResourceBundle.getText("scanEdit.noNameInput"));
 				return false;
 			}
@@ -250,7 +255,7 @@ sap.ui.define([
 			oScanModel = this.getView().getModel("selectedScan");
 			iExistingListCount = oScanModel.oData.listIds.length;
 			
-			if(iExistingListCount < 1) {
+			if (iExistingListCount < 1) {
 				MessageBox.error(oResourceBundle.getText("scanEdit.noListsExist"));
 				return false;
 			}
@@ -282,12 +287,14 @@ sap.ui.define([
 			var oSelectedScan = this.getView().getModel("selectedScan");
 			var aLists = oSelectedScan.getProperty("/listIds");
 			
-			if(aLists == undefined)
+			if (aLists === undefined) {				
 				return false;
+			}
 			
-			for(var iIndex = 0; iIndex < aLists.length; iIndex++) {
-				if(aLists[iIndex] == iListId)
+			for (var iIndex = 0; iIndex < aLists.length; iIndex++) {
+				if (aLists[iIndex] === iListId) {					
 					return true;
+				}
 			}
 			
 			return false;

@@ -10,10 +10,10 @@ sap.ui.define([
 		 */
 		getScanById : function(iScanId, oScans) {
 			//Get the selected scan from the array of all scans according to the id.
-			for(var i = 0; i < oScans.length; i++) {
+			for (var i = 0; i < oScans.length; i++) {
     			var oTempScan = oScans[i];
     			
-				if(oTempScan.id == iScanId) {
+				if (oTempScan.id === iScanId) {
 					return oTempScan;
 				}
 			}
@@ -27,10 +27,10 @@ sap.ui.define([
 		 */
 		getInstrumentById : function(iInstrumentId, oQuotations) {
 			//Get the selected instrument from the array of all quotations according to the id.
-			for(var i = 0; i < oQuotations.length; i++) {
+			for (var i = 0; i < oQuotations.length; i++) {
     			var oTempQuotation = oQuotations[i];
     			
-				if(oTempQuotation.instrument.id == iInstrumentId) {
+				if (oTempQuotation.instrument.id === iInstrumentId) {
 					return oTempQuotation.instrument;
 				}
 			}
@@ -57,7 +57,7 @@ sap.ui.define([
 			//Data at item level
 			wsScan.setProperty("/listIds", new Array());
 			
-			for(var i = 0; i < oScan.lists.length; i++) {
+			for (var i = 0; i < oScan.lists.length; i++) {
 				var oList = oScan.lists[i];
 				
 				wsScan.oData.listIds.push(oList.id);
@@ -65,7 +65,7 @@ sap.ui.define([
 			
 			wsScan.setProperty("/incompleteInstrumentIds", new Array());
 			
-			for(var i = 0; i < oScan.incompleteInstruments.length; i++) {
+			for (var i = 0; i < oScan.incompleteInstruments.length; i++) {
 				var oInstrument = oScan.incompleteInstruments[i];
 				
 				wsScan.oData.incompleteInstrumentIds.push(oInstrument.id);
@@ -79,14 +79,15 @@ sap.ui.define([
 		 * Returns the localized text of the given execution status.
 		 */
 		getLocalizedExecutionStatusText : function(sStatus, oResourceBundle) {
-			if(sStatus == Constants.SCAN_EXECUTION_STATUS.NOT_EXECUTED)
+			if (sStatus === Constants.SCAN_EXECUTION_STATUS.NOT_EXECUTED) {				
 				return oResourceBundle.getText("scan.executionStatus.notExecuted");
-			else if(sStatus == Constants.SCAN_EXECUTION_STATUS.IN_PROGRESS)
+			} else if (sStatus === Constants.SCAN_EXECUTION_STATUS.IN_PROGRESS) {				
 				return oResourceBundle.getText("scan.executionStatus.inProgress");
-			else if(sStatus == Constants.SCAN_EXECUTION_STATUS.FINISHED)
+			} else if (sStatus === Constants.SCAN_EXECUTION_STATUS.FINISHED) {				
 				return oResourceBundle.getText("scan.executionStatus.finished");
-			else
+			} else {				
 				return "";
+			}
 		},
 		
 		
@@ -94,12 +95,13 @@ sap.ui.define([
 		 * Returns the localized text of the given completion status.
 		 */
 		getLocalizedCompletionStatusText : function(sStatus, oResourceBundle) {
-			if(sStatus == Constants.SCAN_COMPLETION_STATUS.COMPLETE)
+			if (sStatus === Constants.SCAN_COMPLETION_STATUS.COMPLETE) {				
 				return oResourceBundle.getText("scan.completionStatus.complete");
-			else if(sStatus == Constants.SCAN_COMPLETION_STATUS.INCOMPLETE)
+			} else if (sStatus === Constants.SCAN_COMPLETION_STATUS.INCOMPLETE) {				
 				return oResourceBundle.getText("scan.completionStatus.incomplete");
-			else
+			} else {				
 				return "";
+			}
 		},
 		
 				
@@ -199,20 +201,24 @@ sap.ui.define([
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
 			
 			//Add template to URL.
-			if(sTemplate == Constants.SCAN_TEMPLATE.RS_SINCE_DATE)
+			if (sTemplate === Constants.SCAN_TEMPLATE.RS_SINCE_DATE) {				
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + Constants.SCAN_TEMPLATE.RS_SINCE_DATE + "&startDate=" + sStartDate;
-			else
+			} else {				
 				sQueryUrl = sQueryUrl + "?scanTemplate=" + sTemplate;
+			}
 			
 			//Add instrument type to URL.
-			if(sType != undefined && sType != "")
+			if (sType !== undefined && sType !== "") {				
 				sQueryUrl = sQueryUrl + "&instrumentType=" + sType;
+			}
 				
-			if(sMinLiquidity != undefined && sMinLiquidity != "")
+			if (sMinLiquidity !== undefined && sMinLiquidity !== "") {				
 				sQueryUrl = sQueryUrl + "&minLiquidity=" + sMinLiquidity;
+			}
 				
-			if(sMinAtrp != undefined && sMinAtrp != "")
+			if (sMinAtrp !== undefined && sMinAtrp !== "") {				
 				sQueryUrl = sQueryUrl + "&minAtrp=" + sMinAtrp;
+			}
 			
 			jQuery.ajax({
 				type : "GET", 

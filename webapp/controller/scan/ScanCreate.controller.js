@@ -72,7 +72,7 @@ sap.ui.define([
 			var aListArray = new Array();
 			
 			if (aContexts && aContexts.length) {
-				for(var iIndex = 0; iIndex < aContexts.length; iIndex++) {
+				for (var iIndex = 0; iIndex < aContexts.length; iIndex++) {
 					var oContext = aContexts[iIndex];
 					aListArray.push(oContext.getObject().id);
 				}
@@ -90,8 +90,9 @@ sap.ui.define([
 		onSavePressed : function () {
 			var bInputValid = this.verifyObligatoryFields();
 			
-			if(bInputValid == false)
+			if (bInputValid === false) {				
 				return;
+			}
 
 			ScanController.createScanByWebService(this.getView().getModel("newScan"), this.createScanCallback, this);
 		},
@@ -111,11 +112,11 @@ sap.ui.define([
 		queryListsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}
 			
@@ -127,19 +128,19 @@ sap.ui.define([
 		 * Callback function of the createScan RESTful WebService call in the ScanController.
 		 */
 		createScanCallback : function (oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
 					//"this" is unknown in the success function of the ajax call. Therefore the calling controller is provided.
 					oCallingController.resetUIElements();
 					oCallingController.initializeScanModel();
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			} 
@@ -152,8 +153,9 @@ sap.ui.define([
 		resetUIElements : function () {
 			var oSelectDialog = this.getView().byId("listSelectionDialog");
 			
-			if(oSelectDialog != undefined)
+			if (oSelectDialog !== undefined) {				
 				oSelectDialog.clearSelection();
+			}
 		},
 		
 		
@@ -166,7 +168,7 @@ sap.ui.define([
 			var iExistingListCount;
 			var oScanModel;
 
-			if(this.getView().byId("nameInput").getValue() == "") {
+			if (this.getView().byId("nameInput").getValue() === "") {
 				MessageBox.error(oResourceBundle.getText("scanCreate.noNameInput"));
 				return false;
 			}
@@ -175,7 +177,7 @@ sap.ui.define([
 			oScanModel = this.getView().getModel("newScan");
 			iExistingListCount = oScanModel.oData.listIds.length;
 			
-			if(iExistingListCount < 1) {
+			if (iExistingListCount < 1) {
 				MessageBox.error(oResourceBundle.getText("scanCreate.noListsExist"));
 				return false;
 			}
@@ -202,12 +204,14 @@ sap.ui.define([
 			var oNewScan = this.getView().getModel("newScan");
 			var aLists = oNewScan.getProperty("/listIds");
 
-			if(aLists == undefined)
+			if (aLists === undefined) {				
 				return false;
+			}
 
-			for(var iIndex = 0; iIndex < aLists.length; iIndex++) {
-				if(aLists[iIndex] == iListId)
+			for (var iIndex = 0; iIndex < aLists.length; iIndex++) {
+				if (aLists[iIndex] === iListId) {					
 					return true;
+				}
 			}
 
 			return false;

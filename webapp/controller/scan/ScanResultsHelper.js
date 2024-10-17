@@ -14,63 +14,63 @@ sap.ui.define([
 			var sTitle = "";
 			var sDescription = "";
 			
-			if(sKey == Constants.SCAN_TEMPLATE.ALL) {
+			if (sKey === Constants.SCAN_TEMPLATE.ALL) {
 				sTitle = oResourceBundle.getText("scanResults.template.all");
 				sDescription = oResourceBundle.getText("scanResults.template.all.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.BUYABLE_BASE) {
+			else if (sKey === Constants.SCAN_TEMPLATE.BUYABLE_BASE) {
 				sTitle = oResourceBundle.getText("scanResults.template.buyableBase");
 				sDescription = oResourceBundle.getText("scanResults.template.buyableBase.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE) {
+			else if (sKey === Constants.SCAN_TEMPLATE.MINERVINI_TREND_TEMPLATE) {
 				sTitle = oResourceBundle.getText("scanResults.template.minervini");
 				sDescription = oResourceBundle.getText("scanResults.template.minervini.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.CONSOLIDATION_10_WEEKS) {
+			else if (sKey === Constants.SCAN_TEMPLATE.CONSOLIDATION_10_WEEKS) {
 				sTitle = oResourceBundle.getText("scanResults.template.consolidation10Weeks");
 				sDescription = oResourceBundle.getText("scanResults.template.consolidation10Weeks.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.CONSOLIDATION_10_DAYS) {
+			else if (sKey === Constants.SCAN_TEMPLATE.CONSOLIDATION_10_DAYS) {
 				sTitle = oResourceBundle.getText("scanResults.template.consolidation10Days");
 				sDescription = oResourceBundle.getText("scanResults.template.consolidation10Days.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES) {
+			else if (sKey === Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES) {
 				sTitle = oResourceBundle.getText("scanResults.template.breakoutCandidates");
 				sDescription = oResourceBundle.getText("scanResults.template.breakoutCandidates.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.UP_ON_VOLUME) {
+			else if (sKey === Constants.SCAN_TEMPLATE.UP_ON_VOLUME) {
 				sTitle = oResourceBundle.getText("scanResults.template.upOnVolume");
 				sDescription = oResourceBundle.getText("scanResults.template.upOnVolume.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.DOWN_ON_VOLUME) {
+			else if (sKey === Constants.SCAN_TEMPLATE.DOWN_ON_VOLUME) {
 				sTitle = oResourceBundle.getText("scanResults.template.downOnVolume");
 				sDescription = oResourceBundle.getText("scanResults.template.downOnVolume.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.NEAR_52_WEEK_HIGH) {
+			else if (sKey === Constants.SCAN_TEMPLATE.NEAR_52_WEEK_HIGH) {
 				sTitle = oResourceBundle.getText("scanResults.template.near52WeekHigh");
 				sDescription = oResourceBundle.getText("scanResults.template.near52WeekHigh.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.NEAR_52_WEEK_LOW) {
+			else if (sKey === Constants.SCAN_TEMPLATE.NEAR_52_WEEK_LOW) {
 				sTitle = oResourceBundle.getText("scanResults.template.near52WeekLow");
 				sDescription = oResourceBundle.getText("scanResults.template.near52WeekLow.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.RS_SINCE_DATE) {
+			else if (sKey === Constants.SCAN_TEMPLATE.RS_SINCE_DATE) {
 				sTitle = oResourceBundle.getText("scanResults.template.rsSinceDate");
 				sDescription = oResourceBundle.getText("scanResults.template.rsSinceDate.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.THREE_WEEKS_TIGHT) {
+			else if (sKey === Constants.SCAN_TEMPLATE.THREE_WEEKS_TIGHT) {
 				sTitle = oResourceBundle.getText("scanResults.template.threeWeeksTight");
 				sDescription = oResourceBundle.getText("scanResults.template.threeWeeksTight.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.HIGH_TIGHT_FLAG) {
+			else if (sKey === Constants.SCAN_TEMPLATE.HIGH_TIGHT_FLAG) {
 				sTitle = oResourceBundle.getText("scanResults.template.highTightFlag");
 				sDescription = oResourceBundle.getText("scanResults.template.highTightFlag.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.SWING_TRADING_ENVIRONMENT) {
+			else if (sKey === Constants.SCAN_TEMPLATE.SWING_TRADING_ENVIRONMENT) {
 				sTitle = oResourceBundle.getText("scanResults.template.swingTradingEnvironment");
 				sDescription = oResourceBundle.getText("scanResults.template.swingTradingEnvironment.description");
 			}
-			else if(sKey == Constants.SCAN_TEMPLATE.RS_NEAR_HIGH_IG) {
+			else if (sKey === Constants.SCAN_TEMPLATE.RS_NEAR_HIGH_IG) {
 				sTitle = oResourceBundle.getText("scanResults.template.rsNearHighIg");
 				sDescription = oResourceBundle.getText("scanResults.template.rsNearHighIg.description");
 			}
@@ -155,11 +155,11 @@ sap.ui.define([
 		getChartUrl : function(oInstrument, sWebServiceBaseUrl) {
 			var sChartUrl = "";
 
-			if(oInstrument.type == Constants.INSTRUMENT_TYPE.RATIO) {
+			if (oInstrument.type === Constants.INSTRUMENT_TYPE.RATIO) {
 				sChartUrl = this.getChartUrlRatio(oInstrument);
 			}
 			else {
-				if(oInstrument.symbol == "") {
+				if (oInstrument.symbol === "") {
 					sChartUrl = this.getChartUrlBackend(oInstrument, sWebServiceBaseUrl);
 				} else {
 					sChartUrl = this.getChartUrlNonRatio(oInstrument);
@@ -181,28 +181,28 @@ sap.ui.define([
 			
 			sChartUrl = sBaseChartUrl.replace("{symbol}", sSymbol);
 			
-			if(sStockExchange == Constants.STOCK_EXCHANGE.NYSE) {
+			if (sStockExchange === Constants.STOCK_EXCHANGE.NYSE) {
 				sChartUrl = sChartUrl.replace("{exchange}", "");
 			}
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.NDQ) {
+			else if (sStockExchange === Constants.STOCK_EXCHANGE.NDQ) {
 				sChartUrl = sChartUrl.replace("{exchange}", "");
 			}
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.AMEX) {
+			else if (sStockExchange === Constants.STOCK_EXCHANGE.AMEX) {
 				sChartUrl = sChartUrl.replace("{exchange}", "");
 			}
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.OTC) {
+			else if (sStockExchange === Constants.STOCK_EXCHANGE.OTC) {
 				sChartUrl = sChartUrl.replace("{exchange}", "");
 			}
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX) {
+			else if (sStockExchange === Constants.STOCK_EXCHANGE.TSX) {
 				sChartUrl = sChartUrl.replace("{exchange}", ".TO");
 			}
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSXV) {
+			else if (sStockExchange === Constants.STOCK_EXCHANGE.TSXV) {
 				sChartUrl = sChartUrl.replace("{exchange}", ".V");
 			}
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.CSE) {
+			else if (sStockExchange === Constants.STOCK_EXCHANGE.CSE) {
 				sChartUrl = sChartUrl.replace("{exchange}", ".CA");
 			}
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.LSE) {
+			else if (sStockExchange === Constants.STOCK_EXCHANGE.LSE) {
 				sChartUrl = sChartUrl.replace("{exchange}", ".L");
 			}
 			
@@ -249,20 +249,20 @@ sap.ui.define([
 			var sStockExchange = oInstrument.stockExchange;
 			var sSymbol = oInstrument.symbol;
 			
-			if(	sStockExchange == Constants.STOCK_EXCHANGE.NYSE ||
-				sStockExchange == Constants.STOCK_EXCHANGE.NDQ ||
-				sStockExchange == Constants.STOCK_EXCHANGE.AMEX ||
-				sStockExchange == Constants.STOCK_EXCHANGE.OTC) {
+			if (sStockExchange === Constants.STOCK_EXCHANGE.NYSE ||
+				sStockExchange === Constants.STOCK_EXCHANGE.NDQ ||
+				sStockExchange === Constants.STOCK_EXCHANGE.AMEX ||
+				sStockExchange === Constants.STOCK_EXCHANGE.OTC) {
 					
 				sEarningsUrl = sBaseEarningsUrl.replace("{placeholder}", sSymbol);
 			}
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX ||
-				sStockExchange == Constants.STOCK_EXCHANGE.TSXV ||
-				sStockExchange == Constants.STOCK_EXCHANGE.CSE) {
+			else if (sStockExchange === Constants.STOCK_EXCHANGE.TSX ||
+				sStockExchange === Constants.STOCK_EXCHANGE.TSXV ||
+				sStockExchange === Constants.STOCK_EXCHANGE.CSE) {
 					
 				sEarningsUrl = sBaseEarningsUrl.replace("{placeholder}", "tse:" + sSymbol);
 			}
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.LSE) {
+			else if (sStockExchange === Constants.STOCK_EXCHANGE.LSE) {
 				sEarningsUrl = sBaseEarningsUrl.replace("{placeholder}", "gb:" + sSymbol);
 			}
 			
@@ -281,11 +281,12 @@ sap.ui.define([
 			oComboxBox.getItemByKey(Constants.INSTRUMENT_TYPE.INDUSTRY_GROUP).setEnabled(false);
 			oComboxBox.getItemByKey(Constants.INSTRUMENT_TYPE.RATIO).setEnabled(false);
 			
-			if(aAllowedInstrumentTypes == undefined || aAllowedInstrumentTypes.length == 0)
+			if (aAllowedInstrumentTypes === undefined || aAllowedInstrumentTypes.length === 0) {				
 				return;
+			}
 				
 			//Only set those types to visible, that are explicitly allowed.			
-			for(var i = 0; i < aAllowedInstrumentTypes.length; i++) {
+			for (var i = 0; i < aAllowedInstrumentTypes.length; i++) {
 				oComboxBox.getItemByKey(aAllowedInstrumentTypes[i]).setEnabled(true);
 			}
 		}
