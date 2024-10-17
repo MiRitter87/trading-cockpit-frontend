@@ -59,7 +59,7 @@ sap.ui.define([
 				oSelectDialog.clearSelection();
 			}
 									
-			oScan = ScanController.getScanById(oSelectedItem.getKey(), oScansModel.oData.scan);
+			oScan = ScanController.getScanById(Number(oSelectedItem.getKey()), oScansModel.oData.scan);
 			if (oScan !== null) {				
 				wsScan = ScanController.getScanForWebService(oScan);
 			}

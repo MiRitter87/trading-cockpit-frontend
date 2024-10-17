@@ -46,7 +46,7 @@ sap.ui.define([
 				return;
 			}
 				
-			oScan = ScanController.getScanById(oSelectedItem.getKey(), oScansModel.oData.scan);
+			oScan = ScanController.getScanById(Number(oSelectedItem.getKey()), oScansModel.oData.scan);
 			oScanModel.setData(oScan);
 			
 			//Set the model of the view according to the selected scan to allow binding of the UI elements.
