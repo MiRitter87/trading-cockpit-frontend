@@ -47,7 +47,7 @@ sap.ui.define([
 			var oPriceAlertModel;
 			
 			//Get the selected instrument
-			if(oSelectedItem != null) {			
+			if (oSelectedItem !== null) {			
 				oInstrument = InstrumentController.getInstrumentById(oSelectedItem.getKey(), oInstrumentsModel.oData.instrument);				
 			} else {
 				return;
@@ -70,18 +70,19 @@ sap.ui.define([
 			PriceAlertController.validatePriceInput(this.getView().byId("priceInput"), this.getOwnerComponent().getModel("i18n").getResourceBundle(),
 				this.getView().getModel("newPriceAlert"), "/price");
 				
-			if(this.getView().byId("instrumentComboBox").getSelectedKey() == "") {
+			if (this.getView().byId("instrumentComboBox").getSelectedKey() === "") {
 				this.showMessageOnUndefinedInstrument();
 				return;
 			}
 			
-			if(this.getView().byId("typeComboBox").getSelectedKey() == "") {
+			if (this.getView().byId("typeComboBox").getSelectedKey() === "") {
 				this.showMessageOnUndefinedType();
 				return;
 			}
 			
-			if(PriceAlertController.isPriceValid(this.getView().byId("priceInput").getValue()) == false)
+			if (PriceAlertController.isPriceValid(this.getView().byId("priceInput").getValue()) === false) {				
 				return;
+			}
 			
 			PriceAlertController.createPriceAlertByWebService(this.getView().getModel("newPriceAlert"), this.createPriceAlertCallback, this);
 		},
@@ -101,12 +102,12 @@ sap.ui.define([
 		queryInstrumentsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}
 			
@@ -118,19 +119,19 @@ sap.ui.define([
 		 * Callback function of the createPriceAlert RESTful WebService call in the PriceAlertController.
 		 */
 		createPriceAlertCallback : function (oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
 					//"this" is unknown in the success function of the ajax call. Therefore the calling controller is provided.
 					oCallingController.resetUIElements();
 					oCallingController.initializePriceAlertModel();
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			} 

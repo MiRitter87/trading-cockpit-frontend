@@ -40,7 +40,7 @@ sap.ui.define([
 			var oPriceAlert;
 			var oPriceAlertModel = new JSONModel();
 			
-			if(oSelectedItem == null) {
+			if (oSelectedItem === null) {
 				this.resetUIElements();				
 				return;
 			}
@@ -60,14 +60,15 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if (bShowSuccessMessage === true) {					
 					MessageToast.show(oResourceBundle.getText("priceAlertDisplay.dataLoaded"));			
+				}
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			

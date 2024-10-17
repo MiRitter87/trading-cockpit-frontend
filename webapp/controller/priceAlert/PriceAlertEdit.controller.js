@@ -47,13 +47,13 @@ sap.ui.define([
 			var oPriceAlertsModel = this.getView().getModel("priceAlerts");
 			var oPriceAlert, wsPriceAlert;
 			
-			if(oSelectedItem == null) {
+			if (oSelectedItem === null) {
 				this.resetUIElements();				
 				return;
 			}
 				
 			oPriceAlert = PriceAlertController.getPriceAlertById(oSelectedItem.getKey(), oPriceAlertsModel.oData.priceAlert);
-			if(oPriceAlert != null)
+			if (oPriceAlert !== null)
 				wsPriceAlert = PriceAlertController.getPriceAlertForWebService(oPriceAlert);
 			
 			//Set the model of the view according to the selected price alert to allow binding of the UI elements.
@@ -62,10 +62,11 @@ sap.ui.define([
 			//Manually set the price of the Input field because the price is not directly bound due to validation reasons.
 			this.setPriceInputValue(oPriceAlert.price);
 			
-			if(oPriceAlert.triggerTime != null)
+			if (oPriceAlert.triggerTime !== null) {
 				this.enableInputFields(false);
-			else
+			} else {				
 				this.enableInputFields(true);
+			}
 		},
 		
 		
@@ -80,12 +81,12 @@ sap.ui.define([
 			var oPriceAlertModel;
 			
 			//Check if a price alert has been selected.
-			if(this.getView().byId("priceAlertComboBox").getSelectedKey() == "") {
+			if (this.getView().byId("priceAlertComboBox").getSelectedKey() === "") {
 				return;
 			}
 			
 			//Get the selected instrument.
-			if(oSelectedItem != null) {			
+			if (oSelectedItem !== null) {			
 				oInstrument = InstrumentController.getInstrumentById(oSelectedItem.getKey(), oInstrumentsModel.oData.instrument);				
 			} else {
 				return;
@@ -106,8 +107,9 @@ sap.ui.define([
 		onSavePressed : function () {				
 			var bInputValid = this.verifyObligatoryFields();
 			
-			if(bInputValid == false)
+			if (bInputValid === false) {				
 				return;
+			}
 				
 			PriceAlertController.savePriceAlertByWebService(this.getView().getModel("selectedPriceAlert"), this.savePriceAlertCallback, this);
 		},
@@ -127,12 +129,12 @@ sap.ui.define([
 		queryInstrumentsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setSizeLimit(300);
 				oModel.setData(oReturnData.data);
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}
 			
@@ -147,14 +149,15 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if (bShowSuccessMessage === true) {					
 					MessageToast.show(oResourceBundle.getText("priceAlertEdit.dataLoaded"));			
+				}
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -166,8 +169,8 @@ sap.ui.define([
 		 *  Callback function of the savePriceAlert RESTful WebService call in the PriceAlertController.
 		 */
 		savePriceAlertCallback : function(oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
 					//Update the data source of the ComboBox with the new priceAlert data.
 					PriceAlertController.queryPriceAlertsByWebService(oCallingController.queryPriceAlertsCallback, oCallingController, false);
 					
@@ -177,15 +180,15 @@ sap.ui.define([
 					MessageToast.show(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'I') {
+				if (oReturnData.message[0].type === 'I') {
 					MessageToast.show(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if (oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
@@ -239,7 +242,7 @@ sap.ui.define([
 		verifyObligatoryFields : function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(this.getView().byId("priceAlertComboBox").getSelectedKey() == "") {
+			if (this.getView().byId("priceAlertComboBox").getSelectedKey() === "") {
 				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noPriceAlertSelected"));
 				return;
 			}
@@ -248,15 +251,16 @@ sap.ui.define([
 			PriceAlertController.validatePriceInput(this.getView().byId("priceInput"), this.getOwnerComponent().getModel("i18n").getResourceBundle(),
 				this.getView().getModel("selectedPriceAlert"), "/price");
 			
-			if(PriceAlertController.isPriceValid(this.getView().byId("priceInput").getValue()) == false)
+			if (PriceAlertController.isPriceValid(this.getView().byId("priceInput").getValue()) === false) {				
 				return false;
+			}
 			
-			if(this.getView().byId("instrumentComboBox").getSelectedKey() == "") {
+			if (this.getView().byId("instrumentComboBox").getSelectedKey() === "") {
 				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noInstrumentSelected"));
 				return false;
 			}
 			
-			if(this.getView().byId("typeComboBox").getSelectedKey() == "") {
+			if (this.getView().byId("typeComboBox").getSelectedKey() === "") {
 				MessageBox.error(oResourceBundle.getText("priceAlertEdit.noTypeSelected"));
 				return false;
 			}

@@ -112,8 +112,9 @@ sap.ui.define([
 			if(oReturnData.data != null) {
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true)
+				if(bShowSuccessMessage == true) {					
 					MessageToast.show(oResourceBundle.getText("priceAlertOverview.dataLoaded"));			
+				}
 			}
 			
 			if(oReturnData.data == null && oReturnData.message != null)  {
@@ -170,10 +171,11 @@ sap.ui.define([
 		 * Checks if a price alert has been selected.
 		 */
 		isPriceAlertSelected : function () {
-			if(this.getView().byId("priceAlertTable").getSelectedItem() == null)
+			if(this.getView().byId("priceAlertTable").getSelectedItem() == null) {				
 				return false;
-			else
+			} else {				
 				return true;
+			}
 		},
 		
 		

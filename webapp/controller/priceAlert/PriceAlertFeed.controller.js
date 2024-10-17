@@ -40,11 +40,11 @@ sap.ui.define([
 		queryPriceAlertsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
-			if(oReturnData.data != null) {
+			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);		
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if (oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -59,12 +59,12 @@ sap.ui.define([
 		 *  Callback function of the savePriceAlert RESTful WebService call in the PriceAlertController.
 		 */
 		savePriceAlertCallback : function(oReturnData) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S' || oReturnData.message[0].type == 'I') {
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S' || oReturnData.message[0].type === 'I') {
 					MessageToast.show(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'E' || oReturnData.message[0].type == 'W') {
+				if (oReturnData.message[0].type === 'E' || oReturnData.message[0].type === 'W') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 			}
@@ -95,11 +95,13 @@ sap.ui.define([
 		 * Formatter of the price alert icon.
 		 */
 		priceAlertIconFormatter: function(sAlertType) {
-			if(sAlertType == Constants.ALERT_TYPE.GREATER_OR_EQUAL)
+			if (sAlertType === Constants.ALERT_TYPE.GREATER_OR_EQUAL) {				
 				return "sap-icon://trend-up";
+			}
 				
-			if(sAlertType == Constants.ALERT_TYPE.LESS_OR_EQUAL)
+			if (sAlertType === Constants.ALERT_TYPE.LESS_OR_EQUAL) {				
 				return "sap-icon://trend-down";
+			}
 		},
 		
 		
@@ -150,7 +152,7 @@ sap.ui.define([
 			oPriceAlertsModel = oCallingController.getView().getModel("priceAlerts");
 			iNumberPriceAlerts = oPriceAlertsModel.oData.priceAlert.length;
 			
-			if(iNumberPriceAlerts > 0) {
+			if (iNumberPriceAlerts > 0) {
 				this.vibrate(400);
 				this.playAlertSound();				
 			}
@@ -167,8 +169,9 @@ sap.ui.define([
 		vibrate: function(iDuration) {			
 			var bSupportsVibrate = "vibrate" in navigator;
 			
-			if(bSupportsVibrate == false)		
+			if (bSupportsVibrate === false)	 {				
 				return;
+			}	
 				
 			window.navigator.vibrate(iDuration);
 		},

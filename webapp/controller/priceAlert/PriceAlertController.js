@@ -20,7 +20,7 @@ sap.ui.define([
 		isPriceValid : function (sPriceInputString) {
 			var fPricePerUnit = parseFloat(sPriceInputString);
 			
-			if(isNaN(fPricePerUnit)) {
+			if (isNaN(fPricePerUnit)) {
 				return false;
 			}
 			else {
@@ -42,7 +42,7 @@ sap.ui.define([
 			var sPriceInputString = oPriceInput.getValue();
 			var fPricePerUnit = parseFloat(sPriceInputString);
 			
-			if(isNaN(fPricePerUnit)) {
+			if (isNaN(fPricePerUnit)) {
 				oPriceInput.setValueState(sap.ui.core.ValueState.Error);
 				oPriceInput.setValueStateText(oResourceBundle.getText("error.useDecimalPlaces"));
 				oModel.setProperty(sPricePropertyPath, 0);
@@ -59,10 +59,10 @@ sap.ui.define([
 		 */
 		getPriceAlertById : function(iPriceAlertId, oPriceAlerts) {
 			//Get the selected price alert from the array of all price alerts according to the id.
-			for(var i = 0; i < oPriceAlerts.length; i++) {
+			for (var i = 0; i < oPriceAlerts.length; i++) {
     			var oTempPriceAlert = oPriceAlerts[i];
     			
-				if(oTempPriceAlert.id == iPriceAlertId) {
+				if (oTempPriceAlert.id === iPriceAlertId) {
 					return oTempPriceAlert;
 				}
 			}
@@ -75,12 +75,13 @@ sap.ui.define([
 		 * Returns the localized text of the given type.
 		 */
 		getLocalizedTypeText : function(sType, oResourceBundle) {
-			if(sType == Constants.ALERT_TYPE.LESS_OR_EQUAL)
+			if (sType === Constants.ALERT_TYPE.LESS_OR_EQUAL) {				
 				return oResourceBundle.getText("priceAlert.type.lessOrEqual");
-			else if(sType == Constants.ALERT_TYPE.GREATER_OR_EQUAL)
+			} else if (sType === Constants.ALERT_TYPE.GREATER_OR_EQUAL) {				
 				return oResourceBundle.getText("priceAlert.type.greaterOrEqual");
-			else
+			} else {				
 				return "";
+			}
 		},
 		
 		
@@ -88,24 +89,25 @@ sap.ui.define([
 		 * Returns the currency for the given stock exchange.
 		 */
 		getCurrencyForStockExchange : function(sStockExchange) {
-			if(sStockExchange == Constants.STOCK_EXCHANGE.NYSE)
+			if (sStockExchange === Constants.STOCK_EXCHANGE.NYSE) {				
 				return Constants.CURRENCY.USD;
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.NDQ)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.NDQ) {				
 				return Constants.CURRENCY.USD;
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.AMEX)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.AMEX) {				
 				return Constants.CURRENCY.USD;
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.OTC)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.OTC) {				
 				return Constants.CURRENCY.USD;	
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSX)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.TSX) {				
 				return Constants.CURRENCY.CAD;
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.TSXV)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.TSXV) {				
 				return Constants.CURRENCY.CAD;
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.CSE)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.CSE) {				
 				return Constants.CURRENCY.CAD;
-			else if(sStockExchange == Constants.STOCK_EXCHANGE.LSE)
+			} else if (sStockExchange === Constants.STOCK_EXCHANGE.LSE) {				
 				return Constants.CURRENCY.GBP;
-			else
+			} else {
 				return null;
+			}
 		},
 		
 		
@@ -113,10 +115,11 @@ sap.ui.define([
 		 * returns the display text for the given currency code.
 		 */
 		getCurrencyDisplayText: function(sCurrencyCode) {
-			if(sCurrencyCode == Constants.CURRENCY.GBP)
+			if (sCurrencyCode === Constants.CURRENCY.GBP) {				
 				return "GBp";
-			else
+			} else {				
 				return sCurrencyCode;
+			}
 		},
 		
 		
@@ -176,21 +179,24 @@ sap.ui.define([
 			var bTriggerStatusGiven = false;
 			var bConfirmationStatusGiven = false;
 			
-			if(sTriggerStatus != undefined && sTriggerStatus != null)
+			if (sTriggerStatus !== undefined && sTriggerStatus !== null) {				
 				bTriggerStatusGiven = true;
+			}
 				
-			if(sConfirmationStatus != undefined && sConfirmationStatus != null)
+			if (sConfirmationStatus !== undefined && sConfirmationStatus !== null) {				
 				bConfirmationStatusGiven = true;
+			}
 				
-			if(bTriggerStatusGiven == true) {
+			if (bTriggerStatusGiven === true) {
 				sQueryUrl= sQueryUrl + "?triggerStatusQuery=" + sTriggerStatus;
 				
-				if(bConfirmationStatusGiven == true)
+				if (bConfirmationStatusGiven === true) {					
 					sQueryUrl = sQueryUrl + "&confirmationStatusQuery=" + sConfirmationStatus;			
-			}
-			else {
-				if(bConfirmationStatusGiven == true)
+				}
+			} else {
+				if (bConfirmationStatusGiven === true) {					
 					sQueryUrl= sQueryUrl + "?confirmationStatusQuery=" + sConfirmationStatus;
+				}
 			}
 			
 			jQuery.ajax({
