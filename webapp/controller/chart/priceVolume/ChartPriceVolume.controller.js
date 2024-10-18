@@ -62,7 +62,7 @@ sap.ui.define([
 				return;
 			}
 			
-			oInstrument = ScanController.getInstrumentById(oSelectedItem.getKey(), oQuotationsModel.oData.quotation);
+			oInstrument = ScanController.getInstrumentById(Number(oSelectedItem.getKey()), oQuotationsModel.oData.quotation);
 			
 			if (oInstrument.type === Constants.INSTRUMENT_TYPE.RATIO) {
 				oVolumeCheckBox.setSelected(false);
