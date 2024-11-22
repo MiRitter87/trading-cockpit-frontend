@@ -113,9 +113,9 @@
 							</f:fields>
 						</f:FormElement>
 					
-						<f:FormElement label="{i18n>instrument.companyPathInvestingCom}">
+						<f:FormElement label="{i18n>instrument.investingId}">
 							<f:fields>
-								<Text id="companyPathText" text="{selectedInstrument>/companyPathInvestingCom}"/>
+								<Text id="investingIdText" text="{selectedInstrument>/investingId}"/>
 							</f:fields>
 						</f:FormElement>
 					</f:FormContainer>
