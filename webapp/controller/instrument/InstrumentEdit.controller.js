@@ -203,7 +203,7 @@ sap.ui.define([
 			this.getView().byId("listComboBox").setEnabled(true);
 			this.getView().byId("listComboBox").setSelectedItem(null);
 			
-			this.getView().byId("companyPathInput").setEnabled(true);
+			this.getView().byId("investingIdInput").setEnabled(true);
 			
 			InstrumentController.setSectorAndIgComboBoxEnabled(false, 
 					this.getView().byId("sectorComboBox"), this.getView().byId("industryGroupComboBox"));
@@ -299,8 +299,8 @@ sap.ui.define([
 				this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
 				this.getView().byId("stockExchangeComboBox").setEnabled(false);
 				this.getView().byId("stockExchangeComboBox").setRequired(false);
-				this.getView().byId("companyPathInput").setValue("");
-				this.getView().byId("companyPathInput").setEnabled(false);
+				this.getView().byId("investingIdInput").setValue("");
+				this.getView().byId("investingIdInput").setEnabled(false);
 				this.getView().byId("dividendComboBox").setRequired(true);
 				this.getView().byId("divisorComboBox").setRequired(true);
 				
@@ -312,7 +312,7 @@ sap.ui.define([
 				this.getView().byId("symbolInput").setRequired(true);
 				this.getView().byId("stockExchangeComboBox").setEnabled(true);
 				this.getView().byId("stockExchangeComboBox").setRequired(true);
-				this.getView().byId("companyPathInput").setEnabled(true);
+				this.getView().byId("investingIdInput").setEnabled(true);
 				this.getView().byId("dividendComboBox").setRequired(false);
 				this.getView().byId("divisorComboBox").setRequired(false);
 				
@@ -343,7 +343,7 @@ sap.ui.define([
 				this.getView().byId("symbolInput").setRequired(true);
 				this.getView().byId("stockExchangeComboBox").setEnabled(true);
 				this.getView().byId("stockExchangeComboBox").setRequired(true);
-				this.getView().byId("companyPathInput").setEnabled(true);
+				this.getView().byId("investingIdInput").setEnabled(true);
 			} else {
 				this.getView().byId("symbolInput").setValue("");
 				this.getView().byId("symbolInput").setEnabled(false);
@@ -351,8 +351,8 @@ sap.ui.define([
 				this.getView().byId("stockExchangeComboBox").setSelectedItem(null);
 				this.getView().byId("stockExchangeComboBox").setEnabled(false);
 				this.getView().byId("stockExchangeComboBox").setRequired(false);
-				this.getView().byId("companyPathInput").setValue("");
-				this.getView().byId("companyPathInput").setEnabled(false);
+				this.getView().byId("investingIdInput").setValue("");
+				this.getView().byId("investingIdInput").setEnabled(false);
 			}
 		},
 		
@@ -369,7 +369,7 @@ sap.ui.define([
 			wsInstrument.setProperty("/type", oInstrument.type);
 			wsInstrument.setProperty("/stockExchange", oInstrument.stockExchange);
 			wsInstrument.setProperty("/name", oInstrument.name);
-			wsInstrument.setProperty("/companyPathInvestingCom", oInstrument.companyPathInvestingCom);
+			wsInstrument.setProperty("/investingId", oInstrument.investingId);
 			
 			//References
 			if (oInstrument.sector !== null) {				

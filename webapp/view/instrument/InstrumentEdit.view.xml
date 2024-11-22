@@ -119,10 +119,10 @@
 							</f:fields>
 						</f:FormElement>
 					
-						<f:FormElement label="{i18n>instrument.companyPathInvestingCom}">
+						<f:FormElement label="{i18n>instrument.investingId}">
 							<f:fields>
-								<Input id ="companyPathInput" maxLength="50" value="{selectedInstrument>/companyPathInvestingCom}" required="false"
-									tooltip="{i18n>instrumentEdit.companyPathTooltip}"/>
+								<Input id ="investingIdInput" maxLength="10" value="{selectedInstrument>/investingId}" required="false"
+									tooltip="{i18n>instrumentEdit.investingIdTooltip}"/>
 							</f:fields>
 						</f:FormElement>
 					</f:FormContainer>
