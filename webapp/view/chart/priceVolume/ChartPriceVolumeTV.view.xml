@@ -21,6 +21,8 @@
 				</ComboBox>
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
 			</FlexBox>
+			
+			<core:HTML id="chartContainerHTML" content="&lt;div id='chartContainer'&gt;&lt;/div&gt;"/>
 		</content>
 	</Page>
 </mvc:View>

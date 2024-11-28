@@ -3,7 +3,7 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
 	xmlns:f="sap.ui.layout.form"
-	xmlns:html="http://www.w3.org/1999/xhtml">>
+	xmlns:html="http://www.w3.org/1999/xhtml">
 
 	<Dialog id="tradingViewChartContainerDialog" title="{i18n>chartPriceVolume.selectObjectCoordinateTitle}">
 		<content>
