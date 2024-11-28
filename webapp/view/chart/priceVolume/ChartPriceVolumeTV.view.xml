@@ -7,6 +7,8 @@
 	xmlns:core="sap.ui.core">
 	
 	<Page title="{i18n>chartPriceVolumeTV.header}">
-
+		<headerContent>
+			<Button icon="sap-icon://hint" tooltip="{i18n>chartPriceVolumeTV.typeTooltip}" press=".onChartInformationPressed"/>
+		</headerContent>
 	</Page>
 </mvc:View>
