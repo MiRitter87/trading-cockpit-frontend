@@ -198,6 +198,10 @@
 				"name": "chartPriceVolumeRoute",
 				"target": "chartPriceVolumeTarget"
 			}, {
+				"pattern": "chartPriceVolumeTV",
+				"name": "chartPriceVolumeTVRoute",
+				"target": "chartPriceVolumeTVTarget"
+			}, {
 				"pattern": "chartDistributionDays",
 				"name": "chartDistributionDaysRoute",
 				"target": "chartDistributionDaysTarget"
@@ -387,6 +391,11 @@
             	"chartPriceVolumeTarget": {
 					"viewId": "ChartPriceVolume",
 					"viewName": "chart.priceVolume.ChartPriceVolume",
+					"viewLevel" : 1
+            	},
+            	"chartPriceVolumeTVTarget": {
+					"viewId": "ChartPriceVolumeTV",
+					"viewName": "chart.priceVolume.ChartPriceVolumeTV",
 					"viewLevel" : 1
             	},
             	"chartDistributionDaysTarget": {

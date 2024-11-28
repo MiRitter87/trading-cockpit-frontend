@@ -57,6 +57,14 @@ sap.ui.define([
 			oRouter.navTo("chartPriceVolumeRoute");	
 		},
 		
+		/**
+		 * Handles click at the Price/Volume (TradingView) tile.
+		 */
+		onPriceVolumeTVPressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("chartPriceVolumeTVRoute");	
+		},
+		
 		
 		/**
 		 * Handles click at the Distribution Days tile.
