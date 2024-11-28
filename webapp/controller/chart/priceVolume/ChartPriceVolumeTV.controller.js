@@ -1,7 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/m/MessageBox"
-], function (Controller, MessageBox) {
+	"../../scan/ScanController",
+	"../../Constants",
+	"sap/ui/model/json/JSONModel",
+	"sap/m/MessageBox",
+	"sap/m/MessageToast"
+], function (Controller, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartPriceVolumeTV", {
@@ -9,7 +13,17 @@ sap.ui.define([
 		 * Initializes the controller.
 		 */
 		onInit : function () {
-			
+			var oRouter = this.getOwnerComponent().getRouter();
+			oRouter.getRoute("chartPriceVolumeTVRoute").attachMatched(this._onRouteMatched, this);
+		},
+		
+		
+		/**
+		 * Handles the routeMatched-event when the router navigates to this view.
+		 */
+		_onRouteMatched: function () {
+			//Query only instruments that have quotations referenced. Otherwise no chart could be created.
+			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, false, Constants.SCAN_TEMPLATE.ALL);
 		},
 		
 		
@@ -25,5 +39,40 @@ sap.ui.define([
 			mOptions.title = sTitle;
 			MessageBox.information(sDescription, mOptions);
 		},
+		
+		
+		/**
+		 * Handles the selection of an Instrument.
+		 */
+		onInstrumentSelectionChange : function (oControlEvent) {
+			//TODO: Only display volume bars, if instrument is not of type RATIO.
+		},
+		
+		
+		/**
+    	 * Handles the button press event of the refresh chart button.
+    	 */
+    	onRefreshPressed : function() {
+	
+		},
+		
+		
+		/**
+		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
+		 */
+		queryQuotationsCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if (oReturnData.data !== null) {
+				oModel.setSizeLimit(300);
+				oModel.setData(oReturnData.data);
+			}
+			
+			if (oReturnData.data === null && oReturnData.message !== null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}
+			
+			oCallingController.getView().setModel(oModel, "quotations");
+		}
 	});
 });

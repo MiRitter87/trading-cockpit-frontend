@@ -10,5 +10,17 @@
 		<headerContent>
 			<Button icon="sap-icon://hint" tooltip="{i18n>chartPriceVolumeTV.typeTooltip}" press=".onChartInformationPressed"/>
 		</headerContent>
+		
+		<content>
+			<FlexBox alignItems="Center" justifyContent="Start">
+				<Label text="{i18n>chartPriceVolumeTV.instrument}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" required="true"/>
+				<ComboBox id="instrumentComboBox" items="{path: 'quotations>/quotation/', sorter: {path: 'instrument/id'}}" 
+					selectionChange=".onInstrumentSelectionChange">
+					
+					<core:Item key="{quotations>instrument/id}" text="{quotations>instrument/symbol} - {quotations>instrument/name}"/>
+				</ComboBox>
+				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
+			</FlexBox>
+		</content>
 	</Page>
 </mvc:View>

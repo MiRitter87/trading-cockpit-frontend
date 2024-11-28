@@ -5,8 +5,9 @@ sap.ui.define([
 	"../../Constants",
 	"./ChartAnalysisController",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageBox"
-], function (Controller, MainController, ScanController, Constants, ChartAnalysisController, JSONModel, MessageBox) {
+	"sap/m/MessageBox",
+	"sap/m/MessageToast"
+], function (Controller, MainController, ScanController, Constants, ChartAnalysisController, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartPriceVolume", {
