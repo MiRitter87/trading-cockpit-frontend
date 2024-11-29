@@ -4,10 +4,11 @@ sap.ui.define([
 	"../../scan/ScanController",
 	"../../Constants",
 	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/format/DateFormat",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast",
 	"./lightweight-charts.standalone.production"
-], function (Controller, MainController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
+], function (Controller, MainController, ScanController, Constants, JSONModel, DateFormat, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartPriceVolumeTV", {
@@ -152,20 +153,53 @@ sap.ui.define([
                     },
                 },
             });
-
-            // Sample Data
-            const lineSeries = chart.addLineSeries({
-                color: 'rgb(55, 128, 255)',
-                lineWidth: 2,
-            });
             
-            lineSeries.setData([
-                { time: '2023-01-01', value: 100 },
-                { time: '2023-01-02', value: 101 },
-                { time: '2023-01-03', value: 99 },
-                { time: '2023-01-04', value: 105 },
-                { time: '2023-01-05', value: 98 },
-            ]);
-		}
+            const candlestickSeries = chart.addCandlestickSeries();
+			candlestickSeries.setData(this.getCandlestickSeries());
+			
+			//Automatically zoom the time scale to display all datasets over the full width of the chart.
+			chart.timeScale().fitContent();
+			
+			// Customizing the Crosshair
+			chart.applyOptions({
+    			crosshair: {
+			        // Change mode from default 'magnet' to 'normal'.
+			        // Allows the crosshair to move freely without snapping to datapoints
+			        mode: LightweightCharts.CrosshairMode.Normal
+    			},
+			});
+		},
+		
+		
+		/**
+		 * Creates a candlestick series that contains the data to be displayed.
+		 */
+		getCandlestickSeries : function () {
+			var oQuotationsModel = this.getView().getModel("quotationsForChart");
+			var oQuotations = oQuotationsModel.oData.quotation;
+			var aCandlestickSeries = new Array();
+			var oDateFormat, oDate, sFormattedDate;
+			
+			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
+			
+			//The dataset needs to be constructed beginning at the oldest value.
+			for (var i = oQuotations.length -1; i >= 0; i--) {
+    			var oQuotation = oQuotations[i];
+    			var oCandlestickDataset = new Object();
+    			
+    			oCandlestickDataset.open = oQuotation.open;
+    			oCandlestickDataset.high = oQuotation.high;
+    			oCandlestickDataset.low = oQuotation.low;
+    			oCandlestickDataset.close = oQuotation.close;
+    			
+    			oDate = new Date(parseInt(oQuotation.date));
+    			sFormattedDate = oDateFormat.format(oDate);
+    			oCandlestickDataset.time = sFormattedDate;
+    			
+    			aCandlestickSeries.push(oCandlestickDataset);
+			}
+			
+			return aCandlestickSeries;
+		},
 	});
 });
