@@ -54,6 +54,11 @@ sap.ui.define([
     	 * Handles the button press event of the refresh chart button.
     	 */
     	onRefreshPressed : function() {
+			var sDivId = "chartContainer";
+			
+			//Remove previously created chart for subsequent chart creations
+			document.getElementById(sDivId).innerHTML = "";
+	
 			const chart = LightweightCharts.createChart(document.getElementById("chartContainer"), {
   				width: document.getElementById("chartContainer").clientWidth,
                 height: document.getElementById("chartContainer").clientHeight,
