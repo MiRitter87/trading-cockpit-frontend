@@ -4,7 +4,8 @@ sap.ui.define([
 	"../../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
-	"sap/m/MessageToast"
+	"sap/m/MessageToast",
+	"./lightweight-charts.standalone.production"
 ], function (Controller, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
@@ -53,7 +54,36 @@ sap.ui.define([
     	 * Handles the button press event of the refresh chart button.
     	 */
     	onRefreshPressed : function() {
-	
+			const chart = LightweightCharts.createChart(document.getElementById("chartContainer"), {
+  				width: document.getElementById("chartContainer").clientWidth,
+                height: document.getElementById("chartContainer").clientHeight,
+                layout: {
+                    backgroundColor: 'white',
+                    textColor: 'black',
+                },
+                grid: {
+                    vertLines: {
+                        color: '#eee',
+                    },
+                    horzLines: {
+                        color: '#eee',
+                    },
+                },
+            });
+
+            // Sample Data
+            const lineSeries = chart.addLineSeries({
+                color: 'rgb(55, 128, 255)',
+                lineWidth: 2,
+            });
+            
+            lineSeries.setData([
+                { time: '2023-01-01', value: 100 },
+                { time: '2023-01-02', value: 101 },
+                { time: '2023-01-03', value: 99 },
+                { time: '2023-01-04', value: 105 },
+                { time: '2023-01-05', value: 98 },
+            ]);
 		},
 		
 		
