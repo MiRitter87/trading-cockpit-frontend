@@ -22,7 +22,8 @@
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
 			</FlexBox>
 			
-			<core:HTML id="chartContainerHTML" content="&lt;div id=&quot;chartContainer&quot; style=&quot;position: relative; width: 1600px; height: 700px;&quot;&gt;&lt;/div&gt;"/>
+			<core:HTML id="chartContainerHTML" 
+				content="&lt;div id=&quot;chartContainer&quot; style=&quot;position: relative; width: 1600px; height: 700px;&quot;&gt;&lt;/div&gt;"/>
 		</content>
 	</Page>
 </mvc:View>
