@@ -167,6 +167,13 @@ sap.ui.define([
 			        // Allows the crosshair to move freely without snapping to datapoints
 			        mode: LightweightCharts.CrosshairMode.Normal
     			},
+    			rightPriceScale: {
+					mode: LightweightCharts.PriceScaleMode.Logarithmic,
+					scaleMargins: {
+				        top: 0.05,
+				        bottom: 0.05,
+				    },
+				}
 			});
 		},
 		
