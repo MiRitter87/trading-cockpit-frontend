@@ -161,21 +161,9 @@ sap.ui.define([
 				priceFormat: {
         			type: 'volume',
     			},
-    			priceScaleId: '' // set as an overlay by setting a blank priceScaleId
-			});
-			
-			volumeSeries.priceScale().applyOptions({
-    			// set the positioning of the volume series
-    			scaleMargins: {
-			        top: 0.7, // highest point of the series will be 70% away from the top
-			        bottom: 0,
-    			},
-			});
-			
+    			priceScaleId: 'left'
+			});	
 			volumeSeries.setData(this.getVolumeSeries());
-			
-			//Automatically zoom the time scale to display all datasets over the full width of the chart.
-			chart.timeScale().fitContent();
 			
 			// Customizing the Crosshair
 			chart.applyOptions({
@@ -188,10 +176,21 @@ sap.ui.define([
 					mode: LightweightCharts.PriceScaleMode.Logarithmic,
 					scaleMargins: {
 				        top: 0.05,
-				        bottom: 0.05,
+				        bottom: 0.15,
 				    },
-				}
+				    visible: true
+				},
+    			leftPriceScale: {
+					scaleMargins: {
+			        	top: 0.85,
+			        	bottom: 0,
+    				},
+        			visible: true,
+    			}
 			});
+			
+			//Automatically zoom the time scale to display all datasets over the full width of the chart.
+			chart.timeScale().fitContent();
 		},
 		
 		
