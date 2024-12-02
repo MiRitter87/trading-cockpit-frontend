@@ -248,6 +248,13 @@ sap.ui.define([
     			sFormattedDate = oDateFormat.format(oDate);
     			oVolumeDataset.time = sFormattedDate;
     			
+    			//Determine color of volume bars
+    			if(oQuotation.close >= oQuotation.open) {
+					oVolumeDataset.color = 'green';
+				} else {
+					oVolumeDataset.color = 'red';
+				}
+    			
     			aVolumeSeries.push(oVolumeDataset);
     		}
     		
