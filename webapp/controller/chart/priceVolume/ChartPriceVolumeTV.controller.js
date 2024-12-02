@@ -157,6 +157,23 @@ sap.ui.define([
             const candlestickSeries = chart.addCandlestickSeries();
 			candlestickSeries.setData(this.getCandlestickSeries());
 			
+			const volumeSeries = chart.addHistogramSeries({
+				priceFormat: {
+        			type: 'volume',
+    			},
+    			priceScaleId: '' // set as an overlay by setting a blank priceScaleId
+			});
+			
+			volumeSeries.priceScale().applyOptions({
+    			// set the positioning of the volume series
+    			scaleMargins: {
+			        top: 0.7, // highest point of the series will be 70% away from the top
+			        bottom: 0,
+    			},
+			});
+			
+			volumeSeries.setData(this.getVolumeSeries());
+			
 			//Automatically zoom the time scale to display all datasets over the full width of the chart.
 			chart.timeScale().fitContent();
 			
@@ -208,5 +225,34 @@ sap.ui.define([
 			
 			return aCandlestickSeries;
 		},
+		
+		
+		/**
+		 * Creates a Histogram series that contains the volume data to be displayed.
+		 */
+		getVolumeSeries : function () {
+			var oQuotationsModel = this.getView().getModel("quotationsForChart");
+			var oQuotations = oQuotationsModel.oData.quotation;
+			var aVolumeSeries = new Array();
+			var oDateFormat, oDate, sFormattedDate;
+			
+			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
+			
+			//The dataset needs to be constructed beginning at the oldest value.
+			for (var i = oQuotations.length -1; i >= 0; i--) {
+    			var oQuotation = oQuotations[i];
+    			var oVolumeDataset = new Object();
+    			
+    			oVolumeDataset.value = oQuotation.volume;
+    			
+    			oDate = new Date(parseInt(oQuotation.date));
+    			sFormattedDate = oDateFormat.format(oDate);
+    			oVolumeDataset.time = sFormattedDate;
+    			
+    			aVolumeSeries.push(oVolumeDataset);
+    		}
+    		
+    		return aVolumeSeries;
+		}
 	});
 });
