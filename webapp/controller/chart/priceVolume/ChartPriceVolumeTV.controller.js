@@ -78,8 +78,15 @@ sap.ui.define([
 			var ema21Data = this.getEma21Data();
 	
 			if (oEvent.getSource().getPressed()) {
-					const maSeries = chart.addLineSeries({ color: 'yellow', lineWidth: 1 });
-					maSeries.setData(ema21Data);
+					const ema21Series = chart.addLineSeries({ color: 'yellow', lineWidth: 1 });
+					ema21Series.setData(ema21Data);
+					chartModel.setProperty("/ema21Series", ema21Series);
+			} else {
+				const ema21Series = chartModel.getProperty("/ema21Series");
+				
+				if(ema21Series !== undefined && chart !== undefined) {
+					chart.removeSeries(ema21Series);
+				}
 			}
 		},
 		
