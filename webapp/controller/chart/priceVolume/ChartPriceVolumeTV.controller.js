@@ -70,6 +70,14 @@ sap.ui.define([
 		
 		
 		/**
+    	 * Handles the button press event of the EMA(21) ToggleButton.
+    	 */
+    	onEma21Pressed : function() {
+	
+		},
+		
+		
+		/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
 		queryAllQuotationsCallback : function(oReturnData, oCallingController) {

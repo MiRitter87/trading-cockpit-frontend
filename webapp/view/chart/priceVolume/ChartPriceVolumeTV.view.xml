@@ -22,6 +22,10 @@
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
 			</FlexBox>
 			
+			<HBox>
+				<ToggleButton text="{i18n>chartPriceVolumeTV.ema21}" press=".onEma21Pressed"/>
+			</HBox>
+			
 			<core:HTML id="chartContainerHTML" 
 				content="&lt;div id=&quot;chartContainer&quot; style=&quot;position: relative; width: 1600px; height: 700px;&quot;&gt;&lt;/div&gt;"/>
 		</content>
