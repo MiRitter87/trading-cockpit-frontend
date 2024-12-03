@@ -27,6 +27,8 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query only instruments that have quotations referenced. Otherwise no chart could be created.
 			ScanController.queryQuotationsByWebService(this.queryAllQuotationsCallback, this, false, Constants.SCAN_TEMPLATE.ALL);
+			
+			this.resetUIElements();
 		},
 		
 		
@@ -319,6 +321,21 @@ sap.ui.define([
     		}
     		
     		return aEma21Series;
+		},
+		
+		
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements : function () {
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oEma21Button = this.getView().byId("ema21Button");
+
+			oInstrumentComboBox.setSelectedKey("");
+			oEma21Button.setPressed(false);
+			
+			//Remove previously created chart.
+			document.getElementById("chartContainer").innerHTML = "";
 		}
 	});
 });

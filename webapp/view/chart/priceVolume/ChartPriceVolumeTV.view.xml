@@ -23,7 +23,7 @@
 			</FlexBox>
 			
 			<HBox>
-				<ToggleButton text="{i18n>chartPriceVolumeTV.ema21}" press=".onEma21Pressed"/>
+				<ToggleButton id="ema21Button" text="{i18n>chartPriceVolumeTV.ema21}" press=".onEma21Pressed"/>
 			</HBox>
 			
 			<core:HTML id="chartContainerHTML" 
