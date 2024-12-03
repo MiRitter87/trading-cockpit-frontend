@@ -72,8 +72,15 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the EMA(21) ToggleButton.
     	 */
-    	onEma21Pressed : function() {
+    	onEma21Pressed : function(oEvent) {
+			var chartModel = this.getView().getModel("chartModel");
+			var chart = chartModel.getProperty("/chart");
+			var ema21Data = this.getEma21Data();
 	
+			if (oEvent.getSource().getPressed()) {
+					const maSeries = chart.addLineSeries({ color: 'yellow', lineWidth: 1 });
+					maSeries.setData(ema21Data);
+			}
 		},
 		
 		
@@ -141,6 +148,7 @@ sap.ui.define([
 		 */
 		openChart : function () {
 			var sDivId = "chartContainer";
+			var chartModel = new JSONModel();
 			
 			//Remove previously created chart for subsequent chart creations
 			document.getElementById(sDivId).innerHTML = "";
@@ -199,6 +207,10 @@ sap.ui.define([
 			
 			//Automatically zoom the time scale to display all datasets over the full width of the chart.
 			chart.timeScale().fitContent();
+			
+			//Store chart Model for further access.
+			chartModel.setProperty("/chart", chart);
+			this.getView().setModel(chartModel, "chartModel");
 		},
 		
 		
@@ -267,6 +279,39 @@ sap.ui.define([
     		}
     		
     		return aVolumeSeries;
+		},
+		
+		
+		/**
+		 * Create a line series that contains the EMA(21) data.
+		 */
+		getEma21Data : function () {
+			var oQuotationsModel = this.getView().getModel("quotationsForChart");
+			var oQuotations = oQuotationsModel.oData.quotation;
+			var aEma21Series = new Array();
+			var oDateFormat, oDate, sFormattedDate;
+			
+			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
+			
+			//The dataset needs to be constructed beginning at the oldest value.
+			for (var i = oQuotations.length -1; i >= 0; i--) {
+    			var oQuotation = oQuotations[i];
+    			var oEma21Dataset = new Object();
+    			
+    			if(oQuotation.movingAverageData === null || oQuotation.movingAverageData.ema21 === 0) {
+					continue;
+				}
+    			
+    			oEma21Dataset.value = oQuotation.movingAverageData.ema21;
+    			
+    			oDate = new Date(parseInt(oQuotation.date));
+    			sFormattedDate = oDateFormat.format(oDate);
+    			oEma21Dataset.time = sFormattedDate;
+    			
+    			aEma21Series.push(oEma21Dataset);
+    		}
+    		
+    		return aEma21Series;
 		}
 	});
 });
