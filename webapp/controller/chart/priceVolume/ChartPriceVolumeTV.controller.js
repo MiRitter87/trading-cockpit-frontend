@@ -77,7 +77,7 @@ sap.ui.define([
     	onEma21Pressed : function(oEvent) {
 			var chartModel = this.getView().getModel("chartModel");
 			var chart = chartModel.getProperty("/chart");
-			var ema21Data = this.getEma21Data();
+			var ema21Data = this.getMovingAverageData(Constants.CHART_OVERLAY.EMA_21);
 	
 			if (oEvent.getSource().getPressed()) {
 					const ema21Series = chart.addLineSeries({ color: 'yellow', lineWidth: 1 });
@@ -88,6 +88,28 @@ sap.ui.define([
 				
 				if(ema21Series !== undefined && chart !== undefined) {
 					chart.removeSeries(ema21Series);
+				}
+			}
+		},
+		
+		
+		/**
+    	 * Handles the button press event of the SMA(50) ToggleButton.
+    	 */
+    	onSma50Pressed : function(oEvent) {
+			var chartModel = this.getView().getModel("chartModel");
+			var chart = chartModel.getProperty("/chart");
+			var sma50Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_50);
+	
+			if (oEvent.getSource().getPressed()) {
+					const sma50Series = chart.addLineSeries({ color: 'blue', lineWidth: 1 });
+					sma50Series.setData(sma50Data);
+					chartModel.setProperty("/sma50Series", sma50Series);
+			} else {
+				const sma50Series = chartModel.getProperty("/sma50Series");
+				
+				if(sma50Series !== undefined && chart !== undefined) {
+					chart.removeSeries(sma50Series);
 				}
 			}
 		},
@@ -292,12 +314,12 @@ sap.ui.define([
 		
 		
 		/**
-		 * Create a line series that contains the EMA(21) data.
+		 * Create a line series that contains the data of the requested moving average.
 		 */
-		getEma21Data : function () {
+		getMovingAverageData : function (sRequestedMA) {
 			var oQuotationsModel = this.getView().getModel("quotationsForChart");
 			var oQuotations = oQuotationsModel.oData.quotation;
-			var aEma21Series = new Array();
+			var aMovingAverageSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
 			
 			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
@@ -305,22 +327,26 @@ sap.ui.define([
 			//The dataset needs to be constructed beginning at the oldest value.
 			for (var i = oQuotations.length -1; i >= 0; i--) {
     			var oQuotation = oQuotations[i];
-    			var oEma21Dataset = new Object();
+    			var oMovingAverageDataset = new Object();
     			
-    			if(oQuotation.movingAverageData === null || oQuotation.movingAverageData.ema21 === 0) {
+    			if(oQuotation.movingAverageData === null) {
 					continue;
 				}
-    			
-    			oEma21Dataset.value = oQuotation.movingAverageData.ema21;
-    			
+				
+				if(sRequestedMA === Constants.CHART_OVERLAY.EMA_21 && oQuotation.movingAverageData.ema21 !== 0) {
+					oMovingAverageDataset.value = oQuotation.movingAverageData.ema21;
+				} else if(sRequestedMA === Constants.CHART_OVERLAY.SMA_50 && oQuotation.movingAverageData.sma50 !== 0) {
+					oMovingAverageDataset.value = oQuotation.movingAverageData.sma50;
+				}
+    			    			
     			oDate = new Date(parseInt(oQuotation.date));
     			sFormattedDate = oDateFormat.format(oDate);
-    			oEma21Dataset.time = sFormattedDate;
+    			oMovingAverageDataset.time = sFormattedDate;
     			
-    			aEma21Series.push(oEma21Dataset);
+    			aMovingAverageSeries.push(oMovingAverageDataset);
     		}
     		
-    		return aEma21Series;
+    		return aMovingAverageSeries;
 		},
 		
 		
@@ -330,9 +356,11 @@ sap.ui.define([
 		resetUIElements : function () {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oEma21Button = this.getView().byId("ema21Button");
+			var oSma50Button = this.getView().byId("sma50Button");
 
 			oInstrumentComboBox.setSelectedKey("");
 			oEma21Button.setPressed(false);
+			oSma50Button.setPressed(false);
 			
 			//Remove previously created chart.
 			document.getElementById("chartContainer").innerHTML = "";
