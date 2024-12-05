@@ -195,6 +195,7 @@ sap.ui.define([
 			oCallingController.getView().setModel(oModel, "quotationsForChart");
 			
 			oCallingController.openChart();
+			oCallingController.setButtonVisibility(true);
 		},
 		
 		
@@ -406,6 +407,22 @@ sap.ui.define([
 		
 		
 		/**
+		 * Sets the visibility of the chart buttons.
+		 */
+		setButtonVisibility : function(bVisible) {
+			var oEma21Button = this.getView().byId("ema21Button");
+			var oSma50Button = this.getView().byId("sma50Button");
+			var oSma150Button = this.getView().byId("sma150Button");
+			var oSma200Button = this.getView().byId("sma200Button");
+			
+			oEma21Button.setVisible(bVisible);
+			oSma50Button.setVisible(bVisible);
+			oSma150Button.setVisible(bVisible);
+			oSma200Button.setVisible(bVisible);
+		},
+		
+		
+		/**
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
@@ -421,6 +438,8 @@ sap.ui.define([
 			oSma50Button.setPressed(false);
 			oSma150Button.setPressed(false);
 			oSma200Button.setPressed(false);
+			
+			this.setButtonVisibility(false);
 			
 			//Remove previously created chart.
 			document.getElementById("chartContainer").innerHTML = "";
