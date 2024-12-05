@@ -115,6 +115,28 @@ sap.ui.define([
 		},
 		
 		
+				/**
+    	 * Handles the button press event of the SMA(150) ToggleButton.
+    	 */
+    	onSma150Pressed : function(oEvent) {
+			var chartModel = this.getView().getModel("chartModel");
+			var chart = chartModel.getProperty("/chart");
+			var sma150Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_150);
+	
+			if (oEvent.getSource().getPressed()) {
+					const sma150Series = chart.addLineSeries({ color: 'red', lineWidth: 1 });
+					sma150Series.setData(sma150Data);
+					chartModel.setProperty("/sma150Series", sma150Series);
+			} else {
+				const sma150Series = chartModel.getProperty("/sma150Series");
+				
+				if(sma150Series !== undefined && chart !== undefined) {
+					chart.removeSeries(sma150Series);
+				}
+			}
+		},
+		
+		
 		/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
@@ -337,6 +359,8 @@ sap.ui.define([
 					oMovingAverageDataset.value = oQuotation.movingAverageData.ema21;
 				} else if(sRequestedMA === Constants.CHART_OVERLAY.SMA_50 && oQuotation.movingAverageData.sma50 !== 0) {
 					oMovingAverageDataset.value = oQuotation.movingAverageData.sma50;
+				} else if(sRequestedMA === Constants.CHART_OVERLAY.SMA_150 && oQuotation.movingAverageData.sma150 !== 0) {
+					oMovingAverageDataset.value = oQuotation.movingAverageData.sma150;
 				}
     			    			
     			oDate = new Date(parseInt(oQuotation.date));
@@ -357,10 +381,13 @@ sap.ui.define([
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oEma21Button = this.getView().byId("ema21Button");
 			var oSma50Button = this.getView().byId("sma50Button");
+			var oSma150Button = this.getView().byId("sma150Button");
 
 			oInstrumentComboBox.setSelectedKey("");
+			
 			oEma21Button.setPressed(false);
 			oSma50Button.setPressed(false);
+			oSma150Button.setPressed(false);
 			
 			//Remove previously created chart.
 			document.getElementById("chartContainer").innerHTML = "";
