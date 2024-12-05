@@ -80,9 +80,9 @@ sap.ui.define([
 			var ema21Data = this.getMovingAverageData(Constants.CHART_OVERLAY.EMA_21);
 	
 			if (oEvent.getSource().getPressed()) {
-					const ema21Series = chart.addLineSeries({ color: 'yellow', lineWidth: 1 });
-					ema21Series.setData(ema21Data);
-					chartModel.setProperty("/ema21Series", ema21Series);
+				const ema21Series = chart.addLineSeries({ color: 'yellow', lineWidth: 1 });
+				ema21Series.setData(ema21Data);
+				chartModel.setProperty("/ema21Series", ema21Series);
 			} else {
 				const ema21Series = chartModel.getProperty("/ema21Series");
 				
@@ -102,9 +102,9 @@ sap.ui.define([
 			var sma50Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_50);
 	
 			if (oEvent.getSource().getPressed()) {
-					const sma50Series = chart.addLineSeries({ color: 'blue', lineWidth: 1 });
-					sma50Series.setData(sma50Data);
-					chartModel.setProperty("/sma50Series", sma50Series);
+				const sma50Series = chart.addLineSeries({ color: 'blue', lineWidth: 1 });
+				sma50Series.setData(sma50Data);
+				chartModel.setProperty("/sma50Series", sma50Series);
 			} else {
 				const sma50Series = chartModel.getProperty("/sma50Series");
 				
@@ -124,9 +124,9 @@ sap.ui.define([
 			var sma150Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_150);
 	
 			if (oEvent.getSource().getPressed()) {
-					const sma150Series = chart.addLineSeries({ color: 'red', lineWidth: 1 });
-					sma150Series.setData(sma150Data);
-					chartModel.setProperty("/sma150Series", sma150Series);
+				const sma150Series = chart.addLineSeries({ color: 'red', lineWidth: 1 });
+				sma150Series.setData(sma150Data);
+				chartModel.setProperty("/sma150Series", sma150Series);
 			} else {
 				const sma150Series = chartModel.getProperty("/sma150Series");
 				
@@ -146,9 +146,9 @@ sap.ui.define([
 			var sma200Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_200);
 	
 			if (oEvent.getSource().getPressed()) {
-					const sma200Series = chart.addLineSeries({ color: 'green', lineWidth: 1 });
-					sma200Series.setData(sma200Data);
-					chartModel.setProperty("/sma200Series", sma200Series);
+				const sma200Series = chart.addLineSeries({ color: 'green', lineWidth: 1 });
+				sma200Series.setData(sma200Data);
+				chartModel.setProperty("/sma200Series", sma200Series);
 			} else {
 				const sma200Series = chartModel.getProperty("/sma200Series");
 				
@@ -231,18 +231,6 @@ sap.ui.define([
 			const chart = LightweightCharts.createChart(document.getElementById("chartContainer"), {
   				width: document.getElementById("chartContainer").clientWidth,
                 height: document.getElementById("chartContainer").clientHeight,
-                layout: {
-                    backgroundColor: 'white',
-                    textColor: 'black',
-                },
-                grid: {
-                    vertLines: {
-                        color: '#eee',
-                    },
-                    horzLines: {
-                        color: '#eee',
-                    },
-                },
             });
             
             const candlestickSeries = chart.addCandlestickSeries();
@@ -256,8 +244,22 @@ sap.ui.define([
 			});	
 			volumeSeries.setData(this.getVolumeSeries());
 			
-			// Customizing the Crosshair
-			chart.applyOptions({
+			this.applyChartOptions(chart);
+			
+			//Automatically zoom the time scale to display all datasets over the full width of the chart.
+			chart.timeScale().fitContent();
+			
+			//Store chart Model for further access.
+			chartModel.setProperty("/chart", chart);
+			this.getView().setModel(chartModel, "chartModel");
+		},
+		
+		
+		/**
+		 * Applies options to the given chart.
+		 */
+		applyChartOptions : function(oChart) {
+			oChart.applyOptions({
     			crosshair: {
 			        // Change mode from default 'magnet' to 'normal'.
 			        // Allows the crosshair to move freely without snapping to datapoints
@@ -277,15 +279,20 @@ sap.ui.define([
 			        	bottom: 0,
     				},
         			visible: true,
-    			}
+    			},
+    			layout: {
+                    backgroundColor: 'white',
+                    textColor: 'black',
+                },
+                grid: {
+                    vertLines: {
+                        color: '#eee',
+                    },
+                    horzLines: {
+                        color: '#eee',
+                    },
+                }
 			});
-			
-			//Automatically zoom the time scale to display all datasets over the full width of the chart.
-			chart.timeScale().fitContent();
-			
-			//Store chart Model for further access.
-			chartModel.setProperty("/chart", chart);
-			this.getView().setModel(chartModel, "chartModel");
 		},
 		
 		
