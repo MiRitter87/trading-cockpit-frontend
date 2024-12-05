@@ -115,7 +115,7 @@ sap.ui.define([
 		},
 		
 		
-				/**
+		/**
     	 * Handles the button press event of the SMA(150) ToggleButton.
     	 */
     	onSma150Pressed : function(oEvent) {
@@ -132,6 +132,28 @@ sap.ui.define([
 				
 				if(sma150Series !== undefined && chart !== undefined) {
 					chart.removeSeries(sma150Series);
+				}
+			}
+		},
+		
+		
+		/**
+    	 * Handles the button press event of the SMA(200) ToggleButton.
+    	 */
+    	onSma200Pressed : function(oEvent) {
+			var chartModel = this.getView().getModel("chartModel");
+			var chart = chartModel.getProperty("/chart");
+			var sma200Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_200);
+	
+			if (oEvent.getSource().getPressed()) {
+					const sma200Series = chart.addLineSeries({ color: 'green', lineWidth: 1 });
+					sma200Series.setData(sma200Data);
+					chartModel.setProperty("/sma200Series", sma200Series);
+			} else {
+				const sma200Series = chartModel.getProperty("/sma200Series");
+				
+				if(sma200Series !== undefined && chart !== undefined) {
+					chart.removeSeries(sma200Series);
 				}
 			}
 		},
@@ -361,6 +383,8 @@ sap.ui.define([
 					oMovingAverageDataset.value = oQuotation.movingAverageData.sma50;
 				} else if(sRequestedMA === Constants.CHART_OVERLAY.SMA_150 && oQuotation.movingAverageData.sma150 !== 0) {
 					oMovingAverageDataset.value = oQuotation.movingAverageData.sma150;
+				} else if(sRequestedMA === Constants.CHART_OVERLAY.SMA_200 && oQuotation.movingAverageData.sma200 !== 0) {
+					oMovingAverageDataset.value = oQuotation.movingAverageData.sma200;
 				}
     			    			
     			oDate = new Date(parseInt(oQuotation.date));
@@ -382,12 +406,14 @@ sap.ui.define([
 			var oEma21Button = this.getView().byId("ema21Button");
 			var oSma50Button = this.getView().byId("sma50Button");
 			var oSma150Button = this.getView().byId("sma150Button");
+			var oSma200Button = this.getView().byId("sma200Button");
 
 			oInstrumentComboBox.setSelectedKey("");
 			
 			oEma21Button.setPressed(false);
 			oSma50Button.setPressed(false);
 			oSma150Button.setPressed(false);
+			oSma200Button.setPressed(false);
 			
 			//Remove previously created chart.
 			document.getElementById("chartContainer").innerHTML = "";

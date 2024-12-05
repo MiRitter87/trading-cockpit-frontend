@@ -26,6 +26,7 @@
 				<ToggleButton id="ema21Button" text="{i18n>chartPriceVolumeTV.ema21}" press=".onEma21Pressed"/>
 				<ToggleButton id="sma50Button" text="{i18n>chartPriceVolumeTV.sma50}" press=".onSma50Pressed"/>
 				<ToggleButton id="sma150Button" text="{i18n>chartPriceVolumeTV.sma150}" press=".onSma150Pressed"/>
+				<ToggleButton id="sma200Button" text="{i18n>chartPriceVolumeTV.sma200}" press=".onSma200Pressed"/>
 			</HBox>
 			
 			<core:HTML id="chartContainerHTML" 
