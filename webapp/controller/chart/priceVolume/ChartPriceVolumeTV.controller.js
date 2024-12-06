@@ -120,6 +120,18 @@ sap.ui.define([
 		
 		
 		/**
+    	 * Handles the button press event of the SMA(30) volume ToggleButton.
+    	 */
+    	onSma30VolumePressed : function(oEvent) {
+			if (oEvent.getSource().getPressed()) {
+				this.displaySma30Volume(true);
+			} else {
+				this.displaySma30Volume(false);
+			}
+		},
+		
+		
+		/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
 		queryAllQuotationsCallback : function(oReturnData, oCallingController) {
@@ -354,6 +366,8 @@ sap.ui.define([
 					oMovingAverageDataset.value = oQuotation.movingAverageData.sma150;
 				} else if(sRequestedMA === Constants.CHART_OVERLAY.SMA_200 && oQuotation.movingAverageData.sma200 !== 0) {
 					oMovingAverageDataset.value = oQuotation.movingAverageData.sma200;
+				} else if(sRequestedMA === "SMA_30_VOLUME" && oQuotation.movingAverageData.sma30Volume !== 0) {
+					oMovingAverageDataset.value = oQuotation.movingAverageData.sma30Volume;
 				}
     			    			
     			oDate = new Date(parseInt(oQuotation.date));
@@ -375,11 +389,13 @@ sap.ui.define([
 			var oSma50Button = this.getView().byId("sma50Button");
 			var oSma150Button = this.getView().byId("sma150Button");
 			var oSma200Button = this.getView().byId("sma200Button");
+			var oSma30VolumeButton = this.getView().byId("sma30VolumeButton");
 			
 			this.displayEma21(oEma21Button.getPressed());
 			this.displaySma50(oSma50Button.getPressed());
 			this.displaySma150(oSma150Button.getPressed());
 			this.displaySma200(oSma200Button.getPressed());
+			this.displaySma30Volume(oSma30VolumeButton.getPressed());
 		},
 		
 		
@@ -472,6 +488,30 @@ sap.ui.define([
 		
 		
 		/**
+		 * Displays the SMA(30) of the volume in the chart.
+		 */
+		displaySma30Volume : function (bVisible) {
+			var chartModel = this.getView().getModel("chartModel");
+			var chart = chartModel.getProperty("/chart");
+			var sma30VolumeData = this.getMovingAverageData("SMA_30_VOLUME");
+	
+			if (bVisible === true) {
+				const sma30VolumeSeries = chart.addLineSeries(
+					{ color: 'black', lineWidth: 1, priceLineVisible: false, priceScaleId: 'left' }
+				);
+				sma30VolumeSeries.setData(sma30VolumeData);
+				chartModel.setProperty("/sma30VolumeSeries", sma30VolumeSeries);
+			} else {
+				const sma30VolumeSeries = chartModel.getProperty("/sma30VolumeSeries");
+				
+				if(sma30VolumeSeries !== undefined && chart !== undefined) {
+					chart.removeSeries(sma30VolumeSeries);
+				}
+			}
+		},
+		
+		
+		/**
 		 * Sets the visibility of the chart buttons.
 		 */
 		setButtonVisibility : function(bVisible) {
@@ -479,11 +519,13 @@ sap.ui.define([
 			var oSma50Button = this.getView().byId("sma50Button");
 			var oSma150Button = this.getView().byId("sma150Button");
 			var oSma200Button = this.getView().byId("sma200Button");
+			var oSma30VolumeButton = this.getView().byId("sma30VolumeButton");
 			
 			oEma21Button.setVisible(bVisible);
 			oSma50Button.setVisible(bVisible);
 			oSma150Button.setVisible(bVisible);
 			oSma200Button.setVisible(bVisible);
+			oSma30VolumeButton.setVisible(bVisible);
 		},
 		
 		
@@ -496,6 +538,7 @@ sap.ui.define([
 			var oSma50Button = this.getView().byId("sma50Button");
 			var oSma150Button = this.getView().byId("sma150Button");
 			var oSma200Button = this.getView().byId("sma200Button");
+			var oSma30VolumeButton = this.getView().byId("sma30VolumeButton");
 
 			oInstrumentComboBox.setSelectedKey("");
 			
@@ -503,6 +546,7 @@ sap.ui.define([
 			oSma50Button.setPressed(false);
 			oSma150Button.setPressed(false);
 			oSma200Button.setPressed(false);
+			oSma30VolumeButton.setPressed(false);
 			
 			this.setButtonVisibility(false);
 			
