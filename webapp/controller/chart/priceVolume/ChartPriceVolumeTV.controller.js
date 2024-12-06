@@ -75,20 +75,10 @@ sap.ui.define([
     	 * Handles the button press event of the EMA(21) ToggleButton.
     	 */
     	onEma21Pressed : function(oEvent) {
-			var chartModel = this.getView().getModel("chartModel");
-			var chart = chartModel.getProperty("/chart");
-			var ema21Data = this.getMovingAverageData(Constants.CHART_OVERLAY.EMA_21);
-	
 			if (oEvent.getSource().getPressed()) {
-				const ema21Series = chart.addLineSeries({ color: 'yellow', lineWidth: 1 });
-				ema21Series.setData(ema21Data);
-				chartModel.setProperty("/ema21Series", ema21Series);
+				this.displayEma21(true);
 			} else {
-				const ema21Series = chartModel.getProperty("/ema21Series");
-				
-				if(ema21Series !== undefined && chart !== undefined) {
-					chart.removeSeries(ema21Series);
-				}
+				this.displayEma21(false);
 			}
 		},
 		
@@ -97,20 +87,10 @@ sap.ui.define([
     	 * Handles the button press event of the SMA(50) ToggleButton.
     	 */
     	onSma50Pressed : function(oEvent) {
-			var chartModel = this.getView().getModel("chartModel");
-			var chart = chartModel.getProperty("/chart");
-			var sma50Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_50);
-	
 			if (oEvent.getSource().getPressed()) {
-				const sma50Series = chart.addLineSeries({ color: 'blue', lineWidth: 1 });
-				sma50Series.setData(sma50Data);
-				chartModel.setProperty("/sma50Series", sma50Series);
+				this.displaySma50(true);
 			} else {
-				const sma50Series = chartModel.getProperty("/sma50Series");
-				
-				if(sma50Series !== undefined && chart !== undefined) {
-					chart.removeSeries(sma50Series);
-				}
+				this.displaySma50(false);
 			}
 		},
 		
@@ -119,20 +99,10 @@ sap.ui.define([
     	 * Handles the button press event of the SMA(150) ToggleButton.
     	 */
     	onSma150Pressed : function(oEvent) {
-			var chartModel = this.getView().getModel("chartModel");
-			var chart = chartModel.getProperty("/chart");
-			var sma150Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_150);
-	
 			if (oEvent.getSource().getPressed()) {
-				const sma150Series = chart.addLineSeries({ color: 'red', lineWidth: 1 });
-				sma150Series.setData(sma150Data);
-				chartModel.setProperty("/sma150Series", sma150Series);
+				this.displaySma150(true);
 			} else {
-				const sma150Series = chartModel.getProperty("/sma150Series");
-				
-				if(sma150Series !== undefined && chart !== undefined) {
-					chart.removeSeries(sma150Series);
-				}
+				this.displaySma150(false);
 			}
 		},
 		
@@ -141,20 +111,10 @@ sap.ui.define([
     	 * Handles the button press event of the SMA(200) ToggleButton.
     	 */
     	onSma200Pressed : function(oEvent) {
-			var chartModel = this.getView().getModel("chartModel");
-			var chart = chartModel.getProperty("/chart");
-			var sma200Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_200);
-	
 			if (oEvent.getSource().getPressed()) {
-				const sma200Series = chart.addLineSeries({ color: 'green', lineWidth: 1 });
-				sma200Series.setData(sma200Data);
-				chartModel.setProperty("/sma200Series", sma200Series);
+				this.displaySma200(true);
 			} else {
-				const sma200Series = chartModel.getProperty("/sma200Series");
-				
-				if(sma200Series !== undefined && chart !== undefined) {
-					chart.removeSeries(sma200Series);
-				}
+				this.displaySma200(false);
 			}
 		},
 		
@@ -196,6 +156,7 @@ sap.ui.define([
 			
 			oCallingController.openChart();
 			oCallingController.setButtonVisibility(true);
+			oCallingController.applyMovingAverages();
 		},
 		
 		
@@ -403,6 +364,110 @@ sap.ui.define([
     		}
     		
     		return aMovingAverageSeries;
+		},
+		
+		
+		/**
+		 * Applies the moving averages to the chart according to the state of the ToggleButtons.
+		 */
+		applyMovingAverages : function() {
+			var oEma21Button = this.getView().byId("ema21Button");
+			var oSma50Button = this.getView().byId("sma50Button");
+			var oSma150Button = this.getView().byId("sma150Button");
+			var oSma200Button = this.getView().byId("sma200Button");
+			
+			this.displayEma21(oEma21Button.getPressed());
+			this.displaySma50(oSma50Button.getPressed());
+			this.displaySma150(oSma150Button.getPressed());
+			this.displaySma200(oSma200Button.getPressed());
+		},
+		
+		
+		/**
+		 * Displays the EMA(21) in the chart.
+		 */
+		displayEma21 : function (bVisible) {
+			var chartModel = this.getView().getModel("chartModel");
+			var chart = chartModel.getProperty("/chart");
+			var ema21Data = this.getMovingAverageData(Constants.CHART_OVERLAY.EMA_21);
+	
+			if (bVisible === true) {
+				const ema21Series = chart.addLineSeries({ color: 'yellow', lineWidth: 1 });
+				ema21Series.setData(ema21Data);
+				chartModel.setProperty("/ema21Series", ema21Series);
+			} else {
+				const ema21Series = chartModel.getProperty("/ema21Series");
+				
+				if(ema21Series !== undefined && chart !== undefined) {
+					chart.removeSeries(ema21Series);
+				}
+			}
+		},
+		
+		
+		/**
+		 * Displays the SMA(50) in the chart.
+		 */
+		displaySma50 : function (bVisible) {
+			var chartModel = this.getView().getModel("chartModel");
+			var chart = chartModel.getProperty("/chart");
+			var sma50Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_50);
+	
+			if (bVisible === true) {
+				const sma50Series = chart.addLineSeries({ color: 'blue', lineWidth: 1 });
+				sma50Series.setData(sma50Data);
+				chartModel.setProperty("/sma50Series", sma50Series);
+			} else {
+				const sma50Series = chartModel.getProperty("/sma50Series");
+				
+				if(sma50Series !== undefined && chart !== undefined) {
+					chart.removeSeries(sma50Series);
+				}
+			}
+		},
+		
+		
+		/**
+		 * Displays the SMA(150) in the chart.
+		 */
+		displaySma150 : function (bVisible) {
+			var chartModel = this.getView().getModel("chartModel");
+			var chart = chartModel.getProperty("/chart");
+			var sma150Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_150);
+	
+			if (bVisible === true) {
+				const sma150Series = chart.addLineSeries({ color: 'red', lineWidth: 1 });
+				sma150Series.setData(sma150Data);
+				chartModel.setProperty("/sma150Series", sma150Series);
+			} else {
+				const sma150Series = chartModel.getProperty("/sma150Series");
+				
+				if(sma150Series !== undefined && chart !== undefined) {
+					chart.removeSeries(sma150Series);
+				}
+			}
+		},
+		
+		
+		/**
+		 * Displays the SMA(200) in the chart.
+		 */
+		displaySma200 : function (bVisible) {
+			var chartModel = this.getView().getModel("chartModel");
+			var chart = chartModel.getProperty("/chart");
+			var sma200Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_200);
+	
+			if (bVisible === true) {
+				const sma200Series = chart.addLineSeries({ color: 'green', lineWidth: 1 });
+				sma200Series.setData(sma200Data);
+				chartModel.setProperty("/sma200Series", sma200Series);
+			} else {
+				const sma200Series = chartModel.getProperty("/sma200Series");
+				
+				if(sma200Series !== undefined && chart !== undefined) {
+					chart.removeSeries(sma200Series);
+				}
+			}
 		},
 		
 		
