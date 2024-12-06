@@ -392,7 +392,7 @@ sap.ui.define([
 			var ema21Data = this.getMovingAverageData(Constants.CHART_OVERLAY.EMA_21);
 	
 			if (bVisible === true) {
-				const ema21Series = chart.addLineSeries({ color: 'yellow', lineWidth: 1 });
+				const ema21Series = chart.addLineSeries({ color: 'yellow', lineWidth: 1, priceLineVisible: false });
 				ema21Series.setData(ema21Data);
 				chartModel.setProperty("/ema21Series", ema21Series);
 			} else {
@@ -414,7 +414,7 @@ sap.ui.define([
 			var sma50Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_50);
 	
 			if (bVisible === true) {
-				const sma50Series = chart.addLineSeries({ color: 'blue', lineWidth: 1 });
+				const sma50Series = chart.addLineSeries({ color: 'blue', lineWidth: 1, priceLineVisible: false });
 				sma50Series.setData(sma50Data);
 				chartModel.setProperty("/sma50Series", sma50Series);
 			} else {
@@ -436,7 +436,7 @@ sap.ui.define([
 			var sma150Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_150);
 	
 			if (bVisible === true) {
-				const sma150Series = chart.addLineSeries({ color: 'red', lineWidth: 1 });
+				const sma150Series = chart.addLineSeries({ color: 'red', lineWidth: 1, priceLineVisible: false });
 				sma150Series.setData(sma150Data);
 				chartModel.setProperty("/sma150Series", sma150Series);
 			} else {
@@ -458,7 +458,7 @@ sap.ui.define([
 			var sma200Data = this.getMovingAverageData(Constants.CHART_OVERLAY.SMA_200);
 	
 			if (bVisible === true) {
-				const sma200Series = chart.addLineSeries({ color: 'green', lineWidth: 1 });
+				const sma200Series = chart.addLineSeries({ color: 'green', lineWidth: 1, priceLineVisible: false });
 				sma200Series.setData(sma200Data);
 				chartModel.setProperty("/sma200Series", sma200Series);
 			} else {
