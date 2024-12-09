@@ -520,12 +520,14 @@ sap.ui.define([
 			var oSma150Button = this.getView().byId("sma150Button");
 			var oSma200Button = this.getView().byId("sma200Button");
 			var oSma30VolumeButton = this.getView().byId("sma30VolumeButton");
+			var oHorizontalLineButton = this.getView().byId("horizontalLineButton");
 			
 			oEma21Button.setVisible(bVisible);
 			oSma50Button.setVisible(bVisible);
 			oSma150Button.setVisible(bVisible);
 			oSma200Button.setVisible(bVisible);
 			oSma30VolumeButton.setVisible(bVisible);
+			oHorizontalLineButton.setVisible(bVisible);
 		},
 		
 		

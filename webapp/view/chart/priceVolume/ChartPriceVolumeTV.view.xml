@@ -28,6 +28,9 @@
 				<ToggleButton id="sma150Button" text="{i18n>chartPriceVolumeTV.sma150}" press=".onSma150Pressed"/>
 				<ToggleButton id="sma200Button" text="{i18n>chartPriceVolumeTV.sma200}" press=".onSma200Pressed"/>
 				<ToggleButton id="sma30VolumeButton" text="{i18n>chartPriceVolumeTV.sma30Volume}" press=".onSma30VolumePressed"/>
+				
+				<ToggleButton id="horizontalLineButton" class="sapUiMediumMarginBegin"
+					text="――" tooltip="{i18n>chartPriceVolumeTV.horizontalLineTooltip}"/>
 			</HBox>
 			
 			<core:HTML id="chartContainerHTML" 
