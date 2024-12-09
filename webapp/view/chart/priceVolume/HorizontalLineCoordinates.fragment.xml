@@ -1,0 +1,50 @@
+<!DOCTYPE xml>
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form">
+
+	<Dialog id="horizontalLineCoordinatesDialog" title="{i18n>chartPriceVolumeTV.horizontalLineCoordinates.title}">
+		<content>
+			<f:Form id="coordinatesForm" editable="false">
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="2"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="2"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="{i18n>chartPriceVolumeTV.horizontalLineCoordinates.date}">
+								<f:fields>
+									<Text id="selectedDateText" text="{selectedCoordinates>/date}"/>
+								</f:fields>
+							</f:FormElement>
+							
+							<f:FormElement label="{i18n>cchartPriceVolumeTV.horizontalLineCoordinates.price}">
+								<f:fields>
+									<Text id="selectedPriceText" text="{selectedCoordinates>/price}"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</content>
+		
+		<Button text="{i18n>chartPriceVolumeTV.horizontalLineCoordinates.buttonAccept}" press=".onTakeCoordinate" class="sapUiSmallMargin"/>
+		<Button text="{i18n>button.cancel}" press=".onCancelCoordinate" class="sapUiSmallMargin"/>
+	</Dialog>
+</core:FragmentDefinition>
