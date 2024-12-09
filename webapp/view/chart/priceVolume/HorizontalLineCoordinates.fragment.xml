@@ -33,7 +33,7 @@
 								</f:fields>
 							</f:FormElement>
 							
-							<f:FormElement label="{i18n>cchartPriceVolumeTV.horizontalLineCoordinates.price}">
+							<f:FormElement label="{i18n>chartPriceVolumeTV.horizontalLineCoordinates.price}">
 								<f:fields>
 									<Text id="selectedPriceText" text="{selectedCoordinates>/price}"/>
 								</f:fields>

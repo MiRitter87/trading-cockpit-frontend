@@ -138,18 +138,34 @@ sap.ui.define([
 			if (!param.point) {
 		        return;
 		    }
-			
-			/*
+		    
+		    var oHorizontalLineButton = this.getView().byId("horizontalLineButton");
 			var oSelectedCoordinateModel = new JSONModel();
 		    var oChartModel = this.getView().getModel("chartModel");
 		    var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
 		    var price = candlestickSeries.coordinateToPrice(param.point.y);
+		    
+		    if (oHorizontalLineButton.getPressed() === true) {
+				//Write selected price to JSONModel and bind model to view.
+				oSelectedCoordinateModel.setProperty("/price", price.toFixed(2));
+				oSelectedCoordinateModel.setProperty("/date", param.time);
+				this.getView().setModel(oSelectedCoordinateModel, "selectedCoordinates");
+				
+				MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.chart.priceVolume.HorizontalLineCoordinates");
+			} else {
+				return;
+			}
+		},
+		
+		
+		/**
+		 * Handles a click at the cancel button of the horizontal line coordinate PopUp.
+		 */
+		onCancelCoordinate : function() {
+			var oHorizontalLineButton = this.getView().byId("horizontalLineButton");
 			
-			//Write selected price to JSONModel and bind model to view.
-			oSelectedCoordinateModel.setProperty("/price", price.toFixed(2));
-			oSelectedCoordinateModel.setProperty("/date", param.time);
-			this.getView().setModel(oSelectedCoordinateModel, "selectedCoordinates");
-			*/
+			this.byId("horizontalLineCoordinatesDialog").close();
+			oHorizontalLineButton.setPressed(false);
 		},
 		
 		
@@ -250,7 +266,7 @@ sap.ui.define([
 			
 			//Store chart Model for further access.
 			chartModel.setProperty("/chart", chart);
-			chartModel.setProperty("/candleStickSeries", candlestickSeries)
+			chartModel.setProperty("/candlestickSeries", candlestickSeries)
 			this.getView().setModel(chartModel, "chartModel");
 		},
 		
