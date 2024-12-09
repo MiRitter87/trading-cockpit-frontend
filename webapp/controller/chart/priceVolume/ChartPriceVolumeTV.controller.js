@@ -132,6 +132,28 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles clicks in the TradingView chart.
+		 */
+		onChartClicked : function (param) {
+			if (!param.point) {
+		        return;
+		    }
+			
+			/*
+			var oSelectedCoordinateModel = new JSONModel();
+		    var oChartModel = this.getView().getModel("chartModel");
+		    var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
+		    var price = candlestickSeries.coordinateToPrice(param.point.y);
+			
+			//Write selected price to JSONModel and bind model to view.
+			oSelectedCoordinateModel.setProperty("/price", price.toFixed(2));
+			oSelectedCoordinateModel.setProperty("/date", param.time);
+			this.getView().setModel(oSelectedCoordinateModel, "selectedCoordinates");
+			*/
+		},
+		
+		
+		/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
 		queryAllQuotationsCallback : function(oReturnData, oCallingController) {
@@ -223,8 +245,12 @@ sap.ui.define([
 			//Automatically zoom the time scale to display all datasets over the full width of the chart.
 			chart.timeScale().fitContent();
 			
+			//Handle clicks in the chart. The controller needs to be bound to access the data model within the handler.
+			chart.subscribeClick(this.onChartClicked.bind(this));
+			
 			//Store chart Model for further access.
 			chartModel.setProperty("/chart", chart);
+			chartModel.setProperty("/candleStickSeries", candlestickSeries)
 			this.getView().setModel(chartModel, "chartModel");
 		},
 		
