@@ -47,14 +47,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Handles the selection of an Instrument.
-		 */
-		onInstrumentSelectionChange : function (oControlEvent) {
-			//TODO: Only display volume bars, if instrument is not of type RATIO.
-		},
-		
-		
-		/**
     	 * Handles the button press event of the refresh chart button.
     	 */
     	onRefreshPressed : function() {
@@ -204,6 +196,21 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the button press event of the delete button in the "chart overview" dialog.
+		 */
+		onDeleteChartObjectPressed : function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			if (this.getView().byId("chartObjectTable").getSelectedItem() === null) {
+				MessageBox.information(oResourceBundle.getText("chartPriceVolumeTV.objectOverviewDialog.noObjectSelected"));
+				return;				
+			}
+			
+			this.deleteHorizontalLineByWebService(this.getSelectedHorizontalLine(), this.deleteHorizontalLineCallback, this);
+		},
+		
+		
+		/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
 		queryAllQuotationsCallback : function(oReturnData, oCallingController) {
@@ -293,6 +300,38 @@ sap.ui.define([
 		
 		
 		/**
+		 * Callback function of the deleteHorizontalLine RESTful WebService call.
+		 */
+		deleteHorizontalLineCallback : function(oReturnData, oCallingController) {
+			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
+			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
+			
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
+					MessageToast.show(oReturnData.message[0].text);
+					
+					if (sSelectedInstrumentId === "") {
+						oCallingController.queryHorizontalLinesByWebService(
+							oCallingController.queryHorizontalLinesCallback, oCallingController, true);				
+					}
+					else {
+						oCallingController.queryHorizontalLinesByWebService(
+							oCallingController.queryHorizontalLinesCallback, oCallingController, true, sSelectedInstrumentId);	
+					}
+				}
+				
+				if (oReturnData.message[0].type === 'E') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+				
+				if (oReturnData.message[0].type === 'W') {
+					MessageBox.warning(oReturnData.message[0].text);
+				}
+			}
+		},
+		
+		
+		/**
 		 * Queries the quotation WebService for quotations of an Instrument with the given ID.
 		 */
 		queryQuotationsOfInstrument : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
@@ -355,6 +394,27 @@ sap.ui.define([
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});                                                                 
+		},
+		
+		
+		/**
+		 * Deletes the given horizontal line using the WebService.
+		 */
+		deleteHorizontalLineByWebService : function(oHorizontalLine, callbackFunction, oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + oHorizontalLine.id;
+			
+			//Use "DELETE" to delete an existing resource.
+			jQuery.ajax({
+				type : "DELETE", 
+				contentType : "application/json", 
+				url : sQueryUrl, 
+				dataType : "json", 
+				success : function(data) {
+					callbackFunction(data, oCallingController);
+				}
+			});
 		},
 		
 		
@@ -741,6 +801,18 @@ sap.ui.define([
 			oHorizontalLineWS.setProperty("/price", oSelectedCoordinateModel.getProperty("/price"));
 			
 			return oHorizontalLineWS;
+		},
+		
+		
+		/**
+		 * Gets the the selected horizontal line from the overview table.
+		 */
+		getSelectedHorizontalLine : function () {
+			var oListItem = this.getView().byId("chartObjectTable").getSelectedItem();
+			var oContext = oListItem.getBindingContext("horizontalLines");
+			var oSelectedHorizontalLine = oContext.getProperty(null, oContext);
+			
+			return oSelectedHorizontalLine;
 		}
 	});
 });
