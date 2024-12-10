@@ -180,6 +180,30 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the button press event of the overview button.
+		 */
+		onOverviewPressed : function() {
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
+			
+			if (sSelectedInstrumentId === "") {
+				this.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, this, true);				
+			}
+			else {
+				this.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, this, true, sSelectedInstrumentId);	
+			}
+		},
+		
+		
+		/**
+		 * Handles a click at the close button of the object overview dialog.
+		 */
+		onCloseObjectOverviewDialog : function() {
+			this.byId("chartObjectOverviewDialog").close();
+		},
+		
+		
+		/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
 		queryAllQuotationsCallback : function(oReturnData, oCallingController) {
@@ -246,6 +270,29 @@ sap.ui.define([
 		
 		
 		/**
+		 * Callback function of the queryHorizontalLines RESTful WebService call.
+		 */
+		queryHorizontalLinesCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			var oOverviewDialog = oCallingController.byId("chartObjectOverviewDialog");
+			
+			if (oReturnData.data !== null) {
+				oModel.setData(oReturnData.data);		
+			}
+			
+			if (oReturnData.data === null && oReturnData.message !== null)  {
+				MessageToast.show(oReturnData.message[0].text);
+			}                                                               
+			
+			oCallingController.getView().setModel(oModel, "horizontalLines");
+			
+			if (oOverviewDialog === undefined || oOverviewDialog.isOpen() === false) {
+				MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.chart.priceVolume.ChartObjectOverview");				
+			}
+		},
+		
+		
+		/**
 		 * Queries the quotation WebService for quotations of an Instrument with the given ID.
 		 */
 		queryQuotationsOfInstrument : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
@@ -284,6 +331,30 @@ sap.ui.define([
 					callbackFunction(data, oCallingController);
 				}
 			});
+		},
+		
+		
+		/**
+		 * Queries the chartObject WebService for horizontal lines.
+		 */
+		queryHorizontalLinesByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
+			
+			if (sInstrumentId !== undefined && sInstrumentId !== null) {				
+				sQueryUrl= sQueryUrl + "?instrumentId=" + sInstrumentId;
+			}
+			
+			jQuery.ajax({
+				type : "GET", 
+				contentType : "application/json", 
+				url : sQueryUrl, 
+				dataType : "json", 
+				success : function(data) {
+					callbackFunction(data, oCallingController, bShowSuccessMessage);
+				}
+			});                                                                 
 		},
 		
 		
