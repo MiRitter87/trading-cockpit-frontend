@@ -31,6 +31,8 @@
 				
 				<ToggleButton id="horizontalLineButton" class="sapUiMediumMarginBegin"
 					text="――" tooltip="{i18n>chartPriceVolumeTV.horizontalLineTooltip}"/>
+				<Button id="overviewButton" icon="sap-icon://list" press=".onOverviewPressed"
+					tooltip="{i18n>chartPriceVolumeTV.overviewTooltip}"/>
 			</HBox>
 			
 			<core:HTML id="chartContainerHTML" 
