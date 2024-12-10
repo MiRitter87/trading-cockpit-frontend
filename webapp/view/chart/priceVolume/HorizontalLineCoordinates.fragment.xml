@@ -44,7 +44,7 @@
 			</f:Form>
 		</content>
 		
-		<Button text="{i18n>chartPriceVolumeTV.horizontalLineCoordinates.buttonAccept}" press=".onTakeCoordinate" class="sapUiSmallMargin"/>
+		<Button text="{i18n>chartPriceVolumeTV.horizontalLineCoordinates.buttonAccept}" press=".onAcceptCoordinate" class="sapUiSmallMargin"/>
 		<Button text="{i18n>button.cancel}" press=".onCancelCoordinate" class="sapUiSmallMargin"/>
 	</Dialog>
 </core:FragmentDefinition>

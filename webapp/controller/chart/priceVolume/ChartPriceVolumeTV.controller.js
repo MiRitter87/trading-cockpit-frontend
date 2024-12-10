@@ -159,6 +159,16 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles accepting the selected coordinate for the horizontal line.
+		 */
+		onAcceptCoordinate : function() {
+			var oHorizontalLineModel = this.getHorizontalLineModel();
+			
+			this.createHorizontalLineByWebService(oHorizontalLineModel, this.createHorizontalLineCallback, this);
+		},
+		
+		
+		/**
 		 * Handles a click at the cancel button of the horizontal line coordinate PopUp.
 		 */
 		onCancelCoordinate : function() {
@@ -211,6 +221,31 @@ sap.ui.define([
 		
 		
 		/**
+		 * Callback function of the createHorizontalLine RESTful WebService call.
+		 */
+		createHorizontalLineCallback : function (oReturnData, oCallingController) {
+			var oHorizontalLineButton = oCallingController.getView().byId("horizontalLineButton");
+			
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
+					MessageToast.show(oReturnData.message[0].text);
+					
+					oCallingController.byId("horizontalLineCoordinatesDialog").close();
+					oHorizontalLineButton.setPressed(false);
+				}
+				
+				if (oReturnData.message[0].type === 'E') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+				
+				if (oReturnData.message[0].type === 'W') {
+					MessageBox.warning(oReturnData.message[0].text);
+				}
+			}
+		},
+		
+		
+		/**
 		 * Queries the quotation WebService for quotations of an Instrument with the given ID.
 		 */
 		queryQuotationsOfInstrument : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
@@ -227,6 +262,28 @@ sap.ui.define([
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});  
+		},
+		
+		
+		/**
+		 * Calls a WebService operation to create a horizontal line object.
+		 */
+		createHorizontalLineByWebService : function(oHorizontalLineModel, callbackFunction, oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
+			var sJSONData = oHorizontalLineModel.getJSON();
+			
+			//Use "POST" to create a resource.
+			jQuery.ajax({
+				type : "POST", 
+				contentType : "application/json", 
+				url : sQueryUrl,
+				data : sJSONData, 
+				success : function(data) {
+					callbackFunction(data, oCallingController);
+				}
+			});
 		},
 		
 		
@@ -596,6 +653,21 @@ sap.ui.define([
 			
 			//Remove previously created chart.
 			document.getElementById("chartContainer").innerHTML = "";
+		},
+		
+		
+		/**
+		 * Gets the HorizontalLine as JSONModel that can be further processed by the WebService.
+		 */
+		getHorizontalLineModel : function () {
+			var oHorizontalLineWS = new JSONModel();
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oSelectedCoordinateModel = this.getView().getModel("selectedCoordinates");
+			
+			oHorizontalLineWS.setProperty("/instrumentId", oInstrumentComboBox.getSelectedKey());
+			oHorizontalLineWS.setProperty("/price", oSelectedCoordinateModel.getProperty("/price"));
+			
+			return oHorizontalLineWS;
 		}
 	});
 });
