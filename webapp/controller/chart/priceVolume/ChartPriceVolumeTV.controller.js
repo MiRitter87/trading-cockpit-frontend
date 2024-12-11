@@ -234,6 +234,8 @@ sap.ui.define([
 		 */
 		queryInstrumentQuotationsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
+			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
+			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
 			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);		
@@ -248,6 +250,11 @@ sap.ui.define([
 			oCallingController.openChart();
 			oCallingController.setButtonVisibility(true);
 			oCallingController.applyMovingAverages();
+			
+			if (sSelectedInstrumentId !== "") {			
+				oCallingController.queryHorizontalLinesByWebService(
+					oCallingController.queryHorizontalLinesForDrawingCallback, oCallingController, true, sSelectedInstrumentId);	
+			}
 		},
 		
 		
@@ -278,6 +285,7 @@ sap.ui.define([
 		
 		/**
 		 * Callback function of the queryHorizontalLines RESTful WebService call.
+		 * This callback function is used in the context of the object overview dialog.
 		 */
 		queryHorizontalLinesCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
@@ -295,6 +303,24 @@ sap.ui.define([
 			
 			if (oOverviewDialog === undefined || oOverviewDialog.isOpen() === false) {
 				MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.chart.priceVolume.ChartObjectOverview");				
+			}
+		},
+		
+		
+		/**
+		 * Callback function of the queryHorizontalLines RESTful WebService call.
+		 * This callback function is used to draw horizontal lines in the TradingView chart.
+		 */
+		queryHorizontalLinesForDrawingCallback : function(oReturnData, oCallingController) {
+			var oModel = new JSONModel();
+			
+			if (oReturnData.data !== null) {
+				oModel.setData(oReturnData.data);
+				oCallingController.drawHorizontalLines(oModel);	
+			}
+			
+			if (oReturnData.data === null && oReturnData.message !== null)  {
+				MessageToast.show(oReturnData.message[0].text);
 			}
 		},
 		
@@ -555,7 +581,7 @@ sap.ui.define([
     			oVolumeDataset.time = sFormattedDate;
     			
     			//Determine color of volume bars
-    			if(oQuotation.close >= oQuotation.open) {
+    			if (oQuotation.close >= oQuotation.open) {
 					oVolumeDataset.color = 'green';
 				} else {
 					oVolumeDataset.color = 'red';
@@ -584,19 +610,19 @@ sap.ui.define([
     			var oQuotation = oQuotations[i];
     			var oMovingAverageDataset = new Object();
     			
-    			if(oQuotation.movingAverageData === null) {
+    			if (oQuotation.movingAverageData === null) {
 					continue;
 				}
 				
-				if(sRequestedMA === Constants.CHART_OVERLAY.EMA_21 && oQuotation.movingAverageData.ema21 !== 0) {
+				if (sRequestedMA === Constants.CHART_OVERLAY.EMA_21 && oQuotation.movingAverageData.ema21 !== 0) {
 					oMovingAverageDataset.value = oQuotation.movingAverageData.ema21;
-				} else if(sRequestedMA === Constants.CHART_OVERLAY.SMA_50 && oQuotation.movingAverageData.sma50 !== 0) {
+				} else if (sRequestedMA === Constants.CHART_OVERLAY.SMA_50 && oQuotation.movingAverageData.sma50 !== 0) {
 					oMovingAverageDataset.value = oQuotation.movingAverageData.sma50;
-				} else if(sRequestedMA === Constants.CHART_OVERLAY.SMA_150 && oQuotation.movingAverageData.sma150 !== 0) {
+				} else if (sRequestedMA === Constants.CHART_OVERLAY.SMA_150 && oQuotation.movingAverageData.sma150 !== 0) {
 					oMovingAverageDataset.value = oQuotation.movingAverageData.sma150;
-				} else if(sRequestedMA === Constants.CHART_OVERLAY.SMA_200 && oQuotation.movingAverageData.sma200 !== 0) {
+				} else if (sRequestedMA === Constants.CHART_OVERLAY.SMA_200 && oQuotation.movingAverageData.sma200 !== 0) {
 					oMovingAverageDataset.value = oQuotation.movingAverageData.sma200;
-				} else if(sRequestedMA === "SMA_30_VOLUME" && oQuotation.movingAverageData.sma30Volume !== 0) {
+				} else if (sRequestedMA === "SMA_30_VOLUME" && oQuotation.movingAverageData.sma30Volume !== 0) {
 					oMovingAverageDataset.value = oQuotation.movingAverageData.sma30Volume;
 				}
     			    			
@@ -644,7 +670,7 @@ sap.ui.define([
 			} else {
 				const ema21Series = chartModel.getProperty("/ema21Series");
 				
-				if(ema21Series !== undefined && chart !== undefined) {
+				if (ema21Series !== undefined && chart !== undefined) {
 					chart.removeSeries(ema21Series);
 				}
 			}
@@ -666,7 +692,7 @@ sap.ui.define([
 			} else {
 				const sma50Series = chartModel.getProperty("/sma50Series");
 				
-				if(sma50Series !== undefined && chart !== undefined) {
+				if (sma50Series !== undefined && chart !== undefined) {
 					chart.removeSeries(sma50Series);
 				}
 			}
@@ -688,7 +714,7 @@ sap.ui.define([
 			} else {
 				const sma150Series = chartModel.getProperty("/sma150Series");
 				
-				if(sma150Series !== undefined && chart !== undefined) {
+				if (sma150Series !== undefined && chart !== undefined) {
 					chart.removeSeries(sma150Series);
 				}
 			}
@@ -710,7 +736,7 @@ sap.ui.define([
 			} else {
 				const sma200Series = chartModel.getProperty("/sma200Series");
 				
-				if(sma200Series !== undefined && chart !== undefined) {
+				if (sma200Series !== undefined && chart !== undefined) {
 					chart.removeSeries(sma200Series);
 				}
 			}
@@ -734,10 +760,18 @@ sap.ui.define([
 			} else {
 				const sma30VolumeSeries = chartModel.getProperty("/sma30VolumeSeries");
 				
-				if(sma30VolumeSeries !== undefined && chart !== undefined) {
+				if (sma30VolumeSeries !== undefined && chart !== undefined) {
 					chart.removeSeries(sma30VolumeSeries);
 				}
 			}
+		},
+		
+		
+		/**
+		 * Draws horizontal lines to the TradingView chart.
+		 */
+		drawHorizontalLines : function(oHorizontalLines) {
+			//TODO Implement method
 		},
 		
 		
