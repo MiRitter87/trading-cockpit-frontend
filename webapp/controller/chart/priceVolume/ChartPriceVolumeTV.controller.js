@@ -459,7 +459,7 @@ sap.ui.define([
                 height: document.getElementById("chartContainer").clientHeight,
             });
             
-            const candlestickSeries = chart.addCandlestickSeries();
+            const candlestickSeries = chart.addCandlestickSeries({ priceLineVisible: false });
 			candlestickSeries.setData(this.getCandlestickSeries());
 			
 			const volumeSeries = chart.addHistogramSeries({
