@@ -449,7 +449,8 @@ sap.ui.define([
 		 */
 		openChart : function () {
 			var sDivId = "chartContainer";
-			var chartModel = new JSONModel();
+			var oChartModel = new JSONModel();
+			var bIsInstrumentTypeRatio = this.isInstrumentTypeRatio();
 			
 			//Remove previously created chart for subsequent chart creations
 			document.getElementById(sDivId).innerHTML = "";
@@ -462,15 +463,17 @@ sap.ui.define([
             const candlestickSeries = chart.addCandlestickSeries({ priceLineVisible: false });
 			candlestickSeries.setData(this.getCandlestickSeries());
 			
-			const volumeSeries = chart.addHistogramSeries({
-				priceFormat: {
-        			type: 'volume',
-    			},
-    			priceScaleId: 'left'
-			});	
-			volumeSeries.setData(this.getVolumeSeries());
+			if (bIsInstrumentTypeRatio === false) {
+				const volumeSeries = chart.addHistogramSeries({
+					priceFormat: {
+	        			type: 'volume',
+	    			},
+	    			priceScaleId: 'left'
+				});	
+				volumeSeries.setData(this.getVolumeSeries());				
+			}
 			
-			this.applyChartOptions(chart);
+			this.applyChartOptions(chart, bIsInstrumentTypeRatio);
 			
 			//Automatically zoom the time scale to display all datasets over the full width of the chart.
 			chart.timeScale().fitContent();
@@ -479,16 +482,16 @@ sap.ui.define([
 			chart.subscribeClick(this.onChartClicked.bind(this));
 			
 			//Store chart Model for further access.
-			chartModel.setProperty("/chart", chart);
-			chartModel.setProperty("/candlestickSeries", candlestickSeries)
-			this.getView().setModel(chartModel, "chartModel");
+			oChartModel.setProperty("/chart", chart);
+			oChartModel.setProperty("/candlestickSeries", candlestickSeries)
+			this.getView().setModel(oChartModel, "chartModel");
 		},
 		
 		
 		/**
 		 * Applies options to the given chart.
 		 */
-		applyChartOptions : function(oChart) {
+		applyChartOptions : function(oChart, bIsInstrumentTypeRatio) {
 			oChart.applyOptions({
     			crosshair: {
 			        // Change mode from default 'magnet' to 'normal'.
@@ -503,13 +506,12 @@ sap.ui.define([
 				    },
 				    visible: true
 				},
-    			leftPriceScale: {
+				leftPriceScale: {
 					scaleMargins: {
 			        	top: 0.85,
-			        	bottom: 0,
-    				},
-        			visible: true,
-    			},
+			        	bottom: 0
+			        }
+	    		},
     			layout: {
                     backgroundColor: 'white',
                     textColor: 'black',
@@ -523,6 +525,16 @@ sap.ui.define([
                     },
                 }
 			});
+			
+			if (bIsInstrumentTypeRatio === true) {
+				oChart.applyOptions({
+					leftPriceScale: { visible: false }
+				});
+			} else {
+				oChart.applyOptions({
+					leftPriceScale: { visible: true	}
+				});
+			}
 		},
 		
 		
@@ -856,6 +868,28 @@ sap.ui.define([
 			var oSelectedHorizontalLine = oContext.getProperty(null, oContext);
 			
 			return oSelectedHorizontalLine;
+		},
+		
+		
+		/**
+		 * Checks if the instrument for which quotations have been loaded is of type RATIO.
+		 */
+		isInstrumentTypeRatio : function () {
+			var oQuotationsModel = this.getView().getModel("quotationsForChart");
+			var oQuotations = oQuotationsModel.oData.quotation;
+			var oQuotation;
+			
+			if(oQuotations.length === 0) {
+				return false;
+			}
+			
+			oQuotation = oQuotations[0];
+				
+			if (oQuotation.instrument.type === Constants.INSTRUMENT_TYPE.RATIO) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	});
 });
