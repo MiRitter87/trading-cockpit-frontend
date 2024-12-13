@@ -60,7 +60,6 @@
 						
 						<IconTabFilter text="{i18n>chartPriceVolume.tabChartAnalysis}" key="chartAnalysis">
 							<Button id="addButton" text="{i18n>chartPriceVolume.buttonAddObject}" press=".onAddObjectPressed" class="sapUiSmallMarginEnd"/>
-							<Button id="editButton" text="{i18n>chartPriceVolume.buttonEditObject}" press=".onEditObjectPressed" class="sapUiSmallMarginEnd"/>
 						</IconTabFilter>
 					</items>
 				</IconTabBar>

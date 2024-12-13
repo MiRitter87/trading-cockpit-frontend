@@ -217,14 +217,6 @@ sap.ui.define([
 		onAddObjectPressed : function() {
 			ChartAnalysisController.onAddObjectPressed(this);
 		},
-		
-		
-		/**
-		 * Handles the button press event of the edit object button.
-		 */
-		onEditObjectPressed : function() {
-			
-		},
 
 		
 		/**
