@@ -57,10 +57,6 @@
 								</ComboBox>
 							</FlexBox>
 						</IconTabFilter>
-						
-						<IconTabFilter text="{i18n>chartPriceVolume.tabChartAnalysis}" key="chartAnalysis">
-							<Button id="addButton" text="{i18n>chartPriceVolume.buttonAddObject}" press=".onAddObjectPressed" class="sapUiSmallMarginEnd"/>
-						</IconTabFilter>
 					</items>
 				</IconTabBar>
 			</VBox>

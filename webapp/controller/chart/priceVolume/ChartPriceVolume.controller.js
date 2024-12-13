@@ -3,11 +3,10 @@ sap.ui.define([
 	"../../MainController",
 	"../../scan/ScanController",
 	"../../Constants",
-	"./ChartAnalysisController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, ScanController, Constants, ChartAnalysisController, JSONModel, MessageBox, MessageToast) {
+], function (Controller, MainController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartPriceVolume", {
@@ -208,54 +207,6 @@ sap.ui.define([
 				oRsInstrumentLabel.setVisible(false);
 				oRsInstrumentComboBox.setVisible(false);
 			}
-		},
-		
-		
-		/**
-		 * Handles the button press event of the add object button.
-		 */
-		onAddObjectPressed : function() {
-			ChartAnalysisController.onAddObjectPressed(this);
-		},
-
-		
-		/**
-		 * Handles the button press event of the open chart button for chart object coordinate selection.
-		 */
-		onOpenChartPressed : function() {
-			ChartAnalysisController.onOpenChartPressed(this);
-		},
-		
-		
-		/**
-		 * Handles the button press event of the save button in the "create chart object" dialog.
-		 */
-		onSaveNewChartObjectPressed : function() {
-			ChartAnalysisController.onSaveNewChartObjectPressed(this);
-		},
-		
-		
-		/**
-		 * Handles the button press event of the cancel button in the "create chart object" dialog.
-		 */
-		onCancelCreateChartObjectDialog : function() {
-			ChartAnalysisController.onCancelCreateChartObjectDialog(this);
-		},
-		
-		
-		/**
-		 * Handles a click at the take coordinate button of the TradingView chart container.
-		 */
-		onTakeCoordinate : function() {
-			ChartAnalysisController.onTakeCoordinate(this);
-		},
-		
-		
-		/**
-		 * Handles a click at the cancel button of the TradingView chart container.
-		 */
-		onCancelChartDialog : function() {
-			ChartAnalysisController.onCancelChartDialog(this);
 		},
 		
 		
