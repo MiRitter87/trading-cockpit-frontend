@@ -225,15 +225,7 @@ sap.ui.define([
 		onEditObjectPressed : function() {
 			
 		},
-		
-		
-		/**
-		 * Handles the button press event of the overview object button.
-		 */
-		onObjectOverviewPressed : function() {
-			ChartAnalysisController.onObjectOverviewPressed(this);
-		},
-		
+
 		
 		/**
 		 * Handles the button press event of the open chart button for chart object coordinate selection.
@@ -260,14 +252,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Handles the button press event of the delete button in the "chart overview" dialog.
-		 */
-		onDeleteChartObjectPressed : function() {
-			ChartAnalysisController.onDeleteChartObjectPressed(this);
-		},
-		
-		
-		/**
 		 * Handles a click at the take coordinate button of the TradingView chart container.
 		 */
 		onTakeCoordinate : function() {
@@ -280,14 +264,6 @@ sap.ui.define([
 		 */
 		onCancelChartDialog : function() {
 			ChartAnalysisController.onCancelChartDialog(this);
-		},
-		
-		
-		/**
-		 * Handles a click at the close button of the object overview dialog.
-		 */
-		onCloseObjectOverviewDialog : function() {
-			ChartAnalysisController.onCloseObjectOverviewDialog(this);
 		},
 		
 		

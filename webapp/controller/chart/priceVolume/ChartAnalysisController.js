@@ -117,22 +117,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Handles the button press event of the object overview button.
-		 */
-		onObjectOverviewPressed : function(oCallingController) {
-			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
-			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
-			
-			if (sSelectedInstrumentId === "") {
-				this.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, oCallingController, true);				
-			}
-			else {
-				this.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, oCallingController, true, sSelectedInstrumentId);	
-			}
-		},
-		
-		
-		/**
 		 * Handles the button press event of the open chart button for chart object coordinate selection.
 		 */
 		onOpenChartPressed : function(oCallingController) {
@@ -168,22 +152,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Handles the button press event of the delete button in the "chart overview" dialog.
-		 */
-		onDeleteChartObjectPressed : function(oCallingController) {
-			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
-			
-			if (oCallingController.getView().byId("chartObjectTable").getSelectedItem() === null) {
-				MessageBox.information(oResourceBundle.getText("chartPriceVolume.objectOverviewDialog.noObjectSelected"));
-				return;				
-			}
-			
-			this.deleteHorizontalLineByWebService(
-				this.getSelectedHorizontalLine(oCallingController), this.deleteHorizontalLineCallback.bind(this), oCallingController);
-		},
-		
-		
-		/**
 		 * Executed after PopUp for TradingView chart has been fully initialized and opened.
 		 */
 		onTradingViewPopupOpened : function (oCallingController) {
@@ -207,14 +175,6 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oSelectedCoordinateModel, "selectedCoordinates");
 			oCallingController.byId("tradingViewChartContainerDialog").close();
-		},
-		
-		
-		/**
-		 * Handles a click at the close button of the object overview dialog.
-		 */
-		onCloseObjectOverviewDialog : function(oCallingController) {
-			oCallingController.byId("chartObjectOverviewDialog").close();
 		},
 		
 		
@@ -261,59 +221,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Callback function of the queryHorizontalLines RESTful WebService call.
-		 */
-		queryHorizontalLinesCallback : function(oReturnData, oCallingController) {
-			var oModel = new JSONModel();
-			var oOverviewDialog = oCallingController.byId("chartObjectOverviewDialog");
-			
-			if (oReturnData.data !== null) {
-				oModel.setData(oReturnData.data);		
-			}
-			
-			if (oReturnData.data === null && oReturnData.message !== null)  {
-				MessageToast.show(oReturnData.message[0].text);
-			}                                                               
-			
-			oCallingController.getView().setModel(oModel, "horizontalLines");
-			
-			if (oOverviewDialog === undefined || oOverviewDialog.isOpen() === false) {
-				MainController.openFragmentAsPopUp(oCallingController, "trading-cockpit-frontend.view.chart.priceVolume.ChartObjectOverview");				
-			}
-		},
-		
-		
-		/**
-		 * Callback function of the deleteHorizontalLine RESTful WebService call.
-		 */
-		deleteHorizontalLineCallback : function(oReturnData, oCallingController) {
-			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
-			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
-			
-			if (oReturnData.message !== null) {
-				if (oReturnData.message[0].type === 'S') {
-					MessageToast.show(oReturnData.message[0].text);
-					
-					if (sSelectedInstrumentId === "") {
-						this.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, oCallingController, true);				
-					}
-					else {
-						this.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, oCallingController, true, sSelectedInstrumentId);	
-					}
-				}
-				
-				if (oReturnData.message[0].type === 'E') {
-					MessageBox.error(oReturnData.message[0].text);
-				}
-				
-				if (oReturnData.message[0].type === 'W') {
-					MessageBox.warning(oReturnData.message[0].text);
-				}
-			}
-		},
-		
-		
-		/**
 		 * Calls a WebService operation to create a horizontal line object.
 		 */
 		createHorizontalLineByWebService : function(oHorizontalLineModel, callbackFunction, oCallingController) {
@@ -333,52 +240,7 @@ sap.ui.define([
 				}
 			});
 		},
-		
-		
-		/**
-		 * Queries the chartObject WebService for horizontal lines.
-		 */
-		queryHorizontalLinesByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
-			var sServerAddress = MainController.getServerAddress();
-			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
-			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
-			
-			if (sInstrumentId !== undefined && sInstrumentId !== null) {				
-				sQueryUrl= sQueryUrl + "?instrumentId=" + sInstrumentId;
-			}
-			
-			jQuery.ajax({
-				type : "GET", 
-				contentType : "application/json", 
-				url : sQueryUrl, 
-				dataType : "json", 
-				success : function(data) {
-					callbackFunction(data, oCallingController, bShowSuccessMessage);
-				}
-			});                                                                 
-		},
-		
-		
-		/**
-		 * Deletes the given horizontal line using the WebService.
-		 */
-		deleteHorizontalLineByWebService : function(oHorizontalLine, callbackFunction, oCallingController) {
-			var sServerAddress = MainController.getServerAddress();
-			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
-			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + oHorizontalLine.id;
-			
-			//Use "DELETE" to delete an existing resource.
-			jQuery.ajax({
-				type : "DELETE", 
-				contentType : "application/json", 
-				url : sQueryUrl, 
-				dataType : "json", 
-				success : function(data) {
-					callbackFunction(data, oCallingController);
-				}
-			});
-		},
-		
+
 		
 		/**
 		 * Queries the quotation WebService for quotations of an Instrument with the given ID.
@@ -444,18 +306,6 @@ sap.ui.define([
 			oHorizontalLineWS.setProperty("/price", oSelectedCoordinateModel.getProperty("/price"));
 			
 			return oHorizontalLineWS;
-		},
-		
-		
-		/**
-		 * Gets the the selected horizontal line from the overview table.
-		 */
-		getSelectedHorizontalLine : function (oCallingController) {
-			var oListItem = oCallingController.getView().byId("chartObjectTable").getSelectedItem();
-			var oContext = oListItem.getBindingContext("horizontalLines");
-			var oSelectedHorizontalLine = oContext.getProperty(null, oContext);
-			
-			return oSelectedHorizontalLine;
 		},
 		
 		
