@@ -1,9 +1,123 @@
 sap.ui.define([
 	"../../Constants",
-	"sap/ui/core/format/DateFormat"
-], function (Constants, DateFormat) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/format/DateFormat",
+	"./lightweight-charts.standalone.production"
+], function (Constants, JSONModel, DateFormat) {
 	"use strict";
 	return {
+		/**
+		 * Handles initialization of the TradingView lightweight-charts component.
+		 */
+		openChart : function (oCallingController) {
+			var sDivId = "chartContainer";
+			var oChartModel = new JSONModel();
+			var bIsInstrumentTypeRatio = this.isInstrumentTypeRatio(oCallingController);
+			
+			//Remove previously created chart for subsequent chart creations
+			document.getElementById(sDivId).innerHTML = "";
+	
+			const chart = LightweightCharts.createChart(document.getElementById("chartContainer"), {
+  				width: document.getElementById("chartContainer").clientWidth,
+                height: document.getElementById("chartContainer").clientHeight,
+            });
+            
+            const candlestickSeries = chart.addCandlestickSeries({ priceLineVisible: false });
+			candlestickSeries.setData(this.getCandlestickSeries(oCallingController));
+			
+			if (bIsInstrumentTypeRatio === false) {
+				const volumeSeries = chart.addHistogramSeries({
+					priceFormat: {
+	        			type: 'volume',
+	    			},
+	    			priceScaleId: 'left'
+				});	
+				volumeSeries.setData(this.getVolumeSeries(oCallingController));				
+			}
+			
+			this.applyChartOptions(chart, bIsInstrumentTypeRatio);
+			
+			//Automatically zoom the time scale to display all datasets over the full width of the chart.
+			chart.timeScale().fitContent();
+			
+			//Handle clicks in the chart. The controller needs to be bound to access the data model within the handler.
+			chart.subscribeClick(oCallingController.onChartClicked.bind(oCallingController));
+			
+			//Store chart Model for further access.
+			oChartModel.setProperty("/chart", chart);
+			oChartModel.setProperty("/candlestickSeries", candlestickSeries)
+			oCallingController.getView().setModel(oChartModel, "chartModel");
+		},
+		
+		
+		/**
+		 * Creates a candlestick series that contains the data to be displayed.
+		 */
+		getCandlestickSeries : function (oCallingController) {
+			var oQuotationsModel = oCallingController.getView().getModel("quotationsForChart");
+			var oQuotations = oQuotationsModel.oData.quotation;
+			var aCandlestickSeries = new Array();
+			var oDateFormat, oDate, sFormattedDate;
+			
+			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
+			
+			//The dataset needs to be constructed beginning at the oldest value.
+			for (var i = oQuotations.length -1; i >= 0; i--) {
+    			var oQuotation = oQuotations[i];
+    			var oCandlestickDataset = new Object();
+    			
+    			oCandlestickDataset.open = oQuotation.open;
+    			oCandlestickDataset.high = oQuotation.high;
+    			oCandlestickDataset.low = oQuotation.low;
+    			oCandlestickDataset.close = oQuotation.close;
+    			
+    			oDate = new Date(parseInt(oQuotation.date));
+    			sFormattedDate = oDateFormat.format(oDate);
+    			oCandlestickDataset.time = sFormattedDate;
+    			
+    			aCandlestickSeries.push(oCandlestickDataset);
+			}
+			
+			return aCandlestickSeries;
+		},
+		
+		
+		/**
+		 * Creates a Histogram series that contains the volume data to be displayed.
+		 */
+		getVolumeSeries : function (oCallingController) {
+			var oQuotationsModel = oCallingController.getView().getModel("quotationsForChart");
+			var oQuotations = oQuotationsModel.oData.quotation;
+			var aVolumeSeries = new Array();
+			var oDateFormat, oDate, sFormattedDate;
+			
+			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
+			
+			//The dataset needs to be constructed beginning at the oldest value.
+			for (var i = oQuotations.length -1; i >= 0; i--) {
+    			var oQuotation = oQuotations[i];
+    			var oVolumeDataset = new Object();
+    			
+    			oVolumeDataset.value = oQuotation.volume;
+    			
+    			oDate = new Date(parseInt(oQuotation.date));
+    			sFormattedDate = oDateFormat.format(oDate);
+    			oVolumeDataset.time = sFormattedDate;
+    			
+    			//Determine color of volume bars
+    			if (oQuotation.close >= oQuotation.open) {
+					oVolumeDataset.color = 'green';
+				} else {
+					oVolumeDataset.color = 'red';
+				}
+    			
+    			aVolumeSeries.push(oVolumeDataset);
+    		}
+    		
+    		return aVolumeSeries;
+		},
+		
+		
 		/**
 		 * Applies options to the given chart.
 		 */
@@ -224,6 +338,45 @@ sap.ui.define([
     		}
     		
     		return aMovingAverageSeries;
-		}
+		},
+		
+		
+		/**
+		 * Checks if the instrument for which quotations have been loaded is of type RATIO.
+		 */
+		isInstrumentTypeRatio : function (oCallingController) {
+			var oQuotationsModel = oCallingController.getView().getModel("quotationsForChart");
+			var oQuotations = oQuotationsModel.oData.quotation;
+			var oQuotation;
+			
+			if (oQuotations.length === 0) {
+				return false;
+			}
+			
+			oQuotation = oQuotations[0];
+				
+			if (oQuotation.instrument.type === Constants.INSTRUMENT_TYPE.RATIO) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+		
+		
+		/**
+		 * Draws horizontal lines to the TradingView chart.
+		 */
+		drawHorizontalLines : function(oCallingController, oHorizontalLines) {
+			var aHorizontalLines = oHorizontalLines.oData.horizontalLine;
+			var oChartModel = oCallingController.getView().getModel("chartModel");
+			var oCandlestickSeries = oChartModel.getProperty("/candlestickSeries");
+						
+			for (var i = 0; i < aHorizontalLines.length; i++) {
+				var oHorizontalLine = aHorizontalLines[i];
+				
+				const priceLine = { price: oHorizontalLine.price, color: 'black', lineWidth: 1, lineStyle: 0 };
+				oCandlestickSeries.createPriceLine(priceLine);
+			}
+		},
 	};
 });

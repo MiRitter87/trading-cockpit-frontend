@@ -5,11 +5,10 @@ sap.ui.define([
 	"../../scan/ScanController",
 	"../../Constants",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/core/format/DateFormat",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast",
 	"./lightweight-charts.standalone.production"
-], function (Controller, TradingViewController, MainController, ScanController, Constants, JSONModel, DateFormat, MessageBox, MessageToast) {
+], function (Controller, TradingViewController, MainController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartPriceVolumeTV", {
@@ -248,7 +247,7 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oModel, "quotationsForChart");
 			
-			oCallingController.openChart();
+			TradingViewController.openChart(oCallingController);
 			oCallingController.setButtonVisibility(true);
 			TradingViewController.applyMovingAverages(oCallingController);
 			
@@ -317,7 +316,7 @@ sap.ui.define([
 			
 			if (oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
-				oCallingController.drawHorizontalLines(oModel);	
+				TradingViewController.drawHorizontalLines(oCallingController, oModel);	
 			}
 			
 			if (oReturnData.data === null && oReturnData.message !== null)  {
@@ -446,135 +445,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Handles initialization of the TradingView lightweight-charts component.
-		 */
-		openChart : function () {
-			var sDivId = "chartContainer";
-			var oChartModel = new JSONModel();
-			var bIsInstrumentTypeRatio = this.isInstrumentTypeRatio();
-			
-			//Remove previously created chart for subsequent chart creations
-			document.getElementById(sDivId).innerHTML = "";
-	
-			const chart = LightweightCharts.createChart(document.getElementById("chartContainer"), {
-  				width: document.getElementById("chartContainer").clientWidth,
-                height: document.getElementById("chartContainer").clientHeight,
-            });
-            
-            const candlestickSeries = chart.addCandlestickSeries({ priceLineVisible: false });
-			candlestickSeries.setData(this.getCandlestickSeries());
-			
-			if (bIsInstrumentTypeRatio === false) {
-				const volumeSeries = chart.addHistogramSeries({
-					priceFormat: {
-	        			type: 'volume',
-	    			},
-	    			priceScaleId: 'left'
-				});	
-				volumeSeries.setData(this.getVolumeSeries());				
-			}
-			
-			TradingViewController.applyChartOptions(chart, bIsInstrumentTypeRatio);
-			
-			//Automatically zoom the time scale to display all datasets over the full width of the chart.
-			chart.timeScale().fitContent();
-			
-			//Handle clicks in the chart. The controller needs to be bound to access the data model within the handler.
-			chart.subscribeClick(this.onChartClicked.bind(this));
-			
-			//Store chart Model for further access.
-			oChartModel.setProperty("/chart", chart);
-			oChartModel.setProperty("/candlestickSeries", candlestickSeries)
-			this.getView().setModel(oChartModel, "chartModel");
-		},
-		
-		
-		/**
-		 * Creates a candlestick series that contains the data to be displayed.
-		 */
-		getCandlestickSeries : function () {
-			var oQuotationsModel = this.getView().getModel("quotationsForChart");
-			var oQuotations = oQuotationsModel.oData.quotation;
-			var aCandlestickSeries = new Array();
-			var oDateFormat, oDate, sFormattedDate;
-			
-			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
-			
-			//The dataset needs to be constructed beginning at the oldest value.
-			for (var i = oQuotations.length -1; i >= 0; i--) {
-    			var oQuotation = oQuotations[i];
-    			var oCandlestickDataset = new Object();
-    			
-    			oCandlestickDataset.open = oQuotation.open;
-    			oCandlestickDataset.high = oQuotation.high;
-    			oCandlestickDataset.low = oQuotation.low;
-    			oCandlestickDataset.close = oQuotation.close;
-    			
-    			oDate = new Date(parseInt(oQuotation.date));
-    			sFormattedDate = oDateFormat.format(oDate);
-    			oCandlestickDataset.time = sFormattedDate;
-    			
-    			aCandlestickSeries.push(oCandlestickDataset);
-			}
-			
-			return aCandlestickSeries;
-		},
-		
-		
-		/**
-		 * Creates a Histogram series that contains the volume data to be displayed.
-		 */
-		getVolumeSeries : function () {
-			var oQuotationsModel = this.getView().getModel("quotationsForChart");
-			var oQuotations = oQuotationsModel.oData.quotation;
-			var aVolumeSeries = new Array();
-			var oDateFormat, oDate, sFormattedDate;
-			
-			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
-			
-			//The dataset needs to be constructed beginning at the oldest value.
-			for (var i = oQuotations.length -1; i >= 0; i--) {
-    			var oQuotation = oQuotations[i];
-    			var oVolumeDataset = new Object();
-    			
-    			oVolumeDataset.value = oQuotation.volume;
-    			
-    			oDate = new Date(parseInt(oQuotation.date));
-    			sFormattedDate = oDateFormat.format(oDate);
-    			oVolumeDataset.time = sFormattedDate;
-    			
-    			//Determine color of volume bars
-    			if (oQuotation.close >= oQuotation.open) {
-					oVolumeDataset.color = 'green';
-				} else {
-					oVolumeDataset.color = 'red';
-				}
-    			
-    			aVolumeSeries.push(oVolumeDataset);
-    		}
-    		
-    		return aVolumeSeries;
-		},
-		
-		
-		/**
-		 * Draws horizontal lines to the TradingView chart.
-		 */
-		drawHorizontalLines : function(oHorizontalLines) {
-			var aHorizontalLines = oHorizontalLines.oData.horizontalLine;
-			var oChartModel = this.getView().getModel("chartModel");
-			var oCandlestickSeries = oChartModel.getProperty("/candlestickSeries");
-						
-			for (var i = 0; i < aHorizontalLines.length; i++) {
-				var oHorizontalLine = aHorizontalLines[i];
-				
-				const priceLine = { price: oHorizontalLine.price, color: 'black', lineWidth: 1, lineStyle: 0 };
-				oCandlestickSeries.createPriceLine(priceLine);
-			}
-		},
-		
-		
-		/**
 		 * Sets the visibility of the chart buttons.
 		 */
 		setButtonVisibility : function(bVisible) {
@@ -646,28 +516,6 @@ sap.ui.define([
 			var oSelectedHorizontalLine = oContext.getProperty(null, oContext);
 			
 			return oSelectedHorizontalLine;
-		},
-		
-		
-		/**
-		 * Checks if the instrument for which quotations have been loaded is of type RATIO.
-		 */
-		isInstrumentTypeRatio : function () {
-			var oQuotationsModel = this.getView().getModel("quotationsForChart");
-			var oQuotations = oQuotationsModel.oData.quotation;
-			var oQuotation;
-			
-			if(oQuotations.length === 0) {
-				return false;
-			}
-			
-			oQuotation = oQuotations[0];
-				
-			if (oQuotation.instrument.type === Constants.INSTRUMENT_TYPE.RATIO) {
-				return true;
-			} else {
-				return false;
-			}
 		}
 	});
 });
