@@ -4,13 +4,13 @@
 	xmlns:core="sap.ui.core"
 	xmlns:html="http://www.w3.org/1999/xhtml">>
 
-	<Dialog id="chartObjectOverviewDialog" title="{i18n>chartPriceVolume.objectOverviewDialog.title}">
+	<Dialog id="chartObjectOverviewDialog" title="{i18n>chartPriceVolumeTV.objectOverviewDialog.title}">
 		<Table id="chartObjectTable" items="{path: 'horizontalLines>/horizontalLine/'}" mode="SingleSelectMaster" sticky="HeaderToolbar,ColumnHeaders">
 			<headerToolbar>
 				<OverflowToolbar>
-					<Title text="{i18n>chartPriceVolume.objectOverviewDialog.tableHeader} ({= ${horizontalLines>/horizontalLine/}.length})"/>
+					<Title text="{i18n>chartPriceVolumeTV.objectOverviewDialog.tableHeader} ({= ${horizontalLines>/horizontalLine/}.length})"/>
 					<ToolbarSpacer/>
-					<Button icon="sap-icon://delete" tooltip="{i18n>chartPriceVolume.objectOverviewDialog.deleteSelected}" 
+					<Button icon="sap-icon://delete" tooltip="{i18n>chartPriceVolumeTV.objectOverviewDialog.deleteSelected}" 
 						press=".onDeleteChartObjectPressed"/>
 				</OverflowToolbar>
 				</headerToolbar>
