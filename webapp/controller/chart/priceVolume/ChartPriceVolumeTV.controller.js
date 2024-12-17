@@ -234,6 +234,7 @@ sap.ui.define([
 		 */
 		queryInstrumentQuotationsCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
+			var oChartToolbar = oCallingController.getView().byId("chartToolbar");
 			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
@@ -248,7 +249,7 @@ sap.ui.define([
 			oCallingController.getView().setModel(oModel, "quotationsForChart");
 			
 			TradingViewController.openChart(oCallingController);
-			oCallingController.setButtonVisibility(true);
+			oChartToolbar.setVisible(true);
 			TradingViewController.applyMovingAverages(oCallingController);
 			
 			if (sSelectedInstrumentId !== "") {			
@@ -445,28 +446,6 @@ sap.ui.define([
 		
 		
 		/**
-		 * Sets the visibility of the chart buttons.
-		 */
-		setButtonVisibility : function(bVisible) {
-			var oEma21Button = this.getView().byId("ema21Button");
-			var oSma50Button = this.getView().byId("sma50Button");
-			var oSma150Button = this.getView().byId("sma150Button");
-			var oSma200Button = this.getView().byId("sma200Button");
-			var oSma30VolumeButton = this.getView().byId("sma30VolumeButton");
-			var oHorizontalLineButton = this.getView().byId("horizontalLineButton");
-			var oOverviewButton = this.getView().byId("overviewButton");
-			
-			oEma21Button.setVisible(bVisible);
-			oSma50Button.setVisible(bVisible);
-			oSma150Button.setVisible(bVisible);
-			oSma200Button.setVisible(bVisible);
-			oSma30VolumeButton.setVisible(bVisible);
-			oHorizontalLineButton.setVisible(bVisible);
-			oOverviewButton.setVisible(bVisible);
-		},
-		
-		
-		/**
 		 * Resets the UI elements.
 		 */
 		resetUIElements : function () {
@@ -476,6 +455,7 @@ sap.ui.define([
 			var oSma150Button = this.getView().byId("sma150Button");
 			var oSma200Button = this.getView().byId("sma200Button");
 			var oSma30VolumeButton = this.getView().byId("sma30VolumeButton");
+			var oChartToolbar = this.getView().byId("chartToolbar");
 
 			oInstrumentComboBox.setSelectedKey("");
 			
@@ -485,7 +465,7 @@ sap.ui.define([
 			oSma200Button.setPressed(false);
 			oSma30VolumeButton.setPressed(false);
 			
-			this.setButtonVisibility(false);
+			oChartToolbar.setVisible(false);
 			
 			//Remove previously created chart.
 			document.getElementById("chartContainer").innerHTML = "";

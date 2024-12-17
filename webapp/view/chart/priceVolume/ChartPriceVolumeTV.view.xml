@@ -22,7 +22,7 @@
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
 			</FlexBox>
 			
-			<HBox>
+			<Toolbar id="chartToolbar">
 				<ToggleButton id="ema21Button" text="{i18n>chartPriceVolumeTV.ema21}" press=".onEma21Pressed"/>
 				<ToggleButton id="sma50Button" text="{i18n>chartPriceVolumeTV.sma50}" press=".onSma50Pressed"/>
 				<ToggleButton id="sma150Button" text="{i18n>chartPriceVolumeTV.sma150}" press=".onSma150Pressed"/>
@@ -33,7 +33,7 @@
 					text="――" tooltip="{i18n>chartPriceVolumeTV.horizontalLineTooltip}"/>
 				<Button id="overviewButton" icon="sap-icon://list" press=".onOverviewPressed"
 					tooltip="{i18n>chartPriceVolumeTV.overviewTooltip}"/>
-			</HBox>
+			</Toolbar>
 			
 			<core:HTML id="chartContainerHTML" 
 				content="&lt;div id=&quot;chartContainer&quot; style=&quot;position: relative; width: 1600px; height: 700px;&quot;&gt;&lt;/div&gt;"/>
