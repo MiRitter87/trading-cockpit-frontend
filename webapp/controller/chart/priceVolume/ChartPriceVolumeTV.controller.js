@@ -249,6 +249,7 @@ sap.ui.define([
 			oCallingController.getView().setModel(oModel, "quotationsForChart");
 			
 			TradingViewController.openChart(oCallingController);
+			oCallingController.setToolbarTitle();
 			oChartToolbar.setVisible(true);
 			TradingViewController.applyMovingAverages(oCallingController);
 			
@@ -496,6 +497,22 @@ sap.ui.define([
 			var oSelectedHorizontalLine = oContext.getProperty(null, oContext);
 			
 			return oSelectedHorizontalLine;
+		},
+		
+		
+		/**
+		 * Sets the title text of the chart toolbar.
+		 */
+		setToolbarTitle : function () {
+			var oToolbarTitle = this.getView().byId("toolbarTitle");
+			var oQuotationsModel = this.getView().getModel("quotationsForChart");
+			var oQuotations = oQuotationsModel.oData.quotation;
+			var oQuotation;
+
+			if (oQuotations.length > 0) {
+				oQuotation = oQuotations[0];
+				oToolbarTitle.setText(oQuotation.instrument.name);
+			}
 		}
 	});
 });
