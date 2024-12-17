@@ -22,23 +22,25 @@
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
 			</FlexBox>
 			
-			<Toolbar id="chartToolbar">
-				<Title id="toolbarTitle"/>
-				<ToolbarSpacer/>
-				<ToggleButton id="ema21Button" text="{i18n>chartPriceVolumeTV.ema21}" press=".onEma21Pressed"/>
-				<ToggleButton id="sma50Button" text="{i18n>chartPriceVolumeTV.sma50}" press=".onSma50Pressed"/>
-				<ToggleButton id="sma150Button" text="{i18n>chartPriceVolumeTV.sma150}" press=".onSma150Pressed"/>
-				<ToggleButton id="sma200Button" text="{i18n>chartPriceVolumeTV.sma200}" press=".onSma200Pressed"/>
-				<ToggleButton id="sma30VolumeButton" text="{i18n>chartPriceVolumeTV.sma30Volume}" press=".onSma30VolumePressed"/>
+			<ScrollContainer>
+				<OverflowToolbar id="chartToolbar" width="1600px">
+					<Title id="toolbarTitle"/>
+					<ToolbarSpacer/>
+					<ToggleButton id="ema21Button" text="{i18n>chartPriceVolumeTV.ema21}" press=".onEma21Pressed"/>
+					<ToggleButton id="sma50Button" text="{i18n>chartPriceVolumeTV.sma50}" press=".onSma50Pressed"/>
+					<ToggleButton id="sma150Button" text="{i18n>chartPriceVolumeTV.sma150}" press=".onSma150Pressed"/>
+					<ToggleButton id="sma200Button" text="{i18n>chartPriceVolumeTV.sma200}" press=".onSma200Pressed"/>
+					<ToggleButton id="sma30VolumeButton" text="{i18n>chartPriceVolumeTV.sma30Volume}" press=".onSma30VolumePressed"/>
+					
+					<ToggleButton id="horizontalLineButton" class="sapUiMediumMarginBegin"
+						text="――" tooltip="{i18n>chartPriceVolumeTV.horizontalLineTooltip}"/>
+					<Button id="overviewButton" icon="sap-icon://list" press=".onOverviewPressed"
+						tooltip="{i18n>chartPriceVolumeTV.overviewTooltip}"/>
+				</OverflowToolbar>
 				
-				<ToggleButton id="horizontalLineButton" class="sapUiMediumMarginBegin"
-					text="――" tooltip="{i18n>chartPriceVolumeTV.horizontalLineTooltip}"/>
-				<Button id="overviewButton" icon="sap-icon://list" press=".onOverviewPressed"
-					tooltip="{i18n>chartPriceVolumeTV.overviewTooltip}"/>
-			</Toolbar>
-			
-			<core:HTML id="chartContainerHTML" 
-				content="&lt;div id=&quot;chartContainer&quot; style=&quot;position: relative; width: 1600px; height: 700px;&quot;&gt;&lt;/div&gt;"/>
+				<core:HTML id="chartContainerHTML" 
+					content="&lt;div id=&quot;chartContainer&quot; style=&quot;position: relative; width: 1600px; height: 700px;&quot;&gt;&lt;/div&gt;"/>
+			</ScrollContainer>
 		</content>
 	</Page>
 </mvc:View>
