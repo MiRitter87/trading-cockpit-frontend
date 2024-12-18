@@ -20,6 +20,7 @@ sap.ui.define([
 			const chart = LightweightCharts.createChart(document.getElementById("chartContainer"), {
   				width: document.getElementById("chartContainer").clientWidth,
                 height: document.getElementById("chartContainer").clientHeight,
+                autoSize: true
             });
             
             const candlestickSeries = chart.addCandlestickSeries({ priceLineVisible: false });
