@@ -351,8 +351,11 @@ sap.ui.define([
 				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.SMA_200;
 			}
 			
+			if (oSma30VolumeCheckBox.getSelected() === true) {
+				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.SMA_30_VOLUME;
+			}
+			
 			sParameters = sParameters + "&withVolume=" + oVolumeCheckBox.getSelected();
-			sParameters = sParameters + "&withSma30Volume=" + oSma30VolumeCheckBox.getSelected();
 			
 			if (sSelectedIndicator === Constants.CHART_INDICATOR.RS_LINE) {
 				sParameters = sParameters + "&rsInstrumentId=" + oRsInstrumentComboBox.getSelectedKey();

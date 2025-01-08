@@ -107,7 +107,8 @@ sap.ui.define([
 			EMA_21: 'EMA_21',
 			SMA_50: 'SMA_50',
 			SMA_150: 'SMA_150',
-			SMA_200: 'SMA_200'
+			SMA_200: 'SMA_200',
+			SMA_30_VOLUME: 'SMA_30_VOLUME'
 		},
 		
 		CHART_OBJECT_TYPE: {
