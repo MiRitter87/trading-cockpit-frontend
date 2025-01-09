@@ -60,7 +60,7 @@ sap.ui.define([
 			var aCandlestickSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
 			
-			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
+			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
 			
 			//The dataset needs to be constructed beginning at the oldest value.
 			for (var i = oQuotations.length -1; i >= 0; i--) {
@@ -92,7 +92,7 @@ sap.ui.define([
 			var aVolumeSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
 			
-			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
+			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
 			
 			//The dataset needs to be constructed beginning at the oldest value.
 			for (var i = oQuotations.length -1; i >= 0; i--) {
@@ -308,7 +308,7 @@ sap.ui.define([
 			var aMovingAverageSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
 			
-			oDateFormat = DateFormat.getDateInstance({pattern : "YYYY-MM-dd"});
+			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
 			
 			//The dataset needs to be constructed beginning at the oldest value.
 			for (var i = oQuotations.length -1; i >= 0; i--) {
