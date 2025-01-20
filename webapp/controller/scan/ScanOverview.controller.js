@@ -104,8 +104,16 @@ sap.ui.define([
 		/** 
 		 * Handles tasks to be performed after the scan start dialog has been opened.
 		 */
-		onStartScanDialogOpened : function () {
+		onStartScanDialogAfterOpen : function () {
 			this.initializeScopeComboBox();
+		},
+		
+		
+		/** 
+		 * Handles tasks to be performed before the scan start dialog is opened.
+		 */
+		onStartScanDialogBeforeOpen : function () {
+			this.initializeScanDialogTitle();
 		},
 		
 		
@@ -269,5 +277,18 @@ sap.ui.define([
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.SCAN_SCOPE.INCOMPLETE, "scanOverview.scanScope.incomplete");
 		},
+		
+		
+		/**
+		 * Initializes the title of the "start scan" dialog.
+		 */
+		initializeScanDialogTitle : function () {
+			var oScanDialog = this.byId("startScanDialog");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oScan = this.getSelectedScan();
+			var sTitleText = oResourceBundle.getText("scanOverview.startScanHeader", [oScan.id]);
+			
+			oScanDialog.setTitle(sTitleText);
+		}
 	});
 });
