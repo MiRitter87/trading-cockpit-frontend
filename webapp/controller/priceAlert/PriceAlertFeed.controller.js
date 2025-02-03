@@ -129,11 +129,7 @@ sap.ui.define([
 			var sText = oResourceBundle.getText("priceAlertFeed.lastUpdate");
 			var oDate = new Date();
 			
-			sText = sText + oDate.getHours();
-			sText = sText + ":";
-			sText = sText + oDate.getMinutes();
-			sText = sText + ":";
-			sText = sText + oDate.getSeconds();
+			sText = sText + oDate.toLocaleTimeString();
 			
 			oCallingController.getView().byId("lastUpdateText").setText(sText);
 		},
