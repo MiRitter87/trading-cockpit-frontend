@@ -23,11 +23,11 @@ sap.ui.define([
                 autoSize: true
             });
             
-            const candlestickSeries = chart.addCandlestickSeries({ priceLineVisible: false });
+            const candlestickSeries = chart.addSeries(LightweightCharts.CandlestickSeries, { priceLineVisible: false });
 			candlestickSeries.setData(this.getCandlestickSeries(oCallingController));
 			
 			if (bIsInstrumentTypeRatio === false) {
-				const volumeSeries = chart.addHistogramSeries({
+				const volumeSeries = chart.addSeries(LightweightCharts.HistogramSeries, {
 					priceFormat: {
 	        			type: 'volume',
 	    			},
@@ -196,7 +196,8 @@ sap.ui.define([
 			var ema21Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.EMA_21);
 	
 			if (bVisible === true) {
-				const ema21Series = chart.addLineSeries({ color: 'yellow', lineWidth: 1, priceLineVisible: false });
+				const ema21Series = chart.addSeries(LightweightCharts.LineSeries, 
+					{ color: 'yellow', lineWidth: 1, priceLineVisible: false });
 				ema21Series.setData(ema21Data);
 				chartModel.setProperty("/ema21Series", ema21Series);
 			} else {
@@ -218,7 +219,8 @@ sap.ui.define([
 			var sma50Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_50);
 	
 			if (bVisible === true) {
-				const sma50Series = chart.addLineSeries({ color: 'blue', lineWidth: 1, priceLineVisible: false });
+				const sma50Series = chart.addSeries(LightweightCharts.LineSeries, 
+					{ color: 'blue', lineWidth: 1, priceLineVisible: false });
 				sma50Series.setData(sma50Data);
 				chartModel.setProperty("/sma50Series", sma50Series);
 			} else {
@@ -240,7 +242,8 @@ sap.ui.define([
 			var sma150Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_150);
 	
 			if (bVisible === true) {
-				const sma150Series = chart.addLineSeries({ color: 'red', lineWidth: 1, priceLineVisible: false });
+				const sma150Series = chart.addSeries(LightweightCharts.LineSeries, 
+					{ color: 'red', lineWidth: 1, priceLineVisible: false });
 				sma150Series.setData(sma150Data);
 				chartModel.setProperty("/sma150Series", sma150Series);
 			} else {
@@ -262,7 +265,8 @@ sap.ui.define([
 			var sma200Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_200);
 	
 			if (bVisible === true) {
-				const sma200Series = chart.addLineSeries({ color: 'green', lineWidth: 1, priceLineVisible: false });
+				const sma200Series = chart.addSeries(LightweightCharts.LineSeries, 
+					{ color: 'green', lineWidth: 1, priceLineVisible: false });
 				sma200Series.setData(sma200Data);
 				chartModel.setProperty("/sma200Series", sma200Series);
 			} else {
@@ -284,7 +288,7 @@ sap.ui.define([
 			var sma30VolumeData = this.getMovingAverageData(oCallingController, "SMA_30_VOLUME");
 	
 			if (bVisible === true) {
-				const sma30VolumeSeries = chart.addLineSeries(
+				const sma30VolumeSeries = chart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, priceScaleId: 'left' }
 				);
 				sma30VolumeSeries.setData(sma30VolumeData);
