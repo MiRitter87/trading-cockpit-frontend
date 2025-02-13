@@ -96,7 +96,7 @@ sap.ui.define([
 			var oListComboBox = this.getView().byId("listComboBox");
 			var sSelectedListId = oListComboBox.getSelectedKey();
 			var sServerAddress = MainController.getServerAddress();
-			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
+			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/jFreeChart");
 			var sChartUrl = sServerAddress + sWebServiceBaseUrl;
 			
 			sChartUrl = sChartUrl + "/ritterPatternIndicator";

@@ -148,7 +148,7 @@ sap.ui.define([
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			var sServerAddress = MainController.getServerAddress();
-			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
+			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/jFreeChart");
 			var sChartUrl = sServerAddress + sWebServiceBaseUrl;
 			var sListId = this.getView().byId("listComboBox").getSelectedKey();
 			
