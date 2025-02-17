@@ -189,7 +189,7 @@ sap.ui.define([
 		 */
 		afterMiniChartPopoverOpened : function(oControlEvent) {
 			var sServerAddress = MainController.getServerAddress();
-			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
+			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/jFreeChart");
 			var sChartUrl = sServerAddress + sWebServiceBaseUrl;
 			var oPopover = oControlEvent.getSource();
 			var oContext = oPopover.getBindingContext();
