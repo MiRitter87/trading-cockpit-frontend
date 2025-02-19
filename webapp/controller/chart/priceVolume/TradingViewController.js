@@ -304,6 +304,14 @@ sap.ui.define([
 		
 		
 		/**
+		 * Displays the Bollinger BandWidth in a separate pane of the chart.
+		 */
+		displayBollingerBandWidth : function (oCallingController, bVisible) {
+			
+		},
+		
+		
+		/**
 		 * Create a line series that contains the data of the requested moving average.
 		 */
 		getMovingAverageData : function (oCallingController, sRequestedMA) {

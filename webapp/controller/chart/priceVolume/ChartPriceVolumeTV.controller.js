@@ -124,6 +124,18 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the button press event of the Bollinger BandWidth ToggleButton.
+		 */
+		onBollingerBandWidthPressed : function(oEvent) {
+			if (oEvent.getSource().getPressed()) {
+				TradingViewController.displayBollingerBandWidth(this, true);
+			} else {
+				TradingViewController.displayBollingerBandWidth(this, false);
+			}
+		},
+		
+		
+		/**
 		 * Handles clicks in the TradingView chart.
 		 */
 		onChartClicked : function (param) {
