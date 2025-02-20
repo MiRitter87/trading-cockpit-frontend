@@ -310,6 +310,21 @@ sap.ui.define([
 			var chartModel = oCallingController.getView().getModel("chartModel");
 			var chart = chartModel.getProperty("/chart");
 			var bbwData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.BBW);
+			
+			if (bVisible === true) {
+				const bbwSeries = chart.addSeries(LightweightCharts.LineSeries, 
+					{ color: 'black', lineWidth: 1, priceLineVisible: false },
+					1 // Pane index
+				);
+				bbwSeries.setData(bbwData);
+				chartModel.setProperty("/bbwSeries", bbwSeries);
+			} else {
+				const bbwSeries = chartModel.getProperty("/bbwSeries");
+				
+				if (bbwSeries !== undefined && chart !== undefined) {
+					chart.removeSeries(bbwSeries);
+				}
+			}
 		},
 		
 		
