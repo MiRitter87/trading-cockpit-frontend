@@ -59,7 +59,7 @@ sap.ui.define([
 				return;
 			}
 			
-			this.queryQuotationsOfInstrument(this.queryInstrumentQuotationsCallback, this, false, sSelectedInstrumentId);
+			this.queryChartData(this.queryChartDataCallback, this, false, sSelectedInstrumentId);
 		},
 		
 		
@@ -242,9 +242,9 @@ sap.ui.define([
 		
 		
 		/**
-		 * Callback function of the queryQuotationsOfInstrument RESTful WebService call.
+		 * Callback function of the queryChartData RESTful WebService call.
 		 */
-		queryInstrumentQuotationsCallback : function(oReturnData, oCallingController) {
+		queryChartDataCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			var oChartToolbar = oCallingController.getView().byId("chartToolbar");
 			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
@@ -258,7 +258,7 @@ sap.ui.define([
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
-			oCallingController.getView().setModel(oModel, "quotationsForChart");
+			oCallingController.getView().setModel(oModel, "chartData");
 			
 			TradingViewController.openChart(oCallingController);
 			oCallingController.setToolbarTitle();
@@ -374,10 +374,10 @@ sap.ui.define([
 		/**
 		 * Queries the quotation WebService for quotations of an Instrument with the given ID.
 		 */
-		queryQuotationsOfInstrument : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
+		queryChartData : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
 			var sServerAddress = MainController.getServerAddress();
-			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/quotation");
-			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + sInstrumentId;
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chartData");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/priceVolume/" + sInstrumentId;
 			
 			jQuery.ajax({
 				type : "GET", 
@@ -517,7 +517,7 @@ sap.ui.define([
 		 */
 		setToolbarTitle : function () {
 			var oToolbarTitle = this.getView().byId("toolbarTitle");
-			var oQuotationsModel = this.getView().getModel("quotationsForChart");
+			var oQuotationsModel = this.getView().getModel("chartData");
 			var oQuotations = oQuotationsModel.oData.quotation;
 			var oQuotation;
 

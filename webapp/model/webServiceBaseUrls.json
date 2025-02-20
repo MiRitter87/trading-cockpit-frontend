@@ -6,6 +6,7 @@
 	"quotation": "/trading-cockpit-backend/services/rest/quotations",
 	"statistic": "/trading-cockpit-backend/services/rest/statistics",
 	"jFreeChart": "/trading-cockpit-backend/services/rest/charts/jFreeChart",
+	"chartData": "/trading-cockpit-backend/services/rest/charts/data",
 	"horizontalLine": "/trading-cockpit-backend/services/rest/chartObjects/horizontalLine",
 	"dashboard": "/trading-cockpit-backend/services/rest/dashboard"
 }

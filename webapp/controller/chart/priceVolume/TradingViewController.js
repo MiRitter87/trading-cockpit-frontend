@@ -55,7 +55,7 @@ sap.ui.define([
 		 * Creates a candlestick series that contains the data to be displayed.
 		 */
 		getCandlestickSeries : function (oCallingController) {
-			var oQuotationsModel = oCallingController.getView().getModel("quotationsForChart");
+			var oQuotationsModel = oCallingController.getView().getModel("chartData");
 			var oQuotations = oQuotationsModel.oData.quotation;
 			var aCandlestickSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
@@ -87,7 +87,7 @@ sap.ui.define([
 		 * Creates a Histogram series that contains the volume data to be displayed.
 		 */
 		getVolumeSeries : function (oCallingController) {
-			var oQuotationsModel = oCallingController.getView().getModel("quotationsForChart");
+			var oQuotationsModel = oCallingController.getView().getModel("chartData");
 			var oQuotations = oQuotationsModel.oData.quotation;
 			var aVolumeSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
@@ -317,7 +317,7 @@ sap.ui.define([
 		 * Create a line series that contains the data of the requested moving average.
 		 */
 		getMovingAverageData : function (oCallingController, sRequestedMA) {
-			var oQuotationsModel = oCallingController.getView().getModel("quotationsForChart");
+			var oQuotationsModel = oCallingController.getView().getModel("chartData");
 			var oQuotations = oQuotationsModel.oData.quotation;
 			var aMovingAverageSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
@@ -360,7 +360,7 @@ sap.ui.define([
 		 * Create a line series that contains the data of the requested indicator.
 		 */
 		getIndicatorData : function (oCallingController, sRequestedIndicator) {
-			var oQuotationsModel = oCallingController.getView().getModel("quotationsForChart");
+			var oQuotationsModel = oCallingController.getView().getModel("chartData");
 			var oQuotations = oQuotationsModel.oData.quotation;
 			var aIndicatorSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
@@ -395,7 +395,7 @@ sap.ui.define([
 		 * Checks if the instrument for which quotations have been loaded is of type RATIO.
 		 */
 		isInstrumentTypeRatio : function (oCallingController) {
-			var oQuotationsModel = oCallingController.getView().getModel("quotationsForChart");
+			var oQuotationsModel = oCallingController.getView().getModel("chartData");
 			var oQuotations = oQuotationsModel.oData.quotation;
 			var oQuotation;
 			
