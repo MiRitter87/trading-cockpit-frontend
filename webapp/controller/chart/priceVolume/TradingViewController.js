@@ -285,7 +285,7 @@ sap.ui.define([
 		displaySma30Volume : function (oCallingController, bVisible) {
 			var chartModel = oCallingController.getView().getModel("chartModel");
 			var chart = chartModel.getProperty("/chart");
-			var sma30VolumeData = this.getMovingAverageData(oCallingController, "SMA_30_VOLUME");
+			var sma30VolumeData = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_30_VOLUME);
 	
 			if (bVisible === true) {
 				const sma30VolumeSeries = chart.addSeries(LightweightCharts.LineSeries, 
@@ -307,7 +307,9 @@ sap.ui.define([
 		 * Displays the Bollinger BandWidth in a separate pane of the chart.
 		 */
 		displayBollingerBandWidth : function (oCallingController, bVisible) {
-			
+			var chartModel = oCallingController.getView().getModel("chartModel");
+			var chart = chartModel.getProperty("/chart");
+			var bbwData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.BBW);
 		},
 		
 		
@@ -351,6 +353,41 @@ sap.ui.define([
     		}
     		
     		return aMovingAverageSeries;
+		},
+		
+		
+		/**
+		 * Create a line series that contains the data of the requested indicator.
+		 */
+		getIndicatorData : function (oCallingController, sRequestedIndicator) {
+			var oQuotationsModel = oCallingController.getView().getModel("quotationsForChart");
+			var oQuotations = oQuotationsModel.oData.quotation;
+			var aIndicatorSeries = new Array();
+			var oDateFormat, oDate, sFormattedDate;
+			
+			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
+			
+			//The dataset needs to be constructed beginning at the oldest value.
+			for (var i = oQuotations.length -1; i >= 0; i--) {
+    			var oQuotation = oQuotations[i];
+    			var oIndicatorDataset = new Object();
+    			
+    			if (oQuotation.indicator === null) {
+					continue;
+				}
+				
+				if (sRequestedIndicator === Constants.CHART_INDICATOR.BBW && oQuotation.indicator.bollingerBandWidth10Days !== 0) {
+					oIndicatorDataset.value = oQuotation.indicator.bollingerBandWidth10Days;
+				}
+    			    			
+    			oDate = new Date(parseInt(oQuotation.date));
+    			sFormattedDate = oDateFormat.format(oDate);
+    			oIndicatorDataset.time = sFormattedDate;
+    			
+    			aIndicatorSeries.push(oIndicatorDataset);
+    		}
+    		
+    		return aIndicatorSeries;
 		},
 		
 		
