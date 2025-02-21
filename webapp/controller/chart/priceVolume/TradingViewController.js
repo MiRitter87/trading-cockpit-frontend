@@ -33,7 +33,9 @@ sap.ui.define([
 	    			},
 	    			priceScaleId: 'left'
 				});	
-				volumeSeries.setData(this.getVolumeSeries(oCallingController));				
+				volumeSeries.setData(this.getVolumeSeries(oCallingController));	
+				
+				oChartModel.setProperty("/volumeSeries", volumeSeries);			
 			}
 			
 			this.applyChartOptions(chart, bIsInstrumentTypeRatio);
@@ -46,7 +48,7 @@ sap.ui.define([
 			
 			//Store chart Model for further access.
 			oChartModel.setProperty("/chart", chart);
-			oChartModel.setProperty("/candlestickSeries", candlestickSeries)
+			oChartModel.setProperty("/candlestickSeries", candlestickSeries);
 			oCallingController.getView().setModel(oChartModel, "chartModel");
 		},
 		
@@ -310,18 +312,15 @@ sap.ui.define([
 			var chartModel = oCallingController.getView().getModel("chartModel");
 			var chart = chartModel.getProperty("/chart");
 			var bbwData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.BBW);
-			var chartHeight = chart.options().height;
 			
 			if (bVisible === true) {
 				const bbwSeries = chart.addSeries(LightweightCharts.LineSeries, 
-					{ color: 'black', lineWidth: 1, priceLineVisible: false },
-					1 // Pane index
+					{ color: 'black', lineWidth: 1, priceLineVisible: false }
 				);
 				bbwSeries.setData(bbwData);
 				chartModel.setProperty("/bbwSeries", bbwSeries);
 				
-				const indicatorPane = chart.panes()[1];
-				indicatorPane.setHeight(chartHeight * 0.15);
+				this.organizePanes(chartModel);
 			} else {
 				const bbwSeries = chartModel.getProperty("/bbwSeries");
 				
@@ -329,6 +328,33 @@ sap.ui.define([
 					chart.removeSeries(bbwSeries);
 				}
 			}
+		},
+		
+		
+		/**
+		 * Organizes the panes in a manner that the indicator is at the top pane and price/volume are below.
+		 */
+		organizePanes : function (oChartModel) {
+			var chart = oChartModel.getProperty("/chart");
+			var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
+			var volumeSeries = oChartModel.getProperty("/volumeSeries");
+			var bbwSeries = oChartModel.getProperty("/bbwSeries");
+			var chartHeight;
+			var firstPane;
+			var secondPane;
+			
+			bbwSeries.moveToPane(0);
+			candlestickSeries.moveToPane(1);
+			volumeSeries.moveToPane(1);
+			
+			// TODO: The moving average series need to be reorganized, too.
+			
+			chartHeight = chart.options().height;
+			
+			firstPane = chart.panes()[0];
+			firstPane.setHeight(chartHeight * 0.15);
+			secondPane = chart.panes()[1];
+			secondPane.setHeight(chartHeight * 0.85);			
 		},
 		
 		
