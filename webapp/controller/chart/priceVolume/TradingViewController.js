@@ -310,6 +310,7 @@ sap.ui.define([
 			var chartModel = oCallingController.getView().getModel("chartModel");
 			var chart = chartModel.getProperty("/chart");
 			var bbwData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.BBW);
+			var chartHeight = chart.options().height;
 			
 			if (bVisible === true) {
 				const bbwSeries = chart.addSeries(LightweightCharts.LineSeries, 
@@ -318,6 +319,9 @@ sap.ui.define([
 				);
 				bbwSeries.setData(bbwData);
 				chartModel.setProperty("/bbwSeries", bbwSeries);
+				
+				const indicatorPane = chart.panes()[1];
+				indicatorPane.setHeight(chartHeight * 0.15);
 			} else {
 				const bbwSeries = chartModel.getProperty("/bbwSeries");
 				
