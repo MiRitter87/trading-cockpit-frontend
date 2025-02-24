@@ -339,22 +339,46 @@ sap.ui.define([
 			var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
 			var volumeSeries = oChartModel.getProperty("/volumeSeries");
 			var bbwSeries = oChartModel.getProperty("/bbwSeries");
+			var ema21Series = oChartModel.getProperty("/ema21Series");
+			var sma50Series = oChartModel.getProperty("/sma50Series");
+			var sma150Series = oChartModel.getProperty("/sma150Series");
+			var sma200Series = oChartModel.getProperty("/sma200Series");
+			var sma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
 			var chartHeight;
 			var firstPane;
-			var secondPane;
+			var aPanes;
 			
 			bbwSeries.moveToPane(0);
 			candlestickSeries.moveToPane(1);
 			volumeSeries.moveToPane(1);
 			
-			// TODO: The moving average series need to be reorganized, too.
+			//Just for test
+			aPanes = chart.panes();
+			
+			if (ema21Series !== undefined && chart !== undefined) {
+				ema21Series.moveToPane(1);
+			}
+			
+			if (sma50Series !== undefined && chart !== undefined) {
+				sma50Series.moveToPane(1);
+			}
+			
+			if (sma150Series !== undefined && chart !== undefined) {
+				sma150Series.moveToPane(1);
+			}
+			
+			if (sma200Series !== undefined && chart !== undefined) {
+				sma200Series.moveToPane(1);
+			}
+			
+			if (sma30VolumeSeries !== undefined && chart !== undefined) {
+				sma30VolumeSeries.moveToPane(1);
+			}
 			
 			chartHeight = chart.options().height;
 			
 			firstPane = chart.panes()[0];
-			firstPane.setHeight(chartHeight * 0.15);
-			secondPane = chart.panes()[1];
-			secondPane.setHeight(chartHeight * 0.85);			
+			firstPane.setHeight(chartHeight * 0.15);		
 		},
 		
 		
