@@ -202,6 +202,8 @@ sap.ui.define([
 					{ color: 'yellow', lineWidth: 1, priceLineVisible: false });
 				ema21Series.setData(ema21Data);
 				chartModel.setProperty("/ema21Series", ema21Series);
+				
+				this.organizePanes(oCallingController, chartModel);
 			} else {
 				const ema21Series = chartModel.getProperty("/ema21Series");
 				
@@ -225,6 +227,8 @@ sap.ui.define([
 					{ color: 'blue', lineWidth: 1, priceLineVisible: false });
 				sma50Series.setData(sma50Data);
 				chartModel.setProperty("/sma50Series", sma50Series);
+				
+				this.organizePanes(oCallingController, chartModel);
 			} else {
 				const sma50Series = chartModel.getProperty("/sma50Series");
 				
@@ -248,6 +252,8 @@ sap.ui.define([
 					{ color: 'red', lineWidth: 1, priceLineVisible: false });
 				sma150Series.setData(sma150Data);
 				chartModel.setProperty("/sma150Series", sma150Series);
+				
+				this.organizePanes(oCallingController, chartModel);
 			} else {
 				const sma150Series = chartModel.getProperty("/sma150Series");
 				
@@ -271,6 +277,8 @@ sap.ui.define([
 					{ color: 'green', lineWidth: 1, priceLineVisible: false });
 				sma200Series.setData(sma200Data);
 				chartModel.setProperty("/sma200Series", sma200Series);
+				
+				this.organizePanes(oCallingController, chartModel);
 			} else {
 				const sma200Series = chartModel.getProperty("/sma200Series");
 				
@@ -295,6 +303,8 @@ sap.ui.define([
 				);
 				sma30VolumeSeries.setData(sma30VolumeData);
 				chartModel.setProperty("/sma30VolumeSeries", sma30VolumeSeries);
+				
+				this.organizePanes(oCallingController, chartModel);
 			} else {
 				const sma30VolumeSeries = chartModel.getProperty("/sma30VolumeSeries");
 				
@@ -344,47 +354,54 @@ sap.ui.define([
 			var sma150Series = oChartModel.getProperty("/sma150Series");
 			var sma200Series = oChartModel.getProperty("/sma200Series");
 			var sma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
-			var firstPane;
+			var indicatorPane;
+			var pricePaneIndex;
 			var chartHeight;
 			
-			bbwSeries.moveToPane(0);
-			candlestickSeries.moveToPane(1);
-			volumeSeries.moveToPane(1);
+			if (oCallingController.getView().byId("bbwButton").getPressed() === true) {	
+				bbwSeries.moveToPane(0);
+				candlestickSeries.moveToPane(1);
+				volumeSeries.moveToPane(1);
+				
+				chartHeight = chart.options().height;
+			
+				indicatorPane = chart.panes()[0];
+				indicatorPane.setHeight(chartHeight * 0.15);
+				
+				pricePaneIndex = 1;	
+			} else {
+				pricePaneIndex = 0;
+			}
 			
 			if (oCallingController.getView().byId("ema21Button").getPressed() === true) {				
 				if (ema21Series !== undefined && chart !== undefined) {
-					ema21Series.moveToPane(1);
+					ema21Series.moveToPane(pricePaneIndex);
 				}
 			}
 			
 			if (oCallingController.getView().byId("sma50Button").getPressed() === true) {	
 				if (sma50Series !== undefined && chart !== undefined) {
-					sma50Series.moveToPane(1);
+					sma50Series.moveToPane(pricePaneIndex);
 				}
 			}
 			
 			if (oCallingController.getView().byId("sma150Button").getPressed() === true) {	
 				if (sma150Series !== undefined && chart !== undefined) {
-					sma150Series.moveToPane(1);
+					sma150Series.moveToPane(pricePaneIndex);
 				}
 			}
 			
 			if (oCallingController.getView().byId("sma200Button").getPressed() === true) {	
 				if (sma200Series !== undefined && chart !== undefined) {
-					sma200Series.moveToPane(1);
+					sma200Series.moveToPane(pricePaneIndex);
 				}
 			}
 			
 			if (oCallingController.getView().byId("sma30VolumeButton").getPressed() === true) {	
 				if (sma30VolumeSeries !== undefined && chart !== undefined) {
-					sma30VolumeSeries.moveToPane(1);
+					sma30VolumeSeries.moveToPane(pricePaneIndex);
 				}
-			}
-			
-			chartHeight = chart.options().height;
-			
-			firstPane = chart.panes()[0];
-			firstPane.setHeight(chartHeight * 0.15);		
+			}	
 		},
 		
 		
