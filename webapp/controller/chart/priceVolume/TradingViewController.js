@@ -203,7 +203,7 @@ sap.ui.define([
 				ema21Series.setData(ema21Data);
 				chartModel.setProperty("/ema21Series", ema21Series);
 				
-				this.organizePanes(oCallingController, chartModel);
+				this.organizeMovingAverages(oCallingController, chartModel);
 			} else {
 				const ema21Series = chartModel.getProperty("/ema21Series");
 				
@@ -228,7 +228,7 @@ sap.ui.define([
 				sma50Series.setData(sma50Data);
 				chartModel.setProperty("/sma50Series", sma50Series);
 				
-				this.organizePanes(oCallingController, chartModel);
+				this.organizeMovingAverages(oCallingController, chartModel);
 			} else {
 				const sma50Series = chartModel.getProperty("/sma50Series");
 				
@@ -253,7 +253,7 @@ sap.ui.define([
 				sma150Series.setData(sma150Data);
 				chartModel.setProperty("/sma150Series", sma150Series);
 				
-				this.organizePanes(oCallingController, chartModel);
+				this.organizeMovingAverages(oCallingController, chartModel);
 			} else {
 				const sma150Series = chartModel.getProperty("/sma150Series");
 				
@@ -278,7 +278,7 @@ sap.ui.define([
 				sma200Series.setData(sma200Data);
 				chartModel.setProperty("/sma200Series", sma200Series);
 				
-				this.organizePanes(oCallingController, chartModel);
+				this.organizeMovingAverages(oCallingController, chartModel);
 			} else {
 				const sma200Series = chartModel.getProperty("/sma200Series");
 				
@@ -304,7 +304,7 @@ sap.ui.define([
 				sma30VolumeSeries.setData(sma30VolumeData);
 				chartModel.setProperty("/sma30VolumeSeries", sma30VolumeSeries);
 				
-				this.organizePanes(oCallingController, chartModel);
+				this.organizeMovingAverages(oCallingController, chartModel);
 			} else {
 				const sma30VolumeSeries = chartModel.getProperty("/sma30VolumeSeries");
 				
@@ -331,6 +331,7 @@ sap.ui.define([
 				chartModel.setProperty("/bbwSeries", bbwSeries);
 				
 				this.organizePanes(oCallingController, chartModel);
+				this.organizeMovingAverages(oCallingController, chartModel);
 			} else {
 				const bbwSeries = chartModel.getProperty("/bbwSeries");
 				
@@ -342,20 +343,14 @@ sap.ui.define([
 		
 		
 		/**
-		 * Organizes the panes in a manner that the indicator is at the top pane and price/volume are below.
+		 * Organizes the panes in a manner that the indicator is at the top pane and the price/volume pane is below.
 		 */
 		organizePanes : function (oCallingController, oChartModel) {
 			var chart = oChartModel.getProperty("/chart");
 			var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
 			var volumeSeries = oChartModel.getProperty("/volumeSeries");
 			var bbwSeries = oChartModel.getProperty("/bbwSeries");
-			var ema21Series = oChartModel.getProperty("/ema21Series");
-			var sma50Series = oChartModel.getProperty("/sma50Series");
-			var sma150Series = oChartModel.getProperty("/sma150Series");
-			var sma200Series = oChartModel.getProperty("/sma200Series");
-			var sma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
 			var indicatorPane;
-			var pricePaneIndex;
 			var chartHeight;
 			
 			if (oCallingController.getView().byId("bbwButton").getPressed() === true) {	
@@ -367,7 +362,23 @@ sap.ui.define([
 			
 				indicatorPane = chart.panes()[0];
 				indicatorPane.setHeight(chartHeight * 0.15);
-				
+			}
+		},
+		
+		
+		/**
+		 * Moves the moving averages to the target pane depending on the state of the indicator button.
+		 */
+		organizeMovingAverages : function (oCallingController, oChartModel) {
+			var chart = oChartModel.getProperty("/chart");
+			var ema21Series = oChartModel.getProperty("/ema21Series");
+			var sma50Series = oChartModel.getProperty("/sma50Series");
+			var sma150Series = oChartModel.getProperty("/sma150Series");
+			var sma200Series = oChartModel.getProperty("/sma200Series");
+			var sma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
+			var pricePaneIndex;
+			
+			if (oCallingController.getView().byId("bbwButton").getPressed() === true) {	
 				pricePaneIndex = 1;	
 			} else {
 				pricePaneIndex = 0;
@@ -401,7 +412,7 @@ sap.ui.define([
 				if (sma30VolumeSeries !== undefined && chart !== undefined) {
 					sma30VolumeSeries.moveToPane(pricePaneIndex);
 				}
-			}	
+			}
 		},
 		
 		
