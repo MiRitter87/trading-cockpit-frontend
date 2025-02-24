@@ -320,7 +320,7 @@ sap.ui.define([
 				bbwSeries.setData(bbwData);
 				chartModel.setProperty("/bbwSeries", bbwSeries);
 				
-				this.organizePanes(chartModel);
+				this.organizePanes(oCallingController, chartModel);
 			} else {
 				const bbwSeries = chartModel.getProperty("/bbwSeries");
 				
@@ -334,7 +334,7 @@ sap.ui.define([
 		/**
 		 * Organizes the panes in a manner that the indicator is at the top pane and price/volume are below.
 		 */
-		organizePanes : function (oChartModel) {
+		organizePanes : function (oCallingController, oChartModel) {
 			var chart = oChartModel.getProperty("/chart");
 			var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
 			var volumeSeries = oChartModel.getProperty("/volumeSeries");
@@ -344,35 +344,41 @@ sap.ui.define([
 			var sma150Series = oChartModel.getProperty("/sma150Series");
 			var sma200Series = oChartModel.getProperty("/sma200Series");
 			var sma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
-			var chartHeight;
 			var firstPane;
-			var aPanes;
+			var chartHeight;
 			
 			bbwSeries.moveToPane(0);
 			candlestickSeries.moveToPane(1);
 			volumeSeries.moveToPane(1);
 			
-			//Just for test
-			aPanes = chart.panes();
-			
-			if (ema21Series !== undefined && chart !== undefined) {
-				ema21Series.moveToPane(1);
+			if (oCallingController.getView().byId("ema21Button").getPressed() === true) {				
+				if (ema21Series !== undefined && chart !== undefined) {
+					ema21Series.moveToPane(1);
+				}
 			}
 			
-			if (sma50Series !== undefined && chart !== undefined) {
-				sma50Series.moveToPane(1);
+			if (oCallingController.getView().byId("sma50Button").getPressed() === true) {	
+				if (sma50Series !== undefined && chart !== undefined) {
+					sma50Series.moveToPane(1);
+				}
 			}
 			
-			if (sma150Series !== undefined && chart !== undefined) {
-				sma150Series.moveToPane(1);
+			if (oCallingController.getView().byId("sma150Button").getPressed() === true) {	
+				if (sma150Series !== undefined && chart !== undefined) {
+					sma150Series.moveToPane(1);
+				}
 			}
 			
-			if (sma200Series !== undefined && chart !== undefined) {
-				sma200Series.moveToPane(1);
+			if (oCallingController.getView().byId("sma200Button").getPressed() === true) {	
+				if (sma200Series !== undefined && chart !== undefined) {
+					sma200Series.moveToPane(1);
+				}
 			}
 			
-			if (sma30VolumeSeries !== undefined && chart !== undefined) {
-				sma30VolumeSeries.moveToPane(1);
+			if (oCallingController.getView().byId("sma30VolumeButton").getPressed() === true) {	
+				if (sma30VolumeSeries !== undefined && chart !== undefined) {
+					sma30VolumeSeries.moveToPane(1);
+				}
 			}
 			
 			chartHeight = chart.options().height;
