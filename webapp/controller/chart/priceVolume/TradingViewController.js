@@ -174,7 +174,7 @@ sap.ui.define([
 		/**
 		 * Applies the moving averages to the chart according to the state of the ToggleButtons.
 		 */
-		applyMovingAverages : function(oCallingController) {
+		applyMovingAverages : function (oCallingController) {
 			var oEma21Button = oCallingController.getView().byId("ema21Button");
 			var oSma50Button = oCallingController.getView().byId("sma50Button");
 			var oSma150Button = oCallingController.getView().byId("sma150Button");
@@ -186,6 +186,16 @@ sap.ui.define([
 			this.displaySma150(oCallingController, oSma150Button.getPressed());
 			this.displaySma200(oCallingController, oSma200Button.getPressed());
 			this.displaySma30Volume(oCallingController, oSma30VolumeButton.getPressed());
+		},
+		
+		
+		/**
+		 * Applies the indicators to the chart according to the state of the ToggleButtons.
+		 */
+		applyIndicators : function (oCallingController) {
+			var bbwButton = oCallingController.getView().byId("bbwButton");
+			
+			this.displayBollingerBandWidth(oCallingController, bbwButton.getPressed());
 		},
 		
 		

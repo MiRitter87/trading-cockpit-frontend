@@ -263,6 +263,7 @@ sap.ui.define([
 			TradingViewController.openChart(oCallingController);
 			oCallingController.setToolbarTitle();
 			oChartToolbar.setVisible(true);
+			TradingViewController.applyIndicators(oCallingController);
 			TradingViewController.applyMovingAverages(oCallingController);
 			
 			if (sSelectedInstrumentId !== "") {			
