@@ -469,6 +469,7 @@ sap.ui.define([
 			var oSma150Button = this.getView().byId("sma150Button");
 			var oSma200Button = this.getView().byId("sma200Button");
 			var oSma30VolumeButton = this.getView().byId("sma30VolumeButton");
+			var oBBWButton = this.getView().byId("bbwButton");
 			var oChartToolbar = this.getView().byId("chartToolbar");
 
 			oInstrumentComboBox.setSelectedKey("");
@@ -478,6 +479,7 @@ sap.ui.define([
 			oSma150Button.setPressed(false);
 			oSma200Button.setPressed(false);
 			oSma30VolumeButton.setPressed(false);
+			oBBWButton.setPressed(false);
 			
 			oChartToolbar.setVisible(false);
 			
