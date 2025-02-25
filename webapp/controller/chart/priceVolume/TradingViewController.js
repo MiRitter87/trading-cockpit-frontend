@@ -322,12 +322,18 @@ sap.ui.define([
 			var chartModel = oCallingController.getView().getModel("chartModel");
 			var chart = chartModel.getProperty("/chart");
 			var bbwData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.BBW);
+			var bbwThreshold = this.getBBWThreshold(oCallingController);
 			
 			if (bVisible === true) {
 				const bbwSeries = chart.addSeries(LightweightCharts.LineSeries, 
-					{ color: 'black', lineWidth: 1, priceLineVisible: false }
+					{ color: 'black', lineWidth: 1, priceLineVisible: false, lastValueVisible: true }
 				);
 				bbwSeries.setData(bbwData);
+				
+				//Draw horizontal trigger line
+				const priceLine = { price: bbwThreshold, color: 'black', lineWidth: 1, lineStyle: 0, axisLabelVisible: false };
+				bbwSeries.createPriceLine(priceLine);
+				
 				chartModel.setProperty("/bbwSeries", bbwSeries);
 				
 				this.organizePanes(oCallingController, chartModel);
@@ -491,6 +497,19 @@ sap.ui.define([
     		}
     		
     		return aIndicatorSeries;
+		},
+		
+		
+		/**
+		 * Gets the threshold value of the Bollinger BandWidth.
+		 */
+		getBBWThreshold : function (oCallingController) {
+			var oQuotationsModel = oCallingController.getView().getModel("chartData");
+			var oQuotations = oQuotationsModel.oData.quotation;
+			var oQuotation = oQuotations[0];
+			
+			//The threshold is stored in the newest quotation.
+			return oQuotation.indicator.bbw10Threshold25Percent;
 		},
 		
 		
