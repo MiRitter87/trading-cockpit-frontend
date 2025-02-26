@@ -136,6 +136,18 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the button press event of the Slow Stochastic ToggleButton.
+		 */
+		onSlowStochasticPressed : function(oEvent) {
+			if (oEvent.getSource().getPressed()) {
+				TradingViewController.displaySlowStochastic(this, true);
+			} else {
+				TradingViewController.displaySlowStochastic(this, false);
+			}
+		},
+		
+		
+		/**
 		 * Handles clicks in the TradingView chart.
 		 */
 		onChartClicked : function (param) {
@@ -470,6 +482,7 @@ sap.ui.define([
 			var oSma200Button = this.getView().byId("sma200Button");
 			var oSma30VolumeButton = this.getView().byId("sma30VolumeButton");
 			var oBBWButton = this.getView().byId("bbwButton");
+			var oSlowStoButton = this.getView().byId("slowStochasticButton");
 			var oChartToolbar = this.getView().byId("chartToolbar");
 
 			oInstrumentComboBox.setSelectedKey("");
@@ -480,6 +493,7 @@ sap.ui.define([
 			oSma200Button.setPressed(false);
 			oSma30VolumeButton.setPressed(false);
 			oBBWButton.setPressed(false);
+			oSlowStoButton.setPressed(false);
 			
 			oChartToolbar.setVisible(false);
 			

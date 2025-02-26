@@ -359,6 +359,14 @@ sap.ui.define([
 		
 		
 		/**
+		 * Displays the Slow Stochastic in a separate pane of the chart.
+		 */
+		displaySlowStochastic : function (oCallingController, bVisible) {
+			
+		},
+		
+		
+		/**
 		 * Organizes the panes in a manner that the indicator is at the top pane and the price/volume pane is below.
 		 */
 		organizePanes : function (oCallingController, oChartModel) {
