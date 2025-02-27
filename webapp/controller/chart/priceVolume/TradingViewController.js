@@ -405,8 +405,9 @@ sap.ui.define([
 				candlestickSeries.moveToPane(1);
 				volumeSeries.moveToPane(1);
 				
+				bbwSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
+				
 				chartHeight = chart.options().height;
-			
 				indicatorPane = chart.panes()[0];
 				indicatorPane.setHeight(chartHeight * 0.15);
 			}
@@ -416,11 +417,14 @@ sap.ui.define([
 				candlestickSeries.moveToPane(1);
 				volumeSeries.moveToPane(1);
 				
+				slowStochasticSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
+				
 				chartHeight = chart.options().height;
-			
 				indicatorPane = chart.panes()[0];
 				indicatorPane.setHeight(chartHeight * 0.15);
 			}
+			
+			candlestickSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
 		},
 		
 		
