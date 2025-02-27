@@ -127,6 +127,15 @@ sap.ui.define([
 		 * Handles the button press event of the Bollinger BandWidth ToggleButton.
 		 */
 		onBollingerBandWidthPressed : function(oEvent) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oSlowStochasticButton = this.getView().byId("slowStochasticButton");
+			
+			if (oSlowStochasticButton.getPressed() && oEvent.getSource().getPressed()) {
+				MessageToast.show(oResourceBundle.getText("chartPriceVolumeTV.multipleIndicatorError"));
+				oEvent.getSource().setPressed(false);
+				return;				
+			}
+			
 			if (oEvent.getSource().getPressed()) {
 				TradingViewController.displayBollingerBandWidth(this, true);
 			} else {
@@ -139,6 +148,15 @@ sap.ui.define([
 		 * Handles the button press event of the Slow Stochastic ToggleButton.
 		 */
 		onSlowStochasticPressed : function(oEvent) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oBBWButton = this.getView().byId("bbwButton");
+			
+			if (oBBWButton.getPressed() && oEvent.getSource().getPressed()) {
+				MessageToast.show(oResourceBundle.getText("chartPriceVolumeTV.multipleIndicatorError"));
+				oEvent.getSource().setPressed(false);
+				return;				
+			}
+			
 			if (oEvent.getSource().getPressed()) {
 				TradingViewController.displaySlowStochastic(this, true);
 			} else {
