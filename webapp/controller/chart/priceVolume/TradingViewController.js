@@ -194,8 +194,10 @@ sap.ui.define([
 		 */
 		applyIndicators : function (oCallingController) {
 			var bbwButton = oCallingController.getView().byId("bbwButton");
+			var slowStochasticButton = oCallingController.getView().byId("slowStochasticButton");
 			
 			this.displayBollingerBandWidth(oCallingController, bbwButton.getPressed());
+			this.displaySlowStochastic(oCallingController, slowStochasticButton.getPressed());
 		},
 		
 		
@@ -362,7 +364,27 @@ sap.ui.define([
 		 * Displays the Slow Stochastic in a separate pane of the chart.
 		 */
 		displaySlowStochastic : function (oCallingController, bVisible) {
+			var chartModel = oCallingController.getView().getModel("chartModel");
+			var chart = chartModel.getProperty("/chart");
+			var slowStochasticData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.SLOW_STOCHASTIC);
 			
+			if (bVisible === true) {
+				const slowStochasticSeries = chart.addSeries(LightweightCharts.LineSeries, 
+					{ color: 'black', lineWidth: 1, priceLineVisible: false, lastValueVisible: true }
+				);
+				slowStochasticSeries.setData(slowStochasticData);
+				
+				chartModel.setProperty("/slowStochasticSeries", slowStochasticSeries);
+				
+				this.organizePanes(oCallingController, chartModel);
+				this.organizeMovingAverages(oCallingController, chartModel);
+			} else {
+				const slowStochasticSeries = chartModel.getProperty("/slowStochasticSeries");
+				
+				if (slowStochasticSeries !== undefined && chart !== undefined) {
+					chart.removeSeries(slowStochasticSeries);
+				}
+			}
 		},
 		
 		
@@ -374,11 +396,23 @@ sap.ui.define([
 			var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
 			var volumeSeries = oChartModel.getProperty("/volumeSeries");
 			var bbwSeries = oChartModel.getProperty("/bbwSeries");
+			var slowStochasticSeries = oChartModel.getProperty("/slowStochasticSeries");
 			var indicatorPane;
 			var chartHeight;
 			
 			if (oCallingController.getView().byId("bbwButton").getPressed() === true) {	
 				bbwSeries.moveToPane(0);
+				candlestickSeries.moveToPane(1);
+				volumeSeries.moveToPane(1);
+				
+				chartHeight = chart.options().height;
+			
+				indicatorPane = chart.panes()[0];
+				indicatorPane.setHeight(chartHeight * 0.15);
+			}
+			
+			if (oCallingController.getView().byId("slowStochasticButton").getPressed() === true) {	
+				slowStochasticSeries.moveToPane(0);
 				candlestickSeries.moveToPane(1);
 				volumeSeries.moveToPane(1);
 				
@@ -505,6 +539,10 @@ sap.ui.define([
 				
 				if (sRequestedIndicator === Constants.CHART_INDICATOR.BBW && oQuotation.indicator.bollingerBandWidth10Days !== 0) {
 					oIndicatorDataset.value = oQuotation.indicator.bollingerBandWidth10Days;
+				}
+				
+				if (sRequestedIndicator === Constants.CHART_INDICATOR.SLOW_STOCHASTIC && oQuotation.indicator.slowStochastic14Days !== 0) {
+					oIndicatorDataset.value = oQuotation.indicator.slowStochastic14Days;
 				}
     			    			
     			oDate = new Date(parseInt(oQuotation.date));
