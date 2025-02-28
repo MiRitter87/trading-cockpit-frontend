@@ -440,7 +440,9 @@ sap.ui.define([
 			var sma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
 			var pricePaneIndex;
 			
-			if (oCallingController.getView().byId("bbwButton").getPressed() === true) {	
+			if (oCallingController.getView().byId("bbwButton").getPressed() === true || 
+				oCallingController.getView().byId("slowStochasticButton").getPressed() === true) {	
+					
 				pricePaneIndex = 1;	
 			} else {
 				pricePaneIndex = 0;
