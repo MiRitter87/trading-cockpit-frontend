@@ -374,6 +374,14 @@ sap.ui.define([
 				);
 				slowStochasticSeries.setData(slowStochasticData);
 				
+				//Draw horizontal trigger lines
+				const priceLineTop = { price: 85, color: 'black', lineWidth: 1, lineStyle: 0, axisLabelVisible: false };
+				slowStochasticSeries.createPriceLine(priceLineTop);
+				const priceLineMid = { price: 50, color: 'black', lineWidth: 1, lineStyle: 2, axisLabelVisible: false };
+				slowStochasticSeries.createPriceLine(priceLineMid);
+				const priceLineBot = { price: 15, color: 'black', lineWidth: 1, lineStyle: 0, axisLabelVisible: false };
+				slowStochasticSeries.createPriceLine(priceLineBot);
+				
 				chartModel.setProperty("/slowStochasticSeries", slowStochasticSeries);
 				
 				this.organizePanes(oCallingController, chartModel);
