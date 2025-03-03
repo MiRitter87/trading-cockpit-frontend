@@ -169,7 +169,11 @@ sap.ui.define([
 		 * Handles the button press event of the RS line ToggleButton.
 		 */
 		onRsLinePressed : function(oEvent) {
-			
+			if (oEvent.getSource().getPressed()) {
+				TradingViewController.displayRsLine(this, true);
+			} else {
+				TradingViewController.displayRsLine(this, false);
+			}
 		},
 		
 		

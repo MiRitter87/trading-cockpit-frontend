@@ -195,9 +195,11 @@ sap.ui.define([
 		applyIndicators : function (oCallingController) {
 			var bbwButton = oCallingController.getView().byId("bbwButton");
 			var slowStochasticButton = oCallingController.getView().byId("slowStochasticButton");
+			var rsLineButton = oCallingController.getView().byId("rsLineButton");
 			
 			this.displayBollingerBandWidth(oCallingController, bbwButton.getPressed());
 			this.displaySlowStochastic(oCallingController, slowStochasticButton.getPressed());
+			this.displayRsLine(oCallingController, rsLineButton.getPressed());
 		},
 		
 		
@@ -397,6 +399,35 @@ sap.ui.define([
 		
 		
 		/**
+		 * Displays the RS line in a separate pane of the chart.
+		 */
+		displayRsLine : function (oCallingController, bVisible) {
+			var chartModel = oCallingController.getView().getModel("chartModel");
+			var chart = chartModel.getProperty("/chart");
+			var rsLineData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.RS_LINE);
+			
+			if (bVisible === true) {
+				const rsLineSeries = chart.addSeries(LightweightCharts.LineSeries, 
+					{ color: 'black', lineWidth: 1, priceLineVisible: false, lastValueVisible: true }
+				);
+				rsLineSeries.setData(rsLineData);
+				
+				
+				chartModel.setProperty("/rsLineSeries", rsLineSeries);
+				
+				this.organizePanes(oCallingController, chartModel);
+				this.organizeMovingAverages(oCallingController, chartModel);
+			} else {
+				const rsLineSeries = chartModel.getProperty("/rsLineSeries");
+				
+				if (rsLineSeries !== undefined && chart !== undefined) {
+					chart.removeSeries(rsLineSeries);
+				}
+			}
+		},
+		
+		
+		/**
 		 * Organizes the panes in a manner that the indicator is at the top pane and the price/volume pane is below.
 		 */
 		organizePanes : function (oCallingController, oChartModel) {
@@ -405,6 +436,7 @@ sap.ui.define([
 			var volumeSeries = oChartModel.getProperty("/volumeSeries");
 			var bbwSeries = oChartModel.getProperty("/bbwSeries");
 			var slowStochasticSeries = oChartModel.getProperty("/slowStochasticSeries");
+			var rsLineSeries = oChartModel.getProperty("/rsLineSeries");
 			var indicatorPane;
 			var chartHeight;
 			
@@ -414,10 +446,6 @@ sap.ui.define([
 				volumeSeries.moveToPane(1);
 				
 				bbwSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
-				
-				chartHeight = chart.options().height;
-				indicatorPane = chart.panes()[0];
-				indicatorPane.setHeight(chartHeight * 0.15);
 			}
 			
 			if (oCallingController.getView().byId("slowStochasticButton").getPressed() === true) {	
@@ -426,11 +454,19 @@ sap.ui.define([
 				volumeSeries.moveToPane(1);
 				
 				slowStochasticSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
-				
-				chartHeight = chart.options().height;
-				indicatorPane = chart.panes()[0];
-				indicatorPane.setHeight(chartHeight * 0.15);
 			}
+			
+			if (oCallingController.getView().byId("rsLineButton").getPressed() === true) {	
+				rsLineSeries.moveToPane(0);
+				candlestickSeries.moveToPane(1);
+				volumeSeries.moveToPane(1);
+				
+				rsLineSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
+			}
+			
+			chartHeight = chart.options().height;
+			indicatorPane = chart.panes()[0];
+			indicatorPane.setHeight(chartHeight * 0.15);
 			
 			candlestickSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
 		},
@@ -449,7 +485,8 @@ sap.ui.define([
 			var pricePaneIndex;
 			
 			if (oCallingController.getView().byId("bbwButton").getPressed() === true || 
-				oCallingController.getView().byId("slowStochasticButton").getPressed() === true) {	
+				oCallingController.getView().byId("slowStochasticButton").getPressed() === true ||
+				oCallingController.getView().byId("rsLineButton").getPressed() === true) {	
 					
 				pricePaneIndex = 1;	
 			} else {
@@ -557,6 +594,10 @@ sap.ui.define([
 				
 				if (sRequestedIndicator === Constants.CHART_INDICATOR.SLOW_STOCHASTIC && oQuotation.indicator.slowStochastic14Days !== 0) {
 					oIndicatorDataset.value = oQuotation.indicator.slowStochastic14Days;
+				}
+				
+				if (sRequestedIndicator === Constants.CHART_INDICATOR.RS_LINE && oQuotation.relativeStrengthData.rsLinePrice !== 0) {
+					oIndicatorDataset.value = oQuotation.relativeStrengthData.rsLinePrice;
 				}
     			    			
     			oDate = new Date(parseInt(oQuotation.date));
