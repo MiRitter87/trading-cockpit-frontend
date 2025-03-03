@@ -166,6 +166,14 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles the button press event of the RS line ToggleButton.
+		 */
+		onRsLinePressed : function(oEvent) {
+			
+		},
+		
+		
+		/**
 		 * Handles clicks in the TradingView chart.
 		 */
 		onChartClicked : function (param) {
