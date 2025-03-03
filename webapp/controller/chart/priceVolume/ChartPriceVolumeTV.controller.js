@@ -128,9 +128,9 @@ sap.ui.define([
 		 */
 		onBollingerBandWidthPressed : function(oEvent) {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var oSlowStochasticButton = this.getView().byId("slowStochasticButton");
+			var bMultipleButtonsPressed = this.areMultipleIndicatorButtonsPressed();
 			
-			if (oSlowStochasticButton.getPressed() && oEvent.getSource().getPressed()) {
+			if (bMultipleButtonsPressed) {
 				MessageToast.show(oResourceBundle.getText("chartPriceVolumeTV.multipleIndicatorError"));
 				oEvent.getSource().setPressed(false);
 				return;				
@@ -149,9 +149,9 @@ sap.ui.define([
 		 */
 		onSlowStochasticPressed : function(oEvent) {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var oBBWButton = this.getView().byId("bbwButton");
+			var bMultipleButtonsPressed = this.areMultipleIndicatorButtonsPressed();
 			
-			if (oBBWButton.getPressed() && oEvent.getSource().getPressed()) {
+			if (bMultipleButtonsPressed) {
 				MessageToast.show(oResourceBundle.getText("chartPriceVolumeTV.multipleIndicatorError"));
 				oEvent.getSource().setPressed(false);
 				return;				
@@ -169,6 +169,15 @@ sap.ui.define([
 		 * Handles the button press event of the RS line ToggleButton.
 		 */
 		onRsLinePressed : function(oEvent) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var bMultipleButtonsPressed = this.areMultipleIndicatorButtonsPressed();
+			
+			if (bMultipleButtonsPressed) {
+				MessageToast.show(oResourceBundle.getText("chartPriceVolumeTV.multipleIndicatorError"));
+				oEvent.getSource().setPressed(false);
+				return;				
+			}
+			
 			if (oEvent.getSource().getPressed()) {
 				TradingViewController.displayRsLine(this, true);
 			} else {
@@ -513,6 +522,7 @@ sap.ui.define([
 			var oSma30VolumeButton = this.getView().byId("sma30VolumeButton");
 			var oBBWButton = this.getView().byId("bbwButton");
 			var oSlowStoButton = this.getView().byId("slowStochasticButton");
+			var oRsLineButton = this.getView().byId("rsLineButton");
 			var oChartToolbar = this.getView().byId("chartToolbar");
 
 			oInstrumentComboBox.setSelectedKey("");
@@ -524,6 +534,7 @@ sap.ui.define([
 			oSma30VolumeButton.setPressed(false);
 			oBBWButton.setPressed(false);
 			oSlowStoButton.setPressed(false);
+			oRsLineButton.setPressed(false);
 			
 			oChartToolbar.setVisible(false);
 			
@@ -571,6 +582,35 @@ sap.ui.define([
 			if (oQuotations.length > 0) {
 				oQuotation = oQuotations[0];
 				oToolbarTitle.setText(oQuotation.instrument.name);
+			}
+		},
+		
+		
+		/**
+		 * Checks if more than one indicator button is pressed.
+		 */
+		areMultipleIndicatorButtonsPressed : function () {
+			var oBBWButton = this.getView().byId("bbwButton");
+			var oSlowStochasticButton = this.getView().byId("slowStochasticButton");
+			var oRsLineButton = this.getView().byId("rsLineButton");
+			var iNumberButtonsPressed = 0;
+			
+			if (oSlowStochasticButton.getPressed()) {
+				iNumberButtonsPressed++;	
+			}
+			
+			if (oBBWButton.getPressed()) {
+				iNumberButtonsPressed++;
+			}
+			
+			if (oRsLineButton.getPressed()) {
+				iNumberButtonsPressed++;
+			}
+			
+			if (iNumberButtonsPressed > 1) {
+				return true;
+			} else {
+				return false;
 			}
 		}
 	});
