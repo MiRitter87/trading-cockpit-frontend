@@ -31,7 +31,8 @@ sap.ui.define([
 					priceFormat: {
 	        			type: 'volume',
 	    			},
-	    			priceScaleId: 'left'
+	    			priceScaleId: 'left',
+	    			priceLineVisible: false
 				});	
 				volumeSeries.setData(this.getVolumeSeries(oCallingController));	
 				
