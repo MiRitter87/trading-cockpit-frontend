@@ -297,7 +297,6 @@ sap.ui.define([
 		 */
 		queryChartDataCallback : function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
-			var oChartToolbar = oCallingController.getView().byId("chartToolbar");
 			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
@@ -312,8 +311,7 @@ sap.ui.define([
 			oCallingController.getView().setModel(oModel, "chartData");
 			
 			TradingViewController.openChart(oCallingController);
-			oCallingController.setToolbarTitle();
-			oChartToolbar.setVisible(true);
+			oCallingController.updateToolbarForChartDisplay();
 			TradingViewController.applyIndicators(oCallingController);
 			TradingViewController.applyMovingAverages(oCallingController);
 			
@@ -571,17 +569,31 @@ sap.ui.define([
 		
 		
 		/**
-		 * Sets the title text of the chart toolbar.
+		 * Updates the toolbar for chart display. 
 		 */
-		setToolbarTitle : function () {
+		updateToolbarForChartDisplay : function () {
+			var oChartToolbar = this.getView().byId("chartToolbar");
 			var oToolbarTitle = this.getView().byId("toolbarTitle");
+			var oRsLineButton = this.getView().byId("rsLineButton");
 			var oQuotationsModel = this.getView().getModel("chartData");
 			var oQuotations = oQuotationsModel.oData.quotation;
 			var oQuotation;
 
+			// Set title
 			if (oQuotations.length > 0) {
 				oQuotation = oQuotations[0];
 				oToolbarTitle.setText(oQuotation.instrument.name);
+			} else {
+				return;
+			}
+			
+			oChartToolbar.setVisible(true);
+			
+			// Disable RS-Line button for non-stocks.
+			if (oQuotation.instrument.type === Constants.INSTRUMENT_TYPE.STOCK) {
+				oRsLineButton.setEnabled(true);
+			} else {
+				oRsLineButton.setEnabled(false);
 			}
 		},
 		

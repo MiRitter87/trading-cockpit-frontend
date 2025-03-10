@@ -595,6 +595,11 @@ sap.ui.define([
 					continue;
 				}
 				
+				if (oQuotation.relativeStrengthData === null) {
+					// For example on holidays when the divisor instrument is not traded. No RS-Data available then.
+					continue;
+				}
+				
 				if (sRequestedIndicator === Constants.CHART_INDICATOR.BBW && oQuotation.indicator.bollingerBandWidth10Days !== 0) {
 					oIndicatorDataset.value = oQuotation.indicator.bollingerBandWidth10Days;
 				}
