@@ -336,10 +336,12 @@ sap.ui.define([
 		displayBollingerBandWidth : function (oCallingController, bVisible) {
 			var chartModel = oCallingController.getView().getModel("chartModel");
 			var chart = chartModel.getProperty("/chart");
-			var bbwData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.BBW);
+			var bbwData;
 			var bbwThreshold = this.getBBWThreshold(oCallingController);
 			
 			if (bVisible === true) {
+				bbwData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.BBW);
+				
 				const bbwSeries = chart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, lastValueVisible: true }
 				);
@@ -369,9 +371,11 @@ sap.ui.define([
 		displaySlowStochastic : function (oCallingController, bVisible) {
 			var chartModel = oCallingController.getView().getModel("chartModel");
 			var chart = chartModel.getProperty("/chart");
-			var slowStochasticData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.SLOW_STOCHASTIC);
+			var slowStochasticData;
 			
 			if (bVisible === true) {
+				slowStochasticData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.SLOW_STOCHASTIC);
+				
 				const slowStochasticSeries = chart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, lastValueVisible: true }
 				);
@@ -405,9 +409,11 @@ sap.ui.define([
 		displayRsLine : function (oCallingController, bVisible) {
 			var chartModel = oCallingController.getView().getModel("chartModel");
 			var chart = chartModel.getProperty("/chart");
-			var rsLineData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.RS_LINE);
+			var rsLineData;
 			
 			if (bVisible === true) {
+				rsLineData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.RS_LINE);
+				
 				const rsLineSeries = chart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, lastValueVisible: true }
 				);
