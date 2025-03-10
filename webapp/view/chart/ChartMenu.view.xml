@@ -83,8 +83,15 @@
 						</TileContent>
 					</GenericTile>
 					
-					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-						header="{i18n>navigation.menu.chart.healthCheck}" press="onHealthCheckPressed">
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout"	header="{i18n>navigation.menu.chart.healthCheck}" 
+						subheader="{i18n>navigation.menu.chart.healthCheck.jFreeChart}" press="onHealthCheckPressed">
+						<TileContent>
+							<ImageContent src="sap-icon://business-objects-experience" />
+						</TileContent>
+					</GenericTile>
+					
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>navigation.menu.chart.healthCheck}" 
+						subheader="{i18n>navigation.menu.chart.healthCheck.tradingView}" press="onHealthCheckTVPressed">
 						<TileContent>
 							<ImageContent src="sap-icon://business-objects-experience" />
 						</TileContent>

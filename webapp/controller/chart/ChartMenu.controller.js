@@ -103,6 +103,15 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles click at the Health Check (TradingView) tile.
+		 */
+		onHealthCheckTVPressed : function () {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("chartHealthCheckTVRoute");
+		},
+		
+		
+		/**
 		 * Handles click at the Aggregate Indicator tile.
 		 */
 		onAggregateIndicatorPressed : function () {
