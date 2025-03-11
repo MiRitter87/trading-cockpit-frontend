@@ -8,7 +8,22 @@
 	
 	<Page title="{i18n>chartHealthCheckTV.header}">
 		<content>
+			<VBox>
+				<FlexBox alignItems="Center" justifyContent="Start">
+					<Label text="{i18n>chartHealthCheckTV.instrument}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" required="true"/>
+					<ComboBox id="instrumentComboBox" items="{path: 'quotations>/quotation/', sorter: {path: 'instrument/id'}}">
+						<core:Item key="{quotations>instrument/id}" text="{quotations>instrument/symbol} - {quotations>instrument/name}"/>
+					</ComboBox>
+					<Label text="{i18n>healthCheckProfile}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" required="true"/>
+					<ComboBox id="healthCheckProfileComboBox"/>
+					<Button icon="sap-icon://hint" type="Transparent" tooltip="{i18n>i18n>healthCheckProfile.tooltip}" 
+									press=".onProfileInformationPressed"/>
+					<Label text="{i18n>chartHealthCheckTV.lookbackPeriod}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" required="true"/>
+					<Input id="lookbackPeriodInput" value="15" type="Number" description="{i18n>chartHealthCheckTV.lookbackPeriod.description}"/>
+				</FlexBox>
 
+				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
+			</VBox>
 		</content>
 	</Page>
 </mvc:View>
