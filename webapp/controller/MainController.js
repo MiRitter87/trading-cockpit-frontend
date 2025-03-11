@@ -70,6 +70,33 @@ sap.ui.define([
 		
 		
 		/**
+		 * Initializes the ComboBox of the health check profile.
+		 */
+		initializeHealthCheckProfileComboBox: function (oComboBox, oResourceBundle) {
+			this.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.ALL, "healthCheckProfile.all");
+				
+			this.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS, "healthCheckProfile.confirmations");
+				
+			this.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS, "healthCheckProfile.weakness");
+				
+			this.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH, "healthCheckProfile.strength");
+				
+			this.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.ALL_WITHOUT_COUNTING, "healthCheckProfile.allWithoutCounting")
+				
+			this.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING, "healthCheckProfile.confirmationsWithoutCounting");
+				
+			this.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING, "healthCheckProfile.weaknessWithoutCounting");
+		},
+		
+		
+		/**
 		 * Adds an item to a ComboBox.
 		 */
 		addItemToComboBox : function(oComboBox, oResourceBundle, sItemKey, sTextKey) {

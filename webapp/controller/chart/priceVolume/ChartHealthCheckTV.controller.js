@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"../../MainController",
 	"sap/m/MessageBox"
-], function (Controller, MessageBox) {
+], function (Controller, MainController, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartHealthCheckTV", {
@@ -9,7 +10,7 @@ sap.ui.define([
 		 * Initializes the controller.
 		 */
 		onInit : function () {
-
+			this.initializeHealthCheckProfileComboBox();
 		},
 		
 		
@@ -25,5 +26,16 @@ sap.ui.define([
 			mOptions.title = sTitle;
 			MessageBox.information(sDescription, mOptions);
 		},
+		
+		
+		/**
+		 * Initializes the ComboBox of the health check profile.
+		 */
+		initializeHealthCheckProfileComboBox: function () {
+			var oComboBox = this.getView().byId("healthCheckProfileComboBox");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			MainController.initializeHealthCheckProfileComboBox(oComboBox, oResourceBundle);
+		}
 	});
 });
