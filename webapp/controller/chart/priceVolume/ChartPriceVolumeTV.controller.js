@@ -422,7 +422,7 @@ sap.ui.define([
 		
 		
 		/**
-		 * Queries the quotation WebService for quotations of an Instrument with the given ID.
+		 * Queries the chart data WebService for price/volume data of an Instrument with the given ID.
 		 */
 		queryChartData : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
 			var sServerAddress = MainController.getServerAddress();
