@@ -1,12 +1,13 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../../MainController",
+	"./TradingViewController",
 	"../../scan/ScanController",
 	"../../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, ScanController, Constants, JSONModel, MessageToast, MessageBox) {
+], function (Controller, MainController, TradingViewController, ScanController, Constants, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartHealthCheckTV", {
@@ -27,6 +28,8 @@ sap.ui.define([
 		_onRouteMatched: function () {
 			//Query only instruments that have quotations referenced. Otherwise no chart could be created.
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, false, Constants.SCAN_TEMPLATE.ALL);
+			
+			this.resetUIElements();
     	},
 		
 		
@@ -64,6 +67,14 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles clicks in the TradingView chart.
+		 */
+		onChartClicked : function () {
+			// No function implemented yet in the context of the health check view.
+		},
+		
+		
+		/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
 		queryQuotationsCallback : function(oReturnData, oCallingController) {
@@ -97,6 +108,8 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "chartData");
+			
+			TradingViewController.openChart(oCallingController);
 		},
 		
 		
@@ -131,6 +144,23 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			MainController.initializeHealthCheckProfileComboBox(oComboBox, oResourceBundle);
+		},
+		
+		
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements : function () {
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oProfileComboBox = this.getView().byId("healthCheckProfileComboBox");
+			var oLookbackPeriodInput = this.getView().byId("lookbackPeriodInput");
+
+			oInstrumentComboBox.setSelectedKey("");
+			oProfileComboBox.setSelectedKey("");
+			oLookbackPeriodInput.setValue("15");
+			
+			//Remove previously created chart.
+			document.getElementById("chartContainer").innerHTML = "";
 		}
 	});
 });
