@@ -59,7 +59,7 @@ sap.ui.define([
 		 */
 		getCandlestickSeries : function (oCallingController) {
 			var oQuotationsModel = oCallingController.getView().getModel("chartData");
-			var oQuotations = oQuotationsModel.oData.quotation;
+			var oQuotations = oQuotationsModel.oData.quotations.quotation;
 			var aCandlestickSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
 			
@@ -91,7 +91,7 @@ sap.ui.define([
 		 */
 		getVolumeSeries : function (oCallingController) {
 			var oQuotationsModel = oCallingController.getView().getModel("chartData");
-			var oQuotations = oQuotationsModel.oData.quotation;
+			var oQuotations = oQuotationsModel.oData.quotations.quotation;
 			var aVolumeSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
 			
@@ -537,7 +537,7 @@ sap.ui.define([
 		 */
 		getMovingAverageData : function (oCallingController, sRequestedMA) {
 			var oQuotationsModel = oCallingController.getView().getModel("chartData");
-			var oQuotations = oQuotationsModel.oData.quotation;
+			var oQuotations = oQuotationsModel.oData.quotations.quotation;
 			var aMovingAverageSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
 			
@@ -580,7 +580,7 @@ sap.ui.define([
 		 */
 		getIndicatorData : function (oCallingController, sRequestedIndicator) {
 			var oQuotationsModel = oCallingController.getView().getModel("chartData");
-			var oQuotations = oQuotationsModel.oData.quotation;
+			var oQuotations = oQuotationsModel.oData.quotations.quotation;
 			var aIndicatorSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
 			
@@ -628,7 +628,7 @@ sap.ui.define([
 		 */
 		getBBWThreshold : function (oCallingController) {
 			var oQuotationsModel = oCallingController.getView().getModel("chartData");
-			var oQuotations = oQuotationsModel.oData.quotation;
+			var oQuotations = oQuotationsModel.oData.quotations.quotation;
 			var oQuotation = oQuotations[0];
 			
 			//The threshold is stored in the newest quotation.
@@ -641,7 +641,7 @@ sap.ui.define([
 		 */
 		isInstrumentTypeRatio : function (oCallingController) {
 			var oQuotationsModel = oCallingController.getView().getModel("chartData");
-			var oQuotations = oQuotationsModel.oData.quotation;
+			var oQuotations = oQuotationsModel.oData.quotations.quotation;
 			var oQuotation;
 			
 			if (oQuotations.length === 0) {
