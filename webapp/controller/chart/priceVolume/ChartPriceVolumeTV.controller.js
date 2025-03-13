@@ -310,7 +310,7 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oModel, "chartData");
 			
-			TradingViewController.openChart(oCallingController);
+			TradingViewController.openChart(oCallingController, "chartContainerPV");
 			oCallingController.updateToolbarForChartDisplay();
 			TradingViewController.applyIndicators(oCallingController);
 			TradingViewController.applyMovingAverages(oCallingController);
@@ -537,7 +537,7 @@ sap.ui.define([
 			oChartToolbar.setVisible(false);
 			
 			//Remove previously created chart.
-			document.getElementById("chartContainer").innerHTML = "";
+			document.getElementById("chartContainerPV").innerHTML = "";
 		},
 		
 		

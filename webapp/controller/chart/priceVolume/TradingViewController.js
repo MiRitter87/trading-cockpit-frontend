@@ -9,17 +9,16 @@ sap.ui.define([
 		/**
 		 * Handles initialization of the TradingView lightweight-charts component.
 		 */
-		openChart : function (oCallingController) {
-			var sDivId = "chartContainer";
+		openChart : function (oCallingController, sChartContainerDivId) {
 			var oChartModel = new JSONModel();
 			var bIsInstrumentTypeRatio = this.isInstrumentTypeRatio(oCallingController);
 			
 			//Remove previously created chart for subsequent chart creations
-			document.getElementById(sDivId).innerHTML = "";
+			document.getElementById(sChartContainerDivId).innerHTML = "";
 	
-			const chart = LightweightCharts.createChart(document.getElementById("chartContainer"), {
-  				width: document.getElementById("chartContainer").clientWidth,
-                height: document.getElementById("chartContainer").clientHeight,
+			const chart = LightweightCharts.createChart(document.getElementById(sChartContainerDivId), {
+  				width: document.getElementById(sChartContainerDivId).clientWidth,
+                height: document.getElementById(sChartContainerDivId).clientHeight,
                 autoSize: true
             });
             

@@ -41,7 +41,7 @@
 			</OverflowToolbar>
 			
 			<core:HTML id="chartContainerHTML" 
-				content="&lt;div id=&quot;chartContainer&quot; style=&quot;position: relative; width: 100%; height: 80%;&quot;&gt;&lt;/div&gt;"/>
+				content="&lt;div id=&quot;chartContainerPV&quot; style=&quot;position: relative; width: 100%; height: 80%;&quot;&gt;&lt;/div&gt;"/>
 		</content>
 	</Page>
 </mvc:View>

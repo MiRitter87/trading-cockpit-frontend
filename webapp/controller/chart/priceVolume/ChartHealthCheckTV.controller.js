@@ -109,7 +109,7 @@ sap.ui.define([
 			
 			oCallingController.getView().setModel(oModel, "chartData");
 			
-			TradingViewController.openChart(oCallingController);
+			TradingViewController.openChart(oCallingController, "chartContainerHealth");
 		},
 		
 		
@@ -160,7 +160,7 @@ sap.ui.define([
 			oLookbackPeriodInput.setValue("15");
 			
 			//Remove previously created chart.
-			document.getElementById("chartContainer").innerHTML = "";
+			document.getElementById("chartContainerHealth").innerHTML = "";
 		}
 	});
 });
