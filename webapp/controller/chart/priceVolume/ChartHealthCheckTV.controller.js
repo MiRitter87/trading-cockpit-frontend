@@ -110,6 +110,7 @@ sap.ui.define([
 			oCallingController.getView().setModel(oModel, "chartData");
 			
 			TradingViewController.openChart(oCallingController, "chartContainerHealth");
+			TradingViewController.setVisibleNumberOfCandles(oCallingController, 100);
 		},
 		
 		

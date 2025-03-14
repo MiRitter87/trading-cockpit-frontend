@@ -660,7 +660,7 @@ sap.ui.define([
 		/**
 		 * Draws horizontal lines to the TradingView chart.
 		 */
-		drawHorizontalLines : function(oCallingController, oHorizontalLines) {
+		drawHorizontalLines : function (oCallingController, oHorizontalLines) {
 			var aHorizontalLines = oHorizontalLines.oData.horizontalLine;
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var oCandlestickSeries = oChartModel.getProperty("/candlestickSeries");
@@ -672,5 +672,20 @@ sap.ui.define([
 				oCandlestickSeries.createPriceLine(priceLine);
 			}
 		},
+		
+		
+		/**
+		 * Sets the number of candles that are being displayed.
+		 */
+		setVisibleNumberOfCandles : function (oCallingController, iNumberOfCandles) {
+			var oChartModel = oCallingController.getView().getModel("chartModel");
+			var oChart = oChartModel.getProperty("/chart");
+			var oQuotationsModel = oCallingController.getView().getModel("chartData");
+			var aQuotations = oQuotationsModel.getProperty("/quotations/quotation");
+			var iNumberExistingCandles = aQuotations.length;
+			var iStartIndex = iNumberExistingCandles - iNumberOfCandles;
+			
+			oChart.timeScale().setVisibleLogicalRange({ from: iStartIndex, to: iNumberExistingCandles });
+		}
 	};
 });
