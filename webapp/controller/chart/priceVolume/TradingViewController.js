@@ -594,11 +594,6 @@ sap.ui.define([
 					continue;
 				}
 				
-				if (oQuotation.relativeStrengthData === null) {
-					// For example on holidays when the divisor instrument is not traded. No RS-Data available then.
-					continue;
-				}
-				
 				if (sRequestedIndicator === Constants.CHART_INDICATOR.BBW && oQuotation.indicator.bollingerBandWidth10Days !== 0) {
 					oIndicatorDataset.value = oQuotation.indicator.bollingerBandWidth10Days;
 				}
@@ -607,8 +602,15 @@ sap.ui.define([
 					oIndicatorDataset.value = oQuotation.indicator.slowStochastic14Days;
 				}
 				
-				if (sRequestedIndicator === Constants.CHART_INDICATOR.RS_LINE && oQuotation.relativeStrengthData.rsLinePrice !== 0) {
-					oIndicatorDataset.value = oQuotation.relativeStrengthData.rsLinePrice;
+				if (sRequestedIndicator === Constants.CHART_INDICATOR.RS_LINE) {
+					if (oQuotation.relativeStrengthData === null) {
+						// For example on holidays when the divisor instrument is not traded. No RS-Data available then.
+						continue;
+					}
+					
+					if (oQuotation.relativeStrengthData.rsLinePrice !== 0) {					
+						oIndicatorDataset.value = oQuotation.relativeStrengthData.rsLinePrice;
+					}
 				}
     			    			
     			oDate = new Date(parseInt(oQuotation.date));
