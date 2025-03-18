@@ -3,14 +3,20 @@ sap.ui.define([
 	"../../MainController",
 	"./TradingViewController",
 	"../../scan/ScanController",
+	"../../instrument/InstrumentController",
 	"../../Constants",
+	"../../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, TradingViewController, ScanController, Constants, JSONModel, MessageToast, MessageBox) {
+], function (Controller, MainController, TradingViewController, ScanController, InstrumentController, 
+	Constants, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartHealthCheckTV", {
+		formatter: formatter,
+		
+		
 		/**
 		 * Initializes the controller.
 		 */
@@ -145,6 +151,40 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			MainController.initializeHealthCheckProfileComboBox(oComboBox, oResourceBundle);
+		},
+		
+		
+				/**
+		 * Formatter of the protocol category text.
+		 */
+		categoryTextFormatter: function(sCategory) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			return InstrumentController.categoryTextFormatter(sCategory, oResourceBundle);
+		},
+		
+		
+		/**
+		 * Formatter of the protocol category icon.
+		 */
+		categoryIconFormatter: function(sCategory) {
+			return InstrumentController.categoryIconFormatter(sCategory);
+		},
+		
+		
+		/**
+		 * Formatter of the protocol category state.
+		 */
+		categoryStateFormatter: function(sCategory) {
+			return InstrumentController.categoryStateFormatter(sCategory);
+		},
+		
+		
+		/**
+		 * Formatter of the health check profile text.
+		 */
+		profileTextFormatter: function(sProfile) {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			return InstrumentController.profileTextFormatter(sProfile, oResourceBundle);
 		},
 		
 		
