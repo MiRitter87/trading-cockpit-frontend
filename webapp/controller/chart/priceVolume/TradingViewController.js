@@ -434,6 +434,20 @@ sap.ui.define([
 		
 		
 		/**
+		 * Displays a Histogram with the net sum of health check events for each trading day.
+		 */
+		displayHealthCheckEvents : function (oCallingController, bVisible) {
+			var chartModel = oCallingController.getView().getModel("chartModel");
+			var chart = chartModel.getProperty("/chart");
+			var healthEventData;
+			
+			if (bVisible === true) {
+				healthEventData = this.getHealthEventData(oCallingController);
+			}
+		},
+		
+		
+		/**
 		 * Organizes the panes in a manner that the indicator is at the top pane and the price/volume pane is below.
 		 */
 		organizePanes : function (oCallingController, oChartModel) {
@@ -575,7 +589,7 @@ sap.ui.define([
 		
 		
 		/**
-		 * Create a line series that contains the data of the requested indicator.
+		 * Create a series that contains the data of the requested indicator.
 		 */
 		getIndicatorData : function (oCallingController, sRequestedIndicator) {
 			var oQuotationsModel = oCallingController.getView().getModel("chartData");
@@ -621,6 +635,44 @@ sap.ui.define([
     		}
     		
     		return aIndicatorSeries;
+		},
+		
+		
+		/**
+		 * Create a series that contains health check event data.
+		 */
+		getHealthEventData : function (oCallingController) {
+			var oChartData = oCallingController.getView().getModel("chartData");
+			var aQuotations = oChartData.getProperty("/quotations");
+			var healthEvents = oChartData.getProperty("/healthEvents");
+			var aHealthEventSeries = new Array()
+			var oDateFormat, oDate, sFormattedDate;
+			
+			if (healthevents === undefined) {
+				return;
+			}
+			
+			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
+			
+			//The dataset needs to be constructed beginning at the oldest value.
+			for (var i = oQuotations.length -1; i >= 0; i--) {
+    			var oQuotation = aQuotations[i];
+    			var oHealthEventDataset = new Object();
+    			var eventNumber = healthEvents.get(oQuotation.date);
+    			
+    			if (eventNumber === undefined) {
+					continue;
+				}
+				
+				oDate = new Date(parseInt(oQuotation.date));
+    			sFormattedDate = oDateFormat.format(oDate);
+    			oHealthEventDataset.time = sFormattedDate;
+    			oHealthEventDataset.value = eventNumber;
+    			
+    			aHealthEventSeries.push(oHealthEventDataset);
+    		}
+    		
+    		return aHealthEventSeries;
 		},
 		
 		
