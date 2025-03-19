@@ -352,7 +352,7 @@ sap.ui.define([
 				
 				chartModel.setProperty("/bbwSeries", bbwSeries);
 				
-				this.organizePanes(oCallingController, chartModel);
+				this.organizePanesPriceVolume(oCallingController, chartModel);
 				this.organizeMovingAverages(oCallingController, chartModel);
 			} else {
 				const bbwSeries = chartModel.getProperty("/bbwSeries");
@@ -390,7 +390,7 @@ sap.ui.define([
 				
 				chartModel.setProperty("/slowStochasticSeries", slowStochasticSeries);
 				
-				this.organizePanes(oCallingController, chartModel);
+				this.organizePanesPriceVolume(oCallingController, chartModel);
 				this.organizeMovingAverages(oCallingController, chartModel);
 			} else {
 				const slowStochasticSeries = chartModel.getProperty("/slowStochasticSeries");
@@ -421,7 +421,7 @@ sap.ui.define([
 				
 				chartModel.setProperty("/rsLineSeries", rsLineSeries);
 				
-				this.organizePanes(oCallingController, chartModel);
+				this.organizePanesPriceVolume(oCallingController, chartModel);
 				this.organizeMovingAverages(oCallingController, chartModel);
 			} else {
 				const rsLineSeries = chartModel.getProperty("/rsLineSeries");
@@ -464,9 +464,10 @@ sap.ui.define([
 		
 		
 		/**
-		 * Organizes the panes in a manner that the indicator is at the top pane and the price/volume pane is below.
+		 * Organizes the panes of the price/volume chart in a manner that 
+		 * the indicator is at the top pane and the price/volume pane is below.
 		 */
-		organizePanes : function (oCallingController, oChartModel) {
+		organizePanesPriceVolume : function (oCallingController, oChartModel) {
 			var chart = oChartModel.getProperty("/chart");
 			var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
 			var volumeSeries = oChartModel.getProperty("/volumeSeries");
