@@ -443,6 +443,22 @@ sap.ui.define([
 			
 			if (bVisible === true) {
 				healthEventData = this.getHealthEventData(oCallingController);
+				
+				const healthEventSeries = chart.addSeries(LightweightCharts.HistogramSeries,
+					{ color: 'blue'}
+				);
+				healthEventSeries.setData(healthEventData);
+				
+				chartModel.setProperty("/healthEventSeries", healthEventSeries);
+				
+				this.organizePanesHealthCheck(chartModel);
+				//this.organizeMovingAverages(oCallingController, chartModel);
+			} else {
+				const healthEventSeries = chartModel.getProperty("/healthEventSeries");
+				
+				if (healthEventSeries !== undefined && chart !== undefined) {
+					chart.removeSeries(healthEventSeries);
+				}
 			}
 		},
 		
@@ -489,6 +505,30 @@ sap.ui.define([
 			indicatorPane.setHeight(chartHeight * 0.15);
 			
 			candlestickSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
+		},
+		
+		
+		/**
+		 * Organizes the panes of the health check chart in a manner that
+		 * the indicator is at the top pane and the price/volume pane is below.
+		 */
+		organizePanesHealthCheck : function (oChartModel) {
+			var chart = oChartModel.getProperty("/chart");
+			var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
+			var volumeSeries = oChartModel.getProperty("/volumeSeries");
+			var healthEventSeries = oChartModel.getProperty("/healthEventSeries");
+			var indicatorPane;
+			var chartHeight;
+			
+			healthEventSeries.moveToPane(0);
+			candlestickSeries.moveToPane(1);
+			volumeSeries.moveToPane(1);
+			healthEventSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
+			candlestickSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
+			
+			chartHeight = chart.options().height;
+			indicatorPane = chart.panes()[0];
+			indicatorPane.setHeight(chartHeight * 0.15);
 		},
 		
 		
@@ -643,22 +683,25 @@ sap.ui.define([
 		 */
 		getHealthEventData : function (oCallingController) {
 			var oChartData = oCallingController.getView().getModel("chartData");
-			var aQuotations = oChartData.getProperty("/quotations");
-			var healthEvents = oChartData.getProperty("/healthEvents");
+			var aQuotations = oChartData.getProperty("/quotations/quotation");
+			var oHealthEvents = oChartData.getProperty("/healthEvents");
 			var aHealthEventSeries = new Array()
 			var oDateFormat, oDate, sFormattedDate;
+			var healthEventMap;
 			
-			if (healthevents === undefined) {
+			if (oHealthEvents === undefined) {
 				return;
 			}
+			
+			healthEventMap = new Map(Object.entries(oHealthEvents));
 			
 			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
 			
 			//The dataset needs to be constructed beginning at the oldest value.
-			for (var i = oQuotations.length -1; i >= 0; i--) {
+			for (var i = aQuotations.length -1; i >= 0; i--) {
     			var oQuotation = aQuotations[i];
     			var oHealthEventDataset = new Object();
-    			var eventNumber = healthEvents.get(oQuotation.date);
+    			var eventNumber = healthEventMap.get(String(oQuotation.date));
     			
     			if (eventNumber === undefined) {
 					continue;
