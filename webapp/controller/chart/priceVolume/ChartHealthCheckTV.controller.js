@@ -196,6 +196,7 @@ sap.ui.define([
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oProfileComboBox = this.getView().byId("healthCheckProfileComboBox");
 			var oLookbackPeriodInput = this.getView().byId("lookbackPeriodInput");
+			var oChartData = new JSONModel();
 
 			oInstrumentComboBox.setSelectedKey("");
 			oProfileComboBox.setSelectedKey("");
@@ -203,6 +204,8 @@ sap.ui.define([
 			
 			//Remove previously created chart.
 			document.getElementById("chartContainerHealth").innerHTML = "";
+			
+			this.getView().setModel(oChartData, "chartData");
 		}
 	});
 });
