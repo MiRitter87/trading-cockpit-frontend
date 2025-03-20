@@ -23,7 +23,7 @@
 			</FlexBox>
 			
 			<OverflowToolbar id="chartToolbar">
-				<Title id="toolbarTitle"/>
+				<Title id="toolbarTitle" class="sapUiTinyMarginBegin"/>
 				<ToolbarSpacer/>
 				<ToggleButton id="ema21Button" text="{i18n>chartPriceVolumeTV.ema21}" press=".onEma21Pressed"/>
 				<ToggleButton id="sma50Button" text="{i18n>chartPriceVolumeTV.sma50}" press=".onSma50Pressed"/>

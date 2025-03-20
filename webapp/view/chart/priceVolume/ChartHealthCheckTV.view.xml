@@ -25,12 +25,11 @@
 									press=".onProfileInformationPressed"/>
 					<Label text="{i18n>chartHealthCheckTV.lookbackPeriod}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" required="true"/>
 					<Input id="lookbackPeriodInput" value="15" type="Number" description="{i18n>chartHealthCheckTV.lookbackPeriod.description}"/>
+					<Button text="{i18n>button.refresh}" press=".onRefreshPressed"/>
 				</FlexBox>
-
-				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
 			</VBox>
 			
-			<Title id="chartTitle"/>
+			<Title id="chartTitle" class="sapUiSmallMarginBegin sapUiSmallMarginTop"/>
 			
 			<l:Splitter height="85%">
 				<core:HTML id="chartContainerHTML" 

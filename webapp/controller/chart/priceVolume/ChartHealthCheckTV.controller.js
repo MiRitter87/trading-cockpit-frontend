@@ -217,11 +217,13 @@ sap.ui.define([
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oProfileComboBox = this.getView().byId("healthCheckProfileComboBox");
 			var oLookbackPeriodInput = this.getView().byId("lookbackPeriodInput");
+			var oChartTitle = this.getView().byId("chartTitle");
 			var oChartData = new JSONModel();
 
 			oInstrumentComboBox.setSelectedKey("");
 			oProfileComboBox.setSelectedKey("");
 			oLookbackPeriodInput.setValue("15");
+			oChartTitle.setText("");
 			
 			//Remove previously created chart.
 			document.getElementById("chartContainerHealth").innerHTML = "";
