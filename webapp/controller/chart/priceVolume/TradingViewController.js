@@ -57,16 +57,16 @@ sap.ui.define([
 		 * Creates a candlestick series that contains the data to be displayed.
 		 */
 		getCandlestickSeries : function (oCallingController) {
-			var oQuotationsModel = oCallingController.getView().getModel("chartData");
-			var oQuotations = oQuotationsModel.oData.quotations.quotation;
+			var oChartData = oCallingController.getView().getModel("chartData");
+			var aQuotations = oChartData.getProperty("/quotations/quotation");
 			var aCandlestickSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
 			
 			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
 			
 			//The dataset needs to be constructed beginning at the oldest value.
-			for (var i = oQuotations.length -1; i >= 0; i--) {
-    			var oQuotation = oQuotations[i];
+			for (var i = aQuotations.length -1; i >= 0; i--) {
+    			var oQuotation = aQuotations[i];
     			var oCandlestickDataset = new Object();
     			
     			oCandlestickDataset.open = oQuotation.open;
@@ -89,16 +89,16 @@ sap.ui.define([
 		 * Creates a Histogram series that contains the volume data to be displayed.
 		 */
 		getVolumeSeries : function (oCallingController) {
-			var oQuotationsModel = oCallingController.getView().getModel("chartData");
-			var oQuotations = oQuotationsModel.oData.quotations.quotation;
+			var oChartData = oCallingController.getView().getModel("chartData");
+			var aQuotations = oChartData.getProperty("/quotations/quotation");
 			var aVolumeSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
 			
 			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
 			
 			//The dataset needs to be constructed beginning at the oldest value.
-			for (var i = oQuotations.length -1; i >= 0; i--) {
-    			var oQuotation = oQuotations[i];
+			for (var i = aQuotations.length -1; i >= 0; i--) {
+    			var oQuotation = aQuotations[i];
     			var oVolumeDataset = new Object();
     			
     			oVolumeDataset.value = oQuotation.volume;
@@ -207,19 +207,19 @@ sap.ui.define([
 		 * Displays the EMA(21) in the chart.
 		 */
 		displayEma21 : function (oCallingController, bVisible) {
-			var chartModel = oCallingController.getView().getModel("chartModel");
-			var chart = chartModel.getProperty("/chart");
+			var oChartModel = oCallingController.getView().getModel("chartModel");
+			var chart = oChartModel.getProperty("/chart");
 			var ema21Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.EMA_21);
 	
 			if (bVisible === true) {
 				const ema21Series = chart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'yellow', lineWidth: 1, priceLineVisible: false });
 				ema21Series.setData(ema21Data);
-				chartModel.setProperty("/ema21Series", ema21Series);
+				oChartModel.setProperty("/ema21Series", ema21Series);
 				
-				this.organizeMovingAverages(oCallingController, chartModel);
+				this.organizeMovingAverages(oCallingController, oChartModel);
 			} else {
-				const ema21Series = chartModel.getProperty("/ema21Series");
+				const ema21Series = oChartModel.getProperty("/ema21Series");
 				
 				if (ema21Series !== undefined && chart !== undefined) {
 					chart.removeSeries(ema21Series);
@@ -232,19 +232,19 @@ sap.ui.define([
 		 * Displays the SMA(50) in the chart.
 		 */
 		displaySma50 : function (oCallingController, bVisible) {
-			var chartModel = oCallingController.getView().getModel("chartModel");
-			var chart = chartModel.getProperty("/chart");
+			var oChartModel = oCallingController.getView().getModel("chartModel");
+			var chart = oChartModel.getProperty("/chart");
 			var sma50Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_50);
 	
 			if (bVisible === true) {
 				const sma50Series = chart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'blue', lineWidth: 1, priceLineVisible: false });
 				sma50Series.setData(sma50Data);
-				chartModel.setProperty("/sma50Series", sma50Series);
+				oChartModel.setProperty("/sma50Series", sma50Series);
 				
-				this.organizeMovingAverages(oCallingController, chartModel);
+				this.organizeMovingAverages(oCallingController, oChartModel);
 			} else {
-				const sma50Series = chartModel.getProperty("/sma50Series");
+				const sma50Series = oChartModel.getProperty("/sma50Series");
 				
 				if (sma50Series !== undefined && chart !== undefined) {
 					chart.removeSeries(sma50Series);
@@ -257,19 +257,19 @@ sap.ui.define([
 		 * Displays the SMA(150) in the chart.
 		 */
 		displaySma150 : function (oCallingController, bVisible) {
-			var chartModel = oCallingController.getView().getModel("chartModel");
-			var chart = chartModel.getProperty("/chart");
+			var oChartModel = oCallingController.getView().getModel("chartModel");
+			var chart = oChartModel.getProperty("/chart");
 			var sma150Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_150);
 	
 			if (bVisible === true) {
 				const sma150Series = chart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'red', lineWidth: 1, priceLineVisible: false });
 				sma150Series.setData(sma150Data);
-				chartModel.setProperty("/sma150Series", sma150Series);
+				oChartModel.setProperty("/sma150Series", sma150Series);
 				
-				this.organizeMovingAverages(oCallingController, chartModel);
+				this.organizeMovingAverages(oCallingController, oChartModel);
 			} else {
-				const sma150Series = chartModel.getProperty("/sma150Series");
+				const sma150Series = oChartModel.getProperty("/sma150Series");
 				
 				if (sma150Series !== undefined && chart !== undefined) {
 					chart.removeSeries(sma150Series);
@@ -282,19 +282,19 @@ sap.ui.define([
 		 * Displays the SMA(200) in the chart.
 		 */
 		displaySma200 : function (oCallingController, bVisible) {
-			var chartModel = oCallingController.getView().getModel("chartModel");
-			var chart = chartModel.getProperty("/chart");
+			var oChartModel = oCallingController.getView().getModel("chartModel");
+			var chart = oChartModel.getProperty("/chart");
 			var sma200Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_200);
 	
 			if (bVisible === true) {
 				const sma200Series = chart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'green', lineWidth: 1, priceLineVisible: false });
 				sma200Series.setData(sma200Data);
-				chartModel.setProperty("/sma200Series", sma200Series);
+				oChartModel.setProperty("/sma200Series", sma200Series);
 				
-				this.organizeMovingAverages(oCallingController, chartModel);
+				this.organizeMovingAverages(oCallingController, oChartModel);
 			} else {
-				const sma200Series = chartModel.getProperty("/sma200Series");
+				const sma200Series = oChartModel.getProperty("/sma200Series");
 				
 				if (sma200Series !== undefined && chart !== undefined) {
 					chart.removeSeries(sma200Series);
@@ -307,8 +307,8 @@ sap.ui.define([
 		 * Displays the SMA(30) of the volume in the chart.
 		 */
 		displaySma30Volume : function (oCallingController, bVisible) {
-			var chartModel = oCallingController.getView().getModel("chartModel");
-			var chart = chartModel.getProperty("/chart");
+			var oChartModel = oCallingController.getView().getModel("chartModel");
+			var chart = oChartModel.getProperty("/chart");
 			var sma30VolumeData = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_30_VOLUME);
 	
 			if (bVisible === true) {
@@ -316,11 +316,11 @@ sap.ui.define([
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, priceScaleId: 'left' }
 				);
 				sma30VolumeSeries.setData(sma30VolumeData);
-				chartModel.setProperty("/sma30VolumeSeries", sma30VolumeSeries);
+				oChartModel.setProperty("/sma30VolumeSeries", sma30VolumeSeries);
 				
-				this.organizeMovingAverages(oCallingController, chartModel);
+				this.organizeMovingAverages(oCallingController, oChartModel);
 			} else {
-				const sma30VolumeSeries = chartModel.getProperty("/sma30VolumeSeries");
+				const sma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
 				
 				if (sma30VolumeSeries !== undefined && chart !== undefined) {
 					chart.removeSeries(sma30VolumeSeries);
@@ -333,8 +333,8 @@ sap.ui.define([
 		 * Displays the Bollinger BandWidth in a separate pane of the chart.
 		 */
 		displayBollingerBandWidth : function (oCallingController, bVisible) {
-			var chartModel = oCallingController.getView().getModel("chartModel");
-			var chart = chartModel.getProperty("/chart");
+			var oChartModel = oCallingController.getView().getModel("chartModel");
+			var chart = oChartModel.getProperty("/chart");
 			var bbwData;
 			var bbwThreshold = this.getBBWThreshold(oCallingController);
 			
@@ -350,12 +350,12 @@ sap.ui.define([
 				const priceLine = { price: bbwThreshold, color: 'black', lineWidth: 1, lineStyle: 0, axisLabelVisible: false };
 				bbwSeries.createPriceLine(priceLine);
 				
-				chartModel.setProperty("/bbwSeries", bbwSeries);
+				oChartModel.setProperty("/bbwSeries", bbwSeries);
 				
-				this.organizePanesPriceVolume(oCallingController, chartModel);
-				this.organizeMovingAverages(oCallingController, chartModel);
+				this.organizePanesPriceVolume(oCallingController, oChartModel);
+				this.organizeMovingAverages(oCallingController, oChartModel);
 			} else {
-				const bbwSeries = chartModel.getProperty("/bbwSeries");
+				const bbwSeries = oChartModel.getProperty("/bbwSeries");
 				
 				if (bbwSeries !== undefined && chart !== undefined) {
 					chart.removeSeries(bbwSeries);
@@ -368,8 +368,8 @@ sap.ui.define([
 		 * Displays the Slow Stochastic in a separate pane of the chart.
 		 */
 		displaySlowStochastic : function (oCallingController, bVisible) {
-			var chartModel = oCallingController.getView().getModel("chartModel");
-			var chart = chartModel.getProperty("/chart");
+			var oChartModel = oCallingController.getView().getModel("chartModel");
+			var chart = oChartModel.getProperty("/chart");
 			var slowStochasticData;
 			
 			if (bVisible === true) {
@@ -388,12 +388,12 @@ sap.ui.define([
 				const priceLineBot = { price: 15, color: 'black', lineWidth: 1, lineStyle: 0, axisLabelVisible: false };
 				slowStochasticSeries.createPriceLine(priceLineBot);
 				
-				chartModel.setProperty("/slowStochasticSeries", slowStochasticSeries);
+				oChartModel.setProperty("/slowStochasticSeries", slowStochasticSeries);
 				
-				this.organizePanesPriceVolume(oCallingController, chartModel);
-				this.organizeMovingAverages(oCallingController, chartModel);
+				this.organizePanesPriceVolume(oCallingController, oChartModel);
+				this.organizeMovingAverages(oCallingController, oChartModel);
 			} else {
-				const slowStochasticSeries = chartModel.getProperty("/slowStochasticSeries");
+				const slowStochasticSeries = oChartModel.getProperty("/slowStochasticSeries");
 				
 				if (slowStochasticSeries !== undefined && chart !== undefined) {
 					chart.removeSeries(slowStochasticSeries);
@@ -406,8 +406,8 @@ sap.ui.define([
 		 * Displays the RS line in a separate pane of the chart.
 		 */
 		displayRsLine : function (oCallingController, bVisible) {
-			var chartModel = oCallingController.getView().getModel("chartModel");
-			var chart = chartModel.getProperty("/chart");
+			var oChartModel = oCallingController.getView().getModel("chartModel");
+			var chart = oChartModel.getProperty("/chart");
 			var rsLineData;
 			
 			if (bVisible === true) {
@@ -419,12 +419,12 @@ sap.ui.define([
 				rsLineSeries.setData(rsLineData);
 				
 				
-				chartModel.setProperty("/rsLineSeries", rsLineSeries);
+				oChartModel.setProperty("/rsLineSeries", rsLineSeries);
 				
-				this.organizePanesPriceVolume(oCallingController, chartModel);
-				this.organizeMovingAverages(oCallingController, chartModel);
+				this.organizePanesPriceVolume(oCallingController, oChartModel);
+				this.organizeMovingAverages(oCallingController, oChartModel);
 			} else {
-				const rsLineSeries = chartModel.getProperty("/rsLineSeries");
+				const rsLineSeries = oChartModel.getProperty("/rsLineSeries");
 				
 				if (rsLineSeries !== undefined && chart !== undefined) {
 					chart.removeSeries(rsLineSeries);
@@ -437,8 +437,8 @@ sap.ui.define([
 		 * Displays a Histogram with the net sum of health check events for each trading day.
 		 */
 		displayHealthCheckEvents : function (oCallingController, bVisible) {
-			var chartModel = oCallingController.getView().getModel("chartModel");
-			var chart = chartModel.getProperty("/chart");
+			var oChartModel = oCallingController.getView().getModel("chartModel");
+			var chart = oChartModel.getProperty("/chart");
 			var healthEventData;
 			
 			if (bVisible === true) {
@@ -449,12 +449,12 @@ sap.ui.define([
 				);
 				healthEventSeries.setData(healthEventData);
 				
-				chartModel.setProperty("/healthEventSeries", healthEventSeries);
+				oChartModel.setProperty("/healthEventSeries", healthEventSeries);
 				
-				this.organizePanesHealthCheck(chartModel);
-				//this.organizeMovingAverages(oCallingController, chartModel);
+				this.organizePanesHealthCheck(oChartModel);
+				//this.organizeMovingAverages(oCallingController, oChartModel);
 			} else {
-				const healthEventSeries = chartModel.getProperty("/healthEventSeries");
+				const healthEventSeries = oChartModel.getProperty("/healthEventSeries");
 				
 				if (healthEventSeries !== undefined && chart !== undefined) {
 					chart.removeSeries(healthEventSeries);
@@ -590,16 +590,16 @@ sap.ui.define([
 		 * Create a line series that contains the data of the requested moving average.
 		 */
 		getMovingAverageData : function (oCallingController, sRequestedMA) {
-			var oQuotationsModel = oCallingController.getView().getModel("chartData");
-			var oQuotations = oQuotationsModel.oData.quotations.quotation;
+			var oChartData = oCallingController.getView().getModel("chartData");
+			var aQuotations = oChartData.getProperty("/quotations/quotation");
 			var aMovingAverageSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
 			
 			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
 			
 			//The dataset needs to be constructed beginning at the oldest value.
-			for (var i = oQuotations.length -1; i >= 0; i--) {
-    			var oQuotation = oQuotations[i];
+			for (var i = aQuotations.length -1; i >= 0; i--) {
+    			var oQuotation = aQuotations[i];
     			var oMovingAverageDataset = new Object();
     			
     			if (oQuotation.movingAverageData === null) {
@@ -633,16 +633,16 @@ sap.ui.define([
 		 * Create a series that contains the data of the requested indicator.
 		 */
 		getIndicatorData : function (oCallingController, sRequestedIndicator) {
-			var oQuotationsModel = oCallingController.getView().getModel("chartData");
-			var oQuotations = oQuotationsModel.oData.quotations.quotation;
+			var oChartData = oCallingController.getView().getModel("chartData");
+			var aQuotations = oChartData.getProperty("/quotations/quotation");
 			var aIndicatorSeries = new Array();
 			var oDateFormat, oDate, sFormattedDate;
 			
 			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
 			
 			//The dataset needs to be constructed beginning at the oldest value.
-			for (var i = oQuotations.length -1; i >= 0; i--) {
-    			var oQuotation = oQuotations[i];
+			for (var i = aQuotations.length -1; i >= 0; i--) {
+    			var oQuotation = aQuotations[i];
     			var oIndicatorDataset = new Object();
     			
     			if (oQuotation.indicator === null) {
@@ -724,9 +724,9 @@ sap.ui.define([
 		 * Gets the threshold value of the Bollinger BandWidth.
 		 */
 		getBBWThreshold : function (oCallingController) {
-			var oQuotationsModel = oCallingController.getView().getModel("chartData");
-			var oQuotations = oQuotationsModel.oData.quotations.quotation;
-			var oQuotation = oQuotations[0];
+			var oChartData = oCallingController.getView().getModel("chartData");
+			var aQuotations = oChartData.getProperty("/quotations/quotation");
+			var oQuotation = aQuotations[0];
 			
 			//The threshold is stored in the newest quotation.
 			return oQuotation.indicator.bbw10Threshold25Percent;
@@ -737,15 +737,15 @@ sap.ui.define([
 		 * Checks if the instrument for which quotations have been loaded is of type RATIO.
 		 */
 		isInstrumentTypeRatio : function (oCallingController) {
-			var oQuotationsModel = oCallingController.getView().getModel("chartData");
-			var oQuotations = oQuotationsModel.oData.quotations.quotation;
+			var oChartData = oCallingController.getView().getModel("chartData");
+			var aQuotations = oChartData.getProperty("/quotations/quotation");
 			var oQuotation;
 			
-			if (oQuotations.length === 0) {
+			if (aQuotations.length === 0) {
 				return false;
 			}
 			
-			oQuotation = oQuotations[0];
+			oQuotation = aQuotations[0];
 				
 			if (oQuotation.instrument.type === Constants.INSTRUMENT_TYPE.RATIO) {
 				return true;
@@ -778,8 +778,8 @@ sap.ui.define([
 		setVisibleNumberOfCandles : function (oCallingController, iNumberOfCandles) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var oChart = oChartModel.getProperty("/chart");
-			var oQuotationsModel = oCallingController.getView().getModel("chartData");
-			var aQuotations = oQuotationsModel.getProperty("/quotations/quotation");
+			var oChartData = oCallingController.getView().getModel("chartData");
+			var aQuotations = oChartData.getProperty("/quotations/quotation");
 			var iNumberExistingCandles = aQuotations.length;
 			var iStartIndex = iNumberExistingCandles - iNumberOfCandles;
 			
