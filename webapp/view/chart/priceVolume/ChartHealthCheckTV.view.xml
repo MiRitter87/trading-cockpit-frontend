@@ -30,9 +30,11 @@
 				<Button text="{i18n>button.refresh}" press=".onRefreshPressed" class="sapUiSmallMargin"/>
 			</VBox>
 			
+			<Title id="chartTitle"/>
+			
 			<l:Splitter height="85%">
 				<core:HTML id="chartContainerHTML" 
-					content="&lt;div id=&quot;chartContainerHealth&quot; style=&quot;position: relative; width: 100%; height: 100%;&quot;&gt;&lt;/div&gt;"/>
+					content="&lt;div id=&quot;chartContainerHealth&quot; style=&quot;position: relative; width: 100%; height: 100%;&quot;&gt;&lt;/div&gt;"/>				
 					
 				<Table id="protocolTable" items="{path: 'chartData>/protocol/protocolEntry/'}" mode="None" sticky="ColumnHeaders">
 					<columns>

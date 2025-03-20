@@ -114,6 +114,7 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "chartData");
+			oCallingController.updateChartTitle();
 			
 			TradingViewController.openChart(oCallingController, "chartContainerHealth");
 			TradingViewController.displayHealthCheckEvents(oCallingController, true);
@@ -186,6 +187,26 @@ sap.ui.define([
 		profileTextFormatter: function(sProfile) {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			return InstrumentController.profileTextFormatter(sProfile, oResourceBundle);
+		},
+		
+		
+		/**
+		 * Updates the title of the chart.
+		 */
+		updateChartTitle : function () {
+			var oChartTitle = this.getView().byId("chartTitle");
+			var oChartData = this.getView().getModel("chartData");
+			var aQuotations = oChartData.getProperty("/quotations/quotation");
+			var oQuotation;
+
+			// Set title
+			if (aQuotations.length > 0) {
+				oQuotation = aQuotations[0];
+				oChartTitle.setText(oQuotation.instrument.name);
+			} else {
+				return;
+			}
+			
 		},
 		
 		
