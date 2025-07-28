@@ -60,7 +60,7 @@ sap.ui.define([
 				return;
 			}
 			
-			oInstrument = InstrumentController.getInstrumentById(oSectorIgComboBox.getSelectedKey(), oInstrumentsModel.oData.instrument);
+			oInstrument = InstrumentController.getInstrumentById(Number(oSectorIgComboBox.getSelectedKey()), oInstrumentsModel.oData.instrument);
 			
 			if (oInstrument === null) {				
 				DashboardController.queryStatisticsByWebService(this.queryStatisticsCallback, this, true, sSelectedType);

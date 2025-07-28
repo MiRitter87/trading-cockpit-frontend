@@ -88,7 +88,7 @@ sap.ui.define([
 			
 			//Get the selected instrument.
 			if (oSelectedItem !== null) {			
-				oInstrument = InstrumentController.getInstrumentById(oSelectedItem.getKey(), oInstrumentsModel.oData.instrument);				
+				oInstrument = InstrumentController.getInstrumentById(Number(oSelectedItem.getKey()), oInstrumentsModel.oData.instrument);				
 			} else {
 				return;
 			}
