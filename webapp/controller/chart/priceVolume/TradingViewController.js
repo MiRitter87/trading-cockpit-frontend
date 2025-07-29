@@ -445,7 +445,7 @@ sap.ui.define([
 				healthEventData = this.getHealthEventData(oCallingController);
 				
 				const healthEventSeries = chart.addSeries(LightweightCharts.HistogramSeries,
-					{ color: 'blue'}
+					{ color: 'blue', priceLineVisible: false}
 				);
 				healthEventSeries.setData(healthEventData);
 				
