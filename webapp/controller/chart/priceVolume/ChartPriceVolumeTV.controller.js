@@ -126,17 +126,21 @@ sap.ui.define([
 		/**
 		 * Handles the button press event of the Bollinger BandWidth ToggleButton.
 		 */
-		onBollingerBandWidthPressed : function(oEvent) {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var bMultipleButtonsPressed = this.areMultipleIndicatorButtonsPressed();
-			
-			if (bMultipleButtonsPressed) {
-				MessageToast.show(oResourceBundle.getText("chartPriceVolumeTV.multipleIndicatorError"));
-				oEvent.getSource().setPressed(false);
-				return;				
-			}
+		onBollingerBandWidthPressed : function(oEvent) {		
+			var oSlowStoButton = this.getView().byId("slowStochasticButton");
+			var oRsLineButton = this.getView().byId("rsLineButton");
 			
 			if (oEvent.getSource().getPressed()) {
+				if(oSlowStoButton.getPressed() === true) {
+					oSlowStoButton.setPressed(false);
+					TradingViewController.displaySlowStochastic(this, false);
+				}
+				
+				if(oRsLineButton.getPressed() === true) {
+					oRsLineButton.setPressed(false);
+					TradingViewController.displayRsLine(this, false);
+				}
+				
 				TradingViewController.displayBollingerBandWidth(this, true);
 			} else {
 				TradingViewController.displayBollingerBandWidth(this, false);
@@ -148,16 +152,20 @@ sap.ui.define([
 		 * Handles the button press event of the Slow Stochastic ToggleButton.
 		 */
 		onSlowStochasticPressed : function(oEvent) {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var bMultipleButtonsPressed = this.areMultipleIndicatorButtonsPressed();
-			
-			if (bMultipleButtonsPressed) {
-				MessageToast.show(oResourceBundle.getText("chartPriceVolumeTV.multipleIndicatorError"));
-				oEvent.getSource().setPressed(false);
-				return;				
-			}
+			var oBBWButton = this.getView().byId("bbwButton");
+			var oRsLineButton = this.getView().byId("rsLineButton");
 			
 			if (oEvent.getSource().getPressed()) {
+				if(oBBWButton.getPressed() === true) {
+					oBBWButton.setPressed(false);
+					TradingViewController.displayBollingerBandWidth(this, false);
+				}
+				
+				if(oRsLineButton.getPressed() === true) {
+					oRsLineButton.setPressed(false);
+					TradingViewController.displayRsLine(this, false);
+				}
+				
 				TradingViewController.displaySlowStochastic(this, true);
 			} else {
 				TradingViewController.displaySlowStochastic(this, false);
@@ -169,16 +177,21 @@ sap.ui.define([
 		 * Handles the button press event of the RS line ToggleButton.
 		 */
 		onRsLinePressed : function(oEvent) {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var bMultipleButtonsPressed = this.areMultipleIndicatorButtonsPressed();
-			
-			if (bMultipleButtonsPressed) {
-				MessageToast.show(oResourceBundle.getText("chartPriceVolumeTV.multipleIndicatorError"));
-				oEvent.getSource().setPressed(false);
-				return;				
-			}
+			var oSlowStoButton = this.getView().byId("slowStochasticButton");
+			var oBBWButton = this.getView().byId("bbwButton");
 			
 			if (oEvent.getSource().getPressed()) {
+				if(oSlowStoButton.getPressed() === true) {
+					oSlowStoButton.setPressed(false);
+					TradingViewController.displaySlowStochastic(this, false);
+				}
+				
+				if(oBBWButton.getPressed() === true) {
+					oBBWButton.setPressed(false);
+					TradingViewController.displayBollingerBandWidth(this, false);
+				}
+				
+				
 				TradingViewController.displayRsLine(this, true);
 			} else {
 				TradingViewController.displayRsLine(this, false);
@@ -595,35 +608,6 @@ sap.ui.define([
 			} else {
 				oRsLineButton.setPressed(false);
 				oRsLineButton.setEnabled(false);
-			}
-		},
-		
-		
-		/**
-		 * Checks if more than one indicator button is pressed.
-		 */
-		areMultipleIndicatorButtonsPressed : function () {
-			var oBBWButton = this.getView().byId("bbwButton");
-			var oSlowStochasticButton = this.getView().byId("slowStochasticButton");
-			var oRsLineButton = this.getView().byId("rsLineButton");
-			var iNumberButtonsPressed = 0;
-			
-			if (oSlowStochasticButton.getPressed()) {
-				iNumberButtonsPressed++;	
-			}
-			
-			if (oBBWButton.getPressed()) {
-				iNumberButtonsPressed++;
-			}
-			
-			if (oRsLineButton.getPressed()) {
-				iNumberButtonsPressed++;
-			}
-			
-			if (iNumberButtonsPressed > 1) {
-				return true;
-			} else {
-				return false;
 			}
 		}
 	});
