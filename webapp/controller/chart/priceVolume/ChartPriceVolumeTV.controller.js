@@ -593,6 +593,7 @@ sap.ui.define([
 			if (oQuotation.instrument.type === Constants.INSTRUMENT_TYPE.STOCK) {
 				oRsLineButton.setEnabled(true);
 			} else {
+				oRsLineButton.setPressed(false);
 				oRsLineButton.setEnabled(false);
 			}
 		},
