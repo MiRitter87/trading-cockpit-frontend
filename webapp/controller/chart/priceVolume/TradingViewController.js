@@ -218,7 +218,7 @@ sap.ui.define([
 				ema21Series.setData(ema21Data);
 				oChartModel.setProperty("/ema21Series", ema21Series);
 				
-				this.organizeMovingAverages(oCallingController, oChartModel);
+				this.organizeMovingAverages(oChartModel);
 			} else {
 				const ema21Series = oChartModel.getProperty("/ema21Series");
 				
@@ -244,7 +244,7 @@ sap.ui.define([
 				sma50Series.setData(sma50Data);
 				oChartModel.setProperty("/sma50Series", sma50Series);
 				
-				this.organizeMovingAverages(oCallingController, oChartModel);
+				this.organizeMovingAverages(oChartModel);
 			} else {
 				const sma50Series = oChartModel.getProperty("/sma50Series");
 				
@@ -270,7 +270,7 @@ sap.ui.define([
 				sma150Series.setData(sma150Data);
 				oChartModel.setProperty("/sma150Series", sma150Series);
 				
-				this.organizeMovingAverages(oCallingController, oChartModel);
+				this.organizeMovingAverages(oChartModel);
 			} else {
 				const sma150Series = oChartModel.getProperty("/sma150Series");
 				
@@ -296,7 +296,7 @@ sap.ui.define([
 				sma200Series.setData(sma200Data);
 				oChartModel.setProperty("/sma200Series", sma200Series);
 				
-				this.organizeMovingAverages(oCallingController, oChartModel);
+				this.organizeMovingAverages(oChartModel);
 			} else {
 				const sma200Series = oChartModel.getProperty("/sma200Series");
 				
@@ -323,7 +323,7 @@ sap.ui.define([
 				sma30VolumeSeries.setData(sma30VolumeData);
 				oChartModel.setProperty("/sma30VolumeSeries", sma30VolumeSeries);
 				
-				this.organizeMovingAverages(oCallingController, oChartModel);
+				this.organizeMovingAverages(oChartModel);
 			} else {
 				const sma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
 				
@@ -337,13 +337,14 @@ sap.ui.define([
 		/**
 		 * Displays the Bollinger BandWidth in a separate pane of the chart.
 		 */
-		displayBollingerBandWidth : function (oCallingController, bVisible) {
+		displayBollingerBandWidth : function (oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var bbwData;
 			var bbwThreshold = this.getBBWThreshold(oCallingController);
+			var isBbwVisible = oChartModel.getProperty("/displayBollingerBandWidth");
 			
-			if (bVisible === true) {
+			if (isBbwVisible === true) {
 				bbwData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.BBW);
 				
 				const bbwSeries = chart.addSeries(LightweightCharts.LineSeries, 
@@ -357,8 +358,8 @@ sap.ui.define([
 				
 				oChartModel.setProperty("/bbwSeries", bbwSeries);
 				
-				this.organizePanesPriceVolume(oCallingController, oChartModel);
-				this.organizeMovingAverages(oCallingController, oChartModel);
+				this.organizePanesPriceVolume(oChartModel);
+				this.organizeMovingAverages(oChartModel);
 			} else {
 				const bbwSeries = oChartModel.getProperty("/bbwSeries");
 				
@@ -372,12 +373,13 @@ sap.ui.define([
 		/**
 		 * Displays the Slow Stochastic in a separate pane of the chart.
 		 */
-		displaySlowStochastic : function (oCallingController, bVisible) {
+		displaySlowStochastic : function (oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var slowStochasticData;
+			var isSlowStochasticVisible = oChartModel.getProperty("/displaySlowStochastic");
 			
-			if (bVisible === true) {
+			if (isSlowStochasticVisible === true) {
 				slowStochasticData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.SLOW_STOCHASTIC);
 				
 				const slowStochasticSeries = chart.addSeries(LightweightCharts.LineSeries, 
@@ -395,8 +397,8 @@ sap.ui.define([
 				
 				oChartModel.setProperty("/slowStochasticSeries", slowStochasticSeries);
 				
-				this.organizePanesPriceVolume(oCallingController, oChartModel);
-				this.organizeMovingAverages(oCallingController, oChartModel);
+				this.organizePanesPriceVolume(oChartModel);
+				this.organizeMovingAverages(oChartModel);
 			} else {
 				const slowStochasticSeries = oChartModel.getProperty("/slowStochasticSeries");
 				
@@ -410,12 +412,13 @@ sap.ui.define([
 		/**
 		 * Displays the RS line in a separate pane of the chart.
 		 */
-		displayRsLine : function (oCallingController, bVisible) {
+		displayRsLine : function (oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var rsLineData;
+			var isRsLineVisible = oChartModel.getProperty("/displayRsLine");
 			
-			if (bVisible === true) {
+			if (isRsLineVisible === true) {
 				rsLineData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.RS_LINE);
 				
 				const rsLineSeries = chart.addSeries(LightweightCharts.LineSeries, 
@@ -426,8 +429,8 @@ sap.ui.define([
 				
 				oChartModel.setProperty("/rsLineSeries", rsLineSeries);
 				
-				this.organizePanesPriceVolume(oCallingController, oChartModel);
-				this.organizeMovingAverages(oCallingController, oChartModel);
+				this.organizePanesPriceVolume(oChartModel);
+				this.organizeMovingAverages(oChartModel);
 			} else {
 				const rsLineSeries = oChartModel.getProperty("/rsLineSeries");
 				
@@ -472,7 +475,7 @@ sap.ui.define([
 		 * Organizes the panes of the price/volume chart in a manner that 
 		 * the indicator is at the top pane and the price/volume pane is below.
 		 */
-		organizePanesPriceVolume : function (oCallingController, oChartModel) {
+		organizePanesPriceVolume : function (oChartModel) {
 			var chart = oChartModel.getProperty("/chart");
 			var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
 			var volumeSeries = oChartModel.getProperty("/volumeSeries");
@@ -482,7 +485,7 @@ sap.ui.define([
 			var indicatorPane;
 			var chartHeight;
 			
-			if (oCallingController.getView().byId("bbwButton").getPressed() === true) {	
+			if (oChartModel.getProperty("/displayBollingerBandWidth") === true) {	
 				bbwSeries.moveToPane(0);
 				candlestickSeries.moveToPane(1);
 				volumeSeries.moveToPane(1);
@@ -490,7 +493,7 @@ sap.ui.define([
 				bbwSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
 			}
 			
-			if (oCallingController.getView().byId("slowStochasticButton").getPressed() === true) {	
+			if (oChartModel.getProperty("/displaySlowStochastic") === true) {	
 				slowStochasticSeries.moveToPane(0);
 				candlestickSeries.moveToPane(1);
 				volumeSeries.moveToPane(1);
@@ -498,7 +501,7 @@ sap.ui.define([
 				slowStochasticSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
 			}
 			
-			if (oCallingController.getView().byId("rsLineButton").getPressed() === true) {	
+			if (oChartModel.getProperty("/displayRsLine") === true) {	
 				rsLineSeries.moveToPane(0);
 				candlestickSeries.moveToPane(1);
 				volumeSeries.moveToPane(1);
@@ -541,7 +544,7 @@ sap.ui.define([
 		/**
 		 * Moves the moving averages to the target pane depending on the state of the indicator button.
 		 */
-		organizeMovingAverages : function (oCallingController, oChartModel) {
+		organizeMovingAverages : function (oChartModel) {
 			var chart = oChartModel.getProperty("/chart");
 			var ema21Series = oChartModel.getProperty("/ema21Series");
 			var sma50Series = oChartModel.getProperty("/sma50Series");
@@ -549,46 +552,41 @@ sap.ui.define([
 			var sma200Series = oChartModel.getProperty("/sma200Series");
 			var sma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
 			var pricePaneIndex;
-			var isEma21Visible =  oChartModel.getProperty("/displayEma21");
-			var isSma50Visible =  oChartModel.getProperty("/displaySma50");
-			var isSma150Visible =  oChartModel.getProperty("/displaySma150");
-			var isSma200Visible =  oChartModel.getProperty("/displaySma200");
-			var isSma30VolumeVisible =  oChartModel.getProperty("/displaySma30Volume");
 			
-			if (oCallingController.getView().byId("bbwButton").getPressed() === true || 
-				oCallingController.getView().byId("slowStochasticButton").getPressed() === true ||
-				oCallingController.getView().byId("rsLineButton").getPressed() === true) {	
+			if (oChartModel.getProperty("/displayBollingerBandWidth") === true || 
+				oChartModel.getProperty("/displaySlowStochastic") === true ||
+				oChartModel.getProperty("/displayRsLine") === true) {	
 					
 				pricePaneIndex = 1;	
 			} else {
 				pricePaneIndex = 0;
 			}
 			
-			if (isEma21Visible === true) {				
+			if (oChartModel.getProperty("/displayEma21") === true) {				
 				if (ema21Series !== undefined && chart !== undefined) {
 					ema21Series.moveToPane(pricePaneIndex);
 				}
 			}
 			
-			if (isSma50Visible === true) {	
+			if (oChartModel.getProperty("/displaySma50") === true) {	
 				if (sma50Series !== undefined && chart !== undefined) {
 					sma50Series.moveToPane(pricePaneIndex);
 				}
 			}
 			
-			if (isSma150Visible === true) {	
+			if (oChartModel.getProperty("/displaySma150") === true) {	
 				if (sma150Series !== undefined && chart !== undefined) {
 					sma150Series.moveToPane(pricePaneIndex);
 				}
 			}
 			
-			if (isSma200Visible === true) {	
+			if (oChartModel.getProperty("/displaySma200") === true) {	
 				if (sma200Series !== undefined && chart !== undefined) {
 					sma200Series.moveToPane(pricePaneIndex);
 				}
 			}
 			
-			if (isSma30VolumeVisible === true) {	
+			if (oChartModel.getProperty("/displaySma30Volume") === true) {	
 				if (sma30VolumeSeries !== undefined && chart !== undefined) {
 					sma30VolumeSeries.moveToPane(pricePaneIndex);
 				}

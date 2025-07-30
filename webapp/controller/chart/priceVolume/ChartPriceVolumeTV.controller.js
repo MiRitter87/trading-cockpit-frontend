@@ -146,25 +146,30 @@ sap.ui.define([
 		/**
 		 * Handles the button press event of the Bollinger BandWidth ToggleButton.
 		 */
-		onBollingerBandWidthPressed : function(oEvent) {		
+		onBollingerBandWidthPressed : function(oEvent) {
+			var oChartModel = this.getView().getModel("chartModel");
 			var oSlowStoButton = this.getView().byId("slowStochasticButton");
 			var oRsLineButton = this.getView().byId("rsLineButton");
 			
 			if (oEvent.getSource().getPressed()) {
 				if(oSlowStoButton.getPressed() === true) {
 					oSlowStoButton.setPressed(false);
-					TradingViewController.displaySlowStochastic(this, false);
+					oChartModel.setProperty("/displaySlowStochastic", false);
+					TradingViewController.displaySlowStochastic(this);
 				}
 				
 				if(oRsLineButton.getPressed() === true) {
 					oRsLineButton.setPressed(false);
-					TradingViewController.displayRsLine(this, false);
+					oChartModel.setProperty("/displayRsLine", false);
+					TradingViewController.displayRsLine(this);
 				}
 				
-				TradingViewController.displayBollingerBandWidth(this, true);
+				oChartModel.setProperty("/displayBollingerBandWidth", true);
 			} else {
-				TradingViewController.displayBollingerBandWidth(this, false);
+				oChartModel.setProperty("/displayBollingerBandWidth", false);
 			}
+			
+			TradingViewController.displayBollingerBandWidth(this);
 		},
 		
 		
@@ -172,24 +177,29 @@ sap.ui.define([
 		 * Handles the button press event of the Slow Stochastic ToggleButton.
 		 */
 		onSlowStochasticPressed : function(oEvent) {
+			var oChartModel = this.getView().getModel("chartModel");
 			var oBBWButton = this.getView().byId("bbwButton");
 			var oRsLineButton = this.getView().byId("rsLineButton");
 			
 			if (oEvent.getSource().getPressed()) {
 				if(oBBWButton.getPressed() === true) {
 					oBBWButton.setPressed(false);
-					TradingViewController.displayBollingerBandWidth(this, false);
+					oChartModel.setProperty("/displayBollingerBandWidth", false);
+					TradingViewController.displayBollingerBandWidth(this);
 				}
 				
 				if(oRsLineButton.getPressed() === true) {
 					oRsLineButton.setPressed(false);
-					TradingViewController.displayRsLine(this, false);
+					oChartModel.setProperty("/displayRsLine", false);
+					TradingViewController.displayRsLine(this);
 				}
 				
-				TradingViewController.displaySlowStochastic(this, true);
+				oChartModel.setProperty("/displaySlowStochastic", true);
 			} else {
-				TradingViewController.displaySlowStochastic(this, false);
+				oChartModel.setProperty("/displaySlowStochastic", false);
 			}
+			
+			TradingViewController.displaySlowStochastic(this);
 		},
 		
 		
@@ -197,25 +207,29 @@ sap.ui.define([
 		 * Handles the button press event of the RS line ToggleButton.
 		 */
 		onRsLinePressed : function(oEvent) {
+			var oChartModel = this.getView().getModel("chartModel");
 			var oSlowStoButton = this.getView().byId("slowStochasticButton");
 			var oBBWButton = this.getView().byId("bbwButton");
 			
 			if (oEvent.getSource().getPressed()) {
 				if(oSlowStoButton.getPressed() === true) {
 					oSlowStoButton.setPressed(false);
-					TradingViewController.displaySlowStochastic(this, false);
+					oChartModel.setProperty("/displaySlowStochastic", false);
+					TradingViewController.displaySlowStochastic(this);
 				}
 				
 				if(oBBWButton.getPressed() === true) {
 					oBBWButton.setPressed(false);
-					TradingViewController.displayBollingerBandWidth(this, false);
+					oChartModel.setProperty("/displayBollingerBandWidth", false);
+					TradingViewController.displayBollingerBandWidth(this);
 				}
 				
-				
-				TradingViewController.displayRsLine(this, true);
+				oChartModel.setProperty("/displayRsLine", true);
 			} else {
-				TradingViewController.displayRsLine(this, false);
+				oChartModel.setProperty("/displayRsLine", false);
 			}
+			
+			TradingViewController.displayRsLine(this);
 		},
 		
 		
