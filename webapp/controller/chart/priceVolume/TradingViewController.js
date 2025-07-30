@@ -172,34 +172,24 @@ sap.ui.define([
 		
 		
 		/**
-		 * Applies the moving averages to the chart according to the state of the ToggleButtons.
+		 * Applies the moving averages to the chart according to the state of the chartModel.
 		 */
 		applyMovingAverages : function (oCallingController) {
-			var oEma21Button = oCallingController.getView().byId("ema21Button");
-			var oSma50Button = oCallingController.getView().byId("sma50Button");
-			var oSma150Button = oCallingController.getView().byId("sma150Button");
-			var oSma200Button = oCallingController.getView().byId("sma200Button");
-			var oSma30VolumeButton = oCallingController.getView().byId("sma30VolumeButton");
-			
-			this.displayEma21(oCallingController, oEma21Button.getPressed());
-			this.displaySma50(oCallingController, oSma50Button.getPressed());
-			this.displaySma150(oCallingController, oSma150Button.getPressed());
-			this.displaySma200(oCallingController, oSma200Button.getPressed());
-			this.displaySma30Volume(oCallingController, oSma30VolumeButton.getPressed());
+			this.displayEma21(oCallingController);
+			this.displaySma50(oCallingController);
+			this.displaySma150(oCallingController);
+			this.displaySma200(oCallingController);
+			this.displaySma30Volume(oCallingController);
 		},
 		
 		
 		/**
-		 * Applies the indicators to the chart according to the state of the ToggleButtons.
+		 * Applies the indicators to the chart according to the state of the chartModel.
 		 */
 		applyIndicators : function (oCallingController) {
-			var bbwButton = oCallingController.getView().byId("bbwButton");
-			var slowStochasticButton = oCallingController.getView().byId("slowStochasticButton");
-			var rsLineButton = oCallingController.getView().byId("rsLineButton");
-			
-			this.displayBollingerBandWidth(oCallingController, bbwButton.getPressed());
-			this.displaySlowStochastic(oCallingController, slowStochasticButton.getPressed());
-			this.displayRsLine(oCallingController, rsLineButton.getPressed());
+			this.displayBollingerBandWidth(oCallingController);
+			this.displaySlowStochastic(oCallingController);
+			this.displayRsLine(oCallingController);
 		},
 		
 		
@@ -542,7 +532,7 @@ sap.ui.define([
 		
 		
 		/**
-		 * Moves the moving averages to the target pane depending on the state of the indicator button.
+		 * Moves the moving averages to the target pane depending on the visibility of any indicator.
 		 */
 		organizeMovingAverages : function (oChartModel) {
 			var chart = oChartModel.getProperty("/chart");

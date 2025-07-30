@@ -359,6 +359,7 @@ sap.ui.define([
 			
 			TradingViewController.openChart(oCallingController, "chartContainerPV");
 			oCallingController.updateToolbarForChartDisplay();
+			oCallingController.updateModelForOverlays();
 			TradingViewController.applyIndicators(oCallingController);
 			TradingViewController.applyMovingAverages(oCallingController);
 			
@@ -642,6 +643,86 @@ sap.ui.define([
 			} else {
 				oRsLineButton.setPressed(false);
 				oRsLineButton.setEnabled(false);
+			}
+		},
+		
+		
+		/**
+		 * Updates the chartModel with visibility information about moving averages and indicators.
+		 */
+		updateModelForOverlays : function () {
+			this.updateModelForMovingAverages();
+			this.updateModelForIndicators();
+		},
+		
+		
+		/**
+		 * Updates the chartModel with visibility information about moving averages.
+		 */
+		updateModelForMovingAverages : function () {
+			var oChartModel = this.getView().getModel("chartModel");
+			var oEma21Button = this.getView().byId("ema21Button");
+			var oSma50Button = this.getView().byId("sma50Button");
+			var oSma150Button = this.getView().byId("sma150Button");
+			var oSma200Button = this.getView().byId("sma200Button");
+			var oSma30VolumeButton = this.getView().byId("sma30VolumeButton");
+			
+			if (oEma21Button.getPressed()) {
+				oChartModel.setProperty("/displayEma21", true);
+			} else {
+				oChartModel.setProperty("/displayEma21", false);
+			}
+			
+			if (oSma50Button.getPressed()) {
+				oChartModel.setProperty("/displaySma50", true);
+			} else {
+				oChartModel.setProperty("/displaySma50", false);
+			}
+			
+			if (oSma150Button.getPressed()) {
+				oChartModel.setProperty("/displaySma150", true);
+			} else {
+				oChartModel.setProperty("/displaySma150", false);
+			}
+			
+			if (oSma200Button.getPressed()) {
+				oChartModel.setProperty("/displaySma200", true);
+			} else {
+				oChartModel.setProperty("/displaySma200", false);
+			}
+			
+			if (oSma30VolumeButton.getPressed()) {
+				oChartModel.setProperty("/displaySma30Volume", true);
+			} else {
+				oChartModel.setProperty("/displaySma30Volume", false);
+			}
+		},
+		
+		/**
+		 * Updates the chartModel with visibility information about indicators.
+		 */
+		updateModelForIndicators : function () {
+			var oChartModel = this.getView().getModel("chartModel");
+			var oBBWButton = this.getView().byId("bbwButton");
+			var oSlowStoButton = this.getView().byId("slowStochasticButton");
+			var oRsLineButton = this.getView().byId("rsLineButton");
+			
+			if (oBBWButton.getPressed()) {
+				oChartModel.setProperty("/displayBollingerBandWidth", true);
+			} else {
+				oChartModel.setProperty("/displayBollingerBandWidth", false);
+			}
+			
+			if (oSlowStoButton.getPressed()) {
+				oChartModel.setProperty("/displaySlowStochastic", true);
+			} else {
+				oChartModel.setProperty("/displaySlowStochastic", false);
+			}
+			
+			if (oRsLineButton.getPressed()) {
+				oChartModel.setProperty("/displayRsLine", true);
+			} else {
+				oChartModel.setProperty("/displayRsLine", false);
 			}
 		}
 	});
