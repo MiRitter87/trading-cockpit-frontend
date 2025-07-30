@@ -67,11 +67,15 @@ sap.ui.define([
     	 * Handles the button press event of the EMA(21) ToggleButton.
     	 */
     	onEma21Pressed : function(oEvent) {
+			var oChartModel = this.getView().getModel("chartModel");
+	
 			if (oEvent.getSource().getPressed()) {
-				TradingViewController.displayEma21(this, true);
+				oChartModel.setProperty("/displayEma21", true);
 			} else {
-				TradingViewController.displayEma21(this, false);
+				oChartModel.setProperty("/displayEma21", false);
 			}
+			
+			TradingViewController.displayEma21(this);
 		},
 		
 		
@@ -79,11 +83,15 @@ sap.ui.define([
     	 * Handles the button press event of the SMA(50) ToggleButton.
     	 */
     	onSma50Pressed : function(oEvent) {
+			var oChartModel = this.getView().getModel("chartModel");
+	
 			if (oEvent.getSource().getPressed()) {
-				TradingViewController.displaySma50(this, true);
+				oChartModel.setProperty("/displaySma50", true);
 			} else {
-				TradingViewController.displaySma50(this, false);
+				oChartModel.setProperty("/displaySma50", false);
 			}
+			
+			TradingViewController.displaySma50(this);
 		},
 		
 		
@@ -91,11 +99,15 @@ sap.ui.define([
     	 * Handles the button press event of the SMA(150) ToggleButton.
     	 */
     	onSma150Pressed : function(oEvent) {
+			var oChartModel = this.getView().getModel("chartModel");
+	
 			if (oEvent.getSource().getPressed()) {
-				TradingViewController.displaySma150(this, true);
+				oChartModel.setProperty("/displaySma150", true);
 			} else {
-				TradingViewController.displaySma150(this, false);
+				oChartModel.setProperty("/displaySma150", false);
 			}
+			
+			TradingViewController.displaySma150(this);
 		},
 		
 		
@@ -103,11 +115,15 @@ sap.ui.define([
     	 * Handles the button press event of the SMA(200) ToggleButton.
     	 */
     	onSma200Pressed : function(oEvent) {
+			var oChartModel = this.getView().getModel("chartModel");
+			
 			if (oEvent.getSource().getPressed()) {
-				TradingViewController.displaySma200(this, true);
+				oChartModel.setProperty("/displaySma200", true);
 			} else {
-				TradingViewController.displaySma200(this, false);
+				oChartModel.setProperty("/displaySma200", false);
 			}
+			
+			TradingViewController.displaySma200(this);
 		},
 		
 		
@@ -115,11 +131,15 @@ sap.ui.define([
     	 * Handles the button press event of the SMA(30) volume ToggleButton.
     	 */
     	onSma30VolumePressed : function(oEvent) {
+			var oChartModel = this.getView().getModel("chartModel");
+			
 			if (oEvent.getSource().getPressed()) {
-				TradingViewController.displaySma30Volume(this, true);
+				oChartModel.setProperty("/displaySma30Volume", true);
 			} else {
-				TradingViewController.displaySma30Volume(this, false);
+				oChartModel.setProperty("/displaySma30Volume", false);
 			}
+			
+			TradingViewController.displaySma30Volume(this);
 		},
 		
 		

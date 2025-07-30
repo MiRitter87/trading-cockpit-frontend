@@ -206,12 +206,13 @@ sap.ui.define([
 		/**
 		 * Displays the EMA(21) in the chart.
 		 */
-		displayEma21 : function (oCallingController, bVisible) {
+		displayEma21 : function (oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var ema21Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.EMA_21);
+			var isEma21Visible = oChartModel.getProperty("/displayEma21");
 	
-			if (bVisible === true) {
+			if (isEma21Visible === true) {
 				const ema21Series = chart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'yellow', lineWidth: 1, priceLineVisible: false });
 				ema21Series.setData(ema21Data);
@@ -231,12 +232,13 @@ sap.ui.define([
 		/**
 		 * Displays the SMA(50) in the chart.
 		 */
-		displaySma50 : function (oCallingController, bVisible) {
+		displaySma50 : function (oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var sma50Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_50);
+			var isSma50Visible = oChartModel.getProperty("/displaySma50");
 	
-			if (bVisible === true) {
+			if (isSma50Visible === true) {
 				const sma50Series = chart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'blue', lineWidth: 1, priceLineVisible: false });
 				sma50Series.setData(sma50Data);
@@ -256,12 +258,13 @@ sap.ui.define([
 		/**
 		 * Displays the SMA(150) in the chart.
 		 */
-		displaySma150 : function (oCallingController, bVisible) {
+		displaySma150 : function (oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var sma150Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_150);
+			var isSma150Visible = oChartModel.getProperty("/displaySma150");
 	
-			if (bVisible === true) {
+			if (isSma150Visible === true) {
 				const sma150Series = chart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'red', lineWidth: 1, priceLineVisible: false });
 				sma150Series.setData(sma150Data);
@@ -281,12 +284,13 @@ sap.ui.define([
 		/**
 		 * Displays the SMA(200) in the chart.
 		 */
-		displaySma200 : function (oCallingController, bVisible) {
+		displaySma200 : function (oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var sma200Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_200);
+			var isSma200Visible = oChartModel.getProperty("/displaySma200");
 	
-			if (bVisible === true) {
+			if (isSma200Visible === true) {
 				const sma200Series = chart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'green', lineWidth: 1, priceLineVisible: false });
 				sma200Series.setData(sma200Data);
@@ -306,12 +310,13 @@ sap.ui.define([
 		/**
 		 * Displays the SMA(30) of the volume in the chart.
 		 */
-		displaySma30Volume : function (oCallingController, bVisible) {
+		displaySma30Volume : function (oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var sma30VolumeData = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_30_VOLUME);
+			var isSma30VolumeVisible = oChartModel.getProperty("/displaySma30Volume");
 	
-			if (bVisible === true) {
+			if (isSma30VolumeVisible === true) {
 				const sma30VolumeSeries = chart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, priceScaleId: 'left' }
 				);
@@ -544,6 +549,11 @@ sap.ui.define([
 			var sma200Series = oChartModel.getProperty("/sma200Series");
 			var sma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
 			var pricePaneIndex;
+			var isEma21Visible =  oChartModel.getProperty("/displayEma21");
+			var isSma50Visible =  oChartModel.getProperty("/displaySma50");
+			var isSma150Visible =  oChartModel.getProperty("/displaySma150");
+			var isSma200Visible =  oChartModel.getProperty("/displaySma200");
+			var isSma30VolumeVisible =  oChartModel.getProperty("/displaySma30Volume");
 			
 			if (oCallingController.getView().byId("bbwButton").getPressed() === true || 
 				oCallingController.getView().byId("slowStochasticButton").getPressed() === true ||
@@ -554,31 +564,31 @@ sap.ui.define([
 				pricePaneIndex = 0;
 			}
 			
-			if (oCallingController.getView().byId("ema21Button").getPressed() === true) {				
+			if (isEma21Visible === true) {				
 				if (ema21Series !== undefined && chart !== undefined) {
 					ema21Series.moveToPane(pricePaneIndex);
 				}
 			}
 			
-			if (oCallingController.getView().byId("sma50Button").getPressed() === true) {	
+			if (isSma50Visible === true) {	
 				if (sma50Series !== undefined && chart !== undefined) {
 					sma50Series.moveToPane(pricePaneIndex);
 				}
 			}
 			
-			if (oCallingController.getView().byId("sma150Button").getPressed() === true) {	
+			if (isSma150Visible === true) {	
 				if (sma150Series !== undefined && chart !== undefined) {
 					sma150Series.moveToPane(pricePaneIndex);
 				}
 			}
 			
-			if (oCallingController.getView().byId("sma200Button").getPressed() === true) {	
+			if (isSma200Visible === true) {	
 				if (sma200Series !== undefined && chart !== undefined) {
 					sma200Series.moveToPane(pricePaneIndex);
 				}
 			}
 			
-			if (oCallingController.getView().byId("sma30VolumeButton").getPressed() === true) {	
+			if (isSma30VolumeVisible === true) {	
 				if (sma30VolumeSeries !== undefined && chart !== undefined) {
 					sma30VolumeSeries.moveToPane(pricePaneIndex);
 				}
