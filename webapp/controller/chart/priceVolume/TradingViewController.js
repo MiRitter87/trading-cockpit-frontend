@@ -434,12 +434,13 @@ sap.ui.define([
 		/**
 		 * Displays a Histogram with the net sum of health check events for each trading day.
 		 */
-		displayHealthCheckEvents : function (oCallingController, bVisible) {
+		displayHealthCheckEvents : function (oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var healthEventData;
+			var areEventsVisible = oChartModel.getProperty("/displayHealthCheckEvents");
 			
-			if (bVisible === true) {
+			if (areEventsVisible === true) {
 				healthEventData = this.getHealthEventData(oCallingController);
 				
 				const healthEventSeries = chart.addSeries(LightweightCharts.HistogramSeries,
@@ -450,7 +451,7 @@ sap.ui.define([
 				oChartModel.setProperty("/healthEventSeries", healthEventSeries);
 				
 				this.organizePanesHealthCheck(oChartModel);
-				//this.organizeMovingAverages(oCallingController, oChartModel);
+				this.organizeMovingAverages(oChartModel);
 			} else {
 				const healthEventSeries = oChartModel.getProperty("/healthEventSeries");
 				
@@ -545,7 +546,8 @@ sap.ui.define([
 			
 			if (oChartModel.getProperty("/displayBollingerBandWidth") === true || 
 				oChartModel.getProperty("/displaySlowStochastic") === true ||
-				oChartModel.getProperty("/displayRsLine") === true) {	
+				oChartModel.getProperty("/displayRsLine") === true ||
+				oChartModel.getProperty("/displayHealthCheckEvents") === true) {	
 					
 				pricePaneIndex = 1;	
 			} else {

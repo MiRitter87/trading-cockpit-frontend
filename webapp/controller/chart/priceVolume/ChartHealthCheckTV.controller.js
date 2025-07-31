@@ -114,10 +114,13 @@ sap.ui.define([
 			}                                                               
 			
 			oCallingController.getView().setModel(oModel, "chartData");
-			oCallingController.updateChartTitle();
 			
 			TradingViewController.openChart(oCallingController, "chartContainerHealth");
-			TradingViewController.displayHealthCheckEvents(oCallingController, true);
+			
+			oCallingController.updateChartTitle();
+			oCallingController.updateModelForOverlays();
+			TradingViewController.displayHealthCheckEvents(oCallingController);
+			TradingViewController.applyMovingAverages(oCallingController);
 			TradingViewController.setVisibleNumberOfCandles(oCallingController, 100);
 		},
 		
@@ -207,6 +210,25 @@ sap.ui.define([
 				return;
 			}
 			
+		},
+		
+		
+		/**
+		 * Updates the chartModel with visibility information about moving averages and indicators.
+		 */
+		updateModelForOverlays : function () {
+			var oChartModel = this.getView().getModel("chartModel");
+			
+			oChartModel.setProperty("/displayBollingerBandWidth", false);
+			oChartModel.setProperty("/displaySlowStochastic", false);
+			oChartModel.setProperty("/displayRsLine", false);
+			oChartModel.setProperty("/displayHealthCheckEvents", true);
+			
+			oChartModel.setProperty("/displayEma21", true);
+			oChartModel.setProperty("/displaySma50", true);
+			oChartModel.setProperty("/displaySma150", false);
+			oChartModel.setProperty("/displaySma200", false);
+			oChartModel.setProperty("/displaySma30Volume", true);
 		},
 		
 		
