@@ -52,7 +52,7 @@ sap.ui.define([
 		
 		
 		/**
-    	 * Handles the button press event of the template information button.
+    	 * Handles the button press event of the profile information button.
     	 */
     	onProfileInformationPressed : function() {
 			var oComboBox = this.getView().byId("healthCheckProfileComboBox");

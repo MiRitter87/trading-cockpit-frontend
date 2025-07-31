@@ -54,6 +54,29 @@ sap.ui.define([
 		
 		
 		/**
+    	 * Handles the button press event of the profile information button.
+    	 */
+    	onProfileInformationPressed : function() {
+			var oComboBox = this.getView().byId("healthCheckProfileComboBox");
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var mOptions = new Object();
+			var sTitle = "", sDescription = "";
+			var sKey = oComboBox.getSelectedKey();
+			
+			sTitle = MainController.getTitleOfHealthCheckProfile(sKey, oResourceBundle);
+			sDescription = MainController.getDescriptionOfHealthCheckProfile(sKey, oResourceBundle);
+			
+			if (sTitle === "" || sDescription === "") {
+				MessageBox.information(oResourceBundle.getText("chartHealthCheckTV.noProfileSelected"));
+				return;
+			}
+				
+			mOptions.title = sTitle
+			MessageBox.information(sDescription, mOptions);
+		},
+		
+		
+		/**
     	 * Handles the button press event of the refresh chart button.
     	 */
     	onRefreshPressed : function() {
