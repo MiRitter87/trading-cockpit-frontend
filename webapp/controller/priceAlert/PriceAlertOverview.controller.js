@@ -43,7 +43,7 @@ sap.ui.define([
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oSelectedPriceAlertModel;
 			
-			if(this.isPriceAlertSelected() == false) {
+			if(this.isPriceAlertSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("priceAlertOverview.noPriceAlertSelected"));
 				return;
 			}
@@ -63,7 +63,7 @@ sap.ui.define([
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(this.isPriceAlertSelected() == false) {
+			if(this.isPriceAlertSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("priceAlertOverview.noPriceAlertSelected"));
 				return;
 			}
@@ -109,15 +109,15 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			if(oReturnData.data != null) {
+			if(oReturnData.data !== null) {
 				oModel.setData(oReturnData.data);
 				
-				if(bShowSuccessMessage == true) {					
+				if(bShowSuccessMessage === true) {					
 					MessageToast.show(oResourceBundle.getText("priceAlertOverview.dataLoaded"));			
 				}
 			}
 			
-			if(oReturnData.data == null && oReturnData.message != null)  {
+			if(oReturnData.data === null && oReturnData.message !== null)  {
 				MessageToast.show(oReturnData.message[0].text);
 			}                                                               
 			
@@ -129,17 +129,17 @@ sap.ui.define([
 		 * Callback function of the deletePriceAlert RESTful WebService call in the PriceAlertController.
 		 */
 		deletePriceAlertCallback : function(oReturnData, oCallingController) {
-			if(oReturnData.message != null) {
-				if(oReturnData.message[0].type == 'S') {
+			if(oReturnData.message !== null) {
+				if(oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
 					PriceAlertController.queryPriceAlertsByWebService(oCallingController.queryPriceAlertsCallback, oCallingController, false);
 				}
 				
-				if(oReturnData.message[0].type == 'E') {
+				if(oReturnData.message[0].type === 'E') {
 					MessageBox.error(oReturnData.message[0].text);
 				}
 				
-				if(oReturnData.message[0].type == 'W') {
+				if(oReturnData.message[0].type === 'W') {
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
@@ -171,7 +171,7 @@ sap.ui.define([
 		 * Checks if a price alert has been selected.
 		 */
 		isPriceAlertSelected : function () {
-			if(this.getView().byId("priceAlertTable").getSelectedItem() == null) {				
+			if(this.getView().byId("priceAlertTable").getSelectedItem() === null) {				
 				return false;
 			} else {				
 				return true;
