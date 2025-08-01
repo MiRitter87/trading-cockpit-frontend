@@ -152,13 +152,13 @@ sap.ui.define([
 			var oRsLineButton = this.getView().byId("rsLineButton");
 			
 			if (oEvent.getSource().getPressed()) {
-				if(oSlowStoButton.getPressed() === true) {
+				if (oSlowStoButton.getPressed() === true) {
 					oSlowStoButton.setPressed(false);
 					oChartModel.setProperty("/displaySlowStochastic", false);
 					TradingViewController.displaySlowStochastic(this);
 				}
 				
-				if(oRsLineButton.getPressed() === true) {
+				if (oRsLineButton.getPressed() === true) {
 					oRsLineButton.setPressed(false);
 					oChartModel.setProperty("/displayRsLine", false);
 					TradingViewController.displayRsLine(this);
@@ -182,13 +182,13 @@ sap.ui.define([
 			var oRsLineButton = this.getView().byId("rsLineButton");
 			
 			if (oEvent.getSource().getPressed()) {
-				if(oBBWButton.getPressed() === true) {
+				if (oBBWButton.getPressed() === true) {
 					oBBWButton.setPressed(false);
 					oChartModel.setProperty("/displayBollingerBandWidth", false);
 					TradingViewController.displayBollingerBandWidth(this);
 				}
 				
-				if(oRsLineButton.getPressed() === true) {
+				if (oRsLineButton.getPressed() === true) {
 					oRsLineButton.setPressed(false);
 					oChartModel.setProperty("/displayRsLine", false);
 					TradingViewController.displayRsLine(this);
@@ -212,13 +212,13 @@ sap.ui.define([
 			var oBBWButton = this.getView().byId("bbwButton");
 			
 			if (oEvent.getSource().getPressed()) {
-				if(oSlowStoButton.getPressed() === true) {
+				if (oSlowStoButton.getPressed() === true) {
 					oSlowStoButton.setPressed(false);
 					oChartModel.setProperty("/displaySlowStochastic", false);
 					TradingViewController.displaySlowStochastic(this);
 				}
 				
-				if(oBBWButton.getPressed() === true) {
+				if (oBBWButton.getPressed() === true) {
 					oBBWButton.setPressed(false);
 					oChartModel.setProperty("/displayBollingerBandWidth", false);
 					TradingViewController.displayBollingerBandWidth(this);
