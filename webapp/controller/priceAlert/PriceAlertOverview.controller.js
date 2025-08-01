@@ -7,7 +7,7 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, PriceAlertController, Constants, formatter, JSONModel, MessageToast, MessageBox) {
+], function(Controller, MainController, PriceAlertController, Constants, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertOverview", {
@@ -17,7 +17,7 @@ sap.ui.define([
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("priceAlertOverviewRoute").attachMatched(this._onRouteMatched, this);
 		},
@@ -26,7 +26,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true);
 			
@@ -38,7 +38,7 @@ sap.ui.define([
     	/**
 		 * Handles the press-event of the show details button.
 		 */
-		onShowDetailsPressed : function () {
+		onShowDetailsPressed: function() {
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oSelectedPriceAlertModel;
@@ -59,7 +59,7 @@ sap.ui.define([
 		/**
 		 * Handles the press-event of the delete button.
 		 */
-		onDeletePressed : function () {
+		onDeletePressed: function() {
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -75,7 +75,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the close button of the price alert details fragment.
 		 */
-		onCloseDialog : function () {
+		onCloseDialog: function() {
 			this.byId("priceAlertDetailsDialog").close();
 		},
 		
@@ -83,7 +83,7 @@ sap.ui.define([
 		/**
 		 * Handles a selection of an icon in the IconTabBar for price alert filtering.
 		 */
-		onFilterSelect: function (oEvent) {
+		onFilterSelect: function(oEvent) {
 			var	sKey = oEvent.getParameter("key");
 
 			if (sKey === "All") {
@@ -105,7 +105,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryPriceAlert RESTful WebService call in the PriceAlertController.
 		 */
-		queryPriceAlertsCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		queryPriceAlertsCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -128,7 +128,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the deletePriceAlert RESTful WebService call in the PriceAlertController.
 		 */
-		deletePriceAlertCallback : function(oReturnData, oCallingController) {
+		deletePriceAlertCallback: function(oReturnData, oCallingController) {
 			if (oReturnData.message !== null) {
 				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
@@ -170,7 +170,7 @@ sap.ui.define([
 		/**
 		 * Checks if a price alert has been selected.
 		 */
-		isPriceAlertSelected : function () {
+		isPriceAlertSelected: function() {
 			if (this.getView().byId("priceAlertTable").getSelectedItem() === null) {				
 				return false;
 			} else {				
@@ -182,7 +182,7 @@ sap.ui.define([
 		/**
 		 * Gets the the selected price alert.
 		 */
-		getSelectedPriceAlert : function () {
+		getSelectedPriceAlert: function() {
 			var oListItem = this.getView().byId("priceAlertTable").getSelectedItem();
 			var oContext = oListItem.getBindingContext("priceAlerts");
 			var oSelectedPriceAlert = oContext.getProperty(null, oContext);

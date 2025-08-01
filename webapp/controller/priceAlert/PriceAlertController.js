@@ -2,13 +2,13 @@ sap.ui.define([
 	"../MainController",
 	"../Constants",
 	"sap/ui/model/json/JSONModel"
-], function (MainController, Constants, JSONModel) {
+], function(MainController, Constants, JSONModel) {
 	"use strict";
 	return {
 		/**
 		 * Initializes the given ComboBox with items for alert type selection.
 		 */
-		initializeTypeComboBox : function(oComboBox, oResourceBundle) {
+		initializeTypeComboBox: function(oComboBox, oResourceBundle) {
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.ALERT_TYPE.LESS_OR_EQUAL, "priceAlert.type.lessOrEqual");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.ALERT_TYPE.GREATER_OR_EQUAL, "priceAlert.type.greaterOrEqual");
 		},
@@ -17,7 +17,7 @@ sap.ui.define([
 		/**
 		 * Checks if a valid price is filled in.
 		 */
-		isPriceValid : function (sPriceInputString) {
+		isPriceValid: function(sPriceInputString) {
 			var fPricePerUnit = parseFloat(sPriceInputString);
 			
 			if (isNaN(fPricePerUnit)) {
@@ -38,7 +38,7 @@ sap.ui.define([
 		 *
          * Therefore the Input is set as type String and the price is parsed manually in this function.
 		 */
-		validatePriceInput : function (oPriceInput, oResourceBundle, oModel, sPricePropertyPath) {
+		validatePriceInput: function(oPriceInput, oResourceBundle, oModel, sPricePropertyPath) {
 			var sPriceInputString = oPriceInput.getValue();
 			var fPricePerUnit = parseFloat(sPriceInputString);
 			
@@ -57,7 +57,7 @@ sap.ui.define([
 		/**
 		 * Gets the price alert data of the price alert with the given ID.
 		 */
-		getPriceAlertById : function(iPriceAlertId, oPriceAlerts) {
+		getPriceAlertById: function(iPriceAlertId, oPriceAlerts) {
 			//Get the selected price alert from the array of all price alerts according to the id.
 			for (var i = 0; i < oPriceAlerts.length; i++) {
     			var oTempPriceAlert = oPriceAlerts[i];
@@ -74,7 +74,7 @@ sap.ui.define([
 		/**
 		 * Returns the localized text of the given type.
 		 */
-		getLocalizedTypeText : function(sType, oResourceBundle) {
+		getLocalizedTypeText: function(sType, oResourceBundle) {
 			if (sType === Constants.ALERT_TYPE.LESS_OR_EQUAL) {				
 				return oResourceBundle.getText("priceAlert.type.lessOrEqual");
 			} else if (sType === Constants.ALERT_TYPE.GREATER_OR_EQUAL) {				
@@ -88,7 +88,7 @@ sap.ui.define([
 		/**
 		 * Returns the currency for the given stock exchange.
 		 */
-		getCurrencyForStockExchange : function(sStockExchange) {
+		getCurrencyForStockExchange: function(sStockExchange) {
 			if (sStockExchange === Constants.STOCK_EXCHANGE.NYSE) {				
 				return Constants.CURRENCY.USD;
 			} else if (sStockExchange === Constants.STOCK_EXCHANGE.NDQ) {				
@@ -126,7 +126,7 @@ sap.ui.define([
 		/**
 		 * Creates a representation of a price alert that can be processed by the WebService.
 		 */
-		getPriceAlertForWebService : function(oPriceAlert) {
+		getPriceAlertForWebService: function(oPriceAlert) {
 			var wsPriceAlert = new JSONModel();
 			
 			wsPriceAlert.setProperty("/id", oPriceAlert.id);
@@ -150,7 +150,7 @@ sap.ui.define([
 		/**
 		 * Calls a WebService operation to create a price alert.
 		 */
-		createPriceAlertByWebService : function(oPriceAlertModel, callbackFunction, oCallingController) {
+		createPriceAlertByWebService: function(oPriceAlertModel, callbackFunction, oCallingController) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/priceAlert");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
@@ -162,7 +162,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl,
 				data : sJSONData, 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController);
 				}
 			});
@@ -172,7 +172,7 @@ sap.ui.define([
 		/**
 		 * Queries the price alert WebService for all price alerts.
 		 */
-		queryPriceAlertsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sTriggerStatus, sConfirmationStatus) {
+		queryPriceAlertsByWebService: function(callbackFunction, oCallingController, bShowSuccessMessage, sTriggerStatus, sConfirmationStatus) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/priceAlert");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
@@ -204,7 +204,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl, 
 				dataType : "json", 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});                                                                 
@@ -214,7 +214,7 @@ sap.ui.define([
 		/**
 		 * Updates changes of the price alert data using the WebService.
 		 */
-		savePriceAlertByWebService : function(oPriceAlertModel, callbackFunction, oCallingController) {
+		savePriceAlertByWebService: function(oPriceAlertModel, callbackFunction, oCallingController) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/priceAlert");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
@@ -226,7 +226,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl,
 				data : sJSONData, 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController);
 				}
 			}); 
@@ -236,7 +236,7 @@ sap.ui.define([
 		/**
 		 * Deletes the given price alert using the WebService.
 		 */
-		deletePriceAlertByWebService : function(oPriceAlert, callbackFunction, oCallingController) {
+		deletePriceAlertByWebService: function(oPriceAlert, callbackFunction, oCallingController) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/priceAlert");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + oPriceAlert.id;
@@ -247,7 +247,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl, 
 				dataType : "json", 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController);
 				}
 			});

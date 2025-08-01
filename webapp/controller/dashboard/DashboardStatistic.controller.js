@@ -8,7 +8,7 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, Constants, MainController, DashboardController, InstrumentController, formatter, JSONModel, MessageToast, MessageBox) {
+], function(Controller, Constants, MainController, DashboardController, InstrumentController, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.dashboard.DashboardStatistic", {
@@ -18,7 +18,7 @@ sap.ui.define([
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("dashboardStatisticRoute").attachMatched(this._onRouteMatched, this);
 			
@@ -29,7 +29,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query statistic data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			DashboardController.queryStatisticsByWebService(this.queryStatisticsCallback, this, true, Constants.INSTRUMENT_TYPE.STOCK);
 			
@@ -43,7 +43,7 @@ sap.ui.define([
     	/**
     	 * Handles the button press event of the refresh statistic button.
     	 */
-    	onRefreshPressed : function() {
+    	onRefreshPressed: function() {
 			var sSelectedType = "";
 			var sSectorId;
 			var sIndustryGroupId;
@@ -85,7 +85,7 @@ sap.ui.define([
     	/**
 		 * Callback function of the queryStatistics RESTful WebService call in the ScanController.
 		 */
-		queryStatisticsCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		queryStatisticsCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -109,7 +109,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryInstruments RESTful WebService call in the InstrumentController.
 		 */
-		queryInstrumentsCallback : function(oReturnData, oCallingController) {
+		queryInstrumentsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			var oSectorIgComboBox = oCallingController.getView().byId("sectorIgComboBox");
 			
@@ -132,7 +132,7 @@ sap.ui.define([
 		/**
 		 * Initializes the given ComboBox with items for instrument type selection.
 		 */
-		initializeTypeComboBox : function() {
+		initializeTypeComboBox: function() {
 			var oTypeComboBox = this.getView().byId("typeComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -144,7 +144,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oTypeComboBox = this.getView().byId("typeComboBox");
 			var oSectorIgComboBox = this.getView().byId("sectorIgComboBox");
 

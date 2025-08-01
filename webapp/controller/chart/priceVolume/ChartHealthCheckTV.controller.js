@@ -9,7 +9,7 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, TradingViewController, ScanController, InstrumentController, 
+], function(Controller, MainController, TradingViewController, ScanController, InstrumentController, 
 	Constants, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
@@ -20,7 +20,7 @@ sap.ui.define([
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("chartHealthCheckTVRoute").attachMatched(this._onRouteMatched, this);
 			
@@ -31,7 +31,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query only instruments that have quotations referenced. Otherwise no chart could be created.
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, false, Constants.SCAN_TEMPLATE.ALL);
 			
@@ -42,7 +42,7 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the chart information button.
     	 */
-    	onChartInformationPressed : function() {
+    	onChartInformationPressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var mOptions = new Object();
 			var sTitle = oResourceBundle.getText("chartHealthCheckTV.info.title");
@@ -56,7 +56,7 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the profile information button.
     	 */
-    	onProfileInformationPressed : function() {
+    	onProfileInformationPressed: function() {
 			var oComboBox = this.getView().byId("healthCheckProfileComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var mOptions = new Object();
@@ -79,7 +79,7 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the refresh chart button.
     	 */
-    	onRefreshPressed : function() {
+    	onRefreshPressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var sInstrumentId = oInstrumentComboBox.getSelectedKey();
@@ -98,7 +98,7 @@ sap.ui.define([
 		/**
 		 * Handles clicks in the TradingView chart.
 		 */
-		onChartClicked : function () {
+		onChartClicked: function() {
 			// No function implemented yet in the context of the health check view.
 		},
 		
@@ -106,7 +106,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
-		queryQuotationsCallback : function(oReturnData, oCallingController) {
+		queryQuotationsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -125,7 +125,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryChartData RESTful WebService call.
 		 */
-		queryChartDataCallback : function(oReturnData, oCallingController) {
+		queryChartDataCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -151,7 +151,7 @@ sap.ui.define([
 		/**
 		 * Queries the chart data WebService for health check data of an Instrument with the given ID.
 		 */
-		queryChartData : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId, sProfile, sLookbackPeriod) {
+		queryChartData: function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId, sProfile, sLookbackPeriod) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chartData");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/healthCheck/" + sInstrumentId;
@@ -164,7 +164,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl, 
 				dataType : "json", 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});  
@@ -174,7 +174,7 @@ sap.ui.define([
 		/**
 		 * Initializes the ComboBox of the health check profile.
 		 */
-		initializeHealthCheckProfileComboBox: function () {
+		initializeHealthCheckProfileComboBox: function() {
 			var oComboBox = this.getView().byId("healthCheckProfileComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -219,7 +219,7 @@ sap.ui.define([
 		/**
 		 * Updates the title of the chart.
 		 */
-		updateChartTitle : function () {
+		updateChartTitle: function() {
 			var oChartTitle = this.getView().byId("chartTitle");
 			var oChartData = this.getView().getModel("chartData");
 			var aQuotations = oChartData.getProperty("/quotations/quotation");
@@ -239,7 +239,7 @@ sap.ui.define([
 		/**
 		 * Updates the chartModel with visibility information about moving averages and indicators.
 		 */
-		updateModelForOverlays : function () {
+		updateModelForOverlays: function() {
 			var oChartModel = this.getView().getModel("chartModel");
 			
 			oChartModel.setProperty("/displayBollingerBandWidth", false);
@@ -258,7 +258,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oProfileComboBox = this.getView().byId("healthCheckProfileComboBox");
 			var oLookbackPeriodInput = this.getView().byId("lookbackPeriodInput");

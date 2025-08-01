@@ -20,7 +20,7 @@ sap.ui.define([
 	"sap/m/ObjectStatus",
 	"sap/ui/core/library",
 	"sap/ui/core/Fragment"
-], function (Controller, MainController, Constants, ScanController, ScanResultsHelper, InstrumentController, JSONModel,
+], function(Controller, MainController, Constants, ScanController, ScanResultsHelper, InstrumentController, JSONModel,
 	MessageToast, MessageBox, Filter, FilterOperator, Engine, SelectionController, SortController, Sorter,
 	ColumnListItem, Text, Link, ObjectStatus, coreLibrary, Fragment) {
 		
@@ -30,7 +30,7 @@ sap.ui.define([
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oTypeComboBox = this.getView().byId("typeComboBox");
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("scanResultsRoute").attachMatched(this._onRouteMatched, this);
@@ -46,7 +46,7 @@ sap.ui.define([
 		/**
 		 * Handles destroying of the ScanResults view.
 		 */
-		onExit: function () {
+		onExit: function() {
 			this._oTPC.destroy();
 		},
 		
@@ -54,7 +54,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, true, 
 				Constants.SCAN_TEMPLATE.ALL, Constants.INSTRUMENT_TYPE.STOCK);
@@ -66,7 +66,7 @@ sap.ui.define([
     	/**
 		 * Handles the selection of a scan template.
 		 */
-		onTemplateSelectionChange : function (oControlEvent) {
+		onTemplateSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oStartDateLabel = this.getView().byId("startDateLabel");
 			var oStartDatePicker = this.getView().byId("startDatePicker");
@@ -106,7 +106,7 @@ sap.ui.define([
     	/**
     	 * Handles the button press event of the refresh scan results button.
     	 */
-    	onRefreshPressed : function() {
+    	onRefreshPressed: function() {
 			var sSelectedTemplate = "";
 			var sSelectedType = "";
 			var sSelectedDate = "";
@@ -149,7 +149,7 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the template information button.
     	 */
-    	onTemplateInformationPressed : function() {
+    	onTemplateInformationPressed: function() {
 			var oComboBox = this.getView().byId("templateComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var sKey = oComboBox.getSelectedKey();
@@ -161,7 +161,7 @@ sap.ui.define([
 		/**
 		 * Handles the link pressed event of the symbol link.
 		 */
-		onSymbolLinkPressed : function(oEvent) {
+		onSymbolLinkPressed: function(oEvent) {
 			var oContext = oEvent.getSource().getBindingContext();
 			var	oControl = oEvent.getSource();
 			var	oView = this.getView();
@@ -187,7 +187,7 @@ sap.ui.define([
 		/**
 		 * Handles loading of image after the mini chart Popover has been opened.
 		 */
-		afterMiniChartPopoverOpened : function(oControlEvent) {
+		afterMiniChartPopoverOpened: function(oControlEvent) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/jFreeChart");
 			var sChartUrl = sServerAddress + sWebServiceBaseUrl;
@@ -205,7 +205,7 @@ sap.ui.define([
 		/**
     	 * Handles the button pressed event of the "StockCharts" button in the table header.
     	 */
-    	onStockchartsPressed : function() {
+    	onStockchartsPressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			if (this.isInstrumentSelected() === false) {
@@ -220,7 +220,7 @@ sap.ui.define([
 		/**
     	 * Handles the button pressed event of the "Earnings" button in the table header.
     	 */
-    	onEarningsPressed : function() {
+    	onEarningsPressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oInstrument;
 			
@@ -243,7 +243,7 @@ sap.ui.define([
 		/**
 		 * Handles the search function of the scan results table.
 		 */
-		onSearch: function (oEvent) {
+		onSearch: function(oEvent) {
 			var sValue = oEvent.getParameter("newValue");
 			var oBinding = this.getView().byId("quotationTable").getBinding("items");
 			
@@ -263,7 +263,7 @@ sap.ui.define([
 		/**
 		 * Handles the search function in the SelectDialog for Instrument comparison.
 		 */
-		onCompareSearch: function (oEvent) {
+		onCompareSearch: function(oEvent) {
 			var sValue = oEvent.getParameter("value");
 			var oBinding = oEvent.getParameter("itemsBinding");
 			
@@ -283,7 +283,7 @@ sap.ui.define([
 		/**
 		 * Handles the closing of the SelectDialog for Instrument comparison.
 		 */
-		onCompareDialogClose: function (oEvent) {
+		onCompareDialogClose: function(oEvent) {
 			var aContexts = oEvent.getParameter("selectedContexts");
 			var oBinding = this.getView().byId("quotationTable").getBinding("items");
 			var aFilterArray = new Array();
@@ -316,7 +316,7 @@ sap.ui.define([
 		/**
 		 * Handles the button pressed event of the compare instruments button.
 		 */
-		onComparePressed: function () {
+		onComparePressed: function() {
 			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.scan.InstrumentSelectionDialog");
 		},
 		
@@ -324,7 +324,7 @@ sap.ui.define([
 		/**
 		 * Handles the button pressed event of the settings button.
 		 */
-		onSettingsPressed : function(oEvent) {
+		onSettingsPressed: function(oEvent) {
 			var oTable = this.byId("quotationTable");
 
 			Engine.getInstance().show(oTable, ["Columns", "Sorter"], {
@@ -394,7 +394,7 @@ sap.ui.define([
     	/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
-		queryQuotationsCallback : function(oReturnData, oCallingController) {
+		queryQuotationsCallback: function(oReturnData, oCallingController) {
 			var oSearchField = oCallingController.getView().byId("resultsSearchField");
 			var oModel = new JSONModel();
 			
@@ -427,7 +427,7 @@ sap.ui.define([
 		/**
 		 * Initializes the ComboBox for Scan template selection.
 		 */
-		initializeTemplateComboBox : function() {
+		initializeTemplateComboBox: function() {
 			var oComboBox = this.getView().byId("templateComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -438,7 +438,7 @@ sap.ui.define([
 		/**
 		 * Initializes the dialog for settings (Personalization).
 		 */
-		initializeSettingsDialog : function() {
+		initializeSettingsDialog: function() {
 			var oTable = this.byId("quotationTable");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -464,7 +464,7 @@ sap.ui.define([
 		/**
 		 * Opens the stock chart of the given Instrument.
 		 */
-		openStockChart : function(oInstrument) {
+		openStockChart: function(oInstrument) {
 			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
 			var sChartUrl = ScanResultsHelper.getChartUrl(oInstrument, sWebServiceBaseUrl);
 					
@@ -475,7 +475,7 @@ sap.ui.define([
 		/**
 		 * Opens a website with earnings data of the given Instrument.
 		 */
-		openEarnings : function(oInstrument) {
+		openEarnings: function(oInstrument) {
 			var sEarningsUrl = ScanResultsHelper.getEarningsUrl(oInstrument);
 					
 			window.open(sEarningsUrl, '_blank');
@@ -485,7 +485,7 @@ sap.ui.define([
 		/**
 		 * Gets an array of table cells based on the state of the personalization dialog.
 		 */
-		getTableCells : function(oState) {
+		getTableCells: function(oState) {
 			var aCells = oState.Columns.map(function(oColumnState) {
 				var sPath = this.oMetadataHelper.getProperty(oColumnState.key).path;
 				var oText;
@@ -561,7 +561,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements into the intial state.
 		 */
-		resetUiElements : function() {
+		resetUiElements: function() {
 			var oTemplateComboBox = this.getView().byId("templateComboBox");
 			var oTypeComboBox = this.getView().byId("typeComboBox");
 			var oStartDateLabel = this.getView().byId("startDateLabel");
@@ -636,7 +636,7 @@ sap.ui.define([
 		/**
 		 * Checks if an instrument has been selected.
 		 */
-		isInstrumentSelected : function () {
+		isInstrumentSelected: function() {
 			if (this.getView().byId("quotationTable").getSelectedItem() === null) {				
 				return false;
 			} else {				
@@ -648,7 +648,7 @@ sap.ui.define([
 		/**
 		 * Gets the the selected instrument.
 		 */
-		getSelectedInstrument : function () {
+		getSelectedInstrument: function() {
 			var oListItem = this.getView().byId("quotationTable").getSelectedItem();
 			var oContext = oListItem.getBindingContext();
 			var oSelectedQuotation = oContext.getProperty(null, oContext);

@@ -7,7 +7,7 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, PriceAlertController, InstrumentController, formatter, JSONModel, MessageToast, MessageBox) {
+], function(Controller, MainController, PriceAlertController, InstrumentController, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertEdit", {
@@ -17,7 +17,7 @@ sap.ui.define([
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("priceAlertEditRoute").attachMatched(this._onRouteMatched, this);
 				
@@ -29,7 +29,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query price alert data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true);
 			//Query instruments for instrument selection dialog.
@@ -42,7 +42,7 @@ sap.ui.define([
 		/**
 		 * Handles the selection of an item in the price alert ComboBox.
 		 */
-		onPriceAlertSelectionChange : function (oControlEvent) {
+		onPriceAlertSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oPriceAlertsModel = this.getView().getModel("priceAlerts");
 			var oPriceAlert, wsPriceAlert;
@@ -74,7 +74,7 @@ sap.ui.define([
 		/**
 		 * Handles the selection of an item in the instrument ComboBox.
 		 */
-		onInstrumentSelectionChange : function (oControlEvent) {
+		onInstrumentSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oInstrumentsModel = this.getView().getModel("instruments");
 			var oInstrument;
@@ -105,7 +105,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the save button.
 		 */
-		onSavePressed : function () {				
+		onSavePressed: function() {				
 			var bInputValid = this.verifyObligatoryFields();
 			
 			if (bInputValid === false) {				
@@ -119,7 +119,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the cancel button.
 		 */
-		onCancelPressed : function () {
+		onCancelPressed: function() {
 			MainController.navigateToStartpage(sap.ui.core.UIComponent.getRouterFor(this));	
 		},
 		
@@ -127,7 +127,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
 		 */
-		queryInstrumentsCallback : function(oReturnData, oCallingController) {
+		queryInstrumentsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -146,7 +146,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryPriceAlerts RESTful WebService call in the PriceAlertController.
 		 */
-		queryPriceAlertsCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		queryPriceAlertsCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -169,7 +169,7 @@ sap.ui.define([
 		/**
 		 *  Callback function of the savePriceAlert RESTful WebService call in the PriceAlertController.
 		 */
-		savePriceAlertCallback : function(oReturnData, oCallingController) {
+		savePriceAlertCallback: function(oReturnData, oCallingController) {
 			if (oReturnData.message !== null) {
 				if (oReturnData.message[0].type === 'S') {
 					//Update the data source of the ComboBox with the new priceAlert data.
@@ -199,7 +199,7 @@ sap.ui.define([
 		/**
 		 * Sets the value of the priceInput.
 		 */
-		setPriceInputValue : function(fValue) {
+		setPriceInputValue: function(fValue) {
 			this.getView().byId("priceInput").setValue(fValue);
 			this.getView().byId("priceInput").setValueState(sap.ui.core.ValueState.None);
 		},
@@ -208,7 +208,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oPriceAlertModel = new JSONModel();
 			
 			this.getView().setModel(oPriceAlertModel, "selectedPriceAlert");
@@ -226,7 +226,7 @@ sap.ui.define([
 		/**
 		 * Enables or disables the Input fields of the form
 		 */
-		enableInputFields : function (bEnabled) {
+		enableInputFields: function(bEnabled) {
 			this.getView().byId("instrumentComboBox").setEnabled(bEnabled);	
 			this.getView().byId("typeComboBox").setEnabled(bEnabled);
 			this.getView().byId("priceInput").setEnabled(bEnabled);
@@ -240,7 +240,7 @@ sap.ui.define([
 		 * Verifies input of obligatory fields.
 		 * Returns true if input is valid. Returns false if input is invalid.
 		 */
-		verifyObligatoryFields : function() {
+		verifyObligatoryFields: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			if (this.getView().byId("priceAlertComboBox").getSelectedKey() === "") {

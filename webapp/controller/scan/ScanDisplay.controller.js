@@ -4,7 +4,7 @@ sap.ui.define([
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (Controller, ScanController, formatter, JSONModel, MessageToast) {
+], function(Controller, ScanController, formatter, JSONModel, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanDisplay", {
@@ -14,7 +14,7 @@ sap.ui.define([
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("scanDisplayRoute").attachMatched(this._onRouteMatched, this);
 		},
@@ -23,7 +23,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ScanController.queryScansByWebService(this.queryScansCallback, this, true);
 
@@ -35,7 +35,7 @@ sap.ui.define([
 		/**
 		 * Handles the selection of an item in the scan ComboBox.
 		 */
-		onScanSelectionChange : function (oControlEvent) {
+		onScanSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oScansModel = this.getView().getModel("scans");
 			var oScan;
@@ -57,7 +57,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryScans RESTful WebService call in the ScanController.
 		 */
-		queryScansCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		queryScansCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -96,7 +96,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oScanModel = new JSONModel();
 			
 			this.getView().byId("scanComboBox").setSelectedItem(null);			

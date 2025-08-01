@@ -8,14 +8,14 @@ sap.ui.define([
 	"sap/m/MessageToast",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Controller, MainController, ScanController, ListController, JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
+], function(Controller, MainController, ScanController, ListController, JSONModel, MessageBox, MessageToast, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanCreate", {
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			
 			//Register an event handler that gets called every time the router navigates to this view.
@@ -26,7 +26,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query lists for list selection dialog.
 			ListController.queryListsByWebService(this.queryListsCallback, this, false);
 			
@@ -38,7 +38,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the open list selection button.
 		 */
-		onSelectListsPressed : function () {
+		onSelectListsPressed: function() {
 			MainController.openFragmentAsPopUp(this, "trading-cockpit-frontend.view.scan.ListSelectionDialog");
 		},
 		
@@ -46,7 +46,7 @@ sap.ui.define([
 		/**
 		 * Handles the search function in the SelectDialog of lists.
 		 */
-		onSearch: function (oEvent) {
+		onSearch: function(oEvent) {
 			var sValue = oEvent.getParameter("value");
 			var oBinding = oEvent.getParameter("itemsBinding");
 			
@@ -66,7 +66,7 @@ sap.ui.define([
 		/**
 		 * Handles the closing of the SelectDialog of lists.
 		 */
-		onDialogClose: function (oEvent) {
+		onDialogClose: function(oEvent) {
 			var aContexts = oEvent.getParameter("selectedContexts");
 			var oNewScanModel = this.getView().getModel("newScan");
 			var aListArray = new Array();
@@ -87,7 +87,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the save button.
 		 */
-		onSavePressed : function () {
+		onSavePressed: function() {
 			var bInputValid = this.verifyObligatoryFields();
 			
 			if (bInputValid === false) {				
@@ -101,7 +101,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the cancel button.
 		 */
-		onCancelPressed : function () {
+		onCancelPressed: function() {
 			MainController.navigateToStartpage(sap.ui.core.UIComponent.getRouterFor(this));	
 		},
 
@@ -109,7 +109,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryListsByWebService RESTful WebService call in the ListController.
 		 */
-		queryListsCallback : function(oReturnData, oCallingController) {
+		queryListsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -127,7 +127,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the createScan RESTful WebService call in the ScanController.
 		 */
-		createScanCallback : function (oReturnData, oCallingController) {
+		createScanCallback: function(oReturnData, oCallingController) {
 			if (oReturnData.message !== null) {
 				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
@@ -150,7 +150,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oSelectDialog = this.getView().byId("listSelectionDialog");
 			
 			if (oSelectDialog !== undefined) {				
@@ -163,7 +163,7 @@ sap.ui.define([
 		 * Verifies input of obligatory fields.
 		 * Returns true if input is valid. Returns false if input is invalid.
 		 */
-		verifyObligatoryFields : function() {
+		verifyObligatoryFields: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var iExistingListCount;
 			var oScanModel;
@@ -189,7 +189,7 @@ sap.ui.define([
 		/**
 		 * Initializes the scan model to which the UI controls are bound.
 		 */
-		initializeScanModel : function () {
+		initializeScanModel: function() {
 			var oScanModel = new JSONModel();
 			
 			oScanModel.loadData("model/scan/scanCreate.json");
@@ -200,7 +200,7 @@ sap.ui.define([
 		/**
 		 * Formatter that determines the selected lists of a list for the SelectDialog.
 		 */
-		isListSelectedFormatter : function(iListId) {
+		isListSelectedFormatter: function(iListId) {
 			var oNewScan = this.getView().getModel("newScan");
 			var aLists = oNewScan.getProperty("/listIds");
 

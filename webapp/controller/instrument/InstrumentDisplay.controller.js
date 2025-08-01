@@ -4,14 +4,14 @@ sap.ui.define([
 	"./InstrumentController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (Controller, MainController, InstrumentController, JSONModel, MessageToast) {
+], function(Controller, MainController, InstrumentController, JSONModel, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentDisplay", {
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("instrumentDisplayRoute").attachMatched(this._onRouteMatched, this);
 		},
@@ -20,7 +20,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
 			
@@ -32,7 +32,7 @@ sap.ui.define([
 		/**
 		 * Handles the selection of an item in the instrument ComboBox.
 		 */
-		onInstrumentSelectionChange : function (oControlEvent) {
+		onInstrumentSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oInstrumentsModel = this.getView().getModel("instruments");
 			var oInstrument;
@@ -54,7 +54,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryInstruments RESTful WebService call in the InstrumentController.
 		 */
-		queryInstrumentsCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		queryInstrumentsCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -78,7 +78,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oSelectedInstrument = new JSONModel();
 			
 			this.getView().byId("instrumentComboBox").setSelectedItem(null);

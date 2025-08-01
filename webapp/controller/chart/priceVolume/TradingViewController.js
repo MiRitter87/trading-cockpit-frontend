@@ -3,13 +3,13 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/format/DateFormat",
 	"./lightweight-charts.standalone.production"
-], function (Constants, JSONModel, DateFormat) {
+], function(Constants, JSONModel, DateFormat) {
 	"use strict";
 	return {
 		/**
 		 * Handles initialization of the TradingView lightweight-charts component.
 		 */
-		openChart : function (oCallingController, sChartContainerDivId) {
+		openChart: function(oCallingController, sChartContainerDivId) {
 			var oChartModel = new JSONModel();
 			var bIsInstrumentTypeRatio = this.isInstrumentTypeRatio(oCallingController);
 			
@@ -56,7 +56,7 @@ sap.ui.define([
 		/**
 		 * Creates a candlestick series that contains the data to be displayed.
 		 */
-		getCandlestickSeries : function (oCallingController) {
+		getCandlestickSeries: function(oCallingController) {
 			var oChartData = oCallingController.getView().getModel("chartData");
 			var aQuotations = oChartData.getProperty("/quotations/quotation");
 			var aCandlestickSeries = new Array();
@@ -88,7 +88,7 @@ sap.ui.define([
 		/**
 		 * Creates a Histogram series that contains the volume data to be displayed.
 		 */
-		getVolumeSeries : function (oCallingController) {
+		getVolumeSeries: function(oCallingController) {
 			var oChartData = oCallingController.getView().getModel("chartData");
 			var aQuotations = oChartData.getProperty("/quotations/quotation");
 			var aVolumeSeries = new Array();
@@ -124,7 +124,7 @@ sap.ui.define([
 		/**
 		 * Applies options to the given chart.
 		 */
-		applyChartOptions : function(oChart, bIsInstrumentTypeRatio) {
+		applyChartOptions: function(oChart, bIsInstrumentTypeRatio) {
 			oChart.applyOptions({
     			crosshair: {
 			        // Change mode from default 'magnet' to 'normal'.
@@ -174,7 +174,7 @@ sap.ui.define([
 		/**
 		 * Applies the moving averages to the chart according to the state of the chartModel.
 		 */
-		applyMovingAverages : function (oCallingController) {
+		applyMovingAverages: function(oCallingController) {
 			this.displayEma21(oCallingController);
 			this.displaySma50(oCallingController);
 			this.displaySma150(oCallingController);
@@ -186,7 +186,7 @@ sap.ui.define([
 		/**
 		 * Applies the indicators to the chart according to the state of the chartModel.
 		 */
-		applyIndicators : function (oCallingController) {
+		applyIndicators: function(oCallingController) {
 			this.displayBollingerBandWidth(oCallingController);
 			this.displaySlowStochastic(oCallingController);
 			this.displayRsLine(oCallingController);
@@ -196,7 +196,7 @@ sap.ui.define([
 		/**
 		 * Displays the EMA(21) in the chart.
 		 */
-		displayEma21 : function (oCallingController) {
+		displayEma21: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var ema21Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.EMA_21);
@@ -222,7 +222,7 @@ sap.ui.define([
 		/**
 		 * Displays the SMA(50) in the chart.
 		 */
-		displaySma50 : function (oCallingController) {
+		displaySma50: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var sma50Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_50);
@@ -248,7 +248,7 @@ sap.ui.define([
 		/**
 		 * Displays the SMA(150) in the chart.
 		 */
-		displaySma150 : function (oCallingController) {
+		displaySma150: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var sma150Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_150);
@@ -274,7 +274,7 @@ sap.ui.define([
 		/**
 		 * Displays the SMA(200) in the chart.
 		 */
-		displaySma200 : function (oCallingController) {
+		displaySma200: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var sma200Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_200);
@@ -300,7 +300,7 @@ sap.ui.define([
 		/**
 		 * Displays the SMA(30) of the volume in the chart.
 		 */
-		displaySma30Volume : function (oCallingController) {
+		displaySma30Volume: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var sma30VolumeData = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_30_VOLUME);
@@ -327,7 +327,7 @@ sap.ui.define([
 		/**
 		 * Displays the Bollinger BandWidth in a separate pane of the chart.
 		 */
-		displayBollingerBandWidth : function (oCallingController) {
+		displayBollingerBandWidth: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var bbwData;
@@ -363,7 +363,7 @@ sap.ui.define([
 		/**
 		 * Displays the Slow Stochastic in a separate pane of the chart.
 		 */
-		displaySlowStochastic : function (oCallingController) {
+		displaySlowStochastic: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var slowStochasticData;
@@ -402,7 +402,7 @@ sap.ui.define([
 		/**
 		 * Displays the RS line in a separate pane of the chart.
 		 */
-		displayRsLine : function (oCallingController) {
+		displayRsLine: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var rsLineData;
@@ -434,7 +434,7 @@ sap.ui.define([
 		/**
 		 * Displays a Histogram with the net sum of health check events for each trading day.
 		 */
-		displayHealthCheckEvents : function (oCallingController) {
+		displayHealthCheckEvents: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var chart = oChartModel.getProperty("/chart");
 			var healthEventData;
@@ -466,7 +466,7 @@ sap.ui.define([
 		 * Organizes the panes of the price/volume chart in a manner that 
 		 * the indicator is at the top pane and the price/volume pane is below.
 		 */
-		organizePanesPriceVolume : function (oChartModel) {
+		organizePanesPriceVolume: function(oChartModel) {
 			var chart = oChartModel.getProperty("/chart");
 			var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
 			var volumeSeries = oChartModel.getProperty("/volumeSeries");
@@ -512,7 +512,7 @@ sap.ui.define([
 		 * Organizes the panes of the health check chart in a manner that
 		 * the indicator is at the top pane and the price/volume pane is below.
 		 */
-		organizePanesHealthCheck : function (oChartModel) {
+		organizePanesHealthCheck: function(oChartModel) {
 			var chart = oChartModel.getProperty("/chart");
 			var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
 			var volumeSeries = oChartModel.getProperty("/volumeSeries");
@@ -535,7 +535,7 @@ sap.ui.define([
 		/**
 		 * Moves the moving averages to the target pane depending on the visibility of any indicator.
 		 */
-		organizeMovingAverages : function (oChartModel) {
+		organizeMovingAverages: function(oChartModel) {
 			var chart = oChartModel.getProperty("/chart");
 			var ema21Series = oChartModel.getProperty("/ema21Series");
 			var sma50Series = oChartModel.getProperty("/sma50Series");
@@ -589,7 +589,7 @@ sap.ui.define([
 		/**
 		 * Create a line series that contains the data of the requested moving average.
 		 */
-		getMovingAverageData : function (oCallingController, sRequestedMA) {
+		getMovingAverageData: function(oCallingController, sRequestedMA) {
 			var oChartData = oCallingController.getView().getModel("chartData");
 			var aQuotations = oChartData.getProperty("/quotations/quotation");
 			var aMovingAverageSeries = new Array();
@@ -632,7 +632,7 @@ sap.ui.define([
 		/**
 		 * Create a series that contains the data of the requested indicator.
 		 */
-		getIndicatorData : function (oCallingController, sRequestedIndicator) {
+		getIndicatorData: function(oCallingController, sRequestedIndicator) {
 			var oChartData = oCallingController.getView().getModel("chartData");
 			var aQuotations = oChartData.getProperty("/quotations/quotation");
 			var aIndicatorSeries = new Array();
@@ -682,7 +682,7 @@ sap.ui.define([
 		/**
 		 * Create a series that contains health check event data.
 		 */
-		getHealthEventData : function (oCallingController) {
+		getHealthEventData: function(oCallingController) {
 			var oChartData = oCallingController.getView().getModel("chartData");
 			var aQuotations = oChartData.getProperty("/quotations/quotation");
 			var oHealthEvents = oChartData.getProperty("/healthEvents");
@@ -723,7 +723,7 @@ sap.ui.define([
 		/**
 		 * Gets the threshold value of the Bollinger BandWidth.
 		 */
-		getBBWThreshold : function (oCallingController) {
+		getBBWThreshold: function(oCallingController) {
 			var oChartData = oCallingController.getView().getModel("chartData");
 			var aQuotations = oChartData.getProperty("/quotations/quotation");
 			var oQuotation = aQuotations[0];
@@ -736,7 +736,7 @@ sap.ui.define([
 		/**
 		 * Checks if the instrument for which quotations have been loaded is of type RATIO.
 		 */
-		isInstrumentTypeRatio : function (oCallingController) {
+		isInstrumentTypeRatio: function(oCallingController) {
 			var oChartData = oCallingController.getView().getModel("chartData");
 			var aQuotations = oChartData.getProperty("/quotations/quotation");
 			var oQuotation;
@@ -758,7 +758,7 @@ sap.ui.define([
 		/**
 		 * Draws horizontal lines to the TradingView chart.
 		 */
-		drawHorizontalLines : function (oCallingController, oHorizontalLines) {
+		drawHorizontalLines: function(oCallingController, oHorizontalLines) {
 			var aHorizontalLines = oHorizontalLines.oData.horizontalLine;
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var oCandlestickSeries = oChartModel.getProperty("/candlestickSeries");
@@ -775,7 +775,7 @@ sap.ui.define([
 		/**
 		 * Sets the number of candles that are being displayed.
 		 */
-		setVisibleNumberOfCandles : function (oCallingController, iNumberOfCandles) {
+		setVisibleNumberOfCandles: function(oCallingController, iNumberOfCandles) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var oChart = oChartModel.getProperty("/chart");
 			var oChartData = oCallingController.getView().getModel("chartData");

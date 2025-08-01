@@ -4,7 +4,7 @@ sap.ui.define([
 	"../../model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (Controller, PriceAlertController, formatter, JSONModel, MessageToast) {
+], function(Controller, PriceAlertController, formatter, JSONModel, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertDisplay", {
@@ -14,7 +14,7 @@ sap.ui.define([
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("priceAlertDisplayRoute").attachMatched(this._onRouteMatched, this);
 		},
@@ -23,7 +23,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true);
 			
@@ -34,7 +34,7 @@ sap.ui.define([
 		/**
 		 * Handles the selection of an item in the price alert ComboBox.
 		 */
-		onPriceAlertSelectionChange : function (oControlEvent) {
+		onPriceAlertSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oPriceAlertsModel = this.getView().getModel("priceAlerts");
 			var oPriceAlert;
@@ -56,7 +56,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryPriceAlerts RESTful WebService call in the PriceAlertController.
 		 */
-		queryPriceAlertsCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		queryPriceAlertsCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -100,7 +100,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oPriceAlertModel = new JSONModel();
 			
 			this.getView().setModel(oPriceAlertModel, "selectedPriceAlert");

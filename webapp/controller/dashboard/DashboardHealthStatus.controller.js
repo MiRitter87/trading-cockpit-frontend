@@ -9,7 +9,7 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, ScanController, ListController, Constants, formatter, DashboardController, 
+], function(Controller, MainController, ScanController, ListController, Constants, formatter, DashboardController, 
 	JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
@@ -20,7 +20,7 @@ sap.ui.define([
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("dashboardHealthStatusRoute").attachMatched(this._onRouteMatched, this);
 		},
@@ -29,7 +29,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query only instruments that have quotations referenced. Otherwise no health status can be determined.
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, false, Constants.SCAN_TEMPLATE.ALL);
 			
@@ -42,7 +42,7 @@ sap.ui.define([
     	/**
     	 * Handles the button press event of the refresh health check button.
     	 */
-    	onRefreshPressed : function() {
+    	onRefreshPressed: function() {
 			var bInputValid = this.verifyObligatoryFields();
 			var sInstrumentId;
 			var sListId;
@@ -61,7 +61,7 @@ sap.ui.define([
     	/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
-		queryQuotationsCallback : function(oReturnData, oCallingController) {
+		queryQuotationsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
 			
@@ -83,7 +83,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryLists RESTful WebService call in the ListController.
 		 */
-		queryListsCallback : function(oReturnData, oCallingController) {
+		queryListsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -101,7 +101,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the getMarketHealthStatus RESTful WebService call in the DashboardController.
 		 */
-		queryHealthStatusCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		queryHealthStatusCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -124,7 +124,7 @@ sap.ui.define([
 		 * Verifies input of obligatory fields.
 		 * Returns true if input is valid. Returns false if input is invalid.
 		 */
-		verifyObligatoryFields : function() {
+		verifyObligatoryFields: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			
@@ -139,7 +139,7 @@ sap.ui.define([
 		/**
 		 * Formatter of the Swingtrading Environment status icon.
 		 */
-		steIconSrcFormatter : function(sSwingTradingEnvironmentStatus) {
+		steIconSrcFormatter: function(sSwingTradingEnvironmentStatus) {
 			if (sSwingTradingEnvironmentStatus === 'GREEN') {
 				return "sap-icon://status-positive";
 			}
@@ -155,7 +155,7 @@ sap.ui.define([
 		/**
 		 * Formatter of the Swingtrading Environment status icon color.
 		 */
-		steIconColorFormatter : function(sSwingTradingEnvironmentStatus) {
+		steIconColorFormatter: function(sSwingTradingEnvironmentStatus) {
 			if (sSwingTradingEnvironmentStatus === 'GREEN') {
 				return "green";
 			}
@@ -171,7 +171,7 @@ sap.ui.define([
 		/**
 		 * Formatter of the visibility of the Distribution Days icon.
 		 */
-		ddIconVisibleFormatter : function(iDistributionDaysSum) {			
+		ddIconVisibleFormatter: function(iDistributionDaysSum) {			
 			if (iDistributionDaysSum >= 5) {
 				return true;
 			}
@@ -184,7 +184,7 @@ sap.ui.define([
 		/**
 		 * Formatter of the Aggregate Indicator text.
 		 */
-		aiTextFormatter : function(iAggregateIndicator) {
+		aiTextFormatter: function(iAggregateIndicator) {
 			//The backend returns -1 if the aggregate indicator could not be determined.
 			//In this case don't show any value.
 			if (iAggregateIndicator === -1) {
@@ -199,7 +199,7 @@ sap.ui.define([
 		/**
 		 * Formatter of the Aggregate Indicator status icon.
 		 */
-		aiIconSrcFormatter : function(iAggregateIndicator) {
+		aiIconSrcFormatter: function(iAggregateIndicator) {
 			if (iAggregateIndicator >= 0 && iAggregateIndicator <= 15) {
 				return "sap-icon://status-positive";
 			}
@@ -215,7 +215,7 @@ sap.ui.define([
 		/**
 		 * Formatter of the Aggregate Indicator status icon color.
 		 */
-		aiIconColorFormatter : function(iAggregateIndicator) {
+		aiIconColorFormatter: function(iAggregateIndicator) {
 			if (iAggregateIndicator <= 15) {
 				return "green";
 			}
@@ -228,7 +228,7 @@ sap.ui.define([
 		/**
 		 * Formatter calculating the percentage of instruments near the 52-week high.
 		 */
-		percentNear52wHighFormatter : function(iNumberNear52wHigh, iNumberNear52wLow) {
+		percentNear52wHighFormatter: function(iNumberNear52wHigh, iNumberNear52wLow) {
 			var iPercentNearHigh;
 			
 			if (iNumberNear52wHigh === 0 && iNumberNear52wLow === 0) {
@@ -244,7 +244,7 @@ sap.ui.define([
 		/**
 		 * Formatter calculating the percentage of instruments near the 52-week low.
 		 */
-		percentNear52wLowFormatter : function(iNumberNear52wHigh, iNumberNear52wLow) {
+		percentNear52wLowFormatter: function(iNumberNear52wHigh, iNumberNear52wLow) {
 			var iPercentNearLow;
 			
 			if (iNumberNear52wHigh === 0 && iNumberNear52wLow === 0) {
@@ -260,7 +260,7 @@ sap.ui.define([
 		/**
 		 * Formatter calculating the percentage of instruments trading up on volume.
 		 */
-		percentUpOnVolumeFormatter : function(iNumberUpOnVolume, iNumberDownOnVolume) {
+		percentUpOnVolumeFormatter: function(iNumberUpOnVolume, iNumberDownOnVolume) {
 			var iPercentUpOnVolume;
 			
 			if (iNumberUpOnVolume === 0 && iNumberDownOnVolume === 0) {
@@ -276,7 +276,7 @@ sap.ui.define([
 		/**
 		 * Formatter calculating the percentage of instruments trading down on volume.
 		 */
-		percentDownOnVolumeFormatter : function(iNumberUpOnVolume, iNumberDownOnVolume) {
+		percentDownOnVolumeFormatter: function(iNumberUpOnVolume, iNumberDownOnVolume) {
 			var iPercentNearLow;
 			
 			if (iNumberUpOnVolume === 0 && iNumberDownOnVolume === 0) {
@@ -292,7 +292,7 @@ sap.ui.define([
     	/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oListComboBox = this.getView().byId("listComboBox");
 			var oDistributionDaysIcon = this.getView().byId("distributionDaysIcon");

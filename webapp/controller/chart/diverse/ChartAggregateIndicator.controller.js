@@ -7,14 +7,14 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, ScanController, ListController, Constants, JSONModel, MessageBox, MessageToast) {
+], function(Controller, MainController, ScanController, ListController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.diverse.ChartAggregateIndicator", {
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("chartAggregateIndicatorRoute").attachMatched(this._onRouteMatched, this);
 		},
@@ -23,7 +23,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query only instruments that have quotations referenced. Otherwise no Aggregate Indicator can be determined.
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, false, Constants.SCAN_TEMPLATE.ALL);
 			
@@ -36,7 +36,7 @@ sap.ui.define([
     	/**
     	 * Handles the button press event of the chart information button.
     	 */
-    	onChartInformationPressed : function() {
+    	onChartInformationPressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var mOptions = new Object();
 			var sTitle = oResourceBundle.getText("chartAggregateIndicator.info.title");
@@ -50,7 +50,7 @@ sap.ui.define([
     	/**
     	 * Handles the button press event of the refresh chart button.
     	 */
-    	onRefreshPressed : function() {
+    	onRefreshPressed: function() {
 			var oImage = this.getView().byId("chartImage");
 			var bIsInputValid = this.isInputValid();
 			var sChartUrl;
@@ -68,7 +68,7 @@ sap.ui.define([
 		/**
 		 * Handles error during loading of the chart image using the given URL.
 		 */
-		onChartImageError : function() {
+		onChartImageError: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oImage = this.getView().byId("chartImage");
 			var sImageSrc = oImage.getProperty("src");
@@ -87,7 +87,7 @@ sap.ui.define([
     	/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
-		queryQuotationsCallback : function(oReturnData, oCallingController) {
+		queryQuotationsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
 			
@@ -109,7 +109,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryLists RESTful WebService call in the ListController.
 		 */
-		queryListsCallback : function(oReturnData, oCallingController) {
+		queryListsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -127,7 +127,7 @@ sap.ui.define([
 		/**
 		 * Validates the user input. Prompts messages in input is not valid.
 		 */
-		isInputValid : function () {
+		isInputValid: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
@@ -144,7 +144,7 @@ sap.ui.define([
 		/**
 		 * Determines the URL of the chart.
 		 */
-		getChartUrl : function() {
+		getChartUrl: function() {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			var sServerAddress = MainController.getServerAddress();
@@ -169,7 +169,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oListComboBox = this.getView().byId("listComboBox");
 			var oImage = this.getView().byId("chartImage");

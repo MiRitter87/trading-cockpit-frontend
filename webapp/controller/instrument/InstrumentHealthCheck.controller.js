@@ -7,7 +7,7 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, MainController, InstrumentController, formatter, Constants, JSONModel, MessageToast, MessageBox) {
+], function(Controller, MainController, InstrumentController, formatter, Constants, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentHealthCheck", {
@@ -17,7 +17,7 @@ sap.ui.define([
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("instrumentHealthCheckRoute").attachMatched(this._onRouteMatched, this);
 			
@@ -29,7 +29,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
 			
@@ -40,7 +40,7 @@ sap.ui.define([
     	/**
     	 * Handles the button press event of the template information button.
     	 */
-    	onProfileInformationPressed : function() {
+    	onProfileInformationPressed: function() {
 			var oComboBox = this.getView().byId("healthCheckProfileComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var mOptions = new Object();
@@ -63,7 +63,7 @@ sap.ui.define([
     	/**
     	 * Handles the button press event of the refresh health check button.
     	 */
-    	onRefreshPressed : function() {
+    	onRefreshPressed: function() {
 			var bInputValid = this.verifyObligatoryFields();
 			var sInstrumentId;
 			var sStartDate;
@@ -85,7 +85,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryInstruments RESTful WebService call in the InstrumentController.
 		 */
-		queryInstrumentsCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		queryInstrumentsCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 						
@@ -109,7 +109,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the checkInstrumentHealth RESTful WebService call in the InstrumentController.
 		 */
-		checkInstrumentHealthCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		checkInstrumentHealthCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -167,7 +167,7 @@ sap.ui.define([
 		 * Verifies input of obligatory fields.
 		 * Returns true if input is valid. Returns false if input is invalid.
 		 */
-		verifyObligatoryFields : function() {
+		verifyObligatoryFields: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oStartDatePicker = this.getView().byId("startDatePicker");
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
@@ -196,7 +196,7 @@ sap.ui.define([
 		/**
 		 * Initializes the minium and maximum start date of the DatePicker.
 		 */
-		initializeMinAndMaxDate : function() {
+		initializeMinAndMaxDate: function() {
 			var oStartDatePicker = this.getView().byId("startDatePicker");
 			var dateNow = new Date();
 			var dateOneYearAgo = new Date();
@@ -211,7 +211,7 @@ sap.ui.define([
 		/**
 		 * Initializes the ComboBox of the health check profile.
 		 */
-		initializeHealthCheckProfileComboBox: function () {
+		initializeHealthCheckProfileComboBox: function() {
 			var oComboBox = this.getView().byId("healthCheckProfileComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -222,7 +222,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oStartDatePicker = this.getView().byId("startDatePicker");
 			var oHealthCheckComboBox = this.getView().byId("healthCheckProfileComboBox");

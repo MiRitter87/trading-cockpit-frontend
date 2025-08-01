@@ -7,7 +7,7 @@ sap.ui.define([
 	"sap/m/MessageBox",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Controller, MainController, InstrumentController,
+], function(Controller, MainController, InstrumentController,
 			JSONModel, MessageToast, MessageBox, Filter, FilterOperator) {
 	"use strict";
 
@@ -15,7 +15,7 @@ sap.ui.define([
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("instrumentOverviewRoute").attachMatched(this._onRouteMatched, this);
 		},
@@ -24,7 +24,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
     	},
@@ -33,7 +33,7 @@ sap.ui.define([
     	/**
 		 * Handles the press-event of the show details button.
 		 */
-		onShowDetailsPressed : function () {
+		onShowDetailsPressed: function() {
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oSelectedInstrumentModel;
@@ -54,7 +54,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the close button of the instrument details fragment.
 		 */
-		onCloseDialog : function () {
+		onCloseDialog: function() {
 			this.byId("instrumentDetailsDialog").close();
 		},
     	
@@ -62,7 +62,7 @@ sap.ui.define([
     	/**
 		 * Handles the search function of the table.
 		 */
-		onSearch: function (oEvent) {
+		onSearch: function(oEvent) {
 			var sValue = oEvent.getParameter("newValue");
 			var oBinding = this.getView().byId("instrumentTable").getBinding("items");
 			
@@ -82,7 +82,7 @@ sap.ui.define([
 		/**
 		 * Handles the press-event of the delete button.
 		 */
-		onDeletePressed : function () {
+		onDeletePressed: function() {
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -98,7 +98,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryInstruments RESTful WebService call in the InstrumentController.
 		 */
-		queryInstrumentsCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		queryInstrumentsCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 						
@@ -122,7 +122,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the deleteInstrument RESTful WebService call in the InstrumentController.
 		 */
-		deleteInstrumentCallback : function(oReturnData, oCallingController) {
+		deleteInstrumentCallback: function(oReturnData, oCallingController) {
 			if (oReturnData.message !== null) {
 				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
@@ -159,7 +159,7 @@ sap.ui.define([
 		/**
 		 * Checks if an instrument has been selected.
 		 */
-		isInstrumentSelected : function () {
+		isInstrumentSelected: function() {
 			if (this.getView().byId("instrumentTable").getSelectedItem() === null) {				
 				return false;
 			} else {				
@@ -171,7 +171,7 @@ sap.ui.define([
 		/**
 		 * Gets the the selected instrument.
 		 */
-		getSelectedInstrument : function () {
+		getSelectedInstrument: function() {
 			var oListItem = this.getView().byId("instrumentTable").getSelectedItem();
 			var oContext = oListItem.getBindingContext("instruments");
 			var oSelectedInstrument = oContext.getProperty(null, oContext);

@@ -7,7 +7,7 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, ScanController, MainController, Constants, formatter, JSONModel, MessageToast, MessageBox) {
+], function(Controller, ScanController, MainController, Constants, formatter, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanOverview", {
@@ -17,7 +17,7 @@ sap.ui.define([
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("scanOverviewRoute").attachMatched(this._onRouteMatched, this);
 		},
@@ -26,7 +26,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ScanController.queryScansByWebService(this.queryScansCallback, this, true);
     	},
@@ -35,7 +35,7 @@ sap.ui.define([
 		/**
 		 * Handles the press-event of the show details button.
 		 */
-		onShowDetailsPressed : function () {
+		onShowDetailsPressed: function() {
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oSelectedScanModel;
@@ -56,7 +56,7 @@ sap.ui.define([
 		/**
 		 * Handles the press-event of the start scan button.
 		 */
-		onStartScanPressed: function () {
+		onStartScanPressed: function() {
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -72,7 +72,7 @@ sap.ui.define([
 		/**
 		 * Handles the press-event of the delete button.
 		 */
-		onDeletePressed : function () {
+		onDeletePressed: function() {
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -88,7 +88,7 @@ sap.ui.define([
 		/**
 		 * Handles the press-event of the refresh button.
 		 */
-		onRefreshPressed : function() {
+		onRefreshPressed: function() {
 			ScanController.queryScansByWebService(this.queryScansCallback, this, true);
 		},
 		
@@ -96,7 +96,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the close button of the list details fragment.
 		 */
-		onCloseDialog : function () {
+		onCloseDialog: function() {
 			this.byId("scanDetailsDialog").close();
 		},
 		
@@ -104,7 +104,7 @@ sap.ui.define([
 		/** 
 		 * Handles tasks to be performed after the scan start dialog has been opened.
 		 */
-		onStartScanDialogAfterOpen : function () {
+		onStartScanDialogAfterOpen: function() {
 			this.initializeScopeComboBox();
 		},
 		
@@ -112,7 +112,7 @@ sap.ui.define([
 		/** 
 		 * Handles tasks to be performed before the scan start dialog is opened.
 		 */
-		onStartScanDialogBeforeOpen : function () {
+		onStartScanDialogBeforeOpen: function() {
 			this.initializeScanDialogTitle();
 		},
 		
@@ -120,7 +120,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the start button of the start scan dialog.
 		 */
-		onStartScanDialog : function () {
+		onStartScanDialog: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oScan, oScanWS;
 			var sSelectedScope = this.getView().byId("scanScopeComboBox").getSelectedKey();
@@ -150,7 +150,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the cancel button of the start scan dialog.
 		 */
-		onCancelScanDialog : function () {
+		onCancelScanDialog: function() {
 			this.byId("startScanDialog").close();
 		},
 
@@ -158,7 +158,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryScans RESTful WebService call in the ScanController.
 		 */
-		queryScansCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		queryScansCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -181,7 +181,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the deleteScan RESTful WebService call in the ScanController.
 		 */
-		deleteScanCallback : function(oReturnData, oCallingController) {
+		deleteScanCallback: function(oReturnData, oCallingController) {
 			if (oReturnData.message !== null) {
 				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
@@ -202,7 +202,7 @@ sap.ui.define([
 		/**
 		 *  Callback function of the saveScan RESTful WebService call in the ScanController.
 		 */
-		saveScanCallback : function(oReturnData, oCallingController) {
+		saveScanCallback: function(oReturnData, oCallingController) {
 			if (oReturnData.message !== null) {
 				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
@@ -223,7 +223,7 @@ sap.ui.define([
 		/**
 		 * Checks if a scan has been selected.
 		 */
-		isScanSelected : function () {
+		isScanSelected: function() {
 			if (this.getView().byId("scanTable").getSelectedItem() === null) {				
 				return false;
 			} else {				
@@ -235,7 +235,7 @@ sap.ui.define([
 		/**
 		 * Gets the the selected scan.
 		 */
-		getSelectedScan : function () {
+		getSelectedScan: function() {
 			var oListItem = this.getView().byId("scanTable").getSelectedItem();
 			var oContext = oListItem.getBindingContext("scans");
 			var oSelectedScan = oContext.getProperty(null, oContext);
@@ -263,7 +263,7 @@ sap.ui.define([
 		/**
 		 * Initializes the ComboBox of scan scope of the start scan dialog.
 		 */
-		initializeScopeComboBox : function () {
+		initializeScopeComboBox: function() {
 			var oComboBox = this.getView().byId("scanScopeComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -282,7 +282,7 @@ sap.ui.define([
 		/**
 		 * Initializes the title of the "start scan" dialog.
 		 */
-		initializeScanDialogTitle : function () {
+		initializeScanDialogTitle: function() {
 			var oScanDialog = this.byId("startScanDialog");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oScan = this.getSelectedScan();

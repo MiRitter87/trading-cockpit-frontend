@@ -1,13 +1,13 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+], function(Controller) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanMenu", {
 		/**
 		 * Handles click at the scan create tile.
 		 */
-		onScanCreatePressed : function () {
+		onScanCreatePressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("scanCreateRoute");	
 		},
@@ -16,7 +16,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the scan edit tile.
 		 */
-		onScanEditPressed : function () {
+		onScanEditPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("scanEditRoute");	
 		},
@@ -25,7 +25,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the scan display tile.
 		 */
-		onScanDisplayPressed : function () {
+		onScanDisplayPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("scanDisplayRoute");	
 		},
@@ -34,7 +34,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the scan overview tile.
 		 */
-		onScanOverviewPressed : function () {
+		onScanOverviewPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("scanOverviewRoute");	
 		},
@@ -43,7 +43,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the scan results tile.
 		 */
-		onScanResultsPressed : function () {
+		onScanResultsPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("scanResultsRoute");	
 		}

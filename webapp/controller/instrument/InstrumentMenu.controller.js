@@ -1,13 +1,13 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+], function(Controller) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentMenu", {
 		/**
 		 * Handles click at the instrument create tile.
 		 */
-		onInstrumentCreatePressed : function () {
+		onInstrumentCreatePressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("instrumentCreateRoute");	
 		},
@@ -16,7 +16,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the instrument edit tile.
 		 */
-		onInstrumentEditPressed : function () {
+		onInstrumentEditPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("instrumentEditRoute");	
 		},
@@ -25,7 +25,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the instrument display tile.
 		 */
-		onInstrumentDisplayPressed : function () {
+		onInstrumentDisplayPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("instrumentDisplayRoute");	
 		},
@@ -34,7 +34,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the instrument overview tile.
 		 */
-		onInstrumentOverviewPressed : function () {
+		onInstrumentOverviewPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("instrumentOverviewRoute");	
 		},
@@ -43,7 +43,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the instrument health check tile.
 		 */
-		onInstrumentHealthCheckPressed : function () {
+		onInstrumentHealthCheckPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("instrumentHealthCheckRoute");	
 		}

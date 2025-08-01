@@ -6,14 +6,14 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox"
-], function (Controller, ListController, InstrumentController, MainController, JSONModel, MessageToast, MessageBox) {
+], function(Controller, ListController, InstrumentController, MainController, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.list.ListOverview", {
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("listOverviewRoute").attachMatched(this._onRouteMatched, this);
 		},
@@ -22,7 +22,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ListController.queryListsByWebService(this.queryListsCallback, this, true);
     	},
@@ -31,7 +31,7 @@ sap.ui.define([
 		/**
 		 * Handles the press-event of the show details button.
 		 */
-		onShowDetailsPressed : function () {
+		onShowDetailsPressed: function() {
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oSelectedListModel;
@@ -52,7 +52,7 @@ sap.ui.define([
 		/**
 		 * Handles the press-event of the Excel export button.
 		 */
-		onExcelExportPressed : function () {
+		onExcelExportPressed: function() {
 			var oResourceBundle;
 			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -68,7 +68,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the close button of the list details fragment.
 		 */
-		onCloseDialog : function () {
+		onCloseDialog: function() {
 			this.byId("listDetailsDialog").close();
 		},
 
@@ -76,7 +76,7 @@ sap.ui.define([
 		/**
 		 * Handles the press-event of the delete button.
 		 */
-		onDeletePressed : function () {
+		onDeletePressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			if (this.isListSelected() === false) {
@@ -91,7 +91,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryLists RESTful WebService call in the ListController.
 		 */
-		queryListsCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		queryListsCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -114,7 +114,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the deleteList RESTful WebService call in the ListController.
 		 */
-		deleteListCallback : function(oReturnData, oCallingController) {
+		deleteListCallback: function(oReturnData, oCallingController) {
 			if (oReturnData.message !== null) {
 				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
@@ -135,7 +135,7 @@ sap.ui.define([
 		/**
 		 * Checks if a list has been selected.
 		 */
-		isListSelected : function () {
+		isListSelected: function() {
 			if (this.getView().byId("listTable").getSelectedItem() === null) {				
 				return false;
 			} else {				
@@ -147,7 +147,7 @@ sap.ui.define([
 		/**
 		 * Gets the the selected list.
 		 */
-		getSelectedList : function () {
+		getSelectedList: function() {
 			var oListItem = this.getView().byId("listTable").getSelectedItem();
 			var oContext = oListItem.getBindingContext("lists");
 			var oSelectedList = oContext.getProperty(null, oContext);

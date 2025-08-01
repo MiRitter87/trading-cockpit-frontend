@@ -9,7 +9,7 @@ sap.ui.define([
 	"sap/m/MessageBox",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Controller, MainController, ScanController, ListController, formatter, JSONModel, MessageToast, MessageBox, Filter, FilterOperator) {
+], function(Controller, MainController, ScanController, ListController, formatter, JSONModel, MessageToast, MessageBox, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.scan.ScanEdit", {
@@ -19,7 +19,7 @@ sap.ui.define([
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("scanEditRoute").attachMatched(this._onRouteMatched, this);
 		},
@@ -28,7 +28,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query scan data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ScanController.queryScansByWebService(this.queryScansCallback, this, true);
 			//Query lists for list selection dialog.
@@ -42,7 +42,7 @@ sap.ui.define([
 		/**
 		 * Handles the selection of an item in the scan ComboBox.
 		 */
-		onScanSelectionChange : function (oControlEvent) {
+		onScanSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oScansModel = this.getView().getModel("scans");
 			var oScan, wsScan;
@@ -76,7 +76,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the open list selection button.
 		 */
-		onSelectListsPressed : function () {
+		onSelectListsPressed: function() {
 			if (this.getView().byId("scanComboBox").getSelectedKey() === "") {
 				var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 				MessageBox.error(oResourceBundle.getText("scanEdit.noScanSelected"));
@@ -90,7 +90,7 @@ sap.ui.define([
 		/**
 		 * Handles the search function in the SelectDialog of lists.
 		 */
-		onSearch: function (oEvent) {
+		onSearch: function(oEvent) {
 			var sValue = oEvent.getParameter("value");
 			var oBinding = oEvent.getParameter("itemsBinding");
 			
@@ -110,7 +110,7 @@ sap.ui.define([
 		/**
 		 * Handles the closing of the SelectDialog of lists.
 		 */
-		onDialogClose: function (oEvent) {
+		onDialogClose: function(oEvent) {
 			var aContexts = oEvent.getParameter("selectedContexts");
 			var oSelectedScanModel = this.getView().getModel("selectedScan");
 			var aListArray = new Array();
@@ -131,7 +131,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the save button.
 		 */
-		onSavePressed : function () {				
+		onSavePressed: function() {				
 			var bInputValid = this.verifyObligatoryFields();
 			
 			if (bInputValid === false) {				
@@ -145,7 +145,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the cancel button.
 		 */
-		onCancelPressed : function () {
+		onCancelPressed: function() {
 			MainController.navigateToStartpage(sap.ui.core.UIComponent.getRouterFor(this));	
 		},
 
@@ -153,7 +153,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryScans RESTful WebService call in the ScanController.
 		 */
-		queryScansCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		queryScansCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -176,7 +176,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryListsByWebService RESTful WebService call in the ListController.
 		 */
-		queryListsCallback : function(oReturnData, oCallingController) {
+		queryListsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -194,7 +194,7 @@ sap.ui.define([
 		/**
 		 *  Callback function of the saveScan RESTful WebService call in the ScanController.
 		 */
-		saveScanCallback : function(oReturnData, oCallingController) {
+		saveScanCallback: function(oReturnData, oCallingController) {
 			if (oReturnData.message !== null) {
 				if (oReturnData.message[0].type === 'S') {
 					//Update the data source of the ComboBox with the new scan data.
@@ -224,7 +224,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oSelectedScan = new JSONModel();
 			var oSelectDialog = this.getView().byId("listSelectionDialog");
 			
@@ -241,7 +241,7 @@ sap.ui.define([
 		 * Verifies input of obligatory fields.
 		 * Returns true if input is valid. Returns false if input is invalid.
 		 */
-		verifyObligatoryFields : function() {
+		verifyObligatoryFields: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var iExistingListCount;
 			var oScanModel;
@@ -283,7 +283,7 @@ sap.ui.define([
 		/**
 		 * Formatter that determines the selected lists of a scan for the SelectDialog.
 		 */
-		isListSelectedFormatter : function(iListId) {
+		isListSelectedFormatter: function(iListId) {
 			var oSelectedScan = this.getView().getModel("selectedScan");
 			var aLists = oSelectedScan.getProperty("/listIds");
 			

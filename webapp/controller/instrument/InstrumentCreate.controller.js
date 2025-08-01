@@ -7,14 +7,14 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, InstrumentController, ListController, Constants, JSONModel, MessageBox, MessageToast) {
+], function(Controller, MainController, InstrumentController, ListController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.instrument.InstrumentCreate", {
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			
 			//Register an event handler that gets called every time the router navigates to this view.
@@ -31,7 +31,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			this.resetUIElements();
 			this.initializeInstrumentModel();
 			
@@ -46,7 +46,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the save button.
 		 */
-		onSavePressed : function () {
+		onSavePressed: function() {
 			if (this.isInputValid() === false) {				
 				return;
 			}
@@ -58,7 +58,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the cancel button.
 		 */
-		onCancelPressed : function () {
+		onCancelPressed: function() {
 			MainController.navigateToStartpage(sap.ui.core.UIComponent.getRouterFor(this));	
 		},
 		
@@ -66,7 +66,7 @@ sap.ui.define([
 		/**
 		 * Handles the selection of an instrument type.
 		 */
-		onTypeSelectionChange : function () {
+		onTypeSelectionChange: function() {
 			this.applyTypeRelatedUiSettings();
 			this.applyListRelatedUiSettings();
 		},
@@ -75,7 +75,7 @@ sap.ui.define([
 		/**
 		 * Handles the selection of an item in the data source list ComboBox.
 		 */
-		onListSelectionChange : function () {
+		onListSelectionChange: function() {
 			this.applyListRelatedUiSettings();
 		},
 		
@@ -83,7 +83,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
 		 */
-		queryInstrumentsCallback : function(oReturnData, oCallingController) {
+		queryInstrumentsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -105,7 +105,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryLists RESTful WebService call in the ListController.
 		 */
-		queryListsCallback : function(oReturnData, oCallingController) {
+		queryListsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -123,7 +123,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the createInstrument RESTful WebService call in the InstrumentController.
 		 */
-		createInstrumentCallback : function (oReturnData, oCallingController) {
+		createInstrumentCallback: function(oReturnData, oCallingController) {
 			if (oReturnData.message !== null) {
 				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
@@ -150,7 +150,7 @@ sap.ui.define([
 		/**
 		 * Initializes the instrument model to which the UI controls are bound.
 		 */
-		initializeInstrumentModel : function () {
+		initializeInstrumentModel: function() {
 			var oInstrumentModel = new JSONModel();
 			
 			oInstrumentModel.loadData("model/instrument/instrumentCreate.json");
@@ -161,7 +161,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			this.getView().byId("typeComboBox").setSelectedItem(null);
 			
 			this.getView().byId("symbolInput").setEnabled(true);
@@ -187,7 +187,7 @@ sap.ui.define([
 		/**
 		 * Checks if the input is valid. Additionally prompts messages informing the user about missing data.
 		 */
-		isInputValid : function () {
+		isInputValid: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var sType = this.getView().byId("typeComboBox").getSelectedKey();
 			
@@ -233,7 +233,7 @@ sap.ui.define([
 		/**
 		 * Applies settings of UI elements based on the selected instrument type.
 		 */
-		applyTypeRelatedUiSettings : function () {
+		applyTypeRelatedUiSettings: function() {
 			var oInstrumentModel;
 			var sSelectedType;
 			
@@ -293,7 +293,7 @@ sap.ui.define([
 		/**
 		 * Applies settings of UI elements based on the selected data source list.
 		 */
-		applyListRelatedUiSettings : function () {
+		applyListRelatedUiSettings: function() {
 			var sSelectedType;
 			var oSelectedList = this.getView().byId("listComboBox").getSelectedItem();
 			var oInstrumentModel = this.getView().getModel("newInstrument");

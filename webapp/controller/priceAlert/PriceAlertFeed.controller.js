@@ -6,7 +6,7 @@ sap.ui.define([
 	"sap/ui/core/IntervalTrigger",
 	"sap/m/MessageToast",
 	"sap/ui/model/json/JSONModel"
-], function (Controller, PriceAlertController, Constants, formatter, IntervalTrigger, MessageToast, JSONModel) {
+], function(Controller, PriceAlertController, Constants, formatter, IntervalTrigger, MessageToast, JSONModel) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertFeed", {
@@ -16,7 +16,7 @@ sap.ui.define([
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var intervalTrigger = new IntervalTrigger(10000);
 			//".bind(this)" injects the context of "this" into the getAlerts-function.
 			intervalTrigger.addListener(this.getAlerts.bind(this));
@@ -37,7 +37,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryPriceAlerts RESTful WebService call in the PriceAlertController.
 		 */
-		queryPriceAlertsCallback : function(oReturnData, oCallingController) {
+		queryPriceAlertsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -58,7 +58,7 @@ sap.ui.define([
 		/**
 		 *  Callback function of the savePriceAlert RESTful WebService call in the PriceAlertController.
 		 */
-		savePriceAlertCallback : function(oReturnData) {
+		savePriceAlertCallback: function(oReturnData) {
 			if (oReturnData.message !== null) {
 				if (oReturnData.message[0].type === 'S' || oReturnData.message[0].type === 'I') {
 					MessageToast.show(oReturnData.message[0].text);
@@ -74,7 +74,7 @@ sap.ui.define([
 		/**
 		 * Gets the price alerts.
 		 */
-		getAlerts: function () {			
+		getAlerts: function() {			
 			PriceAlertController.queryPriceAlertsByWebService(this.queryPriceAlertsCallback, this, true, 
 				Constants.ALERT_TRIGGER_STATUS.TRIGGERED, Constants.ALERT_CONFIRMATION_STATUS.NOT_CONFIRMED);
 		},
@@ -108,7 +108,7 @@ sap.ui.define([
 		/**
 		 * Gets the price alert of the FeedListItem on which the action was performed.
 		 */
-		getPriceAlertForAction : function (oEvent) {
+		getPriceAlertForAction: function(oEvent) {
 			var oPriceAlertModel;
 			
 			var oFeedListItem = oEvent.getSource();

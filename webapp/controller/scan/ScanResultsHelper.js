@@ -3,13 +3,13 @@ sap.ui.define([
 	"../Constants",
 	"sap/m/MessageBox",
 	"sap/m/p13n/MetadataHelper"
-], function (MainController, Constants, MessageBox, MetadataHelper) {
+], function(MainController, Constants, MessageBox, MetadataHelper) {
 	"use strict";
 	return {
 		/**
 		 * Opens a MessageBox with information about the selected scan template.
 		 */
-		openTemplateInformation : function(oResourceBundle, sKey) {
+		openTemplateInformation: function(oResourceBundle, sKey) {
 			var mOptions = new Object();
 			var sTitle = "";
 			var sDescription = "";
@@ -87,7 +87,7 @@ sap.ui.define([
 		/**
 		 * Initializes the ComboBox for Scan template selection.
 		 */
-		initializeTemplateComboBox : function(oResourceBundle, oComboBox) {
+		initializeTemplateComboBox: function(oResourceBundle, oComboBox) {
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.ALL, "scanResults.template.all");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.BUYABLE_BASE, "scanResults.template.buyableBase");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES, "scanResults.template.breakoutCandidates");
@@ -109,7 +109,7 @@ sap.ui.define([
 		/**
 		 * Gets the MetadataHelper that contains column information of the scan results table.
 		 */
-		getMetadataHelper : function(oResourceBundle) {
+		getMetadataHelper: function(oResourceBundle) {
 			var oMetadataHelper = new MetadataHelper([
 				{key: "symbolColumn", label: oResourceBundle.getText("instrument.symbol"), 
 					path: "instrument/symbol"},
@@ -152,7 +152,7 @@ sap.ui.define([
 				/**
 		 * Gets a chart URL for the given Instrument.
 		 */
-		getChartUrl : function(oInstrument, sWebServiceBaseUrl) {
+		getChartUrl: function(oInstrument, sWebServiceBaseUrl) {
 			var sChartUrl = "";
 
 			if (oInstrument.type === Constants.INSTRUMENT_TYPE.RATIO) {
@@ -173,7 +173,7 @@ sap.ui.define([
 		/**
 		 * Gets a chart URL for an Instrument of any type other than RATIO where symbol and stock exchange are given.
 		 */
-		getChartUrlNonRatio : function(oInstrument) {
+		getChartUrlNonRatio: function(oInstrument) {
 			var sBaseChartUrl = "https://stockcharts.com/h-sc/ui?s={symbol}{exchange}&p=D&yr=1&mn=0&dy=0&id=p87853059193";
 			var sChartUrl = "";
 			var sStockExchange = oInstrument.stockExchange;
@@ -213,7 +213,7 @@ sap.ui.define([
 		/**
 		 * Gets a chart URL for an Instrument of type RATIO.
 		 */
-		getChartUrlRatio : function(oInstrument) {
+		getChartUrlRatio: function(oInstrument) {
 			var sBaseChartUrl = "https://stockcharts.com/h-sc/ui?s={symbolDividend}:{symbolDivisor}&p=D&yr=1&mn=0&dy=0&id=p45419491770";
 			var sChartUrl = "";
 			var sSymbolDividend = oInstrument.dividend.symbol;
@@ -229,7 +229,7 @@ sap.ui.define([
 		/**
 		 * Gets the chart URL of a backend chart for the given instrument.
 		 */
-		getChartUrlBackend : function(oInstrument, sWebServiceBaseUrl) {
+		getChartUrlBackend: function(oInstrument, sWebServiceBaseUrl) {
 			var sServerAddress = MainController.getServerAddress();
 			var sChartUrl = sServerAddress + sWebServiceBaseUrl + "/priceVolume/" + oInstrument.id;
 			
@@ -243,7 +243,7 @@ sap.ui.define([
 		/**
 		 * Gets a URL for the earnings website of an Instrument.
 		 */
-		getEarningsUrl : function(oInstrument) {
+		getEarningsUrl: function(oInstrument) {
 			var sBaseEarningsUrl = "https://www.tipranks.com/stocks/{placeholder}/earnings";
 			var sEarningsUrl = "";
 			var sStockExchange = oInstrument.stockExchange;
@@ -273,7 +273,7 @@ sap.ui.define([
 		/**
 		 * Controls which instrument types are available for selection in the type ComboBox.
 		 */
-		enableInstrumentTypesInComboBox : function (oComboxBox, aAllowedInstrumentTypes) {
+		enableInstrumentTypesInComboBox: function(oComboxBox, aAllowedInstrumentTypes) {
 			//Set all types to invisible by default.
 			oComboxBox.getItemByKey(Constants.INSTRUMENT_TYPE.STOCK).setEnabled(false);
 			oComboxBox.getItemByKey(Constants.INSTRUMENT_TYPE.ETF).setEnabled(false);

@@ -8,14 +8,14 @@ sap.ui.define([
 	"sap/m/MessageBox",
 	"sap/m/MessageToast",
 	"./lightweight-charts.standalone.production"
-], function (Controller, TradingViewController, MainController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
+], function(Controller, TradingViewController, MainController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartPriceVolumeTV", {
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("chartPriceVolumeTVRoute").attachMatched(this._onRouteMatched, this);
 		},
@@ -24,7 +24,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query only instruments that have quotations referenced. Otherwise no chart could be created.
 			ScanController.queryQuotationsByWebService(this.queryAllQuotationsCallback, this, false, Constants.SCAN_TEMPLATE.ALL);
 			
@@ -35,7 +35,7 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the chart information button.
     	 */
-    	onChartInformationPressed : function() {
+    	onChartInformationPressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var mOptions = new Object();
 			var sTitle = oResourceBundle.getText("chartPriceVolumeTV.info.title");
@@ -49,7 +49,7 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the refresh chart button.
     	 */
-    	onRefreshPressed : function() {
+    	onRefreshPressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
@@ -66,7 +66,7 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the EMA(21) ToggleButton.
     	 */
-    	onEma21Pressed : function(oEvent) {
+    	onEma21Pressed: function(oEvent) {
 			var oChartModel = this.getView().getModel("chartModel");
 	
 			if (oEvent.getSource().getPressed()) {
@@ -82,7 +82,7 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the SMA(50) ToggleButton.
     	 */
-    	onSma50Pressed : function(oEvent) {
+    	onSma50Pressed: function(oEvent) {
 			var oChartModel = this.getView().getModel("chartModel");
 	
 			if (oEvent.getSource().getPressed()) {
@@ -98,7 +98,7 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the SMA(150) ToggleButton.
     	 */
-    	onSma150Pressed : function(oEvent) {
+    	onSma150Pressed: function(oEvent) {
 			var oChartModel = this.getView().getModel("chartModel");
 	
 			if (oEvent.getSource().getPressed()) {
@@ -114,7 +114,7 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the SMA(200) ToggleButton.
     	 */
-    	onSma200Pressed : function(oEvent) {
+    	onSma200Pressed: function(oEvent) {
 			var oChartModel = this.getView().getModel("chartModel");
 			
 			if (oEvent.getSource().getPressed()) {
@@ -130,7 +130,7 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the SMA(30) volume ToggleButton.
     	 */
-    	onSma30VolumePressed : function(oEvent) {
+    	onSma30VolumePressed: function(oEvent) {
 			var oChartModel = this.getView().getModel("chartModel");
 			
 			if (oEvent.getSource().getPressed()) {
@@ -146,7 +146,7 @@ sap.ui.define([
 		/**
 		 * Handles the button press event of the Bollinger BandWidth ToggleButton.
 		 */
-		onBollingerBandWidthPressed : function(oEvent) {
+		onBollingerBandWidthPressed: function(oEvent) {
 			var oChartModel = this.getView().getModel("chartModel");
 			var oSlowStoButton = this.getView().byId("slowStochasticButton");
 			var oRsLineButton = this.getView().byId("rsLineButton");
@@ -176,7 +176,7 @@ sap.ui.define([
 		/**
 		 * Handles the button press event of the Slow Stochastic ToggleButton.
 		 */
-		onSlowStochasticPressed : function(oEvent) {
+		onSlowStochasticPressed: function(oEvent) {
 			var oChartModel = this.getView().getModel("chartModel");
 			var oBBWButton = this.getView().byId("bbwButton");
 			var oRsLineButton = this.getView().byId("rsLineButton");
@@ -206,7 +206,7 @@ sap.ui.define([
 		/**
 		 * Handles the button press event of the RS line ToggleButton.
 		 */
-		onRsLinePressed : function(oEvent) {
+		onRsLinePressed: function(oEvent) {
 			var oChartModel = this.getView().getModel("chartModel");
 			var oSlowStoButton = this.getView().byId("slowStochasticButton");
 			var oBBWButton = this.getView().byId("bbwButton");
@@ -236,7 +236,7 @@ sap.ui.define([
 		/**
 		 * Handles clicks in the TradingView chart.
 		 */
-		onChartClicked : function (param) {
+		onChartClicked: function(param) {
 			if (!param.point) {
 		        return;
 		    }
@@ -263,7 +263,7 @@ sap.ui.define([
 		/**
 		 * Handles accepting the selected coordinate for the horizontal line.
 		 */
-		onAcceptCoordinate : function() {
+		onAcceptCoordinate: function() {
 			var oHorizontalLineModel = this.getHorizontalLineModel();
 			
 			this.createHorizontalLineByWebService(oHorizontalLineModel, this.createHorizontalLineCallback, this);
@@ -273,7 +273,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the cancel button of the horizontal line coordinate PopUp.
 		 */
-		onCancelCoordinate : function() {
+		onCancelCoordinate: function() {
 			var oHorizontalLineButton = this.getView().byId("horizontalLineButton");
 			
 			this.byId("horizontalLineCoordinatesDialog").close();
@@ -284,7 +284,7 @@ sap.ui.define([
 		/**
 		 * Handles the button press event of the overview button.
 		 */
-		onOverviewPressed : function() {
+		onOverviewPressed: function() {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
@@ -300,7 +300,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the close button of the object overview dialog.
 		 */
-		onCloseObjectOverviewDialog : function() {
+		onCloseObjectOverviewDialog: function() {
 			this.byId("chartObjectOverviewDialog").close();
 		},
 		
@@ -308,7 +308,7 @@ sap.ui.define([
 		/**
 		 * Handles the button press event of the delete button in the "chart overview" dialog.
 		 */
-		onDeleteChartObjectPressed : function() {
+		onDeleteChartObjectPressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			if (this.getView().byId("chartObjectTable").getSelectedItem() === null) {
@@ -323,7 +323,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
-		queryAllQuotationsCallback : function(oReturnData, oCallingController) {
+		queryAllQuotationsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -342,7 +342,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryChartData RESTful WebService call.
 		 */
-		queryChartDataCallback : function(oReturnData, oCallingController) {
+		queryChartDataCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
@@ -373,7 +373,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the createHorizontalLine RESTful WebService call.
 		 */
-		createHorizontalLineCallback : function (oReturnData, oCallingController) {
+		createHorizontalLineCallback: function(oReturnData, oCallingController) {
 			var oHorizontalLineButton = oCallingController.getView().byId("horizontalLineButton");
 			
 			if (oReturnData.message !== null) {
@@ -399,7 +399,7 @@ sap.ui.define([
 		 * Callback function of the queryHorizontalLines RESTful WebService call.
 		 * This callback function is used in the context of the object overview dialog.
 		 */
-		queryHorizontalLinesCallback : function(oReturnData, oCallingController) {
+		queryHorizontalLinesCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			var oOverviewDialog = oCallingController.byId("chartObjectOverviewDialog");
 			
@@ -423,7 +423,7 @@ sap.ui.define([
 		 * Callback function of the queryHorizontalLines RESTful WebService call.
 		 * This callback function is used to draw horizontal lines in the TradingView chart.
 		 */
-		queryHorizontalLinesForDrawingCallback : function(oReturnData, oCallingController) {
+		queryHorizontalLinesForDrawingCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -440,7 +440,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the deleteHorizontalLine RESTful WebService call.
 		 */
-		deleteHorizontalLineCallback : function(oReturnData, oCallingController) {
+		deleteHorizontalLineCallback: function(oReturnData, oCallingController) {
 			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
@@ -472,7 +472,7 @@ sap.ui.define([
 		/**
 		 * Queries the chart data WebService for price/volume data of an Instrument with the given ID.
 		 */
-		queryChartData : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
+		queryChartData: function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chartData");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/priceVolume/" + sInstrumentId;
@@ -482,7 +482,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl, 
 				dataType : "json", 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});  
@@ -492,7 +492,7 @@ sap.ui.define([
 		/**
 		 * Calls a WebService operation to create a horizontal line object.
 		 */
-		createHorizontalLineByWebService : function(oHorizontalLineModel, callbackFunction, oCallingController) {
+		createHorizontalLineByWebService: function(oHorizontalLineModel, callbackFunction, oCallingController) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
@@ -504,7 +504,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl,
 				data : sJSONData, 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController);
 				}
 			});
@@ -514,7 +514,7 @@ sap.ui.define([
 		/**
 		 * Queries the chartObject WebService for horizontal lines.
 		 */
-		queryHorizontalLinesByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
+		queryHorizontalLinesByWebService: function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
@@ -528,7 +528,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl, 
 				dataType : "json", 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});                                                                 
@@ -538,7 +538,7 @@ sap.ui.define([
 		/**
 		 * Deletes the given horizontal line using the WebService.
 		 */
-		deleteHorizontalLineByWebService : function(oHorizontalLine, callbackFunction, oCallingController) {
+		deleteHorizontalLineByWebService: function(oHorizontalLine, callbackFunction, oCallingController) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + oHorizontalLine.id;
@@ -549,7 +549,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl, 
 				dataType : "json", 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController);
 				}
 			});
@@ -559,7 +559,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oEma21Button = this.getView().byId("ema21Button");
 			var oSma50Button = this.getView().byId("sma50Button");
@@ -592,7 +592,7 @@ sap.ui.define([
 		/**
 		 * Gets the HorizontalLine as JSONModel that can be further processed by the WebService.
 		 */
-		getHorizontalLineModel : function () {
+		getHorizontalLineModel: function() {
 			var oHorizontalLineWS = new JSONModel();
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oSelectedCoordinateModel = this.getView().getModel("selectedCoordinates");
@@ -607,7 +607,7 @@ sap.ui.define([
 		/**
 		 * Gets the the selected horizontal line from the overview table.
 		 */
-		getSelectedHorizontalLine : function () {
+		getSelectedHorizontalLine: function() {
 			var oListItem = this.getView().byId("chartObjectTable").getSelectedItem();
 			var oContext = oListItem.getBindingContext("horizontalLines");
 			var oSelectedHorizontalLine = oContext.getProperty(null, oContext);
@@ -619,7 +619,7 @@ sap.ui.define([
 		/**
 		 * Updates the toolbar for chart display. 
 		 */
-		updateToolbarForChartDisplay : function () {
+		updateToolbarForChartDisplay: function() {
 			var oChartToolbar = this.getView().byId("chartToolbar");
 			var oToolbarTitle = this.getView().byId("toolbarTitle");
 			var oRsLineButton = this.getView().byId("rsLineButton");
@@ -650,7 +650,7 @@ sap.ui.define([
 		/**
 		 * Updates the chartModel with visibility information about moving averages and indicators.
 		 */
-		updateModelForOverlays : function () {
+		updateModelForOverlays: function() {
 			this.updateModelForMovingAverages();
 			this.updateModelForIndicators();
 		},
@@ -659,7 +659,7 @@ sap.ui.define([
 		/**
 		 * Updates the chartModel with visibility information about moving averages.
 		 */
-		updateModelForMovingAverages : function () {
+		updateModelForMovingAverages: function() {
 			var oChartModel = this.getView().getModel("chartModel");
 			var oEma21Button = this.getView().byId("ema21Button");
 			var oSma50Button = this.getView().byId("sma50Button");
@@ -701,7 +701,7 @@ sap.ui.define([
 		/**
 		 * Updates the chartModel with visibility information about indicators.
 		 */
-		updateModelForIndicators : function () {
+		updateModelForIndicators: function() {
 			var oChartModel = this.getView().getModel("chartModel");
 			var oBBWButton = this.getView().byId("bbwButton");
 			var oSlowStoButton = this.getView().byId("slowStochasticButton");

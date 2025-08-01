@@ -6,14 +6,14 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
+], function(Controller, MainController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartPriceVolume", {
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("chartPriceVolumeRoute").attachMatched(this._onRouteMatched, this);
 			
@@ -25,7 +25,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query only instruments that have quotations referenced. Otherwise no chart could be created.
 			ScanController.queryQuotationsByWebService(this.queryQuotationsCallback, this, false, Constants.SCAN_TEMPLATE.ALL);
 			
@@ -37,7 +37,7 @@ sap.ui.define([
     	/**
     	 * Handles the button press event of the chart information button.
     	 */
-    	onChartInformationPressed : function() {
+    	onChartInformationPressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var mOptions = new Object();
 			var sTitle = oResourceBundle.getText("chartPriceVolume.info.title");
@@ -51,7 +51,7 @@ sap.ui.define([
 		/**
 		 * Handles the selection of an Instrument.
 		 */
-		onInstrumentSelectionChange : function (oControlEvent) {
+		onInstrumentSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oQuotationsModel = this.getView().getModel("quotations");
 			var oInstrument;
@@ -82,7 +82,7 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the refresh chart button.
     	 */
-    	onRefreshPressed : function() {
+    	onRefreshPressed: function() {
 			var oImage = this.getView().byId("chartImage");
 			var bIsInputValid = this.isInputValid();
 			var sChartUrl;
@@ -100,7 +100,7 @@ sap.ui.define([
 		/**
 		 * Handles the selection of a chart template.
 		 */
-		onTemplateSelectionChange : function() {
+		onTemplateSelectionChange: function() {
 			var oTemplateComboBox = this.getView().byId("templateComboBox");
 			var oEma21CheckBox = this.getView().byId("ema21CheckBox");
 			var oSma50CheckBox = this.getView().byId("sma50CheckBox");
@@ -153,7 +153,7 @@ sap.ui.define([
 		/**
 		 * Handles error during loading of the chart image using the given URL.
 		 */
-		onChartImageError : function() {
+		onChartImageError: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oImage = this.getView().byId("chartImage");
 			var sImageSrc = oImage.getProperty("src");
@@ -172,7 +172,7 @@ sap.ui.define([
 		/**
 		 * Handles selection of the volume CheckBox.
 		 */
-		onVolumeCheckBoxSelect : function() {
+		onVolumeCheckBoxSelect: function() {
 			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
 			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
 			 
@@ -190,7 +190,7 @@ sap.ui.define([
 		/**
 		 * Handles selection of an indicator for the price volume chart.
 		 */
-		onIndicatorSelectionChange : function() {
+		onIndicatorSelectionChange: function() {
 			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
 			var oSelectedItem = oIndicatorComboBox.getSelectedItem();
 			var oRsInstrumentLabel = this.getView().byId("rsInstrumentLabel");
@@ -213,7 +213,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryQuotationsByWebService RESTful WebService call in the ScanController.
 		 */
-		queryQuotationsCallback : function(oReturnData, oCallingController) {
+		queryQuotationsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -232,7 +232,7 @@ sap.ui.define([
 		/**
 		 * Initializes the ComboBox of indicator selection.
 		 */
-		initializeIndicatorComboBox : function() {
+		initializeIndicatorComboBox: function() {
 			var oComboBox = this.getView().byId("indicatorComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -253,7 +253,7 @@ sap.ui.define([
 		/**
 		 * Initializes the ComboBox of chart template selection.
 		 */
-		initializeTemplateComboBox : function() {
+		initializeTemplateComboBox: function() {
 			var oComboBox = this.getView().byId("templateComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -271,7 +271,7 @@ sap.ui.define([
 		/**
 		 * Validates the user input. Prompts messages in input is not valid.
 		 */
-		isInputValid : function () {
+		isInputValid: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
@@ -296,7 +296,7 @@ sap.ui.define([
 		/**
 		 * Determines the URL of the statistic chart based on the selected chart type and optional additional parameters.
 		 */
-		getChartUrl : function() {
+		getChartUrl: function() {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			var sServerAddress = MainController.getServerAddress();
@@ -316,7 +316,7 @@ sap.ui.define([
 		/**
 		 * Gets the URL parameters for configuration of price volume chart.
 		 */
-		getUrlParametersPriceVolume : function() {
+		getUrlParametersPriceVolume: function() {
 			var sParameters = "";
 			var oEma21CheckBox = this.getView().byId("ema21CheckBox");
 			var oSma50CheckBox = this.getView().byId("sma50CheckBox");
@@ -368,7 +368,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oRsInstrumentComboBox = this.getView().byId("rsInstrumentComboBox");
 			var oTemplateComboBox = this.getView().byId("templateComboBox");

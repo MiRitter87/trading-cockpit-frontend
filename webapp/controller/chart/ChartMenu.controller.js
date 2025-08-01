@@ -1,13 +1,13 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+], function(Controller) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.ChartMenu", {
 		/**
 		 * Handles click at the Advance/Decline Number tile.
 		 */
-		onAdvanceDeclineNumberPressed : function () {
+		onAdvanceDeclineNumberPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartAdvanceDeclineNumberRoute");	
 		},
@@ -16,7 +16,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the Quota above SMA(50) tile.
 		 */
-		onAboveSma50Pressed : function () {
+		onAboveSma50Pressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartAboveSma50Route");	
 		},
@@ -25,7 +25,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the Quota above SMA(200) tile.
 		 */
-		onAboveSma200Pressed : function () {
+		onAboveSma200Pressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartAboveSma200Route");	
 		},
@@ -34,7 +34,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the Ritter Market Trend tile.
 		 */
-		onRmtPressed : function () {
+		onRmtPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartRitterMarketTrendRoute");	
 		},
@@ -43,7 +43,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the Ritter Pattern Indicator tile.
 		 */
-		onRpiPressed : function () {
+		onRpiPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartRitterPatternIndicatorRoute");	
 		},
@@ -52,7 +52,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the Price/Volume tile.
 		 */
-		onPriceVolumePressed : function () {
+		onPriceVolumePressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartPriceVolumeRoute");	
 		},
@@ -60,7 +60,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the Price/Volume (TradingView) tile.
 		 */
-		onPriceVolumeTVPressed : function () {
+		onPriceVolumeTVPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartPriceVolumeTVRoute");	
 		},
@@ -69,7 +69,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the Distribution Days tile.
 		 */
-		onDistributionDaysPressed : function () {
+		onDistributionDaysPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartDistributionDaysRoute");
 		},
@@ -78,7 +78,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the Follow-Through Days tile.
 		 */
-		onFollowThroughDaysPressed : function () {
+		onFollowThroughDaysPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartFollowThroughDaysRoute");
 		},
@@ -87,7 +87,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the Pocket Pivots tile.
 		 */
-		onPocketPivotsPressed : function () {
+		onPocketPivotsPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartPocketPivotsRoute");
 		},
@@ -96,7 +96,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the Health Check tile.
 		 */
-		onHealthCheckPressed : function () {
+		onHealthCheckPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartHealthCheckRoute");
 		},
@@ -105,7 +105,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the Health Check (TradingView) tile.
 		 */
-		onHealthCheckTVPressed : function () {
+		onHealthCheckTVPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartHealthCheckTVRoute");
 		},
@@ -114,7 +114,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the Aggregate Indicator tile.
 		 */
-		onAggregateIndicatorPressed : function () {
+		onAggregateIndicatorPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("chartAggregateIndicatorRoute");
 		}

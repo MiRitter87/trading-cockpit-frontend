@@ -5,14 +5,14 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, ListController, JSONModel, MessageBox, MessageToast) {
+], function(Controller, MainController, ListController, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.statistic.ChartAdvanceDeclineNumber", {
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("chartAdvanceDeclineNumberRoute").attachMatched(this._onRouteMatched, this);
 		},
@@ -21,7 +21,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			ListController.queryListsByWebService(this.queryListsCallback, this, false);
 			this.resetUIElements();
     	},
@@ -30,7 +30,7 @@ sap.ui.define([
     	/**
     	 * Handles the button press event of the chart information button.
     	 */
-    	onChartInformationPressed : function() {
+    	onChartInformationPressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var mOptions = new Object();
 			var sTitle = oResourceBundle.getText("chartAdNumber.info.title");
@@ -44,7 +44,7 @@ sap.ui.define([
 		/**
     	 * Handles the button press event of the refresh chart button.
     	 */
-    	onRefreshPressed : function() {
+    	onRefreshPressed: function() {
 			var sChartUrl = this.getChartUrl();
 			var oImage = this.getView().byId("chartImage");
 			
@@ -55,7 +55,7 @@ sap.ui.define([
 		/**
 		 * Handles error during loading of the chart image using the given URL.
 		 */
-		onChartImageError : function() {
+		onChartImageError: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oImage = this.getView().byId("chartImage");
 			var sImageSrc = oImage.getProperty("src");
@@ -74,7 +74,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryLists RESTful WebService call in the ListController.
 		 */
-		queryListsCallback : function(oReturnData, oCallingController) {
+		queryListsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -92,7 +92,7 @@ sap.ui.define([
 		/**
 		 * Determines the URL of the chart.
 		 */
-		getChartUrl : function() {
+		getChartUrl: function() {
 			var oListComboBox = this.getView().byId("listComboBox");
 			var sSelectedListId = oListComboBox.getSelectedKey();
 			var sServerAddress = MainController.getServerAddress();
@@ -116,7 +116,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oListComboBox = this.getView().byId("listComboBox");
 			var oImage = this.getView().byId("chartImage");
 			

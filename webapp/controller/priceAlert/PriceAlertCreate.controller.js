@@ -6,14 +6,14 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageBox",
 	"sap/m/MessageToast"
-], function (Controller, MainController, PriceAlertController, InstrumentController, JSONModel, MessageBox, MessageToast) {
+], function(Controller, MainController, PriceAlertController, InstrumentController, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertCreate", {
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			
 			//Register an event handler that gets called every time the router navigates to this view.
@@ -27,7 +27,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query instruments for instrument selection dialog.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, false);
 			
@@ -39,7 +39,7 @@ sap.ui.define([
     	/**
 		 * Handles the selection of an item in the instrument ComboBox.
 		 */
-		onInstrumentSelectionChange : function (oControlEvent) {
+		onInstrumentSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oInstrumentsModel = this.getView().getModel("instruments");
 			var oInstrument;
@@ -65,7 +65,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the save button.
 		 */
-		onSavePressed : function () {
+		onSavePressed: function() {
 			//Validate price first to remove the error indication from the input field as soon as possible if the user fills in correct data.
 			PriceAlertController.validatePriceInput(this.getView().byId("priceInput"), this.getOwnerComponent().getModel("i18n").getResourceBundle(),
 				this.getView().getModel("newPriceAlert"), "/price");
@@ -91,7 +91,7 @@ sap.ui.define([
 		/**
 		 * Handles a click at the cancel button.
 		 */
-		onCancelPressed : function () {
+		onCancelPressed: function() {
 			MainController.navigateToStartpage(sap.ui.core.UIComponent.getRouterFor(this));	
 		},
 		
@@ -99,7 +99,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryInstrumentsByWebService RESTful WebService call in the InstrumentController.
 		 */
-		queryInstrumentsCallback : function(oReturnData, oCallingController) {
+		queryInstrumentsCallback: function(oReturnData, oCallingController) {
 			var oModel = new JSONModel();
 			
 			if (oReturnData.data !== null) {
@@ -118,7 +118,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the createPriceAlert RESTful WebService call in the PriceAlertController.
 		 */
-		createPriceAlertCallback : function (oReturnData, oCallingController) {
+		createPriceAlertCallback: function(oReturnData, oCallingController) {
 			if (oReturnData.message !== null) {
 				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
@@ -141,7 +141,7 @@ sap.ui.define([
 		/**
 		 * Initializes the price alert model to which the UI controls are bound.
 		 */
-		initializePriceAlertModel : function () {
+		initializePriceAlertModel: function() {
 			var oPriceAlertModel = new JSONModel();
 			
 			oPriceAlertModel.loadData("model/priceAlert/priceAlertCreate.json");
@@ -152,7 +152,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			this.getView().byId("typeComboBox").setSelectedItem(null);
 			this.getView().byId("priceInput").setValue(0);
 			this.getView().byId("priceInput").setValueState(sap.ui.core.ValueState.None);
@@ -170,7 +170,7 @@ sap.ui.define([
 		/**
 		 * Displays a message in case the instrument has not been selected.
 		 */
-		showMessageOnUndefinedInstrument : function () {
+		showMessageOnUndefinedInstrument: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			MessageBox.error(oResourceBundle.getText("priceAlertCreate.noInstrumentSelected"));
 		},
@@ -179,7 +179,7 @@ sap.ui.define([
 		/**
 		 * Displays a message in case the type has not been selected.
 		 */
-		showMessageOnUndefinedType : function () {
+		showMessageOnUndefinedType: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			MessageBox.error(oResourceBundle.getText("priceAlertCreate.noTypeSelected"));
 		}

@@ -4,14 +4,14 @@ sap.ui.define([
 	"../instrument/InstrumentController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (Controller, ListController, InstrumentController, JSONModel, MessageToast) {
+], function(Controller, ListController, InstrumentController, JSONModel, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.list.ListDisplay", {
 		/**
 		 * Initializes the controller.
 		 */
-		onInit : function () {
+		onInit: function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("listDisplayRoute").attachMatched(this._onRouteMatched, this);
 		},
@@ -20,7 +20,7 @@ sap.ui.define([
 		/**
 		 * Handles the routeMatched-event when the router navigates to this view.
 		 */
-		_onRouteMatched: function () {
+		_onRouteMatched: function() {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			ListController.queryListsByWebService(this.queryListsCallback, this, true);
 
@@ -32,7 +32,7 @@ sap.ui.define([
 		/**
 		 * Handles the selection of an item in the list ComboBox.
 		 */
-		onListSelectionChange : function (oControlEvent) {
+		onListSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oListsModel = this.getView().getModel("lists");
 			var oList;
@@ -54,7 +54,7 @@ sap.ui.define([
 		/**
 		 * Callback function of the queryLists RESTful WebService call in the ListController.
 		 */
-		queryListsCallback : function(oReturnData, oCallingController, bShowSuccessMessage) {
+		queryListsCallback: function(oReturnData, oCallingController, bShowSuccessMessage) {
 			var oModel = new JSONModel();
 			var oResourceBundle = oCallingController.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
@@ -77,7 +77,7 @@ sap.ui.define([
 		/**
 		 * Resets the UI elements.
 		 */
-		resetUIElements : function () {
+		resetUIElements: function() {
 			var oListModel = new JSONModel();
 			
 			this.getView().byId("listComboBox").setSelectedItem(null);	
@@ -96,7 +96,7 @@ sap.ui.define([
 		/**
 		 * Formatter of the symbol text.
 		 */
-		symbolTextFormatter : function(sSymbol) {
+		symbolTextFormatter: function(sSymbol) {
 			return ListController.symbolTextFormatter(sSymbol);
 		}
 	});

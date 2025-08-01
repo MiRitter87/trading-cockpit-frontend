@@ -1,13 +1,13 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+], function(Controller) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.priceAlert.PriceAlertMenu", {
 		/**
 		 * Handles click at the price alert create tile.
 		 */
-		onPriceAlertCreatePressed : function () {
+		onPriceAlertCreatePressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("priceAlertCreateRoute");	
 		},
@@ -16,7 +16,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the price alert edit tile.
 		 */
-		onPriceAlertEditPressed : function () {
+		onPriceAlertEditPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("priceAlertEditRoute");	
 		},
@@ -25,7 +25,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the price alert display tile.
 		 */
-		onPriceAlertDisplayPressed : function () {
+		onPriceAlertDisplayPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("priceAlertDisplayRoute");	
 		},
@@ -34,7 +34,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the price alert overview tile.
 		 */
-		onPriceAlertOverviewPressed : function () {
+		onPriceAlertOverviewPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("priceAlertOverviewRoute");	
 		},
@@ -43,7 +43,7 @@ sap.ui.define([
 		/**
 		 * Handles click at the price alert feed tile.
 		 */
-		onPriceAlertFeedPressed : function () {
+		onPriceAlertFeedPressed: function() {
 			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter.navTo("priceAlertFeedRoute");	
 		}

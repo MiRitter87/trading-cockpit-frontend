@@ -1,12 +1,12 @@
 sap.ui.define([
 	"../MainController"
-], function (MainController) {
+], function(MainController) {
 	"use strict";
 	return {		
 		/**
 		 * Gets the list data of the list with the given ID.
 		 */
-		getListById : function(iListId, oLists) {
+		getListById: function(iListId, oLists) {
 			//Get the selected list from the array of all lists according to the id.
 			for (var i = 0; i < oLists.length; i++) {
     			var oTempList = oLists[i];
@@ -23,7 +23,7 @@ sap.ui.define([
 		/**
 		 * Formatter of the symbol text within Instrument lists.
 		 */
-		symbolTextFormatter : function(sSymbol) {
+		symbolTextFormatter: function(sSymbol) {
 			if (sSymbol !== "") {				
 				return sSymbol;
 			} else {				
@@ -35,7 +35,7 @@ sap.ui.define([
 		/**
 		 * Calls a WebService operation to create a list.
 		 */
-		createListByWebService : function(oListModel, callbackFunction, oCallingController) {
+		createListByWebService: function(oListModel, callbackFunction, oCallingController) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/list");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
@@ -47,7 +47,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl,
 				data : sJSONData, 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController);
 				}
 			});
@@ -57,7 +57,7 @@ sap.ui.define([
 		/**
 		 * Queries the list WebService for all lists.
 		 */
-		queryListsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage) {
+		queryListsByWebService: function(callbackFunction, oCallingController, bShowSuccessMessage) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/list");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
@@ -67,7 +67,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl, 
 				dataType : "json", 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});                                                                 
@@ -77,7 +77,7 @@ sap.ui.define([
 		/**
 		 * Updates changes of the list data using the WebService.
 		 */
-		saveListByWebService : function(oListModel, callbackFunction, oCallingController) {
+		saveListByWebService: function(oListModel, callbackFunction, oCallingController) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/list");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
@@ -89,7 +89,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl,
 				data : sJSONData, 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController);
 				}
 			}); 
@@ -99,7 +99,7 @@ sap.ui.define([
 		/**
 		 * Deletes the given list using the WebService.
 		 */
-		deleteListByWebService : function(oList, callbackFunction, oCallingController) {
+		deleteListByWebService: function(oList, callbackFunction, oCallingController) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/list");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + oList.id;
@@ -110,7 +110,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl, 
 				dataType : "json", 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController);
 				}
 			});
@@ -120,7 +120,7 @@ sap.ui.define([
 		/**
 		 * Downloads the Instrument data of the List with the most recent prices as Excel file.
 		 */
-		downloadListAsExcelFile : function(oList, oCallingController) {
+		downloadListAsExcelFile: function(oList, oCallingController) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/list");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + oList.id + "/excel";

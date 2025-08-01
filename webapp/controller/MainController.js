@@ -4,14 +4,14 @@ sap.ui.define([
 	"./Constants",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (Fragment, Item, Constants, Filter, FilterOperator) {
+], function(Fragment, Item, Constants, Filter, FilterOperator) {
 	"use strict";
 	
 	return {
 		/**
 		 * Opens the fragment with the given name as PopUp.
 		 */
-		openFragmentAsPopUp : function (oController, sName, callbackFunction) {
+		openFragmentAsPopUp: function(oController, sName, callbackFunction) {
 			var oView = oController.getView();
 			var oDialogOfMap;
 			
@@ -49,7 +49,7 @@ sap.ui.define([
 		/**
 		 * Navigates to the startpage.
 		 */
-		navigateToStartpage : function(oRouter) {
+		navigateToStartpage: function(oRouter) {
 			oRouter.navTo("startPageRoute");	
 		},
 		
@@ -57,7 +57,7 @@ sap.ui.define([
 		/**
 		 * Initializes the given ComboBox with items for stock exchange selection.
 		 */
-		initializeStockExchangeComboBox : function(oComboBox, oResourceBundle) {
+		initializeStockExchangeComboBox: function(oComboBox, oResourceBundle) {
 			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.NYSE, "stockExchange.nyse");
 			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.NDQ, "stockExchange.ndq");
 			this.addItemToComboBox(oComboBox, oResourceBundle, Constants.STOCK_EXCHANGE.AMEX, "stockExchange.amex");
@@ -72,7 +72,7 @@ sap.ui.define([
 		/**
 		 * Initializes the ComboBox of the health check profile.
 		 */
-		initializeHealthCheckProfileComboBox: function (oComboBox, oResourceBundle) {
+		initializeHealthCheckProfileComboBox: function(oComboBox, oResourceBundle) {
 			this.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.HEALTH_CHECK_PROFILE.ALL, "healthCheckProfile.all");
 				
@@ -99,7 +99,7 @@ sap.ui.define([
 		/**
 		 * Adds an item to a ComboBox.
 		 */
-		addItemToComboBox : function(oComboBox, oResourceBundle, sItemKey, sTextKey) {
+		addItemToComboBox: function(oComboBox, oResourceBundle, sItemKey, sTextKey) {
 			var oComboBoxItem = new Item();
 			
 			oComboBoxItem.setKey(sItemKey);
@@ -111,7 +111,7 @@ sap.ui.define([
 		/**
 		 * Returns the localized text of the given stock exchange.
 		 */
-		getLocalizedStockExchangeText : function(sStockExchange, oResourceBundle) {
+		getLocalizedStockExchangeText: function(sStockExchange, oResourceBundle) {
 			if (sStockExchange === Constants.STOCK_EXCHANGE.NYSE) {				
 				return oResourceBundle.getText("stockExchange.nyse");
 			} else if (sStockExchange === Constants.STOCK_EXCHANGE.NDQ) {				
@@ -137,7 +137,7 @@ sap.ui.define([
 		/**
 		 * Returns the localized title of the given health check profile.
 		 */
-		getTitleOfHealthCheckProfile : function (sProfile, oResourceBundle) {
+		getTitleOfHealthCheckProfile: function(sProfile, oResourceBundle) {
 			var sTitle = "";
 			
 			if (sProfile === Constants.HEALTH_CHECK_PROFILE.ALL) {
@@ -168,7 +168,7 @@ sap.ui.define([
 		/**
 		 * Returns the localized description of the given health check profile.
 		 */
-		getDescriptionOfHealthCheckProfile : function (sProfile, oResourceBundle) {
+		getDescriptionOfHealthCheckProfile: function(sProfile, oResourceBundle) {
 			var sDescription = "";
 			
 			if (sProfile === Constants.HEALTH_CHECK_PROFILE.ALL) {
@@ -200,7 +200,7 @@ sap.ui.define([
 		/**
 		 * Gets the server address including the port.
 		 */
-		getServerAddress : function() {
+		getServerAddress: function() {
 			var sServerAddress = window.location.origin;
 			return sServerAddress;
 		},
@@ -209,7 +209,7 @@ sap.ui.define([
 		/**
 		 * Applies a Filter to the ComboBox for Instrument selection.
 		 */
-		applyFilterToInstrumentsComboBox : function (oComboxBox, sTypePath, aAllowedInstrumentTypes) {
+		applyFilterToInstrumentsComboBox: function(oComboxBox, sTypePath, aAllowedInstrumentTypes) {
 			var oBinding = oComboxBox.getBinding("items");
 			var aFilters = new Array();
 			var oFilterType, oFilterTotal;

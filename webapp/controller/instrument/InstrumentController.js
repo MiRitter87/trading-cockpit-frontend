@@ -1,17 +1,16 @@
 sap.ui.define([
 	"../MainController",
-	"../list/ListController",
 	"../Constants",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function (MainController, ListController, Constants, Filter, FilterOperator) {
+], function(MainController, Constants, Filter, FilterOperator) {
 	"use strict";
 	
 	return {
 		/**
 		 * Initializes the given ComboBox with items for instrument type selection.
 		 */
-		initializeTypeComboBox : function(oComboBox, oResourceBundle) {
+		initializeTypeComboBox: function(oComboBox, oResourceBundle) {
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.STOCK, "instrument.type.stock");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.ETF, "instrument.type.etf");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.INSTRUMENT_TYPE.SECTOR, "instrument.type.sector");
@@ -23,7 +22,7 @@ sap.ui.define([
 		/**
 		 * Gets the instrument data of the instrument with the given ID.
 		 */
-		getInstrumentById : function(iInstrumentId, oInstruments) {
+		getInstrumentById: function(iInstrumentId, oInstruments) {
 			//Get the selected instrument from the array of all instruments according to the id.
 			for (var i = 0; i < oInstruments.length; i++) {
     			var oTempInstrument = oInstruments[i];
@@ -40,7 +39,7 @@ sap.ui.define([
 		/**
 		 * Returns the localized text of the given type.
 		 */
-		getLocalizedTypeText : function(sType, oResourceBundle) {
+		getLocalizedTypeText: function(sType, oResourceBundle) {
 			if (sType === Constants.INSTRUMENT_TYPE.STOCK) {				
 				return oResourceBundle.getText("instrument.type.stock");
 			} else if (sType === Constants.INSTRUMENT_TYPE.ETF) {				
@@ -61,7 +60,7 @@ sap.ui.define([
 		 * Enables or disables the ComboBoxes for Sector and Industry Group selection.
 		 * Also resets the previously selected items if the enabled status is set to false.
 		 */
-		setSectorAndIgComboBoxEnabled : function (bEnabled, oSectorComboBox, oIndustryGroupComboBox) {
+		setSectorAndIgComboBoxEnabled: function(bEnabled, oSectorComboBox, oIndustryGroupComboBox) {
 			oSectorComboBox.setEnabled(bEnabled);
 			oIndustryGroupComboBox.setEnabled(bEnabled);
 			
@@ -76,7 +75,7 @@ sap.ui.define([
 		 * Enables or disables the ComboBoxes for ratio selection.
 		 * Also resets the previously selected items if the enabled status is set to false.
 		 */
-		setRatioComboBoxesEnabled : function (bEnabled, oDividendComboBox, oDivisorComboBox) {
+		setRatioComboBoxesEnabled: function(bEnabled, oDividendComboBox, oDivisorComboBox) {
 			oDividendComboBox.setEnabled(bEnabled);
 			oDivisorComboBox.setEnabled(bEnabled);
 			
@@ -90,7 +89,7 @@ sap.ui.define([
 		/**
 		 * Sets a filter for the items displayed in the dividend and divisor ComboBoxes.
 		 */
-		setFilterDividendDivisor : function (oDividendComboBox, oDivisorComboBox) {
+		setFilterDividendDivisor: function(oDividendComboBox, oDivisorComboBox) {
 			var oBindingDividend = oDividendComboBox.getBinding("items");
 			var oBindingDivisor = oDivisorComboBox.getBinding("items");
 			var oFilterTypeEtf = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.ETF);
@@ -111,7 +110,7 @@ sap.ui.define([
 		/**
 		 * Sets a filter for the items displayed in the sector and industry group ComboBoxes.
 		 */
-		setFilterSectorIg : function (oSectorComboBox, oIndustryGroupComboBox) {
+		setFilterSectorIg: function(oSectorComboBox, oIndustryGroupComboBox) {
 			var oBindingSector = oSectorComboBox.getBinding("items");
 			var oBindingIg = oIndustryGroupComboBox.getBinding("items");
 			var oFilterTypeSector = new Filter("type", FilterOperator.EQ, Constants.INSTRUMENT_TYPE.SECTOR);
@@ -193,7 +192,7 @@ sap.ui.define([
 		/**
 		 * Calls a WebService operation to create an instrument.
 		 */
-		createInstrumentByWebService : function(oInstrumentModel, callbackFunction, oCallingController) {
+		createInstrumentByWebService: function(oInstrumentModel, callbackFunction, oCallingController) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
@@ -205,7 +204,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl,
 				data : sJSONData, 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController);
 				}
 			});
@@ -215,7 +214,7 @@ sap.ui.define([
 		/**
 		 * Queries the instrument WebService for all instruments.
 		 */
-		queryInstrumentsByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentType) {
+		queryInstrumentsByWebService: function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentType) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
@@ -229,7 +228,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl, 
 				dataType : "json", 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});                                                                 
@@ -239,7 +238,7 @@ sap.ui.define([
 		/**
 		 * Updates changes of the instrument data using the WebService.
 		 */
-		saveInstrumentByWebService : function(oInstrumentModel, callbackFunction, oCallingController) {
+		saveInstrumentByWebService: function(oInstrumentModel, callbackFunction, oCallingController) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
@@ -251,7 +250,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl,
 				data : sJSONData, 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController);
 				}
 			}); 
@@ -261,7 +260,7 @@ sap.ui.define([
 		/**
 		 * Deletes the given instrument using the WebService.
 		 */
-		deleteInstrumentByWebService : function(oInstrument, callbackFunction, oCallingController) {
+		deleteInstrumentByWebService: function(oInstrument, callbackFunction, oCallingController) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + oInstrument.id;
@@ -272,7 +271,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl, 
 				dataType : "json", 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController);
 				}
 			});
@@ -283,7 +282,7 @@ sap.ui.define([
 		 * Queries the instrument WebService to perform a health check of the given instrument and get the protocol.
 		 * The health check begins at the given start date up until the most recent date.
 		 */
-		checkHealthWithStartDateByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, iInstrumentId, sDate, sProfile) {
+		checkHealthWithStartDateByWebService: function(callbackFunction, oCallingController, bShowSuccessMessage, iInstrumentId, sDate, sProfile) {
 			var sServerAddress = MainController.getServerAddress();
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
@@ -295,7 +294,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl, 
 				dataType : "json", 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});                                                                 
@@ -306,7 +305,7 @@ sap.ui.define([
 		 * Queries the instrument WebService to perform a health check of the given instrument and get the protocol.
 		 * The lookback period defines the number of recent days for which the health check is performed.
 		 */
-		checkHealthWithLookbackPeriodByWebService : function(callbackFunction, oCallingController, bShowSuccessMessage, 
+		checkHealthWithLookbackPeriodByWebService: function(callbackFunction, oCallingController, bShowSuccessMessage, 
 			sInstrumentId, sLookbackPeriod, sProfile) {
 				
 			var sServerAddress = MainController.getServerAddress();
@@ -320,7 +319,7 @@ sap.ui.define([
 				contentType : "application/json", 
 				url : sQueryUrl, 
 				dataType : "json", 
-				success : function(data) {
+				success: function(data) {
 					callbackFunction(data, oCallingController, bShowSuccessMessage);
 				}
 			});                                                                 
