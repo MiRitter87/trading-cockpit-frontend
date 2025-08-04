@@ -37,12 +37,12 @@ sap.ui.define([
     	 */
     	onChartInformationPressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var mOptions = new Object();
+			var oOptions = new Object();
 			var sTitle = oResourceBundle.getText("chartPriceVolumeTV.info.title");
 			var sDescription = oResourceBundle.getText("chartPriceVolumeTV.info.description");
 			
-			mOptions.title = sTitle;
-			MessageBox.information(sDescription, mOptions);
+			oOptions.title = sTitle;
+			MessageBox.information(sDescription, oOptions);
 		},
 		
 		
@@ -244,8 +244,8 @@ sap.ui.define([
 		    var oHorizontalLineButton = this.getView().byId("horizontalLineButton");
 			var oSelectedCoordinateModel = new JSONModel();
 		    var oChartModel = this.getView().getModel("chartModel");
-		    var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
-		    var price = candlestickSeries.coordinateToPrice(param.point.y);
+		    var oCandlestickSeries = oChartModel.getProperty("/candlestickSeries");
+		    var price = oCandlestickSeries.coordinateToPrice(param.point.y);
 		    
 		    if (oHorizontalLineButton.getPressed() === true) {
 				//Write selected price to JSONModel and bind model to view.

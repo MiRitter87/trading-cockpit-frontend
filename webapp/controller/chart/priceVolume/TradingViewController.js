@@ -16,39 +16,39 @@ sap.ui.define([
 			//Remove previously created chart for subsequent chart creations
 			document.getElementById(sChartContainerDivId).innerHTML = "";
 	
-			const chart = LightweightCharts.createChart(document.getElementById(sChartContainerDivId), {
+			const oChart = LightweightCharts.createChart(document.getElementById(sChartContainerDivId), {
   				width: document.getElementById(sChartContainerDivId).clientWidth,
                 height: document.getElementById(sChartContainerDivId).clientHeight,
                 autoSize: true
             });
             
-            const candlestickSeries = chart.addSeries(LightweightCharts.CandlestickSeries, { priceLineVisible: false });
-			candlestickSeries.setData(this.getCandlestickSeries(oCallingController));
+            const oCandlestickSeries = oChart.addSeries(LightweightCharts.CandlestickSeries, { priceLineVisible: false });
+			oCandlestickSeries.setData(this.getCandlestickSeries(oCallingController));
 			
 			if (bIsInstrumentTypeRatio === false) {
-				const volumeSeries = chart.addSeries(LightweightCharts.HistogramSeries, {
+				const oVolumeSeries = oChart.addSeries(LightweightCharts.HistogramSeries, {
 					priceFormat: {
 	        			type: 'volume',
 	    			},
 	    			priceScaleId: 'left',
 	    			priceLineVisible: false
 				});	
-				volumeSeries.setData(this.getVolumeSeries(oCallingController));	
+				oVolumeSeries.setData(this.getVolumeSeries(oCallingController));	
 				
-				oChartModel.setProperty("/volumeSeries", volumeSeries);			
+				oChartModel.setProperty("/volumeSeries", oVolumeSeries);			
 			}
 			
-			this.applyChartOptions(chart, bIsInstrumentTypeRatio);
+			this.applyChartOptions(oChart, bIsInstrumentTypeRatio);
 			
 			//Automatically zoom the time scale to display all datasets over the full width of the chart.
-			chart.timeScale().fitContent();
+			oChart.timeScale().fitContent();
 			
 			//Handle clicks in the chart. The controller needs to be bound to access the data model within the handler.
-			chart.subscribeClick(oCallingController.onChartClicked.bind(oCallingController));
+			oChart.subscribeClick(oCallingController.onChartClicked.bind(oCallingController));
 			
 			//Store chart Model for further access.
-			oChartModel.setProperty("/chart", chart);
-			oChartModel.setProperty("/candlestickSeries", candlestickSeries);
+			oChartModel.setProperty("/chart", oChart);
+			oChartModel.setProperty("/candlestickSeries", oCandlestickSeries);
 			oCallingController.getView().setModel(oChartModel, "chartModel");
 		},
 		
@@ -198,22 +198,22 @@ sap.ui.define([
 		 */
 		displayEma21: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
-			var chart = oChartModel.getProperty("/chart");
-			var ema21Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.EMA_21);
-			var isEma21Visible = oChartModel.getProperty("/displayEma21");
+			var oChart = oChartModel.getProperty("/chart");
+			var aEma21Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.EMA_21);
+			var bIsEma21Visible = oChartModel.getProperty("/displayEma21");
 	
-			if (isEma21Visible === true) {
-				const ema21Series = chart.addSeries(LightweightCharts.LineSeries, 
+			if (bIsEma21Visible === true) {
+				const oEma21Series = oChart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'yellow', lineWidth: 1, priceLineVisible: false });
-				ema21Series.setData(ema21Data);
-				oChartModel.setProperty("/ema21Series", ema21Series);
+				oEma21Series.setData(aEma21Data);
+				oChartModel.setProperty("/ema21Series", oEma21Series);
 				
 				this.organizeMovingAverages(oChartModel);
 			} else {
-				const ema21Series = oChartModel.getProperty("/ema21Series");
+				const oEma21Series = oChartModel.getProperty("/ema21Series");
 				
-				if (ema21Series !== undefined && chart !== undefined) {
-					chart.removeSeries(ema21Series);
+				if (oEma21Series !== undefined && oChart !== undefined) {
+					oChart.removeSeries(oEma21Series);
 				}
 			}
 		},
@@ -224,22 +224,22 @@ sap.ui.define([
 		 */
 		displaySma50: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
-			var chart = oChartModel.getProperty("/chart");
-			var sma50Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_50);
-			var isSma50Visible = oChartModel.getProperty("/displaySma50");
+			var oChart = oChartModel.getProperty("/chart");
+			var aSma50Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_50);
+			var bIsSma50Visible = oChartModel.getProperty("/displaySma50");
 	
-			if (isSma50Visible === true) {
-				const sma50Series = chart.addSeries(LightweightCharts.LineSeries, 
+			if (bIsSma50Visible === true) {
+				const oSma50Series = oChart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'blue', lineWidth: 1, priceLineVisible: false });
-				sma50Series.setData(sma50Data);
-				oChartModel.setProperty("/sma50Series", sma50Series);
+				oSma50Series.setData(aSma50Data);
+				oChartModel.setProperty("/sma50Series", oSma50Series);
 				
 				this.organizeMovingAverages(oChartModel);
 			} else {
-				const sma50Series = oChartModel.getProperty("/sma50Series");
+				const oSma50Series = oChartModel.getProperty("/sma50Series");
 				
-				if (sma50Series !== undefined && chart !== undefined) {
-					chart.removeSeries(sma50Series);
+				if (oSma50Series !== undefined && oChart !== undefined) {
+					oChart.removeSeries(oSma50Series);
 				}
 			}
 		},
@@ -250,22 +250,22 @@ sap.ui.define([
 		 */
 		displaySma150: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
-			var chart = oChartModel.getProperty("/chart");
-			var sma150Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_150);
-			var isSma150Visible = oChartModel.getProperty("/displaySma150");
+			var oChart = oChartModel.getProperty("/chart");
+			var aSma150Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_150);
+			var bIsSma150Visible = oChartModel.getProperty("/displaySma150");
 	
-			if (isSma150Visible === true) {
-				const sma150Series = chart.addSeries(LightweightCharts.LineSeries, 
+			if (bIsSma150Visible === true) {
+				const oSma150Series = oChart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'red', lineWidth: 1, priceLineVisible: false });
-				sma150Series.setData(sma150Data);
-				oChartModel.setProperty("/sma150Series", sma150Series);
+				oSma150Series.setData(aSma150Data);
+				oChartModel.setProperty("/sma150Series", oSma150Series);
 				
 				this.organizeMovingAverages(oChartModel);
 			} else {
-				const sma150Series = oChartModel.getProperty("/sma150Series");
+				const oSma150Series = oChartModel.getProperty("/sma150Series");
 				
-				if (sma150Series !== undefined && chart !== undefined) {
-					chart.removeSeries(sma150Series);
+				if (oSma150Series !== undefined && oChart !== undefined) {
+					oChart.removeSeries(oSma150Series);
 				}
 			}
 		},
@@ -276,22 +276,22 @@ sap.ui.define([
 		 */
 		displaySma200: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
-			var chart = oChartModel.getProperty("/chart");
-			var sma200Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_200);
-			var isSma200Visible = oChartModel.getProperty("/displaySma200");
+			var oChart = oChartModel.getProperty("/chart");
+			var aSma200Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_200);
+			var bIsSma200Visible = oChartModel.getProperty("/displaySma200");
 	
-			if (isSma200Visible === true) {
-				const sma200Series = chart.addSeries(LightweightCharts.LineSeries, 
+			if (bIsSma200Visible === true) {
+				const oSma200Series = oChart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'green', lineWidth: 1, priceLineVisible: false });
-				sma200Series.setData(sma200Data);
-				oChartModel.setProperty("/sma200Series", sma200Series);
+				oSma200Series.setData(aSma200Data);
+				oChartModel.setProperty("/sma200Series", oSma200Series);
 				
 				this.organizeMovingAverages(oChartModel);
 			} else {
-				const sma200Series = oChartModel.getProperty("/sma200Series");
+				const oSma200Series = oChartModel.getProperty("/sma200Series");
 				
-				if (sma200Series !== undefined && chart !== undefined) {
-					chart.removeSeries(sma200Series);
+				if (oSma200Series !== undefined && oChart !== undefined) {
+					oChart.removeSeries(oSma200Series);
 				}
 			}
 		},
@@ -302,23 +302,23 @@ sap.ui.define([
 		 */
 		displaySma30Volume: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
-			var chart = oChartModel.getProperty("/chart");
-			var sma30VolumeData = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_30_VOLUME);
-			var isSma30VolumeVisible = oChartModel.getProperty("/displaySma30Volume");
+			var oChart = oChartModel.getProperty("/chart");
+			var aSma30VolumeData = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_30_VOLUME);
+			var bIsSma30VolumeVisible = oChartModel.getProperty("/displaySma30Volume");
 	
-			if (isSma30VolumeVisible === true) {
-				const sma30VolumeSeries = chart.addSeries(LightweightCharts.LineSeries, 
+			if (bIsSma30VolumeVisible === true) {
+				const oSma30VolumeSeries = oChart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, priceScaleId: 'left' }
 				);
-				sma30VolumeSeries.setData(sma30VolumeData);
-				oChartModel.setProperty("/sma30VolumeSeries", sma30VolumeSeries);
+				oSma30VolumeSeries.setData(aSma30VolumeData);
+				oChartModel.setProperty("/sma30VolumeSeries", oSma30VolumeSeries);
 				
 				this.organizeMovingAverages(oChartModel);
 			} else {
-				const sma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
+				const oSma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
 				
-				if (sma30VolumeSeries !== undefined && chart !== undefined) {
-					chart.removeSeries(sma30VolumeSeries);
+				if (oSma30VolumeSeries !== undefined && oChart !== undefined) {
+					oChart.removeSeries(oSma30VolumeSeries);
 				}
 			}
 		},
@@ -329,32 +329,32 @@ sap.ui.define([
 		 */
 		displayBollingerBandWidth: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
-			var chart = oChartModel.getProperty("/chart");
-			var bbwData;
-			var bbwThreshold = this.getBBWThreshold(oCallingController);
-			var isBbwVisible = oChartModel.getProperty("/displayBollingerBandWidth");
+			var oChart = oChartModel.getProperty("/chart");
+			var aBbwData;
+			var fBbwThreshold = this.getBBWThreshold(oCallingController);
+			var bIsBbwVisible = oChartModel.getProperty("/displayBollingerBandWidth");
 			
-			if (isBbwVisible === true) {
-				bbwData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.BBW);
+			if (bIsBbwVisible === true) {
+				aBbwData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.BBW);
 				
-				const bbwSeries = chart.addSeries(LightweightCharts.LineSeries, 
+				const oBbwSeries = oChart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, lastValueVisible: true }
 				);
-				bbwSeries.setData(bbwData);
+				oBbwSeries.setData(aBbwData);
 				
 				//Draw horizontal trigger line
-				const priceLine = { price: bbwThreshold, color: 'black', lineWidth: 1, lineStyle: 0, axisLabelVisible: false };
-				bbwSeries.createPriceLine(priceLine);
+				const oPriceLine = { price: fBbwThreshold, color: 'black', lineWidth: 1, lineStyle: 0, axisLabelVisible: false };
+				oBbwSeries.createPriceLine(oPriceLine);
 				
-				oChartModel.setProperty("/bbwSeries", bbwSeries);
+				oChartModel.setProperty("/bbwSeries", oBbwSeries);
 				
 				this.organizePanesPriceVolume(oChartModel);
 				this.organizeMovingAverages(oChartModel);
 			} else {
-				const bbwSeries = oChartModel.getProperty("/bbwSeries");
+				const oBbwSeries = oChartModel.getProperty("/bbwSeries");
 				
-				if (bbwSeries !== undefined && chart !== undefined) {
-					chart.removeSeries(bbwSeries);
+				if (oBbwSeries !== undefined && oChart !== undefined) {
+					oChart.removeSeries(oBbwSeries);
 				}
 			}
 		},
@@ -365,35 +365,35 @@ sap.ui.define([
 		 */
 		displaySlowStochastic: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
-			var chart = oChartModel.getProperty("/chart");
-			var slowStochasticData;
-			var isSlowStochasticVisible = oChartModel.getProperty("/displaySlowStochastic");
+			var oChart = oChartModel.getProperty("/chart");
+			var aSlowStochasticData;
+			var bIsSlowStochasticVisible = oChartModel.getProperty("/displaySlowStochastic");
 			
-			if (isSlowStochasticVisible === true) {
-				slowStochasticData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.SLOW_STOCHASTIC);
+			if (bIsSlowStochasticVisible === true) {
+				aSlowStochasticData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.SLOW_STOCHASTIC);
 				
-				const slowStochasticSeries = chart.addSeries(LightweightCharts.LineSeries, 
+				const oSlowStochasticSeries = oChart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, lastValueVisible: true }
 				);
-				slowStochasticSeries.setData(slowStochasticData);
+				oSlowStochasticSeries.setData(aSlowStochasticData);
 				
 				//Draw horizontal trigger lines
 				const priceLineTop = { price: 85, color: 'black', lineWidth: 1, lineStyle: 0, axisLabelVisible: false };
-				slowStochasticSeries.createPriceLine(priceLineTop);
+				oSlowStochasticSeries.createPriceLine(priceLineTop);
 				const priceLineMid = { price: 50, color: 'black', lineWidth: 1, lineStyle: 2, axisLabelVisible: false };
-				slowStochasticSeries.createPriceLine(priceLineMid);
+				oSlowStochasticSeries.createPriceLine(priceLineMid);
 				const priceLineBot = { price: 15, color: 'black', lineWidth: 1, lineStyle: 0, axisLabelVisible: false };
-				slowStochasticSeries.createPriceLine(priceLineBot);
+				oSlowStochasticSeries.createPriceLine(priceLineBot);
 				
-				oChartModel.setProperty("/slowStochasticSeries", slowStochasticSeries);
+				oChartModel.setProperty("/slowStochasticSeries", oSlowStochasticSeries);
 				
 				this.organizePanesPriceVolume(oChartModel);
 				this.organizeMovingAverages(oChartModel);
 			} else {
-				const slowStochasticSeries = oChartModel.getProperty("/slowStochasticSeries");
+				const oSlowStochasticSeries = oChartModel.getProperty("/slowStochasticSeries");
 				
-				if (slowStochasticSeries !== undefined && chart !== undefined) {
-					chart.removeSeries(slowStochasticSeries);
+				if (oSlowStochasticSeries !== undefined && oChart !== undefined) {
+					oChart.removeSeries(oSlowStochasticSeries);
 				}
 			}
 		},
@@ -404,28 +404,28 @@ sap.ui.define([
 		 */
 		displayRsLine: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
-			var chart = oChartModel.getProperty("/chart");
-			var rsLineData;
-			var isRsLineVisible = oChartModel.getProperty("/displayRsLine");
+			var oChart = oChartModel.getProperty("/chart");
+			var oRsLineData;
+			var bIsRsLineVisible = oChartModel.getProperty("/displayRsLine");
 			
-			if (isRsLineVisible === true) {
-				rsLineData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.RS_LINE);
+			if (bIsRsLineVisible === true) {
+				oRsLineData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.RS_LINE);
 				
-				const rsLineSeries = chart.addSeries(LightweightCharts.LineSeries, 
+				const oRsLineSeries = oChart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, lastValueVisible: true }
 				);
-				rsLineSeries.setData(rsLineData);
+				oRsLineSeries.setData(oRsLineData);
 				
 				
-				oChartModel.setProperty("/rsLineSeries", rsLineSeries);
+				oChartModel.setProperty("/rsLineSeries", oRsLineSeries);
 				
 				this.organizePanesPriceVolume(oChartModel);
 				this.organizeMovingAverages(oChartModel);
 			} else {
-				const rsLineSeries = oChartModel.getProperty("/rsLineSeries");
+				const oRsLineSeries = oChartModel.getProperty("/rsLineSeries");
 				
-				if (rsLineSeries !== undefined && chart !== undefined) {
-					chart.removeSeries(rsLineSeries);
+				if (oRsLineSeries !== undefined && oChart !== undefined) {
+					oChart.removeSeries(oRsLineSeries);
 				}
 			}
 		},
@@ -436,27 +436,27 @@ sap.ui.define([
 		 */
 		displayHealthCheckEvents: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
-			var chart = oChartModel.getProperty("/chart");
-			var healthEventData;
-			var areEventsVisible = oChartModel.getProperty("/displayHealthCheckEvents");
+			var oChart = oChartModel.getProperty("/chart");
+			var aHealthEventData;
+			var bAreEventsVisible = oChartModel.getProperty("/displayHealthCheckEvents");
 			
-			if (areEventsVisible === true) {
-				healthEventData = this.getHealthEventData(oCallingController);
+			if (bAreEventsVisible === true) {
+				aHealthEventData = this.getHealthEventData(oCallingController);
 				
-				const healthEventSeries = chart.addSeries(LightweightCharts.HistogramSeries,
+				const oHealthEventSeries = oChart.addSeries(LightweightCharts.HistogramSeries,
 					{ color: 'blue', priceLineVisible: false}
 				);
-				healthEventSeries.setData(healthEventData);
+				oHealthEventSeries.setData(aHealthEventData);
 				
-				oChartModel.setProperty("/healthEventSeries", healthEventSeries);
+				oChartModel.setProperty("/healthEventSeries", oHealthEventSeries);
 				
 				this.organizePanesHealthCheck(oChartModel);
 				this.organizeMovingAverages(oChartModel);
 			} else {
-				const healthEventSeries = oChartModel.getProperty("/healthEventSeries");
+				const oHealthEventSeries = oChartModel.getProperty("/healthEventSeries");
 				
-				if (healthEventSeries !== undefined && chart !== undefined) {
-					chart.removeSeries(healthEventSeries);
+				if (oHealthEventSeries !== undefined && oChart !== undefined) {
+					oChart.removeSeries(oHealthEventSeries);
 				}
 			}
 		},
@@ -467,44 +467,44 @@ sap.ui.define([
 		 * the indicator is at the top pane and the price/volume pane is below.
 		 */
 		organizePanesPriceVolume: function(oChartModel) {
-			var chart = oChartModel.getProperty("/chart");
-			var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
-			var volumeSeries = oChartModel.getProperty("/volumeSeries");
-			var bbwSeries = oChartModel.getProperty("/bbwSeries");
-			var slowStochasticSeries = oChartModel.getProperty("/slowStochasticSeries");
-			var rsLineSeries = oChartModel.getProperty("/rsLineSeries");
-			var indicatorPane;
+			var oChart = oChartModel.getProperty("/chart");
+			var oCandlestickSeries = oChartModel.getProperty("/candlestickSeries");
+			var oVolumeSeries = oChartModel.getProperty("/volumeSeries");
+			var oBbwSeries = oChartModel.getProperty("/bbwSeries");
+			var oSlowStochasticSeries = oChartModel.getProperty("/slowStochasticSeries");
+			var oRsLineSeries = oChartModel.getProperty("/rsLineSeries");
+			var oIndicatorPane;
 			var chartHeight;
 			
 			if (oChartModel.getProperty("/displayBollingerBandWidth") === true) {	
-				bbwSeries.moveToPane(0);
-				candlestickSeries.moveToPane(1);
-				volumeSeries.moveToPane(1);
+				oBbwSeries.moveToPane(0);
+				oCandlestickSeries.moveToPane(1);
+				oVolumeSeries.moveToPane(1);
 				
-				bbwSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
+				oBbwSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
 			}
 			
 			if (oChartModel.getProperty("/displaySlowStochastic") === true) {	
-				slowStochasticSeries.moveToPane(0);
-				candlestickSeries.moveToPane(1);
-				volumeSeries.moveToPane(1);
+				oSlowStochasticSeries.moveToPane(0);
+				oCandlestickSeries.moveToPane(1);
+				oVolumeSeries.moveToPane(1);
 				
-				slowStochasticSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
+				oSlowStochasticSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
 			}
 			
 			if (oChartModel.getProperty("/displayRsLine") === true) {	
-				rsLineSeries.moveToPane(0);
-				candlestickSeries.moveToPane(1);
-				volumeSeries.moveToPane(1);
+				oRsLineSeries.moveToPane(0);
+				oCandlestickSeries.moveToPane(1);
+				oVolumeSeries.moveToPane(1);
 				
-				rsLineSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
+				oRsLineSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
 			}
 			
-			chartHeight = chart.options().height;
-			indicatorPane = chart.panes()[0];
-			indicatorPane.setHeight(chartHeight * 0.15);
+			chartHeight = oChart.options().height;
+			oIndicatorPane = oChart.panes()[0];
+			oIndicatorPane.setHeight(chartHeight * 0.15);
 			
-			candlestickSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
+			oCandlestickSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
 		},
 		
 		
@@ -513,22 +513,22 @@ sap.ui.define([
 		 * the indicator is at the top pane and the price/volume pane is below.
 		 */
 		organizePanesHealthCheck: function(oChartModel) {
-			var chart = oChartModel.getProperty("/chart");
-			var candlestickSeries = oChartModel.getProperty("/candlestickSeries");
-			var volumeSeries = oChartModel.getProperty("/volumeSeries");
-			var healthEventSeries = oChartModel.getProperty("/healthEventSeries");
-			var indicatorPane;
+			var oChart = oChartModel.getProperty("/chart");
+			var oCandlestickSeries = oChartModel.getProperty("/candlestickSeries");
+			var oVolumeSeries = oChartModel.getProperty("/volumeSeries");
+			var oHealthEventSeries = oChartModel.getProperty("/healthEventSeries");
+			var oIndicatorPane;
 			var chartHeight;
 			
-			healthEventSeries.moveToPane(0);
-			candlestickSeries.moveToPane(1);
-			volumeSeries.moveToPane(1);
-			healthEventSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
-			candlestickSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
+			oHealthEventSeries.moveToPane(0);
+			oCandlestickSeries.moveToPane(1);
+			oVolumeSeries.moveToPane(1);
+			oHealthEventSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
+			oCandlestickSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
 			
-			chartHeight = chart.options().height;
-			indicatorPane = chart.panes()[0];
-			indicatorPane.setHeight(chartHeight * 0.15);
+			chartHeight = oChart.options().height;
+			oIndicatorPane = oChart.panes()[0];
+			oIndicatorPane.setHeight(chartHeight * 0.15);
 		},
 		
 		
@@ -536,51 +536,51 @@ sap.ui.define([
 		 * Moves the moving averages to the target pane depending on the visibility of any indicator.
 		 */
 		organizeMovingAverages: function(oChartModel) {
-			var chart = oChartModel.getProperty("/chart");
-			var ema21Series = oChartModel.getProperty("/ema21Series");
-			var sma50Series = oChartModel.getProperty("/sma50Series");
-			var sma150Series = oChartModel.getProperty("/sma150Series");
-			var sma200Series = oChartModel.getProperty("/sma200Series");
-			var sma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
-			var pricePaneIndex;
+			var oChart = oChartModel.getProperty("/chart");
+			var oEma21Series = oChartModel.getProperty("/ema21Series");
+			var oSma50Series = oChartModel.getProperty("/sma50Series");
+			var oSma150Series = oChartModel.getProperty("/sma150Series");
+			var oSma200Series = oChartModel.getProperty("/sma200Series");
+			var oSma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
+			var iPricePaneIndex;
 			
 			if (oChartModel.getProperty("/displayBollingerBandWidth") === true || 
 				oChartModel.getProperty("/displaySlowStochastic") === true ||
 				oChartModel.getProperty("/displayRsLine") === true ||
 				oChartModel.getProperty("/displayHealthCheckEvents") === true) {	
 					
-				pricePaneIndex = 1;	
+				iPricePaneIndex = 1;	
 			} else {
-				pricePaneIndex = 0;
+				iPricePaneIndex = 0;
 			}
 			
 			if (oChartModel.getProperty("/displayEma21") === true) {				
-				if (ema21Series !== undefined && chart !== undefined) {
-					ema21Series.moveToPane(pricePaneIndex);
+				if (oEma21Series !== undefined && oChart !== undefined) {
+					oEma21Series.moveToPane(iPricePaneIndex);
 				}
 			}
 			
 			if (oChartModel.getProperty("/displaySma50") === true) {	
-				if (sma50Series !== undefined && chart !== undefined) {
-					sma50Series.moveToPane(pricePaneIndex);
+				if (oSma50Series !== undefined && oChart !== undefined) {
+					oSma50Series.moveToPane(iPricePaneIndex);
 				}
 			}
 			
 			if (oChartModel.getProperty("/displaySma150") === true) {	
-				if (sma150Series !== undefined && chart !== undefined) {
-					sma150Series.moveToPane(pricePaneIndex);
+				if (oSma150Series !== undefined && oChart !== undefined) {
+					oSma150Series.moveToPane(iPricePaneIndex);
 				}
 			}
 			
 			if (oChartModel.getProperty("/displaySma200") === true) {	
-				if (sma200Series !== undefined && chart !== undefined) {
-					sma200Series.moveToPane(pricePaneIndex);
+				if (oSma200Series !== undefined && oChart !== undefined) {
+					oSma200Series.moveToPane(iPricePaneIndex);
 				}
 			}
 			
 			if (oChartModel.getProperty("/displaySma30Volume") === true) {	
-				if (sma30VolumeSeries !== undefined && chart !== undefined) {
-					sma30VolumeSeries.moveToPane(pricePaneIndex);
+				if (oSma30VolumeSeries !== undefined && oChart !== undefined) {
+					oSma30VolumeSeries.moveToPane(iPricePaneIndex);
 				}
 			}
 		},
@@ -688,13 +688,13 @@ sap.ui.define([
 			var oHealthEvents = oChartData.getProperty("/healthEvents");
 			var aHealthEventSeries = new Array()
 			var oDateFormat, oDate, sFormattedDate;
-			var healthEventMap;
+			var mHealthEventMap;
 			
 			if (oHealthEvents === undefined) {
 				return;
 			}
 			
-			healthEventMap = new Map(Object.entries(oHealthEvents));
+			mHealthEventMap = new Map(Object.entries(oHealthEvents));
 			
 			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
 			
@@ -702,16 +702,16 @@ sap.ui.define([
 			for (var i = aQuotations.length -1; i >= 0; i--) {
     			var oQuotation = aQuotations[i];
     			var oHealthEventDataset = new Object();
-    			var eventNumber = healthEventMap.get(String(oQuotation.date));
+    			var iEventNumber = mHealthEventMap.get(String(oQuotation.date));
     			
-    			if (eventNumber === undefined) {
+    			if (iEventNumber === undefined) {
 					continue;
 				}
 				
 				oDate = new Date(parseInt(oQuotation.date));
     			sFormattedDate = oDateFormat.format(oDate);
     			oHealthEventDataset.time = sFormattedDate;
-    			oHealthEventDataset.value = eventNumber;
+    			oHealthEventDataset.value = iEventNumber;
     			
     			aHealthEventSeries.push(oHealthEventDataset);
     		}
@@ -766,8 +766,8 @@ sap.ui.define([
 			for (var i = 0; i < aHorizontalLines.length; i++) {
 				var oHorizontalLine = aHorizontalLines[i];
 				
-				const priceLine = { price: oHorizontalLine.price, color: 'black', lineWidth: 1, lineStyle: 0 };
-				oCandlestickSeries.createPriceLine(priceLine);
+				const oPriceLine = { price: oHorizontalLine.price, color: 'black', lineWidth: 1, lineStyle: 0 };
+				oCandlestickSeries.createPriceLine(oPriceLine);
 			}
 		},
 		

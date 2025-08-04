@@ -32,12 +32,12 @@ sap.ui.define([
     	 */
     	onChartInformationPressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var mOptions = new Object();
+			var oOptions = new Object();
 			var sTitle = oResourceBundle.getText("chartRmt.info.title");
 			var sDescription = oResourceBundle.getText("chartRmt.info.description");
 			
-			mOptions.title = sTitle;
-			MessageBox.information(sDescription, mOptions);
+			oOptions.title = sTitle;
+			MessageBox.information(sDescription, oOptions);
 		},
 		
 		

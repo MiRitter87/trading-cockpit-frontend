@@ -44,12 +44,12 @@ sap.ui.define([
     	 */
     	onChartInformationPressed: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var mOptions = new Object();
+			var oOptions = new Object();
 			var sTitle = oResourceBundle.getText("chartHealthCheckTV.info.title");
 			var sDescription = oResourceBundle.getText("chartHealthCheckTV.info.description");
 			
-			mOptions.title = sTitle;
-			MessageBox.information(sDescription, mOptions);
+			oOptions.title = sTitle;
+			MessageBox.information(sDescription, oOptions);
 		},
 		
 		
@@ -59,7 +59,7 @@ sap.ui.define([
     	onProfileInformationPressed: function() {
 			var oComboBox = this.getView().byId("healthCheckProfileComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var mOptions = new Object();
+			var oOptions = new Object();
 			var sTitle = "", sDescription = "";
 			var sKey = oComboBox.getSelectedKey();
 			
@@ -71,8 +71,8 @@ sap.ui.define([
 				return;
 			}
 				
-			mOptions.title = sTitle
-			MessageBox.information(sDescription, mOptions);
+			oOptions.title = sTitle
+			MessageBox.information(sDescription, oOptions);
 		},
 		
 		
