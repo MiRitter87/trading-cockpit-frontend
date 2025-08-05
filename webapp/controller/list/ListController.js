@@ -6,10 +6,10 @@ sap.ui.define([
 		/**
 		 * Gets the list data of the list with the given ID.
 		 */
-		getListById: function(iListId, oLists) {
+		getListById: function(iListId, aLists) {
 			//Get the selected list from the array of all lists according to the id.
-			for (var i = 0; i < oLists.length; i++) {
-    			var oTempList = oLists[i];
+			for (var i = 0; i < aLists.length; i++) {
+    			var oTempList = aLists[i];
     			
 				if (oTempList.id === iListId) {
 					return oTempList;

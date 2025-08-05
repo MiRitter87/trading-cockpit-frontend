@@ -41,7 +41,7 @@ sap.ui.define([
 		onListSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oListsModel = this.getView().getModel("lists");
-			var oList, wsList;
+			var oList, oListWs;
 			var oSelectDialog = this.getView().byId("instrumentSelectionDialog");
 			var instrumentsModel = this.getView().getModel("instruments");
 			
@@ -57,11 +57,11 @@ sap.ui.define([
 						
 			oList = ListController.getListById(Number(oSelectedItem.getKey()), oListsModel.oData.list);
 			if (oList !== null) {				
-				wsList = this.getListForWebService(oList);
+				oListWs = this.getListForWebService(oList);
 			}
 			
 			//Set the model of the view according to the selected list to allow binding of the UI elements.
-			this.getView().setModel(wsList, "selectedList");
+			this.getView().setModel(oListWs, "selectedList");
 			
 			//Refresh instruments model to trigger formatter in instrumentSelectionDialog.
 			//This assures the instruments of the selected list are correctly selected.
@@ -265,23 +265,23 @@ sap.ui.define([
 		 * Creates a representation of a list that can be processed by the WebService.
 		 */
 		getListForWebService: function(oList) {
-			var wsList = new JSONModel();
+			var oListWs = new JSONModel();
 			
 			//Data at head level
-			wsList.setProperty("/id", oList.id);
-			wsList.setProperty("/name", oList.name);
-			wsList.setProperty("/description", oList.description);
+			oListWs.setProperty("/id", oList.id);
+			oListWs.setProperty("/name", oList.name);
+			oListWs.setProperty("/description", oList.description);
 			
 			//Data at item level
-			wsList.setProperty("/instrumentIds", new Array());
+			oListWs.setProperty("/instrumentIds", new Array());
 			
 			for (var i = 0; i < oList.instruments.length; i++) {
 				var oInstrument = oList.instruments[i];
 				
-				wsList.oData.instrumentIds.push(oInstrument.id);
+				oListWs.oData.instrumentIds.push(oInstrument.id);
 			}
 			
-			return wsList;
+			return oListWs;
 		},
 		
 		

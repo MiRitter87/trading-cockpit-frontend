@@ -32,8 +32,7 @@ sap.ui.define([
 		 * Handles the press-event of the show details button.
 		 */
 		onShowDetailsPressed: function() {
-			var oResourceBundle;
-			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oSelectedListModel;
 			
 			if (this.isListSelected() === false) {
@@ -53,8 +52,7 @@ sap.ui.define([
 		 * Handles the press-event of the Excel export button.
 		 */
 		onExcelExportPressed: function() {
-			var oResourceBundle;
-			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			if (this.isListSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("listOverview.noListSelected"));

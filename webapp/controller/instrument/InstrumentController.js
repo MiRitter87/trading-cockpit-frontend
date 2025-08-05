@@ -22,10 +22,10 @@ sap.ui.define([
 		/**
 		 * Gets the instrument data of the instrument with the given ID.
 		 */
-		getInstrumentById: function(iInstrumentId, oInstruments) {
+		getInstrumentById: function(iInstrumentId, aInstruments) {
 			//Get the selected instrument from the array of all instruments according to the id.
-			for (var i = 0; i < oInstruments.length; i++) {
-    			var oTempInstrument = oInstruments[i];
+			for (var i = 0; i < aInstruments.length; i++) {
+    			var oTempInstrument = aInstruments[i];
     			
 				if (oTempInstrument.id === iInstrumentId) {
 					return oTempInstrument;
