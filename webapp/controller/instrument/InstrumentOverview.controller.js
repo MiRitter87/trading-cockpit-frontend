@@ -34,8 +34,7 @@ sap.ui.define([
 		 * Handles the press-event of the show details button.
 		 */
 		onShowDetailsPressed: function() {
-			var oResourceBundle;
-			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oSelectedInstrumentModel;
 			
 			if (this.isInstrumentSelected() === false) {
@@ -83,8 +82,7 @@ sap.ui.define([
 		 * Handles the press-event of the delete button.
 		 */
 		onDeletePressed: function() {
-			var oResourceBundle;
-			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			if (this.isInstrumentSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("instrumentOverview.noInstrumentSelected"));

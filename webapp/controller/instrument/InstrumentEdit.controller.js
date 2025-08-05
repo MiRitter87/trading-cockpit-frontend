@@ -361,38 +361,38 @@ sap.ui.define([
 		 * Creates a representation of an Instrument that can be processed by the WebService.
 		 */
 		getInstrumentForWebService: function(oInstrument) {
-			var wsInstrument = new JSONModel();
+			var oInstrumentWs = new JSONModel();
 			
 			//Simple attributes
-			wsInstrument.setProperty("/id", oInstrument.id);
-			wsInstrument.setProperty("/symbol", oInstrument.symbol);
-			wsInstrument.setProperty("/type", oInstrument.type);
-			wsInstrument.setProperty("/stockExchange", oInstrument.stockExchange);
-			wsInstrument.setProperty("/name", oInstrument.name);
-			wsInstrument.setProperty("/investingId", oInstrument.investingId);
+			oInstrumentWs.setProperty("/id", oInstrument.id);
+			oInstrumentWs.setProperty("/symbol", oInstrument.symbol);
+			oInstrumentWs.setProperty("/type", oInstrument.type);
+			oInstrumentWs.setProperty("/stockExchange", oInstrument.stockExchange);
+			oInstrumentWs.setProperty("/name", oInstrument.name);
+			oInstrumentWs.setProperty("/investingId", oInstrument.investingId);
 			
 			//References
 			if (oInstrument.sector !== null) {				
-				wsInstrument.setProperty("/sectorId", oInstrument.sector.id);
+				oInstrumentWs.setProperty("/sectorId", oInstrument.sector.id);
 			}
 				
 			if (oInstrument.industryGroup !== null) {				
-				wsInstrument.setProperty("/industryGroupId", oInstrument.industryGroup.id);
+				oInstrumentWs.setProperty("/industryGroupId", oInstrument.industryGroup.id);
 			}
 				
 			if (oInstrument.dividend !== null) {				
-				wsInstrument.setProperty("/dividendId", oInstrument.dividend.id);
+				oInstrumentWs.setProperty("/dividendId", oInstrument.dividend.id);
 			}
 				
 			if (oInstrument.divisor !== null) {				
-				wsInstrument.setProperty("/divisorId", oInstrument.divisor.id);
+				oInstrumentWs.setProperty("/divisorId", oInstrument.divisor.id);
 			}
 				
 			if (oInstrument.dataSourceList !== null) {				
-				wsInstrument.setProperty("/dataSourceListId", oInstrument.dataSourceList.id);
+				oInstrumentWs.setProperty("/dataSourceListId", oInstrument.dataSourceList.id);
 			}
 			
-			return wsInstrument;
+			return oInstrumentWs;
 		}
 	});
 });

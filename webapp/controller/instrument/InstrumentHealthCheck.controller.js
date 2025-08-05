@@ -43,7 +43,7 @@ sap.ui.define([
     	onProfileInformationPressed: function() {
 			var oComboBox = this.getView().byId("healthCheckProfileComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var mOptions = new Object();
+			var oOptions = new Object();
 			var sTitle = "", sDescription = "";
 			var sKey = oComboBox.getSelectedKey();
 			
@@ -55,8 +55,8 @@ sap.ui.define([
 				return;
 			}
 				
-			mOptions.title = sTitle
-			MessageBox.information(sDescription, mOptions);
+			oOptions.title = sTitle
+			MessageBox.information(sDescription, oOptions);
 		},
     	
     	
@@ -198,13 +198,13 @@ sap.ui.define([
 		 */
 		initializeMinAndMaxDate: function() {
 			var oStartDatePicker = this.getView().byId("startDatePicker");
-			var dateNow = new Date();
-			var dateOneYearAgo = new Date();
+			var dDateNow = new Date();
+			var dDateOneYearAgo = new Date();
 			
-			dateOneYearAgo.setFullYear(dateNow.getFullYear() - 1);
+			dDateOneYearAgo.setFullYear(dDateNow.getFullYear() - 1);
 			
-			oStartDatePicker.setMinDate(dateOneYearAgo);
-			oStartDatePicker.setMaxDate(dateNow);
+			oStartDatePicker.setMinDate(dDateOneYearAgo);
+			oStartDatePicker.setMaxDate(dDateNow);
 		},
 		
 		
