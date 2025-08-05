@@ -36,8 +36,7 @@ sap.ui.define([
 		 * Handles the press-event of the show details button.
 		 */
 		onShowDetailsPressed: function() {
-			var oResourceBundle;
-			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oSelectedScanModel;
 			
 			if (this.isScanSelected() === false) {
@@ -57,8 +56,7 @@ sap.ui.define([
 		 * Handles the press-event of the start scan button.
 		 */
 		onStartScanPressed: function() {
-			var oResourceBundle;
-			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			if (this.isScanSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("scanOverview.noScanSelected"));
@@ -73,8 +71,7 @@ sap.ui.define([
 		 * Handles the press-event of the delete button.
 		 */
 		onDeletePressed: function() {
-			var oResourceBundle;
-			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			if (this.isScanSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("scanOverview.noScanSelected"));
@@ -122,7 +119,7 @@ sap.ui.define([
 		 */
 		onStartScanDialog: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var oScan, oScanWS;
+			var oScan, oScanWs;
 			var sSelectedScope = this.getView().byId("scanScopeComboBox").getSelectedKey();
 			
 			oScan = this.getSelectedScan();
@@ -130,18 +127,18 @@ sap.ui.define([
 				return;
 			}
 			
-			oScanWS = ScanController.getScanForWebService(oScan);
+			oScanWs = ScanController.getScanForWebService(oScan);
 			
 			if (sSelectedScope === "") {
 				MessageBox.error(oResourceBundle.getText("scanOverview.noScanScopeSelected"));
 				return;				
 			}
 			else if (sSelectedScope === Constants.SCAN_SCOPE.ALL) {
-				oScanWS.setProperty("/completionStatus", Constants.SCAN_COMPLETION_STATUS.COMPLETE);
+				oScanWs.setProperty("/completionStatus", Constants.SCAN_COMPLETION_STATUS.COMPLETE);
 			}
 					
-			oScanWS.setProperty("/executionStatus", Constants.SCAN_EXECUTION_STATUS.IN_PROGRESS);
-			ScanController.saveScanByWebService(oScanWS, this.saveScanCallback, this);
+			oScanWs.setProperty("/executionStatus", Constants.SCAN_EXECUTION_STATUS.IN_PROGRESS);
+			ScanController.saveScanByWebService(oScanWs, this.saveScanCallback, this);
 			
 			this.byId("startScanDialog").close();
 		},

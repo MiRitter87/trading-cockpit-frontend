@@ -107,11 +107,6 @@ sap.ui.define([
     	 * Handles the button press event of the refresh scan results button.
     	 */
     	onRefreshPressed: function() {
-			var sSelectedTemplate = "";
-			var sSelectedType = "";
-			var sSelectedDate = "";
-			var sMinLiquidity = "";
-			var sMinAtrp = "";
 			var oTemplateComboBox = this.getView().byId("templateComboBox");
 			var oTypeComboBox = this.getView().byId("typeComboBox");
 			var oStartDatePicker = this.getView().byId("startDatePicker");
@@ -119,11 +114,11 @@ sap.ui.define([
 			var oAtrpInput = this.getView().byId("atrpInput");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			sSelectedTemplate = oTemplateComboBox.getSelectedKey();
-			sSelectedType = oTypeComboBox.getSelectedKey();
-			sSelectedDate = oStartDatePicker.getValue();
-			sMinLiquidity = oLiquidityInput.getValue();
-			sMinAtrp = oAtrpInput.getValue();
+			var sSelectedTemplate = oTemplateComboBox.getSelectedKey();
+			var sSelectedType = oTypeComboBox.getSelectedKey();
+			var sSelectedDate = oStartDatePicker.getValue();
+			var sMinLiquidity = oLiquidityInput.getValue();
+			var sMinAtrp = oAtrpInput.getValue();
 			
 			
 			if (sSelectedTemplate === "") {

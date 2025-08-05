@@ -10,7 +10,7 @@ sap.ui.define([
 		 * Opens a MessageBox with information about the selected scan template.
 		 */
 		openTemplateInformation: function(oResourceBundle, sKey) {
-			var mOptions = new Object();
+			var oOptions = new Object();
 			var sTitle = "";
 			var sDescription = "";
 			
@@ -79,8 +79,8 @@ sap.ui.define([
 				return;
 			}		
 			
-			mOptions.title = sTitle
-			MessageBox.information(sDescription, mOptions);
+			oOptions.title = sTitle
+			MessageBox.information(sDescription, oOptions);
 		},
 		
 		

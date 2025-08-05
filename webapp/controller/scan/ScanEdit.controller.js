@@ -45,7 +45,7 @@ sap.ui.define([
 		onScanSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oScansModel = this.getView().getModel("scans");
-			var oScan, wsScan;
+			var oScan, oScanWs;
 			var oSelectDialog = this.getView().byId("listSelectionDialog");
 			var listsModel = this.getView().getModel("lists");
 			
@@ -61,11 +61,11 @@ sap.ui.define([
 									
 			oScan = ScanController.getScanById(Number(oSelectedItem.getKey()), oScansModel.oData.scan);
 			if (oScan !== null) {				
-				wsScan = ScanController.getScanForWebService(oScan);
+				oScanWs = ScanController.getScanForWebService(oScan);
 			}
 			
 			//Set the model of the view according to the selected scan to allow binding of the UI elements.
-			this.getView().setModel(wsScan, "selectedScan");
+			this.getView().setModel(oScanWs, "selectedScan");
 			
 			//Refresh lists model to trigger formatter in listSelectionDialog.
 			//This assures the lists of the selected scan are correctly selected.
