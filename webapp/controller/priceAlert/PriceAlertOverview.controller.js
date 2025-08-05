@@ -39,8 +39,7 @@ sap.ui.define([
 		 * Handles the press-event of the show details button.
 		 */
 		onShowDetailsPressed: function() {
-			var oResourceBundle;
-			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oSelectedPriceAlertModel;
 			
 			if (this.isPriceAlertSelected() === false) {
@@ -60,8 +59,7 @@ sap.ui.define([
 		 * Handles the press-event of the delete button.
 		 */
 		onDeletePressed: function() {
-			var oResourceBundle;
-			oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
 			if (this.isPriceAlertSelected() === false) {
 				MessageBox.error(oResourceBundle.getText("priceAlertOverview.noPriceAlertSelected"));

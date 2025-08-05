@@ -57,10 +57,10 @@ sap.ui.define([
 		/**
 		 * Gets the price alert data of the price alert with the given ID.
 		 */
-		getPriceAlertById: function(iPriceAlertId, oPriceAlerts) {
+		getPriceAlertById: function(iPriceAlertId, aPriceAlerts) {
 			//Get the selected price alert from the array of all price alerts according to the id.
-			for (var i = 0; i < oPriceAlerts.length; i++) {
-    			var oTempPriceAlert = oPriceAlerts[i];
+			for (var i = 0; i < aPriceAlerts.length; i++) {
+    			var oTempPriceAlert = aPriceAlerts[i];
     			
 				if (oTempPriceAlert.id === iPriceAlertId) {
 					return oTempPriceAlert;
@@ -127,23 +127,23 @@ sap.ui.define([
 		 * Creates a representation of a price alert that can be processed by the WebService.
 		 */
 		getPriceAlertForWebService: function(oPriceAlert) {
-			var wsPriceAlert = new JSONModel();
+			var oPriceAlertWs = new JSONModel();
 			
-			wsPriceAlert.setProperty("/id", oPriceAlert.id);
-			wsPriceAlert.setProperty("/alertType", oPriceAlert.alertType);
-			wsPriceAlert.setProperty("/price", oPriceAlert.price);
-			wsPriceAlert.setProperty("/currency", oPriceAlert.currency);
-			wsPriceAlert.setProperty("/triggerDistancePercent", oPriceAlert.triggerDistancePercent);
-			wsPriceAlert.setProperty("/triggerTime", oPriceAlert.triggerTime);
-			wsPriceAlert.setProperty("/confirmationTime", oPriceAlert.confirmationTime);
-			wsPriceAlert.setProperty("/lastStockQuoteTime", oPriceAlert.lastStockQuoteTime);
-			wsPriceAlert.setProperty("/sendMail", oPriceAlert.sendMail);
-			wsPriceAlert.setProperty("/alertMailAddress", oPriceAlert.alertMailAddress);
-			wsPriceAlert.setProperty("/mailTransmissionTime", oPriceAlert.mailTransmissionTime);
+			oPriceAlertWs.setProperty("/id", oPriceAlert.id);
+			oPriceAlertWs.setProperty("/alertType", oPriceAlert.alertType);
+			oPriceAlertWs.setProperty("/price", oPriceAlert.price);
+			oPriceAlertWs.setProperty("/currency", oPriceAlert.currency);
+			oPriceAlertWs.setProperty("/triggerDistancePercent", oPriceAlert.triggerDistancePercent);
+			oPriceAlertWs.setProperty("/triggerTime", oPriceAlert.triggerTime);
+			oPriceAlertWs.setProperty("/confirmationTime", oPriceAlert.confirmationTime);
+			oPriceAlertWs.setProperty("/lastStockQuoteTime", oPriceAlert.lastStockQuoteTime);
+			oPriceAlertWs.setProperty("/sendMail", oPriceAlert.sendMail);
+			oPriceAlertWs.setProperty("/alertMailAddress", oPriceAlert.alertMailAddress);
+			oPriceAlertWs.setProperty("/mailTransmissionTime", oPriceAlert.mailTransmissionTime);
 			
-			wsPriceAlert.setProperty("/instrumentId", oPriceAlert.instrument.id);
+			oPriceAlertWs.setProperty("/instrumentId", oPriceAlert.instrument.id);
 			
-			return wsPriceAlert;
+			return oPriceAlertWs;
 		},
 		
 		

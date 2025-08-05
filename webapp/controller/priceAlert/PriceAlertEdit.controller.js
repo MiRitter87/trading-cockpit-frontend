@@ -45,7 +45,7 @@ sap.ui.define([
 		onPriceAlertSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oPriceAlertsModel = this.getView().getModel("priceAlerts");
-			var oPriceAlert, wsPriceAlert;
+			var oPriceAlert, oPriceAlertWs;
 			
 			if (oSelectedItem === null) {
 				this.resetUIElements();				
@@ -54,11 +54,11 @@ sap.ui.define([
 				
 			oPriceAlert = PriceAlertController.getPriceAlertById(Number(oSelectedItem.getKey()), oPriceAlertsModel.oData.priceAlert);
 			if (oPriceAlert !== null) {				
-				wsPriceAlert = PriceAlertController.getPriceAlertForWebService(oPriceAlert);
+				oPriceAlertWs = PriceAlertController.getPriceAlertForWebService(oPriceAlert);
 			}
 			
 			//Set the model of the view according to the selected price alert to allow binding of the UI elements.
-			this.getView().setModel(wsPriceAlert, "selectedPriceAlert");
+			this.getView().setModel(oPriceAlertWs, "selectedPriceAlert");
 			
 			//Manually set the price of the Input field because the price is not directly bound due to validation reasons.
 			this.setPriceInputValue(oPriceAlert.price);

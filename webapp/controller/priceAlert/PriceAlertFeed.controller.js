@@ -17,9 +17,9 @@ sap.ui.define([
 		 * Initializes the controller.
 		 */
 		onInit: function() {
-			var intervalTrigger = new IntervalTrigger(10000);
+			var oIntervalTrigger = new IntervalTrigger(10000);
 			//".bind(this)" injects the context of "this" into the getAlerts-function.
-			intervalTrigger.addListener(this.getAlerts.bind(this));
+			oIntervalTrigger.addListener(this.getAlerts.bind(this));
 		},
 		
 		
@@ -127,9 +127,9 @@ sap.ui.define([
 		setLastUpdateText: function(oCallingController) {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var sText = oResourceBundle.getText("priceAlertFeed.lastUpdate");
-			var oDate = new Date();
+			var dQueryDate = new Date();
 			
-			sText = sText + oDate.toLocaleTimeString();
+			sText = sText + dQueryDate.toLocaleTimeString();
 			
 			oCallingController.getView().byId("lastUpdateText").setText(sText);
 		},
@@ -177,8 +177,8 @@ sap.ui.define([
 		 * Plays an alert sound.
 		 */
 		playAlertSound: function() {
-			var audio = new Audio('alert.mp3');
-			audio.play();
+			var oAudio = new Audio('alert.mp3');
+			oAudio.play();
 		},
 		
 		
@@ -191,8 +191,8 @@ sap.ui.define([
 		 * In order to continue querying for price alerts, a silent dummy sound is played periodically to keep the browser active.
 		 */
 		playSilentDummySound: function() {
-			var audio = new Audio('silent2seconds.mp3');
-			audio.play();
+			var oAudio = new Audio('silent2seconds.mp3');
+			oAudio.play();
 		}
 	});
 });
