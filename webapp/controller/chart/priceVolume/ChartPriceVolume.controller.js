@@ -54,6 +54,7 @@ sap.ui.define([
 		onInstrumentSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oQuotationsModel = this.getView().getModel("quotations");
+			var aQuotations = oQuotationsModel.getProperty("/quotation");
 			var oInstrument;
 			var oVolumeCheckBox = this.getView().byId("volumeCheckBox");
 			var oSma30VolumeCheckBox = this.getView().byId("sma30VolumeCheckBox");
@@ -62,7 +63,7 @@ sap.ui.define([
 				return;
 			}
 			
-			oInstrument = ScanController.getInstrumentById(Number(oSelectedItem.getKey()), oQuotationsModel.oData.quotation);
+			oInstrument = ScanController.getInstrumentById(Number(oSelectedItem.getKey()), aQuotations);
 			
 			if (oInstrument.type === Constants.INSTRUMENT_TYPE.RATIO) {
 				oVolumeCheckBox.setSelected(false);

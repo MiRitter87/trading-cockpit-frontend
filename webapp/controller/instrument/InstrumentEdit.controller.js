@@ -47,6 +47,7 @@ sap.ui.define([
 		onInstrumentSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oInstrumentsModel = this.getView().getModel("instruments");
+			var aInstruments = oInstrumentsModel.getProperty("/instrument");
 			var oInstrument, oInstrumentWs;
 			
 			if (oSelectedItem === null) {
@@ -54,7 +55,7 @@ sap.ui.define([
 				return;
 			}
 			
-			oInstrument = InstrumentController.getInstrumentById(Number(oSelectedItem.getKey()), oInstrumentsModel.oData.instrument);
+			oInstrument = InstrumentController.getInstrumentById(Number(oSelectedItem.getKey()), aInstruments);
 			if (oInstrument !== null) {				
 				oInstrumentWs = this.getInstrumentForWebService(oInstrument);
 			}

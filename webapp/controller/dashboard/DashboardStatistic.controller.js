@@ -49,6 +49,7 @@ sap.ui.define([
 			var sIndustryGroupId;
 			var oInstrument;
 			var oInstrumentsModel = this.getView().getModel("instruments");
+			var aInstruments = oInstrumentsModel.getProperty("/instrument");
 			var oTypeComboBox = this.getView().byId("typeComboBox");
 			var oSectorIgComboBox = this.getView().byId("sectorIgComboBox");
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
@@ -60,7 +61,7 @@ sap.ui.define([
 				return;
 			}
 			
-			oInstrument = InstrumentController.getInstrumentById(Number(oSectorIgComboBox.getSelectedKey()), oInstrumentsModel.oData.instrument);
+			oInstrument = InstrumentController.getInstrumentById(Number(oSectorIgComboBox.getSelectedKey()), aInstruments);
 			
 			if (oInstrument === null) {				
 				DashboardController.queryStatisticsByWebService(this.queryStatisticsCallback, this, true, sSelectedType);

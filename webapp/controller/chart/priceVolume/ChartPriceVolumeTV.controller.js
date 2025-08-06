@@ -624,12 +624,12 @@ sap.ui.define([
 			var oToolbarTitle = this.getView().byId("toolbarTitle");
 			var oRsLineButton = this.getView().byId("rsLineButton");
 			var oQuotationsModel = this.getView().getModel("chartData");
-			var oQuotations = oQuotationsModel.oData.quotations.quotation;
+			var aQuotations = oQuotationsModel.getProperty("/quotations/quotation");
 			var oQuotation;
 
 			// Set title
-			if (oQuotations.length > 0) {
-				oQuotation = oQuotations[0];
+			if (aQuotations.length > 0) {
+				oQuotation = aQuotations[0];
 				oToolbarTitle.setText(oQuotation.instrument.name);
 			} else {
 				return;

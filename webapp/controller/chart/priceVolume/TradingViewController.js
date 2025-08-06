@@ -759,7 +759,7 @@ sap.ui.define([
 		 * Draws horizontal lines to the TradingView chart.
 		 */
 		drawHorizontalLines: function(oCallingController, oHorizontalLines) {
-			var aHorizontalLines = oHorizontalLines.oData.horizontalLine;
+			var aHorizontalLines = oHorizontalLines.getProperty("/horizontalLine");
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var oCandlestickSeries = oChartModel.getProperty("/candlestickSeries");
 						
