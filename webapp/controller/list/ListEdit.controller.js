@@ -41,6 +41,7 @@ sap.ui.define([
 		onListSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oListsModel = this.getView().getModel("lists");
+			var aLists = oListsModel.getProperty("/list");
 			var oList, oListWs;
 			var oSelectDialog = this.getView().byId("instrumentSelectionDialog");
 			var instrumentsModel = this.getView().getModel("instruments");
@@ -55,7 +56,7 @@ sap.ui.define([
 				oSelectDialog.clearSelection();
 			}
 						
-			oList = ListController.getListById(Number(oSelectedItem.getKey()), oListsModel.oData.list);
+			oList = ListController.getListById(Number(oSelectedItem.getKey()), aLists);
 			if (oList !== null) {				
 				oListWs = this.getListForWebService(oList);
 			}
@@ -240,8 +241,9 @@ sap.ui.define([
 		 */
 		verifyObligatoryFields: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oListModel = this.getView().getModel("selectedList");
+			var aInstrumentIds = oListModel.getProperty("/instrumentIds");
 			var iExistingInstrumentCount;
-			var oListModel;
 
 			if (this.getView().byId("nameInput").getValue() === "") {
 				MessageBox.error(oResourceBundle.getText("listEdit.noNameInput"));
@@ -249,8 +251,7 @@ sap.ui.define([
 			}
 			
 			//The list has to have at least one instrument.
-			oListModel = this.getView().getModel("selectedList");
-			iExistingInstrumentCount = oListModel.oData.instrumentIds.length;
+			iExistingInstrumentCount = aInstrumentIds.length;
 			
 			if (iExistingInstrumentCount < 1) {
 				MessageBox.error(oResourceBundle.getText("listEdit.noInstrumentsExist"));
@@ -266,20 +267,21 @@ sap.ui.define([
 		 */
 		getListForWebService: function(oList) {
 			var oListWs = new JSONModel();
+			var aInstrumentIds = new Array();
 			
 			//Data at head level
 			oListWs.setProperty("/id", oList.id);
 			oListWs.setProperty("/name", oList.name);
 			oListWs.setProperty("/description", oList.description);
 			
-			//Data at item level
-			oListWs.setProperty("/instrumentIds", new Array());
-			
+			//Data at item level			
 			for (var i = 0; i < oList.instruments.length; i++) {
 				var oInstrument = oList.instruments[i];
-				
-				oListWs.oData.instrumentIds.push(oInstrument.id);
+							
+				aInstrumentIds.push(oInstrument.id);
 			}
+			
+			oListWs.setProperty("/instrumentIds", aInstrumentIds);
 			
 			return oListWs;
 		},

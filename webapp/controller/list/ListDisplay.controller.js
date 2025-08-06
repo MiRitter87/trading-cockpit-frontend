@@ -35,6 +35,7 @@ sap.ui.define([
 		onListSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oListsModel = this.getView().getModel("lists");
+			var aLists = oListsModel.getProperty("/list");
 			var oList;
 			var oListModel = new JSONModel();
 			
@@ -43,7 +44,7 @@ sap.ui.define([
 				return;
 			}
 			
-			oList = ListController.getListById(Number(oSelectedItem.getKey()), oListsModel.oData.list);
+			oList = ListController.getListById(Number(oSelectedItem.getKey()), aLists);
 			oListModel.setData(oList);
 			
 			//Set the model of the view according to the selected list to allow binding of the UI elements.
