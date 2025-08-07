@@ -42,13 +42,14 @@ sap.ui.define([
 		onInstrumentSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oInstrumentsModel = this.getView().getModel("instruments");
+			var aInstruments = oInstrumentsModel.getProperty("/instrument");
 			var oInstrument;
 			var sCurrency = "";
 			var oPriceAlertModel;
 			
 			//Get the selected instrument
 			if (oSelectedItem !== null) {			
-				oInstrument = InstrumentController.getInstrumentById(Number(oSelectedItem.getKey()), oInstrumentsModel.oData.instrument);				
+				oInstrument = InstrumentController.getInstrumentById(Number(oSelectedItem.getKey()), aInstruments);				
 			} else {
 				return;
 			}

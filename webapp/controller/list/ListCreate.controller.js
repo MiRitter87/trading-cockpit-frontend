@@ -179,7 +179,7 @@ sap.ui.define([
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			var oListModel = this.getView().getModel("newList");
 			var aInstrumentIds = oListModel.getProperty("/instrumentIds");
-			var iExistingInstrumentCount;
+			var iExistingInstrumentCount = aInstrumentIds.length;
 
 			if (this.getView().byId("nameInput").getValue() === "") {
 				MessageBox.error(oResourceBundle.getText("listCreate.noNameInput"));
@@ -187,8 +187,6 @@ sap.ui.define([
 			}
 			
 			//The list has to have at least one instrument.
-			iExistingInstrumentCount = aInstrumentIds.length;
-			
 			if (iExistingInstrumentCount < 1) {
 				MessageBox.error(oResourceBundle.getText("listCreate.noInstrumentsExist"));
 				return false;

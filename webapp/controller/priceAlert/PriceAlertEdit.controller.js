@@ -45,6 +45,7 @@ sap.ui.define([
 		onPriceAlertSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oPriceAlertsModel = this.getView().getModel("priceAlerts");
+			var aPriceAlerts = oPriceAlertsModel.getProperty("/priceAlert");
 			var oPriceAlert, oPriceAlertWs;
 			
 			if (oSelectedItem === null) {
@@ -52,7 +53,7 @@ sap.ui.define([
 				return;
 			}
 				
-			oPriceAlert = PriceAlertController.getPriceAlertById(Number(oSelectedItem.getKey()), oPriceAlertsModel.oData.priceAlert);
+			oPriceAlert = PriceAlertController.getPriceAlertById(Number(oSelectedItem.getKey()), aPriceAlerts);
 			if (oPriceAlert !== null) {				
 				oPriceAlertWs = PriceAlertController.getPriceAlertForWebService(oPriceAlert);
 			}
@@ -77,6 +78,7 @@ sap.ui.define([
 		onInstrumentSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oInstrumentsModel = this.getView().getModel("instruments");
+			var aInstruments = oInstrumentsModel.getProperty("/instrument");
 			var oInstrument;
 			var sCurrency = "";
 			var oPriceAlertModel;
@@ -88,7 +90,7 @@ sap.ui.define([
 			
 			//Get the selected instrument.
 			if (oSelectedItem !== null) {			
-				oInstrument = InstrumentController.getInstrumentById(Number(oSelectedItem.getKey()), oInstrumentsModel.oData.instrument);				
+				oInstrument = InstrumentController.getInstrumentById(Number(oSelectedItem.getKey()), aInstruments);				
 			} else {
 				return;
 			}

@@ -37,6 +37,7 @@ sap.ui.define([
 		onPriceAlertSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oPriceAlertsModel = this.getView().getModel("priceAlerts");
+			var aPriceAlerts = oPriceAlertsModel.getProperty("/priceAlert");
 			var oPriceAlert;
 			var oPriceAlertModel = new JSONModel();
 			
@@ -45,7 +46,7 @@ sap.ui.define([
 				return;
 			}
 				
-			oPriceAlert = PriceAlertController.getPriceAlertById(Number(oSelectedItem.getKey()), oPriceAlertsModel.oData.priceAlert);
+			oPriceAlert = PriceAlertController.getPriceAlertById(Number(oSelectedItem.getKey()), aPriceAlerts);
 			oPriceAlertModel.setData(oPriceAlert);
 			
 			//Set the model of the view according to the selected price alert to allow binding of the UI elements.

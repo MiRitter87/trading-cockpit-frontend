@@ -45,6 +45,7 @@ sap.ui.define([
 		onScanSelectionChange: function(oControlEvent) {
 			var oSelectedItem = oControlEvent.getParameters().selectedItem;
 			var oScansModel = this.getView().getModel("scans");
+			var aScans = oScansModel.getProperty("/scan");
 			var oScan, oScanWs;
 			var oSelectDialog = this.getView().byId("listSelectionDialog");
 			var listsModel = this.getView().getModel("lists");
@@ -59,7 +60,7 @@ sap.ui.define([
 				oSelectDialog.clearSelection();
 			}
 									
-			oScan = ScanController.getScanById(Number(oSelectedItem.getKey()), oScansModel.oData.scan);
+			oScan = ScanController.getScanById(Number(oSelectedItem.getKey()), aScans);
 			if (oScan !== null) {				
 				oScanWs = ScanController.getScanForWebService(oScan);
 			}
@@ -243,8 +244,9 @@ sap.ui.define([
 		 */
 		verifyObligatoryFields: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var iExistingListCount;
-			var oScanModel;
+			var oScanModel = this.getView().getModel("selectedScan");
+			var aListIds = oScanModel.getProperty("/listIds");
+			var iExistingListCount = aListIds.length;
 
 			if (this.getView().byId("nameInput").getValue() === "") {
 				MessageBox.error(oResourceBundle.getText("scanEdit.noNameInput"));
@@ -252,9 +254,6 @@ sap.ui.define([
 			}
 			
 			//The scan has to have at least one list.
-			oScanModel = this.getView().getModel("selectedScan");
-			iExistingListCount = oScanModel.oData.listIds.length;
-			
 			if (iExistingListCount < 1) {
 				MessageBox.error(oResourceBundle.getText("scanEdit.noListsExist"));
 				return false;

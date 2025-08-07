@@ -142,11 +142,9 @@ sap.ui.define([
 		 * Plays an alert sound.
 		 */
 		notifyIfAlertsTriggered: function(oCallingController) {			
-			var oPriceAlertsModel;
-			var iNumberPriceAlerts;
-			
-			oPriceAlertsModel = oCallingController.getView().getModel("priceAlerts");
-			iNumberPriceAlerts = oPriceAlertsModel.oData.priceAlert.length;
+			var oPriceAlertsModel = oCallingController.getView().getModel("priceAlerts");
+			var aPriceAlerts = oPriceAlertsModel.getProperty("/priceAlert");
+			var iNumberPriceAlerts = aPriceAlerts.length;
 			
 			if (iNumberPriceAlerts > 0) {
 				this.vibrate(400);

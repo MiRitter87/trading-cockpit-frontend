@@ -165,8 +165,9 @@ sap.ui.define([
 		 */
 		verifyObligatoryFields: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var iExistingListCount;
-			var oScanModel;
+			var oScanModel = this.getView().getModel("newScan");
+			var aListIds = oScanModel.getProperty("/listIds");
+			var iExistingListCount = aListIds.length;
 
 			if (this.getView().byId("nameInput").getValue() === "") {
 				MessageBox.error(oResourceBundle.getText("scanCreate.noNameInput"));
@@ -174,9 +175,6 @@ sap.ui.define([
 			}
 			
 			//The scan has to have at least one list.
-			oScanModel = this.getView().getModel("newScan");
-			iExistingListCount = oScanModel.oData.listIds.length;
-			
 			if (iExistingListCount < 1) {
 				MessageBox.error(oResourceBundle.getText("scanCreate.noListsExist"));
 				return false;

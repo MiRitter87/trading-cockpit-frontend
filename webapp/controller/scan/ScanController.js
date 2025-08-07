@@ -44,6 +44,8 @@ sap.ui.define([
 		 */
 		getScanForWebService: function(oScan) {
 			var oScanWs = new JSONModel();
+			var aListIds = new Array();
+			var aIncompleteInstrumentIds = new Array();
 			
 			//Data at head level
 			oScanWs.setProperty("/id", oScan.id);
@@ -55,21 +57,21 @@ sap.ui.define([
 			oScanWs.setProperty("/progress", oScan.progress);
 			
 			//Data at item level
-			oScanWs.setProperty("/listIds", new Array());
-			
 			for (var i = 0; i < oScan.lists.length; i++) {
 				var oList = oScan.lists[i];
 				
-				oScanWs.oData.listIds.push(oList.id);
+				aListIds.push(oList.id);
 			}
 			
-			oScanWs.setProperty("/incompleteInstrumentIds", new Array());
+			oScanWs.setProperty("/listIds", aListIds);	
 			
 			for (var i = 0; i < oScan.incompleteInstruments.length; i++) {
 				var oInstrument = oScan.incompleteInstruments[i];
 				
-				oScanWs.oData.incompleteInstrumentIds.push(oInstrument.id);
+				aIncompleteInstrumentIds.push(oInstrument.id);
 			}
+			
+			oScanWs.setProperty("/incompleteInstrumentIds", aIncompleteInstrumentIds);
 			
 			return oScanWs;
 		},
