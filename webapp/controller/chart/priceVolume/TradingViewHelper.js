@@ -135,6 +135,165 @@ sap.ui.define([
     		}
     		
     		return aHealthEventSeries;
+		},
+		
+		
+		/**
+		 * Organizes the panes of the price/volume chart in a manner that 
+		 * the indicator is at the top pane and the price/volume pane is below.
+		 */
+		organizePanesPriceVolume: function(oChartModel) {
+			var oChart = oChartModel.getProperty("/chart");
+			var oCandlestickSeries = oChartModel.getProperty("/candlestickSeries");
+			var oVolumeSeries = oChartModel.getProperty("/volumeSeries");
+			var oBbwSeries = oChartModel.getProperty("/bbwSeries");
+			var oSlowStochasticSeries = oChartModel.getProperty("/slowStochasticSeries");
+			var oRsLineSeries = oChartModel.getProperty("/rsLineSeries");
+			var oIndicatorPane;
+			var chartHeight;
+			
+			if (oChartModel.getProperty("/displayBollingerBandWidth") === true) {	
+				oBbwSeries.moveToPane(0);
+				oCandlestickSeries.moveToPane(1);
+				oVolumeSeries.moveToPane(1);
+				
+				oBbwSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
+			}
+			
+			if (oChartModel.getProperty("/displaySlowStochastic") === true) {	
+				oSlowStochasticSeries.moveToPane(0);
+				oCandlestickSeries.moveToPane(1);
+				oVolumeSeries.moveToPane(1);
+				
+				oSlowStochasticSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
+			}
+			
+			if (oChartModel.getProperty("/displayRsLine") === true) {	
+				oRsLineSeries.moveToPane(0);
+				oCandlestickSeries.moveToPane(1);
+				oVolumeSeries.moveToPane(1);
+				
+				oRsLineSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
+			}
+			
+			chartHeight = oChart.options().height;
+			oIndicatorPane = oChart.panes()[0];
+			oIndicatorPane.setHeight(chartHeight * 0.15);
+			
+			oCandlestickSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
+		},
+		
+		
+		/**
+		 * Organizes the panes of the health check chart in a manner that
+		 * the indicator is at the top pane and the price/volume pane is below.
+		 */
+		organizePanesHealthCheck: function(oChartModel) {
+			var oChart = oChartModel.getProperty("/chart");
+			var oCandlestickSeries = oChartModel.getProperty("/candlestickSeries");
+			var oVolumeSeries = oChartModel.getProperty("/volumeSeries");
+			var oHealthEventSeries = oChartModel.getProperty("/healthEventSeries");
+			var oIndicatorPane;
+			var chartHeight;
+			
+			oHealthEventSeries.moveToPane(0);
+			oCandlestickSeries.moveToPane(1);
+			oVolumeSeries.moveToPane(1);
+			oHealthEventSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Normal });
+			oCandlestickSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
+			
+			chartHeight = oChart.options().height;
+			oIndicatorPane = oChart.panes()[0];
+			oIndicatorPane.setHeight(chartHeight * 0.15);
+		},
+		
+		
+		/**
+		 * Moves the moving averages to the target pane depending on the visibility of any indicator.
+		 */
+		organizeMovingAverages: function(oChartModel) {
+			var oChart = oChartModel.getProperty("/chart");
+			var oEma21Series = oChartModel.getProperty("/ema21Series");
+			var oSma50Series = oChartModel.getProperty("/sma50Series");
+			var oSma150Series = oChartModel.getProperty("/sma150Series");
+			var oSma200Series = oChartModel.getProperty("/sma200Series");
+			var oSma30VolumeSeries = oChartModel.getProperty("/sma30VolumeSeries");
+			var iPricePaneIndex;
+			
+			if (oChartModel.getProperty("/displayBollingerBandWidth") === true || 
+				oChartModel.getProperty("/displaySlowStochastic") === true ||
+				oChartModel.getProperty("/displayRsLine") === true ||
+				oChartModel.getProperty("/displayHealthCheckEvents") === true) {	
+					
+				iPricePaneIndex = 1;	
+			} else {
+				iPricePaneIndex = 0;
+			}
+			
+			if (oChartModel.getProperty("/displayEma21") === true) {				
+				if (oEma21Series !== undefined && oChart !== undefined) {
+					oEma21Series.moveToPane(iPricePaneIndex);
+				}
+			}
+			
+			if (oChartModel.getProperty("/displaySma50") === true) {	
+				if (oSma50Series !== undefined && oChart !== undefined) {
+					oSma50Series.moveToPane(iPricePaneIndex);
+				}
+			}
+			
+			if (oChartModel.getProperty("/displaySma150") === true) {	
+				if (oSma150Series !== undefined && oChart !== undefined) {
+					oSma150Series.moveToPane(iPricePaneIndex);
+				}
+			}
+			
+			if (oChartModel.getProperty("/displaySma200") === true) {	
+				if (oSma200Series !== undefined && oChart !== undefined) {
+					oSma200Series.moveToPane(iPricePaneIndex);
+				}
+			}
+			
+			if (oChartModel.getProperty("/displaySma30Volume") === true) {	
+				if (oSma30VolumeSeries !== undefined && oChart !== undefined) {
+					oSma30VolumeSeries.moveToPane(iPricePaneIndex);
+				}
+			}
+		},
+		
+		
+		/**
+		 * Gets the threshold value of the Bollinger BandWidth.
+		 */
+		getBBWThreshold: function(oCallingController) {
+			var oChartData = oCallingController.getView().getModel("chartData");
+			var aQuotations = oChartData.getProperty("/quotations/quotation");
+			var oQuotation = aQuotations[0];
+			
+			//The threshold is stored in the newest quotation.
+			return oQuotation.indicator.bbw10Threshold25Percent;
+		},
+		
+		
+		/**
+		 * Checks if the instrument for which quotations have been loaded is of type RATIO.
+		 */
+		isInstrumentTypeRatio: function(oCallingController) {
+			var oChartData = oCallingController.getView().getModel("chartData");
+			var aQuotations = oChartData.getProperty("/quotations/quotation");
+			var oQuotation;
+			
+			if (aQuotations.length === 0) {
+				return false;
+			}
+			
+			oQuotation = aQuotations[0];
+				
+			if (oQuotation.instrument.type === Constants.INSTRUMENT_TYPE.RATIO) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	};
 });
