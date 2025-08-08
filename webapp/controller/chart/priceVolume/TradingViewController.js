@@ -1,9 +1,10 @@
 sap.ui.define([
+	"./TradingViewHelper",
 	"../../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/format/DateFormat",
 	"./lightweight-charts.standalone.production"
-], function(Constants, JSONModel, DateFormat) {
+], function(TradingViewHelper, Constants, JSONModel, DateFormat) {
 	"use strict";
 	return {
 		/**
@@ -199,7 +200,7 @@ sap.ui.define([
 		displayEma21: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var oChart = oChartModel.getProperty("/chart");
-			var aEma21Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.EMA_21);
+			var aEma21Data = TradingViewHelper.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.EMA_21);
 			var bIsEma21Visible = oChartModel.getProperty("/displayEma21");
 	
 			if (bIsEma21Visible === true) {
@@ -225,7 +226,7 @@ sap.ui.define([
 		displaySma50: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var oChart = oChartModel.getProperty("/chart");
-			var aSma50Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_50);
+			var aSma50Data = TradingViewHelper.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_50);
 			var bIsSma50Visible = oChartModel.getProperty("/displaySma50");
 	
 			if (bIsSma50Visible === true) {
@@ -251,7 +252,7 @@ sap.ui.define([
 		displaySma150: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var oChart = oChartModel.getProperty("/chart");
-			var aSma150Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_150);
+			var aSma150Data = TradingViewHelper.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_150);
 			var bIsSma150Visible = oChartModel.getProperty("/displaySma150");
 	
 			if (bIsSma150Visible === true) {
@@ -277,7 +278,7 @@ sap.ui.define([
 		displaySma200: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var oChart = oChartModel.getProperty("/chart");
-			var aSma200Data = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_200);
+			var aSma200Data = TradingViewHelper.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_200);
 			var bIsSma200Visible = oChartModel.getProperty("/displaySma200");
 	
 			if (bIsSma200Visible === true) {
@@ -303,7 +304,7 @@ sap.ui.define([
 		displaySma30Volume: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var oChart = oChartModel.getProperty("/chart");
-			var aSma30VolumeData = this.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_30_VOLUME);
+			var aSma30VolumeData = TradingViewHelper.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.SMA_30_VOLUME);
 			var bIsSma30VolumeVisible = oChartModel.getProperty("/displaySma30Volume");
 	
 			if (bIsSma30VolumeVisible === true) {
@@ -335,7 +336,7 @@ sap.ui.define([
 			var bIsBbwVisible = oChartModel.getProperty("/displayBollingerBandWidth");
 			
 			if (bIsBbwVisible === true) {
-				aBbwData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.BBW);
+				aBbwData = TradingViewHelper.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.BBW);
 				
 				const oBbwSeries = oChart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, lastValueVisible: true }
@@ -370,7 +371,7 @@ sap.ui.define([
 			var bIsSlowStochasticVisible = oChartModel.getProperty("/displaySlowStochastic");
 			
 			if (bIsSlowStochasticVisible === true) {
-				aSlowStochasticData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.SLOW_STOCHASTIC);
+				aSlowStochasticData = TradingViewHelper.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.SLOW_STOCHASTIC);
 				
 				const oSlowStochasticSeries = oChart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, lastValueVisible: true }
@@ -409,7 +410,7 @@ sap.ui.define([
 			var bIsRsLineVisible = oChartModel.getProperty("/displayRsLine");
 			
 			if (bIsRsLineVisible === true) {
-				oRsLineData = this.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.RS_LINE);
+				oRsLineData = TradingViewHelper.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.RS_LINE);
 				
 				const oRsLineSeries = oChart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, lastValueVisible: true }
@@ -441,7 +442,7 @@ sap.ui.define([
 			var bAreEventsVisible = oChartModel.getProperty("/displayHealthCheckEvents");
 			
 			if (bAreEventsVisible === true) {
-				aHealthEventData = this.getHealthEventData(oCallingController);
+				aHealthEventData = TradingViewHelper.getHealthEventData(oCallingController);
 				
 				const oHealthEventSeries = oChart.addSeries(LightweightCharts.HistogramSeries,
 					{ color: 'blue', priceLineVisible: false}
@@ -583,140 +584,6 @@ sap.ui.define([
 					oSma30VolumeSeries.moveToPane(iPricePaneIndex);
 				}
 			}
-		},
-		
-		
-		/**
-		 * Create a line series that contains the data of the requested moving average.
-		 */
-		getMovingAverageData: function(oCallingController, sRequestedMA) {
-			var oChartData = oCallingController.getView().getModel("chartData");
-			var aQuotations = oChartData.getProperty("/quotations/quotation");
-			var aMovingAverageSeries = new Array();
-			var oDateFormat, oDate, sFormattedDate;
-			
-			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
-			
-			//The dataset needs to be constructed beginning at the oldest value.
-			for (var i = aQuotations.length -1; i >= 0; i--) {
-    			var oQuotation = aQuotations[i];
-    			var oMovingAverageDataset = new Object();
-    			
-    			if (oQuotation.movingAverageData === null) {
-					continue;
-				}
-				
-				if (sRequestedMA === Constants.CHART_OVERLAY.EMA_21 && oQuotation.movingAverageData.ema21 !== 0) {
-					oMovingAverageDataset.value = oQuotation.movingAverageData.ema21;
-				} else if (sRequestedMA === Constants.CHART_OVERLAY.SMA_50 && oQuotation.movingAverageData.sma50 !== 0) {
-					oMovingAverageDataset.value = oQuotation.movingAverageData.sma50;
-				} else if (sRequestedMA === Constants.CHART_OVERLAY.SMA_150 && oQuotation.movingAverageData.sma150 !== 0) {
-					oMovingAverageDataset.value = oQuotation.movingAverageData.sma150;
-				} else if (sRequestedMA === Constants.CHART_OVERLAY.SMA_200 && oQuotation.movingAverageData.sma200 !== 0) {
-					oMovingAverageDataset.value = oQuotation.movingAverageData.sma200;
-				} else if (sRequestedMA === "SMA_30_VOLUME" && oQuotation.movingAverageData.sma30Volume !== 0) {
-					oMovingAverageDataset.value = oQuotation.movingAverageData.sma30Volume;
-				}
-    			    			
-    			oDate = new Date(parseInt(oQuotation.date));
-    			sFormattedDate = oDateFormat.format(oDate);
-    			oMovingAverageDataset.time = sFormattedDate;
-    			
-    			aMovingAverageSeries.push(oMovingAverageDataset);
-    		}
-    		
-    		return aMovingAverageSeries;
-		},
-		
-		
-		/**
-		 * Create a series that contains the data of the requested indicator.
-		 */
-		getIndicatorData: function(oCallingController, sRequestedIndicator) {
-			var oChartData = oCallingController.getView().getModel("chartData");
-			var aQuotations = oChartData.getProperty("/quotations/quotation");
-			var aIndicatorSeries = new Array();
-			var oDateFormat, oDate, sFormattedDate;
-			
-			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
-			
-			//The dataset needs to be constructed beginning at the oldest value.
-			for (var i = aQuotations.length -1; i >= 0; i--) {
-    			var oQuotation = aQuotations[i];
-    			var oIndicatorDataset = new Object();
-    			
-    			if (oQuotation.indicator === null) {
-					continue;
-				}
-				
-				if (sRequestedIndicator === Constants.CHART_INDICATOR.BBW && oQuotation.indicator.bollingerBandWidth10Days !== 0) {
-					oIndicatorDataset.value = oQuotation.indicator.bollingerBandWidth10Days;
-				}
-				
-				if (sRequestedIndicator === Constants.CHART_INDICATOR.SLOW_STOCHASTIC && oQuotation.indicator.slowStochastic14Days !== 0) {
-					oIndicatorDataset.value = oQuotation.indicator.slowStochastic14Days;
-				}
-				
-				if (sRequestedIndicator === Constants.CHART_INDICATOR.RS_LINE) {
-					if (oQuotation.relativeStrengthData === null) {
-						// For example on holidays when the divisor instrument is not traded. No RS-Data available then.
-						continue;
-					}
-					
-					if (oQuotation.relativeStrengthData.rsLinePrice !== 0) {					
-						oIndicatorDataset.value = oQuotation.relativeStrengthData.rsLinePrice;
-					}
-				}
-    			    			
-    			oDate = new Date(parseInt(oQuotation.date));
-    			sFormattedDate = oDateFormat.format(oDate);
-    			oIndicatorDataset.time = sFormattedDate;
-    			
-    			aIndicatorSeries.push(oIndicatorDataset);
-    		}
-    		
-    		return aIndicatorSeries;
-		},
-		
-		
-		/**
-		 * Create a series that contains health check event data.
-		 */
-		getHealthEventData: function(oCallingController) {
-			var oChartData = oCallingController.getView().getModel("chartData");
-			var aQuotations = oChartData.getProperty("/quotations/quotation");
-			var oHealthEvents = oChartData.getProperty("/healthEvents");
-			var aHealthEventSeries = new Array()
-			var oDateFormat, oDate, sFormattedDate;
-			var mHealthEventMap;
-			
-			if (oHealthEvents === undefined) {
-				return;
-			}
-			
-			mHealthEventMap = new Map(Object.entries(oHealthEvents));
-			
-			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
-			
-			//The dataset needs to be constructed beginning at the oldest value.
-			for (var i = aQuotations.length -1; i >= 0; i--) {
-    			var oQuotation = aQuotations[i];
-    			var oHealthEventDataset = new Object();
-    			var iEventNumber = mHealthEventMap.get(String(oQuotation.date));
-    			
-    			if (iEventNumber === undefined) {
-					continue;
-				}
-				
-				oDate = new Date(parseInt(oQuotation.date));
-    			sFormattedDate = oDateFormat.format(oDate);
-    			oHealthEventDataset.time = sFormattedDate;
-    			oHealthEventDataset.value = iEventNumber;
-    			
-    			aHealthEventSeries.push(oHealthEventDataset);
-    		}
-    		
-    		return aHealthEventSeries;
 		},
 		
 		
