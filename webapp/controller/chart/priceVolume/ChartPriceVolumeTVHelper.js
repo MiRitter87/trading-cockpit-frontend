@@ -1,6 +1,7 @@
 sap.ui.define([
 	"../../MainController",
-], function(MainController) {
+	"sap/ui/model/json/JSONModel"
+], function(MainController, JSONModel) {
 	"use strict";
 	return {
 		/**
@@ -81,6 +82,21 @@ sap.ui.define([
 			} else {
 				oChartModel.setProperty("/displayRsLine", false);
 			}
+		},
+		
+		
+		/**
+		 * Gets the HorizontalLine as JSONModel that can be further processed by the WebService.
+		 */
+		getHorizontalLineModel: function(oCallingController) {
+			var oHorizontalLineWS = new JSONModel();
+			var oInstrumentComboBox = oCallingController.getView().byId("instrumentComboBox");
+			var oSelectedCoordinateModel = oCallingController.getView().getModel("selectedCoordinates");
+			
+			oHorizontalLineWS.setProperty("/instrumentId", oInstrumentComboBox.getSelectedKey());
+			oHorizontalLineWS.setProperty("/price", oSelectedCoordinateModel.getProperty("/price"));
+			
+			return oHorizontalLineWS;
 		},
 		
 		

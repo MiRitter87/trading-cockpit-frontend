@@ -265,7 +265,7 @@ sap.ui.define([
 		 * Handles accepting the selected coordinate for the horizontal line.
 		 */
 		onAcceptCoordinate: function() {
-			var oHorizontalLineModel = this.getHorizontalLineModel();
+			var oHorizontalLineModel = ChartPriceVolumeTVHelper.getHorizontalLineModel(this);
 			
 			ChartPriceVolumeTVHelper.createHorizontalLineByWebService(oHorizontalLineModel, this.createHorizontalLineCallback, this);
 		},
@@ -500,21 +500,6 @@ sap.ui.define([
 			
 			//Remove previously created chart.
 			document.getElementById("chartContainerPV").innerHTML = "";
-		},
-		
-		
-		/**
-		 * Gets the HorizontalLine as JSONModel that can be further processed by the WebService.
-		 */
-		getHorizontalLineModel: function() {
-			var oHorizontalLineWS = new JSONModel();
-			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
-			var oSelectedCoordinateModel = this.getView().getModel("selectedCoordinates");
-			
-			oHorizontalLineWS.setProperty("/instrumentId", oInstrumentComboBox.getSelectedKey());
-			oHorizontalLineWS.setProperty("/price", oSelectedCoordinateModel.getProperty("/price"));
-			
-			return oHorizontalLineWS;
 		},
 		
 		
