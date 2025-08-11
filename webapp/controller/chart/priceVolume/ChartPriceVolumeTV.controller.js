@@ -1,5 +1,6 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"./ChartPriceVolumeTVHelper",
 	"./TradingViewController",
 	"../../MainController",
 	"../../scan/ScanController",
@@ -8,7 +9,7 @@ sap.ui.define([
 	"sap/m/MessageBox",
 	"sap/m/MessageToast",
 	"./lightweight-charts.standalone.production"
-], function(Controller, TradingViewController, MainController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
+], function(Controller, ChartPriceVolumeTVHelper, TradingViewController, MainController, ScanController, Constants, JSONModel, MessageBox, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartPriceVolumeTV", {
@@ -59,7 +60,7 @@ sap.ui.define([
 				return;
 			}
 			
-			this.queryChartData(this.queryChartDataCallback, this, false, sSelectedInstrumentId);
+			ChartPriceVolumeTVHelper.queryChartData(this.queryChartDataCallback, this, false, sSelectedInstrumentId);
 		},
 		
 		
@@ -266,7 +267,7 @@ sap.ui.define([
 		onAcceptCoordinate: function() {
 			var oHorizontalLineModel = this.getHorizontalLineModel();
 			
-			this.createHorizontalLineByWebService(oHorizontalLineModel, this.createHorizontalLineCallback, this);
+			ChartPriceVolumeTVHelper.createHorizontalLineByWebService(oHorizontalLineModel, this.createHorizontalLineCallback, this);
 		},
 		
 		
@@ -289,10 +290,10 @@ sap.ui.define([
 			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
 			
 			if (sSelectedInstrumentId === "") {
-				this.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, this, true);				
+				ChartPriceVolumeTVHelper.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, this, true);				
 			}
 			else {
-				this.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, this, true, sSelectedInstrumentId);	
+				ChartPriceVolumeTVHelper.queryHorizontalLinesByWebService(this.queryHorizontalLinesCallback, this, true, sSelectedInstrumentId);	
 			}
 		},
 		
@@ -316,7 +317,7 @@ sap.ui.define([
 				return;				
 			}
 			
-			this.deleteHorizontalLineByWebService(this.getSelectedHorizontalLine(), this.deleteHorizontalLineCallback, this);
+			ChartPriceVolumeTVHelper.deleteHorizontalLineByWebService(this.getSelectedHorizontalLine(), this.deleteHorizontalLineCallback, this);
 		},
 		
 		
@@ -359,12 +360,12 @@ sap.ui.define([
 			
 			TradingViewController.openChart(oCallingController, "chartContainerPV");
 			oCallingController.updateToolbarForChartDisplay();
-			oCallingController.updateModelForOverlays();
+			ChartPriceVolumeTVHelper.updateModelForOverlays(oCallingController);
 			TradingViewController.applyIndicators(oCallingController);
 			TradingViewController.applyMovingAverages(oCallingController);
 			
-			if (sSelectedInstrumentId !== "") {			
-				oCallingController.queryHorizontalLinesByWebService(
+			if (sSelectedInstrumentId !== "") {
+				ChartPriceVolumeTVHelper.queryHorizontalLinesByWebService(
 					oCallingController.queryHorizontalLinesForDrawingCallback, oCallingController, true, sSelectedInstrumentId);	
 			}
 		},
@@ -449,11 +450,11 @@ sap.ui.define([
 					MessageToast.show(oReturnData.message[0].text);
 					
 					if (sSelectedInstrumentId === "") {
-						oCallingController.queryHorizontalLinesByWebService(
+						ChartPriceVolumeTVHelper.queryHorizontalLinesByWebService(
 							oCallingController.queryHorizontalLinesCallback, oCallingController, true);				
 					}
 					else {
-						oCallingController.queryHorizontalLinesByWebService(
+						ChartPriceVolumeTVHelper.queryHorizontalLinesByWebService(
 							oCallingController.queryHorizontalLinesCallback, oCallingController, true, sSelectedInstrumentId);	
 					}
 				}
@@ -466,93 +467,6 @@ sap.ui.define([
 					MessageBox.warning(oReturnData.message[0].text);
 				}
 			}
-		},
-		
-		
-		/**
-		 * Queries the chart data WebService for price/volume data of an Instrument with the given ID.
-		 */
-		queryChartData: function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
-			var sServerAddress = MainController.getServerAddress();
-			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chartData");
-			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/priceVolume/" + sInstrumentId;
-			
-			jQuery.ajax({
-				type : "GET", 
-				contentType : "application/json", 
-				url : sQueryUrl, 
-				dataType : "json", 
-				success: function(data) {
-					callbackFunction(data, oCallingController, bShowSuccessMessage);
-				}
-			});  
-		},
-		
-		
-		/**
-		 * Calls a WebService operation to create a horizontal line object.
-		 */
-		createHorizontalLineByWebService: function(oHorizontalLineModel, callbackFunction, oCallingController) {
-			var sServerAddress = MainController.getServerAddress();
-			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
-			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/";
-			var sJSONData = oHorizontalLineModel.getJSON();
-			
-			//Use "POST" to create a resource.
-			jQuery.ajax({
-				type : "POST", 
-				contentType : "application/json", 
-				url : sQueryUrl,
-				data : sJSONData, 
-				success: function(data) {
-					callbackFunction(data, oCallingController);
-				}
-			});
-		},
-		
-		
-		/**
-		 * Queries the chartObject WebService for horizontal lines.
-		 */
-		queryHorizontalLinesByWebService: function(callbackFunction, oCallingController, bShowSuccessMessage, sInstrumentId) {
-			var sServerAddress = MainController.getServerAddress();
-			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
-			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
-			
-			if (sInstrumentId !== undefined && sInstrumentId !== null) {				
-				sQueryUrl= sQueryUrl + "?instrumentId=" + sInstrumentId;
-			}
-			
-			jQuery.ajax({
-				type : "GET", 
-				contentType : "application/json", 
-				url : sQueryUrl, 
-				dataType : "json", 
-				success: function(data) {
-					callbackFunction(data, oCallingController, bShowSuccessMessage);
-				}
-			});                                                                 
-		},
-		
-		
-		/**
-		 * Deletes the given horizontal line using the WebService.
-		 */
-		deleteHorizontalLineByWebService: function(oHorizontalLine, callbackFunction, oCallingController) {
-			var sServerAddress = MainController.getServerAddress();
-			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/horizontalLine");
-			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/" + oHorizontalLine.id;
-			
-			//Use "DELETE" to delete an existing resource.
-			jQuery.ajax({
-				type : "DELETE", 
-				contentType : "application/json", 
-				url : sQueryUrl, 
-				dataType : "json", 
-				success: function(data) {
-					callbackFunction(data, oCallingController);
-				}
-			});
 		},
 		
 		
@@ -643,86 +557,6 @@ sap.ui.define([
 			} else {
 				oRsLineButton.setPressed(false);
 				oRsLineButton.setEnabled(false);
-			}
-		},
-		
-		
-		/**
-		 * Updates the chartModel with visibility information about moving averages and indicators.
-		 */
-		updateModelForOverlays: function() {
-			this.updateModelForMovingAverages();
-			this.updateModelForIndicators();
-		},
-		
-		
-		/**
-		 * Updates the chartModel with visibility information about moving averages.
-		 */
-		updateModelForMovingAverages: function() {
-			var oChartModel = this.getView().getModel("chartModel");
-			var oEma21Button = this.getView().byId("ema21Button");
-			var oSma50Button = this.getView().byId("sma50Button");
-			var oSma150Button = this.getView().byId("sma150Button");
-			var oSma200Button = this.getView().byId("sma200Button");
-			var oSma30VolumeButton = this.getView().byId("sma30VolumeButton");
-			
-			if (oEma21Button.getPressed()) {
-				oChartModel.setProperty("/displayEma21", true);
-			} else {
-				oChartModel.setProperty("/displayEma21", false);
-			}
-			
-			if (oSma50Button.getPressed()) {
-				oChartModel.setProperty("/displaySma50", true);
-			} else {
-				oChartModel.setProperty("/displaySma50", false);
-			}
-			
-			if (oSma150Button.getPressed()) {
-				oChartModel.setProperty("/displaySma150", true);
-			} else {
-				oChartModel.setProperty("/displaySma150", false);
-			}
-			
-			if (oSma200Button.getPressed()) {
-				oChartModel.setProperty("/displaySma200", true);
-			} else {
-				oChartModel.setProperty("/displaySma200", false);
-			}
-			
-			if (oSma30VolumeButton.getPressed()) {
-				oChartModel.setProperty("/displaySma30Volume", true);
-			} else {
-				oChartModel.setProperty("/displaySma30Volume", false);
-			}
-		},
-		
-		/**
-		 * Updates the chartModel with visibility information about indicators.
-		 */
-		updateModelForIndicators: function() {
-			var oChartModel = this.getView().getModel("chartModel");
-			var oBBWButton = this.getView().byId("bbwButton");
-			var oSlowStoButton = this.getView().byId("slowStochasticButton");
-			var oRsLineButton = this.getView().byId("rsLineButton");
-			
-			if (oBBWButton.getPressed()) {
-				oChartModel.setProperty("/displayBollingerBandWidth", true);
-			} else {
-				oChartModel.setProperty("/displayBollingerBandWidth", false);
-			}
-			
-			if (oSlowStoButton.getPressed()) {
-				oChartModel.setProperty("/displaySlowStochastic", true);
-			} else {
-				oChartModel.setProperty("/displaySlowStochastic", false);
-			}
-			
-			if (oRsLineButton.getPressed()) {
-				oChartModel.setProperty("/displayRsLine", true);
-			} else {
-				oChartModel.setProperty("/displayRsLine", false);
 			}
 		}
 	});
