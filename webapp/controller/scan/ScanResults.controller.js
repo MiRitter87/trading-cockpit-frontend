@@ -15,14 +15,11 @@ sap.ui.define([
 	"sap/m/p13n/SortController",
 	"sap/ui/model/Sorter",
 	"sap/m/ColumnListItem",
-	"sap/m/Text",
-	"sap/m/Link",
-	"sap/m/ObjectStatus",
 	"sap/ui/core/library",
 	"sap/ui/core/Fragment"
 ], function(Controller, MainController, Constants, ScanController, ScanResultsHelper, InstrumentController, JSONModel,
 	MessageToast, MessageBox, Filter, FilterOperator, Engine, SelectionController, SortController, Sorter,
-	ColumnListItem, Text, Link, ObjectStatus, coreLibrary, Fragment) {
+	ColumnListItem, coreLibrary, Fragment) {
 		
 	"use strict";
 	
@@ -375,7 +372,7 @@ sap.ui.define([
         		oTable.insertColumn(oCol, iIndex);
     		}.bind(this));
     		
-    		aCells = this.getTableCells(oState);
+    		aCells = ScanResultsHelper.getTableCells(oState, this);
     		
     		oTable.bindItems({
         		templateShareable: false,
@@ -474,82 +471,6 @@ sap.ui.define([
 			var sEarningsUrl = ScanResultsHelper.getEarningsUrl(oInstrument);
 					
 			window.open(sEarningsUrl, '_blank');
-		},
-		
-		
-		/**
-		 * Gets an array of table cells based on the state of the personalization dialog.
-		 */
-		getTableCells: function(oState) {
-			var aCells = oState.Columns.map(function(oColumnState) {
-				var sPath = this.oMetadataHelper.getProperty(oColumnState.key).path;
-				var oText;
-				var oLink;
-				var oObjectStatus;
-				
-				if (oColumnState.key === "typeColumn") {
-					oText = new Text();
-					oText.bindProperty("text", {
-          				path: sPath,
-           				formatter: this.typeTextFormatter.bind(this)
-       				});
-				} else if (oColumnState.key === "performance5DaysColumn" || 
-					oColumnState.key === "volumeDifferential5DaysColumn" || oColumnState.key === "atrpColumn") {
-					oText = new Text({
-						text: "{" + sPath + "} %"
-					});	
-				} else if (oColumnState.key === "liquidityColumn") {
-					oText = new Text({
-						text: "{parts: ['" + sPath +"', 'currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
-					});	
-				} else if (oColumnState.key === "symbolColumn") {
-					oLink = new Link({
-						text: "{" + sPath + "}",
-						press: this.onSymbolLinkPressed.bind(this)
-					});
-					
-					return oLink;
-				} else if (oColumnState.key === "rsNumberColumn" || oColumnState.key === "rsNumberCompositeIgColumn") {
-					oObjectStatus = new ObjectStatus({
-						text: "{" + sPath + "}",
-						inverted: true
-					});
-					oObjectStatus.bindProperty("state", {
-						path: sPath,
-						formatter: this.rsNumberStateFormatter.bind(this)
-					});
-					
-					return oObjectStatus;
-				} else if (oColumnState.key === "upDownVolumeRatioColumn") {
-					oObjectStatus = new ObjectStatus({
-						text: "{" + sPath + "}"
-					});
-					oObjectStatus.bindProperty("state", {
-						path: sPath,
-						formatter: this.udVolRatioStateFormatter.bind(this)
-					});
-					
-					return oObjectStatus;
-				} else if (oColumnState.key === "distanceTo52WeekHighColumn") {
-					oObjectStatus = new ObjectStatus({
-						text: "{" + sPath + "} %"
-					});
-					oObjectStatus.bindProperty("state", {
-						path: sPath,
-						formatter: this.distance52wHighStateFormatter.bind(this)
-					});
-					
-					return oObjectStatus;
-				} else {
-					oText = new Text({
-						text: "{" + sPath + "}"
-					});					
-				}
-	
-				return oText;
-			}.bind(this));
-			
-			return aCells;
 		},
 		
 		

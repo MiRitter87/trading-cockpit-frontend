@@ -1,9 +1,12 @@
 sap.ui.define([
 	"../MainController",
 	"../Constants",
+	"sap/m/Text",
+	"sap/m/Link",
+	"sap/m/ObjectStatus",
 	"sap/m/MessageBox",
 	"sap/m/p13n/MetadataHelper"
-], function(MainController, Constants, MessageBox, MetadataHelper) {
+], function(MainController, Constants, Text, Link, ObjectStatus, MessageBox, MetadataHelper) {
 	"use strict";
 	return {
 		/**
@@ -149,7 +152,83 @@ sap.ui.define([
 		},
 		
 		
-				/**
+		/**
+		 * Gets an array of table cells based on the state of the personalization dialog.
+		 */
+		getTableCells: function(oState, oCallingController) {
+			var aCells = oState.Columns.map(function(oColumnState) {
+				var sPath = oCallingController.oMetadataHelper.getProperty(oColumnState.key).path;
+				var oText;
+				var oLink;
+				var oObjectStatus;
+				
+				if (oColumnState.key === "typeColumn") {
+					oText = new Text();
+					oText.bindProperty("text", {
+          				path: sPath,
+           				formatter: oCallingController.typeTextFormatter.bind(oCallingController)
+       				});
+				} else if (oColumnState.key === "performance5DaysColumn" || 
+					oColumnState.key === "volumeDifferential5DaysColumn" || oColumnState.key === "atrpColumn") {
+					oText = new Text({
+						text: "{" + sPath + "} %"
+					});	
+				} else if (oColumnState.key === "liquidityColumn") {
+					oText = new Text({
+						text: "{parts: ['" + sPath +"', 'currency'], type: 'sap.ui.model.type.Currency', formatOptions: {style : 'short'} }"
+					});	
+				} else if (oColumnState.key === "symbolColumn") {
+					oLink = new Link({
+						text: "{" + sPath + "}",
+						press: oCallingController.onSymbolLinkPressed.bind(oCallingController)
+					});
+					
+					return oLink;
+				} else if (oColumnState.key === "rsNumberColumn" || oColumnState.key === "rsNumberCompositeIgColumn") {
+					oObjectStatus = new ObjectStatus({
+						text: "{" + sPath + "}",
+						inverted: true
+					});
+					oObjectStatus.bindProperty("state", {
+						path: sPath,
+						formatter: oCallingController.rsNumberStateFormatter.bind(oCallingController)
+					});
+					
+					return oObjectStatus;
+				} else if (oColumnState.key === "upDownVolumeRatioColumn") {
+					oObjectStatus = new ObjectStatus({
+						text: "{" + sPath + "}"
+					});
+					oObjectStatus.bindProperty("state", {
+						path: sPath,
+						formatter: oCallingController.udVolRatioStateFormatter.bind(oCallingController)
+					});
+					
+					return oObjectStatus;
+				} else if (oColumnState.key === "distanceTo52WeekHighColumn") {
+					oObjectStatus = new ObjectStatus({
+						text: "{" + sPath + "} %"
+					});
+					oObjectStatus.bindProperty("state", {
+						path: sPath,
+						formatter: oCallingController.distance52wHighStateFormatter.bind(oCallingController)
+					});
+					
+					return oObjectStatus;
+				} else {
+					oText = new Text({
+						text: "{" + sPath + "}"
+					});					
+				}
+	
+				return oText;
+			}.bind(oCallingController));
+			
+			return aCells;
+		},
+		
+		
+		/**
 		 * Gets a chart URL for the given Instrument.
 		 */
 		getChartUrl: function(oInstrument, sWebServiceBaseUrl) {
