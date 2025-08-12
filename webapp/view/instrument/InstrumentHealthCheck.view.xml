@@ -71,7 +71,7 @@
 						<ToolbarSpacer/>
 						<ObjectStatus text="{protocolEntries>/confirmationPercentage} %" tooltip="{i18n>protocol.category.confirmation}"
 							icon="sap-icon://sys-enter-2" state="Success"/>
-						<ObjectStatus text="{protocolEntries>/uncertainPercentage} %" tooltip="{i18n>protocol.category.uncertain}"
+						<ObjectStatus text="{protocolEntries>/warningPercentage} %" tooltip="{i18n>protocol.category.warning}"
 							icon="sap-icon://alert" state="Warning"/>
 						<ObjectStatus text="{protocolEntries>/violationPercentage} %" tooltip="{i18n>protocol.category.violation}"
 							icon="sap-icon://error" state="Error"/>

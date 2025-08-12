@@ -129,8 +129,8 @@ sap.ui.define([
 				return oResourceBundle.getText("protocol.category.confirmation");
 			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION) {				
 				return oResourceBundle.getText("protocol.category.violation");
-			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN) {				
-				return oResourceBundle.getText("protocol.category.uncertain");
+			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.WARNING) {				
+				return oResourceBundle.getText("protocol.category.warning");
 			} else {				
 				return "";
 			}
@@ -145,7 +145,7 @@ sap.ui.define([
 				return "sap-icon://sys-enter-2";
 			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION) {				
 				return "sap-icon://error";
-			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN) {				
+			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.WARNING) {				
 				return "sap-icon://alert"
 			} else {				
 				return "";
@@ -161,7 +161,7 @@ sap.ui.define([
 				return "Success";
 			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.VIOLATION) {				
 				return "Error";
-			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.UNCERTAIN) {				
+			} else if (sCategory === Constants.PROTOCOL_ENTRY_CATEGORY.WARNING) {				
 				return "Warning"
 			} else {				
 				return "None";
