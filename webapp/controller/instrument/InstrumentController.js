@@ -312,7 +312,7 @@ sap.ui.define([
 			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/instrument");
 			var sQueryUrl = sServerAddress + sWebServiceBaseUrl;
 			
-			sQueryUrl = sQueryUrl + "/" + sInstrumentId + "/health/lookbackPeriod?lookbackPeriod=" + sLookbackPeriod +"&profile=" + sProfile;
+			sQueryUrl = sQueryUrl + "/" + sInstrumentId + "/health/lookbackPeriod/eventBased?lookbackPeriod=" + sLookbackPeriod +"&profile=" + sProfile;
 			
 			jQuery.ajax({
 				type : "GET", 
