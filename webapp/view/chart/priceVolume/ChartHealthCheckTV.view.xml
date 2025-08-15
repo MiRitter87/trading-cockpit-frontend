@@ -37,7 +37,16 @@
 				
 				<List id="protocolList" items="{path: 'chartData>/protocol/dateBasedProtocolEntry/'}">
 					<CustomListItem>
-						<Text text="{path: 'chartData>date', formatter: '.formatter.wsDateFormatter'}"/>
+						<Toolbar>						
+							<Text text="{path: 'chartData>date', formatter: '.formatter.wsDateFormatter'}"/>
+							<ToolbarSpacer/>
+							<ObjectStatus text="{chartData>confirmationPercentage} %" tooltip="{i18n>protocol.category.confirmation}"
+								icon="sap-icon://sys-enter-2" state="Success"/>
+							<ObjectStatus text="{chartData>warningPercentage} %" tooltip="{i18n>protocol.category.warning}"
+								icon="sap-icon://alert" state="Warning"/>
+							<ObjectStatus text="{chartData>violationPercentage} %" tooltip="{i18n>protocol.category.violation}"
+								icon="sap-icon://error" state="Error"/>
+						</Toolbar>
 					</CustomListItem>
 				</List>
 				<!-- 	
