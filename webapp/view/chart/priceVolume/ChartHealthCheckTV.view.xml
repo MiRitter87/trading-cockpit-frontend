@@ -34,9 +34,13 @@
 			
 			<l:Splitter height="90%">
 				<core:HTML id="chartContainerHTML" 
-					content="&lt;div id=&quot;chartContainerHealth&quot; style=&quot;position: relative; width: 100%; height: 100%;&quot;&gt;&lt;/div&gt;"/>				
+					content="&lt;div id=&quot;chartContainerHealth&quot; style=&quot;position: relative; width: 100%; height: 100%;&quot;&gt;&lt;/div&gt;"/>			
 				
 				<List id="protocolList" items="{path: 'chartData>/protocol/dateBasedProtocolEntry/'}">
+					<layoutData>
+						<l:SplitterLayoutData size="30%"/>
+					</layoutData>	
+				
 					<CustomListItem>
 						<Toolbar>						
 							<Text text="{path: 'chartData>date', formatter: '.formatter.wsDateFormatter'}"/>
