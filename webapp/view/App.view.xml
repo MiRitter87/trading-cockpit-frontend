@@ -30,7 +30,7 @@
 	
 		<!-- Content area -->
 		<tnt:mainContents>
-			<App id="contentPage"/>
+			<App id="contentPage" class="tradingCockpit"/>
 		</tnt:mainContents>
 	</tnt:ToolPage>
 </mvc:View>

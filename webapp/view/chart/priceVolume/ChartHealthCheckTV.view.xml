@@ -4,7 +4,6 @@
 	displayBlock="true"
 	xmlns="sap.m"
 	xmlns:l="sap.ui.layout"
-	xmlns:f="sap.f"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core">
 	
@@ -41,7 +40,7 @@
 						<l:SplitterLayoutData size="20%"/>
 					</layoutData>	
 				
-					<CustomListItem>
+					<CustomListItem class="sapUiSmallMarginBottom">
 						<Toolbar>						
 							<Text text="{path: 'chartData>date', formatter: '.formatter.wsDateFormatter'}"/>
 							<ToolbarSpacer/>
@@ -54,7 +53,7 @@
 						</Toolbar>
 						
 						<List items="{path: 'chartData>simpleProtocolEntries', templateShareable : false}">
-							<CustomListItem>
+							<CustomListItem class="noBorder">
 								<ObjectStatus text="{chartData>text}" inverted="true"
 									state="{path: 'chartData>category', formatter: '.categoryStateFormatter'}"/>
 							</CustomListItem>
