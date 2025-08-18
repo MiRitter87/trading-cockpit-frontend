@@ -61,37 +61,6 @@
 						</List>
 					</CustomListItem>
 				</List>
-				<!-- 	
-				<Table id="protocolTable" items="{path: 'chartData>/protocol/protocolEntry/'}" mode="None" sticky="ColumnHeaders">
-					<columns>
-						<Column width="15%">
-							<Text text="{i18n>protocol.date}"/>
-						</Column>
-						<Column minScreenWidth="Desktop" demandPopin="true" width="15%">
-							<Text text="{i18n>protocol.category}"/>
-						</Column>
-						<Column minScreenWidth="Desktop" demandPopin="true" width="25%">
-							<Text text="{i18n>protocol.profile}"/>
-						</Column>
-						<Column width="45%">
-							<Text text="{i18n>protocol.text}"/>
-						</Column>
-					</columns>
-					
-					<items>
-						<ColumnListItem>
-							<cells>
-								<Text text="{path: 'chartData>date', formatter: '.formatter.wsDateFormatter'}"/>
-								<ObjectStatus text="{path: 'chartData>category', formatter: '.categoryTextFormatter'}" 
-									icon="{path: 'chartData>category', formatter: '.categoryIconFormatter'}"
-									state="{path: 'chartData>category', formatter: '.categoryStateFormatter'}"/>
-								<Text text="{path: 'chartData>profile', formatter: '.profileTextFormatter'}"/>
-								<Text text="{chartData>text}"/>
-							</cells>
-						</ColumnListItem>
-					</items>
-				</Table>
-				-->
 			</l:Splitter>
 		</content>
 	</Page>

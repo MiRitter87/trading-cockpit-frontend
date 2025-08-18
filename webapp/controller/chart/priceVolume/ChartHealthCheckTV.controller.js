@@ -182,37 +182,11 @@ sap.ui.define([
 		},
 		
 		
-				/**
-		 * Formatter of the protocol category text.
-		 */
-		categoryTextFormatter: function(sCategory) {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			return InstrumentController.categoryTextFormatter(sCategory, oResourceBundle);
-		},
-		
-		
-		/**
-		 * Formatter of the protocol category icon.
-		 */
-		categoryIconFormatter: function(sCategory) {
-			return InstrumentController.categoryIconFormatter(sCategory);
-		},
-		
-		
 		/**
 		 * Formatter of the protocol category state.
 		 */
 		categoryStateFormatter: function(sCategory) {
 			return InstrumentController.categoryStateFormatter(sCategory);
-		},
-		
-		
-		/**
-		 * Formatter of the health check profile text.
-		 */
-		profileTextFormatter: function(sProfile) {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			return InstrumentController.profileTextFormatter(sProfile, oResourceBundle);
 		},
 		
 		
