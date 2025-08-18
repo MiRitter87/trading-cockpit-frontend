@@ -38,7 +38,7 @@
 				
 				<List id="protocolList" items="{path: 'chartData>/protocol/dateBasedProtocolEntry/'}">
 					<layoutData>
-						<l:SplitterLayoutData size="30%"/>
+						<l:SplitterLayoutData size="20%"/>
 					</layoutData>	
 				
 					<CustomListItem>
@@ -53,12 +53,12 @@
 								icon="sap-icon://error" state="Error"/>
 						</Toolbar>
 						
-						<f:GridList items="{path: 'chartData>simpleProtocolEntries', templateShareable : false}">
-							<f:GridListItem>
+						<List items="{path: 'chartData>simpleProtocolEntries', templateShareable : false}">
+							<CustomListItem>
 								<ObjectStatus text="{chartData>text}" inverted="true"
 									state="{path: 'chartData>category', formatter: '.categoryStateFormatter'}"/>
-							</f:GridListItem>
-						</f:GridList>
+							</CustomListItem>
+						</List>
 					</CustomListItem>
 				</List>
 				<!-- 	

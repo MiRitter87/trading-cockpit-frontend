@@ -144,7 +144,7 @@ sap.ui.define([
 			oCallingController.updateModelForOverlays();
 			TradingViewController.displayHealthCheckEvents(oCallingController);
 			TradingViewController.applyMovingAverages(oCallingController);
-			TradingViewController.setVisibleNumberOfCandles(oCallingController, 100);
+			TradingViewController.setVisibleNumberOfCandles(oCallingController, 127);
 		},
 		
 		
