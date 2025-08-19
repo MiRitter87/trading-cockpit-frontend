@@ -174,7 +174,7 @@ sap.ui.define([
 		
 		
 		/**
-		 * Validates the user input. Prompts messages in input is not valid.
+		 * Validates the user input. Prompts messages if input is not valid.
 		 */
 		isInputValid: function() {
 			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();

@@ -80,18 +80,18 @@ sap.ui.define([
     	 * Handles the button press event of the refresh chart button.
     	 */
     	onRefreshPressed: function() {
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
-			var sInstrumentId = oInstrumentComboBox.getSelectedKey();
-			var sProfile = this.getView().byId("healthCheckProfileComboBox").getSelectedKey();
-			var sLookbackPeriod = this.getView().byId("lookbackPeriodInput").getValue();
+			var bIsInputValid = this.isInputValid();
+			var sInstrumentId;
+			var sProfile;
+			var sLookbackPeriod;
 			
-			if (sInstrumentId === "") {
-				MessageBox.error(oResourceBundle.getText("chartHealthCheckTV.noInstrumentSelected"));
-				return;
+			if (bIsInputValid) {
+				sInstrumentId = this.getView().byId("instrumentComboBox").getSelectedKey();
+				sProfile = this.getView().byId("healthCheckProfileComboBox").getSelectedKey();
+				sLookbackPeriod = this.getView().byId("lookbackPeriodInput").getValue();
+				
+				this.queryChartData(this.queryChartDataCallback, this, false, sInstrumentId, sProfile, sLookbackPeriod);
 			}
-			
-			this.queryChartData(this.queryChartDataCallback, this, false, sInstrumentId, sProfile, sLookbackPeriod);
 		},
 		
 		
@@ -187,6 +187,50 @@ sap.ui.define([
 		 */
 		categoryStateFormatter: function(sCategory) {
 			return InstrumentController.categoryStateFormatter(sCategory);
+		},
+		
+		
+		/**
+		 * Validates the user input. Prompts messages if input is not valid.
+		 */
+		isInputValid: function() {
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var sSelectedInstrumentId = oInstrumentComboBox.getSelectedKey();
+			var oHealthCheckComboBox = this.getView().byId("healthCheckProfileComboBox");
+			var sSelectedProfile = oHealthCheckComboBox.getSelectedKey();
+			var oLookbackPeriodInput = this.getView().byId("lookbackPeriodInput");
+			var sLookbackPeriod = oLookbackPeriodInput.getValue();
+			var iLookbackPeriod = 0;
+			
+			if (sSelectedInstrumentId === "") {
+				MessageBox.error(oResourceBundle.getText("chartHealthCheckTV.noInstrumentSelected"));
+				return false;
+			}
+			
+			if (sSelectedProfile === "") {	
+				MessageBox.error(oResourceBundle.getText("chartHealthCheckTV.noProfileSelected"));
+				return false;
+			}
+			
+			if (sLookbackPeriod === "") {
+				MessageBox.error(oResourceBundle.getText("chartHealthCheckTV.lookbackPeriodInvalid"));
+				return false;
+			}
+			
+			iLookbackPeriod = parseInt(sLookbackPeriod);
+			
+			if (isNaN(iLookbackPeriod)) {
+				MessageBox.error(oResourceBundle.getText("chartHealthCheckTV.lookbackPeriodInvalid"));
+				return false;
+			}
+			
+			if (iLookbackPeriod < 1 || iLookbackPeriod > 50) {
+				MessageBox.error(oResourceBundle.getText("chartHealthCheckTV.lookbackPeriodInvalid"));
+				return false;
+			}
+			
+			return true;
 		},
 		
 		
