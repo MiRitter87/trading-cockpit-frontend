@@ -93,6 +93,9 @@ sap.ui.define([
 				
 			this.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING, "healthCheckProfile.weaknessWithoutCounting");
+				
+			this.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.AFTER_BREAKOUT, "healthCheckProfile.afterBreakout");
 		},
 		
 		
@@ -161,6 +164,9 @@ sap.ui.define([
 			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING) {
 				sTitle = oResourceBundle.getText("healthCheckProfile.weaknessWithoutCounting");
 			}
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.AFTER_BREAKOUT) {
+				sTitle = oResourceBundle.getText("healthCheckProfile.afterBreakout");
+			}
 			
 			return sTitle;
 		},
@@ -191,6 +197,9 @@ sap.ui.define([
 			}
 			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING) {
 				sDescription = oResourceBundle.getText("healthCheckProfile.weaknessWithoutCounting.description");
+			}
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.AFTER_BREAKOUT) {
+				sDescription = oResourceBundle.getText("healthCheckProfile.afterBreakout.description");
 			}
 			
 			return sDescription;
