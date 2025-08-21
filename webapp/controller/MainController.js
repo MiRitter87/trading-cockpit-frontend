@@ -99,6 +99,9 @@ sap.ui.define([
 				
 			this.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.HEALTH_CHECK_PROFILE.REVERSAL_ALERT, "healthCheckProfile.reversalAlert");
+				
+			this.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.HEALTH_CHECK_PROFILE.INSTITUTIONS, "healthCheckProfile.institutions");
 		},
 		
 		
@@ -173,6 +176,9 @@ sap.ui.define([
 			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.REVERSAL_ALERT) {
 				sTitle = oResourceBundle.getText("healthCheckProfile.reversalAlert");
 			}
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.INSTITUTIONS) {
+				sTitle = oResourceBundle.getText("healthCheckProfile.institutions");
+			}
 			
 			return sTitle;
 		},
@@ -209,6 +215,9 @@ sap.ui.define([
 			}
 			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.REVERSAL_ALERT) {
 				sDescription = oResourceBundle.getText("healthCheckProfile.reversalAlert.description");
+			}
+			else if (sProfile === Constants.HEALTH_CHECK_PROFILE.INSTITUTIONS) {
+				sDescription = oResourceBundle.getText("healthCheckProfile.institutions.description");
 			}
 			
 			return sDescription;
