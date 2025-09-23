@@ -22,7 +22,7 @@ Create a new folder *trading-cockpit-frontend* in the *webapps* folder of your W
 Then copy all files and folders from the projects *webapp* folder into the newly created folder of the WebServer.
 [Apache Tomcat](https://tomcat.apache.org/) has been used during development of the application.
 
-The *index.html* file is set up in a way that requires a local [UI5 runtime environment](https://openui5.org/releases/) in the folder *resources* of the base directory of your WebServer.
+The *index.html* file is set up in a way that requires a local [UI5 runtime environment](https://openui5.org/releases/) in the folder *resources* of the base directory of your *trading-cockpit-frontend*.
 The advantage of that configuration is that it reduces the loading time of the application because no runtime information has to be loaded from the web.
 Additionally it allows you to work offline. The current version of the application uses the OpenUI5 runtime version 1.120.18.
 
