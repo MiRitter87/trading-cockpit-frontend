@@ -27,6 +27,8 @@ sap.ui.define([
 		_onRouteMatched: function() {
 			//Query master data every time a user navigates to this view. This assures that changes are being displayed in the ComboBox.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this, true);
+			
+			this.resetUIElements();
     	},
     	
     	
@@ -175,6 +177,16 @@ sap.ui.define([
 			var oSelectedInstrument = oContext.getProperty(null, oContext);
 			
 			return oSelectedInstrument;
+		},
+		
+		
+		/**
+		 * Resets the UI elements.
+		 */
+		resetUIElements: function() {
+			var oSearchField = this.getView().byId("instrumentSearchField");
+			
+			oSearchField.setValue("");
 		}
 	});
 });
