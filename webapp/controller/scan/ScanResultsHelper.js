@@ -118,6 +118,8 @@ sap.ui.define([
 					path: "instrument/symbol"},
 				{key: "nameColumn", label: oResourceBundle.getText("instrument.name"), 
 					path: "instrument/name"},
+				{key: "igNameColumn", label: oResourceBundle.getText("instrument.industryGroup"), 
+					path: "instrument/industryGroup/name"},
 				{key: "typeColumn", label: oResourceBundle.getText("instrument.type"), 
 					path: "instrument/type"},
 				{key: "rsNumberColumn", label: oResourceBundle.getText("indicator.rsNumber"), 

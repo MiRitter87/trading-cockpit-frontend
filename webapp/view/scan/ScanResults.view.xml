@@ -63,6 +63,9 @@
 					<Column id="nameColumn">
 						<Text text="{i18n>instrument.name}"/>
 					</Column>
+					<Column id="igNameColumn" minScreenWidth="Desktop" demandPopin="true">
+						<Text text="{i18n>instrument.industryGroup}"/>
+					</Column>
 					<Column id="typeColumn" minScreenWidth="Desktop" demandPopin="true">
 						<Text text="{i18n>instrument.type}"/>
 					</Column>
@@ -111,6 +114,7 @@
 						<cells>
 							<Link text="{instrument/symbol}" press=".onSymbolLinkPressed"/>
 							<Text text="{instrument/name}"/>
+							<Text text="{instrument/industryGroup/name}"/>
 							<Text text="{path: 'instrument/type', formatter: '.typeTextFormatter'}"/>
 							<ObjectStatus text="{relativeStrengthData/rsNumber}" inverted="true"
 								state="{path: 'relativeStrengthData/rsNumber', formatter: '.rsNumberStateFormatter'}"/>
