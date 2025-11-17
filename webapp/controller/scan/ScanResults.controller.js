@@ -457,7 +457,7 @@ sap.ui.define([
 		 * Opens the stock chart of the given Instrument.
 		 */
 		openStockChart: function(oInstrument) {
-			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/chart");
+			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/jFreeChart");
 			var sChartUrl = ScanResultsHelper.getChartUrl(oInstrument, sWebServiceBaseUrl);
 					
 			window.open(sChartUrl, '_blank');
