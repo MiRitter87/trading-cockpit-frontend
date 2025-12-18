@@ -22,7 +22,8 @@
 							<Title text="{i18n>priceAlertOverview.tableHeader} ({= ${priceAlerts>/priceAlert/}.length})"/>
 							<ToolbarSpacer/>
 							<Button icon="sap-icon://download" tooltip="{i18n>priceAlertOverview.exportAll}" press=".onExportPressed"/>
-							<uni:FileUploader icon="sap-icon://upload" buttonOnly="true" iconOnly="true" fileType="json" tooltip="{i18n>priceAlertOverview.importAll}"/>
+							<uni:FileUploader id="fileUploader" icon="sap-icon://upload" buttonOnly="true" iconOnly="true" fileType="json" 
+								tooltip="{i18n>priceAlertOverview.importAll}" change="onFileChange"/>
 							<Button icon="sap-icon://detail-view" tooltip="{i18n>priceAlertOverview.showDetails}" press=".onShowDetailsPressed"/>
 							<Button icon="sap-icon://delete" tooltip="{i18n>priceAlertOverview.deleteSelected}" press=".onDeletePressed"/>
 						</OverflowToolbar>

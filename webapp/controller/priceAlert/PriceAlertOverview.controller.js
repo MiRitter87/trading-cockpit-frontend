@@ -41,6 +41,30 @@ sap.ui.define([
 		onExportPressed: function() {
 			PriceAlertController.exportPriceAlertsByWebService(this);
 		},
+		
+		
+		/**
+		 * Handles the reading of the JSON file content for import of price alerts.
+		 */
+		onFileChange: function (oEvent) {
+			/*
+			var oFile = oEvent.getParameter("files")[0]; // Get the selected file
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+				var fileContent = e.target.result;  // File content as a string
+				
+				//TODO Call WebService with string.
+			}.bind(this);
+
+			reader.onerror = function (error) {
+			  	console.error("Error reading the file:", error);
+				//TODO Print Message to MessageToast
+			};
+
+			reader.readAsText(oFile);  // Read the file as text
+			*/
+		},
     	
     	
     	/**
