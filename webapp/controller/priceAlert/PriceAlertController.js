@@ -251,6 +251,30 @@ sap.ui.define([
 					callbackFunction(data, oCallingController);
 				}
 			});
+		},
+		
+		
+		/**
+		 * Exports all price alerts using the WebService.
+		 */
+		exportPriceAlertsByWebService: function(oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/priceAlert");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/export";
+			var sFileName = "PriceAlerts.json";
+
+			fetch(sQueryUrl)
+				.then(resp => resp.blob())
+				.then(blob => {
+				    const url = window.URL.createObjectURL(blob);
+				    const a = document.createElement('a');
+				    a.style.display = 'none';
+				    a.href = url;
+				    a.download = sFileName;
+				    document.body.appendChild(a);
+				    a.click();
+				    window.URL.revokeObjectURL(url);
+				});
 		}
 	};
 });

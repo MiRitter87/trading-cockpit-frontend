@@ -33,6 +33,14 @@ sap.ui.define([
 			//"Show all price alerts" is always selected when the user navigates to the overview.
 			this.getView().byId("filterIconTabBar").setSelectedKey("All");
     	},
+		
+		
+		/**
+		 * Handles the press-event of the export price alerts button.
+		 */
+		onExportPressed: function() {
+			PriceAlertController.exportPriceAlertsByWebService(this);
+		},
     	
     	
     	/**
