@@ -275,6 +275,27 @@ sap.ui.define([
 				    a.click();
 				    window.URL.revokeObjectURL(url);
 				});
+		},
+		
+		
+		/**
+		 * Imports the price alerts provided as JSON string using the WebService.
+		 */
+		importPriceAlertsByWebService: function(sJSONString, callbackFunction, oCallingController) {
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = oCallingController.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/priceAlert");
+			var sQueryUrl = sServerAddress + sWebServiceBaseUrl + "/import";
+			
+			//Use "POST" to create a resource.
+			jQuery.ajax({
+				type : "POST", 
+				contentType : "application/json", 
+				url : sQueryUrl,
+				data : sJSONString, 
+				success: function(data) {
+					callbackFunction(data, oCallingController);
+				}
+			});
 		}
 	};
 });

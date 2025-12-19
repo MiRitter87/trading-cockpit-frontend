@@ -46,24 +46,22 @@ sap.ui.define([
 		/**
 		 * Handles the reading of the JSON file content for import of price alerts.
 		 */
-		onFileChange: function (oEvent) {
-			/*
+		onFileChange: function(oEvent) {
 			var oFile = oEvent.getParameter("files")[0]; // Get the selected file
 			var reader = new FileReader();
 
-			reader.onload = function (e) {
-				var fileContent = e.target.result;  // File content as a string
-				
-				//TODO Call WebService with string.
+			reader.onload = function(e) {
+				var sFileContent = e.target.result;  // File content as a string
+
+				PriceAlertController.importPriceAlertsByWebService(sFileContent, this.importPriceAletsCallback, this);
 			}.bind(this);
 
-			reader.onerror = function (error) {
-			  	console.error("Error reading the file:", error);
-				//TODO Print Message to MessageToast
+			reader.onerror = function() {
+				MessageBox.error(oResourceBundle.getText("priceAlertOverview.readFileError"));
+				return;
 			};
 
 			reader.readAsText(oFile);  // Read the file as text
-			*/
 		},
     	
     	
@@ -163,6 +161,31 @@ sap.ui.define([
 				if (oReturnData.message[0].type === 'S') {
 					MessageToast.show(oReturnData.message[0].text);
 					PriceAlertController.queryPriceAlertsByWebService(oCallingController.queryPriceAlertsCallback, oCallingController, false);
+				}
+				
+				if (oReturnData.message[0].type === 'E') {
+					MessageBox.error(oReturnData.message[0].text);
+				}
+				
+				if (oReturnData.message[0].type === 'W') {
+					MessageBox.warning(oReturnData.message[0].text);
+				}
+			}
+		},
+		
+		
+		/**
+		 * Callback function of the importPriceAlerts RESTful WebService call inn the PriceAlertController.
+		 */
+		importPriceAletsCallback: function(oReturnData, oCallingController) {
+			var oFileUploader = oCallingController.byId("fileUploader");
+			
+			// Clear selected file. This allows multiple uploads of the same file.
+			oFileUploader.clear();	
+			
+			if (oReturnData.message !== null) {
+				if (oReturnData.message[0].type === 'S') {
+					MessageToast.show(oReturnData.message[0].text);
 				}
 				
 				if (oReturnData.message[0].type === 'E') {
