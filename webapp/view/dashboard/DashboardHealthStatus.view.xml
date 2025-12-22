@@ -70,9 +70,9 @@
 								</f:fields>
 							</f:FormElement>
 							
-							<f:FormElement label="{i18n>dashboardHealthStatus.upDownVolumeRatio}">
+							<f:FormElement label="{i18n>dashboardHealthStatus.upDownPerfVolRatio}">
 								<f:fields>
-									<Text id="udVolRatioText" text="{marketHealthStatus>/upDownVolumeRatio}"/>
+									<Text id="udVolRatioText" text="{marketHealthStatus>/upDownPerfVolRatio30Days}"/>
 								</f:fields>
 							</f:FormElement>
 							
