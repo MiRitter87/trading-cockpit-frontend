@@ -81,9 +81,9 @@
 									<FlexBox alignItems="Start">
 										<items>
 											<Text id="distributionDaysText" text="{marketHealthStatus>/distributionDaysSum}"/>
-											<core:Icon id="distributionDaysIcon" class="sapUiSmallMarginBegin" src="sap-icon://status-negative" 
-												 color="red" visible="{path: 'marketHealthStatus>/distributionDaysSum', 
-												formatter: '.ddIconVisibleFormatter'}"/>
+											<core:Icon id="distributionDaysIcon" class="sapUiSmallMarginBegin" 
+												src="{path: 'marketHealthStatus>/distributionDaysSum', formatter: '.ddIconSrcFormatter'}"
+												color ="{path: 'marketHealthStatus>/distributionDaysSum', formatter: '.ddIconColorFormatter'}"/>
 										</items>
 									</FlexBox>
 								</f:fields>

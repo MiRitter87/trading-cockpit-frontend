@@ -160,7 +160,7 @@ sap.ui.define([
 				return "green";
 			}
 			else if (sSwingTradingEnvironmentStatus === 'YELLOW') {
-				return "yellow";
+				return "orange";
 			}
 			else if (sSwingTradingEnvironmentStatus === 'RED') {
 				return "red";
@@ -169,14 +169,30 @@ sap.ui.define([
 		
 		
 		/**
-		 * Formatter of the visibility of the Distribution Days icon.
+		 * Formatter of the Distribution Days status icon.
 		 */
-		ddIconVisibleFormatter: function(iDistributionDaysSum) {			
-			if (iDistributionDaysSum >= 5) {
-				return true;
+		ddIconSrcFormatter: function(iDistributionDaysSum) {
+			if (iDistributionDaysSum === 4) {
+				return "sap-icon://status-critical";
+			}
+			else if (iDistributionDaysSum >= 5) {
+				return "sap-icon://status-negative";
 			}
 			else {
-				return false;
+				return null;
+			}
+		},
+		
+		
+		/**
+		 * Formatter of the Distribution Days status icon color.
+		 */
+		ddIconColorFormatter: function(iDistributionDaysSum) {
+			if (iDistributionDaysSum === 4) {
+				return "orange";
+			}
+			else if (iDistributionDaysSum >= 5) {
+				return "red";
 			}
 		},
 		
@@ -295,7 +311,6 @@ sap.ui.define([
 		resetUIElements: function() {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
 			var oListComboBox = this.getView().byId("listComboBox");
-			var oDistributionDaysIcon = this.getView().byId("distributionDaysIcon");
 			var oPi52wHigh = this.getView().byId("pi52wHigh");
 			var oPi52wLow = this.getView().byId("pi52wLow");
 			var oPiUpOnVolume = this.getView().byId("piUpOnVolume");
@@ -306,7 +321,6 @@ sap.ui.define([
 
 			oInstrumentComboBox.setSelectedKey("");
 			oListComboBox.setSelectedKey("");
-			oDistributionDaysIcon.setSrc(null);
 			
 			// Reset ProgressIndicator
 			oPi52wHigh.setPercentValue(0);
