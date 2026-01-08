@@ -174,15 +174,21 @@ sap.ui.define([
 		 */
 		profileTextFormatter: function(sProfile, oResourceBundle) {
 			if (sProfile === Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS) {				
-				return oResourceBundle.getText("protocol.profile.confirmations");
+				return oResourceBundle.getText("healthCheckProfile.confirmations");
 			} else if (sProfile === Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_WEAKNESS) {				
-				return oResourceBundle.getText("protocol.profile.weakness");
+				return oResourceBundle.getText("healthCheckProfile.weakness");
 			} else if (sProfile === Constants.HEALTH_CHECK_PROFILE.SELLING_INTO_STRENGTH) {				
-				return oResourceBundle.getText("protocol.profile.strength");
+				return oResourceBundle.getText("healthCheckProfile.strength");
 			} else if (sProfile === Constants.HEALTH_CHECK_PROFILE.CONFIRMATIONS_WITHOUT_COUNTING) {				
-				return oResourceBundle.getText("protocol.profile.confirmationsWithoutCounting");
+				return oResourceBundle.getText("healthCheckProfile.confirmationsWithoutCounting");
 			} else if (sProfile === Constants.HEALTH_CHECK_PROFILE.WEAKNESS_WITHOUT_COUNTING) {				
-				return oResourceBundle.getText("protocol.profile.weaknessWithoutCounting");
+				return oResourceBundle.getText("healthCheckProfile.weaknessWithoutCounting");
+			} else if (sProfile === Constants.HEALTH_CHECK_PROFILE.AFTER_BREAKOUT) {				
+				return oResourceBundle.getText("healthCheckProfile.afterBreakout");
+			} else if (sProfile === Constants.HEALTH_CHECK_PROFILE.REVERSAL_ALERT) {				
+				return oResourceBundle.getText("healthCheckProfile.reversalAlert");
+			} else if (sProfile === Constants.HEALTH_CHECK_PROFILE.INSTITUTIONS) {				
+				return oResourceBundle.getText("healthCheckProfile.institutions");
 			} else {				
 				return "";
 			}
