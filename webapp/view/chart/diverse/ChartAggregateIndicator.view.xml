@@ -12,7 +12,7 @@
 		</headerContent>
 		
 		<content>
-			<FlexBox alignItems="Center" justifyContent="Start">
+			<FlexBox alignItems="Center" justifyContent="Start" wrap="Wrap">
 				<Label text="{i18n>chartAggregateIndicator.instrument}" class="sapUiSmallMarginBegin sapUiSmallMarginEnd" required="true"/>
 				<ComboBox id="instrumentComboBox" items="{path: 'quotations>/quotation/', sorter: {path: 'instrument/id'}}">
 					<core:Item key="{quotations>instrument/id}" text="{quotations>instrument/symbol} - {quotations>instrument/name}"/>

@@ -9,7 +9,7 @@
 	<Page title="{i18n>dashboardStatistic.header}">
 		<content>
 			<VBox class="sapUiSmallMarginBegin">
-				<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start">
+				<FlexBox class="sapUiSmallMarginBegin" alignItems="Center" justifyContent="Start" wrap="Wrap">
 					<Label text="{i18n>instrument.type}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd" required="true"/>
 					<ComboBox id="typeComboBox"/>
 					<Label text="{i18n>dashboardStatistic.sectorIgLabel}" class="sapUiMediumMarginBegin sapUiSmallMarginEnd"/>
