@@ -77,6 +77,10 @@ sap.ui.define([
 				sTitle = oResourceBundle.getText("scanResults.template.rsNearHighIg");
 				sDescription = oResourceBundle.getText("scanResults.template.rsNearHighIg.description");
 			}
+			else if (sKey === Constants.SCAN_TEMPLATE.MA_PRICE_CONVERGENCE) {
+				sTitle = oResourceBundle.getText("scanResults.template.maPriceConvergence");
+				sDescription = oResourceBundle.getText("scanResults.template.maPriceConvergence.description");
+			}
 			else {
 				MessageBox.information(oResourceBundle.getText("scanResults.noTemplateSelected"));
 				return;
@@ -94,6 +98,7 @@ sap.ui.define([
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.ALL, "scanResults.template.all");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.BUYABLE_BASE, "scanResults.template.buyableBase");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.BREAKOUT_CANDIDATES, "scanResults.template.breakoutCandidates");
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.MA_PRICE_CONVERGENCE, "scanResults.template.maPriceConvergence");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.CONSOLIDATION_10_WEEKS, "scanResults.template.consolidation10Weeks");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.CONSOLIDATION_10_DAYS, "scanResults.template.consolidation10Days");
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, Constants.SCAN_TEMPLATE.HIGH_TIGHT_FLAG, "scanResults.template.highTightFlag");
