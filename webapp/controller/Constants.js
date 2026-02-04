@@ -94,7 +94,8 @@ sap.ui.define([
 		CHART_TEMPLATE: {
 			TREND: 'TREND',
 			BUYABLE_BASE: 'BUYABLE_BASE',
-			RS: 'RS'
+			RS: 'RS',
+			SALE: 'SALE'
 		},
 		
 		CHART_INDICATOR: {

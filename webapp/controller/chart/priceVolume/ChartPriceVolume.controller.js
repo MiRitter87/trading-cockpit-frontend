@@ -151,8 +151,21 @@ sap.ui.define([
 				
 				oIndicatorComboBox.setSelectedKey(Constants.CHART_INDICATOR.RS_LINE);
 				this.onIndicatorSelectionChange();
+			} else if (oTemplateComboBox.getSelectedKey() === Constants.CHART_TEMPLATE.SALE) {
+				oEma10CheckBox.setSelected(true);
+				oEma21CheckBox.setSelected(true);
+				oSma50CheckBox.setSelected(true);
+				oSma150CheckBox.setSelected(false);
+				oSma200CheckBox.setSelected(false);
+					
+				oVolumeCheckBox.setSelected(true);
+				oSma30VolumeCheckBox.setSelected(true);
+				oSma30VolumeCheckBox.setEnabled(true);
+					
+				oIndicatorComboBox.setSelectedKey(Constants.CHART_INDICATOR.NONE);
+				this.onIndicatorSelectionChange();
 			}
-		},
+},
 		
 		
 		/**
@@ -270,6 +283,9 @@ sap.ui.define([
 				
 			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
 				Constants.CHART_TEMPLATE.RS, "chartPriceVolume.template.relativeStrength");
+				
+			MainController.addItemToComboBox(oComboBox, oResourceBundle, 
+				Constants.CHART_TEMPLATE.SALE, "chartPriceVolume.template.sale");
 		},
 		
 		
