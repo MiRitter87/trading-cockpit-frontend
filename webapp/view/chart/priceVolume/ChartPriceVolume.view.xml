@@ -33,6 +33,7 @@
 						</IconTabFilter>
 					
 						<IconTabFilter text="{i18n>chartPriceVolume.tabPrice}" key="price">
+							<CheckBox id="ema10CheckBox" text="{i18n>chartPriceVolume.ema10}"/>
 							<CheckBox id="ema21CheckBox" text="{i18n>chartPriceVolume.ema21}"/>
 							<CheckBox id="sma50CheckBox" text="{i18n>chartPriceVolume.sma50}" selected="true"/>
 							<CheckBox id="sma150CheckBox" text="{i18n>chartPriceVolume.sma150}" selected="true"/>

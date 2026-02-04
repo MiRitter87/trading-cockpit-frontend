@@ -105,6 +105,7 @@ sap.ui.define([
 		},
 		
 		CHART_OVERLAY: {
+			EMA_10: 'EMA_10',
 			EMA_21: 'EMA_21',
 			SMA_50: 'SMA_50',
 			SMA_150: 'SMA_150',

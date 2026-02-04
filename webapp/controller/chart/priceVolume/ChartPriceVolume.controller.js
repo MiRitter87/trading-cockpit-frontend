@@ -103,6 +103,7 @@ sap.ui.define([
 		 */
 		onTemplateSelectionChange: function() {
 			var oTemplateComboBox = this.getView().byId("templateComboBox");
+			var oEma10CheckBox = this.getView().byId("ema10CheckBox");
 			var oEma21CheckBox = this.getView().byId("ema21CheckBox");
 			var oSma50CheckBox = this.getView().byId("sma50CheckBox");
 			var oSma150CheckBox = this.getView().byId("sma150CheckBox");
@@ -112,6 +113,7 @@ sap.ui.define([
 			var oIndicatorComboBox = this.getView().byId("indicatorComboBox");
 			
 			if (oTemplateComboBox.getSelectedKey() === Constants.CHART_TEMPLATE.TREND) {
+				oEma10CheckBox.setSelected(false);
 				oEma21CheckBox.setSelected(false);
 				oSma50CheckBox.setSelected(true);
 				oSma150CheckBox.setSelected(true);
@@ -124,6 +126,7 @@ sap.ui.define([
 				oIndicatorComboBox.setSelectedKey(Constants.CHART_INDICATOR.SLOW_STOCHASTIC);
 				this.onIndicatorSelectionChange();
 			} else if (oTemplateComboBox.getSelectedKey() === Constants.CHART_TEMPLATE.BUYABLE_BASE) {
+				oEma10CheckBox.setSelected(false);
 				oEma21CheckBox.setSelected(true);
 				oSma50CheckBox.setSelected(true);
 				oSma150CheckBox.setSelected(false);
@@ -136,6 +139,7 @@ sap.ui.define([
 				oIndicatorComboBox.setSelectedKey(Constants.CHART_INDICATOR.BBW);
 				this.onIndicatorSelectionChange();
 			} else if (oTemplateComboBox.getSelectedKey() === Constants.CHART_TEMPLATE.RS) {
+				oEma10CheckBox.setSelected(false);
 				oEma21CheckBox.setSelected(false);
 				oSma50CheckBox.setSelected(true);
 				oSma150CheckBox.setSelected(true);
@@ -319,6 +323,7 @@ sap.ui.define([
 		 */
 		getUrlParametersPriceVolume: function() {
 			var sParameters = "";
+			var oEma10CheckBox = this.getView().byId("ema10CheckBox");
 			var oEma21CheckBox = this.getView().byId("ema21CheckBox");
 			var oSma50CheckBox = this.getView().byId("sma50CheckBox");
 			var oSma150CheckBox = this.getView().byId("sma150CheckBox");
@@ -334,6 +339,10 @@ sap.ui.define([
 			}
 			else {
 				sParameters = sParameters + "?indicator=" + sSelectedIndicator;
+			}
+			
+			if (oEma10CheckBox.getSelected() === true) {
+				sParameters = sParameters + "&overlays=" + Constants.CHART_OVERLAY.EMA_10;
 			}
 			
 			if (oEma21CheckBox.getSelected() === true) {
