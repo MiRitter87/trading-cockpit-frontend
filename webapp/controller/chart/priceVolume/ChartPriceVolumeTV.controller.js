@@ -65,6 +65,22 @@ sap.ui.define([
 		
 		
 		/**
+    	 * Handles the button press event of the EMA(10) ToggleButton.
+    	 */
+    	onEma10Pressed: function(oEvent) {
+			var oChartModel = this.getView().getModel("chartModel");
+	
+			if (oEvent.getSource().getPressed()) {
+				oChartModel.setProperty("/displayEma10", true);
+			} else {
+				oChartModel.setProperty("/displayEma10", false);
+			}
+			
+			TradingViewController.displayEma10(this);
+		},
+		
+		
+		/**
     	 * Handles the button press event of the EMA(21) ToggleButton.
     	 */
     	onEma21Pressed: function(oEvent) {
@@ -475,6 +491,7 @@ sap.ui.define([
 		 */
 		resetUIElements: function() {
 			var oInstrumentComboBox = this.getView().byId("instrumentComboBox");
+			var oEma10Button = this.getView().byId("ema10Button");
 			var oEma21Button = this.getView().byId("ema21Button");
 			var oSma50Button = this.getView().byId("sma50Button");
 			var oSma150Button = this.getView().byId("sma150Button");
@@ -487,6 +504,7 @@ sap.ui.define([
 
 			oInstrumentComboBox.setSelectedKey("");
 			
+			oEma10Button.setPressed(false);
 			oEma21Button.setPressed(false);
 			oSma50Button.setPressed(false);
 			oSma150Button.setPressed(false);

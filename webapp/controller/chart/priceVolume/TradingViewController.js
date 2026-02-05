@@ -176,6 +176,7 @@ sap.ui.define([
 		 * Applies the moving averages to the chart according to the state of the chartModel.
 		 */
 		applyMovingAverages: function(oCallingController) {
+			this.displayEma10(oCallingController);
 			this.displayEma21(oCallingController);
 			this.displaySma50(oCallingController);
 			this.displaySma150(oCallingController);
@@ -191,6 +192,32 @@ sap.ui.define([
 			this.displayBollingerBandWidth(oCallingController);
 			this.displaySlowStochastic(oCallingController);
 			this.displayRsLine(oCallingController);
+		},
+		
+		
+		/**
+		 * Displays the EMA(10) in the chart.
+		 */
+		displayEma10: function(oCallingController) {
+			var oChartModel = oCallingController.getView().getModel("chartModel");
+			var oChart = oChartModel.getProperty("/chart");
+			var aEma10Data = TradingViewHelper.getMovingAverageData(oCallingController, Constants.CHART_OVERLAY.EMA_10);
+			var bIsEma10Visible = oChartModel.getProperty("/displayEma10");
+
+			if (bIsEma10Visible === true) {
+				const oEma10Series = oChart.addSeries(LightweightCharts.LineSeries, 
+					{ color: 'black', lineWidth: 1, priceLineVisible: false });
+				oEma10Series.setData(aEma10Data);
+				oChartModel.setProperty("/ema10Series", oEma10Series);
+				
+				TradingViewHelper.organizeMovingAverages(oChartModel);
+			} else {
+				const oEma10Series = oChartModel.getProperty("/ema10Series");
+				
+				if (oEma10Series !== undefined && oChart !== undefined) {
+					oChart.removeSeries(oEma10Series);
+				}
+			}
 		},
 		
 		

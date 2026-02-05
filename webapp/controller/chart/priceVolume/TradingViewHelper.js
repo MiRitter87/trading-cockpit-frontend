@@ -23,8 +23,9 @@ sap.ui.define([
     			if (oQuotation.movingAverageData === null) {
 					continue;
 				}
-				
-				if (sRequestedMA === Constants.CHART_OVERLAY.EMA_21 && oQuotation.movingAverageData.ema21 !== 0) {
+				if (sRequestedMA === Constants.CHART_OVERLAY.EMA_10 && oQuotation.movingAverageData.ema10 !== 0) {
+					oMovingAverageDataset.value = oQuotation.movingAverageData.ema10;
+				} else if (sRequestedMA === Constants.CHART_OVERLAY.EMA_21 && oQuotation.movingAverageData.ema21 !== 0) {
 					oMovingAverageDataset.value = oQuotation.movingAverageData.ema21;
 				} else if (sRequestedMA === Constants.CHART_OVERLAY.SMA_50 && oQuotation.movingAverageData.sma50 !== 0) {
 					oMovingAverageDataset.value = oQuotation.movingAverageData.sma50;
@@ -213,6 +214,7 @@ sap.ui.define([
 		 */
 		organizeMovingAverages: function(oChartModel) {
 			var oChart = oChartModel.getProperty("/chart");
+			var oEma10Series = oChartModel.getProperty("/ema10Series");
 			var oEma21Series = oChartModel.getProperty("/ema21Series");
 			var oSma50Series = oChartModel.getProperty("/sma50Series");
 			var oSma150Series = oChartModel.getProperty("/sma150Series");
@@ -228,6 +230,12 @@ sap.ui.define([
 				iPricePaneIndex = 1;	
 			} else {
 				iPricePaneIndex = 0;
+			}
+			
+			if (oChartModel.getProperty("/displayEma10") === true) {				
+				if (oEma10Series !== undefined && oChart !== undefined) {
+					oEma10Series.moveToPane(iPricePaneIndex);
+				}
 			}
 			
 			if (oChartModel.getProperty("/displayEma21") === true) {				

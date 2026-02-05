@@ -18,11 +18,18 @@ sap.ui.define([
 		 */
 		updateModelForMovingAverages: function(oCallingController) {
 			var oChartModel = oCallingController.getView().getModel("chartModel");
+			var oEma10Button = oCallingController.getView().byId("ema10Button");
 			var oEma21Button = oCallingController.getView().byId("ema21Button");
 			var oSma50Button = oCallingController.getView().byId("sma50Button");
 			var oSma150Button = oCallingController.getView().byId("sma150Button");
 			var oSma200Button = oCallingController.getView().byId("sma200Button");
 			var oSma30VolumeButton = oCallingController.getView().byId("sma30VolumeButton");
+			
+			if (oEma10Button.getPressed()) {
+				oChartModel.setProperty("/displayEma10", true);
+			} else {
+				oChartModel.setProperty("/displayEma10", false);
+			}
 			
 			if (oEma21Button.getPressed()) {
 				oChartModel.setProperty("/displayEma21", true);
