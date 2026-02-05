@@ -140,9 +140,9 @@ sap.ui.define([
 				this.onIndicatorSelectionChange();
 			} else if (oTemplateComboBox.getSelectedKey() === Constants.CHART_TEMPLATE.RS) {
 				oEma10CheckBox.setSelected(false);
-				oEma21CheckBox.setSelected(false);
+				oEma21CheckBox.setSelected(true);
 				oSma50CheckBox.setSelected(true);
-				oSma150CheckBox.setSelected(true);
+				oSma150CheckBox.setSelected(false);
 				oSma200CheckBox.setSelected(true);
 				
 				oVolumeCheckBox.setSelected(true);
