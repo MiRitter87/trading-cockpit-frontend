@@ -434,26 +434,38 @@ sap.ui.define([
 			var oChartModel = oCallingController.getView().getModel("chartModel");
 			var oChart = oChartModel.getProperty("/chart");
 			var oRsLineData;
+			var oRsLineEma21Data;
 			var bIsRsLineVisible = oChartModel.getProperty("/displayRsLine");
 			
 			if (bIsRsLineVisible === true) {
 				oRsLineData = TradingViewHelper.getIndicatorData(oCallingController, Constants.CHART_INDICATOR.RS_LINE);
+				oRsLineEma21Data = TradingViewHelper.getRsLineEma21Data(oCallingController);
 				
 				const oRsLineSeries = oChart.addSeries(LightweightCharts.LineSeries, 
 					{ color: 'black', lineWidth: 1, priceLineVisible: false, lastValueVisible: true }
 				);
 				oRsLineSeries.setData(oRsLineData);
 				
+				const oRsLineEmaSeries = oChart.addSeries(LightweightCharts.LineSeries, 
+					{ color: 'yellow', lineWidth: 1, priceLineVisible: false}
+				);
+				oRsLineEmaSeries.setData(oRsLineEma21Data);
 				
 				oChartModel.setProperty("/rsLineSeries", oRsLineSeries);
+				oChartModel.setProperty("/rsLineEmaSeries", oRsLineEmaSeries);
 				
 				TradingViewHelper.organizePanesPriceVolume(oChartModel);
 				TradingViewHelper.organizeMovingAverages(oChartModel);
 			} else {
 				const oRsLineSeries = oChartModel.getProperty("/rsLineSeries");
+				const oRsLineEmaSeries = oChartModel.getProperty("/rsLineEmaSeries");
 				
 				if (oRsLineSeries !== undefined && oChart !== undefined) {
 					oChart.removeSeries(oRsLineSeries);
+				}
+				
+				if (oRsLineEmaSeries !== undefined && oChart !== undefined) {
+					oChart.removeSeries(oRsLineEmaSeries);
 				}
 			}
 		},

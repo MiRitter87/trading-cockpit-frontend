@@ -140,6 +140,42 @@ sap.ui.define([
 		
 		
 		/**
+		 * Create a series that contains the data of the EMA(21) of the RS-Line.
+		 */
+		getRsLineEma21Data: function(oCallingController) {
+			var oChartData = oCallingController.getView().getModel("chartData");
+			var aQuotations = oChartData.getProperty("/quotations/quotation");
+			var aRsLineEmaSeries = new Array();
+			var oDateFormat, oDate, sFormattedDate;
+
+			oDateFormat = DateFormat.getDateInstance({pattern : "yyyy-MM-dd"});
+
+			//The dataset needs to be constructed beginning at the oldest value.
+			for (var i = aQuotations.length -1; i >= 0; i--) {
+				var oQuotation = aQuotations[i];
+				var oRsLineEmaDataset = new Object();
+				
+				if (oQuotation.indicator === null) {
+					continue;
+				}
+				
+				//TEST: Use values of RS-Line minus 0.1. Later use EMA(21) of RS-Line provided by backend.
+				if (oQuotation.relativeStrengthData.rsLinePrice !== 0) {					
+					oRsLineEmaDataset.value = oQuotation.relativeStrengthData.rsLinePrice - 0.1;
+				}
+				    			
+				oDate = new Date(parseInt(oQuotation.date));
+				sFormattedDate = oDateFormat.format(oDate);
+				oRsLineEmaDataset.time = sFormattedDate;
+				
+				aRsLineEmaSeries.push(oRsLineEmaDataset);
+			}
+
+			return aRsLineEmaSeries;
+		},
+		
+		
+		/**
 		 * Organizes the panes of the price/volume chart in a manner that 
 		 * the indicator is at the top pane and the price/volume pane is below.
 		 */
@@ -150,6 +186,7 @@ sap.ui.define([
 			var oBbwSeries = oChartModel.getProperty("/bbwSeries");
 			var oSlowStochasticSeries = oChartModel.getProperty("/slowStochasticSeries");
 			var oRsLineSeries = oChartModel.getProperty("/rsLineSeries");
+			var oRsLineEmaSeries = oChartModel.getProperty("/rsLineEmaSeries");
 			var oIndicatorPane;
 			var chartHeight;
 			
@@ -171,10 +208,12 @@ sap.ui.define([
 			
 			if (oChartModel.getProperty("/displayRsLine") === true) {	
 				oRsLineSeries.moveToPane(0);
+				oRsLineEmaSeries.moveToPane(0);
 				oCandlestickSeries.moveToPane(1);
 				oVolumeSeries.moveToPane(1);
 				
 				oRsLineSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
+				oRsLineEmaSeries.priceScale().applyOptions({ mode: LightweightCharts.PriceScaleMode.Logarithmic });
 			}
 			
 			chartHeight = oChart.options().height;
