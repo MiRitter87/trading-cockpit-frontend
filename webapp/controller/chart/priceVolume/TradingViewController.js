@@ -232,7 +232,7 @@ sap.ui.define([
 	
 			if (bIsEma21Visible === true) {
 				const oEma21Series = oChart.addSeries(LightweightCharts.LineSeries, 
-					{ color: 'yellow', lineWidth: 1, priceLineVisible: false });
+					{ color: 'orange', lineWidth: 1, priceLineVisible: false });
 				oEma21Series.setData(aEma21Data);
 				oChartModel.setProperty("/ema21Series", oEma21Series);
 				
@@ -447,7 +447,7 @@ sap.ui.define([
 				oRsLineSeries.setData(oRsLineData);
 				
 				const oRsLineEmaSeries = oChart.addSeries(LightweightCharts.LineSeries, 
-					{ color: 'yellow', lineWidth: 1, priceLineVisible: false}
+					{ color: 'orange', lineWidth: 1, priceLineVisible: false }
 				);
 				oRsLineEmaSeries.setData(oRsLineEma21Data);
 				
