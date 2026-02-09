@@ -155,18 +155,18 @@ sap.ui.define([
 				var oQuotation = aQuotations[i];
 				var oRsLineEmaDataset = new Object();
 				
-				if (oQuotation.indicator === null) {
+				if (oQuotation.relativeStrengthData === null) {
 					continue;
 				}
 				
-				//TEST: Use values of RS-Line minus 0.1. Later use EMA(21) of RS-Line provided by backend.
-				if (oQuotation.relativeStrengthData.rsLinePrice !== 0) {					
-					oRsLineEmaDataset.value = oQuotation.relativeStrengthData.rsLinePrice - 0.1;
+				if (oQuotation.relativeStrengthData.rsLineEma21 === 0) {
+					continue;
 				}
 				    			
 				oDate = new Date(parseInt(oQuotation.date));
 				sFormattedDate = oDateFormat.format(oDate);
 				oRsLineEmaDataset.time = sFormattedDate;
+				oRsLineEmaDataset.value = oQuotation.relativeStrengthData.rsLineEma21;
 				
 				aRsLineEmaSeries.push(oRsLineEmaDataset);
 			}
