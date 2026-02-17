@@ -98,7 +98,7 @@
 							</f:fields>
 						</f:FormElement>
 					
-						<f:FormElement label="{i18n>instrument.investingId}">
+						<f:FormElement label="{i18n>instrument.investingId}" visible="false">
 							<f:fields>
 								<Text id="investingIdText" text="{selectedInstrument>/investingId}"/>
 							</f:fields>

@@ -119,7 +119,7 @@
 							</f:fields>
 						</f:FormElement>
 					
-						<f:FormElement label="{i18n>instrument.investingId}">
+						<f:FormElement label="{i18n>instrument.investingId}" visible="false">
 							<f:fields>
 								<Input id ="investingIdInput" maxLength="10" value="{selectedInstrument>/investingId}" required="false"
 									tooltip="{i18n>instrumentEdit.investingIdTooltip}"/>
