@@ -33,4 +33,4 @@ An active internet connection is required then.
 
 ## License
 
-Copyright © 2022-2025, [MiRitter87](https://github.com/MiRitter87). No License.
+Copyright © 2022-2026, [MiRitter87](https://github.com/MiRitter87). No License.
