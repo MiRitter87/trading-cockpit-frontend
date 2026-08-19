@@ -162,6 +162,8 @@ sap.ui.define([
 		 * Formatter of the chart URL.
 		 */
 		chartUrlFormatter: function(oInstrument) {
+			var sBaseChartUrl = "https://stockcharts.com/c-sc/sc?s={symbol}{exchange}&p=D&yr=1&mn=0&dy=0&i=p87853059193&r=1787127613780";
+			
 			if (!oInstrument) {
 		        return "";
 		    }
@@ -171,7 +173,7 @@ sap.ui.define([
 		        return "";
 		    }
 
-		    return ScanResultsHelper.getChartUrlNonRatio(oInstrument);
+		    return ScanResultsHelper.getChartUrlNonRatio(oInstrument, sBaseChartUrl);
 		},
 		
 		

@@ -244,6 +244,7 @@ sap.ui.define([
 		 * Gets a chart URL for the given Instrument.
 		 */
 		getChartUrl: function(oInstrument, sWebServiceBaseUrl) {
+			var sBaseChartUrl = "https://stockcharts.com/h-sc/ui?s={symbol}{exchange}&p=D&yr=1&mn=0&dy=0&id=p87853059193";
 			var sChartUrl = "";
 
 			if (oInstrument.type === Constants.INSTRUMENT_TYPE.RATIO) {
@@ -253,7 +254,7 @@ sap.ui.define([
 				if (oInstrument.symbol === "") {
 					sChartUrl = this.getChartUrlBackend(oInstrument, sWebServiceBaseUrl);
 				} else {
-					sChartUrl = this.getChartUrlNonRatio(oInstrument);
+					sChartUrl = this.getChartUrlNonRatio(oInstrument, sBaseChartUrl);
 				}
 			}
 			
@@ -264,8 +265,7 @@ sap.ui.define([
 		/**
 		 * Gets a chart URL for an Instrument of any type other than RATIO where symbol and stock exchange are given.
 		 */
-		getChartUrlNonRatio: function(oInstrument) {
-			var sBaseChartUrl = "https://stockcharts.com/h-sc/ui?s={symbol}{exchange}&p=D&yr=1&mn=0&dy=0&id=p87853059193";
+		getChartUrlNonRatio: function(oInstrument, sBaseChartUrl) {
 			var sChartUrl = "";
 			var sStockExchange = oInstrument.stockExchange;
 			var sSymbol = oInstrument.symbol;
