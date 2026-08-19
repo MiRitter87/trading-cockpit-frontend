@@ -1,13 +1,15 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"../MainController",
+	"../Constants",
+	"../scan/ScanResultsHelper",
 	"./InstrumentController",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
 	"sap/m/MessageBox",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
-], function(Controller, MainController, InstrumentController,
+], function(Controller, MainController, Constants, ScanResultsHelper, InstrumentController,
 			JSONModel, MessageToast, MessageBox, Filter, FilterOperator) {
 	"use strict";
 
@@ -92,6 +94,25 @@ sap.ui.define([
 			}
 			
 			InstrumentController.deleteInstrumentByWebService(this.getSelectedInstrument(), this.deleteInstrumentCallback, this);
+		},
+		
+		
+		/**
+		 * Handles the link pressed event of the symbol link.
+		 */
+		onSymbolLinkPressed: function(oEvent) {
+			var oContext = oEvent.getSource().getBindingContext("instruments");
+			var oInstrument = oContext.getObject();
+			var sChartUrl = "";
+			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			if (oInstrument.type === Constants.INSTRUMENT_TYPE.RATIO || oInstrument.dataSourceListId !== undefined) {
+				MessageBox.error(oResourceBundle.getText("instrumentOverview.chartNotAvailable"));
+				return;
+			}
+			
+			sChartUrl = ScanResultsHelper.getChartUrlNonRatio(oInstrument);
+			window.open(sChartUrl, '_blank');
 		},
 
 

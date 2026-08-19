@@ -46,7 +46,7 @@
 						<cells>
 							<ObjectIdentifier text="{instruments>id}"/>
 							<Text text="{path: 'instruments>type', formatter: '.typeTextFormatter'}"/>
-							<Text text="{instruments>symbol}"/>
+							<Link text="{instruments>symbol}" press=".onSymbolLinkPressed"/>
 							<Text text="{instruments>name}"/>
 							<Text text="{path: 'instruments>stockExchange', formatter: '.stockExchangeTextFormatter'}"/>
 							<Text text="{instruments>sector/name}"/>
