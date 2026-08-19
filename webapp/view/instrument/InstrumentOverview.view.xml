@@ -46,7 +46,9 @@
 						<cells>
 							<ObjectIdentifier text="{instruments>id}"/>
 							<Text text="{path: 'instruments>type', formatter: '.typeTextFormatter'}"/>
-							<Link text="{instruments>symbol}" press=".onSymbolLinkPressed"/>
+							<Link text="{instruments>symbol}" target="_blank"
+								href="{path: 'instruments>', formatter: '.chartUrlFormatter'}"
+								enabled="{path: 'instruments>', formatter: '.chartAvailableFormatter'}"/>
 							<Text text="{instruments>name}"/>
 							<Text text="{path: 'instruments>stockExchange', formatter: '.stockExchangeTextFormatter'}"/>
 							<Text text="{instruments>sector/name}"/>

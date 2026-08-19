@@ -95,25 +95,6 @@ sap.ui.define([
 			
 			InstrumentController.deleteInstrumentByWebService(this.getSelectedInstrument(), this.deleteInstrumentCallback, this);
 		},
-		
-		
-		/**
-		 * Handles the link pressed event of the symbol link.
-		 */
-		onSymbolLinkPressed: function(oEvent) {
-			var oContext = oEvent.getSource().getBindingContext("instruments");
-			var oInstrument = oContext.getObject();
-			var sChartUrl = "";
-			var oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-			
-			if (oInstrument.type === Constants.INSTRUMENT_TYPE.RATIO || oInstrument.dataSourceListId !== undefined) {
-				MessageBox.error(oResourceBundle.getText("instrumentOverview.chartNotAvailable"));
-				return;
-			}
-			
-			sChartUrl = ScanResultsHelper.getChartUrlNonRatio(oInstrument);
-			window.open(sChartUrl, '_blank');
-		},
 
 
 		/**
@@ -174,6 +155,33 @@ sap.ui.define([
 		 */
 		typeTextFormatter: function(sType) {
 			return InstrumentController.getLocalizedTypeText(sType, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+		},
+		
+		
+		/**
+		 * Formatter of the chart URL.
+		 */
+		chartUrlFormatter: function(oInstrument) {
+			if (!oInstrument) {
+		        return "";
+		    }
+
+		    if (oInstrument.type === Constants.INSTRUMENT_TYPE.RATIO ||
+		        oInstrument.dataSourceListId !== undefined) {
+		        return "";
+		    }
+
+		    return ScanResultsHelper.getChartUrlNonRatio(oInstrument);
+		},
+		
+		
+		/**
+		 * Formatter for chart URL availability.
+		 */
+		chartAvailableFormatter: function(oInstrument) {
+			return !!oInstrument &&
+			        oInstrument.type !== Constants.INSTRUMENT_TYPE.RATIO &&
+			        oInstrument.dataSourceListId === undefined;
 		},
 		
 		
