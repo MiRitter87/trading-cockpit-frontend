@@ -12,7 +12,13 @@
 		</headerContent>
 		
 		<content>
-
+			<Carousel pages="{path: 'instruments>/instrument/'}">
+				<pages>
+					<Text text="{instruments>id}" />
+					<!-- Getting error when querying chart url from within my application. 403 - Forbidden -->
+					<!-- <Image src="{ path: 'instruments>', formatter: '.chartUrlFormatter'}"/> -->				
+				</pages>
+			</Carousel>		
 		</content>
 	</Page>
 </mvc:View>
