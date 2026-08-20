@@ -112,6 +112,15 @@ sap.ui.define([
 		
 		
 		/**
+		 * Handles click at the Chart Browser tile.
+		 */
+		onBrowserPressed: function() {
+			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			oRouter.navTo("chartBrowserRoute");
+		},
+		
+		
+		/**
 		 * Handles click at the Aggregate Indicator tile.
 		 */
 		onAggregateIndicatorPressed: function() {
