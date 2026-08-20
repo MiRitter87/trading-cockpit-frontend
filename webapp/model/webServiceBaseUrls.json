@@ -8,5 +8,6 @@
 	"jFreeChart": "/trading-cockpit-backend/services/rest/charts/jFreeChart",
 	"chartData": "/trading-cockpit-backend/services/rest/charts/data",
 	"horizontalLine": "/trading-cockpit-backend/services/rest/chartObjects/horizontalLine",
-	"dashboard": "/trading-cockpit-backend/services/rest/dashboard"
+	"dashboard": "/trading-cockpit-backend/services/rest/dashboard",
+	"widget": "/trading-cockpit-backend/services/rest/widgets/tradingView"
 }

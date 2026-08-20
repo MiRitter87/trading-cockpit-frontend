@@ -20,7 +20,7 @@
 				</pages>
 			</Carousel>
 			
-			<core:HTML content="&lt;iframe src='tradingview-chart-widget.html' style='width:100%; height:100%; border:0;' &gt;&lt;/iframe&gt;" />	
+			<core:HTML id="htmlControl"/>	
 		</content>
 	</Page>
 </mvc:View>

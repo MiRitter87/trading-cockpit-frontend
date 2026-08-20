@@ -1,11 +1,12 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
+	"../../MainController",
 	"../../instrument/InstrumentController",
 	"../../scan/ScanResultsHelper",
 	"../../Constants",
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function(Controller, InstrumentController, ScanResultsHelper, Constants, JSONModel, MessageToast) {
+], function(Controller, MainController, InstrumentController, ScanResultsHelper, Constants, JSONModel, MessageToast) {
 	"use strict";
 
 	return Controller.extend("trading-cockpit-frontend.controller.chart.priceVolume.ChartBrowser", {
@@ -25,6 +26,19 @@ sap.ui.define([
 			//Query master data every time a user navigates to this view. This assures that changes are being fetched.
 			InstrumentController.queryInstrumentsByWebService(this.queryInstrumentsCallback, this);
     	},
+		
+		
+		/**
+		 * Handles the button press event of the chart information button.
+		 */
+		onChartInformationPressed: function() {
+			var oHtmlControl = this.getView().byId("htmlControl");
+			var sServerAddress = MainController.getServerAddress();
+			var sWebServiceBaseUrl = this.getOwnerComponent().getModel("webServiceBaseUrls").getProperty("/widget");
+			var sChartWidgetUrl = sServerAddress + sWebServiceBaseUrl + "/chart/1";
+			
+			oHtmlControl.setContent("<iframe src='" + sChartWidgetUrl + "' style='width:100%; height:100%; border:0;'></iframe>");
+		},
 		
 		
 		/**
